@@ -64,6 +64,14 @@ body {
   font-weight: 700;
 }
 
+// Mantém partes e capítulos na mesma identidade cromática do livro.
+.sidebar-item .sidebar-item-text,
+.sidebar-item .sidebar-item-text a,
+.sidebar-item-section .sidebar-item-text,
+.sidebar-item-section .sidebar-item-text a {
+  color: $azul-marinho;
+}
+
 .sidebar-item .active {
   color: $azul-marinho;
   background: rgba(164, 181, 196, 0.28);

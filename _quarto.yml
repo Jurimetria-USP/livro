@@ -13,6 +13,7 @@ book:
   page-navigation: true
   navbar:
     background: "#071739"
+    logo: figuras/usp.png
     search: true
     left:
       - text: "Início"
