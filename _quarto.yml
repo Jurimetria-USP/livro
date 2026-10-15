@@ -36,6 +36,8 @@ book:
         - capitulos/selecao-disputas-litigio.qmd
         - capitulos/galanter.qmd
     - part: "Parte II — Ambiente de trabalho"
+      chapters:
+        - capitulos/manipulacao-dados.qmd
     - part: "Parte III — Coleta de processos e decisões"
     - part: "Parte IV — Extração da informação"
     - part: "Parte V — Limpeza e estruturação dos dados"
