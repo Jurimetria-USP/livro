@@ -1,0 +1,124 @@
+---
+title: "Seleção de disputas para o litígio"
+subtitle: "George L. Priest e Benjamin Klein (1984)"
+author:
+- José de Jesus Filho
+format: html
+---
+
+## Introdução
+
+O estudo clássico **The Selection of Disputes for Litigation**, de **George L. Priest** e **Benjamin Klein** (1984), marcou a análise econômica do direito ao propor uma teoria para explicar **por que apenas uma pequena parte dos conflitos sociais chega, de fato, a julgamento** — e por que **os casos julgados não são representativos** do universo total de disputas.  
+A intuição central altera a leitura das estatísticas judiciais: **o que vemos nas decisões publicadas é apenas o “topo do iceberg”**; a maioria dos conflitos termina em acordo, desistência ou outras formas de composição.
+
+##  O problema da seleção dos litígios
+
+Apenas uma fração mínima das disputas chega a julgamento. A maioria termina antes — por acordo, mediação ou desistência. Assim, analisar apenas decisões judiciais cria uma visão distorcida: as sentenças representam o “topo do iceberg”.  
+
+Antes de Priest e Klein, supunha-se que os casos julgados eram **representativos** do universo de litígios. O modelo deles refuta essa ideia: os casos são **selecionados racionalmente** pelas partes, não sorteados aleatoriamente.
+
+## Antecedentes e limitações
+
+Entre os precursores:
+- **Karl Llewellyn**, que via os casos litigados como "patológicos";
+- **William Whitford**, que tentou coletar todos os casos de um tipo de litígio;
+- **Landes & Posner**, que formularam modelos de custo-benefício mas presumindo seleção aleatória.
+
+Priest e Klein, ao contrário, argumentam que **a decisão de litigar é racional e estratégica**, determinada por expectativas e custos.
+
+##  O modelo de seleção
+
+###  Intuição básica
+
+Cada disputa possui um valor “verdadeiro” $(Y')$, que reflete o grau de responsabilidade do réu diante de um **padrão decisório** $(Y^*)$. Assim:
+
+- Se $(Y' > Y^*)$, o autor deveria vencer;
+- Se $(Y' < Y^*)$, o réu deveria vencer.
+
+As partes, porém, **não conhecem $(Y')$** com precisão. Cada uma forma uma **estimativa imperfeita**, com erro:
+
+$$
+Y_{p} = Y' + \varepsilon_{p}
+$$
+
+$$
+Y_{d} = Y' + \varepsilon_{d}
+$$
+
+onde:
+
+- $(Y_{p})$ é a estimativa do autor;
+- $(Y_{d})$ é a estimativa do réu;
+- $(\varepsilon_{p})$ e $(\varepsilon_{d})$ são erros de previsão.
+
+A partir dessas estimativas, cada parte calcula uma **probabilidade subjetiva de vitória**, $(P_{p})$ e $(P_{d})$.
+
+### Condição para o litígio
+
+Um caso segue a julgamento **apenas se a diferença entre as probabilidades esperadas** for **suficiente para compensar os custos do litígio**:
+
+$$
+P_{p} - P_{d} > D
+$$
+
+em que $(D)$ representa o diferencial entre os custos de litigar e os custos de negociar.  
+Quando essa diferença é pequena, o acordo é racional; quando é grande, o caso vai a julgamento.
+
+### O efeito da incerteza
+
+Casos “claros” — com alto consenso sobre quem vencerá — são resolvidos por acordo.  
+Os casos que chegam ao tribunal são aqueles **em torno do limiar de incerteza**, próximos de $(Y^*)$.  
+Logo, os julgamentos tendem a envolver **casos difíceis**, e as vitórias se distribuem **quase igualmente entre autor e réu**.
+
+## A regra dos 50%
+
+A consequência mais conhecida do modelo é o **equilíbrio estatístico de aproximadamente 50%**.  
+Quanto mais precisas forem as informações das partes:
+
+- Menor será o número de casos julgados;
+- Mais próxima de 50% será a taxa de vitórias dos autores.
+
+Isso **não** significa justiça perfeita, mas sim um **equilíbrio de seleção**: as partes só levam a julgamento os casos mais incertos, que tendem a se dividir igualmente em resultados favoráveis a cada lado.
+
+## Implicações teóricas
+
+1. **Viés de amostragem** – as decisões judiciais não representam o universo completo de disputas;  
+2. **Limite das estatísticas** – taxas de sucesso não medem imparcialidade judicial;  
+3. **Aprendizado** – após mudanças legais, as taxas de vitória oscilam, mas convergem a 50%;  
+4. **Custos e incentivos** – quanto maior o custo de litigar, menor o número de julgamentos e mais forte o equilíbrio.
+
+## Evidências empíricas
+
+Estudos de vinte anos em **Cook County (Illinois)** mostraram taxas de vitória próximas de 50% em várias categorias (indenizações, responsabilidade médica, etc.).  
+Outras pesquisas confirmaram o padrão: **a proporção de vitórias é estável ao longo do tempo**, sugerindo que reflete o processo de seleção, e não o mérito substantivo.
+
+## Críticas e limitações
+
+- **Racionalidade e informação**: o modelo assume simetria informacional e racionalidade perfeita, raramente verificadas;  
+- **Poder econômico**: ignora diferenças de recursos e capacidade de suportar risco;  
+- **Fatores psicológicos e simbólicos**: desconsidera motivações não econômicas;  
+- **Litigância repetitiva**: não explica bem comportamentos estratégicos de grandes agentes.
+
+Mesmo assim, o modelo fornece uma **base teórica poderosa** para compreender o funcionamento estatístico do sistema judicial.
+
+##  Relevância contemporânea e jurimetria
+
+A teoria de Priest & Klein tornou-se essencial para a **jurimetria e a IA aplicada ao direito**.  
+Ao analisar grandes bases de dados judiciais, deve-se reconhecer que **as decisões publicadas são uma amostra enviesada**.  
+Modelos de previsão baseados apenas em julgamentos podem amplificar esse viés se não corrigirem o **processo de seleção**.
+
+Ferramentas como **modelos de seleção de Heckman**, **propensity score matching** ou dados sobre **acordos e desistências** ajudam a ajustar as estimativas empíricas.
+
+## Conclusão
+
+O modelo de Priest & Klein revela que o equilíbrio de 50% nas vitórias judiciais não expressa imparcialidade perfeita, mas sim **o produto da seleção racional dos casos que chegam a julgamento**.  
+Compreender essa lógica é fundamental para estudos empíricos, políticas de acesso à justiça e modelos de IA jurídica.
+
+---
+
+## Referências
+
+- Priest, G. L., & Klein, B. (1984). *The Selection of Disputes for Litigation*. *Journal of Legal Studies*, 13(1), 1–55.  
+- Landes, W., & Posner, R. (1973). *The Economic Structure of Tort Law*.  
+- Llewellyn, K. (1960). *The Common Law Tradition: Deciding Appeals*.  
+- Whitford, W. (1968). *Strict Products Liability and the Automobile Industry: Much Ado About Nothing*. *Wisconsin Law Review*, 83–125.

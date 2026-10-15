@@ -30,14 +30,15 @@ As fontes originais não serão alteradas.
 
 ### Percurso conceitual
 
-**Decisão:** o livro será organizado inicialmente em seis grandes módulos:
+**Decisão:** o livro será organizado inicialmente em sete grandes módulos:
 
 1. Fundamentos;
-2. Coleta de processos e decisões;
-3. Extração da informação;
-4. Limpeza e estruturação dos dados;
-5. Descrição do fenômeno;
-6. Explicação do fenômeno.
+2. Ambiente de trabalho;
+3. Coleta de processos e decisões;
+4. Extração da informação;
+5. Limpeza e estruturação dos dados;
+6. Descrição do fenômeno;
+7. Explicação do fenômeno.
 
 A distribuição dos capítulos entre os módulos será definida progressivamente.
 

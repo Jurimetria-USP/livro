@@ -40,7 +40,7 @@ Mais do que apresentar ferramentas, o livro procura mostrar como construir evid�
 
 ## Percurso do livro
 
-O percurso está organizado em seis grandes partes conectadas.
+O percurso está organizado em sete grandes partes conectadas.
 
 ::: {.grid}
 
@@ -53,43 +53,51 @@ Método científico, realismo jurídico e integração entre Direito, Estatísti
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
-### Parte II — Coleta de processos e decisões
+### Parte II — Ambiente de trabalho
+
+Preparação do ambiente necessário ao desenvolvimento das atividades propostas no livro.
+
+[Conheça esta parte](partes/02-ambiente-trabalho.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
+### Parte III — Coleta de processos e decisões
 
 Obtenção de processos, decisões e outros materiais jurídicos que servirão de base para a pesquisa.
 
-[Conheça esta parte](partes/02-coleta.qmd)
+[Conheça esta parte](partes/03-coleta.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
-### Parte III — Extração da informação
+### Parte IV — Extração da informação
 
 Transformação dos documentos jurídicos coletados em informações que possam ser organizadas e analisadas.
 
-[Conheça esta parte](partes/03-extracao.qmd)
+[Conheça esta parte](partes/04-extracao.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-desenvolvimento}
-### Parte IV — Limpeza e estruturação dos dados
+### Parte V — Limpeza e estruturação dos dados
 
 Verificação, padronização e organização das informações para a construção de bases de dados analisáveis.
 
-[Conheça esta parte](partes/04-limpeza-estruturacao.qmd)
+[Conheça esta parte](partes/05-limpeza-estruturacao.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-micro}
-### Parte V — Descrição do fenômeno
+### Parte VI — Descrição do fenômeno
 
 Caracterização empírica dos fenômenos jurídicos a partir dos dados estruturados.
 
-[Conheça esta parte](partes/05-descricao.qmd)
+[Conheça esta parte](partes/06-descricao.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-macro}
-### Parte VI — Explicação do fenômeno
+### Parte VII — Explicação do fenômeno
 
 Investigação das relações e dos mecanismos associados aos fenômenos jurídicos observados.
 
-[Conheça esta parte](partes/06-explicacao.qmd)
+[Conheça esta parte](partes/07-explicacao.qmd)
 :::
 
 :::
@@ -99,17 +107,18 @@ Investigação das relações e dos mecanismos associados aos fenômenos jurídi
 %%| fig-alt: "Percurso do Livro de Jurimetria, dos fundamentos à explicação dos fenômenos jurídicos"
 
 flowchart LR
-    A["Fundamentos"] --> B["Coleta"]
-    B --> C["Extração"]
-    C --> D["Limpeza e<br/>estruturação"]
-    D --> E["Descrição"]
-    E --> F["Explicação"]
+    A["Fundamentos"] --> B["Ambiente de<br/>trabalho"]
+    B --> C["Coleta"]
+    C --> D["Extração"]
+    D --> E["Limpeza e<br/>estruturação"]
+    E --> F["Descrição"]
+    F --> G["Explicação"]
 
     classDef principal fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
     classDef destaque fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
 
-    class A,B,C,D,E principal;
-    class F destaque;
+    class A,B,C,D,E,F principal;
+    class G destaque;
 ```
 
 ## Abordagem

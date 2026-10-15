@@ -31,11 +31,16 @@ book:
     - index.qmd
     - autores.qmd
     - part: partes/01-fundamentos.qmd
-    - part: partes/02-coleta.qmd
-    - part: partes/03-extracao.qmd
-    - part: partes/04-limpeza-estruturacao.qmd
-    - part: partes/05-descricao.qmd
-    - part: partes/06-explicacao.qmd
+      chapters:
+        - capitulos/desenho-pesquisa-jurimetria.qmd
+        - capitulos/selecao-disputas-litigio.qmd
+        - capitulos/galanter.qmd
+    - part: partes/02-ambiente-trabalho.qmd
+    - part: partes/03-coleta.qmd
+    - part: partes/04-extracao.qmd
+    - part: partes/05-limpeza-estruturacao.qmd
+    - part: partes/06-descricao.qmd
+    - part: partes/07-explicacao.qmd
 
 format:
   html:
