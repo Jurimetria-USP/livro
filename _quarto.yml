@@ -11,6 +11,21 @@ book:
     - name: "José de Jesus Filho"
       affiliation: "PUC-SP"
   page-navigation: true
+  navbar:
+    background: "#071739"
+    search: true
+    left:
+      - text: "Início"
+        file: index.qmd
+    right:
+      - icon: github
+        href: https://github.com/Jurimetria-USP/livro
+        aria-label: GitHub
+  sidebar:
+    background: "#F8F5EF"
+    search: true
+    style: "docked"
+    collapse-level: 1
   chapters:
     - index.qmd
     - autores.qmd
@@ -26,7 +41,10 @@ format:
     theme:
       - cosmo
       - tema-moderno.scss
+    css: estilos.css
     toc: true
+    toc-title: "Nesta página"
+    fontsize: 16px
 
 lang: pt-BR
 editor: visual

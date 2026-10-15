@@ -1,4 +1,22 @@
+---
+toc: false
+---
+
 # Prefácio {.unnumbered}
+
+::: {.hero-apostila}
+## Livro de Jurimetria
+
+**Direito, Desigualdades e Ciência de Dados**
+
+Um percurso para transformar documentos jurídicos em evidências empíricas.
+
+::: {.acoes-inicio}
+[Sobre os autores](autores.qmd){.btn .btn-light}
+
+[Conheça o percurso](#percurso-do-livro){.btn .btn-outline-light}
+:::
+:::
 
 ## Motivação
 
@@ -20,6 +38,80 @@ Busca-se conduzir o leitor pelo ciclo da pesquisa jurimétrica: da formulação 
 
 Mais do que apresentar ferramentas, o livro procura mostrar como construir evidências adequadas aos problemas jurídicos e como interpretar resultados de maneira coerente com os métodos utilizados e com as limitações dos dados disponíveis.
 
+## Percurso do livro
+
+O percurso está organizado em seis grandes partes conectadas.
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-proposito}
+### Parte I — Fundamentos
+
+Método científico, realismo jurídico e integração entre Direito, Estatística e Ciência de Dados.
+
+[Conheça esta parte](partes/01-fundamentos.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
+### Parte II — Coleta de processos e decisões
+
+Obtenção de processos, decisões e outros materiais jurídicos que servirão de base para a pesquisa.
+
+[Conheça esta parte](partes/02-coleta.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
+### Parte III — Extração da informação
+
+Transformação dos documentos jurídicos coletados em informações que possam ser organizadas e analisadas.
+
+[Conheça esta parte](partes/03-extracao.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-desenvolvimento}
+### Parte IV — Limpeza e estruturação dos dados
+
+Verificação, padronização e organização das informações para a construção de bases de dados analisáveis.
+
+[Conheça esta parte](partes/04-limpeza-estruturacao.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-micro}
+### Parte V — Descrição do fenômeno
+
+Caracterização empírica dos fenômenos jurídicos a partir dos dados estruturados.
+
+[Conheça esta parte](partes/05-descricao.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-macro}
+### Parte VI — Explicação do fenômeno
+
+Investigação das relações e dos mecanismos associados aos fenômenos jurídicos observados.
+
+[Conheça esta parte](partes/06-explicacao.qmd)
+:::
+
+:::
+
+```{mermaid}
+%%| fig-align: center
+%%| fig-alt: "Percurso do Livro de Jurimetria, dos fundamentos à explicação dos fenômenos jurídicos"
+
+flowchart LR
+    A["Fundamentos"] --> B["Coleta"]
+    B --> C["Extração"]
+    C --> D["Limpeza e<br/>estruturação"]
+    D --> E["Descrição"]
+    E --> F["Explicação"]
+
+    classDef principal fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
+    classDef destaque fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
+
+    class A,B,C,D,E principal;
+    class F destaque;
+```
+
 ## Abordagem
 
 O livro adota uma abordagem aplicada, apoiada em problemas jurídicos e casos empíricos. Os conceitos serão apresentados em diálogo com situações concretas, permitindo acompanhar as escolhas realizadas ao longo de uma pesquisa.
@@ -28,4 +120,12 @@ Sempre que pertinente, os capítulos combinarão fundamentação teórica, exemp
 
 A abordagem enfatiza a integração entre Direito, Estatística e Ciência de Dados. O objetivo é oferecer instrumentos para que o leitor possa formular perguntas relevantes, organizar e analisar informações jurídicas e desenvolver interpretações capazes de contribuir para decisões mais fundamentadas.
 
-Este livro está em preparação. Seu conteúdo será desenvolvido e disponibilizado progressivamente pela iniciativa Jurimetria USP.
+::: {.encerramento-home}
+> **Este livro está em preparação. Seu conteúdo será desenvolvido e disponibilizado progressivamente pela iniciativa Jurimetria USP.**
+
+::: {.acoes-finais}
+[Sobre os autores](autores.qmd){.btn .btn-primary}
+
+[Iniciar o percurso](partes/01-fundamentos.qmd){.btn .btn-outline-primary}
+:::
+:::
