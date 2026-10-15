@@ -10,4 +10,4 @@ O projeto aborda Direito, desigualdades e ciência de dados por meio de métodos
 
 Acesse a versão publicada do livro:
 
-[Livro de Jurimetria](https://jurimetria-usp.github.io/livro/)
+[Livro de Jurimetria](https://jurimetria-usp.github.io/livro/) 
