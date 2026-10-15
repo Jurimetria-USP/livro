@@ -49,7 +49,7 @@ O percurso está organizado em sete grandes partes conectadas.
 
 Método científico, realismo jurídico e integração entre Direito, Estatística e Ciência de Dados.
 
-[Conheça esta parte](partes/01-fundamentos.qmd)
+[Iniciar esta parte](capitulos/desenho-pesquisa-jurimetria.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
@@ -57,7 +57,6 @@ Método científico, realismo jurídico e integração entre Direito, Estatísti
 
 Preparação do ambiente necessário ao desenvolvimento das atividades propostas no livro.
 
-[Conheça esta parte](partes/02-ambiente-trabalho.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
@@ -65,7 +64,6 @@ Preparação do ambiente necessário ao desenvolvimento das atividades propostas
 
 Obtenção de processos, decisões e outros materiais jurídicos que servirão de base para a pesquisa.
 
-[Conheça esta parte](partes/03-coleta.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
@@ -73,7 +71,6 @@ Obtenção de processos, decisões e outros materiais jurídicos que servirão d
 
 Transformação dos documentos jurídicos coletados em informações que possam ser organizadas e analisadas.
 
-[Conheça esta parte](partes/04-extracao.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-desenvolvimento}
@@ -81,7 +78,6 @@ Transformação dos documentos jurídicos coletados em informações que possam 
 
 Verificação, padronização e organização das informações para a construção de bases de dados analisáveis.
 
-[Conheça esta parte](partes/05-limpeza-estruturacao.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-micro}
@@ -89,7 +85,6 @@ Verificação, padronização e organização das informações para a construç
 
 Caracterização empírica dos fenômenos jurídicos a partir dos dados estruturados.
 
-[Conheça esta parte](partes/06-descricao.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-macro}
@@ -97,7 +92,6 @@ Caracterização empírica dos fenômenos jurídicos a partir dos dados estrutur
 
 Investigação das relações e dos mecanismos associados aos fenômenos jurídicos observados.
 
-[Conheça esta parte](partes/07-explicacao.qmd)
 :::
 
 :::
@@ -135,6 +129,6 @@ A abordagem enfatiza a integração entre Direito, Estatística e Ciência de Da
 ::: {.acoes-finais}
 [Sobre os autores](autores.qmd){.btn .btn-primary}
 
-[Iniciar o percurso](partes/01-fundamentos.qmd){.btn .btn-outline-primary}
+[Iniciar o percurso](capitulos/desenho-pesquisa-jurimetria.qmd){.btn .btn-outline-primary}
 :::
 :::

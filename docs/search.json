@@ -59,7 +59,7 @@
     "href": "index.html#percurso-do-livro",
     "title": "Livro de Jurimetria",
     "section": "Percurso do livro",
-    "text": "Percurso do livro\nO percurso está organizado em sete grandes partes conectadas.\n\n\nParte I — Fundamentos\nMétodo científico, realismo jurídico e integração entre Direito, Estatística e Ciência de Dados.\nConheça esta parte\n\n\nParte II — Ambiente de trabalho\nPreparação do ambiente necessário ao desenvolvimento das atividades propostas no livro.\nConheça esta parte\n\n\nParte III — Coleta de processos e decisões\nObtenção de processos, decisões e outros materiais jurídicos que servirão de base para a pesquisa.\nConheça esta parte\n\n\nParte IV — Extração da informação\nTransformação dos documentos jurídicos coletados em informações que possam ser organizadas e analisadas.\nConheça esta parte\n\n\nParte V — Limpeza e estruturação dos dados\nVerificação, padronização e organização das informações para a construção de bases de dados analisáveis.\nConheça esta parte\n\n\nParte VI — Descrição do fenômeno\nCaracterização empírica dos fenômenos jurídicos a partir dos dados estruturados.\nConheça esta parte\n\n\nParte VII — Explicação do fenômeno\nInvestigação das relações e dos mecanismos associados aos fenômenos jurídicos observados.\nConheça esta parte\n\n\n\n\n\n\n\nflowchart LR\n    A[\"Fundamentos\"] --&gt; B[\"Ambiente de&lt;br/&gt;trabalho\"]\n    B --&gt; C[\"Coleta\"]\n    C --&gt; D[\"Extração\"]\n    D --&gt; E[\"Limpeza e&lt;br/&gt;estruturação\"]\n    E --&gt; F[\"Descrição\"]\n    F --&gt; G[\"Explicação\"]\n\n    classDef principal fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;\n    classDef destaque fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;\n\n    class A,B,C,D,E,F principal;\n    class G destaque;",
+    "text": "Percurso do livro\nO percurso está organizado em sete grandes partes conectadas.\n\n\nParte I — Fundamentos\nMétodo científico, realismo jurídico e integração entre Direito, Estatística e Ciência de Dados.\nIniciar esta parte\n\n\nParte II — Ambiente de trabalho\nPreparação do ambiente necessário ao desenvolvimento das atividades propostas no livro.\n\n\nParte III — Coleta de processos e decisões\nObtenção de processos, decisões e outros materiais jurídicos que servirão de base para a pesquisa.\n\n\nParte IV — Extração da informação\nTransformação dos documentos jurídicos coletados em informações que possam ser organizadas e analisadas.\n\n\nParte V — Limpeza e estruturação dos dados\nVerificação, padronização e organização das informações para a construção de bases de dados analisáveis.\n\n\nParte VI — Descrição do fenômeno\nCaracterização empírica dos fenômenos jurídicos a partir dos dados estruturados.\n\n\nParte VII — Explicação do fenômeno\nInvestigação das relações e dos mecanismos associados aos fenômenos jurídicos observados.\n\n\n\n\n\n\n\nflowchart LR\n    A[\"Fundamentos\"] --&gt; B[\"Ambiente de&lt;br/&gt;trabalho\"]\n    B --&gt; C[\"Coleta\"]\n    C --&gt; D[\"Extração\"]\n    D --&gt; E[\"Limpeza e&lt;br/&gt;estruturação\"]\n    E --&gt; F[\"Descrição\"]\n    F --&gt; G[\"Explicação\"]\n\n    classDef principal fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;\n    classDef destaque fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;\n\n    class A,B,C,D,E,F principal;\n    class G destaque;",
     "crumbs": [
       "Início",
       "Prefácio"
@@ -101,12 +101,12 @@
   {
     "objectID": "partes/01-fundamentos.html",
     "href": "partes/01-fundamentos.html",
-    "title": "Fundamentos",
+    "title": "Parte I — Fundamentos",
     "section": "",
-    "text": "Esta parte apresenta o método científico, o realismo jurídico e a integração entre Direito, Estatística e Ciência de Dados.",
+    "text": "Esta parte apresenta as bases da pesquisa jurimétrica. Os capítulos discutem o desenho de pesquisa e mostram como a seleção dos litígios e as desigualdades entre os atores influenciam aquilo que observamos no sistema de justiça.\n\n\nDesenho de pesquisa e jurimetria\nIntrodução ao método científico e à construção da pesquisa empírica aplicada ao Direito.\nLer o capítulo\n\n\nSeleção de disputas para o litígio\nApresentação do modelo de Priest e Klein sobre a seleção dos casos que chegam a julgamento.\nLer o capítulo\n\n\nPor que os que têm saem na frente\nDiscussão das desigualdades estruturais do sistema jurídico a partir de Marc Galanter.\nLer o capítulo",
     "crumbs": [
       "Início",
-      "Fundamentos"
+      "Parte I — Fundamentos"
     ]
   },
   {
@@ -117,7 +117,7 @@
     "text": "1.1 Motivando",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao Desenho de Pesquisa e à Jurimetria</span>"
     ]
   },
@@ -129,7 +129,7 @@
     "text": "1.1.1 Um Experimento Importante\nO avanço do conhecimento científico se apoia, historicamente, na capacidade de formular boas perguntas e testá-las de forma sistemática. Um dos primeiros exemplos marcantes dessa prática ocorreu durante o século XVIII, no contexto das longas viagens oceânicas realizadas por marinhas europeias. Nessas expedições, marinheiros frequentemente adoeciam e morriam em grande número, sem que se soubesse a verdadeira causa. As hipóteses dominantes na época atribuíam as doenças ao “ar ruim” e às condições insalubres dos navios — ideias alinhadas à chamada teoria miasmática das enfermidades.\nA questão que se colocava era: qual a verdadeira causa das mortes e quais soluções poderiam evitá-las? Essa pergunta inaugurou um dos primeiros experimentos controlados da história da medicina.\n\n\n1.1.2 O Experimento de James Lind (1747)\nEm 1747, o médico naval britânico James Lind, servindo a bordo do HMS Salisbury, realizou um estudo pioneiro que hoje reconhecemos como um ensaio clínico controlado. Lind selecionou um grupo de marinheiros acometidos por escorbuto e os dividiu em diferentes grupos de tratamento, garantindo condições semelhantes entre eles. Cada grupo recebeu uma intervenção distinta — vinagre, água do mar, cidra, entre outras substâncias —, mas apenas um grupo recebeu limões e laranjas.\nO resultado foi inequívoco: os marinheiros que consumiram frutas cítricas se recuperaram rapidamente, enquanto os demais continuaram doentes. Com isso, Lind demonstrou empiricamente que a causa do escorbuto não estava no “ar ruim”, mas sim na deficiência de um nutriente essencial presente nos cítricos e posteriormente identificado como a vitamina C.\n\n\n1.1.3 A Descoberta Revolucionária\nCura do Escorbuto\n\n\nA descoberta de Lind representou um marco para o desenvolvimento do método científico na medicina. A partir da observação cuidadosa e da formulação de hipóteses testáveis, foi possível demonstrar a relação causal entre a ausência de determinado nutriente e a manifestação da doença. O estudo inaugurou o uso sistemático de grupos de comparação, controle de variáveis e análise empírica de resultados, práticas que se tornariam pilares da ciência moderna.\nEssa experiência mostrou que o conhecimento científico não avança por mera especulação, mas por testes controlados e evidências observáveis, capazes de distinguir entre correlação e causalidade.\n\n\n\n\nEssa experiência mostrou que o conhecimento científico não avança por mera especulação, mas por testes controlados e evidências observáveis, capazes de distinguir entre correlação e causalidade.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao Desenho de Pesquisa e à Jurimetria</span>"
     ]
   },
@@ -141,7 +141,7 @@
     "text": "1.2 A Ciência\n\n1.2.1 Perguntado “Por que”\nO ponto de partida da ciência é a curiosidade sobre o mundo: por que as coisas acontecem da forma como acontecem? Essa indagação, aparentemente simples, é o motor que impulsiona toda investigação científica. A ciência busca compreender não apenas o que ocorre, mas também as causas e mecanismos subjacentes aos fenômenos observados.\nDurante séculos, especialmente até a metade do século XIX, o conhecimento sobre diversos processos naturais era limitado. Na medicina, por exemplo, pouco se sabia sobre doenças infecciosas e seus modos de transmissão. Somente com os avanços de pesquisadores como Louis Pasteur (1822–1895) é que se consolidou a Teoria Microbiana da Doença, transformando profundamente a prática médica e a saúde pública.\n\n\n1.2.2 Perguntado “Por que”\n\n\nAntes desses avanços, outros cientistas já haviam dado contribuições fundamentais à sistematização do conhecimento. Em 1662, John Graunt publicou a primeira tábua de mortalidade, no livro Natural and Political Observations Made upon the Bills of Mortality. Esse trabalho foi um dos primeiros esforços para quantificar e descrever padrões populacionais e de saúde a partir de registros empíricos.\nGraunt aplicou raciocínios quantitativos a dados sobre nascimentos e mortes, inaugurando a tradição estatística na análise de fenômenos sociais e biológicos. Mais de dois séculos depois, Pasteur ampliou essa lógica de observação e mensuração, demonstrando experimentalmente que doenças contagiosas decorriam da ação de microrganismos, e desenvolvendo o processo de pasteurização como medida de prevenção. Somente em 1873 a academia de Medicina Francesa defende a tese que doenças contagiosas e processos infecciosos tem os microrganismos como responsáveis.\n\n\n\n\nUma das Primeiras Tábuas de Mortalidade\n\n\n\n\nEsses marcos ilustram como o avanço da ciência depende da capacidade de observar, mensurar e explicar os fenômenos de maneira sistemática e replicável.\n\n\n1.2.3 Objetivo da Ciência\nO propósito último da ciência é tornar o mundo um lugar melhor para vivermos, por meio da geração de conhecimento e de inovação tecnológica. Entretanto, o progresso técnico não ocorre isoladamente: ele depende do entendimento teórico dos fenômenos.\nA teoria é o que permite explicar o mundo de forma coerente, organizando as observações em um quadro interpretativo. É a partir dela que se formulam hipóteses, se testam explicações e se criam soluções práticas. Assim, as inovações técnicas são frutos do entendimento teórico, e não o contrário, sendo que a boa ciência combina observação empírica com reflexão conceitual.\n\n\n1.2.4 O Uso Inadequado da Ciência\nEmbora a ciência tenha transformado profundamente o modo como compreendemos o mundo, seu prestígio também pode ser utilizado de forma indevida. A invocação do termo “científico” muitas vezes é empregada para atribuir credibilidade a afirmações infundadas, criando uma aparência de legitimidade sem o devido rigor metodológico.\n\n\n\n\n\n\n\n\nAvisoCredibilidade Fake\n\n\n\nNada confere mais autoridade a uma alegação do que a sugestão de que ela foi “comprovada cientificamente” ou “baseada em evidências científicas”.\n\n\n\n\n\n\nNo entanto, nem toda afirmação que se apresenta como científica é, de fato, resultado de um processo de investigação rigoroso. É comum encontrar exemplos de pseudociência, discursos que simulam o formato da ciência, mas carecem de fundamentos empíricos verificáveis.\nAfirmações de que extraterrestres visitaram a Terra, de que plantas sentem prazer e dor, ou de que celulares causam tumores cerebrais, são exemplos de como o rótulo “científico” pode ser usado de maneira enganosa.\nDa mesma forma, teorias conspiratórias, como a ideia de que governos ocultam informações sobre eventos históricos, frequentemente se valem de uma retórica pseudoacadêmica para convencer o público. Esses casos ilustram como a aparência de método pode ser usada para mascarar a ausência de evidência.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao Desenho de Pesquisa e à Jurimetria</span>"
     ]
   },
@@ -153,7 +153,7 @@
     "text": "1.3 Método Científico\nObservar, Explicar e Testar\nO método científico se organiza em três etapas principais: observar, propor explicações e testar. Cada uma delas é essencial para transformar dados em conhecimento confiável e orientar a investigação de forma estruturada.\n\n1.3.1 Observar\n\n\nObservar significa ter uma noção clara dos fatos que envolvem o fenômeno que estamos estudando. Ciência é a arte de fazer boas observações, capazes de identificar e focar nos aspectos mais relevantes do que está acontecendo. A observação fornece pistas sobre por que um fenômeno ocorre e permite avaliar se diferentes explicações podem ser plausíveis ou devem ser descartadas.\n\n\n\n\n\n\n\n\n\n\nNotaNem sempre a observação é simples ou direta.\n\n\n\nO processo de observar pode ser limitado por dados insuficientes ou difíceis de acessar. É importante reconhecer essas dificuldades e trabalhar para minimizar seus efeitos.\n\n\n\n1.3.1.1 Observções devem ser:\n\nTer clara noção de quais os fenômenos relevantes\nEncontramos uma maneira de garantir que não negligenciamos nada no processo de fazer nossas observações?\nNão viesada: Cegueira a mudança e Cegueira desatenta https://www.youtube.com/watch?v=FaAIW8WFBq8\nO que sabemos com certeza? O que é baseado em fatos e o que é baseado em conjecturas ou suposição?\n\nEvite suposições inocentemente incorporadas\n\nConsideramos alguma informação comparativa necessária?\nAs nossas observações foram contaminadas por expectativas ou crenças?\n\n\n\n1.3.1.2 Como conseguir boas observações e evitar viéses?\n\n\nPara alcançar observações mais precisas, é importante recorrer a instrumentos que ampliem nossos sentidos e utilizar medições quantitativas que descrevam os fenômenos de forma mais fiel. Assim, reduzimos as distorções que decorrem da percepção humana e obtemos registros mais objetivos e verificáveis.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1.3.2 Propor Explicação\nExplicar é apresentar um conjunto de fatores que mostram como ou por que um efeito ocorreu. É o momento de propor uma história explicativa, uma conjectura que, se verdadeira, daria sentido ao fenômeno observado.\n\n\nPerguntas como “por que o sol nasce e se põe todos os dias?” ilustram esse tipo de esforço. Vejamos:\nO Primeiro a enteder o nascimento do sol foi Nicolau Copérnico (1473-1543), que propôs o modelo heliocêntrico do sistema solar. Segundo esse modelo, a Terra gira em torno do Sol, o que explica o movimento aparente do sol no céu ao longo do dia.\nEntretanto, as primeiras provas vieram quase século depois com Galileu , 1610, com as observações de Venus e as fases da Lua. Interessantemente, em 1633 Galileu Galilei foi julgado e condenado pela Inquisição Católica pela sua defesa do heliocentrismo.\n\n\n\n\n\n\n\nGalileo e o Santo Ofício, século XIX por Joseph-Nicolas Robert-Fleury\n\n\n\n\n\n\n\n\n\n\nDe revolutionibus orbium coelestium\n\n\n\n\n\n\n\n\n\n\nNotaHistória Explicativa\n\n\n\nPortanto, a primeira etapa na tentativa de dar sentido a um conjunto de fatos intrigantes é propor o que poderíamos chamar de uma história explicativa, um conjunto de conjecturas que, se verdadeiras, explicariam o quebra-cabeça.\n\n\n\n1.3.2.1 Uma Boa Explicação\nUma hipótese é uma explicação provisória e ainda não comprovada sobre algo específico Oferece uma explicação para um gama mais limitada de fenômenos , um único evento ou um fato.\nJá uma teoria é um corpo de conhecimento mais amplo e consolidado, construído a partir de múltiplas verificações e evidências, como as teorias do Big Bang, Teoria da evolução ou dos germes das doenças.\n\n\n1.3.2.2 CUIDADO\n\n\n\n\n\n\n\n\nAvisoImportante\n\n\n\nÉ comum ouvirmos “isso é apenas uma teoria”, como se fosse uma opinião. No entanto, na ciência, uma teoria é uma explicação robusta, apoiada por evidências e testes repetidos.\n\n\n\n\n\n\n\n\n1.3.2.3 Vamos Pensar: Obsedidade no Brasil\nOs brasileiros enfrentam um sério problema de peso. Entre 2006 e 2019, o número de pessoas com sobrepeso ou obesidade aumentou em 72%, chegando a 20% da população. Esses dados nos convidam a construir hipóteses que expliquem o fenômeno, mesmo que provisoriamente. O objetivo não é acertar, mas exercitar o raciocínio explicativo.\n\n\n\n\n\n\nAvisoFatos e Observações\n\n\n\nSegundo a pesquisa Vigitel do Ministério da Saúde, para população acima de 18 anos o percentual de pessoas com obesidade subiu de 11,8% em 2006 para 20,3% em 2019.\n\n\nQuais as suas hipóteses para explicar esse fenômeno? Não precisa estar correta, mas deve explicar o fenômeno, caso seja verdadeira.\n\n\n\n1.3.3 Testar Explicação\n\n\nTestar uma explicação significa verificar se suas previsões se confirmam.\nPrimeiro, observam-se as consequências da explicação, o que deveria acontecer se a explicação estiver correta?\nSegundo, desenha-se um experimento ou estudo para confrontar essa previsão com os dados. Se os resultados estiverem de acordo, seguimos na direção certa; se não, a hipótese precisa ser revisada.\n\n\n\n\n\n\n\n\n\n\nImportanteFácil Falar Difícil Fazer\n\n\n\nApesar da simplicidade do método científico em teoria, sua aplicação prática exige cuidado e rigor.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao Desenho de Pesquisa e à Jurimetria</span>"
     ]
   },
@@ -165,7 +165,7 @@
     "text": "1.4 A Causalidade\nCompreender a causalidade é uma das tarefas centrais da ciência. Depois de observar um fenômeno e propor uma explicação, é preciso determinar se existe de fato uma relação causal entre os fatores envolvidos. Nem toda associação observada implica causalidade: dois eventos podem ocorrer juntos sem que um cause o outro.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao Desenho de Pesquisa e à Jurimetria</span>"
     ]
   },
@@ -177,7 +177,7 @@
     "text": "1.5 Tipos de Estudos e Relações Causais: Randomização, estudos prospectivos e retrospectivos\n\n1.5.1 Estudos Causais Randomizados.\nOs estudos causais baseados em randomização partem de um conjunto de sujeitos que, antes do início do estudo, apresentam características muito semelhantes. Nenhum desses sujeitos foi previamente exposto ao agente causal suspeito. A partir daí, eles são aleatoriamente designados para dois grupos: um grupo de tratamento e um grupo de controle. Somente os sujeitos do grupo de tratamento são expostos à causa sob investigação.\nEsse tipo de desenho permite isolar o efeito da variável causal e reduzir a influência de outros fatores.\nNo entanto, trata-se da forma mais rara de estudo nas Ciências Sociais Aplicadas, em razão das dificuldades éticas e práticas de implementação.\n\n1.5.1.1 Exemplos de Randomized Control Trial (RCT) em Ciências Sociais e Direito\nJustiça Restaurativa em Casos de Crimes Violentos\n\n\n\nEstudo: Sherman, Lawrence W., et al. Effects of face-to-face restorative justice on victims of crime in four randomized, controlled trials. Journal of experimental criminology 1.3 (2005): 367-395.\nObjetivo: O estudo avaliou o impacto de programas de justiça restaurativa, onde as vítimas e ofensores se encontram em conferências mediadas, em casos de crimes violentos - quatro experimentos controlados.\nResultado: As meta-análises das oito estimativas sugerem o sucesso da justiça restaurativa, tanto como um ritual de interação quanto como uma política para reduzir os danos às vítimas.\n\n\n\n\n\n\n\n\n\n\n\n\n1.5.2 Estudos Prospectivos.\nOs estudos prospectivos, por sua vez, iniciam com sujeitos que já foram expostos ao agente causal sob investigação e os acompanham ao longo do tempo. O ponto de partida é uma situação em que o resultado ainda é desconhecido, e o objetivo é identificar como determinadas variáveis influenciam o desfecho futuro.\nEsse tipo de estudo é valioso para observar a evolução dos efeitos causais, mas é importante reconhecer que outros fatores podem ser responsáveis por alguma parte do efeito nos grupos tratado e de controle. Assim, a relação identificada pode ser relacional, mas não necessariamente causal.\n\n1.5.2.1 Exemplos de Estudos Prospectivos em Ciências Sociais e Direito\nUm exemplo clássico de estudo prospectivo é o Million Women Study (2003), que investigou a relação entre terapias de reposição hormonal (TRH) e câncer de mama.\n\n\n\nEstudo: Beral, Valerie, et al. “Breast cancer and hormone-replacement therapy: the Million Women Study.” The Lancet 362.9392 (2003): 1330-1331\nObjetivo: O Million Women Study foi criado para investigar os efeitos de tipos específicos de TRH no câncer de mama incidente e fatal.Foram recrutadas 1.084.110 mulheres do Reino Unido com idades entre 50 e 64 anos para o Million Women Study entre 1996 e 2001.\nResultado: O uso atual de TRH está associado a um risco aumentado de câncer de mama incidente e fatal.\n\n\n\n\n\n\n\n\n\n\n\n\n1.5.3 Estudos Causais Retrospectivos.\nNos estudos retrospectivos, o processo é inverso: parte-se do resultado final e busca-se identificar as causas que o originaram. Esses estudos têm como propósito principal identificar fatores que levaram a determinado desfecho.\nGeralmente, o pesquisador trabalha com dois grupos, controle e tratamento, compostos por indivíduos que apresentam, ou não, o efeito analisado. O desafio é identificar, de forma cuidadosa, os diferentes níveis do fator potencial de causa entre esses grupos.\n\n\n\n\n\n\nDicaExplicando com Exemplo\n\n\n\nEfeitos do chumbo em crianças. Pesquisa com 4.000 crianças de 4 e 15 anos entre 1999 e 2002. Incluiu 135 crianças com transtorno de déficit de atenção e hiperatividade (TDAH). Exames de sangue foram feitos em todas as 4.000.\n\nAs 135 crianças com TDAH apresentaram níveis de chumbo no sangue muito maior do que nas outras crianças.\n\nTinham quatro vezes mais probabilidade de ter níveis elevados de chumbo no sangue\n\n\nA Questão é, pode-se concluir que a exposição ao chumbo pode causar TDAH?\n\n\nMesmo os melhores estudos retrospectivos oferecem apenas evidências limitadas de causalidade, pois é extremamente difícil controlar todos os fatores potenciais que podem interferir na relação observada. Por isso, é fundamental interpretar seus resultados com cautela.\nObserva-se que Correspondência reversa às vezes é possível em estudos retrospectivos. Ou seja TDAH -&gt; Chumbo….\n\nE é esse o caso nesse estudo: crianças com TDAH são mais propensas a comer tinta com chumbo ou inalar pó de tinta por causa de sua hiperatividade.\n\n\n\n\n\n\n\nAvisoCuidado\n\n\n\nApesar de crianças com TDAH terem “quatro vezes mais chance” de ter níveis elevados de chumbo no sangue.\nNÃO PODEMOS CONCLUIR QUE: Crianças com níveis elevados de chumbo têm “quatro vezes mais probabilidade” de ter TDAH.\n\n\n\n1.5.3.1 Exemplos de Estudos Retrospectivos em Ciências Sociais e Direito\nUm exemplo aplicado às Ciências Sociais é o estudo de Severi, FC; Jesus Filho, J. 2022 (“Há diferenças remuneratórias por gênero na magistratura brasileira?.”), que investigou a hipótese de diferenças remuneratórias entre juízes e juízas em oito tribunais de justiça brasileiros.\n\n\n\nEstudo Severi, FC; Jesus Filho, J. “Há diferenças remuneratórias por gênero na magistratura brasileira?.” Revista de Administração Pública 56.2 (2022): 208-225.\nObjetivo: testar a hipótese de que há clara diferença entre as remunerações médias percebidas por juízes e juízas de 8 tribunais de justiça brasileiros.\nResultado: As diferenças nas médias remuneratórias persistem mesmo após o pareamento, o que pode ser explicado pelos mediadores de gênero, que operam gerando melhores oportunidades para homens em desfavor das mulheres.\n\n\n\n\n\n\n\n\n\n\n\n\n1.5.4 O Método Científico segundo Richard Feynman\nRichard Feynman enfatiza que o método científico baseia-se em propor hipóteses, derivar previsões e testá-las por meio da observação e do experimento. Se os resultados não confirmam a previsão, a hipótese deve ser rejeitada, independentemente de sua origem. Assim segundo o autor temos o seguinte percurso:\n\nFaça uma Observação\n\nObserve um fenômeno no mundo natural.\n\nFormule uma Hipótese\n\nCrie uma possível explicação para o fenômeno.\n\nFaça Previsões\n\nPreveja o que acontecerá se sua hipótese estiver correta.\n\nTeste com Experimentos\n\nConduza experimentos para testar as previsões.\n\nReavalie a Hipótese\n\nSe os resultados não batem com as previsões, a hipótese está errada.\n\n\nEssa visão mostra que a ciência é, acima de tudo, um compromisso ético com a verdade empírica e a disposição de submeter ideias à crítica. O método científico é mais do que um procedimento: é uma atitude de curiosidade, dúvida e verificação constante.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao Desenho de Pesquisa e à Jurimetria</span>"
     ]
   },
@@ -189,7 +189,7 @@
     "text": "1.6 Buscando um Bom Instrumento: Jurimetria\n\n1.6.1 O que é Jurimetria?\nA jurimetria nasce da aplicação do método científico ao campo do Direito. Utiliza ferramentas quantitativas e estatísticas para analisar fenômenos jurídicos, buscando identificar padrões, prever comportamentos e fundamentar decisões em evidências empíricas. Mais do que contar processos ou descrever dados, a jurimetria procura compreender os mecanismos que orientam as decisões judiciais e revelar as regularidades que estruturam a prática jurídica.Assim como nas demais ciências, seu processo envolve observar, explicar e testar\n\n\nUm dos grandes desafios dessa abordagem está na própria natureza dos dados jurídicos, que em sua maioria são não estruturados. Decisões, petições e sentenças são textos longos e complexos, redigidos em linguagem natural, o que torna sua análise sistemática mais difícil.\nPor isso, a pesquisa jurimétrica requer três etapas complementares: coletar e estruturar os dados a partir de fontes dispersas; aplicar métodos de tratamento, como limpeza, padronização e categorização; e, por fim, empregar métodos de análise estatística e computacional capazes de extrair padrões e formular hipóteses sobre o funcionamento do sistema de justiça.\n\n\n\n\n\n\n\n\nEssa capacidade de transformar grandes volumes de informações textuais não padronizadas em conhecimento empírico é o que confere à jurimetria seu caráter verdadeiramente interdisciplinar, unindo Direito, Estatística e Ciência de Dados.\n\n\n1.6.2 Porque estudar Jurimetria?\nO uso de informações e pesquisas empíricas no Direito permite desenvolver práticas mais racionais, eficientes e transparentes. Entre as principais finalidades dessa abordagem, destacam-se:\n\nAperfeiçoamento da gestão judiciária, mediante o uso de dados para identificar gargalos, otimizar fluxos processuais e orientar decisões administrativas;\nRacionalização das decisões judiciais, favorecendo maior consistência e previsibilidade nos julgamentos;\nCompreensão do funcionamento de leis e políticas públicas, avaliando seus efeitos práticos sobre o sistema de justiça e a sociedade;\nAvaliação criteriosa da implementação de normas e políticas, com base em indicadores objetivos e evidências empíricas.\n\nAlém de sua aplicação prática, a jurimetria também contribui para o desenvolvimento do senso crítico diante de argumentos causais frequentemente utilizados no cotidiano jurídico. A análise empírica possibilita questionar afirmações do tipo:\n- “A jurisprudência dominante informa que…”,\n- “O comportamento da vítima foi determinante para o desfecho do caso”,\n- “Não há discriminação contra mulheres na carreira da magistratura paulista”,\n- “Juízes seguem o entendimento do Ministério Público”.\nEsses exemplos evidenciam a necessidade de examinar, com base em dados e métodos, até que ponto tais alegações se sustentam empiricamente.\n\n\n\n\n\n\n\nPaul Kellstedt,Guy Whitten . Fundamentos da pesquisa em ciência política\n\n\n\n\n1.6.3 O que Jurimetria pode Responder?\nA jurimetria pode oferecer evidências que apoiem a tomada de decisão e o aperfeiçoamento institucional, seja no Judiciário, no Legislativo ou no Executivo. Alguns exemplos ilustram o tipo de questão que a jurimetria pode responder:\n\n\n\n\n\n\n\nSeveri, F.\n\n\nA jurimetria busca quantificar e compreender padrões e comportamentos do sistema de justiça Com isso, oferece uma base empírica para aprimorar o Direito e orientar políticas públicas e reformas mais objetiva e transparente.\n\n\n1.6.4 O que IA Pode Fazer?\nNa jurimetria, a função da inteligência artificial (IA) é automatizar a extração de informações de peças processuais, analisar rapidamente grandes volumes de texto e, até auxiliar na elaboração de documentos jurídicos. A perspectiva é que a IA apoie a atividade do Direito, oferecendo suporte e eficiência, mas não substitua o papel do profissional jurídico. Assim:\n\n\n\n\n\n\n\nSeveri, F.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao Desenho de Pesquisa e à Jurimetria</span>"
     ]
   },
@@ -201,7 +201,7 @@
     "text": "1.7 Fase 1: Boas Obervações: Coleta e Transformação\n\n1.7.1 Coleta e Transformação de Dados\nA fase de coleta e transformação de dados é uma etapa central na pesquisa jurimétrica, funcionando como o alicerce do trabalho, já que todas as análises posteriores dependem da qualidade e da estruturação desses dados.\nGeralmente, a coleta é realizada por meio de consultas aos sites dos tribunais, mas esses acervos não oferecem a totalidade das sentenças e acórdãos, e possivelmente não constituem uma amostra totalmente representativa. Por isso, é fundamental conduzir essa etapa com cautela, rigor e transparência, reconhecendo suas limitações e discutindo como essas incompletudes podem impactar os resultados das pesquisas.\n\n\n\n\n\n\n\nSeveri, F.\n\n\n\n\n1.7.2 Extração com IA\nOutra etapa essencial na construção do banco de dados é o uso de inteligência artificial. Embora a IA seja poderosa, ela não é totalmente precisa, dependendo da forma como os textos processuais estão escritos e dos léxicos utilizados. Pode deixar de identificar termos relevantes ou interpretá-los fora de contexto. Por isso, essa etapa deve ser conduzida com cuidado, incluindo testes em subamostras, para garantir que os prompts retornem as informações desejadas\n\n\n\n\n\n\n\nSeveri, F.\n\n\n\n\n\n\n\n\n\nSeveri, F.\n\n\n\n\n1.7.3 Bom conhecimento de programação\nO conhecimento de linguagens de programação voltadas à ciência de dados, como R e Python, é fundamental para coletar, tratar e analisar dados jurídicos. Além disso, é desejável dominar sistemas de gerenciamento de bancos de dados, SQL p.ex., pois permite armazenar esses dados de forma eficiente. Por fim, é importante utilizar técnicas de extração e análise de texto, como NLP e expressões regulares, para explorar e organizar as informações de maneira adequada.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao Desenho de Pesquisa e à Jurimetria</span>"
     ]
   },
@@ -213,7 +213,7 @@
     "text": "1.8 Fase 2: Explicações\n\n1.8.1 Teoria do Direito\nO conhecimento substantivo do Direito é fundamental para elaborar perguntas apropriadas, levantar hipóteses e delimitar o escopo de um projeto. Há muitos ramos no direito e dentro desses ramos muitos assuntos:\n\nDireito civil\nDireito penal\nDireito tributário\nDireito previdenciário\nDireito do Trabalho\nDireito administrativo\nDireito constitucional\n\nTer pessoas que entendam bem sobre o tema é fundamental para o sucesso do projeto.\n\n\n1.8.2 Bom conhecimento do Direito\nConforme observa Ricardo Feliz, cada esfera do Poder possui seus próprios atos processuais. Os atos processuais são o registro formal das ações dentro de um processo. Compreender esses atos é fundamental para determinar quando e como coletar as informações dentro da estrutura processual. Algus exemplos de atos processuais no Judiciários são:\n\nSentença; Acórdão; Decisão liminar; Decisão monocrática\nPetição inicial; Contestação\nParecer\nDocumentos probatórios\n\nTer clareza sobre esses atos permite organizar a coleta de dados de forma precisa e consistente, garantindo que cada informação seja extraída no momento adequado do processo.\n\n\n\n\n\n\n\nFeliz, R.\n\n\n\n\n1.8.3 Bom Desenho de Projeto\nPara elaborar um bom projeto, é essencial seguir uma lógica que conecte problema, hipótese e dados:\n\nCompreender o fenômeno: identificar claramente o problema existente e entender bem o contexto em que ele ocorre.\n\nDefinir o objetivo da pesquisa: estabelecer o que se pretende responder sobre o fenômeno.\n\nPlanejar como responder: determinar quais informações precisam ser coletadas e como serão analisadas para testar a hipótese.\n\nUm bom projeto articula essas etapas de forma coerente, garantindo que cada decisão metodológica esteja alinhada com o problema inicial e a pergunta de pesquisa.\n\n\n\n\n\n\nAvisoExemplo\n\n\n\n\nQual o tempo estimado para a apreciação de uma liminar em pedido de despejo?\nA quantidade e o tipo de droga influenciam o desfecho processual no sentido de condenar por tráfico ou por porte?\nDecisões monocráticas são mais relevantes que decisões colegiadas no STF?\n\n\n\n\n\n1.8.4 Importante!!!\nA avaliação de viabilidade é uma etapa essencial no desenho de um projeto de pesquisa. Ela busca responder três perguntas básicas:\n\nOs dados existem?\n\nSe existem, são acessíveis?\n\nSe são acessíveis, qual a qualidade desses dados?",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao Desenho de Pesquisa e à Jurimetria</span>"
     ]
   },
@@ -225,7 +225,7 @@
     "text": "1.9 Fase 3: Análise das Explicações\n\n1.9.1 Usando Modelos e Estatística\nAnálises descritivas: resume e organiza os dados para mostrar padrões e distribuições. Abaixo pode-se observar o comportamento de 9.499 julgados com o assunto direito ambiental no TJSP.\nApós organizar os dados em tabelas, manteve-se apenas ações civis públicas. Técnicas de processamento de linguagem natural classificaram os desfechos (como procedente, improcedente, acordo, extinção, etc.) e os casos foram agrupados por autor (MP, Defensoria, Executivo e Terceiro Setor) e por faixa de valor da causa. Essa análise permite observar a distribuição dos julgados por desfecho, autor e valor, fornecendo uma visão inicial do comportamento judicial.\n\n\n\n\n\n\n\nSeveri, F.\n\n\n\nAnálises Preditivas: usa dados e modelos para antecipar resultados futuros.\nNa análise preditiva, é possível estimar a probabilidade de uma ação civil pública em Direito Ambiental no TJSP, por exemplo, na comarca de Assis, ser julgada procedente, considerando que o requerente é o Ministério Público.\n\n\n\n\n\n\n\nSeveri, F.\n\n\n\nAnálises Explicartivas: investiga relações e/ou causas entre variáveis para entender por que os fenômenos ocorrem.\nNeste modelo, busca-se explicar o diferencial de salário entre magistrados homens e mulheres, identificando os determinantes que efetivamente causam essa diferença. Ou seja, o objetivo é entender por que o diferencial observado ocorre.\n\n\n\n\n\n\n\nSeveri, F.\n\n\n\n\n1.9.2 Ciclo da Pesquisa\nO ciclo da pesquisa nem sempre segue um caminho linear ou fácil; frequentemente é tortuoso. Apesar disso, ele envolve etapas importantes que precisam ser bem fundamentadas e respeitadas, como as que segue:\n\nDesenho do projeto;\nOperacionalização em variáveis mensuráveis;\nAnálise de viabilidade;\nColeta;\nLimpeza e organização dos dados;\nTransformação dos dados;\nAnálise exploratória;\nAnálise inferencial e preditiva;\nMétricas de desempenho;\nPublicação dos resultados.\n\n\n\n\n\n\n\n\nSeveri, F.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introdução ao Desenho de Pesquisa e à Jurimetria</span>"
     ]
   },
@@ -237,7 +237,7 @@
     "text": "2.1 Introdução\nO estudo clássico The Selection of Disputes for Litigation, de George L. Priest e Benjamin Klein (1984), marcou a análise econômica do direito ao propor uma teoria para explicar por que apenas uma pequena parte dos conflitos sociais chega, de fato, a julgamento — e por que os casos julgados não são representativos do universo total de disputas.\nA intuição central altera a leitura das estatísticas judiciais: o que vemos nas decisões publicadas é apenas o “topo do iceberg”; a maioria dos conflitos termina em acordo, desistência ou outras formas de composição.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -249,7 +249,7 @@
     "text": "2.2 O problema da seleção dos litígios\nApenas uma fração mínima das disputas chega a julgamento. A maioria termina antes — por acordo, mediação ou desistência. Assim, analisar apenas decisões judiciais cria uma visão distorcida: as sentenças representam o “topo do iceberg”.\nAntes de Priest e Klein, supunha-se que os casos julgados eram representativos do universo de litígios. O modelo deles refuta essa ideia: os casos são selecionados racionalmente pelas partes, não sorteados aleatoriamente.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -261,7 +261,7 @@
     "text": "2.3 Antecedentes e limitações\nEntre os precursores: - Karl Llewellyn, que via os casos litigados como “patológicos”; - William Whitford, que tentou coletar todos os casos de um tipo de litígio; - Landes & Posner, que formularam modelos de custo-benefício mas presumindo seleção aleatória.\nPriest e Klein, ao contrário, argumentam que a decisão de litigar é racional e estratégica, determinada por expectativas e custos.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -273,7 +273,7 @@
     "text": "2.4 O modelo de seleção\n\n2.4.1 Intuição básica\nCada disputa possui um valor “verdadeiro” \\((Y')\\), que reflete o grau de responsabilidade do réu diante de um padrão decisório \\((Y^*)\\). Assim:\n\nSe \\((Y' &gt; Y^*)\\), o autor deveria vencer;\nSe \\((Y' &lt; Y^*)\\), o réu deveria vencer.\n\nAs partes, porém, não conhecem \\((Y')\\) com precisão. Cada uma forma uma estimativa imperfeita, com erro:\n\\[\nY_{p} = Y' + \\varepsilon_{p}\n\\]\n\\[\nY_{d} = Y' + \\varepsilon_{d}\n\\]\nonde:\n\n\\((Y_{p})\\) é a estimativa do autor;\n\\((Y_{d})\\) é a estimativa do réu;\n\\((\\varepsilon_{p})\\) e \\((\\varepsilon_{d})\\) são erros de previsão.\n\nA partir dessas estimativas, cada parte calcula uma probabilidade subjetiva de vitória, \\((P_{p})\\) e \\((P_{d})\\).\n\n\n2.4.2 Condição para o litígio\nUm caso segue a julgamento apenas se a diferença entre as probabilidades esperadas for suficiente para compensar os custos do litígio:\n\\[\nP_{p} - P_{d} &gt; D\n\\]\nem que \\((D)\\) representa o diferencial entre os custos de litigar e os custos de negociar.\nQuando essa diferença é pequena, o acordo é racional; quando é grande, o caso vai a julgamento.\n\n\n2.4.3 O efeito da incerteza\nCasos “claros” — com alto consenso sobre quem vencerá — são resolvidos por acordo.\nOs casos que chegam ao tribunal são aqueles em torno do limiar de incerteza, próximos de \\((Y^*)\\).\nLogo, os julgamentos tendem a envolver casos difíceis, e as vitórias se distribuem quase igualmente entre autor e réu.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -285,7 +285,7 @@
     "text": "2.5 A regra dos 50%\nA consequência mais conhecida do modelo é o equilíbrio estatístico de aproximadamente 50%.\nQuanto mais precisas forem as informações das partes:\n\nMenor será o número de casos julgados;\nMais próxima de 50% será a taxa de vitórias dos autores.\n\nIsso não significa justiça perfeita, mas sim um equilíbrio de seleção: as partes só levam a julgamento os casos mais incertos, que tendem a se dividir igualmente em resultados favoráveis a cada lado.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -297,7 +297,7 @@
     "text": "2.6 Implicações teóricas\n\nViés de amostragem – as decisões judiciais não representam o universo completo de disputas;\n\nLimite das estatísticas – taxas de sucesso não medem imparcialidade judicial;\n\nAprendizado – após mudanças legais, as taxas de vitória oscilam, mas convergem a 50%;\n\nCustos e incentivos – quanto maior o custo de litigar, menor o número de julgamentos e mais forte o equilíbrio.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -309,7 +309,7 @@
     "text": "2.7 Evidências empíricas\nEstudos de vinte anos em Cook County (Illinois) mostraram taxas de vitória próximas de 50% em várias categorias (indenizações, responsabilidade médica, etc.).\nOutras pesquisas confirmaram o padrão: a proporção de vitórias é estável ao longo do tempo, sugerindo que reflete o processo de seleção, e não o mérito substantivo.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -321,7 +321,7 @@
     "text": "2.8 Críticas e limitações\n\nRacionalidade e informação: o modelo assume simetria informacional e racionalidade perfeita, raramente verificadas;\n\nPoder econômico: ignora diferenças de recursos e capacidade de suportar risco;\n\nFatores psicológicos e simbólicos: desconsidera motivações não econômicas;\n\nLitigância repetitiva: não explica bem comportamentos estratégicos de grandes agentes.\n\nMesmo assim, o modelo fornece uma base teórica poderosa para compreender o funcionamento estatístico do sistema judicial.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -333,7 +333,7 @@
     "text": "2.9 Relevância contemporânea e jurimetria\nA teoria de Priest & Klein tornou-se essencial para a jurimetria e a IA aplicada ao direito.\nAo analisar grandes bases de dados judiciais, deve-se reconhecer que as decisões publicadas são uma amostra enviesada.\nModelos de previsão baseados apenas em julgamentos podem amplificar esse viés se não corrigirem o processo de seleção.\nFerramentas como modelos de seleção de Heckman, propensity score matching ou dados sobre acordos e desistências ajudam a ajustar as estimativas empíricas.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -345,7 +345,7 @@
     "text": "2.10 Conclusão\nO modelo de Priest & Klein revela que o equilíbrio de 50% nas vitórias judiciais não expressa imparcialidade perfeita, mas sim o produto da seleção racional dos casos que chegam a julgamento.\nCompreender essa lógica é fundamental para estudos empíricos, políticas de acesso à justiça e modelos de IA jurídica.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -357,7 +357,7 @@
     "text": "2.11 Referências\n\nPriest, G. L., & Klein, B. (1984). The Selection of Disputes for Litigation. Journal of Legal Studies, 13(1), 1–55.\n\nLandes, W., & Posner, R. (1973). The Economic Structure of Tort Law.\n\nLlewellyn, K. (1960). The Common Law Tradition: Deciding Appeals.\n\nWhitford, W. (1968). Strict Products Liability and the Automobile Industry: Much Ado About Nothing. Wisconsin Law Review, 83–125.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Seleção de disputas para o litígio</span>"
     ]
   },
@@ -369,7 +369,7 @@
     "text": "3.1 Introdução\nO ensaio “Why the ‘Haves’ Come Out Ahead: Speculations on the Limits of Legal Change”, publicado por Marc Galanter em 1974, é uma das obras mais influentes da sociologia jurídica.\nO texto não é um estudo empírico, mas uma reflexão teórica sobre as estruturas que condicionam o funcionamento do sistema jurídico e limitam sua capacidade de promover mudanças redistributivas.\nGalanter busca compreender por que os grupos socialmente privilegiados (“os que têm”) tendem a sair vitoriosos nos litígios, enquanto os “have-nots” encontram dificuldades em converter o direito em instrumento de transformação.\nO ensaio propõe uma leitura estrutural da justiça: o foco desloca-se das normas e decisões individuais para a arquitetura institucional e estratégica do sistema jurídico.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -381,7 +381,7 @@
     "text": "3.2 A Estrutura do Sistema Jurídico\nLogo no início, Galanter apresenta uma decomposição do sistema jurídico em quatro elementos essenciais:\n\nRegras (rules) – o corpo de aprendizado normativo autorizado, isto é, o conjunto de princípios, leis e doutrinas reconhecidas.\n\nTribunais (courts) – as instituições que aplicam essas regras a casos concretos.\n\nAdvogados (lawyers) – os intermediários especializados que dominam as técnicas de argumentação e o manejo das instituições.\n\nPartes (parties) – os sujeitos sociais que apresentam ou defendem reivindicações diante do sistema.\n\nA partir dessa estrutura, o autor formula a pergunta central: em que condições a litigância pode ser redistributiva, isto é, capaz de diminuir desigualdades?\nA resposta que se desenha ao longo do texto é cética: a configuração do sistema jurídico tende a reforçar, e não a reduzir, as diferenças existentes entre os atores sociais.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -393,7 +393,7 @@
     "text": "3.3 Suposições Iniciais\nO autor parte de algumas premissas básicas:\n\nA sociedade é composta por atores com diferentes níveis de riqueza e poder, envolvidos em interações competitivas.\n\nO sistema jurídico pretende aplicar normas gerais de modo imparcial, sem considerar a identidade das partes.\n\nAs regras são complexas e o acesso a elas exige especialização técnica, o que já cria barreiras.\n\nAs cortes produzem novas regras à medida que decidem casos concretos.\n\nOs recursos institucionais são escassos, de modo que nem todos os casos podem ser julgados plenamente — daí a prevalência dos acordos e transações.\n\nHá níveis hierárquicos de instituições: instâncias superiores que formulam regras e instâncias inferiores que as aplicam, com falhas de comunicação e execução entre elas.\n\nEssas premissas preparam o terreno para a ideia de que o direito, mesmo concebido como neutro, opera dentro de condições materiais e organizacionais que favorecem certos atores.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -405,7 +405,7 @@
     "text": "3.4 A Tipologia das Partes: “One-shotters” e “Repeat Players”\nA principal inovação conceitual do texto é a distinção entre dois tipos de litigantes:\n\n3.4.1 One-shotters (OS)\nSão os atores que têm contato ocasional com o sistema judicial.\nEnvolvem-se em litígios apenas uma vez ou em raras ocasiões, como um acusado criminal, um consumidor lesado ou um trabalhador demitido.\nPara eles, o processo é único e decisivo: o risco é alto, o custo é grande, e não há perspectiva de experiência acumulada.\n\n\n3.4.2 Repeat Players (RP)\nSão aqueles que recorrem ao sistema de forma contínua e sistemática, como empresas, seguradoras, agências governamentais ou grandes credores.\nPossuem recursos financeiros, assessoria técnica constante, conhecimento das práticas institucionais e interesse em moldar o direito a longo prazo.\nGalanter reconhece que essa distinção é uma simplificação — trata-se de um continuum, não de uma divisão rígida —, mas ela é útil para evidenciar o modo como a repetição e a organização estruturam o poder jurídico.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -417,7 +417,7 @@
     "text": "3.5 As Vantagens dos “Repeat Players”\nA partir dessa tipologia, o autor enumera um conjunto de vantagens sistemáticas dos RPs:\n\nExperiência e informação – o RP “já fez isso antes”: conhece as estratégias, os procedimentos e as reações das instituições.\n\nEconomia de escala – por lidar com muitos casos, reduz custos e aprende com a repetição.\n\nRelações institucionais – estabelece vínculos informais com juízes, promotores e servidores, o que facilita a comunicação e a confiança.\n\nReputação de barganha – pode construir uma imagem de credibilidade ou intransigência que o favorece em negociações.\n\nCapacidade de risco e longo prazo – como cada caso representa apenas uma pequena fração de seus interesses, o RP pode adotar estratégias arriscadas para obter ganhos estruturais.\n\nInfluência sobre as regras – investe recursos para moldar normas e precedentes, seja por meio do lobby, seja pela escolha seletiva de casos a levar adiante.\n\nControle da agenda judicial – decide quais litígios devem ser levados a julgamento e quais devem ser encerrados por acordo.\n\nMaior penetração das normas – dispõe de recursos para transformar decisões favoráveis em práticas efetivas no “nível de campo”.\n\nO resultado dessas vantagens é um acúmulo cumulativo de poder jurídico. O RP não apenas vence mais frequentemente, mas produz o direito a seu favor, orientando a evolução das regras e sua aplicação concreta.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -429,7 +429,7 @@
     "text": "3.6 O Problema da “Penetração” das Regras\nGalanter introduz o conceito de “penetração” para descrever a efetividade real das normas.\nNem todas as regras formuladas nas instâncias superiores “penetram” até o nível das práticas cotidianas.\nA distância entre o “pico” (as cortes que enunciam regras) e o “campo” (as instituições que aplicam) abre espaço para distorções e desigualdades.\nOs RPs têm recursos para garantir que as regras que os favorecem sejam efetivamente implementadas, enquanto os OSs tendem a ver as regras favoráveis permanecerem simbólicas, sem eficácia prática.\nDesse modo, o direito formalmente igualitário reproduz desigualdades materiais.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -441,7 +441,7 @@
     "text": "3.7 A Taxonomia das Configurações de Litígio\nPara aprofundar sua análise, Galanter apresenta uma matriz com quatro tipos de configuração processual:\n\n\n\n\n\n\n\n\n\nTipo de relação\nDemandante\nDemandado\nExemplos\n\n\n\n\nBox I\nOS\nOS\nDivórcios, disputas familiares, vizinhança\n\n\nBox II\nRP\nOS\nProcessos de cobrança, despejos, ações fiscais\n\n\nBox III\nOS\nRP\nAcidentes de trânsito, ações contra seguradoras, demissões\n\n\nBox IV\nRP\nRP\nLitígios entre empresas, agências reguladoras, sindicatos\n\n\n\nO autor observa que a maior parte da litigância real situa-se em Box II, onde os RPs processam OSs em escala massiva e rotineira.\nEsses casos raramente geram jurisprudência inovadora, mas mantêm o fluxo burocrático do sistema.\nJá o Box III, no qual o OS desafia um RP, representa o espaço mais frágil da redistribuição.\nO OS tem pouco poder de barganha e dificilmente influencia a criação de novas regras.\nNos Box I e IV, as relações são mais simétricas, mas o volume de casos é pequeno.\nNos litígios entre RPs, há elevado investimento na produção de doutrina e precedentes, o que explica a sofisticação técnica das disputas empresariais ou administrativas.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -453,7 +453,7 @@
     "text": "3.8 O Papel dos Advogados\nA análise de Galanter ganha complexidade ao incluir os advogados como atores autônomos.\nEles próprios são repeat players profissionais e, portanto, introduzem novas camadas de desigualdade.\n\nOs advogados que atuam para grandes organizações mantêm relações contínuas, recursos estáveis e acesso privilegiado à informação.\n\nJá os que representam clientes ocasionais trabalham de forma esporádica, sob restrições éticas (proibição de publicidade, honorários limitados) e com poucos meios de investimento.\n\nA organização da profissão jurídica, segundo Galanter, tende a reforçar as vantagens dos RPs.\nOs profissionais que os atendem estão melhor posicionados social e economicamente; os que servem aos OSs ocupam as camadas inferiores da profissão e dispõem de menos autonomia.\nMesmo os advogados que poderiam agir como contrapeso acabam integrando-se ao sistema de relações permanentes com as instituições.\nAssim, o advogado — longe de nivelar as forças — atua como multiplicador das desigualdades estruturais.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -465,7 +465,7 @@
     "text": "3.9 O Direito e os Limites da Mudança\nO título do ensaio já sugere seu argumento principal: existem limites estruturais à capacidade do direito de produzir mudanças redistributivas.\nEsses limites decorrem de três fatores combinados:\n\nA posição desigual dos atores diante do sistema.\n\nA lógica interna das instituições jurídicas, que favorece a repetição e a previsibilidade.\n\nA transformação das vitórias dos poderosos em regras duradouras, enquanto as vitórias dos fracos permanecem episódicas.\n\nMesmo quando novas normas parecem beneficiar os “have-nots”, sua aplicação depende de recursos e da disposição institucional que, na maioria das vezes, pertencem aos “haves”.\nO resultado é um paradoxo: o direito formalmente igualitário produz resultados sistematicamente desiguais.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -477,7 +477,7 @@
     "text": "3.10 A Dimensão Cultural e a “Litigiosidade”\nEm uma digressão, Galanter observa que as sociedades diferem quanto ao valor atribuído à litigância.\nAlguns contextos culturais encaram a ida aos tribunais como comportamento legítimo e desejável; outros, como indício de fracasso social ou desonra.\nEssas disposições influenciam o equilíbrio entre OSs e RPs: quanto maior o custo psicológico de litigar, mais os indivíduos tenderão a evitar o processo e, portanto, a reforçar a posição dos atores institucionais.\nAo mesmo tempo, o autor distingue entre o valor simbólico das regras e o valor instrumental de sua aplicação:\nas massas podem sentir orgulho de viver sob leis justas, mesmo sem condições de acioná-las eficazmente.\nAssim, a crença na neutralidade do direito serve para legitimar a desigualdade, ao mesmo tempo em que disfarça suas causas estruturais.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -489,7 +489,7 @@
     "text": "3.11 A Lógica Interna das Instituições\nO ensaio mostra que as instituições jurídicas são organizadas de modo a favorecer a eficiência e a estabilidade, e não a redistribuição.\nO excesso de demandas leva à necessidade de “filtragem” e “acomodação”, produzindo incentivos à conciliação e ao acordo.\nMas esses acordos não são simétricos: resultam de barganhas desiguais, nas quais a repetição e o poder de negociação dos RPs determinam os termos.\nO autor insiste que os tribunais não são instrumentos de engenharia social controlada.\nEles funcionam como arenas em que se reproduzem as posições sociais, e a mudança é possível apenas quando atores organizados — também eles “repeat players” — passam a representar interesses redistributivos.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -501,7 +501,7 @@
     "text": "3.12 Considerações Finais\nMarc Galanter formula, em 1974, uma das análises mais persuasivas sobre a conexão entre estrutura social e desempenho jurídico.\nSeu argumento não é moralista nem sentimental: ele descreve um mecanismo institucional de autoperpetuação.\nOs “haves” saem na frente não porque as leis os favorecem abertamente, mas porque dominam as condições práticas de operação do direito:\na informação, o tempo, os recursos, as relações e a possibilidade de transformar experiências passadas em estratégias futuras.\nOs “have-nots”, por sua vez, chegam ao sistema de modo isolado, episódico e dependente — e, por isso, raramente conseguem modificar as regras do jogo.\nO texto termina com uma advertência: enquanto o sistema jurídico permanecer estruturado em torno da repetição e da especialização, a igualdade formal continuará a conviver com a desigualdade real.\nA lei, por mais neutra que pareça, tende a reproduzir o mundo que a produz.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
     ]
   },
@@ -513,74 +513,8 @@
     "text": "3.13 Referências\n\nGalanter, M. (1974). Why the “Haves” Come Out Ahead: Speculations on the Limits of Legal Change. Law & Society Review, 9(1), 95–160.",
     "crumbs": [
       "Início",
-      "Fundamentos",
+      "Parte I — Fundamentos",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Por que os que têm saem na frente: análise do texto de Marc Galanter</span>"
-    ]
-  },
-  {
-    "objectID": "partes/02-ambiente-trabalho.html",
-    "href": "partes/02-ambiente-trabalho.html",
-    "title": "Ambiente de trabalho",
-    "section": "",
-    "text": "Esta parte apresenta a preparação do ambiente necessário ao desenvolvimento das atividades propostas no livro.",
-    "crumbs": [
-      "Início",
-      "Ambiente de trabalho"
-    ]
-  },
-  {
-    "objectID": "partes/03-coleta.html",
-    "href": "partes/03-coleta.html",
-    "title": "Coleta de processos e decisões",
-    "section": "",
-    "text": "Esta parte trata da obtenção de processos, decisões e outros materiais jurídicos que servirão de base para a pesquisa.",
-    "crumbs": [
-      "Início",
-      "Coleta de processos e decisões"
-    ]
-  },
-  {
-    "objectID": "partes/04-extracao.html",
-    "href": "partes/04-extracao.html",
-    "title": "Extração da informação",
-    "section": "",
-    "text": "Esta parte trata da transformação dos documentos jurídicos coletados em informações que possam ser organizadas e analisadas.",
-    "crumbs": [
-      "Início",
-      "Extração da informação"
-    ]
-  },
-  {
-    "objectID": "partes/05-limpeza-estruturacao.html",
-    "href": "partes/05-limpeza-estruturacao.html",
-    "title": "Limpeza e estruturação dos dados",
-    "section": "",
-    "text": "Esta parte trata da verificação, da padronização e da organização das informações para a construção de bases de dados analisáveis.",
-    "crumbs": [
-      "Início",
-      "Limpeza e estruturação dos dados"
-    ]
-  },
-  {
-    "objectID": "partes/06-descricao.html",
-    "href": "partes/06-descricao.html",
-    "title": "Descrição do fenômeno",
-    "section": "",
-    "text": "Esta parte trata da caracterização empírica dos fenômenos jurídicos a partir dos dados estruturados.",
-    "crumbs": [
-      "Início",
-      "Descrição do fenômeno"
-    ]
-  },
-  {
-    "objectID": "partes/07-explicacao.html",
-    "href": "partes/07-explicacao.html",
-    "title": "Explicação do fenômeno",
-    "section": "",
-    "text": "Esta parte trata da investigação das relações e dos mecanismos associados aos fenômenos jurídicos observados.",
-    "crumbs": [
-      "Início",
-      "Explicação do fenômeno"
     ]
   }
 ]

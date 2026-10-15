@@ -35,12 +35,12 @@ book:
         - capitulos/desenho-pesquisa-jurimetria.qmd
         - capitulos/selecao-disputas-litigio.qmd
         - capitulos/galanter.qmd
-    - part: partes/02-ambiente-trabalho.qmd
-    - part: partes/03-coleta.qmd
-    - part: partes/04-extracao.qmd
-    - part: partes/05-limpeza-estruturacao.qmd
-    - part: partes/06-descricao.qmd
-    - part: partes/07-explicacao.qmd
+    - part: "Parte II — Ambiente de trabalho"
+    - part: "Parte III — Coleta de processos e decisões"
+    - part: "Parte IV — Extração da informação"
+    - part: "Parte V — Limpeza e estruturação dos dados"
+    - part: "Parte VI — Descrição do fenômeno"
+    - part: "Parte VII — Explicação do fenômeno"
 
 format:
   html:

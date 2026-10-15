@@ -1,3 +1,35 @@
-# Fundamentos
+---
+toc: false
+---
 
-Esta parte apresenta o método científico, o realismo jurídico e a integração entre Direito, Estatística e Ciência de Dados.
+# Parte I — Fundamentos
+
+Esta parte apresenta as bases da pesquisa jurimétrica. Os capítulos discutem o desenho de pesquisa e mostram como a seleção dos litígios e as desigualdades entre os atores influenciam aquilo que observamos no sistema de justiça.
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-4 .cartao-home .cartao-proposito}
+### Desenho de pesquisa e jurimetria
+
+Introdução ao método científico e à construção da pesquisa empírica aplicada ao Direito.
+
+[Ler o capítulo](../capitulos/desenho-pesquisa-jurimetria.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-4 .cartao-home .cartao-problemas}
+### Seleção de disputas para o litígio
+
+Apresentação do modelo de Priest e Klein sobre a seleção dos casos que chegam a julgamento.
+
+[Ler o capítulo](../capitulos/selecao-disputas-litigio.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-4 .cartao-home .cartao-formacao}
+### Por que os que têm saem na frente
+
+Discussão das desigualdades estruturais do sistema jurídico a partir de Marc Galanter.
+
+[Ler o capítulo](../capitulos/galanter.qmd)
+:::
+
+:::
