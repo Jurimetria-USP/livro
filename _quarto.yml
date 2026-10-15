@@ -1,0 +1,17 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Livro de Jurimetria"
+  subtitle: "Direito, Desigualdades e Ciência de Dados"
+  chapters:
+    - index.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+lang: pt-BR
+editor: visual
