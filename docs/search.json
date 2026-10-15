@@ -4,9 +4,129 @@
     "href": "index.html",
     "title": "Livro de Jurimetria",
     "section": "",
-    "text": "Este livro está em preparação.\nSeu conteúdo será desenvolvido e disponibilizado progressivamente pela iniciativa Jurimetria USP.",
+    "text": "Prefácio",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Prefácio</span>"
+      "Prefácio"
+    ]
+  },
+  {
+    "objectID": "index.html#motivação",
+    "href": "index.html#motivação",
+    "title": "Livro de Jurimetria",
+    "section": "Motivação",
+    "text": "Motivação\nAcreditamos que a jurimetria é fundamental para a construção de um sistema de justiça mais eficiente, transparente e orientado por evidências. Ela contribui para transformar a forma como o Direito é estudado e praticado, tornando pesquisadores e profissionais mais conscientes das possibilidades e dos limites do uso de dados e tecnologias na tomada de decisões.\nA jurimetria, a estatística, a ciência de dados e a inteligência artificial aplicadas ao Direito podem contribuir para o aprimoramento da atuação institucional, desde a formulação de políticas públicas até a condução de processos e a gestão estratégica de casos. Esses instrumentos permitem identificar padrões, descrever fenômenos, avaliar relações, orientar a alocação de recursos e fundamentar decisões de maneira mais explícita e sistemática.",
+    "crumbs": [
+      "Prefácio"
+    ]
+  },
+  {
+    "objectID": "index.html#a-quem-se-destina",
+    "href": "index.html#a-quem-se-destina",
+    "title": "Livro de Jurimetria",
+    "section": "A quem se destina",
+    "text": "A quem se destina\nEste livro se destina a estudantes, pesquisadores e profissionais interessados na aplicação de métodos quantitativos ao estudo do Direito.\nO texto foi concebido para leitores com diferentes formações. Ao integrar conceitos jurídicos, estatísticos e computacionais, procura oferecer um percurso que permita compreender tanto os fundamentos da pesquisa jurimétrica quanto suas aplicações práticas.",
+    "crumbs": [
+      "Prefácio"
+    ]
+  },
+  {
+    "objectID": "index.html#objetivo",
+    "href": "index.html#objetivo",
+    "title": "Livro de Jurimetria",
+    "section": "Objetivo",
+    "text": "Objetivo\nO livro tem como objetivo apresentar os fundamentos e as práticas da jurimetria e da ciência de dados aplicada ao Direito.\nBusca-se conduzir o leitor pelo ciclo da pesquisa jurimétrica: da formulação da pergunta de pesquisa à apresentação dos resultados. Esse percurso envolve o desenho da pesquisa, a coleta de processos e decisões, a extração das informações, a limpeza e a estruturação dos dados, a descrição dos fenômenos observados e a utilização de modelos voltados à sua explicação.\nMais do que apresentar ferramentas, o livro procura mostrar como construir evidências adequadas aos problemas jurídicos e como interpretar resultados de maneira coerente com os métodos utilizados e com as limitações dos dados disponíveis.",
+    "crumbs": [
+      "Prefácio"
+    ]
+  },
+  {
+    "objectID": "index.html#abordagem",
+    "href": "index.html#abordagem",
+    "title": "Livro de Jurimetria",
+    "section": "Abordagem",
+    "text": "Abordagem\nO livro adota uma abordagem aplicada, apoiada em problemas jurídicos e casos empíricos. Os conceitos serão apresentados em diálogo com situações concretas, permitindo acompanhar as escolhas realizadas ao longo de uma pesquisa.\nSempre que pertinente, os capítulos combinarão fundamentação teórica, exemplos, dados e códigos reproduzíveis. Essa integração busca aproximar o leitor das diferentes etapas do trabalho empírico e tornar transparentes os procedimentos utilizados na produção dos resultados.\nA abordagem enfatiza a integração entre Direito, Estatística e Ciência de Dados. O objetivo é oferecer instrumentos para que o leitor possa formular perguntas relevantes, organizar e analisar informações jurídicas e desenvolver interpretações capazes de contribuir para decisões mais fundamentadas.\nEste livro está em preparação. Seu conteúdo será desenvolvido e disponibilizado progressivamente pela iniciativa Jurimetria USP.",
+    "crumbs": [
+      "Prefácio"
+    ]
+  },
+  {
+    "objectID": "autores.html",
+    "href": "autores.html",
+    "title": "Sobre os autores",
+    "section": "",
+    "text": "Alexandre Nicolella\nAlexandre Nicolella é professor de Economia da Faculdade de Economia, Administração e Contabilidade de Ribeirão Preto da Universidade de São Paulo (FEA-RP/USP).\nPossui formação em Economia Aplicada e experiência em microeconometria, avaliação de projetos e análise de dados, com ênfase em métodos quantitativos e modelagem estatística voltados à tomada de decisões em políticas públicas e gestão. Atua em pesquisa e ensino de econometria e análise de dados e participa de projetos financiados por organizações nacionais e internacionais.\nCurrículo Lattes · ORCID",
+    "crumbs": [
+      "Sobre os autores"
+    ]
+  },
+  {
+    "objectID": "autores.html#josé-de-jesus-filho",
+    "href": "autores.html#josé-de-jesus-filho",
+    "title": "Sobre os autores",
+    "section": "José de Jesus Filho",
+    "text": "José de Jesus Filho\n\nJosé de Jesus Filho, da Pontifícia Universidade Católica de São Paulo (PUC-SP), é cientista de dados e especialista em jurimetria.\nAtua no desenvolvimento de ferramentas em R para a extração e a organização de dados judiciais e na aplicação de métodos estatísticos ao estudo do contencioso. É autor do pacote tjsp, desenvolvido para a coleta e a organização de processos e decisões do Tribunal de Justiça de São Paulo.\nTambém ministra cursos e desenvolve materiais sobre coleta, estruturação e análise de dados judiciais, incluindo estudos sobre duração de processos, análise de sobrevivência, aprendizado estatístico, processamento de linguagem natural e sistemas distribuídos.",
+    "crumbs": [
+      "Sobre os autores"
+    ]
+  },
+  {
+    "objectID": "partes/01-fundamentos.html",
+    "href": "partes/01-fundamentos.html",
+    "title": "Fundamentos",
+    "section": "",
+    "text": "Esta parte apresenta o método científico, o realismo jurídico e a integração entre Direito, Estatística e Ciência de Dados.",
+    "crumbs": [
+      "Fundamentos"
+    ]
+  },
+  {
+    "objectID": "partes/02-coleta.html",
+    "href": "partes/02-coleta.html",
+    "title": "Coleta de processos e decisões",
+    "section": "",
+    "text": "Esta parte trata da obtenção de processos, decisões e outros materiais jurídicos que servirão de base para a pesquisa.",
+    "crumbs": [
+      "Coleta de processos e decisões"
+    ]
+  },
+  {
+    "objectID": "partes/03-extracao.html",
+    "href": "partes/03-extracao.html",
+    "title": "Extração da informação",
+    "section": "",
+    "text": "Esta parte trata da transformação dos documentos jurídicos coletados em informações que possam ser organizadas e analisadas.",
+    "crumbs": [
+      "Extração da informação"
+    ]
+  },
+  {
+    "objectID": "partes/04-limpeza-estruturacao.html",
+    "href": "partes/04-limpeza-estruturacao.html",
+    "title": "Limpeza e estruturação dos dados",
+    "section": "",
+    "text": "Esta parte trata da verificação, da padronização e da organização das informações para a construção de bases de dados analisáveis.",
+    "crumbs": [
+      "Limpeza e estruturação dos dados"
+    ]
+  },
+  {
+    "objectID": "partes/05-descricao.html",
+    "href": "partes/05-descricao.html",
+    "title": "Descrição do fenômeno",
+    "section": "",
+    "text": "Esta parte trata da caracterização empírica dos fenômenos jurídicos a partir dos dados estruturados.",
+    "crumbs": [
+      "Descrição do fenômeno"
+    ]
+  },
+  {
+    "objectID": "partes/06-explicacao.html",
+    "href": "partes/06-explicacao.html",
+    "title": "Explicação do fenômeno",
+    "section": "",
+    "text": "Esta parte trata da investigação das relações e dos mecanismos associados aos fenômenos jurídicos observados.",
+    "crumbs": [
+      "Explicação do fenômeno"
     ]
   }
 ]

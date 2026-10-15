@@ -5,12 +5,27 @@ project:
 book:
   title: "Livro de Jurimetria"
   subtitle: "Direito, Desigualdades e Ciência de Dados"
+  author:
+    - name: "Alexandre Nicolella"
+      affiliation: "FEA-RP/USP"
+    - name: "José de Jesus Filho"
+      affiliation: "PUC-SP"
+  page-navigation: true
   chapters:
     - index.qmd
+    - autores.qmd
+    - part: partes/01-fundamentos.qmd
+    - part: partes/02-coleta.qmd
+    - part: partes/03-extracao.qmd
+    - part: partes/04-limpeza-estruturacao.qmd
+    - part: partes/05-descricao.qmd
+    - part: partes/06-explicacao.qmd
 
 format:
   html:
-    theme: cosmo
+    theme:
+      - cosmo
+      - tema-moderno.scss
     toc: true
 
 lang: pt-BR

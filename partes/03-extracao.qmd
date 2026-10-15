@@ -1,0 +1,3 @@
+# Extração da informação
+
+Esta parte trata da transformação dos documentos jurídicos coletados em informações que possam ser organizadas e analisadas.

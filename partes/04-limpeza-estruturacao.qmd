@@ -1,0 +1,3 @@
+# Limpeza e estruturação dos dados
+
+Esta parte trata da verificação, da padronização e da organização das informações para a construção de bases de dados analisáveis.

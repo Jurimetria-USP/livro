@@ -1,0 +1,23 @@
+# Sobre os autores {.unnumbered}
+
+## Alexandre Nicolella
+
+![](imagens/autores/alexandre.jpg){width=140px height=140px style="border-radius: 50%; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.15);"}
+
+Alexandre Nicolella é professor de Economia da Faculdade de Economia, Administração e Contabilidade de Ribeirão Preto da Universidade de São Paulo (FEA-RP/USP).
+
+Possui formação em Economia Aplicada e experiência em microeconometria, avaliação de projetos e análise de dados, com ênfase em métodos quantitativos e modelagem estatística voltados à tomada de decisões em políticas públicas e gestão. Atua em pesquisa e ensino de econometria e análise de dados e participa de projetos financiados por organizações nacionais e internacionais.
+
+[Currículo Lattes](https://lattes.cnpq.br/1375868138002604) · [ORCID](https://orcid.org/0000-0002-1006-6527)
+
+---
+
+## José de Jesus Filho
+
+![](imagens/autores/jjesus.jpg){width=140px height=140px style="border-radius: 50%; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.15);"}
+
+José de Jesus Filho, da Pontifícia Universidade Católica de São Paulo (PUC-SP), é cientista de dados e especialista em jurimetria.
+
+Atua no desenvolvimento de ferramentas em R para a extração e a organização de dados judiciais e na aplicação de métodos estatísticos ao estudo do contencioso. É autor do pacote `tjsp`, desenvolvido para a coleta e a organização de processos e decisões do Tribunal de Justiça de São Paulo.
+
+Também ministra cursos e desenvolve materiais sobre coleta, estruturação e análise de dados judiciais, incluindo estudos sobre duração de processos, análise de sobrevivência, aprendizado estatístico, processamento de linguagem natural e sistemas distribuídos.
