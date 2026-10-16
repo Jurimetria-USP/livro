@@ -50,7 +50,11 @@ book:
         - capitulos/textos-datas-categorias.qmd
         - capitulos/google-drive.qmd
     - part: "Parte III — Construção do banco de dados"
-    - part: "Parte IV — Descrição do fenômeno"
+    - part: partes/04-descricao-fenomeno.qmd
+      chapters:
+        - capitulos/introducao-estatistica.qmd
+        - capitulos/analise-descritiva.qmd
+        - capitulos/analise-sobrevivencia.qmd
     - part: "Parte V — Explicação do fenômeno"
 
 format:

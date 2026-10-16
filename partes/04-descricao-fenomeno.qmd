@@ -1,0 +1,40 @@
+---
+title: "Parte IV — Descrição do fenômeno"
+toc: false
+---
+
+Nesta parte, passamos da organização dos dados à descrição dos fenômenos jurídicos. O percurso reúne os conceitos estatísticos fundamentais, as ferramentas de análise descritiva e o estudo do tempo até a ocorrência de eventos em processos judiciais.
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-4}
+::: {.cartao-home}
+### Uma Introdução à Estatística
+
+Conceitos fundamentais para compreender a produção, a organização e a análise de evidências.
+
+[Acessar o capítulo](../capitulos/introducao-estatistica.qmd)
+:::
+:::
+
+::: {.g-col-12 .g-col-md-4}
+::: {.cartao-home}
+### Análise Descritiva
+
+Medidas, tabelas e representações gráficas para conhecer e comunicar as características dos dados.
+
+[Acessar o capítulo](../capitulos/analise-descritiva.qmd)
+:::
+:::
+
+::: {.g-col-12 .g-col-md-4}
+::: {.cartao-home}
+### Análise de sobrevivência: tempo do processo
+
+Ferramentas para estudar a duração dos processos, a censura e o tempo até a ocorrência de eventos jurídicos.
+
+[Acessar o capítulo](../capitulos/analise-sobrevivencia.qmd)
+:::
+:::
+
+:::

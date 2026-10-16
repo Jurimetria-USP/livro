@@ -4,16 +4,14 @@ toc: false
 
 # Parte II — Ambiente de trabalho e ferramentas
 
-Esta parte apresenta o ambiente computacional e as ferramentas necessárias à pesquisa jurimétrica. O percurso começa pela organização do trabalho e avança até a importação, verificação, transformação e combinação dos dados.
-
-Os capítulos utilizam exemplos relacionados ao Direito, especialmente dados sobre homicídios de mulheres e feminicídios. O percurso combina ferramentas computacionais, organização reproduzível e decisões substantivas sobre a estrutura e a qualidade das informações.
+Esta parte apresenta o ambiente computacional e as ferramentas necessárias à pesquisa jurimétrica. O percurso começa pela organização do trabalho e avança pela importação, verificação, transformação, combinação e obtenção de dados compartilhados. Os capítulos utilizam exemplos relacionados ao Direito, especialmente dados sobre homicídios de mulheres e feminicídios.
 
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-proposito}
 ### R e o ambiente de trabalho
 
-R, RStudio, Positron, editor, console, terminal, documentação e inteligência artificial.
+R, Positron, editor, console, terminal, objetos, gráficos, documentação e inteligência artificial.
 
 [Ler o capítulo](../capitulos/r-ambiente-trabalho.qmd)
 :::
@@ -21,7 +19,7 @@ R, RStudio, Positron, editor, console, terminal, documentação e inteligência 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
 ### Projetos e organização reproduzível
 
-Estrutura de pastas, caminhos relativos, Quarto, GitHub, colaboração e registro das decisões.
+Projetos, estrutura de pastas, caminhos relativos, Quarto, GitHub, colaboração e reprodutibilidade.
 
 [Ler o capítulo](../capitulos/projetos-reprodutiveis.qmd)
 :::
@@ -29,7 +27,7 @@ Estrutura de pastas, caminhos relativos, Quarto, GitHub, colaboração e registr
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
 ### Objetos e operações fundamentais
 
-Objetos, vetores, tipos de valores, funções, operadores e construção inicial do exemplo criminal.
+Objetos, vetores, tipos de valores, funções, operadores e construção inicial da base de feminicídios.
 
 [Ler o capítulo](../capitulos/objetos-operacoes.qmd)
 :::
@@ -37,7 +35,7 @@ Objetos, vetores, tipos de valores, funções, operadores e construção inicial
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-desenvolvimento}
 ### Data frames e importação
 
-Linhas, colunas, unidade de observação e importação de arquivos em diferentes formatos.
+Unidade de observação e importação e exportação de arquivos CSV, Excel, Stata e RDS.
 
 [Ler o capítulo](../capitulos/dataframes-importacao.qmd)
 :::
@@ -45,7 +43,7 @@ Linhas, colunas, unidade de observação e importação de arquivos em diferente
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-micro}
 ### Valores ausentes e qualidade dos dados
 
-Valores `NA`, códigos inválidos, duplicações, coerência e documentação das correções.
+Valores `NA`, códigos especiais, categorias, duplicações, coerência e registro das decisões.
 
 [Ler o capítulo](../capitulos/qualidade-dados.qmd)
 :::
@@ -61,7 +59,7 @@ Ordenação, combinação, agregação e criação de subconjuntos com recursos 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-proposito}
 ### Introdução ao universo tidy
 
-Princípios dos dados tidy, tidyverse, pipe e organização de sequências de operações.
+Princípios dos dados tidy, pacotes do tidyverse, pipe e construção de fluxos de transformação.
 
 [Ler o capítulo](../capitulos/universo-tidy.qmd)
 :::
@@ -69,7 +67,7 @@ Princípios dos dados tidy, tidyverse, pipe e organização de sequências de op
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
 ### Manipulação de dados com dplyr
 
-Seleção, transformação, ordenação, agrupamento e resumo de informações jurídicas.
+Comandos para linhas, colunas e resumos com `filter()`, `select()`, `mutate()` e `summarise()`.
 
 [Ler o capítulo](../capitulos/manipulacao-dplyr.qmd)
 :::
@@ -77,7 +75,7 @@ Seleção, transformação, ordenação, agrupamento e resumo de informações j
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
 ### Dados tidy e transformação com tidyr
 
-Formatos largo e longo, reorganização e separação de variáveis.
+Unidade de observação, formatos largo e longo, `pivot_longer()`, `pivot_wider()` e conferência das transformações.
 
 [Ler o capítulo](../capitulos/dados-tidy-tidyr.qmd)
 :::
@@ -85,7 +83,7 @@ Formatos largo e longo, reorganização e separação de variáveis.
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-desenvolvimento}
 ### Combinação de bases
 
-Chaves, granularidade, correspondências e junções entre bases jurídicas.
+Chaves, relações entre tabelas, correspondências, duplicações e diferentes tipos de junção.
 
 [Ler o capítulo](../capitulos/combinacao-bases.qmd)
 :::
@@ -93,15 +91,15 @@ Chaves, granularidade, correspondências e junções entre bases jurídicas.
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-micro}
 ### Textos, datas e categorias
 
-Padronização e preparação de variáveis frequentes em documentos e bases jurídicas.
+Padronização de textos, números de processo, valores monetários, categorias e datas.
 
 [Ler o capítulo](../capitulos/textos-datas-categorias.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-macro}
-### Acesso a dados compartilhados no Google Drive
+### Google Drive
 
-Obtenção e incorporação de arquivos compartilhados ao projeto.
+Identificação de arquivos públicos, download controlado e importação de CSV, RDS e Excel.
 
 [Ler o capítulo](../capitulos/google-drive.qmd)
 :::
@@ -114,17 +112,22 @@ Obtenção e incorporação de arquivos compartilhados ao projeto.
 %%| fig-align: center
 %%| fig-alt: "Percurso das ferramentas utilizadas na pesquisa jurimétrica"
 
-flowchart LR
+flowchart TB
     A["Ambiente"] --> B["Projeto"]
     B --> C["Objetos"]
-    C --> D["Data frames"]
+    C --> D["Data frames e importação"]
     D --> E["Qualidade"]
-    E --> F["Transformação"]
-    F --> G["Combinação"]
-    G --> H["Dados prontos para aplicação"]
+    E --> F["R base"]
+    F --> G["Universo tidy"]
+    G --> H["dplyr"]
+    H --> I["tidyr"]
+    I --> J["Combinação"]
+    J --> K["Textos, datas e categorias"]
+    K --> L["Google Drive"]
+    L --> M["Ferramentas prontas para<br/>a construção do banco"]
 
     classDef etapa fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
     classDef destaque fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
-    class A,B,C,D,E,F,G etapa;
-    class H destaque;
+    class A,B,C,D,E,F,G,H,I,J,K,L etapa;
+    class M destaque;
 ```
