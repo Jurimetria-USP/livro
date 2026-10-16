@@ -1,3 +1,130 @@
-# Ambiente de trabalho
+---
+toc: false
+---
 
-Esta parte apresenta a preparação do ambiente necessário ao desenvolvimento das atividades propostas no livro.
+# Parte II — Ambiente de trabalho e ferramentas
+
+Esta parte apresenta o ambiente computacional e as ferramentas necessárias à pesquisa jurimétrica. O percurso começa pela organização do trabalho e avança até a importação, verificação, transformação e combinação dos dados.
+
+Os capítulos utilizam exemplos relacionados ao Direito, especialmente dados sobre homicídios de mulheres e feminicídios. O percurso combina ferramentas computacionais, organização reproduzível e decisões substantivas sobre a estrutura e a qualidade das informações.
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-proposito}
+### R e o ambiente de trabalho
+
+R, RStudio, Positron, editor, console, terminal, documentação e inteligência artificial.
+
+[Ler o capítulo](../capitulos/r-ambiente-trabalho.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
+### Projetos e organização reproduzível
+
+Estrutura de pastas, caminhos relativos, Quarto, GitHub, colaboração e registro das decisões.
+
+[Ler o capítulo](../capitulos/projetos-reprodutiveis.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
+### Objetos e operações fundamentais
+
+Objetos, vetores, tipos de valores, funções, operadores e construção inicial do exemplo criminal.
+
+[Ler o capítulo](../capitulos/objetos-operacoes.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-desenvolvimento}
+### Data frames e importação
+
+Linhas, colunas, unidade de observação e importação de arquivos em diferentes formatos.
+
+[Ler o capítulo](../capitulos/dataframes-importacao.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-micro}
+### Valores ausentes e qualidade dos dados
+
+Valores `NA`, códigos inválidos, duplicações, coerência e documentação das correções.
+
+[Ler o capítulo](../capitulos/qualidade-dados.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-macro}
+### Operações com data frames em R base
+
+Ordenação, combinação, agregação e criação de subconjuntos com recursos do R base.
+
+[Ler o capítulo](../capitulos/operacoes-r-base.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-proposito}
+### Introdução ao universo tidy
+
+Princípios dos dados tidy, tidyverse, pipe e organização de sequências de operações.
+
+[Ler o capítulo](../capitulos/universo-tidy.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
+### Manipulação de dados com dplyr
+
+Seleção, transformação, ordenação, agrupamento e resumo de informações jurídicas.
+
+[Ler o capítulo](../capitulos/manipulacao-dplyr.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
+### Dados tidy e transformação com tidyr
+
+Formatos largo e longo, reorganização e separação de variáveis.
+
+[Ler o capítulo](../capitulos/dados-tidy-tidyr.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-desenvolvimento}
+### Combinação de bases
+
+Chaves, granularidade, correspondências e junções entre bases jurídicas.
+
+[Ler o capítulo](../capitulos/combinacao-bases.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-micro}
+### Textos, datas e categorias
+
+Padronização e preparação de variáveis frequentes em documentos e bases jurídicas.
+
+[Ler o capítulo](../capitulos/textos-datas-categorias.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-macro}
+### Acesso a dados compartilhados no Google Drive
+
+Obtenção e incorporação de arquivos compartilhados ao projeto.
+
+[Ler o capítulo](../capitulos/google-drive.qmd)
+:::
+
+:::
+
+## Percurso da parte
+
+```{mermaid}
+%%| fig-align: center
+%%| fig-alt: "Percurso das ferramentas utilizadas na pesquisa jurimétrica"
+
+flowchart LR
+    A["Ambiente"] --> B["Projeto"]
+    B --> C["Objetos"]
+    C --> D["Data frames"]
+    D --> E["Qualidade"]
+    E --> F["Transformação"]
+    F --> G["Combinação"]
+    G --> H["Dados prontos para aplicação"]
+
+    classDef etapa fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
+    classDef destaque fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
+    class A,B,C,D,E,F,G etapa;
+    class H destaque;
+```

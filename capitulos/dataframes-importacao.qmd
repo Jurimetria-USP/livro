@@ -1,0 +1,253 @@
+---
+title: "Data frames e importação"
+subtitle: "Dos arquivos jurídicos à base de dados"
+author:
+  - Alexandre Nicolella
+format: html
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+```
+
+## Introdução
+
+Na prática, uma base raramente será digitada por inteiro. Os dados podem chegar em planilhas, arquivos de texto ou formatos produzidos por outros programas. Neste capítulo, utilizaremos bases sobre homicídios de mulheres, feminicídios e tentativas para compreender a estrutura de um *data frame* e os procedimentos de importação e exportação.
+
+## Linhas, colunas e unidade de observação
+
+Em um *data frame*, cada linha representa uma unidade de observação e cada coluna representa uma variável. Nas bases utilizadas aqui, a unidade de observação é o estado brasileiro.
+
+Antes da leitura, precisamos saber:
+
+- qual é a unidade de observação;
+- o que significa cada variável;
+- qual separador delimita as colunas;
+- qual símbolo representa a parte decimal dos números;
+- como ausências e categorias foram registradas;
+- qual é a codificação de caracteres;
+- qual é a fonte e a data de obtenção dos dados.
+
+Os arquivos originais devem permanecer na pasta `dados`. Arquivos tratados ou exportados devem ser gravados em outra pasta, por exemplo `dados/tratados`, para que o trabalho possa ser reproduzido sem modificar a fonte original.
+
+## Importando arquivos CSV
+
+Apesar do nome *comma-separated values*, um arquivo CSV pode utilizar diferentes caracteres para separar os campos. Nas duas bases deste capítulo, o ponto e vírgula separa as colunas e o ponto marca a parte decimal.
+
+```{r}
+df_feminic22 <- read.table(
+  "dados/dados_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+
+df_t_feminic22 <- read.table(
+  "dados/dados_tent_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+```
+
+Os argumentos utilizados têm funções distintas:
+
+| Argumento | Função |
+|---|---|
+| `header = TRUE` | informa que a primeira linha contém os nomes das variáveis |
+| `sep = ";"` | define o ponto e vírgula como separador de campos |
+| `dec = "."` | define o ponto como marcador decimal |
+| `fileEncoding = "UTF-8"` | informa a codificação dos caracteres |
+| `na.strings = c("", "NA")` | indica como os valores ausentes aparecem no arquivo |
+| `check.names = FALSE` | preserva os nomes originais das colunas |
+
+### `read.csv()`, `read.csv2()` e `read.table()`
+
+As três funções pertencem ao R básico. `read.csv()` pressupõe vírgula entre os campos e ponto decimal. `read.csv2()` pressupõe ponto e vírgula entre os campos e vírgula decimal. `read.table()` permite declarar essas escolhas explicitamente.
+
+``` r
+# Vírgula entre campos e ponto decimal
+dados <- read.csv("dados/arquivo.csv")
+
+# Ponto e vírgula entre campos e vírgula decimal
+dados <- read.csv2("dados/arquivo.csv")
+
+# Ponto e vírgula entre campos e ponto decimal
+dados <- read.table(
+  "dados/arquivo.csv",
+  header = TRUE,
+  sep = ";",
+  dec = "."
+)
+```
+
+Não basta escolher a função pelo nome ou pela extensão do arquivo. É necessário abrir o CSV em um editor de texto ou consultar sua documentação para identificar o separador de campos e o marcador decimal efetivamente utilizados.
+
+## Verificando a importação
+
+Depois da leitura, devemos conferir se a estrutura obtida corresponde à documentação da base:
+
+```{r}
+dim(df_feminic22)
+names(df_feminic22)
+str(df_feminic22)
+head(df_feminic22)
+```
+
+Também podemos verificar as duas bases conjuntamente:
+
+```{r}
+rbind(
+  feminicidios = c(linhas = nrow(df_feminic22), colunas = ncol(df_feminic22)),
+  tentativas = c(linhas = nrow(df_t_feminic22), colunas = ncol(df_t_feminic22))
+)
+```
+
+::: {.callout-warning title="Importar não significa compreender"}
+Um arquivo pode ser aberto corretamente e ainda conter problemas de definição, codificação ou qualidade. A inspeção técnica deve ser acompanhada pela leitura do dicionário e da documentação da fonte.
+:::
+
+## Importando uma planilha do Excel
+
+Uma pasta de trabalho do Excel pode conter uma ou várias abas. Mesmo quando existe apenas uma, podemos informar seu nome explicitamente. Isso torna o código mais claro e evita ambiguidades caso outras abas sejam acrescentadas posteriormente.
+
+O arquivo de exemplo possui somente a aba `feminicidio`:
+
+```{r}
+#| eval: false
+# Requer o pacote readxl
+readxl::excel_sheets("dados/dados_feminic.xlsx")
+
+df_feminic_excel <- readxl::read_excel(
+  "dados/dados_feminic.xlsx",
+  sheet = "feminicidio"
+)
+```
+
+O argumento `sheet` pode receber o nome ou a posição da aba. Usar o nome costuma deixar o script mais compreensível.
+
+## Importando um arquivo do Stata
+
+O material original utiliza o pacote `foreign` para ler arquivos do Stata. Mantemos esse procedimento com o arquivo derivado da mesma base de feminicídios:
+
+```{r}
+df_feminic_stata <- foreign::read.dta(
+  "dados/dados_feminic.dta",
+  convert.factors = FALSE
+)
+
+dim(df_feminic_stata)
+head(df_feminic_stata)
+```
+
+Uma alternativa mais recente é a função `haven::read_dta()`, que integra melhor os tipos de dados utilizados pelo *tidyverse*:
+
+```{r}
+#| eval: false
+# Requer o pacote haven
+df_feminic_stata <- haven::read_dta("dados/dados_feminic.dta")
+```
+
+## Importando um arquivo RDS
+
+O formato RDS armazena um único objeto do R e preserva sua estrutura. Sua leitura é feita diretamente pelo R básico:
+
+```{r}
+df_feminic_rds <- readRDS("dados/dados_feminic.rds")
+
+dim(df_feminic_rds)
+head(df_feminic_rds)
+```
+
+Podemos conferir se o objeto recuperado corresponde ao *data frame* importado do CSV:
+
+```{r}
+all.equal(df_feminic22, df_feminic_rds)
+```
+
+## Comparando os formatos
+
+| Formato | Característica principal | Uso frequente |
+|---|---|---|
+| CSV | arquivo de texto simples e interoperável | intercâmbio de dados entre programas |
+| Excel | organiza dados em planilhas e abas | consulta e troca com usuários de planilhas |
+| Stata | preserva formatos utilizados pelo Stata | intercâmbio com projetos desenvolvidos no Stata |
+| RDS | preserva a estrutura de um objeto do R | armazenamento intermediário em projetos de R |
+
+## Exportando uma base
+
+Uma base tratada deve ser gravada em uma pasta diferente dos dados originais. Os blocos desta seção não são executados automaticamente porque criam ou substituem arquivos no computador.
+
+### Exportando CSV
+
+Para manter a convenção dos arquivos utilizados neste capítulo, definimos ponto e vírgula entre campos e ponto decimal:
+
+```{r}
+#| eval: false
+write.table(
+  df_feminic22,
+  "dados/tratados/feminicidios_2022.csv",
+  sep = ";",
+  dec = ".",
+  row.names = FALSE,
+  fileEncoding = "UTF-8",
+  na = ""
+)
+```
+
+Se o destino exigir vírgula decimal, podemos alterar `dec = ","`. O separador e o marcador decimal devem ser definidos de acordo com o programa e a convenção de quem receberá o arquivo.
+
+### Exportando Excel
+
+No Excel, o nome atribuído ao elemento da lista torna-se o nome da aba. Neste exemplo, o arquivo terá apenas a aba `feminicidio`:
+
+```{r}
+#| eval: false
+# Requer o pacote writexl
+writexl::write_xlsx(
+  list(feminicidio = df_feminic22),
+  "dados/tratados/feminicidios_2022.xlsx"
+)
+```
+
+### Exportando Stata
+
+Mantendo o procedimento do material original:
+
+```{r}
+#| eval: false
+foreign::write.dta(
+  df_feminic22,
+  "dados/tratados/feminicidios_2022.dta"
+)
+```
+
+Também é possível utilizar `haven::write_dta()` quando o pacote `haven` estiver disponível.
+
+### Exportando RDS
+
+```{r}
+#| eval: false
+saveRDS(
+  df_feminic22,
+  "dados/tratados/feminicidios_2022.rds"
+)
+```
+
+::: {.callout-important title="Preserve os dados originais"}
+Não sobrescreva os arquivos recebidos. Transformações e correções devem produzir uma nova base, recriável pelos scripts do projeto.
+:::
+
+## Síntese
+
+Importamos bases com caminhos relativos e examinamos sua estrutura. Vimos como declarar separadores de campos, marcadores decimais, codificação e valores ausentes, além de importar e exportar arquivos CSV, Excel, Stata e RDS. No próximo capítulo, verificaremos ausências, duplicações e coerência antes de realizar análises.

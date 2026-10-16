@@ -1,0 +1,358 @@
+---
+title: "Textos, datas e categorias"
+subtitle: "Preparando variáveis frequentes em bases jurídicas"
+author:
+  - Alexandre Nicolella
+format: html
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+tem_textos <- all(vapply(
+  c("dplyr", "stringr", "lubridate", "readr"),
+  requireNamespace,
+  logical(1),
+  quietly = TRUE
+))
+```
+
+```{r}
+#| include: false
+#| eval: !expr tem_textos
+library(dplyr)
+library(stringr)
+library(lubridate)
+library(readr)
+```
+
+## Introdução
+
+Bases jurídicas frequentemente contêm números de processo, nomes de classes, órgãos julgadores, valores monetários e datas armazenados como texto. Antes de analisar essas informações, precisamos padronizar sua escrita e atribuir o tipo adequado a cada variável.
+
+O material original apresenta a separação de um número de processo e a extração de componentes de datas. Neste capítulo, preservaremos essas operações e ampliaremos o percurso de preparação.
+
+::: {.callout-note title="Objetivos do capítulo"}
+Ao final deste capítulo, você deverá ser capaz de:
+
+- remover espaços excedentes;
+- padronizar maiúsculas e minúsculas;
+- localizar e substituir padrões em textos;
+- decompor um número de processo;
+- converter números monetários armazenados como texto;
+- trabalhar com categorias e fatores;
+- converter textos em datas e extrair períodos;
+- ordenar registros cronologicamente;
+- documentar as decisões de padronização.
+:::
+
+## Uma pequena base jurídica para treinamento
+
+Criaremos uma tabela didática com problemas comuns de preenchimento:
+
+```{r}
+processos_brutos <- data.frame(
+  processo = c(
+    "0001234-56.2022.8.26.0100",
+    "0002345-67.2023.8.26.0200",
+    "0003456-78.2023.8.26.0300",
+    "0004567-89.2024.8.26.0400"
+  ),
+  classe = c(
+    "  ação penal ",
+    "AÇÃO PENAL",
+    " recurso em sentido estrito ",
+    "Recurso em Sentido Estrito"
+  ),
+  data_decisao = c(
+    "15/03/2023",
+    "07/11/2023",
+    "22/02/2024",
+    "05/06/2024"
+  ),
+  valor_acao = c(
+    "R$ 10.500,00",
+    "R$ 8.250,50",
+    "R$ 12.000,00",
+    "R$ 9.750,00"
+  ),
+  resultado = c(
+    " condenação ",
+    "ABSOLVIÇÃO",
+    "provimento parcial",
+    " Condenação"
+  ),
+  stringsAsFactors = FALSE
+)
+
+processos_brutos
+```
+
+::: {.callout-note title="Dados didáticos"}
+Os números e valores desta tabela são fictícios e foram criados apenas para praticar as transformações. Eles não representam processos ou decisões reais.
+:::
+
+## Inspecionando os tipos
+
+```{r}
+str(processos_brutos)
+```
+
+Todas as colunas foram inicialmente registradas como texto. Isso é adequado para o número do processo, mas não para datas e valores monetários.
+
+## Removendo espaços excedentes
+
+`str_squish()` remove espaços no início e no final e reduz sequências internas de espaços:
+
+```{r}
+#| eval: !expr tem_textos
+processos_limpos <- processos_brutos |>
+  mutate(
+    classe = str_squish(classe),
+    resultado = str_squish(resultado)
+  )
+
+processos_limpos[c("classe", "resultado")]
+```
+
+## Padronizando maiúsculas e minúsculas
+
+Diferenças de capitalização podem criar categorias distintas para o mesmo conteúdo. Padronizamos os textos e depois usamos a forma de título para apresentação:
+
+```{r}
+#| eval: !expr tem_textos
+processos_limpos <- processos_limpos |>
+  mutate(
+    classe = str_to_title(
+      str_to_lower(classe),
+      locale = "pt"
+    ),
+    resultado = str_to_title(
+      str_to_lower(resultado),
+      locale = "pt"
+    )
+  )
+
+processos_limpos[c("classe", "resultado")]
+```
+
+## Localizando e substituindo textos
+
+Podemos localizar decisões que contenham a palavra “condenação”:
+
+```{r}
+#| eval: !expr tem_textos
+str_detect(
+  str_to_lower(processos_limpos$resultado),
+  "condenação"
+)
+```
+
+Substituições devem ser específicas e documentadas. Suponha que a mesma expressão tenha sido registrada de duas maneiras: `"Proc. criminal"` e `"Processo criminal"`. Queremos substituir a abreviação `"Proc."` por `"Processo"`, sem modificar o restante do texto.
+
+```{r}
+#| eval: !expr tem_textos
+textos_originais <- c(
+  "Proc. criminal",
+  "Processo criminal"
+)
+
+textos_padronizados <- str_replace(
+  string = textos_originais,
+  pattern = "^Proc\\.",
+  replacement = "Processo"
+)
+
+data.frame(
+  antes = textos_originais,
+  depois = textos_padronizados
+)
+```
+
+A função recebe três informações:
+
+1. `string`: o texto ou vetor de textos que será examinado;
+2. `pattern`: o padrão que queremos localizar;
+3. `replacement`: o texto que substituirá o padrão encontrado.
+
+No padrão `"^Proc\\."`:
+
+- `^` indica que a busca deve ocorrer no início do texto;
+- `Proc` representa exatamente essas quatro letras;
+- `\\.` representa um ponto literal. A barra precisa ser escrita duas vezes no código do R.
+
+Assim, `"Proc. criminal"` torna-se `"Processo criminal"`. O segundo texto permanece igual porque não começa com a abreviação `"Proc."`.
+
+`str_replace()` substitui a primeira ocorrência encontrada em cada texto. Quando for necessário substituir todas as ocorrências, utilizamos `str_replace_all()`.
+
+## Separando as partes do número do processo
+
+O material original utiliza `str_sub()` para extrair componentes do número do processo. Primeiro retiramos a pontuação e preservamos apenas os dígitos:
+
+```{r}
+#| eval: !expr tem_textos
+processos_componentes <- processos_limpos |>
+  mutate(
+    processo_digitos = str_remove_all(processo, "[^0-9]"),
+    sequencial = str_sub(processo_digitos, 1, 7),
+    digito = str_sub(processo_digitos, 8, 9),
+    ano = str_sub(processo_digitos, 10, 13),
+    segmento = str_sub(processo_digitos, 14, 14),
+    tribunal = str_sub(processo_digitos, 15, 16),
+    origem = str_sub(processo_digitos, 17, 20)
+  )
+
+processos_componentes |>
+  select(
+    processo,
+    sequencial,
+    digito,
+    ano,
+    segmento,
+    tribunal,
+    origem
+  )
+```
+
+O número do processo continua sendo um identificador textual. Seus componentes não devem ser convertidos em medidas numéricas apenas porque contêm dígitos.
+
+## Convertendo valores monetários
+
+`parse_number()` identifica a parte numérica e permite informar a convenção brasileira de separadores:
+
+```{r}
+#| eval: !expr tem_textos
+processos_componentes <- processos_componentes |>
+  mutate(
+    valor_acao_numerico = parse_number(
+      valor_acao,
+      locale = locale(
+        decimal_mark = ",",
+        grouping_mark = "."
+      )
+    )
+  )
+
+processos_componentes[c("valor_acao", "valor_acao_numerico")]
+```
+
+Depois da conversão, verificamos se algum texto não pôde ser interpretado:
+
+```{r}
+#| eval: !expr tem_textos
+processos_componentes |>
+  filter(is.na(valor_acao_numerico))
+```
+
+## Categorias e fatores
+
+Uma variável categórica pode ser representada como fator. Primeiro verificamos as categorias encontradas:
+
+```{r}
+#| eval: !expr tem_textos
+sort(unique(processos_componentes$resultado))
+```
+
+Em seguida, definimos uma ordem apenas quando ela possui significado substantivo. Para a classe processual, não há uma ordem natural; portanto, usamos um fator sem ordenação:
+
+```{r}
+#| eval: !expr tem_textos
+processos_componentes <- processos_componentes |>
+  mutate(
+    classe = factor(classe)
+  )
+
+levels(processos_componentes$classe)
+```
+
+::: {.callout-warning title="Cuidado ao converter fatores em números"}
+`as.numeric()` aplicado diretamente a um fator devolve os códigos internos dos níveis, e não o conteúdo exibido. Identificadores e categorias não devem ser convertidos em números sem uma razão substantiva.
+:::
+
+## Convertendo textos em datas
+
+As datas estão no formato dia, mês e ano. A função `dmy()` realiza a conversão:
+
+```{r}
+#| eval: !expr tem_textos
+processos_componentes <- processos_componentes |>
+  mutate(
+    data_decisao = dmy(data_decisao)
+  )
+
+str(processos_componentes$data_decisao)
+```
+
+## Extraindo períodos
+
+Preservando a data completa, podemos criar variáveis de ano, mês e dia da semana:
+
+```{r}
+#| eval: !expr tem_textos
+processos_componentes <- processos_componentes |>
+  mutate(
+    ano_decisao = year(data_decisao),
+    mes_decisao = month(
+      data_decisao,
+      label = TRUE,
+      abbr = FALSE
+    ),
+    dia_semana = wday(
+      data_decisao,
+      label = TRUE,
+      abbr = FALSE
+    )
+  )
+
+processos_componentes |>
+  select(
+    processo,
+    data_decisao,
+    ano_decisao,
+    mes_decisao,
+    dia_semana
+  )
+```
+
+## Ordenando cronologicamente
+
+```{r}
+#| eval: !expr tem_textos
+processos_ordenados <- processos_componentes |>
+  arrange(data_decisao)
+
+processos_ordenados |>
+  select(processo, data_decisao, classe, resultado)
+```
+
+## Registrando as decisões
+
+```{r}
+registro_preparacao <- data.frame(
+  variavel = c("classe", "resultado", "valor_acao", "data_decisao"),
+  problema = c(
+    "espaços e capitalização",
+    "espaços e capitalização",
+    "moeda armazenada como texto",
+    "data armazenada como texto"
+  ),
+  decisao = c(
+    "remover espaços e usar forma de título",
+    "remover espaços e usar forma de título",
+    "converter com separadores brasileiros",
+    "converter no formato dia/mês/ano"
+  ),
+  stringsAsFactors = FALSE
+)
+
+registro_preparacao
+```
+
+## Síntese
+
+Neste capítulo, preservamos as operações do material original sobre números de processo e datas e as ampliamos para textos, valores monetários e fatores. Cada transformação foi acompanhada por uma regra explícita e uma verificação.
+
+No próximo capítulo, veremos como obter arquivos públicos compartilhados pelo Google Drive sem incorporar caminhos pessoais ao código.

@@ -1,0 +1,199 @@
+---
+title: "Google Drive"
+subtitle: "Obtendo arquivos públicos compartilhados"
+author:
+  - Alexandre Nicolella
+format: html
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+```
+
+## Introdução
+
+Arquivos utilizados em uma pesquisa podem ser compartilhados pelo Google Drive. Este capítulo apresenta o procedimento do material original para baixar arquivos configurados como “qualquer pessoa com o link”.
+
+Como o download depende de internet, da instalação do pacote e da permanência das permissões externas, os blocos não são executados automaticamente durante a renderização do livro.
+
+::: {.callout-note title="Objetivos do capítulo"}
+Ao final deste capítulo, você deverá ser capaz de:
+
+- identificar o ID de um arquivo compartilhado;
+- trabalhar sem autenticação com arquivos públicos;
+- obter os metadados do arquivo;
+- escolher explicitamente o destino do download;
+- distinguir download e importação;
+- importar arquivos CSV, RDS e Excel depois do download;
+- preservar os arquivos recebidos e registrar sua origem.
+:::
+
+## Preparando o pacote
+
+O pacote pode ser instalado uma vez no ambiente de trabalho:
+
+```{r}
+#| eval: false
+install.packages("googledrive")
+```
+
+Depois, pode ser carregado na sessão:
+
+```{r}
+#| eval: false
+library(googledrive)
+```
+
+## Encontrando o ID
+
+Um link de compartilhamento costuma apresentar a seguinte estrutura:
+
+``` text
+https://drive.google.com/file/d/ID_DO_ARQUIVO/view?usp=drive_link
+```
+
+O ID é o trecho situado entre `/d/` e `/view`. No link utilizado pelo material original para `cjpg.rds`, por exemplo, o identificador é:
+
+``` text
+1vs4hH1xgYl0YzSb2uWeH0gBMh8E5QPL2
+```
+
+O ID identifica o arquivo, mas não concede acesso por si só. O proprietário precisa manter a permissão pública adequada.
+
+## Trabalhando sem autenticação
+
+Para arquivos públicos, retiramos a autenticação da sessão:
+
+```{r}
+#| eval: false
+googledrive::drive_deauth()
+googledrive::drive_user()
+```
+
+`drive_user()` permite verificar que não há uma conta autenticada. Esse procedimento é adequado apenas para arquivos acessíveis sem login.
+
+## Baixando um arquivo RDS
+
+Primeiro obtemos a referência ao arquivo e depois indicamos o destino explicitamente:
+
+```{r}
+#| eval: false
+cjpg_publico <- googledrive::drive_get(
+  googledrive::as_id(
+    "1vs4hH1xgYl0YzSb2uWeH0gBMh8E5QPL2"
+  )
+)
+
+googledrive::drive_download(
+  cjpg_publico,
+  path = "dados/cjpg.rds",
+  overwrite = FALSE
+)
+```
+
+O argumento `path` evita que o destino dependa da pasta exibida no console. `overwrite = FALSE` protege um arquivo já existente contra substituição acidental.
+
+Depois do download, a importação é uma operação separada:
+
+```{r}
+#| eval: false
+cjpg <- readRDS("dados/cjpg.rds")
+```
+
+## Baixando um arquivo CSV
+
+O material original também compartilha uma versão da base combinada de feminicídios:
+
+```{r}
+#| eval: false
+final_fem_publico <- googledrive::drive_get(
+  googledrive::as_id(
+    "1_GxL3EFsE2JU-39muO_ELoz-kx4-hEpO"
+  )
+)
+
+googledrive::drive_download(
+  final_fem_publico,
+  path = "dados/final_fem_22.csv",
+  overwrite = FALSE
+)
+
+final_fem_22 <- read.table(
+  "dados/final_fem_22.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+```
+
+## Baixando uma planilha do Excel
+
+O terceiro exemplo original utiliza uma planilha de metadados:
+
+```{r}
+#| eval: false
+metadados_publicos <- googledrive::drive_get(
+  googledrive::as_id(
+    "1mtLng43ZAf-sygUjjcaqRaNhuXKC7ol_"
+  )
+)
+
+googledrive::drive_download(
+  metadados_publicos,
+  path = "dados/cpopg_metadados.xlsx",
+  overwrite = FALSE
+)
+
+cpopg <- readxl::read_excel(
+  "dados/cpopg_metadados.xlsx",
+  sheet = 1
+)
+```
+
+Se a planilha possuir abas nomeadas, é preferível informar o nome em `sheet`. A posição pode mudar quando alguém reorganiza a pasta de trabalho.
+
+## Quando substituir um arquivo
+
+`overwrite = TRUE` substitui um arquivo existente no destino. Essa opção pode ser útil em uma rotina de atualização deliberada, mas também pode apagar uma versão necessária para reproduzir resultados anteriores.
+
+Antes de substituir:
+
+1. confirme que o ID aponta para o arquivo esperado;
+2. registre a data de obtenção;
+3. preserve a versão usada na análise;
+4. verifique se o arquivo novo mantém a mesma estrutura;
+5. refaça as validações de qualidade.
+
+## Verificando o download
+
+Depois de baixar e importar um arquivo, aplicamos as verificações já estudadas:
+
+```{r}
+#| eval: false
+file.exists("dados/final_fem_22.csv")
+dim(final_fem_22)
+names(final_fem_22)
+str(final_fem_22)
+head(final_fem_22)
+```
+
+## Permissões e reprodutibilidade
+
+Um link público pode deixar de funcionar quando o arquivo é removido, substituído ou tem sua permissão alterada. Por isso, um projeto reproduzível não deve depender apenas de um link externo sem documentação.
+
+::: {.callout-warning title="Não publique dados restritos"}
+Antes de tornar um arquivo acessível por link, verifique se ele contém informações pessoais, sigilosas ou sujeitas a restrições de uso. A facilidade técnica de compartilhamento não elimina as obrigações jurídicas e éticas relativas aos dados.
+:::
+
+## Síntese
+
+Neste capítulo, preservamos os três exemplos do material original e substituímos caminhos pessoais por caminhos relativos. Separamos a obtenção do arquivo de sua importação, indicamos explicitamente o destino e evitamos a substituição automática.
+
+Com isso, concluímos a Parte II. Temos um ambiente organizado e ferramentas para importar, verificar, transformar, combinar e obter dados compartilhados antes das etapas de construção do banco de dados jurídico.

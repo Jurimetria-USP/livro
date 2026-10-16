@@ -30,17 +30,23 @@ As fontes originais não serão alteradas.
 
 ### Percurso conceitual
 
-**Decisão:** o livro será organizado inicialmente em sete grandes módulos:
+**Decisão:** o livro será organizado inicialmente em cinco grandes módulos:
 
 1. Fundamentos;
-2. Ambiente de trabalho;
-3. Coleta de processos e decisões;
-4. Extração da informação;
-5. Limpeza e estruturação dos dados;
-6. Descrição do fenômeno;
-7. Explicação do fenômeno.
+2. Ambiente de trabalho e ferramentas;
+3. Construção do banco de dados;
+4. Descrição do fenômeno;
+5. Explicação do fenômeno.
+
+A Parte III reunirá, em capítulos próprios, a coleta dos documentos jurídicos, a extração das informações e a limpeza e estruturação do banco de dados.
 
 A distribuição dos capítulos entre os módulos será definida progressivamente.
+
+### Exemplos da Parte II
+
+**Decisão:** os capítulos de ambiente de trabalho e ferramentas manterão exemplos relacionados ao Direito, especialmente os dados sobre homicídios de mulheres e feminicídios provenientes do material da ESMAT.
+
+Os materiais do projeto `IntroducaoR` serão utilizados para aprimorar a estrutura didática e atualizar as ferramentas, sem substituir a identidade jurídica dos exemplos.
 
 ### Forma de desenvolvimento
 

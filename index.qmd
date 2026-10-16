@@ -40,7 +40,7 @@ Mais do que apresentar ferramentas, o livro procura mostrar como construir evid�
 
 ## Percurso do livro
 
-O percurso está organizado em sete grandes partes conectadas.
+O percurso está organizado em cinco grandes partes conectadas.
 
 ::: {.grid}
 
@@ -53,42 +53,28 @@ Método científico, realismo jurídico e integração entre Direito, Estatísti
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
-### Parte II — Ambiente de trabalho
+### Parte II — Ambiente de trabalho e ferramentas
 
-Preparação do ambiente necessário ao desenvolvimento das atividades propostas no livro.
+Preparação do ambiente e apresentação das ferramentas computacionais necessárias à pesquisa jurimétrica.
 
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
-### Parte III — Coleta de processos e decisões
+### Parte III — Construção do banco de dados
 
-Obtenção de processos, decisões e outros materiais jurídicos que servirão de base para a pesquisa.
-
-:::
-
-::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
-### Parte IV — Extração da informação
-
-Transformação dos documentos jurídicos coletados em informações que possam ser organizadas e analisadas.
-
-:::
-
-::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-desenvolvimento}
-### Parte V — Limpeza e estruturação dos dados
-
-Verificação, padronização e organização das informações para a construção de bases de dados analisáveis.
+Coleta dos documentos jurídicos, extração das informações e limpeza e estruturação do banco de dados.
 
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-micro}
-### Parte VI — Descrição do fenômeno
+### Parte IV — Descrição do fenômeno
 
 Caracterização empírica dos fenômenos jurídicos a partir dos dados estruturados.
 
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-macro}
-### Parte VII — Explicação do fenômeno
+### Parte V — Explicação do fenômeno
 
 Investigação das relações e dos mecanismos associados aos fenômenos jurídicos observados.
 
@@ -102,17 +88,15 @@ Investigação das relações e dos mecanismos associados aos fenômenos jurídi
 
 flowchart LR
     A["Fundamentos"] --> B["Ambiente de<br/>trabalho"]
-    B --> C["Coleta"]
-    C --> D["Extração"]
-    D --> E["Limpeza e<br/>estruturação"]
-    E --> F["Descrição"]
-    F --> G["Explicação"]
+    B --> C["Construção do<br/>banco de dados"]
+    C --> D["Descrição"]
+    D --> E["Explicação"]
 
     classDef principal fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
     classDef destaque fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
 
-    class A,B,C,D,E,F principal;
-    class G destaque;
+    class A,B,C,D principal;
+    class E destaque;
 ```
 
 ## Abordagem

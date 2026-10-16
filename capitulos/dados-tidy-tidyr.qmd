@@ -1,0 +1,223 @@
+---
+title: "Dados tidy e transformação com tidyr"
+subtitle: "Organizando linhas, colunas e unidades de observação"
+author:
+  - Alexandre Nicolella
+format: html
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+tem_tidyr <- requireNamespace("tidyr", quietly = TRUE)
+tem_dplyr <- requireNamespace("dplyr", quietly = TRUE)
+```
+
+```{r}
+#| include: false
+df_feminic22 <- read.table(
+  "dados/dados_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+```
+
+```{r}
+#| include: false
+#| eval: !expr tem_tidyr && tem_dplyr
+library(tidyr)
+library(dplyr)
+```
+
+## Introdução
+
+Uma tabela pode ser conveniente para leitura humana e, ao mesmo tempo, inadequada para determinada análise. O `tidyr` ajuda a reorganizar linhas e colunas sem mudar o conteúdo substantivo dos dados.
+
+Neste capítulo, utilizaremos indicadores de homicídios de mulheres e feminicídios para compreender formatos largo e longo.
+
+::: {.callout-note title="Objetivos do capítulo"}
+Ao final deste capítulo, você deverá ser capaz de:
+
+- definir a unidade de observação de uma tabela;
+- reconhecer os formatos largo e longo;
+- transformar colunas em linhas com `pivot_longer()`;
+- transformar linhas em colunas com `pivot_wider()`;
+- separar e unir informações armazenadas em colunas;
+- verificar se a transformação preservou os valores e as observações.
+:::
+
+## Começar pela unidade de observação
+
+Antes de reorganizar uma tabela, precisamos completar a frase:
+
+> Cada linha representa __________.
+
+Na base original, cada linha representa uma unidade da federação. Depois de transformar os indicadores em formato longo, cada linha representará uma combinação entre unidade da federação e indicador.
+
+::: {.callout-important title="A unidade de observação orienta a transformação"}
+O formato tidy depende do fenômeno observado e da pergunta. Não devemos reorganizar uma tabela apenas para que ela pareça mais moderna ou compacta.
+:::
+
+## Preparando uma tabela larga
+
+Selecionamos as contagens absolutas de homicídios de mulheres e feminicídios:
+
+```{r}
+indicadores_largos <- df_feminic22[
+  c("estado", "sigla", "regiao", "homic_abs", "feminico_abs")
+]
+
+names(indicadores_largos)[
+  names(indicadores_largos) == "feminico_abs"
+] <- "feminic_abs"
+
+head(indicadores_largos)
+```
+
+Essa tabela está em formato largo: os dois indicadores ocupam colunas diferentes.
+
+## Transformando colunas em linhas
+
+Para comparar indicadores dentro de uma mesma variável, transformamos as colunas `homic_abs` e `feminic_abs` em linhas:
+
+```{r}
+#| eval: !expr tem_tidyr
+indicadores_longos <- indicadores_largos |>
+  pivot_longer(
+    cols = c(homic_abs, feminic_abs),
+    names_to = "indicador",
+    values_to = "casos"
+  )
+
+head(indicadores_longos)
+```
+
+Agora cada unidade da federação ocupa duas linhas: uma para homicídios de mulheres e outra para feminicídios.
+
+## Conferindo a transformação
+
+A transformação deve preservar os valores. Conferimos o número esperado de linhas:
+
+```{r}
+#| eval: !expr tem_tidyr
+nrow(indicadores_largos)
+nrow(indicadores_longos)
+nrow(indicadores_largos) * 2
+```
+
+Também comparamos os totais antes e depois:
+
+```{r}
+#| eval: !expr tem_tidyr
+totais_largos <- c(
+  homic_abs = sum(indicadores_largos$homic_abs, na.rm = TRUE),
+  feminic_abs = sum(indicadores_largos$feminic_abs, na.rm = TRUE)
+)
+
+totais_longos <- tapply(
+  indicadores_longos$casos,
+  indicadores_longos$indicador,
+  sum,
+  na.rm = TRUE
+)
+
+totais_largos
+totais_longos
+```
+
+## Transformando linhas em colunas
+
+Podemos retornar ao formato largo com `pivot_wider()`:
+
+```{r}
+#| eval: !expr tem_tidyr
+indicadores_largos_recuperados <- indicadores_longos |>
+  pivot_wider(
+    names_from = indicador,
+    values_from = casos
+  )
+
+head(indicadores_largos_recuperados)
+```
+
+Antes de ampliar uma tabela, a combinação das variáveis que permanecerão nas linhas com a variável usada em `names_from` precisa identificar cada valor de maneira única.
+
+::: {.callout-warning title="Não use pivot_wider() para esconder duplicações"}
+Se mais de uma linha corresponder à mesma célula futura, precisamos investigar a unidade de observação e a chave. Agregar ou criar colunas de lista automaticamente pode esconder um problema de estrutura.
+:::
+
+## Quando várias informações ocupam uma coluna
+
+Podemos criar uma chave composta para representar a unidade da federação e o indicador:
+
+```{r}
+#| eval: !expr tem_tidyr
+indicadores_com_chave <- indicadores_longos |>
+  unite(
+    col = chave,
+    sigla,
+    indicador,
+    sep = "_",
+    remove = FALSE
+  )
+
+head(indicadores_com_chave)
+```
+
+A operação inversa separa a chave em duas colunas:
+
+```{r}
+#| eval: !expr tem_tidyr && tem_dplyr
+chave_separada <- indicadores_com_chave |>
+  select(chave, casos) |>
+  separate_wider_delim(
+    cols = chave,
+    delim = "_",
+    names = c("sigla", "tipo", "medida"),
+    too_many = "merge"
+  )
+
+head(chave_separada)
+```
+
+Como os nomes `homic_abs` e `feminic_abs` também contêm `_`, usamos três componentes. O resultado deve ser conferido, pois a regra de separação depende da convenção empregada nos nomes.
+
+## Uma análise depois da organização
+
+No formato longo, podemos calcular totais por indicador:
+
+```{r}
+#| eval: !expr tem_tidyr && tem_dplyr
+resumo_indicadores <- indicadores_longos |>
+  group_by(indicador) |>
+  summarise(
+    unidades = n(),
+    total = sum(casos, na.rm = TRUE),
+    media = mean(casos, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+resumo_indicadores
+```
+
+## O caminho da reorganização
+
+Uma transformação segura deve responder a quatro perguntas:
+
+1. qual era a unidade de observação antes da transformação?
+2. qual será a unidade depois da transformação?
+3. quais colunas identificam cada linha?
+4. como verificaremos que os valores foram preservados?
+
+## Síntese
+
+Neste capítulo, reorganizamos indicadores jurídicos entre os formatos largo e longo, conferimos linhas e totais e trabalhamos com colunas compostas. O objetivo não foi apenas mudar a aparência da tabela, mas adequar sua estrutura à análise sem perder informações.
+
+No próximo capítulo, combinaremos informações armazenadas em tabelas diferentes.

@@ -30,27 +30,19 @@ O livro será organizado em grandes módulos que representam as etapas da pesqui
 
 Método científico, realismo jurídico e integração entre Direito, estatística e ciência de dados.
 
-### 2. Ambiente de trabalho
+### 2. Ambiente de trabalho e ferramentas
 
-Preparação do ambiente necessário ao desenvolvimento das atividades propostas no livro.
+Preparação do ambiente e apresentação das ferramentas computacionais necessárias à pesquisa jurimétrica.
 
-### 3. Coleta de processos e decisões
+### 3. Construção do banco de dados
 
-Obtenção de processos, decisões e outros materiais jurídicos que servirão de base para a pesquisa.
+Coleta dos documentos jurídicos, extração das informações e limpeza e estruturação do banco de dados.
 
-### 4. Extração da informação
-
-Transformação dos documentos jurídicos coletados em informações que possam ser organizadas e analisadas.
-
-### 5. Limpeza e estruturação dos dados
-
-Verificação, padronização e organização das informações para a construção de bases de dados analisáveis.
-
-### 6. Descrição do fenômeno
+### 4. Descrição do fenômeno
 
 Caracterização empírica dos fenômenos jurídicos a partir dos dados estruturados.
 
-### 7. Explicação do fenômeno
+### 5. Explicação do fenômeno
 
 Investigação das relações e dos mecanismos associados aos fenômenos jurídicos observados.
 
@@ -58,7 +50,7 @@ Investigação das relações e dos mecanismos associados aos fenômenos jurídi
 
 Os módulos representam etapas conectadas:
 
-**fundamentos → ambiente de trabalho → coleta → extração → limpeza e estruturação → descrição → explicação**
+**fundamentos → ambiente de trabalho e ferramentas → construção do banco de dados → descrição → explicação**
 
 Cada capítulo deverá ocupar uma posição identificável nesse percurso. A estrutura dos módulos e a distribuição dos capítulos poderão ser revistas e atualizadas ao longo do desenvolvimento do livro.
 

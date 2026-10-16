@@ -1,0 +1,216 @@
+---
+title: "Introdução ao universo tidy"
+subtitle: "Organizando sequências de transformação"
+author:
+  - Alexandre Nicolella
+  - José de Jesus Filho
+format: html
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+tem_dplyr <- requireNamespace("dplyr", quietly = TRUE)
+```
+
+```{r}
+#| include: false
+df_feminic22 <- read.table(
+  "dados/dados_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+```
+
+## Introdução
+
+Uma base importada não responde sozinha a uma pergunta. Para investigar os feminicídios entre as unidades da federação, precisamos selecionar observações e variáveis, criar medidas, ordenar resultados e construir resumos.
+
+O universo *tidy* reúne princípios e ferramentas que ajudam a expressar esse percurso como uma sequência legível de transformações.
+
+::: {.callout-note title="Objetivos do capítulo"}
+Ao final deste capítulo, você deverá ser capaz de:
+
+- reconhecer o tidyverse como um conjunto integrado de pacotes;
+- distinguir instalação e carregamento;
+- identificar os princípios de uma base tidy;
+- compreender o papel dos principais verbos do `dplyr`;
+- encadear operações com o pipe nativo `|>`;
+- construir e verificar um fluxo passo a passo;
+- reconhecer que R base e tidyverse são abordagens complementares.
+:::
+
+## O mundo tidyverse
+
+O `tidyverse` é um conjunto de pacotes que compartilham convenções de organização, programação e apresentação. Entre os mais utilizados estão:
+
+| Pacote | Finalidade principal |
+|---|---|
+| `dplyr` | selecionar, transformar, ordenar e resumir dados |
+| `tidyr` | reorganizar tabelas e trabalhar com formatos largo e longo |
+| `readr` | importar arquivos de texto |
+| `stringr` | manipular textos |
+| `forcats` | trabalhar com fatores e categorias |
+| `ggplot2` | construir visualizações |
+
+Não precisamos usar todos ao mesmo tempo. Cada pacote responde a necessidades específicas do trabalho.
+
+## Instalando e carregando pacotes
+
+A instalação é realizada uma vez em cada ambiente do R:
+
+```{r}
+#| eval: false
+install.packages("tidyverse")
+```
+
+O carregamento deve ser feito em cada nova sessão que utiliza o pacote:
+
+```{r}
+#| eval: !expr tem_dplyr
+library(dplyr)
+```
+
+::: {.callout-note title="Execução dos exemplos"}
+Neste computador, os exemplos que dependem do `dplyr` serão executados automaticamente quando o pacote estiver instalado. A instalação não é realizada durante a renderização do livro.
+:::
+
+## O que significa uma base tidy?
+
+Uma base tidy segue três princípios:
+
+1. cada variável ocupa uma coluna;
+2. cada observação ocupa uma linha;
+3. cada valor ocupa uma célula.
+
+Na base de feminicídios, cada linha representa uma unidade da federação. `estado`, `sigla`, `regiao`, `homic_abs` e `feminico_abs` representam variáveis distintas e, portanto, ocupam colunas diferentes.
+
+```{r}
+head(df_feminic22)
+```
+
+Uma tabela pode seguir esses princípios e ainda possuir ausências, duplicações ou erros. Estrutura e qualidade são dimensões relacionadas, mas diferentes.
+
+## Uma gramática de manipulação
+
+O `dplyr` organiza tarefas frequentes em verbos:
+
+| Função | Pergunta respondida |
+|---|---|
+| `filter()` | quais linhas devem permanecer? |
+| `select()` | quais colunas devem permanecer? |
+| `arrange()` | em qual ordem as linhas devem aparecer? |
+| `mutate()` | quais variáveis devem ser criadas ou modificadas? |
+| `group_by()` | quais grupos devem ser considerados? |
+| `summarise()` | qual resumo deve ser calculado? |
+
+No próximo capítulo, estudaremos essas funções em detalhe. Aqui, o objetivo é compreender como elas formam um percurso.
+
+## Uma tarefa realizada em etapas
+
+Suponha que desejamos identificar os estados com participação de feminicídios igual ou superior a 50%, manter algumas variáveis e ordenar o resultado.
+
+Sem encadear as operações, criaríamos objetos intermediários:
+
+```{r}
+#| eval: !expr tem_dplyr
+etapa_1 <- filter(df_feminic22, part_feminic >= 50)
+etapa_2 <- select(
+  etapa_1,
+  estado,
+  sigla,
+  regiao,
+  part_feminic
+)
+resultado_sem_pipe <- arrange(
+  etapa_2,
+  desc(part_feminic)
+)
+
+resultado_sem_pipe
+```
+
+Essa forma é válida e pode ser útil para inspecionar cada etapa. Entretanto, uma sequência extensa cria muitos objetos temporários.
+
+## O pipe como fluxo de trabalho
+
+O pipe nativo `|>` envia o resultado de uma linha para a função seguinte. O código pode ser lido de cima para baixo:
+
+```{r}
+#| eval: !expr tem_dplyr
+resultado_pipe <- df_feminic22 |>
+  filter(part_feminic >= 50) |>
+  select(
+    estado,
+    sigla,
+    regiao,
+    part_feminic
+  ) |>
+  arrange(desc(part_feminic))
+
+resultado_pipe
+```
+
+O fluxo pode ser descrito assim:
+
+1. comece com a base de feminicídios;
+2. mantenha participações iguais ou superiores a 50%;
+3. selecione as quatro variáveis relevantes;
+4. ordene da maior para a menor participação.
+
+O pipe melhora a leitura, mas não elimina a necessidade de verificar os resultados intermediários.
+
+## Construindo o fluxo passo a passo
+
+Durante a elaboração, é recomendável executar e examinar cada etapa:
+
+```{r}
+#| eval: !expr tem_dplyr
+df_feminic22 |>
+  filter(part_feminic >= 50) |>
+  head()
+```
+
+Depois acrescentamos a seleção:
+
+```{r}
+#| eval: !expr tem_dplyr
+df_feminic22 |>
+  filter(part_feminic >= 50) |>
+  select(estado, sigla, regiao, part_feminic) |>
+  head()
+```
+
+Somente então incluímos a ordenação. Essa prática facilita a localização de erros e ajuda a compreender o efeito de cada função.
+
+## R base e tidyverse são complementares
+
+A mesma seleção pode ser realizada com R base:
+
+```{r}
+resultado_base <- df_feminic22[
+  df_feminic22$part_feminic >= 50,
+  c("estado", "sigla", "regiao", "part_feminic")
+]
+
+resultado_base <- resultado_base[
+  order(resultado_base$part_feminic, decreasing = TRUE),
+]
+
+resultado_base
+```
+
+Não existe obrigação de escolher uma única abordagem para todo o projeto. O importante é que o código seja correto, legível e reproduzível.
+
+## Síntese
+
+Neste capítulo, apresentamos o universo tidy, os princípios de uma base tidy e o pipe como forma de expressar uma sequência de operações. Também mostramos que o tidyverse complementa, em vez de substituir, os recursos do R base.
+
+No próximo capítulo, aplicaremos em detalhe os principais verbos do `dplyr` aos dados de feminicídio.

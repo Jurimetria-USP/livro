@@ -1,0 +1,266 @@
+---
+title: "Operações com data frames em R base"
+subtitle: "Ordenar, combinar, agregar e selecionar"
+author:
+  - Alexandre Nicolella
+format: html
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+```
+
+```{r}
+#| include: false
+df_feminic22 <- read.table(
+  "dados/dados_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+
+df_t_feminic22 <- read.table(
+  "dados/dados_tent_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+```
+
+## Introdução
+
+Nos capítulos anteriores, construímos objetos, importamos bases e verificamos a qualidade dos dados. Agora retomaremos o material original para realizar operações diretamente com as funções do R base.
+
+Nosso objetivo será ordenar os estados, combinar as bases de feminicídios e tentativas, calcular resumos por região e criar subconjuntos sem modificar os arquivos originais.
+
+::: {.callout-note title="Objetivos do capítulo"}
+Ao final deste capítulo, você deverá ser capaz de:
+
+- ordenar as linhas de um *data frame*;
+- identificar e verificar uma chave de combinação;
+- combinar bases com `merge()`;
+- agregar informações por grupo;
+- selecionar e excluir variáveis;
+- selecionar observações por condições lógicas;
+- conferir as dimensões depois de cada transformação.
+:::
+
+## Ordenando os dados
+
+Podemos ordenar os estados pela participação dos feminicídios no total de homicídios de mulheres. A função `order()` devolve a posição que as linhas devem ocupar.
+
+```{r}
+df_feminic22_ord <- df_feminic22[
+  order(df_feminic22$part_feminic, decreasing = TRUE),
+]
+
+head(df_feminic22_ord)
+```
+
+Aplicamos a mesma operação à base de tentativas:
+
+```{r}
+df_t_feminic22_ord <- df_t_feminic22[
+  order(df_t_feminic22$part_t_feminic, decreasing = TRUE),
+]
+
+head(df_t_feminic22_ord)
+```
+
+Os estados com valores ausentes aparecem ao final. Essa ordenação não altera os objetos originais porque o resultado foi atribuído a novos objetos.
+
+## Combinando as duas bases
+
+Temos um *data frame* com homicídios e feminicídios e outro com tentativas. Para combiná-los, precisamos de uma chave presente nas duas tabelas. A variável `sigla` identifica cada unidade da federação.
+
+Antes da combinação, devemos verificar se a chave está preenchida e não se repete:
+
+```{r}
+anyNA(df_feminic22$sigla)
+anyNA(df_t_feminic22$sigla)
+anyDuplicated(df_feminic22$sigla)
+anyDuplicated(df_t_feminic22$sigla)
+```
+
+Realizamos a combinação com `merge()`:
+
+```{r}
+df_final_feminic_22 <- merge(
+  df_feminic22,
+  df_t_feminic22,
+  by = "sigla",
+  all = TRUE,
+  suffixes = c("", "_tent")
+)
+
+dim(df_final_feminic_22)
+names(df_final_feminic_22)
+```
+
+O argumento `all = TRUE` mantém as linhas encontradas em qualquer uma das bases. Como `estado` e `regiao` existem nos dois arquivos, o R acrescenta o sufixo `_tent` às colunas vindas da segunda base.
+
+Conferimos se todas as siglas esperadas estão presentes:
+
+```{r}
+setdiff(df_feminic22$sigla, df_final_feminic_22$sigla)
+setdiff(df_t_feminic22$sigla, df_final_feminic_22$sigla)
+```
+
+::: {.callout-important title="Combinar exige uma chave adequada"}
+Uma chave repetida pode multiplicar linhas durante a combinação. Antes de usar `merge()`, verifique o que cada linha representa e se a chave deveria ser única em cada tabela.
+:::
+
+## Organizando o resultado da combinação
+
+As colunas `estado_tent` e `regiao_tent` repetem informações já existentes. Antes de retirá-las, verificamos se os valores coincidem:
+
+```{r}
+all(df_final_feminic_22$estado == df_final_feminic_22$estado_tent)
+all(df_final_feminic_22$regiao == df_final_feminic_22$regiao_tent)
+```
+
+Depois da conferência, construímos um novo objeto sem as colunas redundantes:
+
+```{r}
+final_fem_22 <- df_final_feminic_22[
+  setdiff(
+    names(df_final_feminic_22),
+    c("estado_tent", "regiao_tent")
+  )
+]
+
+names(final_fem_22)[
+  names(final_fem_22) == "feminico_abs"
+] <- "feminic_abs"
+
+names(final_fem_22)
+```
+
+Usar o nome da coluna é mais seguro do que depender apenas de sua posição, pois a ordem pode mudar quando a base for atualizada.
+
+::: {.callout-warning title="Cuidado ao retirar colunas"}
+Evite retirar repetidamente colunas do mesmo objeto por posição. Crie um novo objeto ou selecione explicitamente os nomes que devem permanecer. Assim, o código pode ser executado novamente sem produzir resultados diferentes.
+:::
+
+## Agregando por região
+
+Podemos calcular médias das variáveis numéricas para cada região. Primeiro identificamos as colunas numéricas:
+
+```{r}
+variaveis_numericas <- vapply(final_fem_22, is.numeric, logical(1))
+names(final_fem_22)[variaveis_numericas]
+```
+
+Em seguida, utilizamos `aggregate()`:
+
+```{r}
+regiao_media <- aggregate(
+  final_fem_22[variaveis_numericas],
+  by = list(regiao = final_fem_22$regiao),
+  FUN = mean,
+  na.rm = TRUE
+)
+
+regiao_media
+```
+
+A média regional atribui o mesmo peso a cada estado. Ela não corresponde necessariamente à taxa calculada a partir dos totais regionais. A escolha da medida deve acompanhar a pergunta de pesquisa.
+
+## Selecionando variáveis
+
+Podemos manter apenas a sigla e as participações de feminicídios e tentativas:
+
+```{r}
+variaveis_selecionadas <- c(
+  "sigla",
+  "part_feminic",
+  "part_t_feminic"
+)
+
+feminic_sel <- final_fem_22[variaveis_selecionadas]
+head(feminic_sel)
+```
+
+Também é possível selecionar colunas por posição:
+
+```{r}
+feminic_sel_posicao <- final_fem_22[c(1:3, 5:6)]
+head(feminic_sel_posicao)
+```
+
+A seleção por posição ajuda a compreender a estrutura do *data frame*, mas nomes explícitos tendem a produzir códigos mais estáveis e legíveis.
+
+Para excluir variáveis pelo nome:
+
+```{r}
+final_sem_renda <- final_fem_22[
+  setdiff(names(final_fem_22), "rendapc")
+]
+
+names(final_sem_renda)
+```
+
+## Criando subconjuntos de observações
+
+Selecionamos os estados das regiões Norte ou Nordeste:
+
+```{r}
+fem_n_ne <- final_fem_22[
+  final_fem_22$regiao == "N" |
+    final_fem_22$regiao == "NE",
+]
+
+fem_n_ne[c("sigla", "regiao", "part_feminic")]
+```
+
+Podemos combinar condições. O exemplo seguinte mantém Norte e Nordeste quando a participação de feminicídios é igual ou superior a 50%:
+
+```{r}
+fem_n_ne_50 <- final_fem_22[
+  (final_fem_22$regiao == "N" |
+     final_fem_22$regiao == "NE") &
+    final_fem_22$part_feminic >= 50,
+]
+
+fem_n_ne_50[c("sigla", "regiao", "part_feminic")]
+```
+
+O material original também utiliza `subset()`. Aqui selecionamos participações entre 30% e 50%:
+
+```{r}
+fem_30_50 <- subset(
+  final_fem_22,
+  part_feminic >= 30 & part_feminic <= 50
+)
+
+fem_30_50[c("sigla", "part_feminic")]
+```
+
+## Conferindo o percurso
+
+Ao final, é útil registrar as dimensões dos principais objetos:
+
+```{r}
+rbind(
+  feminicidios = dim(df_feminic22),
+  tentativas = dim(df_t_feminic22),
+  combinada = dim(final_fem_22),
+  norte_nordeste = dim(fem_n_ne)
+)
+```
+
+## Síntese
+
+Neste capítulo, preservamos as operações do material original e as organizamos em uma sequência verificável. Ordenamos as bases, conferimos a chave, combinamos informações, retiramos colunas redundantes, calculamos médias regionais e criamos subconjuntos.
+
+No próximo capítulo, veremos como o universo tidy organiza essas operações em fluxos de transformação legíveis.

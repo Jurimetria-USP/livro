@@ -54,6 +54,41 @@ Outros textos, páginas, folhas de estilo, dados, imagens, slides, códigos e re
 
 Nenhum material será transferido para o livro apenas por estar disponível. Sua incorporação dependerá de indicação e aprovação.
 
+## Transposição e revisão dos capítulos
+
+O material original indicado pelos autores será utilizado como texto-base para a elaboração dos capítulos correspondentes do livro.
+
+A transposição seguirá os seguintes princípios:
+
+- o conteúdo original será preservado integralmente;
+- capítulos extensos poderão ser divididos em capítulos menores;
+- a divisão deverá manter a sequência, os exemplos, os códigos e a profundidade do material original;
+- o texto não será resumido, substituído ou amplamente reescrito;
+- alterações de redação serão marginais e destinadas à correção, clareza, atualização técnica ou conexão entre as seções;
+- a origem didática do material de referência não será mencionada no texto do livro;
+- dados e referências serão atribuídos às suas fontes efetivas, após verificação;
+- nenhum conteúdo poderá ser atribuído à instituição ou ao curso em que foi utilizado.
+
+Os materiais complementares, especialmente o projeto `IntroducaoR`, serão examinados comparativamente.
+
+A inteligência artificial deverá:
+
+1. identificar conteúdos complementares relevantes;
+2. indicar o trecho do capítulo-base ao qual cada sugestão se relaciona;
+3. explicar o que poderá ser acrescentado, atualizado ou esclarecido;
+4. apresentar a proposta aos autores antes de modificar o capítulo;
+5. incorporar somente as sugestões expressamente aprovadas.
+
+Antes da alteração dos arquivos, será apresentado um mapa contendo:
+
+- a divisão proposta do capítulo original;
+- a localização de cada seção na nova estrutura;
+- os conteúdos preservados;
+- as sugestões de acréscimo;
+- as correções ou atualizações técnicas propostas.
+
+Ao final da transposição, deverá ser verificado que nenhuma explicação, exemplo ou código do texto-base foi omitido.
+
 ## Alterações nos arquivos
 
 Antes de modificar um arquivo, deverá ser informado:

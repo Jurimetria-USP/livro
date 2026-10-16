@@ -1,0 +1,362 @@
+---
+title: "Manipulação de dados com dplyr"
+subtitle: "Selecionar, transformar e resumir informações jurídicas"
+author:
+  - Alexandre Nicolella
+  - José de Jesus Filho
+format: html
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+tem_dplyr <- requireNamespace("dplyr", quietly = TRUE)
+```
+
+```{r}
+#| include: false
+df_feminic22 <- read.table(
+  "dados/dados_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+
+df_t_feminic22 <- read.table(
+  "dados/dados_tent_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+
+df_final_feminic_22 <- merge(
+  df_feminic22,
+  df_t_feminic22,
+  by = "sigla",
+  all = TRUE,
+  suffixes = c("", "_tent")
+)
+
+final_fem_22 <- df_final_feminic_22[
+  setdiff(
+    names(df_final_feminic_22),
+    c("estado_tent", "regiao_tent")
+  )
+]
+
+names(final_fem_22)[names(final_fem_22) == "feminico_abs"] <-
+  "feminic_abs"
+```
+
+## Introdução
+
+O `dplyr` fornece um conjunto consistente de funções para manipular dados. Cada função resolve uma tarefa específica, e o pipe permite reunir essas tarefas em um fluxo legível.
+
+Continuaremos utilizando a base combinada de feminicídios e tentativas construída a partir dos dois arquivos originais.
+
+::: {.callout-note title="Objetivos do capítulo"}
+Ao final deste capítulo, você deverá ser capaz de:
+
+- filtrar observações com `filter()`;
+- selecionar, renomear e reposicionar variáveis;
+- ordenar linhas com `arrange()`;
+- criar variáveis com `mutate()` e `case_when()`;
+- produzir resumos com `group_by()` e `summarise()`;
+- construir tabelas de frequência com `count()`;
+- reunir as operações em um fluxo verificável.
+:::
+
+## Preparando o pacote e a base
+
+```{r}
+#| eval: !expr tem_dplyr
+library(dplyr)
+dim(final_fem_22)
+names(final_fem_22)
+```
+
+## Comandos para as linhas
+
+Esses comandos modificam quais observações aparecem e em que ordem, sem alterar o significado das colunas. Neste bloco, utilizaremos `filter()` para selecionar linhas e `arrange()` para ordená-las.
+
+### Filtrando observações
+
+Selecionamos os estados cuja participação dos feminicídios no total de homicídios de mulheres é igual ou superior a 50%:
+
+```{r}
+#| eval: !expr tem_dplyr
+part50_mais <- final_fem_22 |>
+  filter(part_feminic >= 50)
+
+part50_mais
+```
+
+Podemos combinar critérios. Aqui mantemos participação igual ou superior a 50% e região Norte:
+
+```{r}
+#| eval: !expr tem_dplyr
+part50_mais_norte <- final_fem_22 |>
+  filter(part_feminic >= 50, regiao == "N")
+
+part50_mais_norte
+```
+
+Para manter Sul ou Sudeste, usamos `|` ou `%in%`:
+
+```{r}
+#| eval: !expr tem_dplyr
+sul_sudeste_1 <- final_fem_22 |>
+  filter(regiao == "S" | regiao == "SD")
+
+sul_sudeste_2 <- final_fem_22 |>
+  filter(regiao %in% c("S", "SD"))
+
+identical(sul_sudeste_1, sul_sudeste_2)
+```
+
+Para excluir a região Norte:
+
+```{r}
+#| eval: !expr tem_dplyr
+sem_norte <- final_fem_22 |>
+  filter(regiao != "N")
+```
+
+### Ordenando as linhas
+
+Ordenamos os estados em ordem crescente da taxa de feminicídio:
+
+```{r}
+#| eval: !expr tem_dplyr
+ordenado_crescente <- final_fem_22 |>
+  arrange(feminic_tx)
+
+head(ordenado_crescente)
+```
+
+Também podemos ordenar por região e, dentro dela, pela taxa em ordem decrescente:
+
+```{r}
+#| eval: !expr tem_dplyr
+estado_feminicidio <- final_fem_22 |>
+  arrange(regiao, desc(feminic_tx))
+
+estado_feminicidio |>
+  select(sigla, regiao, feminic_tx) |>
+  head(10)
+```
+
+## Comandos para as colunas
+
+Esses comandos escolhem, renomeiam, reposicionam ou criam variáveis. Neste bloco, utilizaremos `select()`, `rename()`, `relocate()`, `mutate()` e `case_when()`.
+
+### Selecionando variáveis
+
+Montamos uma tabela apenas com as taxas de feminicídio e de tentativa de feminicídio:
+
+```{r}
+#| eval: !expr tem_dplyr
+taxas_feminicidio <- final_fem_22 |>
+  select(sigla, feminic_tx, t_feminic_tx)
+
+head(taxas_feminicidio)
+```
+
+O sinal negativo exclui uma coluna:
+
+```{r}
+#| eval: !expr tem_dplyr
+sem_nome_estado <- final_fem_22 |>
+  select(-estado)
+```
+
+As funções auxiliares permitem selecionar grupos de nomes:
+
+```{r}
+#| eval: !expr tem_dplyr
+variaveis_taxa <- final_fem_22 |>
+  select(sigla, ends_with("_tx"))
+
+names(variaveis_taxa)
+```
+
+### Renomeando variáveis
+
+Podemos selecionar e renomear na mesma operação:
+
+```{r}
+#| eval: !expr tem_dplyr
+taxa_por_estado <- final_fem_22 |>
+  select(
+    estado,
+    taxa_feminicidio = feminic_tx
+  )
+
+head(taxa_por_estado)
+```
+
+Ou usar `rename()` quando queremos conservar as demais colunas:
+
+```{r}
+#| eval: !expr tem_dplyr
+nomes_mais_claros <- final_fem_22 |>
+  rename(
+    taxa_feminicidio = feminic_tx,
+    taxa_tentativa_feminicidio = t_feminic_tx
+  )
+```
+
+### Reposicionando colunas
+
+Podemos reunir as variáveis de feminicídio no início da tabela:
+
+```{r}
+#| eval: !expr tem_dplyr
+feminicidio_reunido <- final_fem_22 |>
+  relocate(
+    feminic_abs,
+    feminic_tx,
+    part_feminic,
+    t_feminic_abs,
+    t_feminic_tx,
+    part_t_feminic,
+    .after = regiao
+  )
+
+names(feminicidio_reunido)
+```
+
+### Criando novas variáveis
+
+Criamos proporções que relacionam os casos consumados com o total formado por casos consumados e tentativas:
+
+```{r}
+#| eval: !expr tem_dplyr
+final_fem_22_1 <- final_fem_22 |>
+  mutate(
+    feminic_efetivado =
+      feminic_abs / (feminic_abs + t_feminic_abs),
+    homic_efetivado =
+      homic_abs / (homic_abs + t_homic_abs)
+  )
+```
+
+Os valores devem ser interpretados com cautela: trata-se de uma construção a partir das variáveis disponíveis, e não de uma probabilidade individual de desfecho.
+
+### Criando categorias
+
+O material original cria uma variável binária para valores de `homic_efetivado` iguais ou superiores a 0,30. Podemos expressar essa regra com `case_when()` e preservar ausências:
+
+```{r}
+#| eval: !expr tem_dplyr
+final_fem_22_1 <- final_fem_22_1 |>
+  mutate(
+    homi_efet_alto = case_when(
+      is.na(homic_efetivado) ~ NA_integer_,
+      homic_efetivado >= 0.30 ~ 1L,
+      homic_efetivado < 0.30 ~ 0L
+    )
+  )
+```
+
+## Comandos para resumos
+
+Esses comandos condensam as observações em estatísticas ou contagens. Utilizaremos `group_by()` para definir grupos, `summarise()` para calcular medidas e `count()` para construir frequências.
+
+### Agrupando e resumindo
+
+Calculamos a taxa média e o desvio-padrão por região:
+
+```{r}
+#| eval: !expr tem_dplyr
+feminic_agrupado <- final_fem_22 |>
+  group_by(regiao) |>
+  summarise(
+    estados = n(),
+    media_feminic = mean(feminic_tx, na.rm = TRUE),
+    dp_feminic = sd(feminic_tx, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+feminic_agrupado
+```
+
+Sem agrupamento, obtemos um resumo para a base inteira:
+
+```{r}
+#| eval: !expr tem_dplyr
+sumario_geral <- final_fem_22 |>
+  summarise(
+    estados = n(),
+    media = mean(feminic_tx, na.rm = TRUE),
+    soma = sum(feminic_abs, na.rm = TRUE),
+    desvio_padrao = sd(feminic_tx, na.rm = TRUE)
+  )
+
+sumario_geral
+```
+
+### Contando categorias
+
+Criamos a variável que identifica participações iguais ou superiores a 50% e contamos suas categorias:
+
+```{r}
+#| eval: !expr tem_dplyr
+final_fem_22_2 <- final_fem_22 |>
+  mutate(mais_50 = part_feminic >= 50)
+
+alta_participacao <- final_fem_22_2 |>
+  count(mais_50, sort = TRUE)
+
+alta_participacao
+```
+
+Também podemos contar por região:
+
+```{r}
+#| eval: !expr tem_dplyr
+regiao_alta_participacao <- final_fem_22_2 |>
+  count(regiao, mais_50, sort = FALSE)
+
+regiao_alta_participacao
+```
+
+## Reunindo as operações
+
+O fluxo seguinte mantém estados com informação disponível, cria a classificação, agrupa por região e resume os resultados:
+
+```{r}
+#| eval: !expr tem_dplyr
+resumo_regional <- final_fem_22 |>
+  filter(!is.na(part_feminic)) |>
+  mutate(
+    participacao = case_when(
+      part_feminic >= 50 ~ "50% ou mais",
+      part_feminic < 50 ~ "menos de 50%"
+    )
+  ) |>
+  group_by(regiao, participacao) |>
+  summarise(
+    estados = n(),
+    taxa_media = mean(feminic_tx, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  arrange(regiao, desc(taxa_media))
+
+resumo_regional
+```
+
+## Síntese
+
+Neste capítulo, preservamos os principais exemplos do material original e os reorganizamos com as funções atuais do `dplyr`. Filtramos linhas, selecionamos e reposicionamos colunas, ordenamos estados, criamos variáveis e produzimos resumos por região.
+
+No próximo capítulo, examinaremos como a disposição das linhas e colunas interfere na análise e como reorganizá-la com `tidyr`.

@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alexandre Nicolella">
+
+<title>8&nbsp; Valores ausentes e qualidade dos dados – Livro de Jurimetria</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../capitulos/operacoes-r-base.html" rel="next">
+<link href="../capitulos/dataframes-importacao.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-af376c0a327698bc4256a7316fbe19a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo light-content">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Livro de Jurimetria</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Início</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Jurimetria-USP/livro"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/qualidade-dados.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Valores ausentes e qualidade dos dados</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../autores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sobre os autores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/01-fundamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte I — Fundamentos</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/desenho-pesquisa-jurimetria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução ao Desenho de Pesquisa e à Jurimetria</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/selecao-disputas-litigio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Seleção de disputas para o litígio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/galanter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Por que os que têm saem na frente: análise do texto de Marc Galanter</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/02-ambiente-trabalho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte II — Ambiente de trabalho e ferramentas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/r-ambiente-trabalho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R e o ambiente de trabalho</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/projetos-reprodutiveis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Projetos e organização reproduzível</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/objetos-operacoes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Objetos e operações fundamentais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/dataframes-importacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data frames e importação</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/qualidade-dados.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Valores ausentes e qualidade dos dados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/operacoes-r-base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Operações com data frames em R base</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/universo-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introdução ao universo tidy</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/manipulacao-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Manipulação de dados com dplyr</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/dados-tidy-tidyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dados tidy e transformação com tidyr</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/combinacao-bases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Combinação de bases</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/textos-datas-categorias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Textos, datas e categorias</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/google-drive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Google Drive</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Parte III — Construção do banco de dados</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Parte IV — Descrição do fenômeno</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Parte V — Explicação do fenômeno</span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução"><span class="header-section-number">8.1</span> Introdução</a></li>
+  <li><a href="#qualidade-depende-do-problema" id="toc-qualidade-depende-do-problema" class="nav-link" data-scroll-target="#qualidade-depende-do-problema"><span class="header-section-number">8.2</span> Qualidade depende do problema</a></li>
+  <li><a href="#valores-ausentes" id="toc-valores-ausentes" class="nav-link" data-scroll-target="#valores-ausentes"><span class="header-section-number">8.3</span> Valores ausentes</a>
+  <ul class="collapse">
+  <li><a href="#ausência-não-é-zero" id="toc-ausência-não-é-zero" class="nav-link" data-scroll-target="#ausência-não-é-zero"><span class="header-section-number">8.3.1</span> Ausência não é zero</a></li>
+  <li><a href="#valores-ausentes-nos-cálculos" id="toc-valores-ausentes-nos-cálculos" class="nav-link" data-scroll-target="#valores-ausentes-nos-cálculos"><span class="header-section-number">8.3.2</span> Valores ausentes nos cálculos</a></li>
+  <li><a href="#excluir-ou-manter-as-observações" id="toc-excluir-ou-manter-as-observações" class="nav-link" data-scroll-target="#excluir-ou-manter-as-observações"><span class="header-section-number">8.3.3</span> Excluir ou manter as observações?</a></li>
+  </ul></li>
+  <li><a href="#códigos-especiais-convertidos-em-na" id="toc-códigos-especiais-convertidos-em-na" class="nav-link" data-scroll-target="#códigos-especiais-convertidos-em-na"><span class="header-section-number">8.4</span> Códigos especiais convertidos em <code>NA</code></a></li>
+  <li><a href="#valores-inválidos-ou-implausíveis" id="toc-valores-inválidos-ou-implausíveis" class="nav-link" data-scroll-target="#valores-inválidos-ou-implausíveis"><span class="header-section-number">8.5</span> Valores inválidos ou implausíveis</a></li>
+  <li><a href="#duplicações-e-identificadores" id="toc-duplicações-e-identificadores" class="nav-link" data-scroll-target="#duplicações-e-identificadores"><span class="header-section-number">8.6</span> Duplicações e identificadores</a></li>
+  <li><a href="#coerência-entre-variáveis" id="toc-coerência-entre-variáveis" class="nav-link" data-scroll-target="#coerência-entre-variáveis"><span class="header-section-number">8.7</span> Coerência entre variáveis</a></li>
+  <li><a href="#tomando-decisões-rastreáveis" id="toc-tomando-decisões-rastreáveis" class="nav-link" data-scroll-target="#tomando-decisões-rastreáveis"><span class="header-section-number">8.8</span> Tomando decisões rastreáveis</a></li>
+  <li><a href="#validando-a-cópia-tratada" id="toc-validando-a-cópia-tratada" class="nav-link" data-scroll-target="#validando-a-cópia-tratada"><span class="header-section-number">8.9</span> Validando a cópia tratada</a></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">8.10</span> Síntese</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/qualidade-dados.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Valores ausentes e qualidade dos dados</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Valores ausentes e qualidade dos dados</span></h1>
+<p class="subtitle lead">Verificando antes de analisar</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexandre Nicolella </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">8.1</span> Introdução</h2>
+<p>Conseguir abrir um arquivo não significa que ele esteja pronto para análise. Valores ausentes, códigos inválidos, duplicações e relações incoerentes podem alterar os resultados ou revelar limitações da fonte.</p>
+<p>A verificação da qualidade não é uma operação puramente mecânica. Ela depende da pergunta de pesquisa, da unidade de observação e do significado das variáveis. Uma mesma ausência pode ser irrelevante para determinada análise e decisiva para outra.</p>
+<p>Neste capítulo, continuaremos trabalhando com as bases sobre homicídios de mulheres, feminicídios e tentativas. O objetivo é aprender a diagnosticar problemas sem alterar os arquivos originais e registrar as decisões tomadas durante o tratamento.</p>
+</section>
+<section id="qualidade-depende-do-problema" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="qualidade-depende-do-problema"><span class="header-section-number">8.2</span> Qualidade depende do problema</h2>
+<p>Antes de modificar a base, precisamos estabelecer o que esperamos encontrar. Neste exemplo:</p>
+<ul>
+<li>cada linha deve representar uma unidade da federação;</li>
+<li>a sigla deve identificar essa unidade;</li>
+<li>variáveis de contagem e taxas não devem apresentar valores negativos;</li>
+<li>a região deve pertencer ao conjunto de categorias esperado;</li>
+<li>o número de feminicídios não deve superar o total correspondente de homicídios de mulheres;</li>
+<li>qualquer ausência deve ser localizada e compreendida antes de uma decisão de tratamento.</li>
+</ul>
+<p>Essas expectativas funcionam como critérios de diagnóstico. Quando uma delas não é satisfeita, o código identifica o caso, mas a documentação e o conhecimento sobre o processo de coleta orientam sua interpretação.</p>
+</section>
+<section id="valores-ausentes" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="valores-ausentes"><span class="header-section-number">8.3</span> Valores ausentes</h2>
+<p>Não temos informação sobre tentativas de feminicídio para os estados de Mato Grosso e São Paulo. No R, a ausência de informação é representada por <code>NA</code>. A função <code>is.na()</code> verifica cada célula e devolve <code>TRUE</code> quando encontra uma ausência.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(df_t_feminic22)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      estado sigla regiao t_homic_abs t_homic_tx t_feminic_abs t_feminic_tx
+ [1,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+ [2,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+ [3,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+ [4,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+ [5,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+ [6,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+ [7,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+ [8,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+ [9,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[10,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[11,]  FALSE FALSE  FALSE       FALSE      FALSE          TRUE         TRUE
+[12,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[13,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[14,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[15,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[16,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[17,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[18,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[19,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[20,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[21,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[22,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[23,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[24,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[25,]  FALSE FALSE  FALSE       FALSE      FALSE          TRUE         TRUE
+[26,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+[27,]  FALSE FALSE  FALSE       FALSE      FALSE         FALSE        FALSE
+      part_t_feminic
+ [1,]          FALSE
+ [2,]          FALSE
+ [3,]          FALSE
+ [4,]          FALSE
+ [5,]          FALSE
+ [6,]          FALSE
+ [7,]          FALSE
+ [8,]          FALSE
+ [9,]          FALSE
+[10,]          FALSE
+[11,]           TRUE
+[12,]          FALSE
+[13,]          FALSE
+[14,]          FALSE
+[15,]          FALSE
+[16,]          FALSE
+[17,]          FALSE
+[18,]          FALSE
+[19,]          FALSE
+[20,]          FALSE
+[21,]          FALSE
+[22,]          FALSE
+[23,]          FALSE
+[24,]          FALSE
+[25,]           TRUE
+[26,]          FALSE
+[27,]          FALSE</code></pre>
+</div>
+</div>
+<p>Como a matriz resultante é extensa, geralmente é mais útil contar as ausências no conjunto da base e em cada variável:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(df_t_feminic22))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(df_t_feminic22))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        estado          sigla         regiao    t_homic_abs     t_homic_tx 
+             0              0              0              0              0 
+ t_feminic_abs   t_feminic_tx part_t_feminic 
+             2              2              2 </code></pre>
+</div>
+</div>
+<p>Também podemos localizar as linhas que possuem ao menos um valor ausente:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>linhas_com_ausencia <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span><span class="fu">complete.cases</span>(df_t_feminic22))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>linhas_com_ausencia</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11 25</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_t_feminic22[linhas_com_ausencia, ]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        estado sigla regiao t_homic_abs t_homic_tx t_feminic_abs t_feminic_tx
+11 Mato Grosso    MT     CO         249       13.8            NA           NA
+25   Sao Paulo    SP     SD         399        1.8            NA           NA
+   part_t_feminic
+11             NA
+25             NA</code></pre>
+</div>
+</div>
+<p>O resultado permite confirmar quais unidades da federação e quais variáveis precisam de atenção.</p>
+<section id="ausência-não-é-zero" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="ausência-não-é-zero"><span class="header-section-number">8.3.1</span> Ausência não é zero</h3>
+<p>Zero e ausência possuem significados diferentes. Zero informa que o fenômeno foi registrado com valor nulo. <code>NA</code> informa que o valor não está disponível ou não é conhecido.</p>
+<p>Substituir automaticamente uma ausência por zero afirmaria que nenhuma tentativa de feminicídio ocorreu, embora a base apenas indique que a informação está ausente.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Ausência não é zero">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Ausência não é zero
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Valores ausentes nunca devem ser convertidos automaticamente em zero. Antes de qualquer substituição, é necessário conhecer o significado da ausência e justificar a decisão.</p>
+</div>
+</div>
+</section>
+<section id="valores-ausentes-nos-cálculos" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="valores-ausentes-nos-cálculos"><span class="header-section-number">8.3.2</span> Valores ausentes nos cálculos</h3>
+<p>Por padrão, uma operação que envolve <code>NA</code> também pode devolver <code>NA</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df_t_feminic22<span class="sc">$</span>t_feminic_abs)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>O argumento <code>na.rm = TRUE</code> retira as ausências somente daquele cálculo:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df_t_feminic22<span class="sc">$</span>t_feminic_abs, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 102.52</code></pre>
+</div>
+</div>
+<p>Essa opção não corrige a base nem resolve a causa das ausências. Ela apenas calcula a média com os valores disponíveis. Por isso, devemos informar quantas observações participaram do cálculo:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(df_t_feminic22<span class="sc">$</span>t_feminic_abs))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+</div>
+</section>
+<section id="excluir-ou-manter-as-observações" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="excluir-ou-manter-as-observações"><span class="header-section-number">8.3.3</span> Excluir ou manter as observações?</h3>
+<p>O material original apresenta <code>na.omit()</code> como uma forma de criar uma base apenas com linhas completas:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_t_feminic22_sem_missing <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(df_t_feminic22)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df_t_feminic22_sem_missing)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df_t_feminic22_sem_missing<span class="sc">$</span>t_feminic_abs)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 102.52</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(df_t_feminic22_sem_missing)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O mesmo resultado pode ser obtido com <code>subset()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_t_feminic22_sem_missing <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  df_t_feminic22,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">is.na</span>(t_feminic_abs)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df_t_feminic22_sem_missing)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(df_t_feminic22_sem_missing)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Essas operações são tecnicamente possíveis, mas não devem ser automáticas. <code>na.omit()</code> elimina a linha inteira quando encontra uma ausência em qualquer coluna, inclusive quando as demais variáveis daquela unidade continuam úteis.</p>
+<p>Em muitos casos, é preferível preservar as observações na base e usar <code>na.rm = TRUE</code> apenas nos cálculos em que isso seja justificável.</p>
+</section>
+</section>
+<section id="códigos-especiais-convertidos-em-na" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="códigos-especiais-convertidos-em-na"><span class="header-section-number">8.4</span> Códigos especiais convertidos em <code>NA</code></h2>
+<p>Algumas bases não registram ausências diretamente como <code>NA</code>. Um código numérico, como <code>99</code> ou <code>999999</code>, pode indicar informação não declarada, ignorada ou não aplicável. A interpretação correta depende do dicionário da base.</p>
+<p>Para demonstrar a recodificação sem alterar os dados originais, criaremos uma cópia didática e introduziremos deliberadamente o código <code>999999</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df_t_feminic_treino <span class="ot">&lt;-</span> df_t_feminic22</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>df_t_feminic_treino<span class="sc">$</span>t_feminic_abs[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">999999</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>df_t_feminic_treino<span class="sc">$</span>t_feminic_abs[</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  df_t_feminic_treino<span class="sc">$</span>t_feminic_abs <span class="sc">==</span> <span class="dv">999999</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>df_t_feminic_treino[<span class="dv">1</span>, ]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  estado sigla regiao t_homic_abs t_homic_tx t_feminic_abs t_feminic_tx
+1   Acre    AC      N         388       93.4            NA          3.9
+  part_t_feminic
+1           3.96</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(df_t_feminic_treino)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Exemplo didático">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Exemplo didático
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O código <code>999999</code> não pertence ao arquivo original. Ele foi introduzido em uma cópia somente para demonstrar a recodificação. Em uma pesquisa real, a transformação só deve ser feita quando a documentação confirmar o significado do código.</p>
+</div>
+</div>
+</section>
+<section id="valores-inválidos-ou-implausíveis" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="valores-inválidos-ou-implausíveis"><span class="header-section-number">8.5</span> Valores inválidos ou implausíveis</h2>
+<p>Um valor pode estar preenchido e ainda assim ser inválido. Antes de definir quais categorias são permitidas, precisamos conhecer a convenção adotada pela própria base:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">unique</span>(df_feminic22<span class="sc">$</span>regiao))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "CO" "N"  "NE" "S"  "SD"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df_feminic22<span class="sc">$</span>regiao)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+CO  N NE  S SD 
+ 4  7  9  3  4 </code></pre>
+</div>
+</div>
+<p>Nesta base, <code>SD</code> é utilizado de maneira consistente para representar o Sudeste. Outros bancos podem usar <code>SE</code>. Uma diferença de convenção não deve ser tratada automaticamente como erro.</p>
+<p>Considerando a codificação observada e sua documentação, verificamos se existem categorias fora do conjunto esperado:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>regioes_esperadas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"N"</span>, <span class="st">"NE"</span>, <span class="st">"CO"</span>, <span class="st">"SD"</span>, <span class="st">"S"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span>df_feminic22<span class="sc">$</span>regiao <span class="sc">%in%</span> regioes_esperadas</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[13] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+[25] FALSE FALSE FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df_feminic22[<span class="sc">!</span>df_feminic22<span class="sc">$</span>regiao <span class="sc">%in%</span> regioes_esperadas, ]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] estado       sigla        regiao       homic_abs    homic_tx    
+[6] feminico_abs feminic_tx   part_feminic rendapc     
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+</div>
+<p>O resultado vazio indica que não encontramos categorias regionais inválidas. Se fosse necessário padronizar essa nomenclatura para combinar a base com outra fonte, a conversão deveria ser feita em uma cópia e registrada como decisão de harmonização, não como correção de um erro.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df_feminic22_tratada <span class="ot">&lt;-</span> df_feminic22</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Também devemos procurar valores incompatíveis com a natureza das variáveis:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(df_feminic22<span class="sc">$</span>homic_abs <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(df_feminic22<span class="sc">$</span>feminico_abs <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(df_t_feminic22<span class="sc">$</span>t_homic_abs <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(df_t_feminic22<span class="sc">$</span>t_feminic_abs <span class="sc">&lt;</span> <span class="dv">0</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="duplicações-e-identificadores" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="duplicações-e-identificadores"><span class="header-section-number">8.6</span> Duplicações e identificadores</h2>
+<p>A função <code>duplicated()</code> identifica linhas que repetem integralmente uma linha anterior:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(df_feminic22))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(df_t_feminic22))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>Também podemos verificar se a variável usada como identificador aparece mais de uma vez:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(df_feminic22<span class="sc">$</span>sigla))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(df_t_feminic22<span class="sc">$</span>sigla))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>Nas duas bases, não encontramos linhas integralmente duplicadas nem siglas repetidas.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Valores repetidos não são necessariamente duplicatas">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Valores repetidos não são necessariamente duplicatas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Duas unidades da federação podem apresentar legitimamente a mesma contagem ou taxa. Uma duplicação depende da unidade de observação e das variáveis que identificam cada linha. Por isso, não devemos remover registros apenas porque determinados valores se repetem.</p>
+</div>
+</div>
+</section>
+<section id="coerência-entre-variáveis" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="coerência-entre-variáveis"><span class="header-section-number">8.7</span> Coerência entre variáveis</h2>
+<p>Além de examinar cada coluna separadamente, devemos verificar relações que precisam ser respeitadas entre variáveis.</p>
+<p>Na primeira base, o número de feminicídios não deve superar o total de homicídios de mulheres:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>incoerencia_feminicidio <span class="ot">&lt;-</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  df_feminic22<span class="sc">$</span>feminico_abs <span class="sc">&gt;</span> df_feminic22<span class="sc">$</span>homic_abs</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(incoerencia_feminicidio, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>df_feminic22[incoerencia_feminicidio <span class="sc">%in%</span> <span class="cn">TRUE</span>, ]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] estado       sigla        regiao       homic_abs    homic_tx    
+[6] feminico_abs feminic_tx   part_feminic rendapc     
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+</div>
+<p>Na segunda base, aplicamos o mesmo raciocínio às tentativas:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>incoerencia_tentativas <span class="ot">&lt;-</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  df_t_feminic22<span class="sc">$</span>t_feminic_abs <span class="sc">&gt;</span> df_t_feminic22<span class="sc">$</span>t_homic_abs</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(incoerencia_tentativas, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df_t_feminic22[incoerencia_tentativas <span class="sc">%in%</span> <span class="cn">TRUE</span>, ]</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] estado         sigla          regiao         t_homic_abs    t_homic_tx    
+[6] t_feminic_abs  t_feminic_tx   part_t_feminic
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+</div>
+<p>Uma relação aparentemente incoerente não prova, por si só, que o dado esteja errado. Definições distintas, períodos de referência diferentes ou mudanças metodológicas também podem explicar o resultado. A verificação indica quais registros precisam ser investigados.</p>
+</section>
+<section id="tomando-decisões-rastreáveis" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="tomando-decisões-rastreáveis"><span class="header-section-number">8.8</span> Tomando decisões rastreáveis</h2>
+<p>O diagnóstico não obriga a corrigir, excluir ou substituir imediatamente. Para cada ocorrência, precisamos registrar:</p>
+<ol type="1">
+<li>o problema identificado;</li>
+<li>a evidência utilizada;</li>
+<li>a decisão tomada;</li>
+<li>a transformação realizada;</li>
+<li>as consequências para a análise.</li>
+</ol>
+<p>Neste exemplo, podemos organizar as decisões em um pequeno registro:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>registro_qualidade <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">problema =</span> <span class="fu">c</span>(</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ausência nas tentativas de feminicídio"</span>,</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"categorias regionais fora do conjunto esperado"</span>,</span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"possíveis linhas duplicadas"</span></span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">evidencia =</span> <span class="fu">c</span>(</span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"NA em Mato Grosso e São Paulo"</span>,</span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"verificação das categorias N, NE, CO, SD e S"</span>,</span>
+<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"verificação com duplicated()"</span></span>
+<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">decisao =</span> <span class="fu">c</span>(</span>
+<span id="cb61-13"><a href="#cb61-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"manter NA e retirar somente dos cálculos justificados"</span>,</span>
+<span id="cb61-14"><a href="#cb61-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nenhuma alteração: todas as categorias são válidas"</span>,</span>
+<span id="cb61-15"><a href="#cb61-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nenhuma exclusão: não foram encontradas duplicações"</span></span>
+<span id="cb61-16"><a href="#cb61-16" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb61-17"><a href="#cb61-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb61-18"><a href="#cb61-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb61-19"><a href="#cb61-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-20"><a href="#cb61-20" aria-hidden="true" tabindex="-1"></a>registro_qualidade</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                        problema
+1         ausência nas tentativas de feminicídio
+2 categorias regionais fora do conjunto esperado
+3                    possíveis linhas duplicadas
+                                     evidencia
+1                NA em Mato Grosso e São Paulo
+2 verificação das categorias N, NE, CO, SD e S
+3                 verificação com duplicated()
+                                                decisao
+1 manter NA e retirar somente dos cálculos justificados
+2    nenhuma alteração: todas as categorias são válidas
+3   nenhuma exclusão: não foram encontradas duplicações</code></pre>
+</div>
+</div>
+</section>
+<section id="validando-a-cópia-tratada" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="validando-a-cópia-tratada"><span class="header-section-number">8.9</span> Validando a cópia tratada</h2>
+<p>Depois das decisões aprovadas, podemos transformar as expectativas em verificações reproduzíveis:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>validacao <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">criterio =</span> <span class="fu">c</span>(</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"27 unidades da federação"</span>,</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"siglas sem repetição"</span>,</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"regiões dentro das categorias esperadas"</span>,</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"contagens sem valores negativos"</span>,</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"feminicídios não superam homicídios"</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">resultado =</span> <span class="fu">c</span>(</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">nrow</span>(df_feminic22_tratada) <span class="sc">==</span> <span class="dv">27</span>,</span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">anyDuplicated</span>(df_feminic22_tratada<span class="sc">$</span>sigla),</span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">all</span>(df_feminic22_tratada<span class="sc">$</span>regiao <span class="sc">%in%</span> regioes_esperadas),</span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">all</span>(df_feminic22_tratada<span class="sc">$</span>homic_abs <span class="sc">&gt;=</span> <span class="dv">0</span>) <span class="sc">&amp;&amp;</span></span>
+<span id="cb63-14"><a href="#cb63-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">all</span>(df_feminic22_tratada<span class="sc">$</span>feminico_abs <span class="sc">&gt;=</span> <span class="dv">0</span>),</span>
+<span id="cb63-15"><a href="#cb63-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">all</span>(df_feminic22_tratada<span class="sc">$</span>feminico_abs <span class="sc">&lt;=</span></span>
+<span id="cb63-16"><a href="#cb63-16" aria-hidden="true" tabindex="-1"></a>          df_feminic22_tratada<span class="sc">$</span>homic_abs)</span>
+<span id="cb63-17"><a href="#cb63-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb63-18"><a href="#cb63-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb63-19"><a href="#cb63-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-20"><a href="#cb63-20" aria-hidden="true" tabindex="-1"></a>validacao</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                 criterio resultado
+1                27 unidades da federação      TRUE
+2                    siglas sem repetição      TRUE
+3 regiões dentro das categorias esperadas      TRUE
+4         contagens sem valores negativos      TRUE
+5     feminicídios não superam homicídios      TRUE</code></pre>
+</div>
+</div>
+<p>Essas verificações não substituem a interpretação substantiva, mas tornam explícitas as expectativas utilizadas e ajudam a detectar problemas quando a base for atualizada.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Não limpe silenciosamente">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Não limpe silenciosamente
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Excluir linhas, substituir valores ou alterar categorias pode mudar o fenômeno observado. Toda decisão precisa ser justificável, documentada e reproduzível. Os arquivos originais devem permanecer preservados.</p>
+</div>
+</div>
+</section>
+<section id="síntese" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="síntese"><span class="header-section-number">8.10</span> Síntese</h2>
+<p>Neste capítulo, preservamos o exemplo original sobre valores ausentes e ampliamos o diagnóstico para códigos especiais, categorias inválidas, duplicações e coerência entre variáveis. Também distinguimos a identificação de um problema da decisão de tratamento e registramos as intervenções realizadas em uma cópia da base.</p>
+<p>Com isso, concluímos a etapa inicial de preparação do ambiente e dos dados. Nos próximos capítulos, aprenderemos a selecionar, ordenar, transformar e combinar informações sem perder a relação entre as operações realizadas e as decisões substantivas da pesquisa.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/dataframes-importacao.html" class="pagination-link" aria-label="Data frames e importação">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data frames e importação</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../capitulos/operacoes-r-base.html" class="pagination-link" aria-label="Operações com data frames em R base">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Operações com data frames em R base</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

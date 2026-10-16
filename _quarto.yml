@@ -35,14 +35,23 @@ book:
         - capitulos/desenho-pesquisa-jurimetria.qmd
         - capitulos/selecao-disputas-litigio.qmd
         - capitulos/galanter.qmd
-    - part: "Parte II — Ambiente de trabalho"
+    - part: partes/02-ambiente-trabalho.qmd
       chapters:
-        - capitulos/manipulacao-dados.qmd
-    - part: "Parte III — Coleta de processos e decisões"
-    - part: "Parte IV — Extração da informação"
-    - part: "Parte V — Limpeza e estruturação dos dados"
-    - part: "Parte VI — Descrição do fenômeno"
-    - part: "Parte VII — Explicação do fenômeno"
+        - capitulos/r-ambiente-trabalho.qmd
+        - capitulos/projetos-reprodutiveis.qmd
+        - capitulos/objetos-operacoes.qmd
+        - capitulos/dataframes-importacao.qmd
+        - capitulos/qualidade-dados.qmd
+        - capitulos/operacoes-r-base.qmd
+        - capitulos/universo-tidy.qmd
+        - capitulos/manipulacao-dplyr.qmd
+        - capitulos/dados-tidy-tidyr.qmd
+        - capitulos/combinacao-bases.qmd
+        - capitulos/textos-datas-categorias.qmd
+        - capitulos/google-drive.qmd
+    - part: "Parte III — Construção do banco de dados"
+    - part: "Parte IV — Descrição do fenômeno"
+    - part: "Parte V — Explicação do fenômeno"
 
 format:
   html:

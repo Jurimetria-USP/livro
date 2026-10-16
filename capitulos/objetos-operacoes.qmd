@@ -1,0 +1,450 @@
+---
+title: "Objetos e operações fundamentais"
+subtitle: "Construindo uma base jurídica passo a passo"
+author:
+  - Alexandre Nicolella
+format: html
+---
+
+## Introdução
+
+Nos capítulos anteriores, conhecemos o ambiente de trabalho e organizamos a pesquisa como um projeto reproduzível. Agora começaremos a representar informações jurídicas no R.
+
+Em vez de apresentar comandos isolados, construiremos progressivamente uma base com dados de homicídios de mulheres e feminicídios nos estados brasileiros em 2022. O exemplo permitirá compreender como valores, vetores e variáveis se relacionam dentro de um banco de dados.
+
+::: {.callout-note title="Objetivos do capítulo"}
+Ao final deste capítulo, você deverá ser capaz de:
+
+- criar objetos e atribuir valores;
+- reconhecer valores numéricos, textuais e lógicos;
+- construir, inspecionar, corrigir e combinar vetores;
+- selecionar elementos por posição e por condições lógicas;
+- representar categorias como fatores;
+- reunir vetores em um *data frame*;
+- renomear e selecionar linhas e colunas;
+- utilizar funções e informar seus argumentos.
+:::
+
+## Uma pergunta para orientar o exemplo
+
+Considere a seguinte questão inicial:
+
+> Como estão distribuídos os registros de homicídios de mulheres e feminicídios entre os estados brasileiros?
+
+Responder adequadamente a essa pergunta exige conhecer a fonte, a definição das variáveis e a qualidade dos registros. Antes da análise substantiva, porém, precisamos compreender como representar e manipular essas informações no R.
+
+## Criando o primeiro objeto
+
+No R, armazenamos informações em **objetos**. O operador `<-` atribui ao nome localizado à esquerda o valor informado à direita.
+
+```{r}
+homicidios_acre <- 22
+homicidios_acre
+```
+
+Se atribuirmos um novo valor ao mesmo nome, o conteúdo anterior será substituído:
+
+```{r}
+homicidios_acre <- 23
+homicidios_acre
+```
+
+::: {.callout-important title="O script preserva o percurso"}
+O objeto guarda somente seu valor atual. O script registra os comandos utilizados para criá-lo e modificá-lo. Por isso, as operações relevantes devem permanecer documentadas no arquivo de código.
+:::
+
+## Tipos básicos de valores
+
+Os valores armazenados no R possuem tipos. Três deles aparecem frequentemente em uma pesquisa:
+
+```{r}
+numero_registros <- 22
+nome_estado <- "Acre"
+possui_registro <- TRUE
+
+typeof(numero_registros)
+typeof(nome_estado)
+typeof(possui_registro)
+```
+
+Textos precisam ser delimitados por aspas. Valores lógicos são representados por `TRUE` e `FALSE`, sem aspas.
+
+## Inserindo dados no R
+
+### Vetores
+
+Um **vetor** reúne valores do mesmo tipo. Começaremos inserindo o número de homicídios de mulheres nos estados brasileiros em 2022. No primeiro elemento, registraremos propositalmente `2` em vez de `22`. Também deixaremos inicialmente de incluir os valores do Distrito Federal e de Tocantins.
+
+```{r}
+homic <- c(
+  2, 73, 22, 88, 406, 264, 95, 137, 127, 101,
+  75, 309, 200, 86, 256, 219, 70, 283, 60, 281,
+  88, 33, 101, 423, 37
+)
+
+homic
+```
+
+Podemos inserir também um vetor de texto com os estados brasileiros na ordem em que deverão aparecer na base completa:
+
+```{r}
+estados <- c(
+  "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará",
+  "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão",
+  "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará",
+  "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro",
+  "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima",
+  "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"
+)
+
+estados
+```
+
+Renomearemos o vetor de homicídios e removeremos o objeto antigo:
+
+```{r}
+homic_abs <- homic
+rm(homic)
+```
+
+Agora corrigimos o primeiro elemento do vetor, substituindo `2` por `22`:
+
+```{r}
+homic_abs[1] <- 22
+homic_abs
+```
+
+Os colchetes permitem selecionar posições específicas. Podemos apresentar somente a posição 7, todas as posições menos a 7 ou o intervalo entre as posições 1 e 7:
+
+```{r}
+homic_abs[7]
+homic_abs[-7]
+homic_abs[1:7]
+```
+
+Ainda faltam dois valores. Primeiro inserimos `36` na posição 7 e `32` ao final do vetor. Em seguida, trocamos esses dois elementos de posição, de modo que o Distrito Federal ocupe a posição 7 e Tocantins a posição 27:
+
+```{r}
+homic_abs <- c(homic_abs[1:6], 36, homic_abs[7:25], 32)
+
+temporario <- homic_abs[27]
+homic_abs[27] <- homic_abs[7]
+homic_abs[7] <- temporario
+
+homic_abs
+```
+
+Antes de relacionar os vetores, devemos confirmar se possuem o mesmo comprimento:
+
+```{r}
+length(estados)
+length(homic_abs)
+length(estados) == length(homic_abs)
+```
+
+::: {.callout-warning title="A ordem precisa ser preservada"}
+Se um vetor for reordenado sem que os demais acompanhem a mudança, os valores poderão ser associados ao estado errado.
+:::
+
+### Texto
+
+Uma *string* é um valor textual. Podemos criar um único texto ou um vetor com diferentes elementos de texto:
+
+```{r}
+a <- "estado homicidio"
+a
+
+b <- c("estado", "homicidio")
+b
+b[1]
+
+paste(b[1], b[2], sep = " ")
+```
+
+A função `paste()` reúne textos. O argumento `sep` define o conteúdo colocado entre eles.
+
+### Fatores
+
+Fatores representam variáveis categóricas. Para classificar os estados por região geográfica, criaremos inicialmente um vetor de texto:
+
+```{r}
+regiao <- c(
+  "N", "NE", "N", "N", "NE", "NE", "CO", "SE", "CO",
+  "NE", "CO", "CO", "SE", "N", "NE", "S", "NE", "NE",
+  "SE", "NE", "S", "N", "N", "S", "SE", "NE", "N"
+)
+
+summary(regiao)
+```
+
+Agora transformamos o vetor em fator e examinamos suas categorias:
+
+```{r}
+regiao <- factor(regiao)
+summary(regiao)
+levels(regiao)
+```
+
+Fatores podem representar região, raça, gênero, situação familiar, condição de saúde, tipo de decisão, classe processual ou resultado do julgamento. Sua codificação deve ser documentada para que as categorias sejam interpretadas corretamente.
+
+### Data frame ou banco de dados
+
+Um *data frame* reúne, em uma mesma estrutura, variáveis de tipos distintos. Cada linha representa uma observação e cada coluna representa uma variável.
+
+Nosso banco será composto por estado, região, número de homicídios de mulheres e número de feminicídios. As três primeiras variáveis já foram criadas. Acrescentaremos agora o vetor de feminicídios:
+
+```{r}
+feminic_abs <- c(
+  11, 31, 8, 21, 107, 28, 19, 33, 56, 69, 47, 40, 171,
+  49, 26, 77, 72, 24, 111, 16, 110, 24, 3, 56, 195, 19, 14
+)
+
+typeof(feminic_abs)
+```
+
+Criamos o banco com `data.frame()`:
+
+```{r}
+data_feminic22 <- data.frame(
+  estados,
+  regiao,
+  homic_abs,
+  feminic_abs
+)
+
+data_feminic22
+```
+
+Podemos modificar simultaneamente todos os nomes das variáveis. O nome `regioa` será introduzido propositalmente para demonstrar sua correção em seguida:
+
+```{r}
+names(data_feminic22) <- c(
+  "estado",
+  "regioa",
+  "homic_abs",
+  "feminic_abs"
+)
+
+names(data_feminic22)
+```
+
+Para corrigir somente os nomes necessários sem depender de um pacote adicional, podemos selecionar suas posições:
+
+```{r}
+names(data_feminic22)[names(data_feminic22) == "estado"] <- "estados"
+names(data_feminic22)[names(data_feminic22) == "regioa"] <- "regiao"
+
+names(data_feminic22)
+```
+
+Também podemos listar o banco completo, selecionar colunas por posição, combinar linhas e colunas ou selecionar variáveis pelo nome:
+
+```{r}
+data_feminic22
+data_feminic22[, 2:3]
+data_feminic22[1:2, 2:3]
+data_feminic22[c("regiao", "feminic_abs")]
+```
+
+Inserir manualmente uma base extensa pode ser trabalhoso. No próximo capítulo, utilizaremos arquivos já disponíveis para importar esses dados.
+
+### Trabalhando com as variáveis
+
+Retomaremos `homic_abs` e `estados` para verificar número de elementos, estrutura, classe e nomes:
+
+```{r}
+length(homic_abs)
+str(homic_abs)
+class(homic_abs)
+names(homic_abs)
+```
+
+Podemos combinar os objetos de formas diferentes. `c()` produz um único vetor; `cbind()` combina por colunas; `rbind()` combina por linhas; e `data.frame()` produz uma estrutura tabular:
+
+```{r}
+comb1 <- c(homic_abs, estados)
+comb2 <- cbind(homic_abs, estados)
+comb3 <- rbind(homic_abs, estados)
+comb4 <- data.frame(
+  homic_abs,
+  estados,
+  stringsAsFactors = FALSE
+)
+
+comb1
+comb2
+comb3
+comb4
+```
+
+A função `ls()` apresenta os objetos existentes na sessão. Depois de inspecionar os objetos criados, podemos remover `comb1`:
+
+```{r}
+ls()
+rm(comb1)
+```
+
+## Criando novas variáveis
+
+Para criar uma variável em um *data frame*, indicamos primeiro o banco e depois o nome da nova coluna com o operador `$`. Podemos somar os registros de homicídios de mulheres e feminicídios em cada estado:
+
+```{r}
+data_feminic22$total_abs <-
+  data_feminic22$homic_abs + data_feminic22$feminic_abs
+
+data_feminic22$total_abs
+```
+
+Também podemos calcular a participação dos feminicídios no total de homicídios de mulheres e armazenar o resultado no banco:
+
+```{r}
+data_feminic22$part_feminic <-
+  data_feminic22$feminic_abs / data_feminic22$homic_abs * 100
+
+part_feminic <- data_feminic22$part_feminic
+part_feminic
+```
+
+Agora criaremos uma variável binária: `1` para os estados em que a participação é maior ou igual a 50% e `0` para os demais:
+
+```{r}
+data_feminic22$mais_50[data_feminic22$part_feminic < 50] <- 0
+data_feminic22$mais_50[data_feminic22$part_feminic >= 50] <- 1
+
+data_feminic22$mais_50
+```
+
+Quando importarmos a base de tentativas, aplicaremos o mesmo procedimento para criar suas variáveis correspondentes.
+
+## Operações aritméticas
+
+Os operadores aritméticos usuais funcionam com objetos numéricos:
+
+| Operador | Operação |
+|:---:|---|
+| `+` | adição |
+| `-` | subtração |
+| `*` | multiplicação |
+| `/` | divisão |
+| `^` | potência |
+| `%%` | resto da divisão |
+| `%/%` | divisão inteira |
+
+```{r}
+homic_abs[1] + feminic_abs[1]
+homic_abs[1] - feminic_abs[1]
+homic_abs[1] * 2
+homic_abs[1] / 2
+homic_abs[1]^2
+homic_abs[1] %% 5
+homic_abs[1] %/% 5
+```
+
+As operações também podem ser aplicadas simultaneamente a todos os elementos de um vetor. Essa característica é chamada de **vetorização**. Foi o que fizemos ao calcular `part_feminic`, sem escrever a mesma operação separadamente para cada estado.
+
+A interpretação substantiva dos resultados depende das definições adotadas pela fonte e da comparabilidade dos registros.
+
+## Comparações e valores lógicos
+
+Operadores relacionais e lógicos permitem formular condições:
+
+| Operador | Significado |
+|:---:|---|
+| `<` | menor que |
+| `<=` | menor ou igual a |
+| `>` | maior que |
+| `>=` | maior ou igual a |
+| `==` | exatamente igual a |
+| `!=` | diferente de |
+| `!x` | negação: não `x` |
+| `x & y` | `x` E `y` |
+| `x \| y` | `x` OU `y` |
+| `x %in% y` | `x` pertence ao conjunto `y` |
+
+Podemos identificar e selecionar os valores de feminicídio superiores a 50:
+
+```{r}
+feminic_abs > 50
+feminic_abs[feminic_abs > 50]
+```
+
+Condições podem ser combinadas com `|` (OU) e `&` (E):
+
+```{r}
+feminic_abs[feminic_abs < 50 | feminic_abs > 100]
+feminic_abs[feminic_abs > 50 & feminic_abs < 100]
+
+feminic_M <- feminic_abs[feminic_abs < 100 & feminic_abs > 50]
+feminic_M
+```
+
+O operador `!` nega uma condição. No exemplo seguinte, selecionamos os estados que **não** pertencem às regiões Norte e Nordeste:
+
+```{r}
+estados[!(regiao %in% c("N", "NE"))]
+```
+
+O operador `%in%` verifica se cada elemento pertence a um conjunto de valores possíveis. Ele será útil, por exemplo, para conferir se uma variável categórica contém somente códigos previstos no dicionário.
+
+Observe também a diferença entre `<-`, que atribui um valor a um objeto, e `==`, que verifica se dois valores são iguais.
+
+## Funções e argumentos
+
+Uma função recebe valores, realiza uma operação e retorna um resultado. Já utilizamos `c()`, `length()`, `class()`, `summary()` e outras funções.
+
+A função `mean()` calcula a média. O argumento `digits` de `round()` define o número de casas decimais:
+
+```{r}
+mean(feminic_abs)
+round(mean(feminic_abs), digits = 1)
+```
+
+::: {.callout-tip title="Consulte a documentação"}
+Ao utilizar uma função nova, consulte sua ajuda para verificar os argumentos aceitos e o tipo de resultado produzido.
+:::
+
+## Inspecionando o banco resultante
+
+Depois de acrescentar as novas variáveis, podemos examinar novamente a estrutura do banco:
+
+```{r}
+str(data_feminic22)
+summary(data_feminic22)
+names(data_feminic22)
+head(data_feminic22)
+```
+
+::: {.callout-important title="Construir o banco não encerra a verificação"}
+Uma tabela bem formada pode conter erros conceituais, valores incorretos ou categorias incompatíveis. A estrutura computacional precisa ser examinada em conjunto com o conhecimento sobre a fonte e o fenômeno jurídico.
+:::
+
+## O caminho percorrido
+
+Partimos de valores isolados e chegamos a uma base com todos os estados e o Distrito Federal:
+
+```{mermaid}
+%%| fig-align: center
+%%| fig-alt: "Percurso entre valores, objetos, vetores e data frame"
+
+flowchart LR
+    A["Valores"] --> B["Objetos"]
+    B --> C["Vetores"]
+    C --> D["Correções e operações"]
+    D --> E["Data frame"]
+
+    classDef etapa fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
+    class A,B,C,D,E etapa;
+```
+
+Nos próximos capítulos, aprenderemos a importar arquivos, verificar a qualidade dos dados e realizar transformações de forma mais sistemática.
+
+::: {.callout-tip title="Antes de avançar"}
+- [ ] Consigo criar um objeto com `<-`?
+- [ ] Sei distinguir valores numéricos, textuais e lógicos?
+- [ ] Consigo criar, corrigir e inspecionar um vetor?
+- [ ] Sei inserir e reorganizar elementos por posição?
+- [ ] Consigo representar categorias como fatores?
+- [ ] Sei reunir vetores em um *data frame*?
+- [ ] Consigo selecionar linhas e colunas?
+- [ ] Compreendo por que a ordem dos vetores precisa ser preservada?
+:::

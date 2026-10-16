@@ -5,8 +5,6 @@ author:
 - Alexandre Nicolella
 date: "03/12/2024"
 format: html
-execute:
-  enabled: false
 ---
 
 ## O R-project e as Boas Práticas
@@ -45,25 +43,25 @@ Por fim a quarta janela (inferior direita) apresenta os pacotes, os gráficos, o
 
 Para abrir a ajuda geral o seguinte abaixo pode ser utilizado e abrirá uma janela no seu navegador.
 
-```r
+```{r,eval = FALSE}
 help.start()
 ```
 
 Suponha que queiramos saber de uma função específica, assim pode-se utilizar o seguinte comando:
 
-```r
+```{r, eval=FALSE}
 help(summary)
 ```
 
 ou
 
-```r
+```{r,eval=F}
 ?summary
 ```
 
 Inclusive pode pedir um exemplo de como utilizar a função que está buscando
 
-```r
+```{r,eval=F}
 example(summary)
 ```
 
@@ -104,13 +102,13 @@ Adote uma regra de criação para você e evite mudar. Crie nomes pequenos e sig
 
 Para saber em qual diretório o R está utilizando para salvar seu espaço de trabalho utilize o seguinte comando:
 
-```r
+```{r,eval=FALSE}
 getwd() 
 ```
 
 No RStudio, sempre prefira a criação de um projeto para a organização de seus dados, com isso, ao mudar de máquina (ou estrutura de diretórios) seu código continuará funcionando normalmente.
 
-```r
+```{r,eval=FALSE}
   File -> New Project
 ```
 
@@ -120,7 +118,7 @@ Identar é o recuo no texto em relação a margem. É importante que esse recuo 
 
 *Sem Identação*
 
-```r
+```{r,eval=F}
 x=c()
 x[1] = 3
 for (i in 2:9) { 
@@ -132,7 +130,7 @@ Note que a quarta linha desse programa está hierarquicamente conectada a linha 
 
 *Com Identação*
 
-```r
+```{r,eval=F}
 x=c()
 x[1] = 3
 for (i in 2:9) { 
@@ -148,35 +146,35 @@ O R possui diversos tipos de variáveis. Alguns desses tipos são:
 
 **Vetores**: Vamos inserir os dados denúmero de homicídios de mulheres nos diversos Estados brasileiros para o ano de 2022.No primeiro elemento teremos um erro, ao invés de 22 colocaremos 2.E não colocamos o valor do Distrito Federal e nem Tocantins
 
-```r
+```{r}
 homic <- c(2,  73,  22,  88,  406,  264,    95,  137,  127,  101,  75,  309,  200,  86,  256,  219,  70,  283,  60,  281,  88,  33,  101,  423,  37)
 homic
 ```
 
 Podemos inserir vetores de texto, por exemplo, iremos inserir os estados brasileiros na mesma ordem do homicídio acima.
 
-```r
+```{r, echo=FALSE}
 estados <- c("Acre",  "Alagoas",  "Amapá",  "Amazonas",  "Bahia",  "Ceará",  "Distrito Federal ",  "Espírito Santo",  "Goiás",  "Maranhão",  "Mato Grosso",  "Mato Grosso do Sul",  "Minas Gerais",  "Pará",  "Paraíba",  "Paraná",  "Pernambuco",  "Piauí",  "Rio de Janeiro",  "Rio Grande do Norte",  "Rio Grande do Sul",  "Rondônia",  "Roraima",  "Santa Catarina",  "São Paulo",  "Sergipe",  "Tocantins")
 estados
 ```
 
 Algumas manipulações importantes que podemos fazer com os vetores. Renomeando e removendo o vetor antigo:
 
-```r
+```{r, echo=FALSE}
 homic_abs=homic
 rm(homic)
 ```
 
 Trocando o primeiro elemento do vetor e dando o print do novo resultado:
 
-```r
+```{r}
 homic_abs[1]=22
 homic_abs
 ```
 
 Algumas maneiras de pedir o print do vetor de homicídios femininos. Somente o estado 7, todos menos o estado 7, Estado de 1 até 7 etc:
 
-```r
+```{r}
 homic_abs[7] 
 homic_abs[-7] 
 homic_abs[1:7]
@@ -184,7 +182,7 @@ homic_abs[1:7]
 
 Podemos incorporar novos dados no nosso vetor de homicídio feminino, Vamos incorporar o dado do Tocantins na posição 7 e o valor do Distrito Federal na útima posição - 27. Depois trocaremos os dois estados de posição:
 
-```r
+```{r}
 #colcar exemplo de inserir no inicio
 
 #inserir no meio e no final 
@@ -202,7 +200,7 @@ homic_abs
 
 String são as variáveis tipo texto. Esse tipo de variável já apareceu na seção anterior quando apresentamos um vetor com a classificação dos Estados. Vejamos mais uma vez. Podemos criar uma variável que contêm "estado homicidio". Uma segunda maneira é criar um vetor com dois elementos "estado" e "homicidio". O comando `paste` cola a variável texto "estado" e a variável texto "homicidio", separado por um espaço.
 
-```r
+```{r}
 a <- "estado homicidio"
 a
 b <- c("estado","homicidio")
@@ -215,14 +213,14 @@ paste(b[1],b[2],sep=' ')
 
 Fator são variáveis de classe. Fator armazenam os valores inteiros na forma de um vetor com as quantidades das k classes e o vetor string dos valores originais. Vejamos o exemplo de um vetor. Podemos análisar os homicídios por região geográfica do país. Assim, classificaremos os estados por região:
 
-```r
+```{r, results='hide'}
 regiao <- c("N",  "NE",  "N",  "N",  "NE",  "NE",  "CO",  "SD",  "CO",  "NE",  "CO",  "CO",  "SD",  "N",  "NE",  "S",  "NE",  "NE",  "SD",  "NE",  "S",  "N",  "N",  "S",  "SD",  "NE",  "N")
 summary(regiao)
 ```
 
 Agora vamos transformar o vetor anterior em um fator
 
-```r
+```{r}
 regiao <- factor(regiao)
 summary(regiao)
 levels(regiao)
@@ -236,7 +234,7 @@ Fatores podem ser as características de raça, gênero, status familiar, status
 
 Esse é um tipo mais geral de variável e consegue lidar na mesma estrutura com variaveis de tipos distintos como numérica, texto e fator. Um banco de dados similar aos outros programas estatísticos. Podemos criar essa variável de forma manual. Nosso banco de dados será composto por 4 variáveis, a primeira o estado, a segunda a região, a terceira o número de homicídios femininos e a quarta o número de feminicidios. As três primeiras já foram incluidas acima e vamos criar somente a quarta. O comando `typeof` mostra qual o tipo de variável.
 
-```r
+```{r}
 feminic_abs=c(11,  31,  8,  21,  107,  28,  19,  33,  56,  69,  47,  40,  171,  49,  26,  77,  72,  24,  111,  16,  110,  24,  3,  56,  195,  19,  14) 
 typeof(feminic_abs)
 
@@ -244,20 +242,20 @@ typeof(feminic_abs)
 
 Para criar o banco de dados utilizamos o seguinte comando:
 
-```r
+```{r}
 data_feminic22<-data.frame(estados, regiao, homic_abs, feminic_abs)  
 ```
 
 Podemos modificar o nome das variáveis com o comando `names`. Entretanto, tem que renomear todas
 
-```r
+```{r, results='hide'}
 names(data_feminic22)<-c("estado", "regioa", "homic_abs", "feminic_abs") 
 data_feminic22
 ```
 
 Ou podemos renomear somente algumas com o comando `reshape`:
 
-```r
+```{r}
 library(reshape)
 data_feminic22 <- rename(data_feminic22, c(estado="estados", regioa="regiao"))
 data_feminic22
@@ -265,7 +263,7 @@ data_feminic22
 
 Podemos também listar variáveis do banco de dados, por exemplo, listar colunas de 1 a 2 ou listar por nome das variáveis, conforme apresentado abaixo:
 
-```r
+```{r,eval=F}
 data_feminic22
 data_feminic22[,2:3]
 data_feminic22[1:2,2:3]
@@ -278,7 +276,7 @@ Entretanto, inserir dados na mão pode ser uma tarefa muito penosa e existem sol
 
 Vamos retomar duas variáveis *homic_abs* e *estado* e vamos manipular essas duas variáveis. Primeiramente vejamos o número de elementos, estrutura, classe e nome:
 
-```r
+```{r}
 length(homic_abs) 
 str(homic_abs)    
 class(homic_abs)  
@@ -287,7 +285,7 @@ names(homic_abs)
 
 Podemos combinar as duas variáveis de forma distintas, por exemplo combinar na forma de um vetor, combinar como coluna ou combinar como linha, vejamos a diferença:
 
-```r
+```{r, results='hide'}
 #Precisa mudar essa parte de posição está confuso pois falamos de dataframe e aqui de vetor
 comb1 <- c(homic_abs,estados)      
 comb2<- cbind(homic_abs,estados)
@@ -304,7 +302,7 @@ comb4
 
 Vejamos quais objetos temos e vamos pedir para visualizar os objetos que acabamos de criar. Por fim removeremos o vetor comb1.
 
-```r
+```{r,eval=F}
 ls()  
 comb1
 comb2
@@ -318,7 +316,7 @@ Disponibilizamos dois banco de dados, um contendo os homicídios e feminicídios
 
 Para leitura desse arquivo em csv o seguinte comando é necessário `read.csv`, indicado que possui cabeçalho e que o separador é ";"
 
-```r
+```{r}
 df_feminic22<-read.csv("C:/Users/Alexandre_Nicolella/Aulas/FEA-RP/Jurimetria/dados_feminic.csv", head=TRUE,sep=";")
 
 df_t_feminic22<-read.csv("C:/Users/Alexandre_Nicolella/Aulas/FEA-RP/Jurimetria/dados_tent_feminic.csv", head=TRUE,sep=";")
@@ -327,7 +325,7 @@ df_t_feminic22<-read.csv("C:/Users/Alexandre_Nicolella/Aulas/FEA-RP/Jurimetria/d
 
 Para leitura de arquivos em Stata terá que utilizar o pacote `foreign`, conforme exemplo abaixo:
 
-```r
+```{r,eval=F}
 library(foreign)
 stata_feminic <- read.dta("~/feminic.dta")
 ```
@@ -344,13 +342,13 @@ O R usa o formato americano de separação numérica. Usa ponto ao invés da ví
 
 Podemos exportar os dados em diferentes formatos. Alguns exemplos são csv, texto delimitado, excel, stata. Vejamos em csv:
 
-```r
+```{r,eval=F}
 write.table(df_feminic22, "C:/Users/Alexandre_Nicolella/Aulas/FEA-RP/Jurimetria/export_feminic.csv", sep=";")
 ```
 
 Para exportar em Stata utilize os seguintes comandos:
 
-```r
+```{r,eval=F}
 library(foreign)
 write.dta(df_feminic22, paste(getwd(),"~/Banco de dados/export_feminic.dta",sep=''))
 ```
@@ -361,20 +359,20 @@ Não temos informação para as tentativas de feminicidio para os estados de Sã
 
 Primeiramente, analisamos se há valores missing no banco de dados:
 
-```r
+```{r,eval=F}
 is.na(df_t_feminic22)
 ```
 
 Podemos desconsiderar os valores *missing* da análise de interesse, vamos fazer a média do dolar sem considerar os valores missing:
 
-```r
+```{r}
 mean(df_t_feminic22$t_feminic_abs) 
 mean(df_t_feminic22$t_feminic_abs, na.rm=TRUE)
 ```
 
 Podemos criar um novo banco de dados sem os valores missing.
 
-```r
+```{r}
 df_t_feminic22_sem_missing <- na.omit(df_t_feminic22)
 mean(df_t_feminic22_sem_missing$t_feminic_abs)
 rm(df_t_feminic22_sem_missing)
@@ -384,7 +382,7 @@ Outra maneira de excluir os valores missing seria a utilização do comando `sub
 
 Pode-se também recodificar uma determinada variável para missing. Muito comum nas pesquisas do IBGE os valores missing serem identificados por um número, por exemplo 999999999999. Dessa forma podemos indicar que esse não é número e sim um valor missing da seguinte maneira:
 
-```r
+```{r,eval=F}
 df_t_feminic22$t_feminic_abs[df_t_feminic22$t_feminic_abs==999999] <- NA
 ```
 
@@ -402,7 +400,7 @@ Doois pontos importantes, dados missing não é 0 e nunca devem ser substituído
 
 Vamos criar uma variável que seria a soma dos homicídios e feminicídios no estado. Para criar a variável precisamos dizer primeiro qual o banco de dados em que queremos criar e qual o nome da variável, conforme apresentado na expressão abaixo.
 
-```r
+```{r}
 library(reshape)
 df_feminic22 <- rename(df_feminic22, c(feminico_abs="feminic_abs"))
 
@@ -414,7 +412,7 @@ df_feminic22$total_abs<- df_feminic22$feminic_abs + df_feminic22$homic_abs
 
 Agora vamos criar uma variável binária que representa como 1 os estados que possuem a taxa de feminicídio em relação ao total de homicídios maior que 50%. Novamente, precisamos indicar o banco de dados e o nome da variável no banco de dados.
 
-```r
+```{r,message=F}
 df_feminic22$mais_50[df_feminic22$part_feminic < 50] <- 0
 df_feminic22$mais_50[df_feminic22$part_feminic >= 50] <- 1
 
@@ -426,7 +424,7 @@ df_feminic22$mais_50
 
 Utilizando os vetores criados anteriormente:
 
-```r
+```{r}
 feminic_abs>50
 feminic_abs[feminic_abs>50]
 feminic_abs[feminic_abs < 50 | feminic_abs > 100]
@@ -458,7 +456,8 @@ A tabela abaixo contém alguns operadaroes lógicos frequentemente utilizados.
 
 Vamos ordenar os estados dos nossos 2 *data frames* pela participação do feminicídio no total de homicídios de mulheres.
 
-```r
+```{r,message=F}
+
 df_feminic22_ord<-df_feminic22[order(df_feminic22$part_feminic, decreasing = TRUE),] 
 
 df_t_feminic22_ord<-df_t_feminic22[order(df_t_feminic22$part_t_feminic, decreasing = TRUE),] 
@@ -469,7 +468,7 @@ df_t_feminic22_ord<-df_t_feminic22[order(df_t_feminic22$part_t_feminic, decreasi
 
 Temos dois *data frames* um contendo homicídios e feminicídios e outro contendo as tentativas. Vamos agora juntar os dois. Para isso os bancos devem conter uma chave única que identifica cada linha e essa deve estar presente nos dois bancos. Inclusive devem ter o mesmo nome.No caso em questão podemos usar o estado como nossa chave que irá conectar os dois bancos.
 
-```r
+```{r, warning=FALSE}
 df_final_feminic_22 <- merge(df_feminic22,df_t_feminic22,by="sigla",keep.all=TRUE)
 ```
 
@@ -479,7 +478,7 @@ Agora temos um banco único com homicídios e tentativas de homicídios.
 
 Vamos criar um banco de dados que contenha os valores médios das variáveis. Para isso vamos agregar fazendo a média por região. Poderíamos utilizar outra função, como a soma, para fazer a agregação:
 
-```r
+```{r,warning=FALSE}
 regiao_media <-aggregate(df_final_feminic_22, by=list(df_final_feminic_22$regiao.x), FUN=mean, na.rm=TRUE)
 regiao_media
 ```
@@ -490,7 +489,7 @@ regiao_media
 
 Podemos estar interessado em manter somente algumas variáveis no nosso banco de dados, por exemplo, queremos manter estado e a participação do feminicídio no total. Assim:
 
-```r
+```{r}
 var_sel <- c("sigla", "part_feminic", "part_t_feminic")
 feminic_sel <- df_final_feminic_22[var_sel]
 
@@ -500,7 +499,7 @@ feminic_sel1 <- df_final_feminic_22[c("sigla", "part_feminic", "part_t_feminic")
 
 Ou podemos fazer indicar as colunas que queremos selecionar. Na segunda opção selecionamos até o final do nosso banco
 
-```r
+```{r}
 feminic_sel2 <- df_final_feminic_22[c(1:3,5:6,12:15)]
 feminic_sel3 <- df_final_feminic_22[c(1:3,10:ncol(df_final_feminic_22))]
 ```
@@ -509,7 +508,7 @@ feminic_sel3 <- df_final_feminic_22[c(1:3,10:ncol(df_final_feminic_22))]
 
 Ao fazer o merge as variáveis que tinham o mesmo nome nos dois bancos, como estado, foram mantidas e agora possuem os nomes estado.x e estado.y, vamos manter apenas uma e trocar o seu nome. O comando `names`ajuda a saber a posição da variável no banco
 
-```r
+```{r}
 names(df_final_feminic_22)
 final_fem_22 <- df_final_feminic_22[c(-12)]
 
@@ -526,7 +525,7 @@ Se fizermos o comando de tirar colunas no mesmo *data frame*, ao rodar novamente
 
 Ou podemos especificar a o nome da coluna que será retirada. Vamos agora tirar a região que ficou duplicada
 
-```r
+```{r,eval=F}
 final_fem_22$regiao.y <-  NULL
 
 library(reshape)
@@ -540,7 +539,8 @@ write.table(final_fem_22, "C:/Users/Alexandre_Nicolella/Aulas/FEA-RP/Jurimetria/
 
 Vamos selecionar as observações dos estados da região Norte e Nordeste:
 
-```r
+```{r,message=F}
+  
 fem_n_nd <- final_fem_22[ which(final_fem_22$regiao=="NE" | final_fem_22$regiao=="N"),]
 
 fem_n_nd1 <- final_fem_22[ which((final_fem_22$regiao=="NE" | final_fem_22$regiao=="N") & final_fem_22$part_feminic>=50),]
@@ -549,6 +549,6 @@ fem_n_nd1 <- final_fem_22[ which((final_fem_22$regiao=="NE" | final_fem_22$regia
 
 Ou podemos selecionar as observações em que a participação do feminicídio está entre 30 e 50%:
 
-```r
+```{r}
 fem_n_nd2 <- subset(final_fem_22, final_fem_22$part_feminic >= 30 & final_fem_22$part_feminic <= 50 )
 ```

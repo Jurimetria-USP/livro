@@ -1,0 +1,319 @@
+---
+title: "Valores ausentes e qualidade dos dados"
+subtitle: "Verificando antes de analisar"
+author:
+  - Alexandre Nicolella
+format: html
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+```
+
+```{r}
+#| include: false
+df_feminic22 <- read.table(
+  "dados/dados_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+
+df_t_feminic22 <- read.table(
+  "dados/dados_tent_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+```
+
+## Introdução
+
+Conseguir abrir um arquivo não significa que ele esteja pronto para análise. Valores ausentes, códigos inválidos, duplicações e relações incoerentes podem alterar os resultados ou revelar limitações da fonte.
+
+A verificação da qualidade não é uma operação puramente mecânica. Ela depende da pergunta de pesquisa, da unidade de observação e do significado das variáveis. Uma mesma ausência pode ser irrelevante para determinada análise e decisiva para outra.
+
+Neste capítulo, continuaremos trabalhando com as bases sobre homicídios de mulheres, feminicídios e tentativas. O objetivo é aprender a diagnosticar problemas sem alterar os arquivos originais e registrar as decisões tomadas durante o tratamento.
+
+## Qualidade depende do problema
+
+Antes de modificar a base, precisamos estabelecer o que esperamos encontrar. Neste exemplo:
+
+- cada linha deve representar uma unidade da federação;
+- a sigla deve identificar essa unidade;
+- variáveis de contagem e taxas não devem apresentar valores negativos;
+- a região deve pertencer ao conjunto de categorias esperado;
+- o número de feminicídios não deve superar o total correspondente de homicídios de mulheres;
+- qualquer ausência deve ser localizada e compreendida antes de uma decisão de tratamento.
+
+Essas expectativas funcionam como critérios de diagnóstico. Quando uma delas não é satisfeita, o código identifica o caso, mas a documentação e o conhecimento sobre o processo de coleta orientam sua interpretação.
+
+## Valores ausentes
+
+Não temos informação sobre tentativas de feminicídio para os estados de Mato Grosso e São Paulo. No R, a ausência de informação é representada por `NA`. A função `is.na()` verifica cada célula e devolve `TRUE` quando encontra uma ausência.
+
+```{r}
+is.na(df_t_feminic22)
+```
+
+Como a matriz resultante é extensa, geralmente é mais útil contar as ausências no conjunto da base e em cada variável:
+
+```{r}
+sum(is.na(df_t_feminic22))
+colSums(is.na(df_t_feminic22))
+```
+
+Também podemos localizar as linhas que possuem ao menos um valor ausente:
+
+```{r}
+linhas_com_ausencia <- which(!complete.cases(df_t_feminic22))
+linhas_com_ausencia
+df_t_feminic22[linhas_com_ausencia, ]
+```
+
+O resultado permite confirmar quais unidades da federação e quais variáveis precisam de atenção.
+
+### Ausência não é zero
+
+Zero e ausência possuem significados diferentes. Zero informa que o fenômeno foi registrado com valor nulo. `NA` informa que o valor não está disponível ou não é conhecido.
+
+Substituir automaticamente uma ausência por zero afirmaria que nenhuma tentativa de feminicídio ocorreu, embora a base apenas indique que a informação está ausente.
+
+::: {.callout-warning title="Ausência não é zero"}
+Valores ausentes nunca devem ser convertidos automaticamente em zero. Antes de qualquer substituição, é necessário conhecer o significado da ausência e justificar a decisão.
+:::
+
+### Valores ausentes nos cálculos
+
+Por padrão, uma operação que envolve `NA` também pode devolver `NA`:
+
+```{r}
+mean(df_t_feminic22$t_feminic_abs)
+```
+
+O argumento `na.rm = TRUE` retira as ausências somente daquele cálculo:
+
+```{r}
+mean(df_t_feminic22$t_feminic_abs, na.rm = TRUE)
+```
+
+Essa opção não corrige a base nem resolve a causa das ausências. Ela apenas calcula a média com os valores disponíveis. Por isso, devemos informar quantas observações participaram do cálculo:
+
+```{r}
+sum(!is.na(df_t_feminic22$t_feminic_abs))
+```
+
+### Excluir ou manter as observações?
+
+O material original apresenta `na.omit()` como uma forma de criar uma base apenas com linhas completas:
+
+```{r}
+df_t_feminic22_sem_missing <- na.omit(df_t_feminic22)
+nrow(df_t_feminic22_sem_missing)
+mean(df_t_feminic22_sem_missing$t_feminic_abs)
+rm(df_t_feminic22_sem_missing)
+```
+
+O mesmo resultado pode ser obtido com `subset()`:
+
+```{r}
+df_t_feminic22_sem_missing <- subset(
+  df_t_feminic22,
+  !is.na(t_feminic_abs)
+)
+nrow(df_t_feminic22_sem_missing)
+rm(df_t_feminic22_sem_missing)
+```
+
+Essas operações são tecnicamente possíveis, mas não devem ser automáticas. `na.omit()` elimina a linha inteira quando encontra uma ausência em qualquer coluna, inclusive quando as demais variáveis daquela unidade continuam úteis.
+
+Em muitos casos, é preferível preservar as observações na base e usar `na.rm = TRUE` apenas nos cálculos em que isso seja justificável.
+
+## Códigos especiais convertidos em `NA`
+
+Algumas bases não registram ausências diretamente como `NA`. Um código numérico, como `99` ou `999999`, pode indicar informação não declarada, ignorada ou não aplicável. A interpretação correta depende do dicionário da base.
+
+Para demonstrar a recodificação sem alterar os dados originais, criaremos uma cópia didática e introduziremos deliberadamente o código `999999`:
+
+```{r}
+df_t_feminic_treino <- df_t_feminic22
+df_t_feminic_treino$t_feminic_abs[1] <- 999999
+
+df_t_feminic_treino$t_feminic_abs[
+  df_t_feminic_treino$t_feminic_abs == 999999
+] <- NA
+
+df_t_feminic_treino[1, ]
+rm(df_t_feminic_treino)
+```
+
+::: {.callout-note title="Exemplo didático"}
+O código `999999` não pertence ao arquivo original. Ele foi introduzido em uma cópia somente para demonstrar a recodificação. Em uma pesquisa real, a transformação só deve ser feita quando a documentação confirmar o significado do código.
+:::
+
+## Valores inválidos ou implausíveis
+
+Um valor pode estar preenchido e ainda assim ser inválido. Antes de definir quais categorias são permitidas, precisamos conhecer a convenção adotada pela própria base:
+
+```{r}
+sort(unique(df_feminic22$regiao))
+table(df_feminic22$regiao)
+```
+
+Nesta base, `SD` é utilizado de maneira consistente para representar o Sudeste. Outros bancos podem usar `SE`. Uma diferença de convenção não deve ser tratada automaticamente como erro.
+
+Considerando a codificação observada e sua documentação, verificamos se existem categorias fora do conjunto esperado:
+
+```{r}
+regioes_esperadas <- c("N", "NE", "CO", "SD", "S")
+
+!df_feminic22$regiao %in% regioes_esperadas
+df_feminic22[!df_feminic22$regiao %in% regioes_esperadas, ]
+```
+
+O resultado vazio indica que não encontramos categorias regionais inválidas. Se fosse necessário padronizar essa nomenclatura para combinar a base com outra fonte, a conversão deveria ser feita em uma cópia e registrada como decisão de harmonização, não como correção de um erro.
+
+```{r}
+df_feminic22_tratada <- df_feminic22
+```
+
+Também devemos procurar valores incompatíveis com a natureza das variáveis:
+
+```{r}
+any(df_feminic22$homic_abs < 0, na.rm = TRUE)
+any(df_feminic22$feminico_abs < 0, na.rm = TRUE)
+any(df_t_feminic22$t_homic_abs < 0, na.rm = TRUE)
+any(df_t_feminic22$t_feminic_abs < 0, na.rm = TRUE)
+```
+
+## Duplicações e identificadores
+
+A função `duplicated()` identifica linhas que repetem integralmente uma linha anterior:
+
+```{r}
+sum(duplicated(df_feminic22))
+sum(duplicated(df_t_feminic22))
+```
+
+Também podemos verificar se a variável usada como identificador aparece mais de uma vez:
+
+```{r}
+sum(duplicated(df_feminic22$sigla))
+sum(duplicated(df_t_feminic22$sigla))
+```
+
+Nas duas bases, não encontramos linhas integralmente duplicadas nem siglas repetidas.
+
+::: {.callout-important title="Valores repetidos não são necessariamente duplicatas"}
+Duas unidades da federação podem apresentar legitimamente a mesma contagem ou taxa. Uma duplicação depende da unidade de observação e das variáveis que identificam cada linha. Por isso, não devemos remover registros apenas porque determinados valores se repetem.
+:::
+
+## Coerência entre variáveis
+
+Além de examinar cada coluna separadamente, devemos verificar relações que precisam ser respeitadas entre variáveis.
+
+Na primeira base, o número de feminicídios não deve superar o total de homicídios de mulheres:
+
+```{r}
+incoerencia_feminicidio <-
+  df_feminic22$feminico_abs > df_feminic22$homic_abs
+
+sum(incoerencia_feminicidio, na.rm = TRUE)
+df_feminic22[incoerencia_feminicidio %in% TRUE, ]
+```
+
+Na segunda base, aplicamos o mesmo raciocínio às tentativas:
+
+```{r}
+incoerencia_tentativas <-
+  df_t_feminic22$t_feminic_abs > df_t_feminic22$t_homic_abs
+
+sum(incoerencia_tentativas, na.rm = TRUE)
+df_t_feminic22[incoerencia_tentativas %in% TRUE, ]
+```
+
+Uma relação aparentemente incoerente não prova, por si só, que o dado esteja errado. Definições distintas, períodos de referência diferentes ou mudanças metodológicas também podem explicar o resultado. A verificação indica quais registros precisam ser investigados.
+
+## Tomando decisões rastreáveis
+
+O diagnóstico não obriga a corrigir, excluir ou substituir imediatamente. Para cada ocorrência, precisamos registrar:
+
+1. o problema identificado;
+2. a evidência utilizada;
+3. a decisão tomada;
+4. a transformação realizada;
+5. as consequências para a análise.
+
+Neste exemplo, podemos organizar as decisões em um pequeno registro:
+
+```{r}
+registro_qualidade <- data.frame(
+  problema = c(
+    "ausência nas tentativas de feminicídio",
+    "categorias regionais fora do conjunto esperado",
+    "possíveis linhas duplicadas"
+  ),
+  evidencia = c(
+    "NA em Mato Grosso e São Paulo",
+    "verificação das categorias N, NE, CO, SD e S",
+    "verificação com duplicated()"
+  ),
+  decisao = c(
+    "manter NA e retirar somente dos cálculos justificados",
+    "nenhuma alteração: todas as categorias são válidas",
+    "nenhuma exclusão: não foram encontradas duplicações"
+  ),
+  stringsAsFactors = FALSE
+)
+
+registro_qualidade
+```
+
+## Validando a cópia tratada
+
+Depois das decisões aprovadas, podemos transformar as expectativas em verificações reproduzíveis:
+
+```{r}
+validacao <- data.frame(
+  criterio = c(
+    "27 unidades da federação",
+    "siglas sem repetição",
+    "regiões dentro das categorias esperadas",
+    "contagens sem valores negativos",
+    "feminicídios não superam homicídios"
+  ),
+  resultado = c(
+    nrow(df_feminic22_tratada) == 27,
+    !anyDuplicated(df_feminic22_tratada$sigla),
+    all(df_feminic22_tratada$regiao %in% regioes_esperadas),
+    all(df_feminic22_tratada$homic_abs >= 0) &&
+      all(df_feminic22_tratada$feminico_abs >= 0),
+    all(df_feminic22_tratada$feminico_abs <=
+          df_feminic22_tratada$homic_abs)
+  )
+)
+
+validacao
+```
+
+Essas verificações não substituem a interpretação substantiva, mas tornam explícitas as expectativas utilizadas e ajudam a detectar problemas quando a base for atualizada.
+
+::: {.callout-important title="Não limpe silenciosamente"}
+Excluir linhas, substituir valores ou alterar categorias pode mudar o fenômeno observado. Toda decisão precisa ser justificável, documentada e reproduzível. Os arquivos originais devem permanecer preservados.
+:::
+
+## Síntese
+
+Neste capítulo, preservamos o exemplo original sobre valores ausentes e ampliamos o diagnóstico para códigos especiais, categorias inválidas, duplicações e coerência entre variáveis. Também distinguimos a identificação de um problema da decisão de tratamento e registramos as intervenções realizadas em uma cópia da base.
+
+Com isso, concluímos a etapa inicial de preparação do ambiente e dos dados. Nos próximos capítulos, aprenderemos a selecionar, ordenar, transformar e combinar informações sem perder a relação entre as operações realizadas e as decisões substantivas da pesquisa.

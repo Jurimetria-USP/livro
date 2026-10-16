@@ -1,0 +1,245 @@
+---
+title: "Combinação de bases"
+subtitle: "Chaves, relações e granularidade"
+author:
+  - Alexandre Nicolella
+format: html
+execute:
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+tem_dplyr <- requireNamespace("dplyr", quietly = TRUE)
+```
+
+```{r}
+#| include: false
+feminicidios <- read.table(
+  "dados/dados_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+
+tentativas_completa <- read.table(
+  "dados/dados_tent_feminic.csv",
+  header = TRUE,
+  sep = ";",
+  dec = ".",
+  fileEncoding = "UTF-8",
+  na.strings = c("", "NA"),
+  check.names = FALSE
+)
+
+tentativas <- tentativas_completa[
+  c(
+    "sigla",
+    "t_homic_abs",
+    "t_homic_tx",
+    "t_feminic_abs",
+    "t_feminic_tx",
+    "part_t_feminic"
+  )
+]
+```
+
+```{r}
+#| include: false
+#| eval: !expr tem_dplyr
+library(dplyr)
+```
+
+## Introdução
+
+As informações necessárias para uma pesquisa nem sempre estão reunidas em uma única tabela. Neste exemplo, uma base contém homicídios de mulheres e feminicídios, enquanto outra contém as tentativas correspondentes.
+
+O capítulo 9 apresentou a combinação com `merge()`. Agora estudaremos com mais detalhe as chaves, as relações entre tabelas e os diferentes tipos de junção.
+
+::: {.callout-note title="Objetivos do capítulo"}
+Ao final deste capítulo, você deverá ser capaz de:
+
+- identificar e verificar uma chave;
+- distinguir relações um para um, um para muitos e muitos para muitos;
+- utilizar `left_join()`, `inner_join()` e `full_join()`;
+- localizar ausências de correspondência com `anti_join()`;
+- reconhecer multiplicações de linhas causadas por chaves repetidas;
+- validar a combinação antes de utilizar seus resultados.
+:::
+
+## O que é uma chave?
+
+Uma chave é uma variável, ou conjunto de variáveis, utilizada para relacionar linhas de tabelas diferentes. Aqui, `sigla` identifica cada unidade da federação.
+
+```{r}
+anyNA(feminicidios$sigla)
+anyNA(tentativas$sigla)
+anyDuplicated(feminicidios$sigla)
+anyDuplicated(tentativas$sigla)
+```
+
+Os resultados indicam que a chave está preenchida e é única nas duas tabelas. Portanto, esperamos uma relação um para um.
+
+## Relações entre tabelas
+
+As relações mais comuns são:
+
+- **um para um:** cada chave aparece uma vez em cada tabela;
+- **um para muitos:** uma chave aparece uma vez em uma tabela e várias vezes na outra;
+- **muitos para muitos:** a chave pode aparecer várias vezes nos dois lados.
+
+Uma relação muitos para muitos pode ser legítima, mas também pode multiplicar linhas de forma inesperada. A granularidade de cada tabela precisa ser conhecida antes da combinação.
+
+## Mantendo todas as unidades da tabela principal
+
+`left_join()` conserva todas as linhas da tabela colocada à esquerda:
+
+```{r}
+#| eval: !expr tem_dplyr
+base_combinada <- left_join(
+  feminicidios,
+  tentativas,
+  by = "sigla",
+  relationship = "one-to-one"
+)
+
+dim(base_combinada)
+head(base_combinada)
+```
+
+O argumento `relationship = "one-to-one"` explicita a relação esperada. Caso as chaves deixem de ser únicas, o código sinalizará o problema.
+
+## Quando faltam correspondências
+
+Antes de confiar no resultado, verificamos quais chaves de uma tabela não aparecem na outra:
+
+```{r}
+#| eval: !expr tem_dplyr
+anti_join(feminicidios, tentativas, by = "sigla")
+anti_join(tentativas, feminicidios, by = "sigla")
+```
+
+Resultados vazios indicam que todas as siglas possuem correspondência. Isso não significa que todas as variáveis estejam preenchidas: Mato Grosso e São Paulo continuam com valores ausentes nas medidas de tentativas de feminicídio.
+
+## Mantendo somente correspondências
+
+`inner_join()` mantém apenas as chaves presentes nos dois lados:
+
+```{r}
+#| eval: !expr tem_dplyr
+somente_correspondencias <- inner_join(
+  feminicidios,
+  tentativas,
+  by = "sigla",
+  relationship = "one-to-one"
+)
+
+nrow(somente_correspondencias)
+```
+
+Quando existem chaves sem correspondência, `inner_join()` elimina essas linhas. Por isso, a escolha da junção pode alterar a população analisada.
+
+## Mantendo tudo dos dois lados
+
+`full_join()` conserva todas as chaves encontradas em qualquer uma das tabelas:
+
+```{r}
+#| eval: !expr tem_dplyr
+todas_as_chaves <- full_join(
+  feminicidios,
+  tentativas,
+  by = "sigla",
+  relationship = "one-to-one"
+)
+
+nrow(todas_as_chaves)
+```
+
+## Como escolher a junção
+
+| Objetivo | Função |
+|---|---|
+| preservar todas as linhas da tabela principal | `left_join()` |
+| manter apenas chaves presentes nas duas tabelas | `inner_join()` |
+| preservar todas as chaves dos dois lados | `full_join()` |
+| localizar chaves sem correspondência | `anti_join()` |
+
+A escolha deve seguir a pergunta de pesquisa. Não devemos selecionar a função apenas porque ela produz mais ou menos linhas.
+
+## O risco das duplicações
+
+Para demonstrar o problema sem alterar os dados originais, criaremos uma cópia didática com a primeira sigla repetida:
+
+```{r}
+tentativas_duplicadas <- rbind(
+  tentativas,
+  tentativas[1, ]
+)
+
+tentativas_duplicadas[
+  duplicated(tentativas_duplicadas$sigla) |
+    duplicated(tentativas_duplicadas$sigla, fromLast = TRUE),
+]
+```
+
+Se realizássemos a combinação sem investigar a chave, o estado repetido produziria duas linhas:
+
+```{r}
+#| eval: !expr tem_dplyr
+exemplo_multiplicacao <- left_join(
+  feminicidios,
+  tentativas_duplicadas,
+  by = "sigla"
+)
+
+nrow(feminicidios)
+nrow(exemplo_multiplicacao)
+```
+
+::: {.callout-note title="Exemplo didático"}
+A duplicação foi introduzida deliberadamente em uma cópia. Ela não pertence à base original e serve apenas para mostrar como uma chave inadequada pode multiplicar observações.
+:::
+
+## Roteiro de validação
+
+Antes e depois de uma combinação:
+
+1. defina o que cada linha representa em cada tabela;
+2. escolha a chave substantivamente correta;
+3. conte chaves ausentes e repetidas;
+4. verifique correspondências com `anti_join()`;
+5. registre o número de linhas antes e depois;
+6. examine casos concretos;
+7. documente a escolha da junção.
+
+```{r}
+#| eval: !expr tem_dplyr
+validacao_combinacao <- data.frame(
+  criterio = c(
+    "sigla única em feminicídios",
+    "sigla única em tentativas",
+    "todas as siglas correspondem",
+    "número de linhas preservado"
+  ),
+  resultado = c(
+    !anyDuplicated(feminicidios$sigla),
+    !anyDuplicated(tentativas$sigla),
+    nrow(anti_join(feminicidios, tentativas, by = "sigla")) == 0 &&
+      nrow(anti_join(tentativas, feminicidios, by = "sigla")) == 0,
+    nrow(base_combinada) == nrow(feminicidios)
+  )
+)
+
+validacao_combinacao
+```
+
+## Síntese
+
+Neste capítulo, aprofundamos a combinação iniciada no R base. Verificamos a chave, distinguimos relações entre tabelas, comparamos tipos de junção e demonstramos como duplicações podem multiplicar linhas.
+
+No próximo capítulo, prepararemos textos, números, datas e categorias presentes em bases jurídicas.

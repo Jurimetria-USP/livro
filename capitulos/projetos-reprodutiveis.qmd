@@ -1,0 +1,321 @@
+---
+title: "Projetos e organização reproduzível"
+subtitle: "Integrando dados, código, documentação e colaboração"
+author:
+  - Alexandre Nicolella
+format: html
+---
+
+## Introdução
+
+Uma pesquisa jurimétrica não é formada apenas por uma base de dados ou por um script. Ela reúne perguntas, documentos jurídicos, dados originais, decisões de tratamento, códigos, resultados e interpretações. Esses elementos precisam ser organizados de maneira que o trabalho possa ser compreendido, revisado e retomado.
+
+Neste capítulo, organizaremos o ambiente apresentado anteriormente como um **projeto reproduzível**. Continuaremos utilizando como referência uma pesquisa sobre homicídios de mulheres e feminicídios.
+
+::: {.callout-note title="Objetivos do capítulo"}
+
+Ao final deste capítulo, você deverá ser capaz de:
+
+- explicar por que uma pesquisa deve ser organizada como projeto;
+- identificar a raiz de um projeto;
+- propor uma estrutura inicial de pastas;
+- distinguir dados originais, dados tratados e resultados;
+- utilizar caminhos relativos;
+- reconhecer o papel de R, Quarto, GitHub e inteligência artificial;
+- compreender por que decisões metodológicas precisam ser registradas.
+
+:::
+
+## Por que trabalhar dentro de um projeto?
+
+Ao longo de uma pesquisa, diferentes arquivos cumprem funções distintas:
+
+- documentos e dados obtidos das fontes;
+- dicionários e informações sobre a origem dos dados;
+- scripts utilizados na importação, limpeza e análise;
+- bases tratadas produzidas pelo código;
+- tabelas, gráficos e outros resultados;
+- textos que apresentam métodos, escolhas e conclusões;
+- referências utilizadas na interpretação do fenômeno.
+
+Quando esses arquivos ficam dispersos, a análise passa a depender da memória de quem a realizou. Torna-se difícil saber qual base foi utilizada, qual script deve ser executado primeiro e qual resultado corresponde à versão atual do trabalho.
+
+Um projeto organiza essas relações. Ele não é apenas uma pasta: é uma forma de registrar o percurso entre a pergunta de pesquisa, as fontes, os dados, os procedimentos e os resultados.
+
+::: {.callout-important title="Reprodutibilidade exige contexto"}
+
+Compartilhar apenas uma base ou apenas um script normalmente não é suficiente. Outra pessoa precisa compreender a origem dos dados, a ordem dos procedimentos e as decisões tomadas durante o trabalho.
+
+:::
+
+## Boas práticas de escrita
+
+A organização do projeto também depende da forma como escrevemos o código. Nomes consistentes e uma apresentação legível facilitam a revisão, a correção e a continuidade da pesquisa.
+
+### Letras maiúsculas e minúsculas
+
+O R diferencia letras maiúsculas de minúsculas. Portanto, os nomes abaixo representam objetos diferentes:
+
+```r
+idade
+Idade
+IDADE
+```
+
+Neste livro, utilizaremos preferencialmente nomes iniciados por letras minúsculas.
+
+::: {.callout-tip title="Adote um padrão"}
+Escolha um padrão para os nomes e mantenha-o ao longo do projeto. A consistência reduz erros e torna o código mais fácil de compreender.
+:::
+
+### Criando bons nomes
+
+Suponha que desejemos representar a idade em que uma pessoa concluiu sua formação universitária. Alguns nomes possíveis seriam:
+
+- `id`: curto, mas pouco informativo e facilmente confundido com uma variável de identificação;
+- `idade_formou_na_universidade`: informativo, mas excessivamente longo;
+- `idade_form`: curto, significativo e formado por palavras separadas por `_`;
+- `idadeForm`: também informativo, mas utiliza outro padrão de separação.
+
+Neste livro, adotaremos preferencialmente letras minúsculas e palavras separadas por `_`.
+
+::: {.callout-tip title="Nomes claros e consistentes"}
+Utilize nomes curtos, mas significativos. Não inicie nomes de objetos ou variáveis com números e evite mudar o padrão durante o projeto.
+:::
+
+### Indentação e legibilidade
+
+Indentar significa utilizar recuos para mostrar que determinadas linhas pertencem à mesma estrutura. Considere primeiro um código sem indentação:
+
+```{r}
+x <- c()
+x[1] <- 3
+
+for (i in 2:9) {
+x[i] <- 2 * x[i - 1]
+}
+```
+
+A operação executada dentro de `for` depende da estrutura iniciada na linha anterior. Essa relação fica mais clara quando o código é indentado:
+
+```{r}
+x <- c()
+x[1] <- 3
+
+for (i in 2:9) {
+  x[i] <- 2 * x[i - 1]
+}
+```
+
+Os dois exemplos podem produzir o mesmo resultado, mas o segundo torna visível a hierarquia entre as instruções. A indentação facilita a leitura e ajuda a identificar blocos incompletos ou delimitadores posicionados incorretamente.
+
+## A raiz do projeto
+
+A **raiz** é a pasta principal a partir da qual os arquivos do projeto são organizados. Considere a seguinte estrutura:
+
+```text
+pesquisa-feminicidios/
+├── README.md
+├── dados/
+│   ├── originais/
+│   └── tratados/
+├── scripts/
+├── figuras/
+├── resultados/
+├── referencias/
+└── relatorio.qmd
+```
+
+Nesse exemplo, `pesquisa-feminicidios/` é a raiz. Todos os demais arquivos e diretórios são localizados em relação a ela.
+
+Para verificar qual diretório de trabalho está sendo utilizado pelo R, podemos executar:
+
+```r
+getwd()
+```
+
+O resultado mostra a pasta que o R está considerando como ponto de partida para localizar arquivos.
+
+No RStudio, podemos criar um projeto por meio do menu:
+
+```text
+File > New Project
+```
+
+Ao abrir o projeto, sua pasta principal passa a funcionar como referência para os caminhos utilizados nos códigos. No Positron, o princípio equivalente consiste em abrir a pasta principal como espaço de trabalho.
+
+No RStudio, a raiz pode ser representada por um projeto da própria IDE. No Positron, normalmente abrimos a pasta principal como espaço de trabalho. O princípio é o mesmo: primeiro abrimos o projeto; depois navegamos até seus arquivos.
+
+## Uma estrutura inicial de pastas
+
+### `dados/originais/`
+
+Reúne os arquivos tal como foram obtidos. Esses dados devem ser preservados para que seja possível verificar a fonte e reconstruir as etapas posteriores.
+
+::: {.callout-warning title="Não altere diretamente os dados originais"}
+
+Correções, recodificações e exclusões devem ser realizadas por código e resultar em uma nova base. O arquivo original funciona como referência do material recebido.
+
+:::
+
+### `dados/tratados/`
+
+Contém bases produzidas a partir dos dados originais. Cada arquivo tratado deverá poder ser reconstruído pela execução dos scripts correspondentes.
+
+### `scripts/`
+
+Reúne os códigos utilizados para obter, limpar, transformar e analisar os dados. Quando houver vários scripts, seus nomes podem indicar a função e a ordem de execução:
+
+```text
+01_importar_dados.R
+02_verificar_qualidade.R
+03_construir_variaveis.R
+04_analisar_resultados.R
+```
+
+### `figuras/` e `resultados/`
+
+Armazenam gráficos, tabelas e outros produtos da análise. É importante distinguir resultados gerados automaticamente daqueles que foram editados manualmente.
+
+### `referencias/`
+
+Pode reunir documentos metodológicos, dicionários, legislação, decisões e textos necessários para compreender a pesquisa. A inclusão de documentos jurídicos deve observar as regras aplicáveis de acesso, sigilo e proteção de dados.
+
+### `README.md`
+
+Apresenta o projeto: seu objetivo, suas fontes, sua estrutura e as orientações necessárias para compreender ou reproduzir o trabalho.
+
+## Arquivos-fonte e arquivos gerados
+
+Uma distinção importante é aquela entre arquivos que representam o trabalho intelectual e arquivos produzidos automaticamente.
+
+| Tipo | Exemplos | Função |
+|---|---|---|
+| Fonte | scripts `.R`, documentos `.qmd`, referências | registra código, texto e decisões |
+| Dado original | planilhas, arquivos `.csv`, documentos coletados | preserva o material recebido |
+| Dado tratado | bases limpas ou estruturadas | resulta dos procedimentos registrados |
+| Resultado gerado | tabelas, gráficos e páginas HTML | pode ser recriado a partir das fontes |
+
+Essa distinção ajuda a decidir o que precisa ser preservado, o que pode ser reconstruído e o que não deve ser editado manualmente.
+
+## Caminhos relativos
+
+Um caminho absoluto identifica a localização completa de um arquivo em um computador específico:
+
+```text
+C:/Users/nome/Desktop/pesquisa-feminicidios/dados/originais/feminicidios.csv
+```
+
+Esse endereço normalmente deixa de funcionar quando o projeto é movido ou aberto por outra pessoa.
+
+Um caminho relativo parte da raiz do projeto:
+
+```r
+dados <- read.csv("dados/originais/feminicidios.csv")
+```
+
+O segundo exemplo é mais portátil. Se a estrutura interna for preservada, o projeto poderá ser aberto em outro computador sem que todos os caminhos precisem ser reescritos.
+
+::: {.callout-tip title="Abra o projeto pela raiz"}
+
+Evite depender de mudanças manuais do diretório de trabalho. Abra a pasta principal do projeto e utilize caminhos relativos para localizar os arquivos.
+
+:::
+
+## Um ambiente integrado de trabalho
+
+As ferramentas utilizadas em uma pesquisa cumprem papéis diferentes e complementares.
+
+```{mermaid}
+%%| fig-align: center
+%%| fig-alt: "Integração entre R, a IDE, Quarto, GitHub e inteligência artificial em uma pesquisa jurimétrica"
+
+flowchart LR
+    A["Pergunta jurídica"] --> B["Projeto"]
+    B --> C["R"]
+    B --> D["RStudio ou Positron"]
+    B --> E["Quarto"]
+    C --> F["Dados e análises"]
+    E --> G["Texto, código e resultados"]
+    B --> H["Git e GitHub"]
+    I["Inteligência artificial"] -. apoio .-> B
+    F --> G
+
+    classDef principal fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
+    classDef destaque fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
+    class A,B,C,D,E,F,G,H principal;
+    class I destaque;
+```
+
+### R
+
+Executa os procedimentos de organização, transformação, descrição e análise dos dados.
+
+### RStudio ou Positron
+
+Reúne editor, console, terminal, arquivos e outros recursos necessários ao desenvolvimento do projeto.
+
+### Quarto
+
+Permite integrar texto, código, resultados, tabelas, gráficos e referências em documentos reproduzíveis, como este livro.
+
+### Git e GitHub
+
+O Git registra versões dos arquivos. O GitHub pode hospedar o repositório, apoiar a colaboração e disponibilizar produtos derivados do projeto. O uso dessas ferramentas será detalhado posteriormente; neste momento, basta compreender sua função no ambiente de trabalho.
+
+### Inteligência artificial
+
+A inteligência artificial pode apoiar a leitura dos materiais, a explicação de códigos, a identificação de inconsistências, a documentação e a revisão dos textos. Sua contribuição deve permanecer subordinada às perguntas da pesquisa e à avaliação dos autores.
+
+## Inteligência artificial e organização do projeto
+
+Uma ferramenta de IA produz respostas melhores quando recebe contexto suficiente. Em um projeto organizado, ela pode consultar a estrutura dos arquivos, as regras de trabalho, as decisões já tomadas e o conteúdo relevante para uma tarefa específica.
+
+Ela pode ajudar a:
+
+- localizar materiais relacionados a uma etapa;
+- comparar versões de um texto ou código;
+- explicar uma mensagem de erro;
+- sugerir formas de organizar uma análise;
+- melhorar clareza e consistência;
+- registrar alterações realizadas.
+
+Entretanto, a ferramenta pode compreender incorretamente a pergunta jurídica, sugerir operações inadequadas ou omitir limitações importantes.
+
+::: {.callout-important title="Decisões intelectuais permanecem com os autores"}
+
+A definição das perguntas, a seleção das fontes, a interpretação dos dados e as conclusões permanecem sob responsabilidade humana. Sugestões da IA devem ser examinadas e aprovadas antes de sua incorporação.
+
+:::
+
+## Registrando decisões
+
+Uma pesquisa reproduzível precisa registrar não apenas o código final, mas também decisões que afetam os resultados. Entre elas:
+
+- origem e data de obtenção dos dados;
+- critérios de inclusão e exclusão;
+- significado das variáveis;
+- tratamento de valores ausentes;
+- correções realizadas;
+- versões relevantes dos arquivos;
+- limitações identificadas;
+- participação de ferramentas de inteligência artificial.
+
+Esse registro permite compreender por que uma base foi construída de determinada maneira e quais alternativas foram consideradas.
+
+## Síntese
+
+Neste capítulo, organizamos a pesquisa jurimétrica como um projeto. Identificamos sua raiz, distinguimos dados originais e tratados, propusemos uma estrutura inicial de pastas e discutimos o uso de caminhos relativos.
+
+Também situamos R, RStudio ou Positron, Quarto, GitHub e inteligência artificial dentro de um mesmo ambiente de trabalho. No próximo capítulo, começaremos a representar as informações jurídicas por meio de objetos e operações fundamentais no R.
+
+::: {.callout-tip title="Antes de avançar"}
+
+- [ ] A raiz do projeto está claramente identificada?
+- [ ] Os dados originais estão separados dos dados tratados?
+- [ ] Os scripts possuem nomes que indicam sua função?
+- [ ] Os caminhos utilizados são relativos?
+- [ ] As decisões metodológicas estão sendo registradas?
+- [ ] O uso de inteligência artificial inclui revisão e validação humana?
+
+:::
