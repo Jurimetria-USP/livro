@@ -5,7 +5,7 @@ toc: false
 # Prefácio {.unnumbered}
 
 ::: {.hero-apostila}
-## Jurimetria: dados, métodos e evidência para o Direito
+## JURIMETRIA: Dados, Métodos e Evidência para o Direito
 
 Um percurso para transformar documentos jurídicos em evidências empíricas.
 
