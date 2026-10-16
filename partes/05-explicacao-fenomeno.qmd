@@ -1,0 +1,30 @@
+---
+title: "Parte V — Explicação do fenômeno"
+toc: false
+---
+
+Nesta parte, avançamos da descrição para a explicação dos fenômenos jurídicos. O percurso começa pelos modelos lineares e segue para modelos adequados a diferentes tipos de resultado e estruturas de dados.
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-6}
+::: {.cartao-home}
+### Modelos Lineares
+
+Fundamentos da regressão linear, estimação, interpretação e aplicações à pesquisa em Direito.
+
+[Acessar o capítulo](../capitulos/modelos-lineares.qmd)
+:::
+:::
+
+::: {.g-col-12 .g-col-md-6}
+::: {.cartao-home}
+### Modelos Avançados
+
+Modelos para variáveis dependentes qualitativas e dados com estruturas mais complexas.
+
+[Acessar o capítulo](../capitulos/modelos-avancados.qmd)
+:::
+:::
+
+:::

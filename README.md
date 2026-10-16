@@ -1,4 +1,4 @@
-# Livro de Jurimetria
+# Jurimetria: dados, métodos e evidência para o Direito
 
 Livro da iniciativa **Jurimetria USP**, vinculada à Faculdade de Direito (FD) e à Faculdade de Economia, Administração e Contabilidade de Ribeirão Preto (FEA-RP) da Universidade de São Paulo.
 
@@ -10,4 +10,4 @@ O projeto aborda Direito, desigualdades e ciência de dados por meio de métodos
 
 Acesse a versão publicada do livro:
 
-[Livro de Jurimetria](https://jurimetria-usp.github.io/livro/) 
+[Jurimetria: dados, métodos e evidência para o Direito](https://jurimetria-usp.github.io/livro/) 

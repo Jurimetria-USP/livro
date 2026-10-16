@@ -5,9 +5,7 @@ toc: false
 # Prefácio {.unnumbered}
 
 ::: {.hero-apostila}
-## Livro de Jurimetria
-
-**Direito, Desigualdades e Ciência de Dados**
+## Jurimetria: dados, métodos e evidência para o Direito
 
 Um percurso para transformar documentos jurídicos em evidências empíricas.
 

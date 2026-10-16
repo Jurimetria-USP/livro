@@ -3,8 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "Livro de Jurimetria"
-  subtitle: "Direito, Desigualdades e Ciência de Dados"
+  title: "Jurimetria: dados, métodos e evidência para o Direito"
   author:
     - name: "Alexandre Nicolella"
       affiliation: "FEA-RP/USP"
@@ -55,7 +54,10 @@ book:
         - capitulos/introducao-estatistica.qmd
         - capitulos/analise-descritiva.qmd
         - capitulos/analise-sobrevivencia.qmd
-    - part: "Parte V — Explicação do fenômeno"
+    - part: partes/05-explicacao-fenomeno.qmd
+      chapters:
+        - capitulos/modelos-lineares.qmd
+        - capitulos/modelos-avancados.qmd
 
 format:
   html:
