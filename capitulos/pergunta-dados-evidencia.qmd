@@ -395,3 +395,7 @@ Escolha um problema jurídico que desperte seu interesse e registre:
 - Consideramos explicações alternativas?
 - A linguagem preserva o alcance e os limites da análise?
 - Conseguimos explicar por que essa investigação merece ser realizada?
+
+## Slides do capítulo
+
+[Ver os slides — Da Pergunta à Conclusão](../slides/fundamentos/pergunta-dados-evidencia/index.html){.btn .btn-primary target="_blank"}

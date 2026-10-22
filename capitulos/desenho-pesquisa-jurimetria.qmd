@@ -342,3 +342,7 @@ Richard Feynman enfatiza que o método científico baseia-se em propor hipótese
     -   Se os resultados não batem com as previsões, a hipótese está errada.
 
 Essa visão mostra que a ciência é, acima de tudo, um compromisso ético com a verdade empírica e a disposição de submeter ideias à crítica. O método científico é mais do que um procedimento: é uma atitude de curiosidade, dúvida e verificação constante.
+
+## Slides do capítulo
+
+[Ver os slides — O Método Científico](../slides/fundamentos/metodo-cientifico/index.html){.btn .btn-primary target="_blank"}

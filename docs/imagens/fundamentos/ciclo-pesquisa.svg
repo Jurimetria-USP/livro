@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="920" viewBox="0 0 1800 920" role="img" aria-labelledby="title desc">
+  <title id="title">Ciclo da pesquisa</title><desc id="desc">Dez etapas conectadas, do desenho do projeto à publicação dos resultados e ao reinício do ciclo.</desc>
+  <defs><marker id="a" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="10" markerHeight="10" orient="auto"><path d="M1 1 11 6 1 11z" fill="#A68868"/></marker><filter id="s"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#071739" flood-opacity=".10"/></filter></defs>
+  <rect width="1800" height="920" rx="28" fill="#F8F5EF"/>
+  <text x="900" y="78" text-anchor="middle" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="44" font-weight="700" fill="#071739">Ciclo da pesquisa</text>
+  <line x1="745" y1="106" x2="1055" y2="106" stroke="#A68868" stroke-width="6" stroke-linecap="round"/>
+  <path d="M205 260H1595V660H205V260" fill="none" stroke="#A68868" stroke-width="6" stroke-linejoin="round" marker-end="url(#a)"/>
+  <g font-family="Inter, 'Segoe UI', Arial, sans-serif" text-anchor="middle">
+    <g filter="url(#s)"><circle cx="205" cy="260" r="72" fill="#071739"/><text x="205" y="250" font-size="24" font-weight="700" fill="#FFF">Desenho do</text><text x="205" y="282" font-size="24" font-weight="700" fill="#FFF">projeto</text></g>
+    <g filter="url(#s)"><circle cx="552" cy="260" r="72" fill="#4B6382"/><text x="552" y="238" font-size="21" font-weight="700" fill="#FFF">Operacionalização</text><text x="552" y="268" font-size="21" font-weight="700" fill="#FFF">em variáveis</text><text x="552" y="298" font-size="21" font-weight="700" fill="#FFF">mensuráveis</text></g>
+    <g filter="url(#s)"><circle cx="900" cy="260" r="72" fill="#A4B5C4" stroke="#071739" stroke-width="3"/><text x="900" y="250" font-size="23" font-weight="700" fill="#071739">Análise de</text><text x="900" y="282" font-size="23" font-weight="700" fill="#071739">viabilidade</text></g>
+    <g filter="url(#s)"><circle cx="1248" cy="260" r="72" fill="#A68868"/><text x="1248" y="250" font-size="24" font-weight="700" fill="#FFF">Coleta de</text><text x="1248" y="282" font-size="24" font-weight="700" fill="#FFF">dados</text></g>
+    <g filter="url(#s)"><circle cx="1595" cy="260" r="72" fill="#071739"/><text x="1595" y="238" font-size="21" font-weight="700" fill="#FFF">Limpeza e</text><text x="1595" y="268" font-size="21" font-weight="700" fill="#FFF">organização</text><text x="1595" y="298" font-size="21" font-weight="700" fill="#FFF">dos dados</text></g>
+    <g filter="url(#s)"><circle cx="1595" cy="660" r="72" fill="#4B6382"/><text x="1595" y="650" font-size="22" font-weight="700" fill="#FFF">Transformação</text><text x="1595" y="681" font-size="22" font-weight="700" fill="#FFF">dos dados</text></g>
+    <g filter="url(#s)"><circle cx="1248" cy="660" r="72" fill="#A4B5C4" stroke="#071739" stroke-width="3"/><text x="1248" y="650" font-size="23" font-weight="700" fill="#071739">Análise</text><text x="1248" y="681" font-size="23" font-weight="700" fill="#071739">exploratória</text></g>
+    <g filter="url(#s)"><circle cx="900" cy="660" r="72" fill="#A68868"/><text x="900" y="638" font-size="20" font-weight="700" fill="#FFF">Análise inferencial</text><text x="900" y="668" font-size="20" font-weight="700" fill="#FFF">e preditiva</text></g>
+    <g filter="url(#s)"><circle cx="552" cy="660" r="72" fill="#4B6382"/><text x="552" y="650" font-size="22" font-weight="700" fill="#FFF">Métricas de</text><text x="552" y="681" font-size="22" font-weight="700" fill="#FFF">desempenho</text></g>
+    <g filter="url(#s)"><circle cx="205" cy="660" r="72" fill="#071739"/><text x="205" y="650" font-size="22" font-weight="700" fill="#FFF">Publicação dos</text><text x="205" y="681" font-size="22" font-weight="700" fill="#FFF">resultados</text></g>
+    <g font-size="25" font-weight="700" fill="#071739"><text x="375" y="225">1</text><text x="725" y="225">2</text><text x="1075" y="225">3</text><text x="1425" y="225">4</text><text x="1642" y="465">5</text><text x="1425" y="625">6</text><text x="1075" y="625">7</text><text x="725" y="625">8</text><text x="375" y="625">9</text><text x="148" y="465">10</text></g>
+  </g>
+  <text x="900" y="845" text-anchor="middle" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="24" fill="#4B6382">A publicação produz novas perguntas e reinicia o percurso da investigação.</text>
+</svg>

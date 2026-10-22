@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1380" viewBox="0 0 1000 1380" role="img" aria-labelledby="title desc">
+  <title id="title">O caminho para o conhecimento científico</title>
+  <desc id="desc">Fluxo vertical entre teoria causal, hipótese, teste empírico, avaliação da hipótese, avaliação da teoria causal e conhecimento científico.</desc>
+
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#071739" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
+      <path d="M 1 1 L 11 6 L 1 11 z" fill="#A68868"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="1380" rx="28" fill="#F8F5EF"/>
+  <rect x="0" y="0" width="1000" height="22" rx="11" fill="#071739"/>
+
+  <text x="500" y="88" text-anchor="middle" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="3" fill="#4B6382">PERCURSO CIENTÍFICO</text>
+  <text x="500" y="143" text-anchor="middle" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="37" font-weight="700" fill="#071739">O caminho para o conhecimento científico</text>
+  <line x1="360" y1="176" x2="640" y2="176" stroke="#A68868" stroke-width="6" stroke-linecap="round"/>
+
+  <g font-family="Inter, 'Segoe UI', Arial, sans-serif" text-anchor="middle">
+    <g filter="url(#shadow)">
+      <rect x="190" y="220" width="620" height="132" rx="20" fill="#071739"/>
+      <circle cx="245" cy="286" r="26" fill="#A68868"/>
+      <text x="245" y="295" font-size="25" font-weight="700" fill="#F8F5EF">1</text>
+      <text x="500" y="299" font-size="34" font-weight="650" fill="#FFFFFF">Teoria causal</text>
+    </g>
+
+    <path d="M 500 364 L 500 418" stroke="#A68868" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="190" y="440" width="620" height="132" rx="20" fill="#E7EBEF" stroke="#4B6382" stroke-width="3"/>
+      <circle cx="245" cy="506" r="26" fill="#4B6382"/>
+      <text x="245" y="515" font-size="25" font-weight="700" fill="#FFFFFF">2</text>
+      <text x="500" y="519" font-size="34" font-weight="650" fill="#071739">Hipótese</text>
+    </g>
+
+    <path d="M 500 584 L 500 638" stroke="#A68868" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="190" y="660" width="620" height="132" rx="20" fill="#4B6382"/>
+      <circle cx="245" cy="726" r="26" fill="#E3C39D"/>
+      <text x="245" y="735" font-size="25" font-weight="700" fill="#071739">3</text>
+      <text x="500" y="739" font-size="34" font-weight="650" fill="#FFFFFF">Teste empírico</text>
+    </g>
+
+    <path d="M 500 804 L 500 858" stroke="#A68868" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="190" y="880" width="620" height="132" rx="20" fill="#E7EBEF" stroke="#4B6382" stroke-width="3"/>
+      <circle cx="245" cy="946" r="26" fill="#4B6382"/>
+      <text x="245" y="955" font-size="25" font-weight="700" fill="#FFFFFF">4</text>
+      <text x="500" y="959" font-size="32" font-weight="650" fill="#071739">Avaliação da hipótese</text>
+    </g>
+
+    <path d="M 500 1024 L 500 1078" stroke="#A68868" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="190" y="1100" width="620" height="132" rx="20" fill="#071739"/>
+      <circle cx="245" cy="1166" r="26" fill="#A68868"/>
+      <text x="245" y="1175" font-size="25" font-weight="700" fill="#F8F5EF">5</text>
+      <text x="500" y="1157" font-size="30" font-weight="650" fill="#FFFFFF">Avaliação da</text>
+      <text x="500" y="1195" font-size="30" font-weight="650" fill="#FFFFFF">teoria causal</text>
+    </g>
+
+    <path d="M 500 1244 L 500 1278" stroke="#A68868" stroke-width="7" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="190" y="1300" width="620" height="70" rx="20" fill="#A4B5C4" stroke="#071739" stroke-width="3"/>
+      <circle cx="245" cy="1335" r="24" fill="#071739"/>
+      <text x="245" y="1343" font-size="23" font-weight="700" fill="#FFFFFF">6</text>
+      <text x="500" y="1347" font-size="31" font-weight="700" fill="#071739">Conhecimento científico</text>
+    </g>
+  </g>
+</svg>

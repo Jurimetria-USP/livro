@@ -43,13 +43,13 @@ Além de sua aplicação prática, a jurimetria também contribui para o **desen
 
 Esses exemplos evidenciam a necessidade de examinar, com base em dados e métodos, até que ponto tais alegações se sustentam empiricamente.
 
-![Paul Kellstedt,Guy Whitten . Fundamentos da pesquisa em ciência política](../imagens/fundamentos/metodo_jur.jpg){.lightbox fig-align="center" width="70%"}
+![O caminho para o conhecimento científico, adaptado de Kellstedt e Whitten](../imagens/fundamentos/metodo-cientifico-fluxo.svg){.lightbox fig-align="center" width="70%"}
 
 ### O que Jurimetria pode Responder?
 
 A jurimetria pode oferecer evidências que **apoiem a tomada de decisão** e **o aperfeiçoamento institucional**, seja no Judiciário, no Legislativo ou no Executivo. Alguns exemplos ilustram o tipo de questão que a jurimetria pode responder:
 
-![Severi, F.](../imagens/fundamentos/resposta1.jpg){.lightbox fig-align="center" width="100%"}
+![Exemplos de perguntas que a jurimetria pode responder](../imagens/fundamentos/perguntas-jurimetria.svg){.lightbox fig-align="center" width="100%"}
 
 A jurimetria busca quantificar e **compreender padrões e comportamentos** do sistema de justiça Com isso, oferece uma base empírica para aprimorar o Direito e orientar políticas públicas e reformas mais objetiva e transparente.
 
@@ -57,7 +57,7 @@ A jurimetria busca quantificar e **compreender padrões e comportamentos** do si
 
 Na jurimetria, a função da **inteligência artificial** (IA) é automatizar a extração de informações de peças processuais, analisar rapidamente grandes volumes de texto e, até auxiliar na elaboração de documentos jurídicos. A perspectiva é que a IA **apoie a atividade do Direito**, oferecendo suporte e eficiência, mas **não substitua o papel do profissional jurídico**. Assim:
 
-![Severi, F.](../imagens/fundamentos/ia.jpg){.lightbox fig-align="center" width="100%"}
+![Aplicações da inteligência artificial no Direito](../imagens/fundamentos/ia-aplicacoes-direito.svg){.lightbox fig-align="center" width="100%"}
 
 ## Fase 1: Boas Obervações: Coleta e Transformação
 
@@ -99,7 +99,7 @@ Ter pessoas que entendam bem sobre o tema é fundamental para o sucesso do proje
 
 ### Bom conhecimento do Direito
 
-Conforme observa Ricardo Feliz, cada esfera do Poder possui seus próprios atos processuais. Os **atos processuais** são o registro formal das **ações dentro de um processo**. Compreender esses atos é fundamental para determinar quando e como coletar as informações dentro da estrutura processual. Algus exemplos de atos processuais no Judiciários são:
+Conforme observa Ricardo Trezzi, cada esfera do Poder possui seus próprios atos processuais. Os **atos processuais** são o registro formal das **ações dentro de um processo**. Compreender esses atos é fundamental para determinar quando e como coletar as informações dentro da estrutura processual. Algus exemplos de atos processuais no Judiciários são:
 
 -   Sentença; Acórdão; Decisão liminar; Decisão monocrática
 -   Petição inicial; Contestação
@@ -108,7 +108,7 @@ Conforme observa Ricardo Feliz, cada esfera do Poder possui seus próprios atos 
 
 Ter clareza sobre esses atos permite organizar a coleta de dados de forma precisa e consistente, garantindo que cada informação seja extraída no momento adequado do processo.
 
-![Feliz, R.](../imagens/fundamentos/ricardo.png){.lightbox fig-align="center" width="100%"}
+![Fluxo da recuperação judicial. Fonte: Ricardo Trezzi.](../imagens/fundamentos/fluxo-recuperacao-judicial-v2.png){.lightbox fig-align="center" width="100%"}
 
 ### Bom Desenho de Projeto
 
@@ -177,4 +177,4 @@ O ciclo da pesquisa nem sempre segue um caminho linear ou fácil; frequentemente
 -   Métricas de desempenho;
 -   Publicação dos resultados.
 
-![Severi, F.](../imagens/fundamentos/ciclo_jur.png){.lightbox fig-align="center" width="100%"}
+![Percurso da pesquisa. Fonte: Fabiana Severo.](../imagens/fundamentos/percurso-pesquisa.png){.lightbox fig-align="center" width="100%"}
