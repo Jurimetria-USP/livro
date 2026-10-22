@@ -4,32 +4,40 @@ toc: false
 
 # Parte I — Fundamentos
 
-Esta parte apresenta as bases da pesquisa jurimétrica. Os capítulos discutem o desenho de pesquisa e mostram como a seleção dos litígios e as desigualdades entre os atores influenciam aquilo que observamos no sistema de justiça.
+Esta parte apresenta as bases da pesquisa jurimétrica. O percurso parte do método científico, passa pela formulação da pergunta e pela construção da evidência, apresenta a jurimetria como instrumento de pesquisa e examina como a seleção dos litígios e as desigualdades entre os atores influenciam aquilo que observamos no sistema de justiça.
 
 ::: {.grid}
 
-::: {.g-col-12 .g-col-md-4 .cartao-home .cartao-proposito}
-### Desenho de pesquisa e jurimetria
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-proposito}
+### Método científico e desenho de pesquisa
 
-Introdução ao método científico e à construção da pesquisa empírica aplicada ao Direito.
+Fundamentos do método científico, da causalidade e dos desenhos de pesquisa aplicados às Ciências Sociais e ao Direito.
 
 [Ler o capítulo](../capitulos/desenho-pesquisa-jurimetria.qmd)
 :::
 
-::: {.g-col-12 .g-col-md-4 .cartao-home .cartao-problemas}
-### Seleção de disputas para o litígio
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
+### Da pergunta à conclusão
 
-Apresentação do modelo de Priest e Klein sobre a seleção dos casos que chegam a julgamento.
+Construção do percurso entre o problema, a pergunta, os dados, a evidência e a conclusão.
 
-[Ler o capítulo](../capitulos/selecao-disputas-litigio.qmd)
+[Ler o capítulo](../capitulos/pergunta-dados-evidencia.qmd)
 :::
 
-::: {.g-col-12 .g-col-md-4 .cartao-home .cartao-formacao}
-### Por que os que têm saem na frente
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
+### Jurimetria como instrumento de pesquisa
 
-Discussão das desigualdades estruturais do sistema jurídico a partir de Marc Galanter.
+Apresentação da jurimetria, de suas possibilidades e das etapas necessárias à pesquisa empírica em Direito.
 
-[Ler o capítulo](../capitulos/galanter.qmd)
+[Ler o capítulo](../capitulos/jurimetria-instrumento-pesquisa.qmd)
+:::
+
+::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-proposito}
+### Seleção dos litígios e desigualdades
+
+Análise da seleção dos casos que chegam a julgamento e das desigualdades estruturais entre os litigantes.
+
+[Ler o capítulo](../capitulos/litigios-desigualdades.qmd)
 :::
 
 :::

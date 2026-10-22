@@ -83,3 +83,13 @@ A saída renderizada será gerada na pasta `docs`, permitindo sua publicação p
 A versão publicada estará disponível em:
 
 `https://jurimetria-usp.github.io/livro/`
+
+## 22 de outubro de 2026
+
+### Organização da Parte I — Fundamentos
+
+**Decisão:** a Parte I será organizada em quatro capítulos: método científico e desenho de pesquisa; da pergunta à conclusão; jurimetria como instrumento de pesquisa; e seleção dos litígios e desigualdades no sistema de justiça.
+
+O primeiro capítulo corresponderá ao conteúdo do capítulo original até a seção sobre o método científico segundo Richard Feynman. O terceiro reunirá o conteúdo iniciado na antiga seção “Buscando um bom instrumento: Jurimetria”. O segundo será desenvolvido a partir do material textual já preparado para os slides, sem incorporação de fontes externas nesta etapa. Os capítulos sobre Priest–Klein e Marc Galanter serão reunidos estruturalmente, preservando os dois textos em blocos próprios.
+
+**Justificativa:** a divisão explicita o percurso entre método científico, formulação da pergunta, aplicação da jurimetria e compreensão da seleção e das desigualdades do sistema de justiça.

@@ -29,8 +29,9 @@ book:
     - part: partes/01-fundamentos.qmd
       chapters:
         - capitulos/desenho-pesquisa-jurimetria.qmd
-        - capitulos/selecao-disputas-litigio.qmd
-        - capitulos/galanter.qmd
+        - capitulos/pergunta-dados-evidencia.qmd
+        - capitulos/jurimetria-instrumento-pesquisa.qmd
+        - capitulos/litigios-desigualdades.qmd
     - part: partes/02-ambiente-trabalho.qmd
       chapters:
         - capitulos/r-ambiente-trabalho.qmd

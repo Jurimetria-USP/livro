@@ -8,7 +8,7 @@
 
 <meta name="author" content="Alexandre Nicolella">
 
-<title>12&nbsp; Dados tidy e transformação com tidyr – JURIMETRIA: Dados, Métodos e Evidência para o Direito</title>
+<title>13&nbsp; Dados tidy e transformação com tidyr – JURIMETRIA: Dados, Métodos e Evidência para o Direito</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -153,7 +153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/dados-tidy-tidyr.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dados tidy e transformação com tidyr</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/dados-tidy-tidyr.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Dados tidy e transformação com tidyr</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -197,19 +197,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/desenho-pesquisa-jurimetria.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução ao Desenho de Pesquisa e à Jurimetria</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Método científico e desenho de pesquisa</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../capitulos/selecao-disputas-litigio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Seleção de disputas para o litígio</span></span></a>
+  <a href="../capitulos/pergunta-dados-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Da pergunta à conclusão</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../capitulos/galanter.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Por que os que têm saem na frente: análise do texto de Marc Galanter</span></span></a>
+  <a href="../capitulos/jurimetria-instrumento-pesquisa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Jurimetria como instrumento de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/litigios-desigualdades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Seleção dos litígios e desigualdades no sistema de justiça</span></span></a>
   </div>
 </li>
       </ul>
@@ -226,73 +232,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/r-ambiente-trabalho.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R e o ambiente de trabalho</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R e o ambiente de trabalho</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/projetos-reprodutiveis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Projetos e organização reproduzível</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Projetos e organização reproduzível</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/objetos-operacoes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Objetos e operações fundamentais</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Objetos e operações fundamentais</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/dataframes-importacao.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data frames e importação</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data frames e importação</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/qualidade-dados.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Valores ausentes e qualidade dos dados</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Valores ausentes e qualidade dos dados</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/operacoes-r-base.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Operações com data frames em R base</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Operações com data frames em R base</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/universo-tidy.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introdução ao universo tidy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introdução ao universo tidy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/manipulacao-dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Manipulação de dados com dplyr</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Manipulação de dados com dplyr</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/dados-tidy-tidyr.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dados tidy e transformação com tidyr</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Dados tidy e transformação com tidyr</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/combinacao-bases.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Combinação de bases</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Combinação de bases</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/textos-datas-categorias.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Textos, datas e categorias</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Textos, datas e categorias</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/google-drive.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Google Drive</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Google Drive</span></span></a>
   </div>
 </li>
       </ul>
@@ -313,19 +319,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/introducao-estatistica.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/analise-descritiva.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/analise-sobrevivencia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Análise de sobrevivência: tempo do processo</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Análise de sobrevivência: tempo do processo</span></span></a>
   </div>
 </li>
       </ul>
@@ -342,13 +348,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/modelos-lineares.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/modelos-avancados.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
   </div>
 </li>
       </ul>
@@ -363,25 +369,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Nesta página</h2>
    
   <ul>
-  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução"><span class="header-section-number">12.1</span> Introdução</a></li>
-  <li><a href="#começar-pela-unidade-de-observação" id="toc-começar-pela-unidade-de-observação" class="nav-link" data-scroll-target="#começar-pela-unidade-de-observação"><span class="header-section-number">12.2</span> Começar pela unidade de observação</a></li>
-  <li><a href="#preparando-uma-tabela-larga" id="toc-preparando-uma-tabela-larga" class="nav-link" data-scroll-target="#preparando-uma-tabela-larga"><span class="header-section-number">12.3</span> Preparando uma tabela larga</a></li>
-  <li><a href="#transformando-colunas-em-linhas" id="toc-transformando-colunas-em-linhas" class="nav-link" data-scroll-target="#transformando-colunas-em-linhas"><span class="header-section-number">12.4</span> Transformando colunas em linhas</a></li>
-  <li><a href="#conferindo-a-transformação" id="toc-conferindo-a-transformação" class="nav-link" data-scroll-target="#conferindo-a-transformação"><span class="header-section-number">12.5</span> Conferindo a transformação</a></li>
-  <li><a href="#transformando-linhas-em-colunas" id="toc-transformando-linhas-em-colunas" class="nav-link" data-scroll-target="#transformando-linhas-em-colunas"><span class="header-section-number">12.6</span> Transformando linhas em colunas</a></li>
-  <li><a href="#quando-várias-informações-ocupam-uma-coluna" id="toc-quando-várias-informações-ocupam-uma-coluna" class="nav-link" data-scroll-target="#quando-várias-informações-ocupam-uma-coluna"><span class="header-section-number">12.7</span> Quando várias informações ocupam uma coluna</a></li>
-  <li><a href="#uma-análise-depois-da-organização" id="toc-uma-análise-depois-da-organização" class="nav-link" data-scroll-target="#uma-análise-depois-da-organização"><span class="header-section-number">12.8</span> Uma análise depois da organização</a></li>
-  <li><a href="#o-caminho-da-reorganização" id="toc-o-caminho-da-reorganização" class="nav-link" data-scroll-target="#o-caminho-da-reorganização"><span class="header-section-number">12.9</span> O caminho da reorganização</a></li>
-  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">12.10</span> Síntese</a></li>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução"><span class="header-section-number">13.1</span> Introdução</a></li>
+  <li><a href="#começar-pela-unidade-de-observação" id="toc-começar-pela-unidade-de-observação" class="nav-link" data-scroll-target="#começar-pela-unidade-de-observação"><span class="header-section-number">13.2</span> Começar pela unidade de observação</a></li>
+  <li><a href="#preparando-uma-tabela-larga" id="toc-preparando-uma-tabela-larga" class="nav-link" data-scroll-target="#preparando-uma-tabela-larga"><span class="header-section-number">13.3</span> Preparando uma tabela larga</a></li>
+  <li><a href="#transformando-colunas-em-linhas" id="toc-transformando-colunas-em-linhas" class="nav-link" data-scroll-target="#transformando-colunas-em-linhas"><span class="header-section-number">13.4</span> Transformando colunas em linhas</a></li>
+  <li><a href="#conferindo-a-transformação" id="toc-conferindo-a-transformação" class="nav-link" data-scroll-target="#conferindo-a-transformação"><span class="header-section-number">13.5</span> Conferindo a transformação</a></li>
+  <li><a href="#transformando-linhas-em-colunas" id="toc-transformando-linhas-em-colunas" class="nav-link" data-scroll-target="#transformando-linhas-em-colunas"><span class="header-section-number">13.6</span> Transformando linhas em colunas</a></li>
+  <li><a href="#quando-várias-informações-ocupam-uma-coluna" id="toc-quando-várias-informações-ocupam-uma-coluna" class="nav-link" data-scroll-target="#quando-várias-informações-ocupam-uma-coluna"><span class="header-section-number">13.7</span> Quando várias informações ocupam uma coluna</a></li>
+  <li><a href="#uma-análise-depois-da-organização" id="toc-uma-análise-depois-da-organização" class="nav-link" data-scroll-target="#uma-análise-depois-da-organização"><span class="header-section-number">13.8</span> Uma análise depois da organização</a></li>
+  <li><a href="#o-caminho-da-reorganização" id="toc-o-caminho-da-reorganização" class="nav-link" data-scroll-target="#o-caminho-da-reorganização"><span class="header-section-number">13.9</span> O caminho da reorganização</a></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">13.10</span> Síntese</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/dados-tidy-tidyr.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dados tidy e transformação com tidyr</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/dados-tidy-tidyr.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Dados tidy e transformação com tidyr</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Dados tidy e transformação com tidyr</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Dados tidy e transformação com tidyr</span></h1>
 <p class="subtitle lead">Organizando linhas, colunas e unidades de observação</p>
 </div>
 
@@ -405,8 +411,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introdução" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">12.1</span> Introdução</h2>
+<section id="introdução" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">13.1</span> Introdução</h2>
 <p>Uma tabela pode ser conveniente para leitura humana e, ao mesmo tempo, inadequada para determinada análise. O <code>tidyr</code> ajuda a reorganizar linhas e colunas sem mudar o conteúdo substantivo dos dados.</p>
 <p>Neste capítulo, utilizaremos indicadores de homicídios de mulheres e feminicídios para compreender formatos largo e longo.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Objetivos do capítulo">
@@ -431,8 +437,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="começar-pela-unidade-de-observação" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="começar-pela-unidade-de-observação"><span class="header-section-number">12.2</span> Começar pela unidade de observação</h2>
+<section id="começar-pela-unidade-de-observação" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="começar-pela-unidade-de-observação"><span class="header-section-number">13.2</span> Começar pela unidade de observação</h2>
 <p>Antes de reorganizar uma tabela, precisamos completar a frase:</p>
 <blockquote class="blockquote">
 <p>Cada linha representa __________.</p>
@@ -452,8 +458,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="preparando-uma-tabela-larga" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="preparando-uma-tabela-larga"><span class="header-section-number">12.3</span> Preparando uma tabela larga</h2>
+<section id="preparando-uma-tabela-larga" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="preparando-uma-tabela-larga"><span class="header-section-number">13.3</span> Preparando uma tabela larga</h2>
 <p>Selecionamos as contagens absolutas de homicídios de mulheres e feminicídios:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>indicadores_largos <span class="ot">&lt;-</span> df_feminic22[</span>
@@ -477,8 +483,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Essa tabela está em formato largo: os dois indicadores ocupam colunas diferentes.</p>
 </section>
-<section id="transformando-colunas-em-linhas" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="transformando-colunas-em-linhas"><span class="header-section-number">12.4</span> Transformando colunas em linhas</h2>
+<section id="transformando-colunas-em-linhas" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="transformando-colunas-em-linhas"><span class="header-section-number">13.4</span> Transformando colunas em linhas</h2>
 <p>Para comparar indicadores dentro de uma mesma variável, transformamos as colunas <code>homic_abs</code> e <code>feminic_abs</code> em linhas:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>indicadores_longos <span class="ot">&lt;-</span> indicadores_largos <span class="sc">|&gt;</span></span>
@@ -503,8 +509,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Agora cada unidade da federação ocupa duas linhas: uma para homicídios de mulheres e outra para feminicídios.</p>
 </section>
-<section id="conferindo-a-transformação" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="conferindo-a-transformação"><span class="header-section-number">12.5</span> Conferindo a transformação</h2>
+<section id="conferindo-a-transformação" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="conferindo-a-transformação"><span class="header-section-number">13.5</span> Conferindo a transformação</h2>
 <p>A transformação deve preservar os valores. Conferimos o número esperado de linhas:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(indicadores_largos)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
@@ -546,8 +552,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="transformando-linhas-em-colunas" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="transformando-linhas-em-colunas"><span class="header-section-number">12.6</span> Transformando linhas em colunas</h2>
+<section id="transformando-linhas-em-colunas" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="transformando-linhas-em-colunas"><span class="header-section-number">13.6</span> Transformando linhas em colunas</h2>
 <p>Podemos retornar ao formato largo com <code>pivot_wider()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>indicadores_largos_recuperados <span class="ot">&lt;-</span> indicadores_longos <span class="sc">|&gt;</span></span>
@@ -584,8 +590,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="quando-várias-informações-ocupam-uma-coluna" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="quando-várias-informações-ocupam-uma-coluna"><span class="header-section-number">12.7</span> Quando várias informações ocupam uma coluna</h2>
+<section id="quando-várias-informações-ocupam-uma-coluna" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="quando-várias-informações-ocupam-uma-coluna"><span class="header-section-number">13.7</span> Quando várias informações ocupam uma coluna</h2>
 <p>Podemos criar uma chave composta para representar a unidade da federação e o indicador:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>indicadores_com_chave <span class="ot">&lt;-</span> indicadores_longos <span class="sc">|&gt;</span></span>
@@ -636,8 +642,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Como os nomes <code>homic_abs</code> e <code>feminic_abs</code> também contêm <code>_</code>, usamos três componentes. O resultado deve ser conferido, pois a regra de separação depende da convenção empregada nos nomes.</p>
 </section>
-<section id="uma-análise-depois-da-organização" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="uma-análise-depois-da-organização"><span class="header-section-number">12.8</span> Uma análise depois da organização</h2>
+<section id="uma-análise-depois-da-organização" class="level2" data-number="13.8">
+<h2 data-number="13.8" class="anchored" data-anchor-id="uma-análise-depois-da-organização"><span class="header-section-number">13.8</span> Uma análise depois da organização</h2>
 <p>No formato longo, podemos calcular totais por indicador:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>resumo_indicadores <span class="ot">&lt;-</span> indicadores_longos <span class="sc">|&gt;</span></span>
@@ -659,8 +665,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="o-caminho-da-reorganização" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="o-caminho-da-reorganização"><span class="header-section-number">12.9</span> O caminho da reorganização</h2>
+<section id="o-caminho-da-reorganização" class="level2" data-number="13.9">
+<h2 data-number="13.9" class="anchored" data-anchor-id="o-caminho-da-reorganização"><span class="header-section-number">13.9</span> O caminho da reorganização</h2>
 <p>Uma transformação segura deve responder a quatro perguntas:</p>
 <ol type="1">
 <li>qual era a unidade de observação antes da transformação?</li>
@@ -669,8 +675,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>como verificaremos que os valores foram preservados?</li>
 </ol>
 </section>
-<section id="síntese" class="level2" data-number="12.10">
-<h2 data-number="12.10" class="anchored" data-anchor-id="síntese"><span class="header-section-number">12.10</span> Síntese</h2>
+<section id="síntese" class="level2" data-number="13.10">
+<h2 data-number="13.10" class="anchored" data-anchor-id="síntese"><span class="header-section-number">13.10</span> Síntese</h2>
 <p>Neste capítulo, reorganizamos indicadores jurídicos entre os formatos largo e longo, conferimos linhas e totais e trabalhamos com colunas compostas. O objetivo não foi apenas mudar a aparência da tabela, mas adequar sua estrutura à análise sem perder informações.</p>
 <p>No próximo capítulo, combinaremos informações armazenadas em tabelas diferentes.</p>
 
@@ -1081,12 +1087,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../capitulos/manipulacao-dplyr.html" class="pagination-link" aria-label="Manipulação de dados com dplyr">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Manipulação de dados com dplyr</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Manipulação de dados com dplyr</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../capitulos/combinacao-bases.html" class="pagination-link" aria-label="Combinação de bases">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Combinação de bases</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Combinação de bases</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

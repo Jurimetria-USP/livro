@@ -1,0 +1,27 @@
+project:
+  type: default
+  output-dir: ../docs/slides
+
+format:
+  revealjs:
+    theme:
+      - default
+      - tema-slides.scss
+    menu: true
+    highlight-style: github-dark
+    slide-number: c/t
+    width: 1400
+    height: 800
+    controls-layout: edges
+    controls: true
+    progress: true
+    history: true
+    center: true
+    transition: slide
+    hash: true
+    scrollable: false
+    embed-resources: true
+    logo: assets/usp.png
+    title-slide-attributes:
+      data-background-color: "#071739"
+

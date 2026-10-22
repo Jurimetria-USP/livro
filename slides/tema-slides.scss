@@ -1,0 +1,151 @@
+/*-- scss:defaults --*/
+
+$azul-profundo: #071739;
+$azul-ardosia: #4b6382;
+$azul-nevoa: #a4b5c4;
+$cinza-perola: #cdd5db;
+$bronze: #a68868;
+$areia: #e3c39d;
+$papel: #f8f5ef;
+$branco: #ffffff;
+$texto: #172033;
+$verde-exemplo: #a1c2bb;
+
+$body-bg: $papel;
+$body-color: $texto;
+$link-color: #345b7e;
+$selection-bg: $areia;
+$presentation-heading-font: Georgia, "Times New Roman", serif;
+$presentation-heading-color: $azul-profundo;
+$presentation-heading-font-weight: 700;
+$presentation-font-size-root: 34px;
+$font-family-sans-serif: "Segoe UI", Inter, system-ui, -apple-system, sans-serif;
+$font-family-monospace: "Cascadia Code", Consolas, monospace;
+$code-color: $azul-profundo;
+
+/*-- scss:rules --*/
+
+.reveal {
+  letter-spacing: 0.002em;
+  line-height: 1.45;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  padding: 0.25rem 0.5rem;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  letter-spacing: -0.018em;
+  text-transform: none;
+}
+
+.reveal .slides section:not(.title-slide) > h2 {
+  color: $azul-profundo;
+  border-bottom: 0.14rem solid $bronze;
+  padding-bottom: 0.38rem;
+  margin-bottom: 0.8rem;
+  width: 100%;
+}
+
+.reveal h3 {
+  color: $azul-ardosia;
+}
+
+.reveal .title-slide {
+  color: $branco;
+}
+
+.reveal .title-slide h1,
+.reveal .title-slide .author,
+.reveal .title-slide .date {
+  color: $branco;
+}
+
+.reveal .title-slide .subtitle {
+  color: $cinza-perola;
+}
+
+.reveal .slides section.capitulo {
+  color: $azul-profundo;
+}
+
+.reveal .slides section.secao {
+  color: $branco;
+}
+
+.reveal .slides section.exemplo {
+  color: $azul-profundo;
+}
+
+.reveal .slides section.secao h1,
+.reveal .slides section.secao h2 {
+  color: $branco;
+}
+
+.reveal .slides section.capitulo h1,
+.reveal .slides section.capitulo h2,
+.reveal .slides section.exemplo h1,
+.reveal .slides section.exemplo h2 {
+  color: $azul-profundo;
+}
+
+.reveal blockquote {
+  color: $azul-ardosia;
+  border-left: 0.22rem solid $bronze;
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: rgba($areia, 0.2);
+  padding: 0.7rem 0.95rem;
+}
+
+.reveal ul li::marker,
+.reveal ol li::marker {
+  color: $bronze;
+}
+
+.reveal table {
+  border: 1px solid rgba($azul-ardosia, 0.16);
+  background: rgba($branco, 0.78);
+  box-shadow: 0 0.22rem 0.65rem rgba($azul-profundo, 0.06);
+}
+
+.reveal table thead {
+  color: $branco;
+  background: $azul-profundo;
+}
+
+.reveal table th,
+.reveal table td {
+  padding: 0.42rem 0.55rem;
+}
+
+.reveal .quarto-figure,
+.reveal p:has(> img) {
+  text-align: center;
+}
+
+.reveal img {
+  border-radius: 0.45rem;
+}
+
+.reveal code {
+  border-radius: 0.2rem;
+}
+
+.reveal .slide-logo {
+  max-height: 2.2rem !important;
+  right: 1rem !important;
+  bottom: 0.7rem !important;
+}
+
+.reveal .slide-number {
+  color: $azul-ardosia;
+  background: transparent;
+  font-family: "Segoe UI", Inter, system-ui, sans-serif;
+}
+
