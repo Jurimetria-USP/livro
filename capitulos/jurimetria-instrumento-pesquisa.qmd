@@ -99,7 +99,7 @@ Ter pessoas que entendam bem sobre o tema é fundamental para o sucesso do proje
 
 ### Bom conhecimento do Direito
 
-Conforme observa Ricardo Trezzi, cada esfera do Poder possui seus próprios atos processuais. Os **atos processuais** são o registro formal das **ações dentro de um processo**. Compreender esses atos é fundamental para determinar quando e como coletar as informações dentro da estrutura processual. Algus exemplos de atos processuais no Judiciários são:
+Conforme observa Ricardo Feliz, cada esfera do Poder possui seus próprios atos processuais. Os **atos processuais** são o registro formal das **ações dentro de um processo**. Compreender esses atos é fundamental para determinar quando e como coletar as informações dentro da estrutura processual. Algus exemplos de atos processuais no Judiciários são:
 
 -   Sentença; Acórdão; Decisão liminar; Decisão monocrática
 -   Petição inicial; Contestação
@@ -108,7 +108,7 @@ Conforme observa Ricardo Trezzi, cada esfera do Poder possui seus próprios atos
 
 Ter clareza sobre esses atos permite organizar a coleta de dados de forma precisa e consistente, garantindo que cada informação seja extraída no momento adequado do processo.
 
-![Fluxo da recuperação judicial. Fonte: Ricardo Trezzi.](../imagens/fundamentos/fluxo-recuperacao-judicial-v2.png){.lightbox fig-align="center" width="100%"}
+![Fluxo da recuperação judicial. Fonte: Ricardo Feliz.](../imagens/fundamentos/fluxo-recuperacao-judicial-v2.png){.lightbox fig-align="center" width="100%"}
 
 ### Bom Desenho de Projeto
 
@@ -177,4 +177,4 @@ O ciclo da pesquisa nem sempre segue um caminho linear ou fácil; frequentemente
 -   Métricas de desempenho;
 -   Publicação dos resultados.
 
-![Percurso da pesquisa. Fonte: Fabiana Severo.](../imagens/fundamentos/percurso-pesquisa.png){.lightbox fig-align="center" width="100%"}
+![Percurso da pesquisa. Fonte: Fabiana Severi.](../imagens/fundamentos/percurso-pesquisa.png){.lightbox fig-align="center" width="100%"}
