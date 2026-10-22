@@ -6,13 +6,19 @@ author:
 format: html
 ---
 
-### O percurso deste capítulo
+## O percurso deste capítulo
 
 No capítulo anterior, discutimos o método científico como um protocolo para produzir conhecimento.
 
 Agora, partimos desse protocolo para organizar o percurso da investigação:
 
-**Problema → Pergunta → Dados → Evidência → Conclusão**
+```{mermaid}
+flowchart LR
+    A[Problema] --> B[Pergunta]
+    B --> C[Dados]
+    C --> D[Evidência]
+    D --> E[Conclusão]
+```
 
 O método orienta a investigação, mas não define automaticamente **o que perguntar**, **quais dados procurar** ou **o que podemos concluir**. Essas decisões precisam permanecer conectadas durante toda a pesquisa. Uma pergunta bem formulada orienta a construção dos dados; os dados delimitam as evidências que podem ser produzidas; e essas evidências definem o alcance legítimo da conclusão.
 
@@ -23,20 +29,11 @@ O método orienta a investigação, mas não define automaticamente **o que perg
 > “Escolher bons problemas é essencial para ser um bom cientista.”  
 > — Uri Alon (2009)
 
-Boas escolhas:
-
-- permitem descobrir novos conhecimentos de forma competente;
-- permitem que o pesquisador se expresse por meio da pesquisa;
-- ajudam a organizar as decisões que serão tomadas ao longo da investigação.
+Escolher a pergunta organiza as decisões tomadas ao longo da investigação e delimita a contribuição pretendida. A escolha também expressa quais problemas o pesquisador considera relevantes e como pretende examiná-los.
 
 ### O papel do grupo de pesquisa
 
-O grupo de pesquisa:
-
-- é um **ambiente estimulante** que tenta maximizar o potencial do estudante como cientista e ser humano;
-- ajuda na escolha de problemas que promovam crescimento e pesquisa automotivada;
-- oferece espaço para apresentar ideias, reconhecer dificuldades e reformular caminhos;
-- não substitui a curiosidade e a responsabilidade do pesquisador pela pergunta escolhida.
+O grupo de pesquisa oferece condições para discutir problemas, apresentar ideias, reconhecer dificuldades e reformular caminhos. Também auxilia na escolha de questões compatíveis com a formação e com as condições de execução do pesquisador. Esse apoio não substitui a responsabilidade do pesquisador pela pergunta escolhida.
 
 ### O que é um bom problema?
 
@@ -44,34 +41,24 @@ Um bom problema científico deve ser:
 
 - **Viável**: possível de realizar com os recursos e o tempo disponíveis.
 - **Interessante**: capaz de gerar conhecimento real.
-- **Motivador**: algo que desperte curiosidade genuína.
+- **Motivador**: capaz de sustentar o interesse do pesquisador durante a investigação.
 - **Formador**: permite crescimento e aprendizado.
 
 ### Os dois eixos: viabilidade e interesse
 
 ![](../slides/fundamentos/pergunta-dados-evidencia/imagens/feas_int_diag.png){width=50%}
 
-- **Eixo X — Viabilidade:** tempo para conclusão e habilidades disponíveis no grupo.
-- **Eixo Y — Interesse:** distância em relação ao conhecimento existente e contribuição esperada.
+Na figura, o **eixo X representa a viabilidade**, considerada a partir do tempo necessário para a conclusão e das habilidades disponíveis no grupo. O **eixo Y representa o interesse**, definido pela distância em relação ao conhecimento existente e pela contribuição esperada.
 
-O objetivo é procurar problemas simultaneamente viáveis e interessantes. Uma pergunta muito interessante, mas impossível de investigar com o tempo, os dados e as habilidades disponíveis, não constitui ainda um projeto executável. De modo semelhante, uma pergunta facilmente respondida, mas incapaz de produzir conhecimento relevante, pode não justificar o esforço da investigação.
+O objetivo é formular problemas que combinem viabilidade e interesse. Uma pergunta que não possa ser investigada com o tempo, os dados e as habilidades disponíveis não constitui um projeto executável. De modo semelhante, uma pergunta de execução simples, mas sem contribuição identificável, pode não justificar a investigação.
 
 ### A pergunta depende do estágio da pesquisa
 
-- **Estudantes de graduação no começo da carreira:** problemas mais delimitados, com retornos rápidos que permitam aprender o processo de pesquisa.
-- **Estudantes de pós-graduação:** podem avançar no eixo do interesse, mas precisam considerar prazos e condições de execução.
-- **Pesquisadores experientes:** podem se aventurar em problemas difíceis e inovadores, com horizontes longos e divisão em subprojetos.
-
-A mesma pergunta pode ser apropriada para um pesquisador e inviável para outro.
+Estudantes de graduação no começo da carreira tendem a se beneficiar de problemas mais delimitados, com retornos suficientemente rápidos para que possam aprender o processo de pesquisa. Estudantes de pós-graduação podem avançar no eixo do interesse, mas ainda precisam considerar prazos e condições de execução. Pesquisadores experientes, por sua vez, podem se aventurar em problemas difíceis e inovadores, com horizontes mais longos e possibilidade de divisão em subprojetos. Por isso, a mesma pergunta pode ser apropriada para um pesquisador e inviável para outro.
 
 ### A importância da exploração inicial
 
-Um erro frequente é aceitar o primeiro problema que aparece.
-
-- Escolhas rápidas podem levar à frustração.
-- Cada semana dedicada à escolha pode evitar meses ou anos de trabalho em uma direção pouco produtiva.
-- Ler, discutir, conhecer os dados e planejar **também é pesquisa**.
-- Ter uma pergunta clara não significa conhecer antecipadamente todas as respostas.
+Aceitar o primeiro problema identificado pode comprometer o desenvolvimento da pesquisa. O tempo dedicado à escolha pode evitar o investimento prolongado em uma direção que posteriormente se revele inviável. Ler, discutir, conhecer os dados e planejar **também é pesquisa**. Ter uma pergunta definida não significa conhecer antecipadamente as respostas.
 
 Uri Alon propõe que estudantes não se comprometam imediatamente com um projeto: antes disso, precisam explorar possibilidades.
 
@@ -79,22 +66,13 @@ Uri Alon propõe que estudantes não se comprometam imediatamente com um projeto
 
 Quem decide como ordenar o interesse dos diferentes problemas?
 
-O interesse é **subjetivo** e **pessoal**.
-
-- Um problema que instiga pessoalmente ajuda a manter a motivação.
-- A voz interna pode ser nutrida e guiada por orientadores cuidadosos.
-- Orientar também significa ajudar cada pesquisador a identificar o padrão de questões que desperta sua curiosidade.
+O interesse possui uma dimensão **subjetiva** e **pessoal**. A relação do pesquisador com o problema contribui para a continuidade do trabalho. A orientação pode auxiliar na identificação das questões que mobilizam sua curiosidade e na avaliação de sua viabilidade científica.
 
 > “Se eu fosse a única pessoa no mundo, qual desses problemas eu gostaria de resolver?”
 
 ### Pesquisa como expressão
 
-O projeto que consideramos interessante expressa o nosso filtro pessoal e a forma como percebemos o mundo.
-
-- Esse filtro envolve valores sobre o que consideramos bom, relevante, verdadeiro ou digno de investigação.
-- A multiplicidade de estilos e questões é uma das bases de uma ciência criativa e viável.
-- Bons problemas estão ligados à nossa visão de mundo.
-- Quando conseguimos nos expressar na ciência, o trabalho ganha significado pessoal.
+O projeto selecionado expressa o modo como o pesquisador percebe o mundo e define o que considera relevante para investigação. Diferentes trajetórias conduzem a distintas questões, estratégias e contribuições. A pesquisa também constitui uma forma de expressão intelectual, desde que as escolhas sejam submetidas aos procedimentos de verificação exigidos pelo método científico.
 
 ## A jornada da pesquisa
 
@@ -108,18 +86,9 @@ O segundo representa o caminho real: não linear, marcado por incertezas, result
 
 ### O caminho real
 
-No caminho idealizado:
+No caminho idealizado, os desvios não são tolerados e a resposta B continua sendo perseguida mesmo quando o custo se torna muito alto. O compromisso rígido com a resposta esperada pode, assim, gerar frustração.
 
-- os desvios não são tolerados;
-- busca-se a resposta B mesmo quando o custo se torna muito alto;
-- o compromisso com a resposta esperada pode gerar frustração.
-
-No caminho real:
-
-- experimentos e estratégias podem não funcionar;
-- algumas suposições se mostram inadequadas;
-- uma fase de confusão pode permitir a entrada do desconhecido;
-- podemos encontrar uma resposta **C**, mais interessante e viável que **B**.
+No caminho real, experimentos e estratégias podem não funcionar, e algumas suposições se mostram inadequadas. Uma fase de confusão pode permitir a entrada do desconhecido e conduzir a uma resposta **C**, mais interessante e viável que **B**.
 
 ### Quando a pergunta precisa mudar
 
@@ -127,28 +96,13 @@ No caminho real:
 
 Entretanto, a mudança precisa ser consciente e registrada.
 
-Reformular não significa abandonar a pesquisa. Pode significar:
-
-- delimitar melhor o fenômeno;
-- adequar o alcance da pergunta;
-- reconhecer uma limitação da fonte;
-- identificar uma pergunta mais interessante;
-- seguir uma descoberta que não estava prevista.
+Reformular não significa abandonar a pesquisa. A mudança pode delimitar melhor o fenômeno, adequar o alcance da pergunta, reconhecer uma limitação da fonte, identificar uma questão mais interessante ou seguir uma descoberta que não estava prevista.
 
 ## Da pergunta aos dados
 
 ### Uma pergunta precisa ser investigável
 
-Uma pergunta não é adequada apenas porque parece interessante.
-
-Precisamos compreender:
-
-- quais informações seriam necessárias para respondê-la;
-- o que cada registro deverá representar;
-- quais grupos, períodos e lugares serão observados;
-- quais informações estão disponíveis;
-- quais informações precisarão ser construídas;
-- quais limitações a fonte impõe à análise.
+Uma pergunta não é adequada apenas porque parece interessante. Precisamos compreender quais informações seriam necessárias para respondê-la, o que cada registro deverá representar e quais grupos, períodos e lugares serão observados. Também é necessário distinguir as informações já disponíveis daquelas que precisarão ser construídas e reconhecer as limitações impostas pela fonte à análise.
 
 ## Exemplo jurídico: violência psicológica
 
@@ -166,13 +120,7 @@ Para produzir evidências, precisamos transformar essa inquietação em pergunta
 
 > Como o artigo 147-B tem sido mobilizado nas denúncias e nas decisões de primeira instância do Tribunal de Justiça de São Paulo?
 
-Essa formulação delimita:
-
-- o dispositivo jurídico observado;
-- os documentos que serão examinados;
-- a etapa do processo judicial;
-- o tribunal de interesse;
-- o tipo de prática institucional que será descrita.
+Essa formulação delimita o dispositivo jurídico observado, os documentos examinados, a etapa do processo judicial, o tribunal de interesse e o tipo de prática institucional que será descrita.
 
 Ela não resolve, por si só, todos os problemas da investigação. Mas orienta a procura pelos dados.
 
@@ -210,12 +158,7 @@ Antes de contar linhas, calcular proporções ou remover duplicidades, precisamo
 
 Uma pesquisa pode coletar processos e analisar mais de um documento de cada processo.
 
-No estudo sobre o artigo 147-B:
-
-- foram identificados 2.215 processos a partir dos parâmetros de busca;
-- depois da exclusão de duplicidades, permaneceram 2.211 processos;
-- foram coletadas 2.207 sentenças;
-- foram analisadas 2.112 denúncias correspondentes.
+No estudo sobre o artigo 147-B, foram identificados 2.215 processos a partir dos parâmetros de busca. Depois da exclusão de duplicidades, permaneceram 2.211 processos. Foram coletadas 2.207 sentenças e analisadas 2.112 denúncias correspondentes.
 
 Esses números não são equivalentes. Processo, sentença e denúncia cumprem papéis distintos na investigação.
 
@@ -233,12 +176,7 @@ Em pesquisas com decisões judiciais, o material recuperado por mecanismos de co
 
 A pergunta precisa ser compatível com a cobertura dos dados.
 
-No exemplo do artigo 147-B, o recorte considera:
-
-- processos julgados em primeira instância;
-- Tribunal de Justiça de São Paulo;
-- período entre 28 de julho de 2021 e 8 de outubro de 2024;
-- decisões recuperadas por palavras-chave e assuntos jurídicos definidos na consulta.
+No exemplo do artigo 147-B, o recorte compreende processos julgados em primeira instância no Tribunal de Justiça de São Paulo, entre 28 de julho de 2021 e 8 de outubro de 2024. As decisões foram recuperadas por palavras-chave e assuntos jurídicos definidos na consulta.
 
 Tribunal, instância, período, documento e parâmetros de busca fazem parte da definição da pesquisa.
 
@@ -253,6 +191,31 @@ Uma pergunta jurídica raramente corresponde diretamente a uma coluna pronta.
 | **Variável recodificada** | agrupamento dos dispositivos por tipo de violência |
 | **Indicador construído** | aplicação ou não do artigo 147-B |
 | **Medida calculada** | proporção de sentenças em que o artigo foi aplicado |
+
+### Da evidência ao argumento
+
+Depois de transformar os documentos em variáveis, podemos examinar como os diferentes tipos penais aparecem nas decisões. No artigo que orienta este exemplo, um dos resultados centrais é a baixa frequência com que o artigo 147-B aparece isoladamente como fundamento da condenação. O quadro a seguir reproduz o resultado apresentado pelos autores.
+
+**Quadro — Condenação isolada por artigo com e sem a presença de agravantes.** Reprodução do Quadro 4, com adaptação de formato.
+
+| Artigo | Frequência (%) |
+|---|---:|
+| Art. 147 do Código Penal | 314 (19,5%) |
+| Art. 147-A do Código Penal | 211 (13,1%) |
+| Art. 129, §§ 9º e 13, do Código Penal | 174 (10,9%) |
+| Art. 24-A da Lei Maria da Penha | 172 (10,7%) |
+| Art. 147-B do Código Penal | 32 (1,2%) |
+| Art. 21 do Decreto-Lei nº 3.688/1941 | 17 (1%) |
+| Art. 150 do Código Penal | 7 (0,43%) |
+| Art. 213 do Código Penal | 1 (0,06%) |
+| Art. 121, § 2º-A, do Código Penal | 0 (0%) |
+| **Total** | **928 (57,7%)** |
+
+**Fonte:** reprodução, com adaptação de formato, do Quadro 4 de Goto, Severi e Nicolella, *Criminalizar é proteger? Um estudo sobre a aplicação do Art. 147-B nos casos de violência psicológica contra mulheres no TJSP*.
+
+Entre os 1.609 processos julgados integralmente procedentes considerados nessa etapa do estudo, o artigo 147-B apareceu isoladamente em 32 sentenças, correspondentes a 1,2% do total analisado. Ameaça, perseguição, lesão corporal e descumprimento de medida protetiva apresentaram frequências superiores. O resultado sustenta a afirmação delimitada de que a aplicação isolada do artigo 147-B foi baixa no corpus e no período examinados.
+
+O quadro, entretanto, não permite concluir sozinho que a criminalização foi ineficaz ou que não ampliou a proteção das mulheres. Essa conclusão exigiria outras evidências e um desenho capaz de avaliar os efeitos da mudança legislativa. A diferença entre essas duas afirmações mostra por que a conclusão precisa respeitar a pergunta, os dados e a estratégia de análise.
 
 ### Os dados realmente permitem responder?
 
@@ -290,7 +253,7 @@ A mudança precisa ser consciente, justificada e documentada.
 
 Essa sequência representa uma progressão na exigência da evidência, não uma escala de importância.
 
-Uma boa análise descritiva pode ser mais útil e confiável do que uma tentativa frágil de demonstrar causalidade.
+Uma análise descritiva compatível com os dados pode oferecer conclusões mais sustentadas do que uma tentativa de demonstrar causalidade sem desenho adequado.
 
 ### Perguntas diferentes sobre o mesmo fenômeno
 
@@ -321,33 +284,17 @@ Pergunte:
 
 > Como os elementos probatórios registrados nos acórdãos se relacionam com o reconhecimento de sua suficiência e com os desfechos das demandas cíveis de violência de gênero digital?
 
-A pergunta conecta três dimensões:
-
-- os tipos de prova apresentados;
-- a avaliação judicial de sua suficiência;
-- os resultados das demandas reparatórias.
+A pergunta conecta os tipos de prova apresentados, a avaliação judicial de sua suficiência e os resultados das demandas reparatórias.
 
 ### Os dados e o desenho
 
-A investigação utiliza:
-
-- 642 acórdãos de apelação;
-- seis Tribunais de Justiça brasileiros;
-- decisões proferidas entre 2010 e 2025;
-- análise quantitativa do conjunto dos acórdãos;
-- análise qualitativa aprofundada de oito decisões envolvendo plataformas digitais.
+A investigação utiliza 642 acórdãos de apelação, provenientes de seis Tribunais de Justiça brasileiros e proferidos entre 2010 e 2025. O desenho combina uma análise quantitativa do conjunto dos acórdãos com uma análise qualitativa aprofundada de oito decisões envolvendo plataformas digitais.
 
 A unidade de observação da análise quantitativa é o **acórdão de apelação**.
 
 ### O que a evidência permite afirmar?
 
-Os dados permitem:
-
-- descrever os tipos de prova mencionados nos acórdãos;
-- examinar associações entre provas, suficiência probatória e resultados;
-- comparar padrões entre contextos e tribunais representados na base;
-- analisar as justificativas utilizadas em decisões selecionadas;
-- discutir a atuação das plataformas na preservação e no fornecimento de dados.
+Os dados permitem descrever os tipos de prova mencionados nos acórdãos, examinar associações entre provas, suficiência probatória e resultados e comparar padrões entre os contextos e tribunais representados na base. A análise qualitativa permite examinar as justificativas utilizadas em decisões selecionadas e discutir a atuação das plataformas na preservação e no fornecimento de dados.
 
 Essas evidências não permitem generalizar automaticamente os resultados para todo o sistema de justiça brasileiro.
 
@@ -369,9 +316,15 @@ Uma análise pode estar tecnicamente correta e, ainda assim, produzir uma conclu
 
 Isso ocorre quando afirmamos mais do que os dados e o desenho da investigação permitem sustentar.
 
-A conclusão deve preservar a conexão entre:
+A conclusão deve preservar a conexão entre todas as etapas da investigação:
 
-**Pergunta → Dados → Estratégia de análise → Evidência → Conclusão**
+```{mermaid}
+flowchart LR
+    A[Pergunta] --> B[Dados]
+    B --> C[Estratégia de análise]
+    C --> D[Evidência]
+    D --> E[Conclusão]
+```
 
 ### Dizer apenas o que a evidência sustenta
 
@@ -398,14 +351,9 @@ Uma formulação compatível com uma investigação delimitada poderia ser:
 
 ### A pergunta amadurece durante a pesquisa
 
-O percurso não termina exatamente como foi inicialmente imaginado.
+O percurso não termina exatamente como foi inicialmente imaginado. A leitura modifica a pergunta, os dados revelam limitações e possibilidades e a análise pode produzir resultados inesperados. A conclusão, por sua vez, pode abrir uma nova pergunta.
 
-- A leitura modifica a pergunta.
-- Os dados revelam limitações e possibilidades.
-- A análise pode produzir resultados inesperados.
-- A conclusão pode abrir uma nova pergunta.
-
-Reformular não significa fracassar. O importante é registrar o que mudou, por que mudou e como essa mudança afeta o alcance da investigação.
+Reformular não encerra a pesquisa. É necessário registrar o que mudou, por que mudou e como essa mudança afeta o alcance da investigação.
 
 ## Síntese
 

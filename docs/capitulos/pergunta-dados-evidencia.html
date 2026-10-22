@@ -76,6 +76,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Procurar"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../estilos.css">
@@ -334,69 +337,70 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Nesta página</h2>
    
   <ul>
-  <li><a href="#o-percurso-deste-capítulo" id="toc-o-percurso-deste-capítulo" class="nav-link active" data-scroll-target="#o-percurso-deste-capítulo"><span class="header-section-number">2.0.1</span> O percurso deste capítulo</a></li>
-  <li><a href="#como-escolher-uma-boa-pergunta" id="toc-como-escolher-uma-boa-pergunta" class="nav-link" data-scroll-target="#como-escolher-uma-boa-pergunta"><span class="header-section-number">2.1</span> Como escolher uma boa pergunta</a>
+  <li><a href="#o-percurso-deste-capítulo" id="toc-o-percurso-deste-capítulo" class="nav-link active" data-scroll-target="#o-percurso-deste-capítulo"><span class="header-section-number">2.1</span> O percurso deste capítulo</a></li>
+  <li><a href="#como-escolher-uma-boa-pergunta" id="toc-como-escolher-uma-boa-pergunta" class="nav-link" data-scroll-target="#como-escolher-uma-boa-pergunta"><span class="header-section-number">2.2</span> Como escolher uma boa pergunta</a>
   <ul class="collapse">
-  <li><a href="#escolher-a-pergunta-também-é-fazer-pesquisa" id="toc-escolher-a-pergunta-também-é-fazer-pesquisa" class="nav-link" data-scroll-target="#escolher-a-pergunta-também-é-fazer-pesquisa"><span class="header-section-number">2.1.1</span> Escolher a pergunta também é fazer pesquisa</a></li>
-  <li><a href="#o-papel-do-grupo-de-pesquisa" id="toc-o-papel-do-grupo-de-pesquisa" class="nav-link" data-scroll-target="#o-papel-do-grupo-de-pesquisa"><span class="header-section-number">2.1.2</span> O papel do grupo de pesquisa</a></li>
-  <li><a href="#o-que-é-um-bom-problema" id="toc-o-que-é-um-bom-problema" class="nav-link" data-scroll-target="#o-que-é-um-bom-problema"><span class="header-section-number">2.1.3</span> O que é um bom problema?</a></li>
-  <li><a href="#os-dois-eixos-viabilidade-e-interesse" id="toc-os-dois-eixos-viabilidade-e-interesse" class="nav-link" data-scroll-target="#os-dois-eixos-viabilidade-e-interesse"><span class="header-section-number">2.1.4</span> Os dois eixos: viabilidade e interesse</a></li>
-  <li><a href="#a-pergunta-depende-do-estágio-da-pesquisa" id="toc-a-pergunta-depende-do-estágio-da-pesquisa" class="nav-link" data-scroll-target="#a-pergunta-depende-do-estágio-da-pesquisa"><span class="header-section-number">2.1.5</span> A pergunta depende do estágio da pesquisa</a></li>
-  <li><a href="#a-importância-da-exploração-inicial" id="toc-a-importância-da-exploração-inicial" class="nav-link" data-scroll-target="#a-importância-da-exploração-inicial"><span class="header-section-number">2.1.6</span> A importância da exploração inicial</a></li>
-  <li><a href="#a-voz-interna" id="toc-a-voz-interna" class="nav-link" data-scroll-target="#a-voz-interna"><span class="header-section-number">2.1.7</span> A voz interna</a></li>
-  <li><a href="#pesquisa-como-expressão" id="toc-pesquisa-como-expressão" class="nav-link" data-scroll-target="#pesquisa-como-expressão"><span class="header-section-number">2.1.8</span> Pesquisa como expressão</a></li>
+  <li><a href="#escolher-a-pergunta-também-é-fazer-pesquisa" id="toc-escolher-a-pergunta-também-é-fazer-pesquisa" class="nav-link" data-scroll-target="#escolher-a-pergunta-também-é-fazer-pesquisa"><span class="header-section-number">2.2.1</span> Escolher a pergunta também é fazer pesquisa</a></li>
+  <li><a href="#o-papel-do-grupo-de-pesquisa" id="toc-o-papel-do-grupo-de-pesquisa" class="nav-link" data-scroll-target="#o-papel-do-grupo-de-pesquisa"><span class="header-section-number">2.2.2</span> O papel do grupo de pesquisa</a></li>
+  <li><a href="#o-que-é-um-bom-problema" id="toc-o-que-é-um-bom-problema" class="nav-link" data-scroll-target="#o-que-é-um-bom-problema"><span class="header-section-number">2.2.3</span> O que é um bom problema?</a></li>
+  <li><a href="#os-dois-eixos-viabilidade-e-interesse" id="toc-os-dois-eixos-viabilidade-e-interesse" class="nav-link" data-scroll-target="#os-dois-eixos-viabilidade-e-interesse"><span class="header-section-number">2.2.4</span> Os dois eixos: viabilidade e interesse</a></li>
+  <li><a href="#a-pergunta-depende-do-estágio-da-pesquisa" id="toc-a-pergunta-depende-do-estágio-da-pesquisa" class="nav-link" data-scroll-target="#a-pergunta-depende-do-estágio-da-pesquisa"><span class="header-section-number">2.2.5</span> A pergunta depende do estágio da pesquisa</a></li>
+  <li><a href="#a-importância-da-exploração-inicial" id="toc-a-importância-da-exploração-inicial" class="nav-link" data-scroll-target="#a-importância-da-exploração-inicial"><span class="header-section-number">2.2.6</span> A importância da exploração inicial</a></li>
+  <li><a href="#a-voz-interna" id="toc-a-voz-interna" class="nav-link" data-scroll-target="#a-voz-interna"><span class="header-section-number">2.2.7</span> A voz interna</a></li>
+  <li><a href="#pesquisa-como-expressão" id="toc-pesquisa-como-expressão" class="nav-link" data-scroll-target="#pesquisa-como-expressão"><span class="header-section-number">2.2.8</span> Pesquisa como expressão</a></li>
   </ul></li>
-  <li><a href="#a-jornada-da-pesquisa" id="toc-a-jornada-da-pesquisa" class="nav-link" data-scroll-target="#a-jornada-da-pesquisa"><span class="header-section-number">2.2</span> A jornada da pesquisa</a>
+  <li><a href="#a-jornada-da-pesquisa" id="toc-a-jornada-da-pesquisa" class="nav-link" data-scroll-target="#a-jornada-da-pesquisa"><span class="header-section-number">2.3</span> A jornada da pesquisa</a>
   <ul class="collapse">
-  <li><a href="#do-ideal-ao-real" id="toc-do-ideal-ao-real" class="nav-link" data-scroll-target="#do-ideal-ao-real"><span class="header-section-number">2.2.1</span> Do ideal ao real</a></li>
-  <li><a href="#o-caminho-real" id="toc-o-caminho-real" class="nav-link" data-scroll-target="#o-caminho-real"><span class="header-section-number">2.2.2</span> O caminho real</a></li>
-  <li><a href="#quando-a-pergunta-precisa-mudar" id="toc-quando-a-pergunta-precisa-mudar" class="nav-link" data-scroll-target="#quando-a-pergunta-precisa-mudar"><span class="header-section-number">2.2.3</span> Quando a pergunta precisa mudar</a></li>
+  <li><a href="#do-ideal-ao-real" id="toc-do-ideal-ao-real" class="nav-link" data-scroll-target="#do-ideal-ao-real"><span class="header-section-number">2.3.1</span> Do ideal ao real</a></li>
+  <li><a href="#o-caminho-real" id="toc-o-caminho-real" class="nav-link" data-scroll-target="#o-caminho-real"><span class="header-section-number">2.3.2</span> O caminho real</a></li>
+  <li><a href="#quando-a-pergunta-precisa-mudar" id="toc-quando-a-pergunta-precisa-mudar" class="nav-link" data-scroll-target="#quando-a-pergunta-precisa-mudar"><span class="header-section-number">2.3.3</span> Quando a pergunta precisa mudar</a></li>
   </ul></li>
-  <li><a href="#da-pergunta-aos-dados" id="toc-da-pergunta-aos-dados" class="nav-link" data-scroll-target="#da-pergunta-aos-dados"><span class="header-section-number">2.3</span> Da pergunta aos dados</a>
+  <li><a href="#da-pergunta-aos-dados" id="toc-da-pergunta-aos-dados" class="nav-link" data-scroll-target="#da-pergunta-aos-dados"><span class="header-section-number">2.4</span> Da pergunta aos dados</a>
   <ul class="collapse">
-  <li><a href="#uma-pergunta-precisa-ser-investigável" id="toc-uma-pergunta-precisa-ser-investigável" class="nav-link" data-scroll-target="#uma-pergunta-precisa-ser-investigável"><span class="header-section-number">2.3.1</span> Uma pergunta precisa ser investigável</a></li>
+  <li><a href="#uma-pergunta-precisa-ser-investigável" id="toc-uma-pergunta-precisa-ser-investigável" class="nav-link" data-scroll-target="#uma-pergunta-precisa-ser-investigável"><span class="header-section-number">2.4.1</span> Uma pergunta precisa ser investigável</a></li>
   </ul></li>
-  <li><a href="#exemplo-jurídico-violência-psicológica" id="toc-exemplo-jurídico-violência-psicológica" class="nav-link" data-scroll-target="#exemplo-jurídico-violência-psicológica"><span class="header-section-number">2.4</span> Exemplo jurídico: violência psicológica</a>
+  <li><a href="#exemplo-jurídico-violência-psicológica" id="toc-exemplo-jurídico-violência-psicológica" class="nav-link" data-scroll-target="#exemplo-jurídico-violência-psicológica"><span class="header-section-number">2.5</span> Exemplo jurídico: violência psicológica</a>
   <ul class="collapse">
-  <li><a href="#do-problema-à-pergunta" id="toc-do-problema-à-pergunta" class="nav-link" data-scroll-target="#do-problema-à-pergunta"><span class="header-section-number">2.4.1</span> Do problema à pergunta</a></li>
-  <li><a href="#uma-pergunta-investigável" id="toc-uma-pergunta-investigável" class="nav-link" data-scroll-target="#uma-pergunta-investigável"><span class="header-section-number">2.4.2</span> Uma pergunta investigável</a></li>
-  <li><a href="#da-pergunta-às-informações-necessárias" id="toc-da-pergunta-às-informações-necessárias" class="nav-link" data-scroll-target="#da-pergunta-às-informações-necessárias"><span class="header-section-number">2.4.3</span> Da pergunta às informações necessárias</a></li>
-  <li><a href="#o-que-cada-linha-representa" id="toc-o-que-cada-linha-representa" class="nav-link" data-scroll-target="#o-que-cada-linha-representa"><span class="header-section-number">2.4.4</span> O que cada linha representa?</a></li>
-  <li><a href="#documentos-diferentes-unidades-diferentes" id="toc-documentos-diferentes-unidades-diferentes" class="nav-link" data-scroll-target="#documentos-diferentes-unidades-diferentes"><span class="header-section-number">2.4.5</span> Documentos diferentes, unidades diferentes</a></li>
-  <li><a href="#população-corpus-e-amostra" id="toc-população-corpus-e-amostra" class="nav-link" data-scroll-target="#população-corpus-e-amostra"><span class="header-section-number">2.4.6</span> População, corpus e amostra</a></li>
-  <li><a href="#recortes-temporal-e-institucional" id="toc-recortes-temporal-e-institucional" class="nav-link" data-scroll-target="#recortes-temporal-e-institucional"><span class="header-section-number">2.4.7</span> Recortes temporal e institucional</a></li>
-  <li><a href="#dos-documentos-às-variáveis" id="toc-dos-documentos-às-variáveis" class="nav-link" data-scroll-target="#dos-documentos-às-variáveis"><span class="header-section-number">2.4.8</span> Dos documentos às variáveis</a></li>
-  <li><a href="#os-dados-realmente-permitem-responder" id="toc-os-dados-realmente-permitem-responder" class="nav-link" data-scroll-target="#os-dados-realmente-permitem-responder"><span class="header-section-number">2.4.9</span> Os dados realmente permitem responder?</a></li>
-  <li><a href="#não-adapte-silenciosamente-a-pergunta-à-base" id="toc-não-adapte-silenciosamente-a-pergunta-à-base" class="nav-link" data-scroll-target="#não-adapte-silenciosamente-a-pergunta-à-base"><span class="header-section-number">2.4.10</span> Não adapte silenciosamente a pergunta à base</a></li>
+  <li><a href="#do-problema-à-pergunta" id="toc-do-problema-à-pergunta" class="nav-link" data-scroll-target="#do-problema-à-pergunta"><span class="header-section-number">2.5.1</span> Do problema à pergunta</a></li>
+  <li><a href="#uma-pergunta-investigável" id="toc-uma-pergunta-investigável" class="nav-link" data-scroll-target="#uma-pergunta-investigável"><span class="header-section-number">2.5.2</span> Uma pergunta investigável</a></li>
+  <li><a href="#da-pergunta-às-informações-necessárias" id="toc-da-pergunta-às-informações-necessárias" class="nav-link" data-scroll-target="#da-pergunta-às-informações-necessárias"><span class="header-section-number">2.5.3</span> Da pergunta às informações necessárias</a></li>
+  <li><a href="#o-que-cada-linha-representa" id="toc-o-que-cada-linha-representa" class="nav-link" data-scroll-target="#o-que-cada-linha-representa"><span class="header-section-number">2.5.4</span> O que cada linha representa?</a></li>
+  <li><a href="#documentos-diferentes-unidades-diferentes" id="toc-documentos-diferentes-unidades-diferentes" class="nav-link" data-scroll-target="#documentos-diferentes-unidades-diferentes"><span class="header-section-number">2.5.5</span> Documentos diferentes, unidades diferentes</a></li>
+  <li><a href="#população-corpus-e-amostra" id="toc-população-corpus-e-amostra" class="nav-link" data-scroll-target="#população-corpus-e-amostra"><span class="header-section-number">2.5.6</span> População, corpus e amostra</a></li>
+  <li><a href="#recortes-temporal-e-institucional" id="toc-recortes-temporal-e-institucional" class="nav-link" data-scroll-target="#recortes-temporal-e-institucional"><span class="header-section-number">2.5.7</span> Recortes temporal e institucional</a></li>
+  <li><a href="#dos-documentos-às-variáveis" id="toc-dos-documentos-às-variáveis" class="nav-link" data-scroll-target="#dos-documentos-às-variáveis"><span class="header-section-number">2.5.8</span> Dos documentos às variáveis</a></li>
+  <li><a href="#da-evidência-ao-argumento" id="toc-da-evidência-ao-argumento" class="nav-link" data-scroll-target="#da-evidência-ao-argumento"><span class="header-section-number">2.5.9</span> Da evidência ao argumento</a></li>
+  <li><a href="#os-dados-realmente-permitem-responder" id="toc-os-dados-realmente-permitem-responder" class="nav-link" data-scroll-target="#os-dados-realmente-permitem-responder"><span class="header-section-number">2.5.10</span> Os dados realmente permitem responder?</a></li>
+  <li><a href="#não-adapte-silenciosamente-a-pergunta-à-base" id="toc-não-adapte-silenciosamente-a-pergunta-à-base" class="nav-link" data-scroll-target="#não-adapte-silenciosamente-a-pergunta-à-base"><span class="header-section-number">2.5.11</span> Não adapte silenciosamente a pergunta à base</a></li>
   </ul></li>
-  <li><a href="#dos-dados-à-evidência" id="toc-dos-dados-à-evidência" class="nav-link" data-scroll-target="#dos-dados-à-evidência"><span class="header-section-number">2.5</span> Dos dados à evidência</a>
+  <li><a href="#dos-dados-à-evidência" id="toc-dos-dados-à-evidência" class="nav-link" data-scroll-target="#dos-dados-à-evidência"><span class="header-section-number">2.6</span> Dos dados à evidência</a>
   <ul class="collapse">
-  <li><a href="#perguntas-diferentes-exigem-evidências-diferentes" id="toc-perguntas-diferentes-exigem-evidências-diferentes" class="nav-link" data-scroll-target="#perguntas-diferentes-exigem-evidências-diferentes"><span class="header-section-number">2.5.1</span> Perguntas diferentes exigem evidências diferentes</a></li>
-  <li><a href="#perguntas-diferentes-sobre-o-mesmo-fenômeno" id="toc-perguntas-diferentes-sobre-o-mesmo-fenômeno" class="nav-link" data-scroll-target="#perguntas-diferentes-sobre-o-mesmo-fenômeno"><span class="header-section-number">2.5.2</span> Perguntas diferentes sobre o mesmo fenômeno</a></li>
-  <li><a href="#uma-associação-não-responde-automaticamente-ao-porquê" id="toc-uma-associação-não-responde-automaticamente-ao-porquê" class="nav-link" data-scroll-target="#uma-associação-não-responde-automaticamente-ao-porquê"><span class="header-section-number">2.5.3</span> Uma associação não responde automaticamente ao porquê</a></li>
+  <li><a href="#perguntas-diferentes-exigem-evidências-diferentes" id="toc-perguntas-diferentes-exigem-evidências-diferentes" class="nav-link" data-scroll-target="#perguntas-diferentes-exigem-evidências-diferentes"><span class="header-section-number">2.6.1</span> Perguntas diferentes exigem evidências diferentes</a></li>
+  <li><a href="#perguntas-diferentes-sobre-o-mesmo-fenômeno" id="toc-perguntas-diferentes-sobre-o-mesmo-fenômeno" class="nav-link" data-scroll-target="#perguntas-diferentes-sobre-o-mesmo-fenômeno"><span class="header-section-number">2.6.2</span> Perguntas diferentes sobre o mesmo fenômeno</a></li>
+  <li><a href="#uma-associação-não-responde-automaticamente-ao-porquê" id="toc-uma-associação-não-responde-automaticamente-ao-porquê" class="nav-link" data-scroll-target="#uma-associação-não-responde-automaticamente-ao-porquê"><span class="header-section-number">2.6.3</span> Uma associação não responde automaticamente ao porquê</a></li>
   </ul></li>
-  <li><a href="#exemplo-jurídico-violência-de-gênero-digital" id="toc-exemplo-jurídico-violência-de-gênero-digital" class="nav-link" data-scroll-target="#exemplo-jurídico-violência-de-gênero-digital"><span class="header-section-number">2.6</span> Exemplo jurídico: violência de gênero digital</a>
+  <li><a href="#exemplo-jurídico-violência-de-gênero-digital" id="toc-exemplo-jurídico-violência-de-gênero-digital" class="nav-link" data-scroll-target="#exemplo-jurídico-violência-de-gênero-digital"><span class="header-section-number">2.7</span> Exemplo jurídico: violência de gênero digital</a>
   <ul class="collapse">
-  <li><a href="#a-pergunta" id="toc-a-pergunta" class="nav-link" data-scroll-target="#a-pergunta"><span class="header-section-number">2.6.1</span> A pergunta</a></li>
-  <li><a href="#os-dados-e-o-desenho" id="toc-os-dados-e-o-desenho" class="nav-link" data-scroll-target="#os-dados-e-o-desenho"><span class="header-section-number">2.6.2</span> Os dados e o desenho</a></li>
-  <li><a href="#o-que-a-evidência-permite-afirmar" id="toc-o-que-a-evidência-permite-afirmar" class="nav-link" data-scroll-target="#o-que-a-evidência-permite-afirmar"><span class="header-section-number">2.6.3</span> O que a evidência permite afirmar?</a></li>
-  <li><a href="#as-limitações-fazem-parte-da-evidência" id="toc-as-limitações-fazem-parte-da-evidência" class="nav-link" data-scroll-target="#as-limitações-fazem-parte-da-evidência"><span class="header-section-number">2.6.4</span> As limitações fazem parte da evidência</a></li>
+  <li><a href="#a-pergunta" id="toc-a-pergunta" class="nav-link" data-scroll-target="#a-pergunta"><span class="header-section-number">2.7.1</span> A pergunta</a></li>
+  <li><a href="#os-dados-e-o-desenho" id="toc-os-dados-e-o-desenho" class="nav-link" data-scroll-target="#os-dados-e-o-desenho"><span class="header-section-number">2.7.2</span> Os dados e o desenho</a></li>
+  <li><a href="#o-que-a-evidência-permite-afirmar" id="toc-o-que-a-evidência-permite-afirmar" class="nav-link" data-scroll-target="#o-que-a-evidência-permite-afirmar"><span class="header-section-number">2.7.3</span> O que a evidência permite afirmar?</a></li>
+  <li><a href="#as-limitações-fazem-parte-da-evidência" id="toc-as-limitações-fazem-parte-da-evidência" class="nav-link" data-scroll-target="#as-limitações-fazem-parte-da-evidência"><span class="header-section-number">2.7.4</span> As limitações fazem parte da evidência</a></li>
   </ul></li>
-  <li><a href="#da-evidência-à-conclusão" id="toc-da-evidência-à-conclusão" class="nav-link" data-scroll-target="#da-evidência-à-conclusão"><span class="header-section-number">2.7</span> Da evidência à conclusão</a>
+  <li><a href="#da-evidência-à-conclusão" id="toc-da-evidência-à-conclusão" class="nav-link" data-scroll-target="#da-evidência-à-conclusão"><span class="header-section-number">2.8</span> Da evidência à conclusão</a>
   <ul class="collapse">
-  <li><a href="#a-conclusão-precisa-responder-à-pergunta" id="toc-a-conclusão-precisa-responder-à-pergunta" class="nav-link" data-scroll-target="#a-conclusão-precisa-responder-à-pergunta"><span class="header-section-number">2.7.1</span> A conclusão precisa responder à pergunta</a></li>
-  <li><a href="#dizer-apenas-o-que-a-evidência-sustenta" id="toc-dizer-apenas-o-que-a-evidência-sustenta" class="nav-link" data-scroll-target="#dizer-apenas-o-que-a-evidência-sustenta"><span class="header-section-number">2.7.2</span> Dizer apenas o que a evidência sustenta</a></li>
-  <li><a href="#preservar-o-contexto-da-análise" id="toc-preservar-o-contexto-da-análise" class="nav-link" data-scroll-target="#preservar-o-contexto-da-análise"><span class="header-section-number">2.7.3</span> Preservar o contexto da análise</a></li>
-  <li><a href="#a-pergunta-amadurece-durante-a-pesquisa" id="toc-a-pergunta-amadurece-durante-a-pesquisa" class="nav-link" data-scroll-target="#a-pergunta-amadurece-durante-a-pesquisa"><span class="header-section-number">2.7.4</span> A pergunta amadurece durante a pesquisa</a></li>
+  <li><a href="#a-conclusão-precisa-responder-à-pergunta" id="toc-a-conclusão-precisa-responder-à-pergunta" class="nav-link" data-scroll-target="#a-conclusão-precisa-responder-à-pergunta"><span class="header-section-number">2.8.1</span> A conclusão precisa responder à pergunta</a></li>
+  <li><a href="#dizer-apenas-o-que-a-evidência-sustenta" id="toc-dizer-apenas-o-que-a-evidência-sustenta" class="nav-link" data-scroll-target="#dizer-apenas-o-que-a-evidência-sustenta"><span class="header-section-number">2.8.2</span> Dizer apenas o que a evidência sustenta</a></li>
+  <li><a href="#preservar-o-contexto-da-análise" id="toc-preservar-o-contexto-da-análise" class="nav-link" data-scroll-target="#preservar-o-contexto-da-análise"><span class="header-section-number">2.8.3</span> Preservar o contexto da análise</a></li>
+  <li><a href="#a-pergunta-amadurece-durante-a-pesquisa" id="toc-a-pergunta-amadurece-durante-a-pesquisa" class="nav-link" data-scroll-target="#a-pergunta-amadurece-durante-a-pesquisa"><span class="header-section-number">2.8.4</span> A pergunta amadurece durante a pesquisa</a></li>
   </ul></li>
-  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">2.8</span> Síntese</a>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">2.9</span> Síntese</a>
   <ul class="collapse">
-  <li><a href="#os-oito-insumos-na-produção-científica" id="toc-os-oito-insumos-na-produção-científica" class="nav-link" data-scroll-target="#os-oito-insumos-na-produção-científica"><span class="header-section-number">2.8.1</span> Os oito insumos na produção científica</a></li>
+  <li><a href="#os-oito-insumos-na-produção-científica" id="toc-os-oito-insumos-na-produção-científica" class="nav-link" data-scroll-target="#os-oito-insumos-na-produção-científica"><span class="header-section-number">2.9.1</span> Os oito insumos na produção científica</a></li>
   </ul></li>
-  <li><a href="#atividade" id="toc-atividade" class="nav-link" data-scroll-target="#atividade"><span class="header-section-number">2.9</span> Atividade</a>
+  <li><a href="#atividade" id="toc-atividade" class="nav-link" data-scroll-target="#atividade"><span class="header-section-number">2.10</span> Atividade</a>
   <ul class="collapse">
-  <li><a href="#formule-uma-pergunta-de-jurimetria" id="toc-formule-uma-pergunta-de-jurimetria" class="nav-link" data-scroll-target="#formule-uma-pergunta-de-jurimetria"><span class="header-section-number">2.9.1</span> Formule uma pergunta de jurimetria</a></li>
-  <li><a href="#verificação-final" id="toc-verificação-final" class="nav-link" data-scroll-target="#verificação-final"><span class="header-section-number">2.9.2</span> Verificação final</a></li>
+  <li><a href="#formule-uma-pergunta-de-jurimetria" id="toc-formule-uma-pergunta-de-jurimetria" class="nav-link" data-scroll-target="#formule-uma-pergunta-de-jurimetria"><span class="header-section-number">2.10.1</span> Formule uma pergunta de jurimetria</a></li>
+  <li><a href="#verificação-final" id="toc-verificação-final" class="nav-link" data-scroll-target="#verificação-final"><span class="header-section-number">2.10.2</span> Verificação final</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -430,159 +434,111 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="o-percurso-deste-capítulo" class="level3" data-number="2.0.1">
-<h3 data-number="2.0.1" class="anchored" data-anchor-id="o-percurso-deste-capítulo"><span class="header-section-number">2.0.1</span> O percurso deste capítulo</h3>
+<section id="o-percurso-deste-capítulo" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="o-percurso-deste-capítulo"><span class="header-section-number">2.1</span> O percurso deste capítulo</h2>
 <p>No capítulo anterior, discutimos o método científico como um protocolo para produzir conhecimento.</p>
 <p>Agora, partimos desse protocolo para organizar o percurso da investigação:</p>
-<p><strong>Problema → Pergunta → Dados → Evidência → Conclusão</strong></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Problema] --&gt; B[Pergunta]
+    B --&gt; C[Dados]
+    C --&gt; D[Evidência]
+    D --&gt; E[Conclusão]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p>O método orienta a investigação, mas não define automaticamente <strong>o que perguntar</strong>, <strong>quais dados procurar</strong> ou <strong>o que podemos concluir</strong>. Essas decisões precisam permanecer conectadas durante toda a pesquisa. Uma pergunta bem formulada orienta a construção dos dados; os dados delimitam as evidências que podem ser produzidas; e essas evidências definem o alcance legítimo da conclusão.</p>
 </section>
-<section id="como-escolher-uma-boa-pergunta" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="como-escolher-uma-boa-pergunta"><span class="header-section-number">2.1</span> Como escolher uma boa pergunta</h2>
-<section id="escolher-a-pergunta-também-é-fazer-pesquisa" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="escolher-a-pergunta-também-é-fazer-pesquisa"><span class="header-section-number">2.1.1</span> Escolher a pergunta também é fazer pesquisa</h3>
+<section id="como-escolher-uma-boa-pergunta" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="como-escolher-uma-boa-pergunta"><span class="header-section-number">2.2</span> Como escolher uma boa pergunta</h2>
+<section id="escolher-a-pergunta-também-é-fazer-pesquisa" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="escolher-a-pergunta-também-é-fazer-pesquisa"><span class="header-section-number">2.2.1</span> Escolher a pergunta também é fazer pesquisa</h3>
 <blockquote class="blockquote">
 <p>“Escolher bons problemas é essencial para ser um bom cientista.”<br>
 — Uri Alon (2009)</p>
 </blockquote>
-<p>Boas escolhas:</p>
-<ul>
-<li>permitem descobrir novos conhecimentos de forma competente;</li>
-<li>permitem que o pesquisador se expresse por meio da pesquisa;</li>
-<li>ajudam a organizar as decisões que serão tomadas ao longo da investigação.</li>
-</ul>
+<p>Escolher a pergunta organiza as decisões tomadas ao longo da investigação e delimita a contribuição pretendida. A escolha também expressa quais problemas o pesquisador considera relevantes e como pretende examiná-los.</p>
 </section>
-<section id="o-papel-do-grupo-de-pesquisa" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="o-papel-do-grupo-de-pesquisa"><span class="header-section-number">2.1.2</span> O papel do grupo de pesquisa</h3>
-<p>O grupo de pesquisa:</p>
-<ul>
-<li>é um <strong>ambiente estimulante</strong> que tenta maximizar o potencial do estudante como cientista e ser humano;</li>
-<li>ajuda na escolha de problemas que promovam crescimento e pesquisa automotivada;</li>
-<li>oferece espaço para apresentar ideias, reconhecer dificuldades e reformular caminhos;</li>
-<li>não substitui a curiosidade e a responsabilidade do pesquisador pela pergunta escolhida.</li>
-</ul>
+<section id="o-papel-do-grupo-de-pesquisa" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="o-papel-do-grupo-de-pesquisa"><span class="header-section-number">2.2.2</span> O papel do grupo de pesquisa</h3>
+<p>O grupo de pesquisa oferece condições para discutir problemas, apresentar ideias, reconhecer dificuldades e reformular caminhos. Também auxilia na escolha de questões compatíveis com a formação e com as condições de execução do pesquisador. Esse apoio não substitui a responsabilidade do pesquisador pela pergunta escolhida.</p>
 </section>
-<section id="o-que-é-um-bom-problema" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3" class="anchored" data-anchor-id="o-que-é-um-bom-problema"><span class="header-section-number">2.1.3</span> O que é um bom problema?</h3>
+<section id="o-que-é-um-bom-problema" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="o-que-é-um-bom-problema"><span class="header-section-number">2.2.3</span> O que é um bom problema?</h3>
 <p>Um bom problema científico deve ser:</p>
 <ul>
 <li><strong>Viável</strong>: possível de realizar com os recursos e o tempo disponíveis.</li>
 <li><strong>Interessante</strong>: capaz de gerar conhecimento real.</li>
-<li><strong>Motivador</strong>: algo que desperte curiosidade genuína.</li>
+<li><strong>Motivador</strong>: capaz de sustentar o interesse do pesquisador durante a investigação.</li>
 <li><strong>Formador</strong>: permite crescimento e aprendizado.</li>
 </ul>
 </section>
-<section id="os-dois-eixos-viabilidade-e-interesse" class="level3" data-number="2.1.4">
-<h3 data-number="2.1.4" class="anchored" data-anchor-id="os-dois-eixos-viabilidade-e-interesse"><span class="header-section-number">2.1.4</span> Os dois eixos: viabilidade e interesse</h3>
+<section id="os-dois-eixos-viabilidade-e-interesse" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="os-dois-eixos-viabilidade-e-interesse"><span class="header-section-number">2.2.4</span> Os dois eixos: viabilidade e interesse</h3>
 <p><img src="../slides/fundamentos/pergunta-dados-evidencia/imagens/feas_int_diag.png" class="img-fluid" style="width:50.0%"></p>
-<ul>
-<li><strong>Eixo X — Viabilidade:</strong> tempo para conclusão e habilidades disponíveis no grupo.</li>
-<li><strong>Eixo Y — Interesse:</strong> distância em relação ao conhecimento existente e contribuição esperada.</li>
-</ul>
-<p>O objetivo é procurar problemas simultaneamente viáveis e interessantes. Uma pergunta muito interessante, mas impossível de investigar com o tempo, os dados e as habilidades disponíveis, não constitui ainda um projeto executável. De modo semelhante, uma pergunta facilmente respondida, mas incapaz de produzir conhecimento relevante, pode não justificar o esforço da investigação.</p>
+<p>Na figura, o <strong>eixo X representa a viabilidade</strong>, considerada a partir do tempo necessário para a conclusão e das habilidades disponíveis no grupo. O <strong>eixo Y representa o interesse</strong>, definido pela distância em relação ao conhecimento existente e pela contribuição esperada.</p>
+<p>O objetivo é formular problemas que combinem viabilidade e interesse. Uma pergunta que não possa ser investigada com o tempo, os dados e as habilidades disponíveis não constitui um projeto executável. De modo semelhante, uma pergunta de execução simples, mas sem contribuição identificável, pode não justificar a investigação.</p>
 </section>
-<section id="a-pergunta-depende-do-estágio-da-pesquisa" class="level3" data-number="2.1.5">
-<h3 data-number="2.1.5" class="anchored" data-anchor-id="a-pergunta-depende-do-estágio-da-pesquisa"><span class="header-section-number">2.1.5</span> A pergunta depende do estágio da pesquisa</h3>
-<ul>
-<li><strong>Estudantes de graduação no começo da carreira:</strong> problemas mais delimitados, com retornos rápidos que permitam aprender o processo de pesquisa.</li>
-<li><strong>Estudantes de pós-graduação:</strong> podem avançar no eixo do interesse, mas precisam considerar prazos e condições de execução.</li>
-<li><strong>Pesquisadores experientes:</strong> podem se aventurar em problemas difíceis e inovadores, com horizontes longos e divisão em subprojetos.</li>
-</ul>
-<p>A mesma pergunta pode ser apropriada para um pesquisador e inviável para outro.</p>
+<section id="a-pergunta-depende-do-estágio-da-pesquisa" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="a-pergunta-depende-do-estágio-da-pesquisa"><span class="header-section-number">2.2.5</span> A pergunta depende do estágio da pesquisa</h3>
+<p>Estudantes de graduação no começo da carreira tendem a se beneficiar de problemas mais delimitados, com retornos suficientemente rápidos para que possam aprender o processo de pesquisa. Estudantes de pós-graduação podem avançar no eixo do interesse, mas ainda precisam considerar prazos e condições de execução. Pesquisadores experientes, por sua vez, podem se aventurar em problemas difíceis e inovadores, com horizontes mais longos e possibilidade de divisão em subprojetos. Por isso, a mesma pergunta pode ser apropriada para um pesquisador e inviável para outro.</p>
 </section>
-<section id="a-importância-da-exploração-inicial" class="level3" data-number="2.1.6">
-<h3 data-number="2.1.6" class="anchored" data-anchor-id="a-importância-da-exploração-inicial"><span class="header-section-number">2.1.6</span> A importância da exploração inicial</h3>
-<p>Um erro frequente é aceitar o primeiro problema que aparece.</p>
-<ul>
-<li>Escolhas rápidas podem levar à frustração.</li>
-<li>Cada semana dedicada à escolha pode evitar meses ou anos de trabalho em uma direção pouco produtiva.</li>
-<li>Ler, discutir, conhecer os dados e planejar <strong>também é pesquisa</strong>.</li>
-<li>Ter uma pergunta clara não significa conhecer antecipadamente todas as respostas.</li>
-</ul>
+<section id="a-importância-da-exploração-inicial" class="level3" data-number="2.2.6">
+<h3 data-number="2.2.6" class="anchored" data-anchor-id="a-importância-da-exploração-inicial"><span class="header-section-number">2.2.6</span> A importância da exploração inicial</h3>
+<p>Aceitar o primeiro problema identificado pode comprometer o desenvolvimento da pesquisa. O tempo dedicado à escolha pode evitar o investimento prolongado em uma direção que posteriormente se revele inviável. Ler, discutir, conhecer os dados e planejar <strong>também é pesquisa</strong>. Ter uma pergunta definida não significa conhecer antecipadamente as respostas.</p>
 <p>Uri Alon propõe que estudantes não se comprometam imediatamente com um projeto: antes disso, precisam explorar possibilidades.</p>
 </section>
-<section id="a-voz-interna" class="level3" data-number="2.1.7">
-<h3 data-number="2.1.7" class="anchored" data-anchor-id="a-voz-interna"><span class="header-section-number">2.1.7</span> A voz interna</h3>
+<section id="a-voz-interna" class="level3" data-number="2.2.7">
+<h3 data-number="2.2.7" class="anchored" data-anchor-id="a-voz-interna"><span class="header-section-number">2.2.7</span> A voz interna</h3>
 <p>Quem decide como ordenar o interesse dos diferentes problemas?</p>
-<p>O interesse é <strong>subjetivo</strong> e <strong>pessoal</strong>.</p>
-<ul>
-<li>Um problema que instiga pessoalmente ajuda a manter a motivação.</li>
-<li>A voz interna pode ser nutrida e guiada por orientadores cuidadosos.</li>
-<li>Orientar também significa ajudar cada pesquisador a identificar o padrão de questões que desperta sua curiosidade.</li>
-</ul>
+<p>O interesse possui uma dimensão <strong>subjetiva</strong> e <strong>pessoal</strong>. A relação do pesquisador com o problema contribui para a continuidade do trabalho. A orientação pode auxiliar na identificação das questões que mobilizam sua curiosidade e na avaliação de sua viabilidade científica.</p>
 <blockquote class="blockquote">
 <p>“Se eu fosse a única pessoa no mundo, qual desses problemas eu gostaria de resolver?”</p>
 </blockquote>
 </section>
-<section id="pesquisa-como-expressão" class="level3" data-number="2.1.8">
-<h3 data-number="2.1.8" class="anchored" data-anchor-id="pesquisa-como-expressão"><span class="header-section-number">2.1.8</span> Pesquisa como expressão</h3>
-<p>O projeto que consideramos interessante expressa o nosso filtro pessoal e a forma como percebemos o mundo.</p>
-<ul>
-<li>Esse filtro envolve valores sobre o que consideramos bom, relevante, verdadeiro ou digno de investigação.</li>
-<li>A multiplicidade de estilos e questões é uma das bases de uma ciência criativa e viável.</li>
-<li>Bons problemas estão ligados à nossa visão de mundo.</li>
-<li>Quando conseguimos nos expressar na ciência, o trabalho ganha significado pessoal.</li>
-</ul>
+<section id="pesquisa-como-expressão" class="level3" data-number="2.2.8">
+<h3 data-number="2.2.8" class="anchored" data-anchor-id="pesquisa-como-expressão"><span class="header-section-number">2.2.8</span> Pesquisa como expressão</h3>
+<p>O projeto selecionado expressa o modo como o pesquisador percebe o mundo e define o que considera relevante para investigação. Diferentes trajetórias conduzem a distintas questões, estratégias e contribuições. A pesquisa também constitui uma forma de expressão intelectual, desde que as escolhas sejam submetidas aos procedimentos de verificação exigidos pelo método científico.</p>
 </section>
 </section>
-<section id="a-jornada-da-pesquisa" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="a-jornada-da-pesquisa"><span class="header-section-number">2.2</span> A jornada da pesquisa</h2>
-<section id="do-ideal-ao-real" class="level3" data-number="2.2.1">
-<h3 data-number="2.2.1" class="anchored" data-anchor-id="do-ideal-ao-real"><span class="header-section-number">2.2.1</span> Do ideal ao real</h3>
+<section id="a-jornada-da-pesquisa" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="a-jornada-da-pesquisa"><span class="header-section-number">2.3</span> A jornada da pesquisa</h2>
+<section id="do-ideal-ao-real" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="do-ideal-ao-real"><span class="header-section-number">2.3.1</span> Do ideal ao real</h3>
 <p><img src="../slides/fundamentos/pergunta-dados-evidencia/imagens/research_schemas.png" class="img-fluid" style="width:70.0%"></p>
 <p>O primeiro esquema representa uma linha reta entre a pergunta <strong>A</strong> e a resposta esperada <strong>B</strong>.</p>
 <p>O segundo representa o caminho real: não linear, marcado por incertezas, resultados inesperados e descobertas.</p>
 </section>
-<section id="o-caminho-real" class="level3" data-number="2.2.2">
-<h3 data-number="2.2.2" class="anchored" data-anchor-id="o-caminho-real"><span class="header-section-number">2.2.2</span> O caminho real</h3>
-<p>No caminho idealizado:</p>
-<ul>
-<li>os desvios não são tolerados;</li>
-<li>busca-se a resposta B mesmo quando o custo se torna muito alto;</li>
-<li>o compromisso com a resposta esperada pode gerar frustração.</li>
-</ul>
-<p>No caminho real:</p>
-<ul>
-<li>experimentos e estratégias podem não funcionar;</li>
-<li>algumas suposições se mostram inadequadas;</li>
-<li>uma fase de confusão pode permitir a entrada do desconhecido;</li>
-<li>podemos encontrar uma resposta <strong>C</strong>, mais interessante e viável que <strong>B</strong>.</li>
-</ul>
+<section id="o-caminho-real" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="o-caminho-real"><span class="header-section-number">2.3.2</span> O caminho real</h3>
+<p>No caminho idealizado, os desvios não são tolerados e a resposta B continua sendo perseguida mesmo quando o custo se torna muito alto. O compromisso rígido com a resposta esperada pode, assim, gerar frustração.</p>
+<p>No caminho real, experimentos e estratégias podem não funcionar, e algumas suposições se mostram inadequadas. Uma fase de confusão pode permitir a entrada do desconhecido e conduzir a uma resposta <strong>C</strong>, mais interessante e viável que <strong>B</strong>.</p>
 </section>
-<section id="quando-a-pergunta-precisa-mudar" class="level3" data-number="2.2.3">
-<h3 data-number="2.2.3" class="anchored" data-anchor-id="quando-a-pergunta-precisa-mudar"><span class="header-section-number">2.2.3</span> Quando a pergunta precisa mudar</h3>
+<section id="quando-a-pergunta-precisa-mudar" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="quando-a-pergunta-precisa-mudar"><span class="header-section-number">2.3.3</span> Quando a pergunta precisa mudar</h3>
 <p>É normal reformular a pergunta quando conhecemos melhor a literatura, o campo e os dados.</p>
 <p>Entretanto, a mudança precisa ser consciente e registrada.</p>
-<p>Reformular não significa abandonar a pesquisa. Pode significar:</p>
-<ul>
-<li>delimitar melhor o fenômeno;</li>
-<li>adequar o alcance da pergunta;</li>
-<li>reconhecer uma limitação da fonte;</li>
-<li>identificar uma pergunta mais interessante;</li>
-<li>seguir uma descoberta que não estava prevista.</li>
-</ul>
+<p>Reformular não significa abandonar a pesquisa. A mudança pode delimitar melhor o fenômeno, adequar o alcance da pergunta, reconhecer uma limitação da fonte, identificar uma questão mais interessante ou seguir uma descoberta que não estava prevista.</p>
 </section>
 </section>
-<section id="da-pergunta-aos-dados" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="da-pergunta-aos-dados"><span class="header-section-number">2.3</span> Da pergunta aos dados</h2>
-<section id="uma-pergunta-precisa-ser-investigável" class="level3" data-number="2.3.1">
-<h3 data-number="2.3.1" class="anchored" data-anchor-id="uma-pergunta-precisa-ser-investigável"><span class="header-section-number">2.3.1</span> Uma pergunta precisa ser investigável</h3>
-<p>Uma pergunta não é adequada apenas porque parece interessante.</p>
-<p>Precisamos compreender:</p>
-<ul>
-<li>quais informações seriam necessárias para respondê-la;</li>
-<li>o que cada registro deverá representar;</li>
-<li>quais grupos, períodos e lugares serão observados;</li>
-<li>quais informações estão disponíveis;</li>
-<li>quais informações precisarão ser construídas;</li>
-<li>quais limitações a fonte impõe à análise.</li>
-</ul>
+<section id="da-pergunta-aos-dados" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="da-pergunta-aos-dados"><span class="header-section-number">2.4</span> Da pergunta aos dados</h2>
+<section id="uma-pergunta-precisa-ser-investigável" class="level3" data-number="2.4.1">
+<h3 data-number="2.4.1" class="anchored" data-anchor-id="uma-pergunta-precisa-ser-investigável"><span class="header-section-number">2.4.1</span> Uma pergunta precisa ser investigável</h3>
+<p>Uma pergunta não é adequada apenas porque parece interessante. Precisamos compreender quais informações seriam necessárias para respondê-la, o que cada registro deverá representar e quais grupos, períodos e lugares serão observados. Também é necessário distinguir as informações já disponíveis daquelas que precisarão ser construídas e reconhecer as limitações impostas pela fonte à análise.</p>
 </section>
 </section>
-<section id="exemplo-jurídico-violência-psicológica" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="exemplo-jurídico-violência-psicológica"><span class="header-section-number">2.4</span> Exemplo jurídico: violência psicológica</h2>
-<section id="do-problema-à-pergunta" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="do-problema-à-pergunta"><span class="header-section-number">2.4.1</span> Do problema à pergunta</h3>
+<section id="exemplo-jurídico-violência-psicológica" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="exemplo-jurídico-violência-psicológica"><span class="header-section-number">2.5</span> Exemplo jurídico: violência psicológica</h2>
+<section id="do-problema-à-pergunta" class="level3" data-number="2.5.1">
+<h3 data-number="2.5.1" class="anchored" data-anchor-id="do-problema-à-pergunta"><span class="header-section-number">2.5.1</span> Do problema à pergunta</h3>
 <p>A Lei nº 14.188/2021 introduziu no Código Penal o crime de violência psicológica contra a mulher, previsto no artigo 147-B.</p>
 <p>Uma inquietação inicial pode ser formulada de maneira ampla:</p>
 <blockquote class="blockquote">
@@ -590,23 +546,16 @@ ul.task-list li input[type="checkbox"] {
 </blockquote>
 <p>Para produzir evidências, precisamos transformar essa inquietação em perguntas empiricamente investigáveis.</p>
 </section>
-<section id="uma-pergunta-investigável" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="uma-pergunta-investigável"><span class="header-section-number">2.4.2</span> Uma pergunta investigável</h3>
+<section id="uma-pergunta-investigável" class="level3" data-number="2.5.2">
+<h3 data-number="2.5.2" class="anchored" data-anchor-id="uma-pergunta-investigável"><span class="header-section-number">2.5.2</span> Uma pergunta investigável</h3>
 <blockquote class="blockquote">
 <p>Como o artigo 147-B tem sido mobilizado nas denúncias e nas decisões de primeira instância do Tribunal de Justiça de São Paulo?</p>
 </blockquote>
-<p>Essa formulação delimita:</p>
-<ul>
-<li>o dispositivo jurídico observado;</li>
-<li>os documentos que serão examinados;</li>
-<li>a etapa do processo judicial;</li>
-<li>o tribunal de interesse;</li>
-<li>o tipo de prática institucional que será descrita.</li>
-</ul>
+<p>Essa formulação delimita o dispositivo jurídico observado, os documentos examinados, a etapa do processo judicial, o tribunal de interesse e o tipo de prática institucional que será descrita.</p>
 <p>Ela não resolve, por si só, todos os problemas da investigação. Mas orienta a procura pelos dados.</p>
 </section>
-<section id="da-pergunta-às-informações-necessárias" class="level3" data-number="2.4.3">
-<h3 data-number="2.4.3" class="anchored" data-anchor-id="da-pergunta-às-informações-necessárias"><span class="header-section-number">2.4.3</span> Da pergunta às informações necessárias</h3>
+<section id="da-pergunta-às-informações-necessárias" class="level3" data-number="2.5.3">
+<h3 data-number="2.5.3" class="anchored" data-anchor-id="da-pergunta-às-informações-necessárias"><span class="header-section-number">2.5.3</span> Da pergunta às informações necessárias</h3>
 <p>Para responder à pergunta, precisamos identificar, entre outras informações:</p>
 <ul>
 <li>os dispositivos legais mencionados na denúncia;</li>
@@ -619,8 +568,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Primeiro descrevemos a informação necessária. Depois procuramos onde e como ela pode ser obtida.</p>
 </section>
-<section id="o-que-cada-linha-representa" class="level3" data-number="2.4.4">
-<h3 data-number="2.4.4" class="anchored" data-anchor-id="o-que-cada-linha-representa"><span class="header-section-number">2.4.4</span> O que cada linha representa?</h3>
+<section id="o-que-cada-linha-representa" class="level3" data-number="2.5.4">
+<h3 data-number="2.5.4" class="anchored" data-anchor-id="o-que-cada-linha-representa"><span class="header-section-number">2.5.4</span> O que cada linha representa?</h3>
 <p>A <strong>unidade de observação</strong> é o elemento representado por cada linha da base.</p>
 <p>Em pesquisas jurídicas, uma linha pode representar:</p>
 <ul>
@@ -634,39 +583,27 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Antes de contar linhas, calcular proporções ou remover duplicidades, precisamos perguntar: <strong>o que cada linha representa?</strong> Essa definição condiciona toda a análise posterior, pois determina o significado das contagens, das comparações e das medidas construídas a partir da base.</p>
 </section>
-<section id="documentos-diferentes-unidades-diferentes" class="level3" data-number="2.4.5">
-<h3 data-number="2.4.5" class="anchored" data-anchor-id="documentos-diferentes-unidades-diferentes"><span class="header-section-number">2.4.5</span> Documentos diferentes, unidades diferentes</h3>
+<section id="documentos-diferentes-unidades-diferentes" class="level3" data-number="2.5.5">
+<h3 data-number="2.5.5" class="anchored" data-anchor-id="documentos-diferentes-unidades-diferentes"><span class="header-section-number">2.5.5</span> Documentos diferentes, unidades diferentes</h3>
 <p>Uma pesquisa pode coletar processos e analisar mais de um documento de cada processo.</p>
-<p>No estudo sobre o artigo 147-B:</p>
-<ul>
-<li>foram identificados 2.215 processos a partir dos parâmetros de busca;</li>
-<li>depois da exclusão de duplicidades, permaneceram 2.211 processos;</li>
-<li>foram coletadas 2.207 sentenças;</li>
-<li>foram analisadas 2.112 denúncias correspondentes.</li>
-</ul>
+<p>No estudo sobre o artigo 147-B, foram identificados 2.215 processos a partir dos parâmetros de busca. Depois da exclusão de duplicidades, permaneceram 2.211 processos. Foram coletadas 2.207 sentenças e analisadas 2.112 denúncias correspondentes.</p>
 <p>Esses números não são equivalentes. Processo, sentença e denúncia cumprem papéis distintos na investigação.</p>
 </section>
-<section id="população-corpus-e-amostra" class="level3" data-number="2.4.6">
-<h3 data-number="2.4.6" class="anchored" data-anchor-id="população-corpus-e-amostra"><span class="header-section-number">2.4.6</span> População, corpus e amostra</h3>
+<section id="população-corpus-e-amostra" class="level3" data-number="2.5.6">
+<h3 data-number="2.5.6" class="anchored" data-anchor-id="população-corpus-e-amostra"><span class="header-section-number">2.5.6</span> População, corpus e amostra</h3>
 <p>A <strong>população</strong> é o conjunto de unidades sobre o qual desejamos produzir informação.</p>
 <p>O <strong>corpus</strong> reúne os documentos efetivamente localizados e selecionados para a análise.</p>
 <p>Uma <strong>amostra</strong> é uma parcela da população observada segundo determinado procedimento.</p>
 <p>Em pesquisas com decisões judiciais, o material recuperado por mecanismos de consulta não deve ser apresentado automaticamente como a totalidade das decisões existentes.</p>
 </section>
-<section id="recortes-temporal-e-institucional" class="level3" data-number="2.4.7">
-<h3 data-number="2.4.7" class="anchored" data-anchor-id="recortes-temporal-e-institucional"><span class="header-section-number">2.4.7</span> Recortes temporal e institucional</h3>
+<section id="recortes-temporal-e-institucional" class="level3" data-number="2.5.7">
+<h3 data-number="2.5.7" class="anchored" data-anchor-id="recortes-temporal-e-institucional"><span class="header-section-number">2.5.7</span> Recortes temporal e institucional</h3>
 <p>A pergunta precisa ser compatível com a cobertura dos dados.</p>
-<p>No exemplo do artigo 147-B, o recorte considera:</p>
-<ul>
-<li>processos julgados em primeira instância;</li>
-<li>Tribunal de Justiça de São Paulo;</li>
-<li>período entre 28 de julho de 2021 e 8 de outubro de 2024;</li>
-<li>decisões recuperadas por palavras-chave e assuntos jurídicos definidos na consulta.</li>
-</ul>
+<p>No exemplo do artigo 147-B, o recorte compreende processos julgados em primeira instância no Tribunal de Justiça de São Paulo, entre 28 de julho de 2021 e 8 de outubro de 2024. As decisões foram recuperadas por palavras-chave e assuntos jurídicos definidos na consulta.</p>
 <p>Tribunal, instância, período, documento e parâmetros de busca fazem parte da definição da pesquisa.</p>
 </section>
-<section id="dos-documentos-às-variáveis" class="level3" data-number="2.4.8">
-<h3 data-number="2.4.8" class="anchored" data-anchor-id="dos-documentos-às-variáveis"><span class="header-section-number">2.4.8</span> Dos documentos às variáveis</h3>
+<section id="dos-documentos-às-variáveis" class="level3" data-number="2.5.8">
+<h3 data-number="2.5.8" class="anchored" data-anchor-id="dos-documentos-às-variáveis"><span class="header-section-number">2.5.8</span> Dos documentos às variáveis</h3>
 <p>Uma pergunta jurídica raramente corresponde diretamente a uma coluna pronta.</p>
 <table class="caption-top table">
 <colgroup>
@@ -703,8 +640,66 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </section>
-<section id="os-dados-realmente-permitem-responder" class="level3" data-number="2.4.9">
-<h3 data-number="2.4.9" class="anchored" data-anchor-id="os-dados-realmente-permitem-responder"><span class="header-section-number">2.4.9</span> Os dados realmente permitem responder?</h3>
+<section id="da-evidência-ao-argumento" class="level3" data-number="2.5.9">
+<h3 data-number="2.5.9" class="anchored" data-anchor-id="da-evidência-ao-argumento"><span class="header-section-number">2.5.9</span> Da evidência ao argumento</h3>
+<p>Depois de transformar os documentos em variáveis, podemos examinar como os diferentes tipos penais aparecem nas decisões. No artigo que orienta este exemplo, um dos resultados centrais é a baixa frequência com que o artigo 147-B aparece isoladamente como fundamento da condenação. O quadro a seguir reproduz o resultado apresentado pelos autores.</p>
+<p><strong>Quadro — Condenação isolada por artigo com e sem a presença de agravantes.</strong> Reprodução do Quadro 4, com adaptação de formato.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Artigo</th>
+<th style="text-align: right;">Frequência (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Art. 147 do Código Penal</td>
+<td style="text-align: right;">314 (19,5%)</td>
+</tr>
+<tr class="even">
+<td>Art. 147-A do Código Penal</td>
+<td style="text-align: right;">211 (13,1%)</td>
+</tr>
+<tr class="odd">
+<td>Art. 129, §§ 9º e 13, do Código Penal</td>
+<td style="text-align: right;">174 (10,9%)</td>
+</tr>
+<tr class="even">
+<td>Art. 24-A da Lei Maria da Penha</td>
+<td style="text-align: right;">172 (10,7%)</td>
+</tr>
+<tr class="odd">
+<td>Art. 147-B do Código Penal</td>
+<td style="text-align: right;">32 (1,2%)</td>
+</tr>
+<tr class="even">
+<td>Art. 21 do Decreto-Lei nº 3.688/1941</td>
+<td style="text-align: right;">17 (1%)</td>
+</tr>
+<tr class="odd">
+<td>Art. 150 do Código Penal</td>
+<td style="text-align: right;">7 (0,43%)</td>
+</tr>
+<tr class="even">
+<td>Art. 213 do Código Penal</td>
+<td style="text-align: right;">1 (0,06%)</td>
+</tr>
+<tr class="odd">
+<td>Art. 121, § 2º-A, do Código Penal</td>
+<td style="text-align: right;">0 (0%)</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>928 (57,7%)</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fonte:</strong> reprodução, com adaptação de formato, do Quadro 4 de Goto, Severi e Nicolella, <em>Criminalizar é proteger? Um estudo sobre a aplicação do Art. 147-B nos casos de violência psicológica contra mulheres no TJSP</em>.</p>
+<p>Entre os 1.609 processos julgados integralmente procedentes considerados nessa etapa do estudo, o artigo 147-B apareceu isoladamente em 32 sentenças, correspondentes a 1,2% do total analisado. Ameaça, perseguição, lesão corporal e descumprimento de medida protetiva apresentaram frequências superiores. O resultado sustenta a afirmação delimitada de que a aplicação isolada do artigo 147-B foi baixa no corpus e no período examinados.</p>
+<p>O quadro, entretanto, não permite concluir sozinho que a criminalização foi ineficaz ou que não ampliou a proteção das mulheres. Essa conclusão exigiria outras evidências e um desenho capaz de avaliar os efeitos da mudança legislativa. A diferença entre essas duas afirmações mostra por que a conclusão precisa respeitar a pergunta, os dados e a estratégia de análise.</p>
+</section>
+<section id="os-dados-realmente-permitem-responder" class="level3" data-number="2.5.10">
+<h3 data-number="2.5.10" class="anchored" data-anchor-id="os-dados-realmente-permitem-responder"><span class="header-section-number">2.5.10</span> Os dados realmente permitem responder?</h3>
 <p>Antes da análise, precisamos avaliar:</p>
 <table class="caption-top table">
 <colgroup>
@@ -745,8 +740,8 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </section>
-<section id="não-adapte-silenciosamente-a-pergunta-à-base" class="level3" data-number="2.4.10">
-<h3 data-number="2.4.10" class="anchored" data-anchor-id="não-adapte-silenciosamente-a-pergunta-à-base"><span class="header-section-number">2.4.10</span> Não adapte silenciosamente a pergunta à base</h3>
+<section id="não-adapte-silenciosamente-a-pergunta-à-base" class="level3" data-number="2.5.11">
+<h3 data-number="2.5.11" class="anchored" data-anchor-id="não-adapte-silenciosamente-a-pergunta-à-base"><span class="header-section-number">2.5.11</span> Não adapte silenciosamente a pergunta à base</h3>
 <p>Se a fonte não contém a informação necessária, existem pelo menos três possibilidades:</p>
 <ol type="1">
 <li>procurar outra fonte;</li>
@@ -757,10 +752,10 @@ ul.task-list li input[type="checkbox"] {
 <p>A mudança precisa ser consciente, justificada e documentada.</p>
 </section>
 </section>
-<section id="dos-dados-à-evidência" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="dos-dados-à-evidência"><span class="header-section-number">2.5</span> Dos dados à evidência</h2>
-<section id="perguntas-diferentes-exigem-evidências-diferentes" class="level3" data-number="2.5.1">
-<h3 data-number="2.5.1" class="anchored" data-anchor-id="perguntas-diferentes-exigem-evidências-diferentes"><span class="header-section-number">2.5.1</span> Perguntas diferentes exigem evidências diferentes</h3>
+<section id="dos-dados-à-evidência" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="dos-dados-à-evidência"><span class="header-section-number">2.6</span> Dos dados à evidência</h2>
+<section id="perguntas-diferentes-exigem-evidências-diferentes" class="level3" data-number="2.6.1">
+<h3 data-number="2.6.1" class="anchored" data-anchor-id="perguntas-diferentes-exigem-evidências-diferentes"><span class="header-section-number">2.6.1</span> Perguntas diferentes exigem evidências diferentes</h3>
 <ul>
 <li><strong>Descrição:</strong> o que está acontecendo?</li>
 <li><strong>Associação:</strong> o que varia conjuntamente?</li>
@@ -768,10 +763,10 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Causalidade:</strong> o que aconteceria se determinado fator mudasse?</li>
 </ul>
 <p>Essa sequência representa uma progressão na exigência da evidência, não uma escala de importância.</p>
-<p>Uma boa análise descritiva pode ser mais útil e confiável do que uma tentativa frágil de demonstrar causalidade.</p>
+<p>Uma análise descritiva compatível com os dados pode oferecer conclusões mais sustentadas do que uma tentativa de demonstrar causalidade sem desenho adequado.</p>
 </section>
-<section id="perguntas-diferentes-sobre-o-mesmo-fenômeno" class="level3" data-number="2.5.2">
-<h3 data-number="2.5.2" class="anchored" data-anchor-id="perguntas-diferentes-sobre-o-mesmo-fenômeno"><span class="header-section-number">2.5.2</span> Perguntas diferentes sobre o mesmo fenômeno</h3>
+<section id="perguntas-diferentes-sobre-o-mesmo-fenômeno" class="level3" data-number="2.6.2">
+<h3 data-number="2.6.2" class="anchored" data-anchor-id="perguntas-diferentes-sobre-o-mesmo-fenômeno"><span class="header-section-number">2.6.2</span> Perguntas diferentes sobre o mesmo fenômeno</h3>
 <p>Sobre o artigo 147-B, podemos perguntar:</p>
 <ul>
 <li><strong>Descrição:</strong> com que frequência o artigo aparece nas denúncias e nas sentenças?</li>
@@ -781,8 +776,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Essas perguntas exigem dados, desenhos e linguagens de conclusão diferentes.</p>
 </section>
-<section id="uma-associação-não-responde-automaticamente-ao-porquê" class="level3" data-number="2.5.3">
-<h3 data-number="2.5.3" class="anchored" data-anchor-id="uma-associação-não-responde-automaticamente-ao-porquê"><span class="header-section-number">2.5.3</span> Uma associação não responde automaticamente ao porquê</h3>
+<section id="uma-associação-não-responde-automaticamente-ao-porquê" class="level3" data-number="2.6.3">
+<h3 data-number="2.6.3" class="anchored" data-anchor-id="uma-associação-não-responde-automaticamente-ao-porquê"><span class="header-section-number">2.6.3</span> Uma associação não responde automaticamente ao porquê</h3>
 <p>Observar um padrão não demonstra, por si só, o mecanismo que o produziu.</p>
 <p>Os dados podem ser consistentes com uma explicação, mas também podem admitir explicações concorrentes.</p>
 <p>Pergunte:</p>
@@ -793,46 +788,27 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="exemplo-jurídico-violência-de-gênero-digital" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="exemplo-jurídico-violência-de-gênero-digital"><span class="header-section-number">2.6</span> Exemplo jurídico: violência de gênero digital</h2>
-<section id="a-pergunta" class="level3" data-number="2.6.1">
-<h3 data-number="2.6.1" class="anchored" data-anchor-id="a-pergunta"><span class="header-section-number">2.6.1</span> A pergunta</h3>
+<section id="exemplo-jurídico-violência-de-gênero-digital" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="exemplo-jurídico-violência-de-gênero-digital"><span class="header-section-number">2.7</span> Exemplo jurídico: violência de gênero digital</h2>
+<section id="a-pergunta" class="level3" data-number="2.7.1">
+<h3 data-number="2.7.1" class="anchored" data-anchor-id="a-pergunta"><span class="header-section-number">2.7.1</span> A pergunta</h3>
 <blockquote class="blockquote">
 <p>Como os elementos probatórios registrados nos acórdãos se relacionam com o reconhecimento de sua suficiência e com os desfechos das demandas cíveis de violência de gênero digital?</p>
 </blockquote>
-<p>A pergunta conecta três dimensões:</p>
-<ul>
-<li>os tipos de prova apresentados;</li>
-<li>a avaliação judicial de sua suficiência;</li>
-<li>os resultados das demandas reparatórias.</li>
-</ul>
+<p>A pergunta conecta os tipos de prova apresentados, a avaliação judicial de sua suficiência e os resultados das demandas reparatórias.</p>
 </section>
-<section id="os-dados-e-o-desenho" class="level3" data-number="2.6.2">
-<h3 data-number="2.6.2" class="anchored" data-anchor-id="os-dados-e-o-desenho"><span class="header-section-number">2.6.2</span> Os dados e o desenho</h3>
-<p>A investigação utiliza:</p>
-<ul>
-<li>642 acórdãos de apelação;</li>
-<li>seis Tribunais de Justiça brasileiros;</li>
-<li>decisões proferidas entre 2010 e 2025;</li>
-<li>análise quantitativa do conjunto dos acórdãos;</li>
-<li>análise qualitativa aprofundada de oito decisões envolvendo plataformas digitais.</li>
-</ul>
+<section id="os-dados-e-o-desenho" class="level3" data-number="2.7.2">
+<h3 data-number="2.7.2" class="anchored" data-anchor-id="os-dados-e-o-desenho"><span class="header-section-number">2.7.2</span> Os dados e o desenho</h3>
+<p>A investigação utiliza 642 acórdãos de apelação, provenientes de seis Tribunais de Justiça brasileiros e proferidos entre 2010 e 2025. O desenho combina uma análise quantitativa do conjunto dos acórdãos com uma análise qualitativa aprofundada de oito decisões envolvendo plataformas digitais.</p>
 <p>A unidade de observação da análise quantitativa é o <strong>acórdão de apelação</strong>.</p>
 </section>
-<section id="o-que-a-evidência-permite-afirmar" class="level3" data-number="2.6.3">
-<h3 data-number="2.6.3" class="anchored" data-anchor-id="o-que-a-evidência-permite-afirmar"><span class="header-section-number">2.6.3</span> O que a evidência permite afirmar?</h3>
-<p>Os dados permitem:</p>
-<ul>
-<li>descrever os tipos de prova mencionados nos acórdãos;</li>
-<li>examinar associações entre provas, suficiência probatória e resultados;</li>
-<li>comparar padrões entre contextos e tribunais representados na base;</li>
-<li>analisar as justificativas utilizadas em decisões selecionadas;</li>
-<li>discutir a atuação das plataformas na preservação e no fornecimento de dados.</li>
-</ul>
+<section id="o-que-a-evidência-permite-afirmar" class="level3" data-number="2.7.3">
+<h3 data-number="2.7.3" class="anchored" data-anchor-id="o-que-a-evidência-permite-afirmar"><span class="header-section-number">2.7.3</span> O que a evidência permite afirmar?</h3>
+<p>Os dados permitem descrever os tipos de prova mencionados nos acórdãos, examinar associações entre provas, suficiência probatória e resultados e comparar padrões entre os contextos e tribunais representados na base. A análise qualitativa permite examinar as justificativas utilizadas em decisões selecionadas e discutir a atuação das plataformas na preservação e no fornecimento de dados.</p>
 <p>Essas evidências não permitem generalizar automaticamente os resultados para todo o sistema de justiça brasileiro.</p>
 </section>
-<section id="as-limitações-fazem-parte-da-evidência" class="level3" data-number="2.6.4">
-<h3 data-number="2.6.4" class="anchored" data-anchor-id="as-limitações-fazem-parte-da-evidência"><span class="header-section-number">2.6.4</span> As limitações fazem parte da evidência</h3>
+<section id="as-limitações-fazem-parte-da-evidência" class="level3" data-number="2.7.4">
+<h3 data-number="2.7.4" class="anchored" data-anchor-id="as-limitações-fazem-parte-da-evidência"><span class="header-section-number">2.7.4</span> As limitações fazem parte da evidência</h3>
 <ul>
 <li>São Paulo e Paraná concentram a maior parte das decisões da base.</li>
 <li>O corpus está restrito a acórdãos de apelação.</li>
@@ -843,17 +819,32 @@ ul.task-list li input[type="checkbox"] {
 <p>As limitações definem o alcance da conclusão; não são um apêndice dispensável da pesquisa. Explicitá-las permite distinguir aquilo que foi efetivamente observado das interpretações que ultrapassariam a cobertura dos documentos e o desenho adotado.</p>
 </section>
 </section>
-<section id="da-evidência-à-conclusão" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="da-evidência-à-conclusão"><span class="header-section-number">2.7</span> Da evidência à conclusão</h2>
-<section id="a-conclusão-precisa-responder-à-pergunta" class="level3" data-number="2.7.1">
-<h3 data-number="2.7.1" class="anchored" data-anchor-id="a-conclusão-precisa-responder-à-pergunta"><span class="header-section-number">2.7.1</span> A conclusão precisa responder à pergunta</h3>
+<section id="da-evidência-à-conclusão" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="da-evidência-à-conclusão"><span class="header-section-number">2.8</span> Da evidência à conclusão</h2>
+<section id="a-conclusão-precisa-responder-à-pergunta" class="level3" data-number="2.8.1">
+<h3 data-number="2.8.1" class="anchored" data-anchor-id="a-conclusão-precisa-responder-à-pergunta"><span class="header-section-number">2.8.1</span> A conclusão precisa responder à pergunta</h3>
 <p>Uma análise pode estar tecnicamente correta e, ainda assim, produzir uma conclusão inadequada.</p>
 <p>Isso ocorre quando afirmamos mais do que os dados e o desenho da investigação permitem sustentar.</p>
-<p>A conclusão deve preservar a conexão entre:</p>
-<p><strong>Pergunta → Dados → Estratégia de análise → Evidência → Conclusão</strong></p>
+<p>A conclusão deve preservar a conexão entre todas as etapas da investigação:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Pergunta] --&gt; B[Dados]
+    B --&gt; C[Estratégia de análise]
+    C --&gt; D[Evidência]
+    D --&gt; E[Conclusão]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
-<section id="dizer-apenas-o-que-a-evidência-sustenta" class="level3" data-number="2.7.2">
-<h3 data-number="2.7.2" class="anchored" data-anchor-id="dizer-apenas-o-que-a-evidência-sustenta"><span class="header-section-number">2.7.2</span> Dizer apenas o que a evidência sustenta</h3>
+<section id="dizer-apenas-o-que-a-evidência-sustenta" class="level3" data-number="2.8.2">
+<h3 data-number="2.8.2" class="anchored" data-anchor-id="dizer-apenas-o-que-a-evidência-sustenta"><span class="header-section-number">2.8.2</span> Dizer apenas o que a evidência sustenta</h3>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -886,8 +877,8 @@ ul.task-list li input[type="checkbox"] {
 </table>
 <p>Palavras como “causa”, “determina”, “produz” ou “comprova” exigem justificativas adicionais.</p>
 </section>
-<section id="preservar-o-contexto-da-análise" class="level3" data-number="2.7.3">
-<h3 data-number="2.7.3" class="anchored" data-anchor-id="preservar-o-contexto-da-análise"><span class="header-section-number">2.7.3</span> Preservar o contexto da análise</h3>
+<section id="preservar-o-contexto-da-análise" class="level3" data-number="2.8.3">
+<h3 data-number="2.8.3" class="anchored" data-anchor-id="preservar-o-contexto-da-análise"><span class="header-section-number">2.8.3</span> Preservar o contexto da análise</h3>
 <p>O período, o recorte institucional, a fonte e a construção das variáveis fazem parte da conclusão.</p>
 <p>Em vez de afirmar:</p>
 <blockquote class="blockquote">
@@ -898,22 +889,16 @@ ul.task-list li input[type="checkbox"] {
 <p>Nas denúncias e sentenças de primeira instância do TJSP recuperadas pelos critérios adotados, entre 2021 e 2024, observamos baixa aplicação do artigo 147-B.</p>
 </blockquote>
 </section>
-<section id="a-pergunta-amadurece-durante-a-pesquisa" class="level3" data-number="2.7.4">
-<h3 data-number="2.7.4" class="anchored" data-anchor-id="a-pergunta-amadurece-durante-a-pesquisa"><span class="header-section-number">2.7.4</span> A pergunta amadurece durante a pesquisa</h3>
-<p>O percurso não termina exatamente como foi inicialmente imaginado.</p>
-<ul>
-<li>A leitura modifica a pergunta.</li>
-<li>Os dados revelam limitações e possibilidades.</li>
-<li>A análise pode produzir resultados inesperados.</li>
-<li>A conclusão pode abrir uma nova pergunta.</li>
-</ul>
-<p>Reformular não significa fracassar. O importante é registrar o que mudou, por que mudou e como essa mudança afeta o alcance da investigação.</p>
+<section id="a-pergunta-amadurece-durante-a-pesquisa" class="level3" data-number="2.8.4">
+<h3 data-number="2.8.4" class="anchored" data-anchor-id="a-pergunta-amadurece-durante-a-pesquisa"><span class="header-section-number">2.8.4</span> A pergunta amadurece durante a pesquisa</h3>
+<p>O percurso não termina exatamente como foi inicialmente imaginado. A leitura modifica a pergunta, os dados revelam limitações e possibilidades e a análise pode produzir resultados inesperados. A conclusão, por sua vez, pode abrir uma nova pergunta.</p>
+<p>Reformular não encerra a pesquisa. É necessário registrar o que mudou, por que mudou e como essa mudança afeta o alcance da investigação.</p>
 </section>
 </section>
-<section id="síntese" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="síntese"><span class="header-section-number">2.8</span> Síntese</h2>
-<section id="os-oito-insumos-na-produção-científica" class="level3" data-number="2.8.1">
-<h3 data-number="2.8.1" class="anchored" data-anchor-id="os-oito-insumos-na-produção-científica"><span class="header-section-number">2.8.1</span> Os oito insumos na produção científica</h3>
+<section id="síntese" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="síntese"><span class="header-section-number">2.9</span> Síntese</h2>
+<section id="os-oito-insumos-na-produção-científica" class="level3" data-number="2.9.1">
+<h3 data-number="2.9.1" class="anchored" data-anchor-id="os-oito-insumos-na-produção-científica"><span class="header-section-number">2.9.1</span> Os oito insumos na produção científica</h3>
 <p>A análise de Scott Cunningham sobre William Shockley destaca oito capacidades:</p>
 <ol type="1">
 <li>identificar um bom problema;</li>
@@ -927,10 +912,10 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 </section>
 </section>
-<section id="atividade" class="level2" data-number="2.9">
-<h2 data-number="2.9" class="anchored" data-anchor-id="atividade"><span class="header-section-number">2.9</span> Atividade</h2>
-<section id="formule-uma-pergunta-de-jurimetria" class="level3" data-number="2.9.1">
-<h3 data-number="2.9.1" class="anchored" data-anchor-id="formule-uma-pergunta-de-jurimetria"><span class="header-section-number">2.9.1</span> Formule uma pergunta de jurimetria</h3>
+<section id="atividade" class="level2" data-number="2.10">
+<h2 data-number="2.10" class="anchored" data-anchor-id="atividade"><span class="header-section-number">2.10</span> Atividade</h2>
+<section id="formule-uma-pergunta-de-jurimetria" class="level3" data-number="2.10.1">
+<h3 data-number="2.10.1" class="anchored" data-anchor-id="formule-uma-pergunta-de-jurimetria"><span class="header-section-number">2.10.1</span> Formule uma pergunta de jurimetria</h3>
 <p>Escolha um problema jurídico que desperte seu interesse e registre:</p>
 <ul>
 <li><strong>Problema:</strong> qual fenômeno ou dificuldade chama sua atenção?</li>
@@ -943,8 +928,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Limites:</strong> o que a investigação não permitirá concluir?</li>
 </ul>
 </section>
-<section id="verificação-final" class="level3" data-number="2.9.2">
-<h3 data-number="2.9.2" class="anchored" data-anchor-id="verificação-final"><span class="header-section-number">2.9.2</span> Verificação final</h3>
+<section id="verificação-final" class="level3" data-number="2.10.2">
+<h3 data-number="2.10.2" class="anchored" data-anchor-id="verificação-final"><span class="header-section-number">2.10.2</span> Verificação final</h3>
 <ul>
 <li>A pergunta é interessante e viável?</li>
 <li>Sabemos quais informações são necessárias?</li>

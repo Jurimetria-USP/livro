@@ -93,3 +93,15 @@ A versão publicada estará disponível em:
 O primeiro capítulo corresponderá ao conteúdo do capítulo original até a seção sobre o método científico segundo Richard Feynman. O terceiro reunirá o conteúdo iniciado na antiga seção “Buscando um bom instrumento: Jurimetria”. O segundo será desenvolvido a partir do material textual já preparado para os slides, sem incorporação de fontes externas nesta etapa. Os capítulos sobre Priest–Klein e Marc Galanter serão reunidos estruturalmente, preservando os dois textos em blocos próprios.
 
 **Justificativa:** a divisão explicita o percurso entre método científico, formulação da pergunta, aplicação da jurimetria e compreensão da seleção e das desigualdades do sistema de justiça.
+
+### Representação de fluxos
+
+**Decisão:** fluxos, processos e sequências de etapas serão representados com diagramas Mermaid. Listas, tabelas e texto corrido continuarão a ser escolhidos de acordo com a natureza do conteúdo.
+
+**Justificativa:** os diagramas tornam relações sequenciais mais claras e mantêm os fluxos editáveis e integrados ao código-fonte do livro.
+
+### Estilo da prosa
+
+**Decisão:** a redação do livro adotará linguagem acadêmica, direta e precisa, sem adjetivação avaliativa. Listas serão utilizadas apenas quando contribuírem para classificações, enumerações técnicas, limitações, atividades ou verificações.
+
+**Justificativa:** o padrão favorece a clareza argumentativa e distingue a exposição analítica da linguagem própria de apresentações.
