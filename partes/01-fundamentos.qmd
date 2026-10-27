@@ -13,7 +13,7 @@ Esta parte apresenta as bases da pesquisa jurimétrica. O percurso parte do mét
 
 Fundamentos do método científico, da causalidade e dos desenhos de pesquisa aplicados às Ciências Sociais e ao Direito.
 
-[Ler o capítulo](../capitulos/desenho-pesquisa-jurimetria.qmd)
+[Ler o capítulo](../capitulos/P1C01-metodo-cientifico.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
@@ -21,7 +21,7 @@ Fundamentos do método científico, da causalidade e dos desenhos de pesquisa ap
 
 Construção do percurso entre o problema, a pergunta, os dados, a evidência e a conclusão.
 
-[Ler o capítulo](../capitulos/pergunta-dados-evidencia.qmd)
+[Ler o capítulo](../capitulos/P1C02-pergunta-dados-evidencia.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
@@ -29,7 +29,7 @@ Construção do percurso entre o problema, a pergunta, os dados, a evidência e 
 
 Apresentação da jurimetria, de suas possibilidades e das etapas necessárias à pesquisa empírica em Direito.
 
-[Ler o capítulo](../capitulos/jurimetria-instrumento-pesquisa.qmd)
+[Ler o capítulo](../capitulos/P1C03-jurimetria-instrumento-pesquisa.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-proposito}
@@ -37,7 +37,7 @@ Apresentação da jurimetria, de suas possibilidades e das etapas necessárias �
 
 Análise da seleção dos casos que chegam a julgamento e das desigualdades estruturais entre os litigantes.
 
-[Ler o capítulo](../capitulos/litigios-desigualdades.qmd)
+[Ler o capítulo](../capitulos/P1C04-litigios-desigualdades.qmd)
 :::
 
 :::

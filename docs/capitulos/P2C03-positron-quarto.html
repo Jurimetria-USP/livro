@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alexandre Nicolella">
+<meta name="author" content="José de Jesus Filho">
+
+<title>7&nbsp; Positron e Quarto: ambiente de trabalho e documentos reproduzíveis – JURIMETRIA: Dados, Métodos e Evidência para o Direito</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../capitulos/P2C04-git-github.html" rel="next">
+<link href="../capitulos/P2C02-r-python-linguagens.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-af376c0a327698bc4256a7316fbe19a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo light-content">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JURIMETRIA: Dados, Métodos e Evidência para o Direito</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Jurimetria-USP/livro"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/P2C03-positron-quarto.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../autores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sobre os autores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/01-fundamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte I — Fundamentos</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C01-metodo-cientifico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Método científico e desenho de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C02-pergunta-dados-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Da pergunta à conclusão</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C03-jurimetria-instrumento-pesquisa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Jurimetria como instrumento de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C04-litigios-desigualdades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Seleção dos litígios e desigualdades no sistema de justiça</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/02-ambiente-trabalho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte II — Ambiente de trabalho e ferramentas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C01-ambiente-computacional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ambiente computacional para a pesquisa jurimétrica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C02-r-python-linguagens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R e Python: linguagens do ambiente de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C03-positron-quarto.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C04-git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C05-agentes-projeto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Agentes de inteligência artificial no projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C06-exemplo-integrado-ecossistema.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Um exemplo integrado do ecossistema</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C07-introducao-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introdução ao R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Parte III — Construção do banco de dados</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/04-descricao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte IV — Descrição do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C01-introducao-estatistica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C02-analise-descritiva.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C03-analise-sobrevivencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Análise de sobrevivência: tempo do processo</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/05-explicacao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte V — Explicação do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C01-modelos-lineares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C02-modelos-avancados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução"><span class="header-section-number">7.1</span> Introdução</a></li>
+  <li><a href="#linguagem-ide-e-sistema-de-publicação" id="toc-linguagem-ide-e-sistema-de-publicação" class="nav-link" data-scroll-target="#linguagem-ide-e-sistema-de-publicação"><span class="header-section-number">7.2</span> Linguagem, IDE e sistema de publicação</a></li>
+  <li><a href="#instalação-do-positron-no-windows" id="toc-instalação-do-positron-no-windows" class="nav-link" data-scroll-target="#instalação-do-positron-no-windows"><span class="header-section-number">7.3</span> Instalação do Positron no Windows</a></li>
+  <li><a href="#abrindo-a-pasta-de-trabalho" id="toc-abrindo-a-pasta-de-trabalho" class="nav-link" data-scroll-target="#abrindo-a-pasta-de-trabalho"><span class="header-section-number">7.4</span> Abrindo a pasta de trabalho</a></li>
+  <li><a href="#componentes-do-positron" id="toc-componentes-do-positron" class="nav-link" data-scroll-target="#componentes-do-positron"><span class="header-section-number">7.5</span> Componentes do Positron</a>
+  <ul class="collapse">
+  <li><a href="#explorer-e-raiz-do-projeto" id="toc-explorer-e-raiz-do-projeto" class="nav-link" data-scroll-target="#explorer-e-raiz-do-projeto"><span class="header-section-number">7.5.1</span> Explorer e raiz do projeto</a></li>
+  <li><a href="#editor" id="toc-editor" class="nav-link" data-scroll-target="#editor"><span class="header-section-number">7.5.2</span> Editor</a></li>
+  <li><a href="#console" id="toc-console" class="nav-link" data-scroll-target="#console"><span class="header-section-number">7.5.3</span> Console</a></li>
+  <li><a href="#terminal" id="toc-terminal" class="nav-link" data-scroll-target="#terminal"><span class="header-section-number">7.5.4</span> Terminal</a></li>
+  <li><a href="#objetos-e-gráficos" id="toc-objetos-e-gráficos" class="nav-link" data-scroll-target="#objetos-e-gráficos"><span class="header-section-number">7.5.5</span> Objetos e gráficos</a></li>
+  </ul></li>
+  <li><a href="#selecionando-r-ou-python" id="toc-selecionando-r-ou-python" class="nav-link" data-scroll-target="#selecionando-r-ou-python"><span class="header-section-number">7.6</span> Selecionando R ou Python</a></li>
+  <li><a href="#ambiente-virtual-do-python-no-projeto" id="toc-ambiente-virtual-do-python-no-projeto" class="nav-link" data-scroll-target="#ambiente-virtual-do-python-no-projeto"><span class="header-section-number">7.7</span> Ambiente virtual do Python no projeto</a>
+  <ul class="collapse">
+  <li><a href="#conferindo-uma-versão-compatível" id="toc-conferindo-uma-versão-compatível" class="nav-link" data-scroll-target="#conferindo-uma-versão-compatível"><span class="header-section-number">7.7.1</span> Conferindo uma versão compatível</a></li>
+  <li><a href="#criando-o-ambiente-no-terminal-integrado" id="toc-criando-o-ambiente-no-terminal-integrado" class="nav-link" data-scroll-target="#criando-o-ambiente-no-terminal-integrado"><span class="header-section-number">7.7.2</span> Criando o ambiente no terminal integrado</a></li>
+  <li><a href="#iniciando-a-sessão-python-no-positron" id="toc-iniciando-a-sessão-python-no-positron" class="nav-link" data-scroll-target="#iniciando-a-sessão-python-no-positron"><span class="header-section-number">7.7.3</span> Iniciando a sessão Python no Positron</a></li>
+  <li><a href="#ambiente-virtual-e-controle-de-versões" id="toc-ambiente-virtual-e-controle-de-versões" class="nav-link" data-scroll-target="#ambiente-virtual-e-controle-de-versões"><span class="header-section-number">7.7.4</span> Ambiente virtual e controle de versões</a></li>
+  </ul></li>
+  <li><a href="#o-que-é-o-quarto" id="toc-o-que-é-o-quarto" class="nav-link" data-scroll-target="#o-que-é-o-quarto"><span class="header-section-number">7.8</span> O que é o Quarto?</a></li>
+  <li><a href="#instalação-e-verificação-do-quarto" id="toc-instalação-e-verificação-do-quarto" class="nav-link" data-scroll-target="#instalação-e-verificação-do-quarto"><span class="header-section-number">7.9</span> Instalação e verificação do Quarto</a>
+  <ul class="collapse">
+  <li><a href="#jupyter-para-documentos-quarto-com-python" id="toc-jupyter-para-documentos-quarto-com-python" class="nav-link" data-scroll-target="#jupyter-para-documentos-quarto-com-python"><span class="header-section-number">7.9.1</span> Jupyter para documentos Quarto com Python</a></li>
+  </ul></li>
+  <li><a href="#primeiro-documento-quarto" id="toc-primeiro-documento-quarto" class="nav-link" data-scroll-target="#primeiro-documento-quarto"><span class="header-section-number">7.10</span> Primeiro documento Quarto</a></li>
+  <li><a href="#arquivo-fonte-e-arquivo-gerado" id="toc-arquivo-fonte-e-arquivo-gerado" class="nav-link" data-scroll-target="#arquivo-fonte-e-arquivo-gerado"><span class="header-section-number">7.11</span> Arquivo-fonte e arquivo gerado</a></li>
+  <li><a href="#erros-frequentes-de-renderização" id="toc-erros-frequentes-de-renderização" class="nav-link" data-scroll-target="#erros-frequentes-de-renderização"><span class="header-section-number">7.12</span> Erros frequentes de renderização</a>
+  <ul class="collapse">
+  <li><a href="#yaml-inválido" id="toc-yaml-inválido" class="nav-link" data-scroll-target="#yaml-inválido"><span class="header-section-number">7.12.1</span> YAML inválido</a></li>
+  <li><a href="#arquivo-não-encontrado" id="toc-arquivo-não-encontrado" class="nav-link" data-scroll-target="#arquivo-não-encontrado"><span class="header-section-number">7.12.2</span> Arquivo não encontrado</a></li>
+  <li><a href="#linguagem-ou-pacote-ausente" id="toc-linguagem-ou-pacote-ausente" class="nav-link" data-scroll-target="#linguagem-ou-pacote-ausente"><span class="header-section-number">7.12.3</span> Linguagem ou pacote ausente</a></li>
+  </ul></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">7.13</span> Síntese</a></li>
+  <li><a href="#referências-de-instalação-e-consulta" id="toc-referências-de-instalação-e-consulta" class="nav-link" data-scroll-target="#referências-de-instalação-e-consulta"><span class="header-section-number">7.14</span> Referências de instalação e consulta</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/P2C03-positron-quarto.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></h1>
+<p class="subtitle lead">Da escrita do código à produção do relatório</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autores</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexandre Nicolella </p>
+             <p>José de Jesus Filho </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">7.1</span> Introdução</h2>
+<p>R e Python são linguagens utilizadas para representar procedimentos de pesquisa. Para escrever, executar e organizar esses procedimentos, utilizaremos o <strong>Positron</strong> como ambiente integrado de desenvolvimento. Para reunir texto, código e resultados em um mesmo documento, utilizaremos o <strong>Quarto</strong>.</p>
+<p>Essas ferramentas cumprem funções diferentes. O Positron organiza o trabalho no computador; o Quarto transforma arquivos-fonte em relatórios, páginas, apresentações e livros. A página que você está lendo foi produzida por esse tipo de integração.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Objetivos do capítulo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Objetivos do capítulo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ao final deste capítulo, você deverá ser capaz de:</p>
+<ul>
+<li>distinguir linguagem, IDE e sistema de publicação;</li>
+<li>instalar e abrir o Positron no Windows;</li>
+<li>reconhecer editor, console, terminal, Explorer, objetos e gráficos;</li>
+<li>selecionar uma instalação de R ou Python;</li>
+<li>criar e selecionar um ambiente virtual de Python para o projeto;</li>
+<li>instalar e verificar o Quarto;</li>
+<li>compreender quando o Jupyter é necessário para executar Python em documentos Quarto;</li>
+<li>criar e renderizar um documento <code>.qmd</code> mínimo;</li>
+<li>distinguir o arquivo-fonte do arquivo HTML gerado.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="linguagem-ide-e-sistema-de-publicação" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="linguagem-ide-e-sistema-de-publicação"><span class="header-section-number">7.2</span> Linguagem, IDE e sistema de publicação</h2>
+<p>O <strong>R</strong> e o <strong>Python</strong> interpretam e executam instruções. O <strong>Positron</strong> reúne os instrumentos utilizados para escrever essas instruções, acompanhar sua execução e navegar pelos arquivos do projeto. O <strong>Quarto</strong> lê um documento-fonte e produz a versão destinada à leitura.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["R ou Python&lt;br/&gt;executam o código"] --&gt; B["Positron&lt;br/&gt;organiza o trabalho"]
+    B --&gt; C["Arquivo .qmd&lt;br/&gt;texto e código"]
+    C --&gt; D["Quarto&lt;br/&gt;renderiza"]
+    D --&gt; E["HTML, PDF ou Word"]
+
+    classDef principal fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
+    classDef resultado fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
+    class A,B,C,D principal;
+    class E resultado;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Uma IDE não substitui as linguagens. É possível instalar o Positron sem ter R ou Python; nesse caso, a interface será aberta, mas ainda não haverá uma linguagem disponível para executar os respectivos códigos.</p>
+</section>
+<section id="instalação-do-positron-no-windows" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="instalação-do-positron-no-windows"><span class="header-section-number">7.3</span> Instalação do Positron no Windows</h2>
+<p>O instalador deve ser obtido na <a href="https://positron.posit.co/download.html">página oficial do Positron</a>. Para computadores Windows usuais com processador Intel ou AMD, selecione a versão <strong>Windows x64</strong>. A instalação por usuário atende, em regra, ao uso individual e não exige que todos os usuários do computador recebam a mesma instalação.</p>
+<p>O procedimento é:</p>
+<ol type="1">
+<li>baixar o instalador adequado à arquitetura do computador;</li>
+<li>executar o arquivo recebido;</li>
+<li>manter a opção de incluir o comando <code>positron</code> no <code>PATH</code>, quando apresentada;</li>
+<li>concluir a instalação e abrir o programa.</li>
+</ol>
+<p>No Windows, a documentação do Positron também recomenda manter atualizado o Microsoft Visual C++ Redistributable. O Positron exige uma versão compatível do R para iniciar uma sessão dessa linguagem; versões antigas podem ser encontradas no computador, mas desconsideradas pela IDE.</p>
+<div id="fig-positron-download" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Página oficial do Positron com os botões de download para Windows x64 e ARM64.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-positron-download-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../figuras/parte-02-ambiente-trabalho/install_positron.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Página oficial do Positron com os botões de download para Windows x64 e ARM64.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-positron-download-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.1: Página oficial de download do Positron com as opções para Windows.
+</figcaption>
+</figure>
+</div>
+<p>Na maior parte dos computadores Windows com processadores Intel ou AMD, utiliza-se a opção <strong>x64</strong> mostrada na <a href="#fig-positron-download" class="quarto-xref">Figura&nbsp;<span>7.1</span></a>. A opção ARM64 deve ser escolhida apenas quando o computador possuir essa arquitetura.</p>
+<p>Para verificar se o comando foi disponibilizado no terminal, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>positron <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Também é possível abrir a pasta atual no Positron pelo terminal:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>positron <span class="op">.</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O ponto representa a pasta em que o terminal está localizado.</p>
+</section>
+<section id="abrindo-a-pasta-de-trabalho" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="abrindo-a-pasta-de-trabalho"><span class="header-section-number">7.4</span> Abrindo a pasta de trabalho</h2>
+<p>No Positron, a unidade de trabalho inicial é uma pasta. Use <strong>File &gt; Open Folder</strong> e selecione a pasta principal do projeto. A pasta aberta aparece no topo do Explorer e funciona como referência para a navegação entre arquivos.</p>
+<p>Abrir a pasta principal é diferente de abrir apenas um arquivo isolado. Quando a raiz está aberta, os caminhos relativos, o terminal e as ferramentas de controle de versão partem do mesmo contexto.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Comece pela raiz">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Comece pela raiz
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Antes de escrever ou executar código, confirme no Explorer qual pasta ocupa o primeiro nível. Ela deve corresponder à pasta principal do trabalho que está sendo realizado.</p>
+</div>
+</div>
+</section>
+<section id="componentes-do-positron" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="componentes-do-positron"><span class="header-section-number">7.5</span> Componentes do Positron</h2>
+<div id="fig-positron-componentes" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Captura da interface do Positron com marcações para Editor, Console, Terminal, Variables, Explorer e Plots.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-positron-componentes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../figuras/positron-ambiente-anotado.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;7.2: Principais componentes do ambiente de trabalho no Positron: editor, console, terminal, painel de objetos, Explorer com a raiz do projeto e painel de gráficos."><img src="../figuras/positron-ambiente-anotado.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Captura da interface do Positron com marcações para Editor, Console, Terminal, Variables, Explorer e Plots."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-positron-componentes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.2: Principais componentes do ambiente de trabalho no Positron: editor, console, terminal, painel de objetos, Explorer com a raiz do projeto e painel de gráficos.
+</figcaption>
+</figure>
+</div>
+<p>A <a href="#fig-positron-componentes" class="quarto-xref">Figura&nbsp;<span>7.2</span></a> identifica os componentes utilizados com maior frequência.</p>
+<section id="explorer-e-raiz-do-projeto" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="explorer-e-raiz-do-projeto"><span class="header-section-number">7.5.1</span> Explorer e raiz do projeto</h3>
+<p>O <strong>Explorer</strong> mostra as pastas e os arquivos. Seu primeiro nível indica a pasta aberta como raiz. Criar, mover ou renomear arquivos nesse painel altera os arquivos existentes no computador.</p>
+</section>
+<section id="editor" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="editor"><span class="header-section-number">7.5.2</span> Editor</h3>
+<p>O <strong>editor</strong> contém os arquivos salvos, como scripts <code>.R</code> e <code>.py</code>, documentos <code>.qmd</code> e arquivos Markdown. Ele preserva a sequência do trabalho e permite revisar o conteúdo antes da execução.</p>
+</section>
+<section id="console" class="level3" data-number="7.5.3">
+<h3 data-number="7.5.3" class="anchored" data-anchor-id="console"><span class="header-section-number">7.5.3</span> Console</h3>
+<p>O <strong>console</strong> mantém uma sessão ativa de R ou Python. Ele recebe comandos dessas linguagens e apresenta resultados, mensagens, avisos e erros.</p>
+</section>
+<section id="terminal" class="level3" data-number="7.5.4">
+<h3 data-number="7.5.4" class="anchored" data-anchor-id="terminal"><span class="header-section-number">7.5.4</span> Terminal</h3>
+<p>O <strong>terminal</strong> recebe comandos do sistema operacional e de programas instalados, como Quarto e Git. Ele não deve ser confundido com o console da linguagem.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Local</th>
+<th>Comando esperado</th>
+<th>Exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Console de R</td>
+<td>código R</td>
+<td><code>mean(c(1, 2, 3))</code></td>
+</tr>
+<tr class="even">
+<td>Console de Python</td>
+<td>código Python</td>
+<td><code>sum([1, 2, 3])</code></td>
+</tr>
+<tr class="odd">
+<td>Terminal</td>
+<td>comando do sistema</td>
+<td><code>python --version</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="objetos-e-gráficos" class="level3" data-number="7.5.5">
+<h3 data-number="7.5.5" class="anchored" data-anchor-id="objetos-e-gráficos"><span class="header-section-number">7.5.5</span> Objetos e gráficos</h3>
+<p>O painel <strong>Variables</strong> permite inspecionar objetos existentes na sessão. O painel <strong>Plots</strong> recebe gráficos produzidos pelo código. Esses painéis ajudam a acompanhar o trabalho, mas não substituem o registro das operações nos scripts.</p>
+</section>
+</section>
+<section id="selecionando-r-ou-python" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="selecionando-r-ou-python"><span class="header-section-number">7.6</span> Selecionando R ou Python</h2>
+<p>No canto superior direito do Positron, o seletor de interpretador informa qual linguagem e qual instalação serão utilizadas. Se houver mais de uma versão do R ou mais de um ambiente Python, a escolha deve ser feita explicitamente.</p>
+<p>Para conferir a versão do R no console dessa linguagem:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Para conferir o executável Python da sessão:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.executable)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.version)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Quando uma instalação de R não aparece, primeiro verifique se ela está em uma pasta padrão do Windows, como <code>C:\Program Files\R</code>. A indicação manual de um executável é uma medida de diagnóstico, não uma etapa obrigatória da instalação comum.</p>
+</section>
+<section id="ambiente-virtual-do-python-no-projeto" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="ambiente-virtual-do-python-no-projeto"><span class="header-section-number">7.7</span> Ambiente virtual do Python no projeto</h2>
+<p>O <strong>interpretador</strong> é o programa que executa o código Python. A instalação principal disponibiliza um interpretador no sistema. Um ambiente virtual cria um espaço isolado que utiliza uma versão de Python e um conjunto próprio de pacotes.</p>
+<p>Em regra, cria-se um ambiente virtual para cada projeto, e não para cada arquivo ou programa. Essa separação evita que a atualização exigida por um trabalho modifique o funcionamento de outro. A pasta do ambiente costuma receber o nome <code>.venv</code> e permanece na raiz do projeto.</p>
+<p>O ambiente virtual não contém os códigos, os dados ou os documentos da pesquisa e não restringe o Python à pasta do projeto. Quando o ambiente está selecionado ou ativado, os comandos utilizam o interpretador e os pacotes associados àquele trabalho. Fora dele, o interpretador instalado no sistema continua disponível.</p>
+<p>O ambiente de Python também é independente da sessão de R. O Positron pode manter uma sessão de R aberta e, ao mesmo tempo, utilizar uma <code>.venv</code> para executar códigos em Python.</p>
+<section id="conferindo-uma-versão-compatível" class="level3" data-number="7.7.1">
+<h3 data-number="7.7.1" class="anchored" data-anchor-id="conferindo-uma-versão-compatível"><span class="header-section-number">7.7.1</span> Conferindo uma versão compatível</h3>
+<p>O Positron pode localizar uma versão do Python e ainda classificá-la como <strong>Unsupported</strong>. Isso significa que a instalação existe, mas não é compatível com a versão atual da IDE. No momento da preparação deste material, utilizamos Python 3.14. Para verificar as versões instaladas, abra o terminal integrado pelo menu <strong>Terminal &gt; New Terminal</strong> e execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>py list</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Se Python 3.14 não estiver disponível, instale-o pelo Python Install Manager:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>py install <span class="dv">3.14</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="criando-o-ambiente-no-terminal-integrado" class="level3" data-number="7.7.2">
+<h3 data-number="7.7.2" class="anchored" data-anchor-id="criando-o-ambiente-no-terminal-integrado"><span class="header-section-number">7.7.2</span> Criando o ambiente no terminal integrado</h3>
+<p>Em um projeto existente, abra sua pasta principal no Positron. Em um projeto novo, crie a pasta, abra-a com <strong>File &gt; Open Folder</strong> e somente então prossiga. Use <strong>Terminal &gt; New Terminal</strong>; não abra um terminal separado pelo menu Iniciar do Windows.</p>
+<p>O terminal integrado pode apresentar <code>PS</code> no início da linha porque utiliza o PowerShell como shell no Windows. Antes de criar o ambiente, confirme a localização:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Location</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O caminho deve corresponder à raiz do projeto, e não a uma pasta do sistema como <code>C:\Windows\System32</code>. Em seguida, crie o ambiente explicitamente com Python 3.14:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>py <span class="op">-</span>V<span class="op">:</span><span class="dv">3.14</span> <span class="op">-</span>m venv <span class="op">.</span><span class="fu">venv</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O comando cria a pasta <code>.venv</code>. Ao identificá-la, o Positron pode perguntar: <strong>“We noticed a new environment has been created. Do you want to select it for the workspace folder?”</strong>. Selecione <strong>Yes</strong>. Essa escolha associa o ambiente à pasta aberta no Positron e não encerra uma sessão de R que já esteja funcionando.</p>
+<div id="fig-python-selecionar-venv" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-python-selecionar-venv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../figuras/parte-02-ambiente-trabalho/py_venv_select.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-selecionar-venv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.3: Seleção do ambiente virtual Python para a pasta de trabalho no Positron.
+</figcaption>
+</figure>
+</div>
+<p>Para ativar o ambiente também no terminal integrado, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\<span class="op">.</span><span class="fu">venv</span>\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Depois da ativação, o início da linha costuma apresentar <code>(.venv)</code>. Verifique a versão e o executável utilizados:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>python <span class="op">--</span>version</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>python <span class="op">-</span>c <span class="st">"import sys; print(sys.executable)"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A primeira instrução deve informar Python 3.14. A segunda deve apresentar um caminho terminado em <code>.venv\Scripts\python.exe</code>.</p>
+</section>
+<section id="iniciando-a-sessão-python-no-positron" class="level3" data-number="7.7.3">
+<h3 data-number="7.7.3" class="anchored" data-anchor-id="iniciando-a-sessão-python-no-positron"><span class="header-section-number">7.7.3</span> Iniciando a sessão Python no Positron</h3>
+<p>Depois de criar o ambiente, use a Paleta de Comandos (<code>Ctrl + Shift + P</code>) e execute <strong>Interpreter: Discover All Interpreters</strong>. Em seguida, execute <strong>Interpreter: Start New Console Session</strong> e selecione o ambiente Python associado à pasta do projeto.</p>
+<p>A sessão iniciada deve identificar Python 3.14 e a <code>.venv</code> do projeto, sem a classificação <strong>Unsupported</strong>. A <a href="#fig-python-sessao-venv" class="quarto-xref">Figura&nbsp;<span>7.4</span></a> mostra o resultado esperado e também registra que as sessões de Python e R permanecem disponíveis no mesmo ambiente de trabalho.</p>
+<div id="fig-python-sessao-venv" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-python-sessao-venv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../figuras/parte-02-ambiente-trabalho/py_venv_session.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-sessao-venv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.4: Sessão Python 3.14 iniciada no Positron com o ambiente virtual do projeto selecionado.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="ambiente-virtual-e-controle-de-versões" class="level3" data-number="7.7.4">
+<h3 data-number="7.7.4" class="anchored" data-anchor-id="ambiente-virtual-e-controle-de-versões"><span class="header-section-number">7.7.4</span> Ambiente virtual e controle de versões</h3>
+<p>A pasta <code>.venv</code> é reconstruível e não deve ser enviada ao repositório. O arquivo <code>.gitignore</code>, localizado na raiz do projeto, deve conter:</p>
+<pre class="gitignore"><code>.venv/</code></pre>
+<p>Essa regra mantém o ambiente no computador e impede que seus arquivos sejam incorporados ao controle de versões. O arquivo <code>.gitignore</code>, ao contrário, faz parte do projeto e deve ser preservado no repositório.</p>
+<p>Para encerrar a ativação do ambiente naquele terminal, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>deactivate</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="o-que-é-o-quarto" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="o-que-é-o-quarto"><span class="header-section-number">7.8</span> O que é o Quarto?</h2>
+<p>O Quarto é um sistema de publicação que combina prosa, referências, equações, tabelas, figuras e código executável. Seu arquivo-fonte possui a extensão <code>.qmd</code>. A renderização lê esse arquivo, executa os blocos autorizados e produz o formato definido no cabeçalho.</p>
+<p>O livro em que este capítulo está inserido é um projeto Quarto. Seus capítulos são escritos em arquivos <code>.qmd</code>; a versão de leitura é formada pelos arquivos HTML produzidos durante a renderização.</p>
+</section>
+<section id="instalação-e-verificação-do-quarto" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="instalação-e-verificação-do-quarto"><span class="header-section-number">7.9</span> Instalação e verificação do Quarto</h2>
+<p>No Windows, baixe o instalador <code>.msi</code> na <a href="https://quarto.org/docs/get-started/">página oficial de instalação do Quarto</a> e conclua o assistente. A <a href="#fig-quarto-download" class="quarto-xref">Figura&nbsp;<span>7.5</span></a> mostra onde localizar o instalador para Windows. Feche e reabra o terminal após a instalação.</p>
+<div id="fig-quarto-download" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Página oficial do Quarto com o instalador MSI para Windows.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto-download-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../figuras/parte-02-ambiente-trabalho/quarto_install.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Página oficial do Quarto com o instalador MSI para Windows.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-download-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.5: Página oficial do Quarto com o instalador para Windows.
+</figcaption>
+</figure>
+</div>
+<p>Primeiro, confirme que o comando está disponível:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>quarto <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Depois, execute a verificação geral:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>quarto check</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O primeiro comando informa apenas a versão instalada. O segundo examina a instalação do Quarto e as integrações encontradas no computador, como R, <code>knitr</code>, Python e Jupyter. Nem todas essas integrações são obrigatórias: o resultado esperado depende das linguagens que o projeto utiliza. A <a href="#fig-quarto-check" class="quarto-xref">Figura&nbsp;<span>7.6</span></a> mostra uma verificação em um projeto que utiliza R e Python.</p>
+<div id="fig-quarto-check" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Terminal integrado do Positron executando quarto check e reconhecendo R, knitr, Python e Jupyter.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto-check-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../figuras/parte-02-ambiente-trabalho/quarto_check.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Terminal integrado do Positron executando quarto check e reconhecendo R, knitr, Python e Jupyter.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-check-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.6: Verificação geral do Quarto no terminal integrado do Positron.
+</figcaption>
+</figure>
+</div>
+<section id="jupyter-para-documentos-quarto-com-python" class="level3" data-number="7.9.1">
+<h3 data-number="7.9.1" class="anchored" data-anchor-id="jupyter-para-documentos-quarto-com-python"><span class="header-section-number">7.9.1</span> Jupyter para documentos Quarto com Python</h3>
+<p>A sessão Python do Positron não exige uma instalação separada do Jupyter. Para versões compatíveis do Python, o Positron fornece o kernel necessário para iniciar o console. Por isso, a sessão Python 3.14 pode funcionar antes da instalação do Jupyter no ambiente virtual.</p>
+<p>A situação é diferente quando um documento Quarto contém blocos executáveis de Python. Nesse caso, o Quarto utiliza o mecanismo do Jupyter para executar o código durante a renderização. Se o projeto utilizar somente blocos de R, essa instalação não é necessária.</p>
+<p>Para preparar a <code>.venv</code> para documentos Quarto com Python, abra o terminal integrado na raiz do projeto. Para evitar que o instalador utilize por engano outra versão disponível no sistema, indique diretamente o executável do ambiente virtual:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\<span class="op">.</span><span class="fu">venv</span>\Scripts\python<span class="op">.</span><span class="fu">exe</span> <span class="op">-</span>m pip install jupyter</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esse comando instala o Jupyter especificamente na <code>.venv</code> do projeto, mesmo que o terminal ainda não esteja ativado. Depois da instalação, verifique o Jupyter pelo mesmo executável:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\<span class="op">.</span><span class="fu">venv</span>\Scripts\python<span class="op">.</span><span class="fu">exe</span> <span class="op">-</span>m jupyter <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-jupyter-venv-versao" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Terminal integrado do Positron com a pasta .venv ativa e a lista de componentes e versões do Jupyter.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-jupyter-venv-versao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../figuras/parte-02-ambiente-trabalho/jupyter_venv_version.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Terminal integrado do Positron com a pasta .venv ativa e a lista de componentes e versões do Jupyter.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-jupyter-venv-versao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.7: Verificação dos componentes do Jupyter instalados no ambiente virtual do projeto.
+</figcaption>
+</figure>
+</div>
+<p>A <a href="#fig-jupyter-venv-versao" class="quarto-xref">Figura&nbsp;<span>7.7</span></a> confirma que o comando foi executado com a <code>.venv</code> ativa e que os componentes utilizados pelo Quarto estão disponíveis. Alguns componentes opcionais podem aparecer como não instalados sem impedir a execução de documentos Quarto ou o uso do console do Positron.</p>
+<p>Por fim, confirme que a <code>.venv</code> está ativada no terminal e verifique se o Quarto reconhece essa integração:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\<span class="op">.</span><span class="fu">venv</span>\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>quarto check jupyter</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O resultado deve registrar que a instalação do Python foi localizada, apresentar o caminho do interpretador dentro de <code>.venv</code> e identificar o Jupyter. Se aparecer um aviso de ambiente não ativado, retorne à ativação da <code>.venv</code> antes de instalar novamente qualquer pacote.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Confirme o interpretador antes de instalar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Confirme o interpretador antes de instalar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Se a instalação utilizar um caminho externo à pasta <code>.venv</code>, interrompa o procedimento e retorne à raiz do projeto. A indicação explícita <code>.\.venv\Scripts\python.exe -m pip install jupyter</code> evita que outra versão do Python disponível no sistema receba os pacotes do projeto.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Ordem das ferramentas">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Ordem das ferramentas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Primeiro instalamos Python e confirmamos seu funcionamento. Depois apresentamos o Positron e criamos a <code>.venv</code>. O Jupyter somente é instalado quando passamos a executar Python dentro de documentos Quarto.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="primeiro-documento-quarto" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="primeiro-documento-quarto"><span class="header-section-number">7.10</span> Primeiro documento Quarto</h2>
+<p>Crie um arquivo chamado <code>exemplo.qmd</code> e insira:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Exemplo jurídico"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Uma tabela simples</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>O documento combina texto, código e resultado.</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>::: {.cell}</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r .cell-code}</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>estados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Acre"</span>, <span class="st">"Alagoas"</span>, <span class="st">"Amapá"</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>feminicidios <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">31</span>, <span class="dv">8</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">estado =</span> estados, <span class="at">feminicidios =</span> feminicidios)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-stdout}</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="in">   estado feminicidios</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="in">1    Acre           11</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="in">2 Alagoas           31</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="in">3   Amapá            8</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O bloco delimitado por <code>---</code> é o <strong>YAML</strong>. Ele deve começar na primeira linha do documento. O título e o formato são metadados; o restante contém a prosa e o bloco de código.</p>
+<p>No terminal, localizado na mesma pasta do arquivo, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>quarto render exemplo<span class="op">.</span><span class="fu">qmd</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Em um documento isolado, o resultado <code>exemplo.html</code> tende a ser criado ao lado da fonte. Em um projeto Quarto, o arquivo <code>_quarto.yml</code> pode definir outro destino, como <code>docs/</code>. Portanto, a localização da saída depende da configuração do projeto.</p>
+</section>
+<section id="arquivo-fonte-e-arquivo-gerado" class="level2" data-number="7.11">
+<h2 data-number="7.11" class="anchored" data-anchor-id="arquivo-fonte-e-arquivo-gerado"><span class="header-section-number">7.11</span> Arquivo-fonte e arquivo gerado</h2>
+<p>O arquivo <code>.qmd</code> é a fonte que deve ser editada. O arquivo <code>.html</code> é o produto da renderização. Modificar diretamente o HTML não atualiza a fonte e a alteração pode desaparecer na próxima renderização.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arquivo</th>
+<th>Natureza</th>
+<th>Conduta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>exemplo.qmd</code></td>
+<td>fonte</td>
+<td>escrever, revisar e preservar</td>
+</tr>
+<tr class="even">
+<td><code>exemplo.html</code></td>
+<td>resultado</td>
+<td>abrir para leitura e verificação</td>
+</tr>
+<tr class="odd">
+<td><code>exemplo_files/</code></td>
+<td>dependências geradas, quando houver</td>
+<td>manter junto ao HTML se o formato depender dela</td>
+</tr>
+</tbody>
+</table>
+<p>Em projetos com recursos incorporados ao próprio HTML, a pasta auxiliar pode não ser criada. Sua presença ou ausência depende das opções de renderização.</p>
+</section>
+<section id="erros-frequentes-de-renderização" class="level2" data-number="7.12">
+<h2 data-number="7.12" class="anchored" data-anchor-id="erros-frequentes-de-renderização"><span class="header-section-number">7.12</span> Erros frequentes de renderização</h2>
+<section id="yaml-inválido" class="level3" data-number="7.12.1">
+<h3 data-number="7.12.1" class="anchored" data-anchor-id="yaml-inválido"><span class="header-section-number">7.12.1</span> YAML inválido</h3>
+<p>Uma instrução inserida antes do cabeçalho pode produzir erro. Por exemplo, <code>quarto render---</code> não é um início válido de documento. O arquivo deve começar exatamente com o delimitador <code>---</code>.</p>
+</section>
+<section id="arquivo-não-encontrado" class="level3" data-number="7.12.2">
+<h3 data-number="7.12.2" class="anchored" data-anchor-id="arquivo-não-encontrado"><span class="header-section-number">7.12.2</span> Arquivo não encontrado</h3>
+<p>Um caminho relativo é interpretado a partir do contexto da renderização. Confirme a raiz do projeto, o nome do arquivo e a posição da pasta referenciada.</p>
+</section>
+<section id="linguagem-ou-pacote-ausente" class="level3" data-number="7.12.3">
+<h3 data-number="7.12.3" class="anchored" data-anchor-id="linguagem-ou-pacote-ausente"><span class="header-section-number">7.12.3</span> Linguagem ou pacote ausente</h3>
+<p>Se um bloco de R ou Python depende de um pacote, esse pacote precisa estar instalado no ambiente que o Quarto está utilizando. A presença do pacote em outra versão do R ou em outro ambiente Python não o torna disponível automaticamente.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Leia a primeira mensagem de erro">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Leia a primeira mensagem de erro
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Erros posteriores podem ser consequência do primeiro problema registrado. Identifique o arquivo, a linha ou o bloco indicados antes de alterar configurações ou instalar programas adicionais.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="síntese" class="level2" data-number="7.13">
+<h2 data-number="7.13" class="anchored" data-anchor-id="síntese"><span class="header-section-number">7.13</span> Síntese</h2>
+<p>Neste capítulo, distinguimos linguagem, IDE e sistema de publicação. Instalamos conceitualmente o Positron e o Quarto, identificamos os componentes do ambiente, selecionamos interpretadores, criamos um ambiente virtual de Python e acompanhamos o percurso entre um arquivo <code>.qmd</code> e o HTML gerado.</p>
+<p>Nos capítulos seguintes, integraremos esse ambiente ao controle de versões e aos agentes de inteligência artificial.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Antes de avançar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Antes de avançar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><label><input type="checkbox">A pasta principal está aberta no Explorer?</label></li>
+<li><label><input type="checkbox">Consigo distinguir editor, console e terminal?</label></li>
+<li><label><input type="checkbox">Sei qual versão do R ou do Python está ativa?</label></li>
+<li><label><input type="checkbox">A <code>.venv</code> foi criada na raiz do projeto com uma versão compatível do Python?</label></li>
+<li><label><input type="checkbox">A regra <code>.venv/</code> está registrada no <code>.gitignore</code>?</label></li>
+<li><label><input type="checkbox">Os comandos <code>quarto --version</code> e <code>quarto check</code> reconhecem a instalação?</label></li>
+<li><label><input type="checkbox">Se o projeto usa blocos Python, o Jupyter está instalado na <code>.venv</code> e é reconhecido pelo Quarto?</label></li>
+<li><label><input type="checkbox">Sei qual arquivo é a fonte e qual foi gerado?</label></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="referências-de-instalação-e-consulta" class="level2" data-number="7.14">
+<h2 data-number="7.14" class="anchored" data-anchor-id="referências-de-instalação-e-consulta"><span class="header-section-number">7.14</span> Referências de instalação e consulta</h2>
+<ul>
+<li><a href="https://positron.posit.co/download.html">Download e requisitos do Positron</a></li>
+<li><a href="https://positron.posit.co/add-to-path.html">Inicialização do Positron pelo terminal</a></li>
+<li><a href="https://positron.posit.co/r-installations.html">Descoberta de instalações de R no Positron</a></li>
+<li><a href="https://positron.posit.co/python-installations.html">Descoberta de instalações e ambientes Python no Positron</a></li>
+<li><a href="https://quarto.org/docs/get-started/">Instalação do Quarto</a></li>
+<li><a href="https://quarto.org/docs/computations/python.html">Uso de Python e Jupyter em documentos Quarto</a></li>
+<li><a href="https://quarto.org/docs/cli/check.html">Verificação da instalação do Quarto</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/P2C02-r-python-linguagens.html" class="pagination-link" aria-label="R e Python: linguagens do ambiente de pesquisa">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R e Python: linguagens do ambiente de pesquisa</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../capitulos/P2C04-git-github.html" class="pagination-link" aria-label="Git e GitHub: versões, colaboração e proteção do projeto">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

@@ -4,104 +4,64 @@ toc: false
 
 # Parte II — Ambiente de trabalho e ferramentas
 
-Esta parte apresenta o ambiente computacional e as ferramentas necessárias à pesquisa jurimétrica. O percurso começa pela organização do trabalho e avança pela importação, verificação, transformação, combinação e obtenção de dados compartilhados. Os capítulos utilizam exemplos relacionados ao Direito, especialmente dados sobre homicídios de mulheres e feminicídios.
+Esta parte monta, passo a passo, o ambiente computacional utilizado no restante do livro. O percurso foi escrito para leitores que ainda não conhecem R, Python, Positron, Quarto, Git, GitHub ou agentes de inteligência artificial. Primeiro apresentamos a função de cada componente; depois instalamos e verificamos as ferramentas; por fim, criamos um projeto jurídico mínimo que as integra.
 
 ::: {.grid}
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-proposito}
-### R e o ambiente de trabalho
+### Ambiente computacional
 
-R, Positron, editor, console, terminal, objetos, gráficos, documentação e inteligência artificial.
+Visão geral do ecossistema e do percurso de montagem do ambiente.
 
-[Ler o capítulo](../capitulos/r-ambiente-trabalho.qmd)
+[Ler o capítulo](../capitulos/P2C01-ambiente-computacional.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
-### Projetos e organização reproduzível
+### R e Python
 
-Projetos, estrutura de pastas, caminhos relativos, Quarto, GitHub, colaboração e reprodutibilidade.
+Função, instalação e verificação das duas linguagens no Windows.
 
-[Ler o capítulo](../capitulos/projetos-reprodutiveis.qmd)
+[Ler o capítulo](../capitulos/P2C02-r-python-linguagens.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
-### Objetos e operações fundamentais
+### Positron e Quarto
 
-Objetos, vetores, tipos de valores, funções, operadores e construção inicial da base de feminicídios.
+IDE, editor, console, terminal, documentos `.qmd` e renderização.
 
-[Ler o capítulo](../capitulos/objetos-operacoes.qmd)
+[Ler o capítulo](../capitulos/P2C03-positron-quarto.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-desenvolvimento}
-### Data frames e importação
+### Git e GitHub
 
-Unidade de observação e importação e exportação de arquivos CSV, Excel, Stata e RDS.
+Controle de versões, criação da conta, repositório local e hospedagem remota.
 
-[Ler o capítulo](../capitulos/dataframes-importacao.qmd)
+[Ler o capítulo](../capitulos/P2C04-git-github.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-micro}
-### Valores ausentes e qualidade dos dados
+### Agentes no projeto
 
-Valores `NA`, códigos especiais, categorias, duplicações, coerência e registro das decisões.
+Codex e Claude Code no Positron, permissões, contexto e supervisão humana.
 
-[Ler o capítulo](../capitulos/qualidade-dados.qmd)
-:::
-
-::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-macro}
-### Operações com data frames em R base
-
-Ordenação, combinação, agregação e criação de subconjuntos com recursos do R base.
-
-[Ler o capítulo](../capitulos/operacoes-r-base.qmd)
+[Ler o capítulo](../capitulos/P2C05-agentes-projeto.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-proposito}
-### Introdução ao universo tidy
+### Exemplo integrado
 
-Princípios dos dados tidy, pacotes do tidyverse, pipe e construção de fluxos de transformação.
+Criação de um projeto jurídico mínimo com as ferramentas apresentadas.
 
-[Ler o capítulo](../capitulos/universo-tidy.qmd)
-:::
-
-::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
-### Manipulação de dados com dplyr
-
-Comandos para linhas, colunas e resumos com `filter()`, `select()`, `mutate()` e `summarise()`.
-
-[Ler o capítulo](../capitulos/manipulacao-dplyr.qmd)
-:::
-
-::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-formacao}
-### Dados tidy e transformação com tidyr
-
-Unidade de observação, formatos largo e longo, `pivot_longer()`, `pivot_wider()` e conferência das transformações.
-
-[Ler o capítulo](../capitulos/dados-tidy-tidyr.qmd)
-:::
-
-::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-desenvolvimento}
-### Combinação de bases
-
-Chaves, relações entre tabelas, correspondências, duplicações e diferentes tipos de junção.
-
-[Ler o capítulo](../capitulos/combinacao-bases.qmd)
-:::
-
-::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-micro}
-### Textos, datas e categorias
-
-Padronização de textos, números de processo, valores monetários, categorias e datas.
-
-[Ler o capítulo](../capitulos/textos-datas-categorias.qmd)
+[Ler o capítulo](../capitulos/P2C06-exemplo-integrado-ecossistema.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-macro}
-### Google Drive
+### Introdução ao R
 
-Identificação de arquivos públicos, download controlado e importação de CSV, RDS e Excel.
+Aprofundamento opcional dos elementos de R utilizados nos exemplos jurídicos.
 
-[Ler o capítulo](../capitulos/google-drive.qmd)
+[Ler o capítulo](../capitulos/P2C07-introducao-r.qmd)
 :::
 
 :::
@@ -112,22 +72,19 @@ Identificação de arquivos públicos, download controlado e importação de CSV
 %%| fig-align: center
 %%| fig-alt: "Percurso das ferramentas utilizadas na pesquisa jurimétrica"
 
-flowchart TB
-    A["Ambiente"] --> B["Projeto"]
-    B --> C["Objetos"]
-    C --> D["Data frames e importação"]
-    D --> E["Qualidade"]
-    E --> F["R base"]
-    F --> G["Universo tidy"]
-    G --> H["dplyr"]
-    H --> I["tidyr"]
-    I --> J["Combinação"]
-    J --> K["Textos, datas e categorias"]
-    K --> L["Google Drive"]
-    L --> M["Ferramentas prontas para<br/>a construção do banco"]
+flowchart LR
+    A["Compreender<br/>o ecossistema"] --> B["Instalar<br/>R e Python"]
+    B --> C["Organizar<br/>Positron e Quarto"]
+    C --> D["Preparar<br/>Git e GitHub"]
+    D --> E["Integrar<br/>Codex e Claude Code"]
+    E --> F["Criar o primeiro<br/>projeto integrado"]
+    F --> G["Aprofundar o R<br/>quando necessário"]
 
     classDef etapa fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
     classDef destaque fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
-    class A,B,C,D,E,F,G,H,I,J,K,L etapa;
-    class M destaque;
+    class A,B,C,D,E etapa;
+    class F destaque;
+    class G etapa;
 ```
+
+Ao final da parte, o leitor terá as ferramentas instaladas, conhecerá suas funções e terá construído um projeto pequeno. O capítulo final de introdução ao R funciona como aprofundamento para quem precisar acompanhar ou revisar a linguagem. A estrutura completa do projeto de pesquisa será desenvolvida na Parte III, em conjunto com a construção do banco de dados.

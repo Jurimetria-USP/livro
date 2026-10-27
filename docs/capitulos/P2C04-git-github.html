@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alexandre Nicolella">
+<meta name="author" content="José de Jesus Filho">
+
+<title>8&nbsp; Git e GitHub: versões, colaboração e proteção do projeto – JURIMETRIA: Dados, Métodos e Evidência para o Direito</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../capitulos/P2C05-agentes-projeto.html" rel="next">
+<link href="../capitulos/P2C03-positron-quarto.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-af376c0a327698bc4256a7316fbe19a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo light-content">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JURIMETRIA: Dados, Métodos e Evidência para o Direito</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Jurimetria-USP/livro"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/P2C04-git-github.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../autores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sobre os autores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/01-fundamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte I — Fundamentos</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C01-metodo-cientifico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Método científico e desenho de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C02-pergunta-dados-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Da pergunta à conclusão</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C03-jurimetria-instrumento-pesquisa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Jurimetria como instrumento de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C04-litigios-desigualdades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Seleção dos litígios e desigualdades no sistema de justiça</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/02-ambiente-trabalho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte II — Ambiente de trabalho e ferramentas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C01-ambiente-computacional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ambiente computacional para a pesquisa jurimétrica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C02-r-python-linguagens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R e Python: linguagens do ambiente de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C03-positron-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C04-git-github.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C05-agentes-projeto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Agentes de inteligência artificial no projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C06-exemplo-integrado-ecossistema.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Um exemplo integrado do ecossistema</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C07-introducao-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introdução ao R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Parte III — Construção do banco de dados</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/04-descricao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte IV — Descrição do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C01-introducao-estatistica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C02-analise-descritiva.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C03-analise-sobrevivencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Análise de sobrevivência: tempo do processo</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/05-explicacao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte V — Explicação do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C01-modelos-lineares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C02-modelos-avancados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução"><span class="header-section-number">8.1</span> Introdução</a></li>
+  <li><a href="#git-e-github-não-são-a-mesma-coisa" id="toc-git-e-github-não-são-a-mesma-coisa" class="nav-link" data-scroll-target="#git-e-github-não-são-a-mesma-coisa"><span class="header-section-number">8.2</span> Git e GitHub não são a mesma coisa</a></li>
+  <li><a href="#instalação-do-git-no-windows" id="toc-instalação-do-git-no-windows" class="nav-link" data-scroll-target="#instalação-do-git-no-windows"><span class="header-section-number">8.3</span> Instalação do Git no Windows</a></li>
+  <li><a href="#identificação-do-autor-dos-registros" id="toc-identificação-do-autor-dos-registros" class="nav-link" data-scroll-target="#identificação-do-autor-dos-registros"><span class="header-section-number">8.4</span> Identificação do autor dos registros</a></li>
+  <li><a href="#o-repositório-local" id="toc-o-repositório-local" class="nav-link" data-scroll-target="#o-repositório-local"><span class="header-section-number">8.5</span> O repositório local</a></li>
+  <li><a href="#o-que-o-git-observa" id="toc-o-que-o-git-observa" class="nav-link" data-scroll-target="#o-que-o-git-observa"><span class="header-section-number">8.6</span> O que o Git observa</a>
+  <ul class="collapse">
+  <li><a href="#primeiro-registro-local" id="toc-primeiro-registro-local" class="nav-link" data-scroll-target="#primeiro-registro-local"><span class="header-section-number">8.6.1</span> Primeiro registro local</a></li>
+  </ul></li>
+  <li><a href="#o-repositório-remoto" id="toc-o-repositório-remoto" class="nav-link" data-scroll-target="#o-repositório-remoto"><span class="header-section-number">8.7</span> O repositório remoto</a></li>
+  <li><a href="#criando-uma-conta-no-github" id="toc-criando-uma-conta-no-github" class="nav-link" data-scroll-target="#criando-uma-conta-no-github"><span class="header-section-number">8.8</span> Criando uma conta no GitHub</a>
+  <ul class="collapse">
+  <li><a href="#conta-git-e-autenticação" id="toc-conta-git-e-autenticação" class="nav-link" data-scroll-target="#conta-git-e-autenticação"><span class="header-section-number">8.8.1</span> Conta, Git e autenticação</a></li>
+  </ul></li>
+  <li><a href="#o-arquivo-.gitignore" id="toc-o-arquivo-.gitignore" class="nav-link" data-scroll-target="#o-arquivo-.gitignore"><span class="header-section-number">8.9</span> O arquivo <code>.gitignore</code></a></li>
+  <li><a href="#o-que-não-deve-ser-versionado" id="toc-o-que-não-deve-ser-versionado" class="nav-link" data-scroll-target="#o-que-não-deve-ser-versionado"><span class="header-section-number">8.10</span> O que não deve ser versionado</a>
+  <ul class="collapse">
+  <li><a href="#credenciais-e-segredos" id="toc-credenciais-e-segredos" class="nav-link" data-scroll-target="#credenciais-e-segredos"><span class="header-section-number">8.10.1</span> Credenciais e segredos</a></li>
+  <li><a href="#dados-pessoais-ou-sigilosos" id="toc-dados-pessoais-ou-sigilosos" class="nav-link" data-scroll-target="#dados-pessoais-ou-sigilosos"><span class="header-section-number">8.10.2</span> Dados pessoais ou sigilosos</a></li>
+  <li><a href="#arquivos-locais-ou-temporários" id="toc-arquivos-locais-ou-temporários" class="nav-link" data-scroll-target="#arquivos-locais-ou-temporários"><span class="header-section-number">8.10.3</span> Arquivos locais ou temporários</a></li>
+  <li><a href="#produtos-gerados" id="toc-produtos-gerados" class="nav-link" data-scroll-target="#produtos-gerados"><span class="header-section-number">8.10.4</span> Produtos gerados</a></li>
+  </ul></li>
+  <li><a href="#uma-verificação-antes-de-registrar-ou-enviar" id="toc-uma-verificação-antes-de-registrar-ou-enviar" class="nav-link" data-scroll-target="#uma-verificação-antes-de-registrar-ou-enviar"><span class="header-section-number">8.11</span> Uma verificação antes de registrar ou enviar</a></li>
+  <li><a href="#git-como-registro-metodológico" id="toc-git-como-registro-metodológico" class="nav-link" data-scroll-target="#git-como-registro-metodológico"><span class="header-section-number">8.12</span> Git como registro metodológico</a></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">8.13</span> Síntese</a></li>
+  <li><a href="#referências-de-instalação-e-consulta" id="toc-referências-de-instalação-e-consulta" class="nav-link" data-scroll-target="#referências-de-instalação-e-consulta"><span class="header-section-number">8.14</span> Referências de instalação e consulta</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/P2C04-git-github.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></h1>
+<p class="subtitle lead">O registro das mudanças em uma pesquisa</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autores</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexandre Nicolella </p>
+             <p>José de Jesus Filho </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">8.1</span> Introdução</h2>
+<p>Uma pesquisa passa por sucessivas alterações. Textos são revistos, códigos são corrigidos e bases são reconstruídas. Salvar cópias com nomes como <code>final</code>, <code>final_2</code> e <code>final_agora_vai</code> não registra de forma adequada o que mudou nem permite relacionar cada versão a uma decisão.</p>
+<p>O <strong>Git</strong> registra mudanças nos arquivos de um projeto. O <strong>GitHub</strong> hospeda repositórios Git e acrescenta instrumentos de colaboração. Eles se relacionam, mas não são a mesma ferramenta.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Objetivos do capítulo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Objetivos do capítulo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ao final deste capítulo, você deverá ser capaz de:</p>
+<ul>
+<li>distinguir Git de GitHub;</li>
+<li>instalar e verificar o Git no Windows;</li>
+<li>criar uma conta no GitHub e reconhecer suas configurações iniciais;</li>
+<li>compreender o que constitui um repositório local;</li>
+<li>reconhecer a diferença entre histórico local e repositório remoto;</li>
+<li>identificar arquivos que não devem ser versionados;</li>
+<li>utilizar <code>.gitignore</code> para prevenir inclusões indevidas;</li>
+<li>reconhecer os cuidados necessários com dados jurídicos e credenciais.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="git-e-github-não-são-a-mesma-coisa" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="git-e-github-não-são-a-mesma-coisa"><span class="header-section-number">8.2</span> Git e GitHub não são a mesma coisa</h2>
+<p>O Git é um sistema de controle de versões executado no computador. Ele compara o estado dos arquivos, registra versões identificadas e permite consultar o histórico do projeto.</p>
+<p>O GitHub é uma plataforma que hospeda repositórios Git na internet. Um repositório pode existir somente no computador, sem GitHub. Também é possível criar um repositório no GitHub e ainda não possuir uma cópia local.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ferramenta</th>
+<th>Local principal</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Git</td>
+<td>computador</td>
+<td>registrar e comparar versões</td>
+</tr>
+<tr class="even">
+<td>GitHub</td>
+<td>serviço remoto</td>
+<td>hospedar repositórios e apoiar a colaboração</td>
+</tr>
+</tbody>
+</table>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Arquivos de trabalho"] --&gt; B["Histórico local&lt;br/&gt;Git"]
+    B &lt;--&gt; C["Repositório remoto&lt;br/&gt;GitHub"]
+    C --&gt; D["Colaboração e publicação"]
+
+    classDef principal fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
+    classDef remoto fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
+    class A,B principal;
+    class C,D remoto;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Enviar uma versão ao GitHub não substitui o registro local. Da mesma forma, registrar uma versão no Git não a publica automaticamente.</p>
+</section>
+<section id="instalação-do-git-no-windows" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="instalação-do-git-no-windows"><span class="header-section-number">8.3</span> Instalação do Git no Windows</h2>
+<p>Baixe o instalador na <a href="https://git-scm.com/install/windows">página oficial do Git para Windows</a>. Para uma primeira instalação, as opções padrão atendem à maior parte dos usos descritos neste livro.</p>
+<p>Após concluir o assistente, feche e reabra o terminal do Positron. Verifique a instalação:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O terminal deve informar a versão encontrada. Se o comando não for reconhecido, reinicie o Positron e verifique se o instalador incluiu o Git no <code>PATH</code> do Windows.</p>
+<div id="fig-git-install" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Página oficial do Git com as opções de instalação para Windows x64 e ARM64." data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-git-install-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../figuras/parte-02-ambiente-trabalho/git_install.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Página oficial do Git com as opções de instalação para Windows x64 e ARM64.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-git-install-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;8.1: Página oficial de instalação do Git para Windows.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="identificação-do-autor-dos-registros" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="identificação-do-autor-dos-registros"><span class="header-section-number">8.4</span> Identificação do autor dos registros</h2>
+<p>O Git associa cada registro a um nome e a um endereço de correio eletrônico. A configuração global vale para os repositórios utilizados pela conta do Windows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>git config <span class="op">--</span>global user<span class="op">.</span><span class="fu">name</span> <span class="st">"Nome do autor"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>git config <span class="op">--</span>global user<span class="op">.</span><span class="fu">email</span> <span class="st">"endereco@exemplo.com"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Para consultar a configuração:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>git config <span class="op">--</span>global <span class="op">--</span>list</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Essa identificação integra o histórico. Ela não substitui a autenticação no GitHub e não concede acesso a repositórios remotos. O nome pode ser o nome acadêmico ou profissional que o autor deseja registrar. O endereço pode ser um correio eletrônico comum ou o endereço privado fornecido pelo GitHub.</p>
+<p>O Git funciona mesmo que esse endereço não seja o mesmo utilizado para entrar no GitHub. Contudo, para que o GitHub associe os registros à conta do autor, o endereço gravado no registro deve estar verificado nessa conta ou corresponder ao endereço privado disponibilizado pela plataforma. Essa associação identifica a autoria do registro; ela não realiza a autenticação nem sincroniza o projeto.</p>
+</section>
+<section id="o-repositório-local" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="o-repositório-local"><span class="header-section-number">8.5</span> O repositório local</h2>
+<p>Um repositório Git é uma pasta de projeto acompanhada por metadados de versão. Quando o controle de versões é iniciado, o Git cria uma pasta oculta denominada <code>.git</code>. Ela contém o histórico e as configurações locais do repositório.</p>
+<p>O comando a seguir informa se a pasta atual pertence a um repositório e mostra o estado dos arquivos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>git status</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Quando executado fora de um repositório, o Git informa que não encontrou a pasta <code>.git</code>. Antes de qualquer operação, observe no terminal se o caminho exibido corresponde à raiz correta do projeto.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Não crie repositórios dentro de repositórios">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Não crie repositórios dentro de repositórios
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Iniciar Git em uma subpasta por engano pode produzir históricos sobrepostos. Confirme a raiz do projeto antes de iniciar o versionamento.</p>
+</div>
+</div>
+</section>
+<section id="o-que-o-git-observa" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="o-que-o-git-observa"><span class="header-section-number">8.6</span> O que o Git observa</h2>
+<p>O Git distingue, de forma simplificada, três situações:</p>
+<ul>
+<li>arquivo ainda não acompanhado;</li>
+<li>arquivo acompanhado e modificado;</li>
+<li>versão registrada no histórico.</li>
+</ul>
+<p>O percurso completo de seleção, registro e intercâmbio de versões será realizado em atividade própria. Neste capítulo, importa compreender que o Git não decide sozinho quais mudanças representam uma versão coerente. A pessoa responsável deve revisar os arquivos e formular um registro que corresponda a uma etapa compreensível do trabalho.</p>
+<section id="primeiro-registro-local" class="level3" data-number="8.6.1">
+<h3 data-number="8.6.1" class="anchored" data-anchor-id="primeiro-registro-local"><span class="header-section-number">8.6.1</span> Primeiro registro local</h3>
+<p>Em uma pasta nova, a sequência básica ocorre primeiro no computador. Na raiz do projeto, os responsáveis iniciam o repositório e conferem os arquivos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>git init</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>git status</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Depois de revisar o conteúdo e o <code>.gitignore</code>, selecionam os arquivos que formarão a versão e conferem novamente o estado:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>git add <span class="op">.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>git status</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Por fim, registram a versão local:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>git commit <span class="op">-</span>m <span class="st">"Cria a estrutura inicial do projeto"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O <em>commit</em> atualiza o histórico local. Ele não cria um repositório no GitHub e não envia arquivos à internet. O uso de <code>git add .</code> pressupõe que a pessoa já examinou os arquivos da pasta e confirmou as regras do <code>.gitignore</code>; quando houver dúvida, os arquivos podem ser selecionados individualmente.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Arquivos na pasta"] --&gt; B["git add&lt;br/&gt;seleciona"]
+    B --&gt; C["git commit&lt;br/&gt;registra localmente"]
+    C --&gt; D["Conexão com o GitHub&lt;br/&gt;etapa posterior"]
+    D --&gt; E["Sincronização&lt;br/&gt;envia ou recebe versões"]
+
+    classDef local fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
+    classDef remoto fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
+    class A,B,C local;
+    class D,E remoto;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="o-repositório-remoto" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="o-repositório-remoto"><span class="header-section-number">8.7</span> O repositório remoto</h2>
+<p>Um repositório no GitHub pode funcionar como ponto de colaboração, cópia remota e origem de uma página pública. Sua visibilidade pode ser pública ou privada. Essa escolha precisa considerar direitos autorais, dados pessoais, sigilo, contratos e as regras institucionais aplicáveis.</p>
+<p>Conectar um repositório local a um remoto não autoriza o envio de arquivos. Em uma etapa posterior, cria-se o repositório no GitHub, associa-se seu endereço ao repositório local e realiza-se a primeira sincronização. A criação do remoto, sua conexão e as operações de envio ou recebimento devem ser realizadas conscientemente pelos autores do projeto.</p>
+<p>Assim, a ordem adotada neste livro é: organizar a pasta, iniciar o Git, revisar e registrar uma versão local; somente depois criar ou escolher um repositório no GitHub e sincronizar os históricos. O GitHub amplia o alcance do repositório, mas não é necessário para criar o primeiro <em>commit</em>.</p>
+</section>
+<section id="criando-uma-conta-no-github" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="criando-uma-conta-no-github"><span class="header-section-number">8.8</span> Criando uma conta no GitHub</h2>
+<p>Para utilizar repositórios remotos e colaborar no GitHub, cada participante deve possuir sua própria conta. A conta é individual; senhas e códigos de autenticação não devem ser compartilhados.</p>
+<p>O procedimento inicial é:</p>
+<ol type="1">
+<li>acessar <a href="https://github.com/">github.com</a>;</li>
+<li>selecionar <strong>Sign up</strong>;</li>
+<li>informar um endereço de correio eletrônico acessível;</li>
+<li>escolher uma senha exclusiva e um nome de usuário;</li>
+<li>confirmar o endereço recebido por correio eletrônico;</li>
+<li>entrar na conta e revisar as configurações de segurança.</li>
+</ol>
+<p>O nome de usuário integra o endereço dos repositórios. Por isso, convém escolher uma identificação estável e adequada ao uso acadêmico ou profissional.</p>
+<p>Ative a autenticação em dois fatores nas configurações de segurança da conta. Esse mecanismo acrescenta uma segunda verificação ao acesso e reduz o risco de uso indevido da conta.</p>
+<!-- IMAGEM A INSERIR: figuras/parte-02-ambiente-trabalho/github-criar-conta.png — página inicial do GitHub com a opção Sign up identificada. -->
+<section id="conta-git-e-autenticação" class="level3" data-number="8.8.1">
+<h3 data-number="8.8.1" class="anchored" data-anchor-id="conta-git-e-autenticação"><span class="header-section-number">8.8.1</span> Conta, Git e autenticação</h3>
+<p>Três elementos não devem ser confundidos:</p>
+<ul>
+<li><code>git config user.name</code> e <code>user.email</code> identificam os registros locais;</li>
+<li>a conta do GitHub identifica a pessoa na plataforma;</li>
+<li>a autenticação autoriza o computador a acessar os repositórios permitidos.</li>
+</ul>
+<p>Ter o Git instalado não cria uma conta no GitHub. Criar a conta também não conecta automaticamente uma pasta local a um repositório remoto. Essa conexão será realizada quando o projeto for criado.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Publicar exige uma decisão própria">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Publicar exige uma decisão própria
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Uma versão local correta não deve ser enviada automaticamente. Antes da publicação, verifique conteúdo, autoria, licenças, dados protegidos e arquivos gerados.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="o-arquivo-.gitignore" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="o-arquivo-.gitignore"><span class="header-section-number">8.9</span> O arquivo <code>.gitignore</code></h2>
+<p>O <code>.gitignore</code> declara padrões de arquivos que o Git deve deixar fora do acompanhamento. Um projeto de pesquisa pode começar com:</p>
+<pre class="gitignore"><code># Sessão local do R
+.Rhistory
+.RData
+.Ruserdata
+
+# Ambientes locais
+.venv/
+.env
+
+# Arquivos temporários
+*.tmp
+*.log
+
+# Dados não publicáveis
+dados/sensiveis/
+dados/identificados/</code></pre>
+<p>Esse arquivo deve ser adaptado ao projeto. Ignorar toda a pasta de dados pode impedir o versionamento de bases públicas ou simuladas que deveriam acompanhar o código. Por outro lado, bases identificadas ou protegidas não devem entrar em um repositório público.</p>
+<p>O <code>.gitignore</code> atua preventivamente. Se um arquivo já foi incorporado ao histórico, acrescentá-lo depois ao <code>.gitignore</code> não elimina as versões anteriores.</p>
+</section>
+<section id="o-que-não-deve-ser-versionado" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="o-que-não-deve-ser-versionado"><span class="header-section-number">8.10</span> O que não deve ser versionado</h2>
+<p>Em pesquisas jurídicas, a revisão deve considerar pelo menos quatro grupos.</p>
+<section id="credenciais-e-segredos" class="level3" data-number="8.10.1">
+<h3 data-number="8.10.1" class="anchored" data-anchor-id="credenciais-e-segredos"><span class="header-section-number">8.10.1</span> Credenciais e segredos</h3>
+<p>Senhas, chaves de API, tokens de acesso e arquivos <code>.env</code> não devem ser registrados no repositório. O código deve obter esses valores de variáveis de ambiente ou de mecanismos próprios de gerenciamento de credenciais.</p>
+</section>
+<section id="dados-pessoais-ou-sigilosos" class="level3" data-number="8.10.2">
+<h3 data-number="8.10.2" class="anchored" data-anchor-id="dados-pessoais-ou-sigilosos"><span class="header-section-number">8.10.2</span> Dados pessoais ou sigilosos</h3>
+<p>Documentos processuais, bases identificadas e informações sujeitas a sigilo exigem avaliação própria. A disponibilidade pública do documento em uma fonte não elimina automaticamente os deveres de proteção, contextualização e uso adequado.</p>
+</section>
+<section id="arquivos-locais-ou-temporários" class="level3" data-number="8.10.3">
+<h3 data-number="8.10.3" class="anchored" data-anchor-id="arquivos-locais-ou-temporários"><span class="header-section-number">8.10.3</span> Arquivos locais ou temporários</h3>
+<p>Caches, históricos de sessão, ambientes virtuais e arquivos temporários dependem do computador e costumam ser reconstruídos. Incluí-los aumenta o repositório sem documentar uma decisão de pesquisa.</p>
+</section>
+<section id="produtos-gerados" class="level3" data-number="8.10.4">
+<h3 data-number="8.10.4" class="anchored" data-anchor-id="produtos-gerados"><span class="header-section-number">8.10.4</span> Produtos gerados</h3>
+<p>HTML, tabelas e figuras podem ser reconstruídos a partir das fontes, mas alguns projetos precisam versioná-los para publicação. A decisão depende da forma de distribuição. Neste livro, por exemplo, os arquivos de <code>docs/</code> integram a publicação da página, embora sejam gerados pelos arquivos-fonte.</p>
+</section>
+</section>
+<section id="uma-verificação-antes-de-registrar-ou-enviar" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="uma-verificação-antes-de-registrar-ou-enviar"><span class="header-section-number">8.11</span> Uma verificação antes de registrar ou enviar</h2>
+<p>Antes de criar uma versão ou publicar mudanças, examine:</p>
+<ul>
+<li>quais arquivos foram modificados;</li>
+<li>se a alteração pertence à etapa atual;</li>
+<li>se existem dados pessoais, sigilosos ou credenciais;</li>
+<li>se algum arquivo grande foi incluído por engano;</li>
+<li>se os resultados podem ser reconstruídos;</li>
+<li>se a documentação corresponde ao código;</li>
+<li>se a versão foi aprovada pelos responsáveis.</li>
+</ul>
+<p>A documentação do GitHub recomenda revisar individualmente os arquivos selecionados e evitar comandos indiscriminados quando houver risco de incorporar conteúdo sensível.</p>
+</section>
+<section id="git-como-registro-metodológico" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="git-como-registro-metodológico"><span class="header-section-number">8.12</span> Git como registro metodológico</h2>
+<p>O histórico do Git não registra apenas programação. Em uma pesquisa, ele pode documentar quando uma variável foi redefinida, quando um critério de inclusão foi alterado ou quando um texto foi revisto após nova verificação. Para cumprir essa função, cada versão precisa reunir mudanças relacionadas e receber uma descrição informativa.</p>
+<p>O Git não explica por si só o fundamento de uma decisão. Critérios de coleta, limpeza e análise também devem aparecer nos documentos metodológicos do projeto.</p>
+</section>
+<section id="síntese" class="level2" data-number="8.13">
+<h2 data-number="8.13" class="anchored" data-anchor-id="síntese"><span class="header-section-number">8.13</span> Síntese</h2>
+<p>Neste capítulo, distinguimos Git e GitHub, verificamos a instalação do Git e identificamos as funções do repositório local e do remoto. Também discutimos o papel do <code>.gitignore</code> e os riscos associados a credenciais, dados jurídicos protegidos e arquivos gerados.</p>
+<p>O capítulo não executou o fluxo completo de envio e recebimento de versões. Essas operações serão feitas quando houver um projeto definido e uma decisão expressa sobre o repositório remoto.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Antes de avançar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Antes de avançar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><label><input type="checkbox">O comando <code>git --version</code> funciona no terminal?</label></li>
+<li><label><input type="checkbox">Sei distinguir repositório local de remoto?</label></li>
+<li><label><input type="checkbox">A raiz do projeto está identificada?</label></li>
+<li><label><input type="checkbox">O <code>.gitignore</code> protege arquivos locais e dados não publicáveis?</label></li>
+<li><label><input type="checkbox">Nenhuma credencial aparece nos arquivos do projeto?</label></li>
+<li><label><input type="checkbox">A publicação permanece uma decisão expressa dos autores?</label></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="referências-de-instalação-e-consulta" class="level2" data-number="8.14">
+<h2 data-number="8.14" class="anchored" data-anchor-id="referências-de-instalação-e-consulta"><span class="header-section-number">8.14</span> Referências de instalação e consulta</h2>
+<ul>
+<li><a href="https://git-scm.com/install/windows">Instalação do Git no Windows</a></li>
+<li><a href="https://docs.github.com/en/get-started/start-your-journey/what-is-github">Diferença entre Git e GitHub</a></li>
+<li><a href="https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address">Configuração do endereço associado aos commits</a></li>
+<li><a href="https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files">Como ignorar arquivos</a></li>
+<li><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository">Prevenção da inclusão de dados sensíveis</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/P2C03-positron-quarto.html" class="pagination-link" aria-label="Positron e Quarto: ambiente de trabalho e documentos reproduzíveis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../capitulos/P2C05-agentes-projeto.html" class="pagination-link" aria-label="Agentes de inteligência artificial no projeto">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Agentes de inteligência artificial no projeto</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

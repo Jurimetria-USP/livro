@@ -28,34 +28,29 @@ book:
     - autores.qmd
     - part: partes/01-fundamentos.qmd
       chapters:
-        - capitulos/desenho-pesquisa-jurimetria.qmd
-        - capitulos/pergunta-dados-evidencia.qmd
-        - capitulos/jurimetria-instrumento-pesquisa.qmd
-        - capitulos/litigios-desigualdades.qmd
+        - capitulos/P1C01-metodo-cientifico.qmd
+        - capitulos/P1C02-pergunta-dados-evidencia.qmd
+        - capitulos/P1C03-jurimetria-instrumento-pesquisa.qmd
+        - capitulos/P1C04-litigios-desigualdades.qmd
     - part: partes/02-ambiente-trabalho.qmd
       chapters:
-        - capitulos/r-ambiente-trabalho.qmd
-        - capitulos/projetos-reprodutiveis.qmd
-        - capitulos/objetos-operacoes.qmd
-        - capitulos/dataframes-importacao.qmd
-        - capitulos/qualidade-dados.qmd
-        - capitulos/operacoes-r-base.qmd
-        - capitulos/universo-tidy.qmd
-        - capitulos/manipulacao-dplyr.qmd
-        - capitulos/dados-tidy-tidyr.qmd
-        - capitulos/combinacao-bases.qmd
-        - capitulos/textos-datas-categorias.qmd
-        - capitulos/google-drive.qmd
+        - capitulos/P2C01-ambiente-computacional.qmd
+        - capitulos/P2C02-r-python-linguagens.qmd
+        - capitulos/P2C03-positron-quarto.qmd
+        - capitulos/P2C04-git-github.qmd
+        - capitulos/P2C05-agentes-projeto.qmd
+        - capitulos/P2C06-exemplo-integrado-ecossistema.qmd
+        - capitulos/P2C07-introducao-r.qmd
     - part: "Parte III — Construção do banco de dados"
     - part: partes/04-descricao-fenomeno.qmd
       chapters:
-        - capitulos/introducao-estatistica.qmd
-        - capitulos/analise-descritiva.qmd
-        - capitulos/analise-sobrevivencia.qmd
+        - capitulos/P4C01-introducao-estatistica.qmd
+        - capitulos/P4C02-analise-descritiva.qmd
+        - capitulos/P4C03-analise-sobrevivencia.qmd
     - part: partes/05-explicacao-fenomeno.qmd
       chapters:
-        - capitulos/modelos-lineares.qmd
-        - capitulos/modelos-avancados.qmd
+        - capitulos/P5C01-modelos-lineares.qmd
+        - capitulos/P5C02-modelos-avancados.qmd
 
 format:
   html:

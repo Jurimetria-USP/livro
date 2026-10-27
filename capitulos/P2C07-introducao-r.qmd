@@ -1,0 +1,519 @@
+---
+title: "Introdução ao R"
+subtitle: "Elementos necessários para acompanhar as análises do livro"
+author:
+  - Alexandre Nicolella
+  - José de Jesus Filho
+format: html
+---
+
+## Introdução
+
+Este capítulo apresenta uma síntese dos elementos de R utilizados ao longo do livro. Ele não substitui um curso de programação. Sua finalidade é oferecer uma referência inicial para a leitura dos códigos e para a execução dos exemplos jurídicos.
+
+Uma exposição mais detalhada, com exercícios e desenvolvimento progressivo, está disponível no material [Introdução ao R](https://anicolella.github.io/IntroducaoR/). Quando um conceito exigir aprofundamento, indicaremos esse percurso complementar.
+
+::: {.callout-note title="Objetivos do capítulo"}
+
+Ao final deste capítulo, você deverá ser capaz de:
+
+- executar e registrar comandos em um script;
+- criar objetos e reconhecer tipos básicos de valores;
+- compreender os fundamentos mínimos de vetores, funções e operadores;
+- construir e inspecionar um `data.frame`;
+- selecionar linhas e colunas e criar variáveis principalmente com `dplyr`;
+- reconhecer valores ausentes;
+- importar e exportar arquivos comuns;
+- compreender o pipe e as operações centrais do `dplyr`;
+- reconhecer transformações, combinações, textos e datas.
+
+:::
+
+## Como utilizar este capítulo
+
+Os exemplos devem ser registrados em um script e executados por partes. O console é utilizado para observar resultados e testar comandos; o script preserva a sequência validada. Quando uma função não for conhecida, consulte sua ajuda antes de adaptá-la:
+
+```r
+?mean
+help(mean)
+example(mean)
+```
+
+## Objetos e atribuição
+
+Um objeto associa um nome a um valor. No R, utilizaremos preferencialmente o operador `<-` para atribuição:
+
+```{r}
+total_processos <- 120
+tribunal <- "TJSP"
+decisao_publicada <- TRUE
+```
+
+Os nomes devem indicar o conteúdo representado. Neste livro, adotaremos letras minúsculas e palavras separadas por `_`.
+
+O R diferencia letras maiúsculas de minúsculas. Portanto, `tribunal`, `Tribunal` e `TRIBUNAL` são nomes distintos.
+
+## Tipos básicos de valores
+
+Os exemplos anteriores representam três tipos frequentes:
+
+| Tipo | Exemplo | Uso |
+|---|---|---|
+| numérico | `120`, `3.5` | contagens e medidas |
+| texto | `"TJSP"` | nomes e categorias |
+| lógico | `TRUE`, `FALSE` | condições e indicadores |
+
+Para verificar o tipo de um objeto:
+
+```{r}
+class(total_processos)
+class(tribunal)
+class(decisao_publicada)
+```
+
+## Vetores
+
+Um vetor reúne valores do mesmo tipo. A função `c()` combina os elementos:
+
+```{r}
+estados <- c("Acre", "Alagoas", "Amapá")
+homicidios_mulheres <- c(22, 73, 22)
+feminicidios <- c(11, 31, 8)
+```
+
+Colchetes simples selecionam parte de um objeto:
+
+```{r}
+estados[1]
+homicidios_mulheres[1:2]
+```
+
+Em listas e estruturas compostas, `[` preserva a estrutura selecionada, enquanto `[[` extrai um único elemento interno. Em um `data.frame`, também podemos utilizar `$` para selecionar uma coluna pelo nome.
+
+## Funções e argumentos
+
+Uma função recebe argumentos, executa um procedimento e devolve um resultado. No exemplo seguinte, `mean()` recebe um vetor e calcula sua média:
+
+```{r}
+mean(feminicidios)
+```
+
+Alguns argumentos possuem valores padrão. Outros precisam ser indicados. Nomear os argumentos torna o código mais claro:
+
+```{r}
+round(x = mean(feminicidios), digits = 1)
+```
+
+## Operadores
+
+### Operadores aritméticos
+
+| Operador | Operação |
+|---|---|
+| `+` | soma |
+| `-` | subtração |
+| `*` | multiplicação |
+| `/` | divisão |
+| `^` | potência |
+| `%%` | resto da divisão |
+
+```{r}
+100 * feminicidios / homicidios_mulheres
+```
+
+### Operadores de comparação
+
+| Operador | Condição |
+|---|---|
+| `==` | igual a |
+| `!=` | diferente de |
+| `>` e `<` | maior e menor |
+| `>=` e `<=` | maior ou igual e menor ou igual |
+
+```{r}
+feminicidios >= 10
+```
+
+### Operadores lógicos
+
+| Operador | Significado |
+|---|---|
+| `&` | e, elemento a elemento |
+| `|` | ou, elemento a elemento |
+| `!` | negação |
+| `&&` | e, avaliando uma condição única |
+| `||` | ou, avaliando uma condição única |
+
+```{r}
+(feminicidios >= 10) & (homicidios_mulheres > 20)
+```
+
+Não confunda `=` ou `<-`, utilizados em atribuições e argumentos, com `==`, que testa igualdade.
+
+## Data frames
+
+Um `data.frame` organiza observações em linhas e variáveis em colunas:
+
+```{r}
+dados_crimes <- data.frame(
+  estado = estados,
+  homicidios_mulheres = homicidios_mulheres,
+  feminicidios = feminicidios
+)
+
+dados_crimes
+```
+
+Antes de analisar uma base, examine sua estrutura:
+
+```{r}
+dim(dados_crimes)
+names(dados_crimes)
+str(dados_crimes)
+head(dados_crimes)
+summary(dados_crimes)
+```
+
+A definição da unidade de observação vem antes do código. Neste exemplo, cada linha representa um estado. Em uma base processual, uma linha poderia representar um processo, uma decisão, uma parte ou um evento. Essa escolha determina o significado das variáveis.
+
+## Uma leitura mínima da indexação do R
+
+É necessário reconhecer a indexação do R para compreender códigos existentes. Em um `data.frame`, a expressão `dados[linhas, colunas]` utiliza a posição anterior à vírgula para as linhas e a posterior para as colunas:
+
+```{r}
+dados_crimes[1:2, ]
+dados_crimes[, c("estado", "feminicidios")]
+```
+
+Uma coluna também pode ser selecionada por `$`:
+
+```{r}
+dados_crimes$estado
+```
+
+Essas formas serão tratadas apenas como fundamento. Nas rotinas desenvolvidas neste livro, priorizaremos os verbos do `dplyr`, que tornam explícita a operação realizada sobre linhas, colunas ou grupos.
+
+## Uma criação simples de variável
+
+Podemos acrescentar uma variável calculada:
+
+```{r}
+dados_crimes$participacao_feminicidios <-
+  100 * dados_crimes$feminicidios /
+  dados_crimes$homicidios_mulheres
+```
+
+Nos próximos exemplos, a criação e a ordenação serão reescritas com `mutate()` e `arrange()`.
+
+## Valores ausentes
+
+O R representa valores ausentes por `NA`. Eles não devem ser confundidos com zero, texto vazio ou ausência de ocorrência.
+
+```{r}
+tempo_dias <- c(35, NA, 72)
+is.na(tempo_dias)
+sum(is.na(tempo_dias))
+```
+
+Muitas funções exigem uma decisão explícita sobre esses valores:
+
+```{r}
+mean(tempo_dias, na.rm = TRUE)
+```
+
+Remover valores ausentes pode alterar o universo observado. A razão da ausência e o tratamento adotado precisam ser registrados.
+
+## Importação e exportação
+
+No percurso principal, utilizaremos as funções do pacote `readr`, integrante do `tidyverse`. Um CSV separado por vírgulas pode ser importado com:
+
+```r
+dados <- read_csv("dados/base.csv")
+```
+
+Quando o separador é ponto e vírgula e a vírgula representa decimais:
+
+```r
+dados <- read_csv2("dados/base.csv")
+```
+
+Para exportar:
+
+```r
+write_csv(dados, "dados/base_tratada.csv")
+```
+
+As funções `read.csv()` e `read.csv2()` do R base continuam aparecendo em códigos existentes. É importante reconhecê-las, mas os exemplos novos priorizarão `readr` para manter a mesma sintaxe utilizada nas etapas de transformação.
+
+Outros formatos exigem funções e pacotes próprios:
+
+```r
+# Excel
+dados <- readxl::read_excel("dados/base.xlsx", sheet = "feminicidio")
+
+# Stata
+dados <- haven::read_dta("dados/base.dta")
+
+# RDS
+dados <- readRDS("dados/base.rds")
+```
+
+O arquivo RDS preserva objetos do R e pode ser salvo com:
+
+```r
+saveRDS(dados, "dados/base.rds")
+```
+
+Antes da importação, confirme o caminho, a extensão, o separador, a codificação e a aba, quando houver.
+
+## O universo tidy como linguagem principal de manipulação
+
+O `tidyverse` reúne pacotes que compartilham princípios de organização e uma sintaxe compatível. A partir deste ponto, ele constitui a forma principal de manipulação adotada no capítulo. Para instalar uma única vez:
+
+```r
+install.packages("tidyverse")
+```
+
+Em cada nova sessão em que ele for utilizado:
+
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse)
+```
+
+Após carregar o pacote, utilizaremos diretamente os nomes das funções, sem repetir `dplyr::` ou `stringr::` em todas as linhas. O prefixo `pacote::função()` continua útil para indicar explicitamente a origem de uma função ou resolver conflitos.
+
+O pipe `|>` envia o resultado de uma etapa para a etapa seguinte:
+
+```{r}
+dados_crimes |>
+  filter(feminicidios >= 10) |>
+  select(estado, feminicidios)
+```
+
+## `dplyr`: o centro do trabalho com os dados
+
+O `dplyr` organiza as operações em verbos. Em vez de concentrar várias tarefas em uma expressão de indexação, cada etapa declara o que será feito. Essa característica facilita a leitura, a conferência e a revisão do percurso de tratamento.
+
+### Linhas
+
+`filter()` mantém as linhas que atendem a uma condição. `arrange()` ordena as observações.
+
+```{r}
+dados_crimes |>
+  filter(feminicidios >= 10) |>
+  arrange(desc(feminicidios))
+```
+
+`filter()` não altera o número de colunas; ele define quais observações permanecem. `arrange()` não elimina observações; apenas modifica sua ordem de apresentação.
+
+### Colunas
+
+`select()` escolhe colunas. `rename()` modifica nomes. `mutate()` cria ou transforma variáveis.
+
+```{r}
+dados_crimes |>
+  select(estado, homicidios_mulheres, feminicidios) |>
+  mutate(
+    participacao_feminicidios =
+      100 * feminicidios / homicidios_mulheres
+  )
+```
+
+`select()` controla quais variáveis permanecem, enquanto `mutate()` preserva as linhas e acrescenta ou transforma colunas. Essa distinção ajuda a conferir a dimensão da base depois de cada etapa.
+
+### Resumos
+
+`summarise()` produz medidas sintéticas. Com `group_by()`, os resumos são calculados por grupo.
+
+```{r}
+dados_crimes |>
+  summarise(
+    total_homicidios_mulheres = sum(homicidios_mulheres),
+    total_feminicidios = sum(feminicidios)
+  )
+```
+
+Em bases com uma variável regional, por exemplo, poderíamos agrupar por região antes do resumo.
+
+### Valores ausentes dentro do fluxo
+
+As funções do `dplyr` também exigem decisões explícitas sobre valores ausentes:
+
+```{r}
+dados_crimes |>
+  summarise(
+    media_feminicidios = mean(feminicidios, na.rm = TRUE),
+    ausentes = sum(is.na(feminicidios))
+  )
+```
+
+O uso de `na.rm = TRUE` retira os valores ausentes daquele cálculo, mas não explica por que eles estão ausentes. A decisão metodológica continua precisando ser registrada.
+
+## Formatos largo e longo
+
+Dados *tidy* organizam cada variável em uma coluna, cada observação em uma linha e cada valor em uma célula. Algumas análises exigem transformar várias colunas de medidas em pares de nome e valor:
+
+```{r}
+dados_longos <- dados_crimes |>
+  pivot_longer(
+    cols = c(homicidios_mulheres, feminicidios),
+    names_to = "indicador",
+    values_to = "valor"
+  )
+
+dados_longos
+```
+
+`pivot_wider()` realiza o movimento inverso. Toda transformação deve preservar a unidade de observação definida para a etapa.
+
+## Combinação de bases
+
+Bases são combinadas por chaves. Antes da junção, verifique se a chave identifica as observações e se existem duplicações.
+
+```r
+resultado <- base_processos |>
+  left_join(base_tribunais, by = "tribunal")
+```
+
+`left_join()` preserva todas as linhas da base à esquerda. Outros tipos de junção respondem a perguntas diferentes. A escolha não deve ser feita apenas para eliminar mensagens ou aumentar correspondências.
+
+## Textos com `stringr`
+
+Textos jurídicos frequentemente apresentam abreviações, diferenças de caixa, acentuação e espaços excedentes. O pacote `stringr`, integrante do `tidyverse`, oferece funções com nomenclatura consistente para localizar, substituir, separar e padronizar textos.
+
+```{r}
+descricao <- c("Proc. criminal", "Processo criminal")
+
+str_replace(
+  descricao,
+  "^Proc\\.",
+  "Processo"
+)
+```
+
+A expressão procura `Proc.` apenas no início do texto e o substitui por `Processo`. O ponto recebe duas barras porque, em expressões regulares, precisa ser tratado como caractere literal.
+
+Outras operações recorrentes são:
+
+```{r}
+movimentos <- c("  SENTENÇA", "Decisão Interlocutória  ")
+
+movimentos |>
+  str_squish() |>
+  str_to_lower()
+```
+
+`str_squish()` retira espaços excedentes e `str_to_lower()` uniformiza a caixa. Essa padronização é técnica; ela não autoriza reunir categorias juridicamente distintas.
+
+## Datas e horas com `lubridate`
+
+Datas e horas ocupam posição central em estudos sobre duração de processos, cumprimento de prazos e sequência de eventos. O pacote `lubridate`, também integrante do `tidyverse`, auxilia na conversão, extração de componentes e cálculo de intervalos.
+
+As funções de conversão indicam a ordem dos componentes da data:
+
+```{r}
+library(lubridate)
+
+data_distribuicao <- dmy("10/03/2026")
+data_sentenca <- ymd("2026-11-25")
+
+data_distribuicao
+data_sentenca
+```
+
+`dmy()` interpreta dia, mês e ano; `ymd()` interpreta ano, mês e dia. Quando existe horário, podem ser utilizadas funções como `dmy_hms()` e `ymd_hms()`:
+
+```{r}
+momento_protocolo <- dmy_hms(
+  "10/03/2026 14:35:20",
+  tz = "America/Sao_Paulo"
+)
+
+momento_protocolo
+```
+
+O fuso horário precisa ser explícito quando o momento exato do evento importa. Sem essa informação, registros produzidos por sistemas distintos podem ser comparados incorretamente.
+
+Componentes podem ser extraídos para conferência ou agrupamento:
+
+```{r}
+year(data_sentenca)
+month(data_sentenca, label = TRUE)
+wday(data_sentenca, label = TRUE)
+hour(momento_protocolo)
+```
+
+Para representar o tempo transcorrido entre dois eventos:
+
+```{r}
+periodo_processual <- interval(data_distribuicao, data_sentenca)
+
+time_length(periodo_processual, unit = "days")
+```
+
+Uma **duração** mede uma quantidade exata de segundos; um **período** utiliza unidades civis, como meses e anos; um **intervalo** preserva os instantes inicial e final. A escolha depende da pergunta. Para tempo processual em dias corridos, o intervalo convertido em dias pode ser adequado; prazos em dias úteis exigem regras adicionais sobre calendário e feriados.
+
+::: {.callout-warning title="Data não é apenas texto"}
+
+Antes de calcular diferenças, verifique o formato original, o fuso horário, a presença de horários ausentes e o significado jurídico dos eventos inicial e final.
+
+:::
+
+## Categorias com `forcats`
+
+Variáveis categóricas podem ser representadas como fatores. O pacote `forcats` oferece funções para alterar níveis sem perder o controle sobre sua ordem e nomenclatura.
+
+```{r}
+resultado <- factor(c("procedente", "improcedente", "parcial"))
+
+resultado <- fct_relevel(
+  resultado,
+  "improcedente",
+  "parcial",
+  "procedente"
+)
+
+levels(resultado)
+```
+
+Também é possível reunir categorias com `fct_collapse()`. Essa operação só deve ser realizada quando a nova classificação estiver justificada pelo desenho da pesquisa. Alterações devem preservar o significado jurídico e permanecer registradas no código.
+
+## O que aprofundar no material específico
+
+Este capítulo reuniu apenas os elementos necessários para acompanhar o livro de Jurimetria. O material [Introdução ao R](https://anicolella.github.io/IntroducaoR/) desenvolve com maior detalhe:
+
+- objetos, funções e estruturas da linguagem;
+- projetos reproduzíveis;
+- importação e qualidade dos dados;
+- manipulação com `dplyr`;
+- transformação com `tidyr`;
+- combinação de bases;
+- tratamento de textos com `stringr`, datas e horas com `lubridate` e categorias com `forcats`;
+- GitHub e ferramentas complementares.
+
+::: {.callout-important title="Compreender antes de reutilizar"}
+
+Não execute uma sequência extensa apenas porque ela produz um resultado. Identifique a unidade de observação, leia cada transformação, confira as dimensões da base e compare o produto com a pergunta de pesquisa.
+
+:::
+
+## Síntese
+
+Apresentamos apenas os fundamentos de R base necessários para ler objetos, vetores, operadores, funções e `data.frame`. O centro do capítulo foi o trabalho com dados por meio do pipe e do `tidyverse`: `readr` para importação, `dplyr` para manipulação, `tidyr` para transformação, `stringr` para textos, `lubridate` para datas e horas e `forcats` para categorias.
+
+O exemplo integrado apresentado no capítulo anterior mostrou como esses elementos podem participar de um projeto pequeno juntamente com Python, Positron, Quarto, Git e agentes de inteligência artificial.
+
+::: {.callout-tip title="Antes de avançar"}
+
+- [ ] Sei executar e preservar comandos em um script?
+- [ ] Distingo objeto, vetor e `data.frame`?
+- [ ] Reconheço operadores aritméticos, comparativos e lógicos?
+- [ ] Sei selecionar linhas e colunas?
+- [ ] Compreendo por que `NA` não equivale a zero?
+- [ ] Consigo ler uma sequência construída com `|>`?
+- [ ] Sei onde consultar o desenvolvimento completo desses conteúdos?
+
+:::

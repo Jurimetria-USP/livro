@@ -1,0 +1,340 @@
+---
+title: "R e Python: linguagens do ambiente de pesquisa"
+subtitle: "Instalação e verificação no Windows"
+author:
+  - Alexandre Nicolella
+  - José de Jesus Filho
+format: html
+---
+
+## Introdução
+
+R e Python são linguagens de programação que podem participar de diferentes etapas da pesquisa jurimétrica. Elas permitem registrar procedimentos em código, executar operações de forma consistente e repetir o trabalho quando os documentos, os dados ou as decisões metodológicas são atualizados.
+
+As duas linguagens não exercem necessariamente a mesma função. R foi desenvolvido como uma linguagem e um ambiente para computação estatística e produção de gráficos. Python é uma linguagem de uso geral, utilizada em tarefas que incluem automação, coleta, processamento de textos e análise de dados. Em um mesmo projeto, cada linguagem pode ser empregada nas tarefas para as quais oferece recursos adequados.
+
+Este capítulo apresenta as duas linguagens, orienta sua instalação no Windows e mostra como verificar seu funcionamento. O objetivo ainda não é ensinar programação. Antes de escrever análises, precisamos confirmar que o sistema consegue executar cada linguagem.
+
+::: {.callout-note title="Objetivos do capítulo"}
+Ao final deste capítulo, você deverá ser capaz de:
+
+- explicar as funções gerais de R e Python na pesquisa jurimétrica;
+- compreender por que as duas linguagens podem coexistir no mesmo projeto;
+- instalar R e Python no Windows a partir das fontes oficiais;
+- identificar as versões instaladas;
+- realizar um teste mínimo em cada linguagem.
+:::
+
+## Duas linguagens no mesmo ambiente
+
+Uma linguagem de programação estabelece regras para expressar instruções que serão executadas pelo computador. O código pode importar dados, transformar variáveis, extrair informações, produzir tabelas ou estimar modelos. Como essas instruções ficam registradas em arquivos, elas podem ser examinadas e executadas novamente.
+
+R e Python possuem comunidades, bibliotecas e formas de organização próprias. A utilização conjunta não exige que uma mesma tarefa seja repetida nas duas linguagens. A divisão deve responder às necessidades da pesquisa e permanecer clara para quem examina o projeto.
+
+| Linguagem | Ênfase no ambiente de pesquisa | Exemplos de utilização |
+|------------------------|------------------------|------------------------|
+| R | estatística, organização, análise e visualização de dados | transformar bases, produzir gráficos, estimar modelos e elaborar resultados |
+| Python | automação, processamento de arquivos e uso geral | coletar documentos, extrair informações, processar textos e automatizar tarefas |
+
+Essa distinção é apenas uma orientação. R também pode automatizar tarefas e processar textos; Python também possui bibliotecas estatísticas e gráficas. A escolha depende do problema, das bibliotecas disponíveis, do conhecimento da equipe e da forma como o projeto será mantido.
+
+## R: linguagem para dados e estatística
+
+### O que é o R?
+
+R é uma linguagem e um ambiente para computação estatística, análise de dados e produção de gráficos. É um software livre, disponível para Windows, macOS e diferentes sistemas baseados em Unix. Sua funcionalidade pode ser ampliada por meio de pacotes. Essas características constam da apresentação oficial do [Projeto R](https://www.r-project.org/about.html).
+
+Na pesquisa jurimétrica, R pode ser utilizado para organizar informações extraídas de processos, decisões e outros documentos jurídicos; verificar e transformar bases de dados; produzir tabelas, gráficos e mapas; descrever fenômenos jurídicos e sociais; e estimar modelos estatísticos.
+
+O trabalho é registrado em comandos, e não apenas em operações realizadas por meio de menus. Isso exige aprendizagem inicial, mas preserva a sequência das operações, facilita correções e permite repetir o procedimento quando a base é atualizada.
+
+### R básico e pacotes
+
+A instalação do R contém funções para criar objetos, realizar cálculos, ler dados e executar análises. Outras funcionalidades são distribuídas em **pacotes**. Um pacote reúne funções, documentação e, em alguns casos, bases destinadas a determinado conjunto de tarefas.
+
+Instalar e carregar são operações diferentes. `install.packages()` transfere o pacote para o computador e normalmente é utilizado uma vez para cada instalação do R. `library()` disponibiliza o pacote na sessão atual e precisa ser executado novamente em sessões posteriores.
+
+``` r
+# Instalação do pacote no computador
+install.packages("dplyr")
+
+# Carregamento na sessão atual
+library(dplyr)
+```
+
+Não precisamos instalar todos os pacotes no início. Eles serão acrescentados conforme as tarefas da pesquisa exigirem.
+
+### Instalação do R no Windows
+
+O instalador oficial está disponível na página [R for Windows](https://cran.r-project.org/bin/windows/base/), mantida pela rede CRAN. A página apresenta a versão estável atual e informa os requisitos do sistema.
+
+Para realizar a instalação:
+
+1.  acesse a página oficial;
+2.  selecione o link de download da versão estável para Windows;
+3.  execute o arquivo baixado;
+4.  selecione o idioma do instalador;
+5.  mantenha o diretório e os componentes sugeridos, salvo se houver uma orientação institucional diferente;
+6.  conclua o procedimento;
+7.  feche e reabra terminais e programas que já estavam em execução.
+
+O número da versão e algumas telas podem mudar. O procedimento deve ser realizado sempre a partir da página oficial, sem procurar instaladores em sites de terceiros.
+
+![Página oficial do CRAN para download da versão estável do R para Windows.](../figuras/parte-02-ambiente-trabalho/r_download_page.png){#fig-r-download fig-align="center" width="100%" fig-alt="Página oficial R for Windows do CRAN, com o link para download da versão estável do R."}
+
+### Atualização de uma instalação existente
+
+Quem já possui R deve começar verificando a versão instalada:
+
+``` r
+R.version.string
+```
+
+Compare o resultado com a versão estável indicada na página [R for Windows](https://cran.r-project.org/bin/windows/base/). Se houver uma versão mais recente, a atualização pode ser testada sem remover imediatamente a versão anterior:
+
+1.  feche R e outros programas que estejam utilizando a linguagem;
+2.  baixe o instalador atual na página oficial;
+3.  execute a instalação normalmente, mantendo temporariamente a versão anterior;
+4.  abra a versão nova de R pelo menu Iniciar;
+5.  no console, execute `R.version.string` para confirmar a versão em uso;
+6.  verifique a biblioteca ativa e teste o carregamento de um pacote já utilizado;
+7.  remova a versão anterior somente depois de confirmar que R e os pacotes necessários funcionam com a versão nova.
+
+Para verificar a biblioteca que está sendo utilizada, execute no console:
+
+``` r
+.libPaths()
+```
+
+Em seguida, verifique se um pacote já conhecido está disponível. Como `dplyr` foi utilizado anteriormente para explicar a diferença entre instalar e carregar um pacote, ele pode servir para esse teste:
+
+``` r
+"dplyr" %in% rownames(installed.packages())
+```
+
+Se o resultado for `TRUE`, carregue o pacote e consulte sua versão:
+
+``` r
+library(dplyr)
+packageVersion("dplyr")
+```
+
+Se o pacote for carregado sem erro, a versão nova de R está acessando essa biblioteca normalmente. Se o resultado for `FALSE`, isso não significa que a instalação de R falhou. Significa apenas que `dplyr` não está disponível na biblioteca ativa. Nesse caso, instale o pacote somente se ele for necessário:
+
+``` r
+install.packages("dplyr")
+```
+
+A atualização de R e a atualização dos pacotes são operações diferentes. Não copie indiscriminadamente a biblioteca da versão anterior e não atualize todos os pacotes como etapa automática. Primeiro verifique a versão, a biblioteca ativa e os pacotes efetivamente necessários.
+
+#### Reinstalação dos pacotes da versão anterior
+
+Quando a versão nova não apresenta os pacotes utilizados anteriormente, podemos criar uma lista na instalação antiga e reinstalá-los a partir das fontes atuais. Esse procedimento evita copiar arquivos compilados para outra versão de R.
+
+Primeiro, abra a versão anterior de R pelo menu Iniciar. Confirme que ela está ativa:
+
+``` r
+R.version.string
+```
+
+Em seguida, identifique os pacotes adicionais instalados e grave seus nomes em um arquivo na pasta do usuário:
+
+``` r
+pacotes_instalados <- as.data.frame(installed.packages())
+
+meus_pacotes <- pacotes_instalados$Package[
+  is.na(pacotes_instalados$Priority)
+]
+
+arquivo_pacotes <- file.path(
+  path.expand("~"),
+  "pacotes-versao-anterior.txt"
+)
+
+writeLines(
+  sort(unique(meus_pacotes)),
+  arquivo_pacotes
+)
+
+arquivo_pacotes
+```
+
+O último comando informa onde a lista foi salva. Depois, feche a versão anterior e abra a versão nova de R. Confirme novamente a versão:
+
+``` r
+R.version.string
+```
+
+Na versão nova, leia o arquivo, identifique os pacotes ausentes e instale as versões atualmente disponíveis:
+
+``` r
+arquivo_pacotes <- file.path(
+  path.expand("~"),
+  "pacotes-versao-anterior.txt"
+)
+
+meus_pacotes <- readLines(arquivo_pacotes)
+pacotes_disponiveis <- rownames(installed.packages())
+
+pacotes_faltantes <- setdiff(
+  meus_pacotes,
+  pacotes_disponiveis
+)
+
+if (length(pacotes_faltantes) > 0) {
+  install.packages(pacotes_faltantes)
+}
+```
+
+::: {.callout-note title="Biblioteca pessoal no Windows"}
+
+Durante a instalação, R pode informar que a biblioteca localizada em `C:/Program Files/R/.../library` não permite gravação e perguntar se deve utilizar uma biblioteca pessoal. Essa mensagem é esperada, pois a pasta `Program Files` é protegida pelo Windows.
+
+Responda **Sim** para criar ou utilizar a biblioteca pessoal. Os pacotes serão instalados em uma pasta pertencente ao usuário, sem necessidade de executar R como administrador. Depois da instalação, os caminhos ativos podem ser conferidos com:
+
+```r
+.libPaths()
+```
+
+O primeiro caminho deverá apontar para a biblioteca pessoal da versão atual de R. A biblioteca do sistema continuará aparecendo entre os demais caminhos e fornecerá os pacotes que acompanham a instalação.
+
+:::
+
+Esse procedimento reinstala os pacotes a partir do CRAN e utiliza versões compatíveis com a instalação nova de R. Ao final, um pacote utilizado pela pesquisa pode ser testado:
+
+``` r
+library(dplyr)
+packageVersion("dplyr")
+```
+
+Pacotes obtidos de outras fontes, como Bioconductor ou GitHub, podem não ser reinstalados por `install.packages()`. Se algum nome for indicado como indisponível, identifique sua fonte original e utilize o respectivo procedimento de instalação. Mantenha a versão anterior de R até confirmar que os pacotes necessários funcionam na versão nova.
+
+::: {.callout-tip title="Mantenha as duas versões durante a verificação"}
+A coexistência temporária de duas versões permite retornar à configuração anterior se R ou algum pacote necessário não funcionar como esperado. Depois dessa verificação, a instalação antiga poderá ser removida pelo Windows.
+:::
+
+### Verificação do R
+
+Abra o R pelo menu Iniciar. No console, execute:
+
+``` r
+R.version.string
+```
+
+O resultado informa a versão utilizada pela sessão. Em seguida, execute um teste mínimo:
+
+``` r
+mensagem <- "R está funcionando"
+print(mensagem)
+```
+
+![Verificação da versão instalada por meio do console do R.](../figuras/parte-02-ambiente-trabalho/r_version.png){#fig-r-versao fig-align="center" width="100%" fig-alt="Console do R no Windows mostrando a execução de R.version.string e a versão instalada."}
+
+### Quando o R não é localizado
+
+No Windows, a instalação oficial não adiciona R ao `PATH` por padrão. Por isso, R pode abrir normalmente pelo menu Iniciar e ainda assim não ser encontrado por outra ferramenta. Essa situação não significa necessariamente que a instalação falhou.
+
+Somente nesse caso é útil abrir R e executar `R.home()`. O comando informa a pasta da instalação que está funcionando. Em seguida, feche e abra novamente o programa que não reconheceu R. No capítulo seguinte, mostraremos como selecionar essa instalação no Positron quando a detecção automática não funcionar.
+
+::: {.callout-warning title="Uma versão antiga pode continuar registrada"}
+Depois de uma atualização, um programa pode continuar procurando uma versão anterior. Antes de reinstalar R, compare a versão mencionada na mensagem de erro com `R.version.string`. A indicação manual da pasta será necessária apenas se a detecção automática continuar falhando.
+:::
+
+## Python: linguagem de uso geral
+
+### O que é Python?
+
+Python é uma linguagem de programação de uso geral. Na pesquisa jurimétrica, pode apoiar a coleta de arquivos, a comunicação com serviços, a extração de informações, o processamento de textos, a automação de tarefas e a análise de dados.
+
+Sua funcionalidade também pode ser ampliada por pacotes. Como projetos diferentes podem depender de versões distintas desses pacotes, é recomendável isolar as dependências de cada trabalho. A criação desse ambiente será apresentada no capítulo seguinte, depois da introdução ao Positron e à organização da pasta do projeto.
+
+### Instalação do Python no Windows
+
+As instruções atuais estão na documentação oficial [Using Python on Windows](https://docs.python.org/3/using/windows.html). O método recomendado utiliza o **Python Install Manager**, que pode ser obtido pelo site oficial ou pela Microsoft Store.
+
+![Página oficial para download do Python no Windows, com acesso ao Python Install Manager.](../figuras/parte-02-ambiente-trabalho/py_download.png){#fig-python-download fig-align="center" width="100%" fig-alt="Página oficial de download do Python com o botão para baixar o Python Install Manager."}
+
+A [Figura @fig-python-download] mostra a página utilizada para obter o instalador.
+
+Para realizar a instalação:
+
+1.  acesse [python.org/downloads](https://www.python.org/downloads/) e selecione a opção indicada para Windows;
+2.  abra o arquivo baixado com dois cliques;
+3.  autorize a execução quando o Windows solicitar confirmação;
+4.  selecione a opção de instalação e mantenha as opções recomendadas;
+5.  aceite a inclusão dos comandos no `PATH` quando essa opção for apresentada;
+6.  aguarde a confirmação de que a instalação foi concluída.
+
+Essas etapas são realizadas nas janelas do instalador. Não é necessário abrir o terminal durante essa sequência. O terminal será utilizado depois da instalação para verificar se os comandos estão disponíveis.
+
+O formato das telas pode variar conforme o arquivo oferecido pelo site oficial. A instalação atual pode utilizar o Python Install Manager, que administra as versões instaladas. O comando `py` permite consultar essas versões e reduz a necessidade de localizar manualmente cada interpretador.
+
+![Assistente de configuração do Python Install Manager no Windows.](../figuras/parte-02-ambiente-trabalho/py_install_manag.png){#fig-python-install-manager fig-align="center" width="100%" fig-alt="Terminal do assistente de configuração do Python Install Manager, com as opções de caminhos longos e inclusão do diretório de comandos no PATH."}
+
+Durante a configuração, o gerenciador pode consultar se o Windows deve permitir caminhos longos e se o diretório global de comandos deve ser incluído no `PATH`. A [Figura @fig-python-install-manager] registra essas duas solicitações. Depois de alterar o `PATH`, feche e abra novamente o terminal para que a configuração seja reconhecida.
+
+### Verificação do Python
+
+Abra um novo terminal e execute:
+
+``` powershell
+python --version
+```
+
+Para listar os interpretadores conhecidos pelo gerenciador:
+
+``` powershell
+py list
+```
+
+Em seguida, realize o teste mínimo:
+
+``` powershell
+python -c "print('Python está funcionando')"
+```
+
+Para identificar o executável utilizado:
+
+``` powershell
+python -c "import sys; print(sys.executable)"
+```
+
+O último comando é importante quando existem diversas instalações. Ele mostra qual interpretador respondeu ao comando `python`.
+
+![Verificação da instalação do Python no terminal do Windows.](../figuras/parte-02-ambiente-trabalho/py_terminal.png){#fig-python-verificacao fig-align="center" width="100%" fig-alt="Terminal do Windows mostrando a versão do Python, a lista de interpretadores, um teste de execução e o caminho do executável."}
+
+A [Figura @fig-python-verificacao] mostra a verificação de uma instalação disponível no sistema. A versão utilizada pelo ambiente de um projeto pode ser diferente; sua seleção será apresentada no capítulo seguinte.
+
+### Quando Python não é localizado
+
+Se `python` ou `py` não forem reconhecidos, feche e reabra o terminal e confira se o Python Install Manager foi concluído. Instalações antigas e alterações manuais no `PATH` também podem criar conflitos. Nessa situação, utilize `py list` para identificar as versões conhecidas e consulte a seção de solução de problemas da documentação oficial antes de modificar variáveis do sistema.
+
+## Como distribuir as tarefas
+
+R e Python podem ser empregados no mesmo percurso sem duplicar cada procedimento. Uma organização possível é utilizar Python para automatizar a obtenção ou a extração de informações e R para estruturar a base, realizar análises estatísticas e produzir resultados. Outra pesquisa pode distribuir as tarefas de forma diferente.
+
+O critério não deve ser a preferência abstrata por uma linguagem, mas a adequação ao problema e a possibilidade de manter o código. A escolha precisa considerar:
+
+- a natureza da tarefa;
+- as bibliotecas disponíveis;
+- a experiência da equipe;
+- a integração com os demais arquivos;
+- a documentação das dependências;
+- a possibilidade de reprodução do procedimento.
+
+Nos capítulos seguintes, R e Python serão conectados ao Positron e aos documentos Quarto. Essa integração permitirá selecionar o interpretador adequado sem perder a unidade do projeto.
+
+## Síntese
+
+R e Python são linguagens que podem exercer funções complementares na pesquisa jurimétrica. R oferece um ambiente voltado à computação estatística, à análise e à visualização de dados. Python é uma linguagem de uso geral que pode apoiar automação, coleta, extração de informações, processamento de textos e análise.
+
+A instalação deve ser seguida por uma verificação simples. No Windows, R pode estar corretamente instalado sem estar disponível no `PATH`, e Python pode possuir diversos interpretadores. Reconhecer essas diferenças evita atribuir problemas de configuração ao código da pesquisa. A seleção dos interpretadores e a organização do ambiente de cada projeto serão tratadas no capítulo seguinte.
+
+::: {.callout-tip title="Antes de avançar"}
+- [ ] Consigo explicar as funções gerais de R e Python?
+- [ ] Instalei R a partir da página oficial?
+- [ ] `R.version.string` informa a versão esperada?
+- [ ] `python --version` identifica uma versão instalada?
+- [ ] `py list` apresenta os interpretadores conhecidos?
+- [ ] O teste mínimo funciona nas duas linguagens?
+:::

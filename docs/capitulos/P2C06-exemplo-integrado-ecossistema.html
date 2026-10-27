@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alexandre Nicolella">
+<meta name="author" content="José de Jesus Filho">
+
+<title>10&nbsp; Um exemplo integrado do ecossistema – JURIMETRIA: Dados, Métodos e Evidência para o Direito</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../capitulos/P2C07-introducao-r.html" rel="next">
+<link href="../capitulos/P2C05-agentes-projeto.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-af376c0a327698bc4256a7316fbe19a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo light-content">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JURIMETRIA: Dados, Métodos e Evidência para o Direito</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Jurimetria-USP/livro"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/P2C06-exemplo-integrado-ecossistema.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Um exemplo integrado do ecossistema</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../autores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sobre os autores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/01-fundamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte I — Fundamentos</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C01-metodo-cientifico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Método científico e desenho de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C02-pergunta-dados-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Da pergunta à conclusão</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C03-jurimetria-instrumento-pesquisa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Jurimetria como instrumento de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C04-litigios-desigualdades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Seleção dos litígios e desigualdades no sistema de justiça</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/02-ambiente-trabalho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte II — Ambiente de trabalho e ferramentas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C01-ambiente-computacional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ambiente computacional para a pesquisa jurimétrica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C02-r-python-linguagens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R e Python: linguagens do ambiente de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C03-positron-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C04-git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C05-agentes-projeto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Agentes de inteligência artificial no projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C06-exemplo-integrado-ecossistema.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Um exemplo integrado do ecossistema</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C07-introducao-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introdução ao R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Parte III — Construção do banco de dados</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/04-descricao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte IV — Descrição do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C01-introducao-estatistica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C02-analise-descritiva.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C03-analise-sobrevivencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Análise de sobrevivência: tempo do processo</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/05-explicacao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte V — Explicação do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C01-modelos-lineares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C02-modelos-avancados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução"><span class="header-section-number">10.1</span> Introdução</a></li>
+  <li><a href="#o-percurso-do-exemplo" id="toc-o-percurso-do-exemplo" class="nav-link" data-scroll-target="#o-percurso-do-exemplo"><span class="header-section-number">10.2</span> O percurso do exemplo</a></li>
+  <li><a href="#antes-de-começar" id="toc-antes-de-começar" class="nav-link" data-scroll-target="#antes-de-começar"><span class="header-section-number">10.3</span> Antes de começar</a></li>
+  <li><a href="#etapa-1-criar-e-abrir-a-pasta" id="toc-etapa-1-criar-e-abrir-a-pasta" class="nav-link" data-scroll-target="#etapa-1-criar-e-abrir-a-pasta"><span class="header-section-number">10.4</span> Etapa 1 — Criar e abrir a pasta</a></li>
+  <li><a href="#etapa-2-iniciar-o-git-local" id="toc-etapa-2-iniciar-o-git-local" class="nav-link" data-scroll-target="#etapa-2-iniciar-o-git-local"><span class="header-section-number">10.5</span> Etapa 2 — Iniciar o Git local</a></li>
+  <li><a href="#etapa-3-criar-os-primeiros-arquivos" id="toc-etapa-3-criar-os-primeiros-arquivos" class="nav-link" data-scroll-target="#etapa-3-criar-os-primeiros-arquivos"><span class="header-section-number">10.6</span> Etapa 3 — Criar os primeiros arquivos</a></li>
+  <li><a href="#etapa-4-fazer-o-primeiro-commit-local" id="toc-etapa-4-fazer-o-primeiro-commit-local" class="nav-link" data-scroll-target="#etapa-4-fazer-o-primeiro-commit-local"><span class="header-section-number">10.7</span> Etapa 4 — Fazer o primeiro commit local</a></li>
+  <li><a href="#etapa-5-publicar-o-repositório-no-github" id="toc-etapa-5-publicar-o-repositório-no-github" class="nav-link" data-scroll-target="#etapa-5-publicar-o-repositório-no-github"><span class="header-section-number">10.8</span> Etapa 5 — Publicar o repositório no GitHub</a></li>
+  <li><a href="#etapa-6-convidar-um-colaborador" id="toc-etapa-6-convidar-um-colaborador" class="nav-link" data-scroll-target="#etapa-6-convidar-um-colaborador"><span class="header-section-number">10.9</span> Etapa 6 — Convidar um colaborador</a></li>
+  <li><a href="#etapa-7-obter-o-projeto-no-computador-do-colaborador" id="toc-etapa-7-obter-o-projeto-no-computador-do-colaborador" class="nav-link" data-scroll-target="#etapa-7-obter-o-projeto-no-computador-do-colaborador"><span class="header-section-number">10.10</span> Etapa 7 — Obter o projeto no computador do colaborador</a></li>
+  <li><a href="#etapa-8-abrir-o-agente-no-projeto" id="toc-etapa-8-abrir-o-agente-no-projeto" class="nav-link" data-scroll-target="#etapa-8-abrir-o-agente-no-projeto"><span class="header-section-number">10.11</span> Etapa 8 — Abrir o agente no projeto</a></li>
+  <li><a href="#etapa-9-criar-as-orientações-do-agente" id="toc-etapa-9-criar-as-orientações-do-agente" class="nav-link" data-scroll-target="#etapa-9-criar-as-orientações-do-agente"><span class="header-section-number">10.12</span> Etapa 9 — Criar as orientações do agente</a></li>
+  <li><a href="#etapa-10-produção-da-base-em-r" id="toc-etapa-10-produção-da-base-em-r" class="nav-link" data-scroll-target="#etapa-10-produção-da-base-em-r"><span class="header-section-number">10.13</span> Etapa 10 — Produção da base em R</a></li>
+  <li><a href="#etapa-11-verificação-em-python" id="toc-etapa-11-verificação-em-python" class="nav-link" data-scroll-target="#etapa-11-verificação-em-python"><span class="header-section-number">10.14</span> Etapa 11 — Verificação em Python</a></li>
+  <li><a href="#etapa-12-relatório-em-quarto" id="toc-etapa-12-relatório-em-quarto" class="nav-link" data-scroll-target="#etapa-12-relatório-em-quarto"><span class="header-section-number">10.15</span> Etapa 12 — Relatório em Quarto</a></li>
+  <li><a href="#etapa-13-observar-o-projeto-no-positron" id="toc-etapa-13-observar-o-projeto-no-positron" class="nav-link" data-scroll-target="#etapa-13-observar-o-projeto-no-positron"><span class="header-section-number">10.16</span> Etapa 13 — Observar o projeto no Positron</a></li>
+  <li><a href="#etapa-14-registrar-a-nova-etapa" id="toc-etapa-14-registrar-a-nova-etapa" class="nav-link" data-scroll-target="#etapa-14-registrar-a-nova-etapa"><span class="header-section-number">10.17</span> Etapa 14 — Registrar a nova etapa</a></li>
+  <li><a href="#etapa-15-revisão-de-leitura-por-um-agente" id="toc-etapa-15-revisão-de-leitura-por-um-agente" class="nav-link" data-scroll-target="#etapa-15-revisão-de-leitura-por-um-agente"><span class="header-section-number">10.18</span> Etapa 15 — Revisão de leitura por um agente</a></li>
+  <li><a href="#como-as-ferramentas-se-complementam" id="toc-como-as-ferramentas-se-complementam" class="nav-link" data-scroll-target="#como-as-ferramentas-se-complementam"><span class="header-section-number">10.19</span> Como as ferramentas se complementam</a></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">10.20</span> Síntese</a></li>
+  <li><a href="#referências-operacionais" id="toc-referências-operacionais" class="nav-link" data-scroll-target="#referências-operacionais"><span class="header-section-number">10.21</span> Referências operacionais</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/02-ambiente-trabalho.html">Parte II — Ambiente de trabalho e ferramentas</a></li><li class="breadcrumb-item"><a href="../capitulos/P2C06-exemplo-integrado-ecossistema.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Um exemplo integrado do ecossistema</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Um exemplo integrado do ecossistema</span></h1>
+<p class="subtitle lead">R, Python, Positron, Quarto, Git e agentes em um projeto jurídico</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autores</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexandre Nicolella </p>
+             <p>José de Jesus Filho </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">10.1</span> Introdução</h2>
+<p>Os capítulos anteriores apresentaram as ferramentas separadamente. Este capítulo reúne seus papéis na criação de um projeto colaborativo iniciado em uma pasta vazia. O percurso começa no Positron, cria um repositório Git local, registra as primeiras versões, publica o repositório no GitHub e incorpora um colaborador. Depois, Codex ou Claude Code auxiliam na montagem dos arquivos do projeto sob supervisão humana.</p>
+<p>Utilizaremos dados ilustrativos de três estados brasileiros sobre homicídios de mulheres e feminicídios. Os valores servem apenas para acompanhar o fluxo computacional e não devem ser interpretados como uma análise substantiva do fenômeno.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Objetivos do capítulo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Objetivos do capítulo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ao final deste capítulo, você deverá ser capaz de:</p>
+<ul>
+<li>criar uma pasta de projeto e abri-la como raiz no Positron;</li>
+<li>iniciar um repositório Git local pela interface do Positron;</li>
+<li>criar <code>README.md</code>, <code>.gitignore</code> e <code>AGENTS.md</code>;</li>
+<li>registrar um primeiro <em>commit</em> local;</li>
+<li>publicar o repositório no GitHub e convidar um colaborador;</li>
+<li>distinguir <em>commit</em> local, envio, recebimento e sincronização;</li>
+<li>abrir Codex ou Claude Code no contexto da pasta;</li>
+<li>executar um script de R que produz uma base;</li>
+<li>utilizar Python para verificar o arquivo produzido;</li>
+<li>renderizar um relatório Quarto;</li>
+<li>registrar uma nova etapa sem misturar mudanças não relacionadas.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="o-percurso-do-exemplo" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="o-percurso-do-exemplo"><span class="header-section-number">10.2</span> O percurso do exemplo</h2>
+<p>O trabalho parte de uma pasta vazia. A estrutura inicial é registrada localmente antes da publicação no GitHub. Somente depois dessa base organizacional criamos códigos, dados e relatório.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Pasta nova&lt;br/&gt;no Positron"] --&gt; B["Git local&lt;br/&gt;primeiro commit"]
+    B --&gt; C["GitHub&lt;br/&gt;repositório remoto"]
+    C --&gt; D["Colaboração&lt;br/&gt;troca de versões"]
+    D --&gt; E["Agente&lt;br/&gt;estrutura autorizada"]
+    E --&gt; F["R e Python&lt;br/&gt;dados e verificação"]
+    F --&gt; G["Quarto&lt;br/&gt;relatório"]
+
+    classDef principal fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
+    classDef apoio fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
+    class A,B,C,E,F,G principal;
+    class D apoio;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="antes-de-começar" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="antes-de-começar"><span class="header-section-number">10.3</span> Antes de começar</h2>
+<p>Este capítulo pressupõe que as etapas anteriores foram concluídas. O computador já deve possuir Git, R, Python, Positron e Quarto. Também são necessárias uma conta no GitHub e a extensão do Codex ou do Claude Code instalada no Positron. Não será necessário instalar novamente essas ferramentas.</p>
+</section>
+<section id="etapa-1-criar-e-abrir-a-pasta" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="etapa-1-criar-e-abrir-a-pasta"><span class="header-section-number">10.4</span> Etapa 1 — Criar e abrir a pasta</h2>
+<p>Crie uma pasta chamada <code>exemplo-juridico</code> em um local destinado aos projetos da disciplina. No Positron:</p>
+<ol type="1">
+<li>selecione <strong>File &gt; Open Folder</strong>;</li>
+<li>localize <code>exemplo-juridico</code>;</li>
+<li>selecione <strong>Select Folder</strong>;</li>
+<li>confirme que <code>EXEMPLO-JURIDICO</code> aparece no primeiro nível do Explorer.</li>
+</ol>
+<p>Nesse momento, a pasta pode estar vazia. Abrir a pasta no Positron define a raiz utilizada pelo Explorer, pelo terminal, pelo Git e pelos agentes.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Abra somente a pasta do projeto">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Abra somente a pasta do projeto
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Não abra como raiz uma pasta ampla que contenha outros trabalhos. O Git e os agentes devem atuar apenas dentro de <code>exemplo-juridico</code>.</p>
+</div>
+</div>
+</section>
+<section id="etapa-2-iniciar-o-git-local" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="etapa-2-iniciar-o-git-local"><span class="header-section-number">10.5</span> Etapa 2 — Iniciar o Git local</h2>
+<p>Na barra lateral do Positron, selecione o ícone <strong>Source Control</strong>. Como a pasta ainda não possui Git, o painel apresentará o botão <strong>Initialize Repository</strong>. Selecione esse botão.</p>
+<p>O Positron executará a inicialização do Git na pasta aberta. O procedimento cria a pasta oculta <code>.git</code>, que contém o histórico local. Ele não cria um repositório no GitHub e não envia nenhum arquivo à internet.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="O que não é criado automaticamente">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>O que não é criado automaticamente
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Initialize Repository</strong> não cria <code>README.md</code>, <code>.gitignore</code> ou <code>AGENTS.md</code>. Esses documentos pertencem ao conteúdo do projeto e serão criados nas etapas seguintes.</p>
+</div>
+</div>
+<p>Se o botão não aparecer, confirme se a pasta correta está aberta e se o Git foi reconhecido. O terminal pode ser usado apenas para diagnóstico:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git status</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="etapa-3-criar-os-primeiros-arquivos" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="etapa-3-criar-os-primeiros-arquivos"><span class="header-section-number">10.6</span> Etapa 3 — Criar os primeiros arquivos</h2>
+<p>No Explorer, selecione o botão <strong>New File</strong> e crie, um por vez, <code>README.md</code> e <code>.gitignore</code>.</p>
+<p>No <code>README.md</code>, registre:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exemplo jurídico integrado</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Projeto didático para demonstrar a organização de uma pesquisa jurídica</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>com Git, GitHub, Positron, R, Python, Quarto e agentes de inteligência</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>artificial.</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Os dados utilizados neste exemplo são ilustrativos.</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No <code>.gitignore</code>, indique arquivos locais que não devem ser versionados:</p>
+<pre class="gitignore"><code>.Rhistory
+.RData
+.Ruserdata
+.venv/
+.env</code></pre>
+<p>Salve os dois arquivos. O painel <strong>Source Control</strong> deverá mostrá-los como alterações ainda não registradas.</p>
+</section>
+<section id="etapa-4-fazer-o-primeiro-commit-local" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="etapa-4-fazer-o-primeiro-commit-local"><span class="header-section-number">10.7</span> Etapa 4 — Fazer o primeiro commit local</h2>
+<p>No painel <strong>Source Control</strong>:</p>
+<ol type="1">
+<li>examine os arquivos apresentados em <strong>Changes</strong>;</li>
+<li>selecione o sinal <code>+</code> ao lado de cada arquivo para incluí-lo em <strong>Staged Changes</strong>;</li>
+<li>escreva a mensagem <code>Cria a estrutura inicial do projeto</code>;</li>
+<li>selecione <strong>Commit</strong>.</li>
+</ol>
+<p>Esse <em>commit</em> registra a primeira versão no computador. Ele ainda não foi enviado ao GitHub.</p>
+</section>
+<section id="etapa-5-publicar-o-repositório-no-github" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="etapa-5-publicar-o-repositório-no-github"><span class="header-section-number">10.8</span> Etapa 5 — Publicar o repositório no GitHub</h2>
+<p>Depois do primeiro <em>commit</em>, o painel <strong>Source Control</strong> pode apresentar <strong>Publish Branch</strong> ou <strong>Publish to GitHub</strong>. Selecione a opção disponível e:</p>
+<ol type="1">
+<li>autentique sua conta do GitHub, se solicitado;</li>
+<li>confirme o nome <code>exemplo-juridico</code>;</li>
+<li>escolha se o repositório será público ou privado;</li>
+<li>confirme a publicação;</li>
+<li>abra o endereço indicado e confira <code>README.md</code> e <code>.gitignore</code>.</li>
+</ol>
+<p>Essa operação cria o repositório remoto, associa-o ao repositório local e envia o histórico existente. Publicar o repositório não significa publicar uma página; GitHub Pages constitui outra decisão.</p>
+</section>
+<section id="etapa-6-convidar-um-colaborador" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="etapa-6-convidar-um-colaborador"><span class="header-section-number">10.9</span> Etapa 6 — Convidar um colaborador</h2>
+<p>Na página do repositório no GitHub:</p>
+<ol type="1">
+<li>abra <strong>Settings</strong>;</li>
+<li>na seção <strong>Access</strong>, escolha <strong>Collaborators</strong>;</li>
+<li>selecione <strong>Add people</strong>;</li>
+<li>pesquise o nome de usuário exato do colaborador;</li>
+<li>envie o convite.</li>
+</ol>
+<p>O colaborador somente terá acesso depois de aceitar o convite. Cada participante utiliza sua própria conta; senhas e códigos de autenticação não são compartilhados.</p>
+</section>
+<section id="etapa-7-obter-o-projeto-no-computador-do-colaborador" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="etapa-7-obter-o-projeto-no-computador-do-colaborador"><span class="header-section-number">10.10</span> Etapa 7 — Obter o projeto no computador do colaborador</h2>
+<p>Depois de aceitar o convite, o colaborador abre o Positron sem uma pasta de projeto e escolhe <strong>New Folder from Git</strong>. Em seguida, informa o endereço do repositório, escolhe onde salvar a cópia e abre a pasta criada.</p>
+<p>Esse procedimento realiza um <em>clone</em>: cria uma cópia local com os arquivos e o histórico existentes no GitHub. A partir daí, cada participante trabalha em sua própria cópia e troca versões pelo repositório remoto.</p>
+</section>
+<section id="etapa-8-abrir-o-agente-no-projeto" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="etapa-8-abrir-o-agente-no-projeto"><span class="header-section-number">10.11</span> Etapa 8 — Abrir o agente no projeto</h2>
+<p>Com <code>exemplo-juridico</code> aberto no Positron, abra o painel do Codex ou do Claude Code. A extensão utilizará a pasta aberta como contexto local. O primeiro pedido deve ser de leitura e proposta:</p>
+<blockquote class="blockquote">
+<p>Examine <code>README.md</code> e <code>.gitignore</code>. Não altere arquivos e não execute comandos. Proponha uma estrutura mínima para um projeto jurídico didático que utilizará R, Python e Quarto. Explique a função de cada pasta e aguarde aprovação.</p>
+</blockquote>
+<p>Depois de revisar a proposta, autorize apenas a estrutura aprovada. Um resultado possível é:</p>
+<pre class="text"><code>exemplo-juridico/
+├── dados/
+├── scripts/
+│   ├── criar_dados.R
+│   └── verificar_dados.py
+├── AGENTS.md
+├── .gitignore
+├── README.md
+└── relatorio.qmd</code></pre>
+</section>
+<section id="etapa-9-criar-as-orientações-do-agente" class="level2" data-number="10.12">
+<h2 data-number="10.12" class="anchored" data-anchor-id="etapa-9-criar-as-orientações-do-agente"><span class="header-section-number">10.12</span> Etapa 9 — Criar as orientações do agente</h2>
+<p>Crie <code>AGENTS.md</code> pelo botão <strong>New File</strong> ou autorize o Codex a criá-lo com o conteúdo aprovado:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Orientações do projeto</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Este é um projeto didático de análise de dados jurídicos.</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Leia o README antes de propor alterações.</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Não modifique arquivos sem autorização expressa.</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Não execute Git nem publique arquivos.</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Não invente dados, fontes ou resultados.</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Preserve os exemplos aprovados.</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Depois de cada alteração, informe exatamente o que mudou.</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O <code>AGENTS.md</code> orienta o Codex quando ele trabalha nessa pasta. Se o projeto também utilizar Claude Code, as orientações comuns podem ser adaptadas em <code>CLAUDE.md</code>. A elaboração de regras mais completas será retomada na Parte III.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Exemplo distinto de uma estrutura definitiva">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Exemplo distinto de uma estrutura definitiva
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Esta organização foi reduzida para tornar visível a integração das ferramentas. O projeto de uma pesquisa real exigirá pastas, documentação, regras e procedimentos adicionais.</p>
+</div>
+</div>
+</section>
+<section id="etapa-10-produção-da-base-em-r" class="level2" data-number="10.13">
+<h2 data-number="10.13" class="anchored" data-anchor-id="etapa-10-produção-da-base-em-r"><span class="header-section-number">10.13</span> Etapa 10 — Produção da base em R</h2>
+<p>No arquivo <code>scripts/criar_dados.R</code>, registre:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dados ilustrativos de três estados brasileiros</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>estados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Acre"</span>, <span class="st">"Alagoas"</span>, <span class="st">"Amapá"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>homicidios_mulheres <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">73</span>, <span class="dv">22</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>feminicidios <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">31</span>, <span class="dv">8</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>dados_crimes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">estado =</span> estados,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">homicidios_mulheres =</span> homicidios_mulheres,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">feminicidios =</span> feminicidios</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  dados_crimes,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dados/dados_crimes.csv"</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">fileEncoding =</span> <span class="st">"UTF-8"</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>dados_crimes</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O script reúne os vetores em um <code>data.frame</code> e grava o resultado em <code>dados/dados_crimes.csv</code>. O caminho parte da raiz do projeto.</p>
+<p>Com o arquivo aberto no editor, execute o script em uma sessão de R. Depois, confirme no Explorer que a pasta <code>dados/</code> contém o CSV.</p>
+</section>
+<section id="etapa-11-verificação-em-python" class="level2" data-number="10.14">
+<h2 data-number="10.14" class="anchored" data-anchor-id="etapa-11-verificação-em-python"><span class="header-section-number">10.14</span> Etapa 11 — Verificação em Python</h2>
+<p>No arquivo <code>scripts/verificar_dados.py</code>, utilize apenas a biblioteca padrão do Python:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>caminho <span class="op">=</span> Path(<span class="st">"dados"</span>) <span class="op">/</span> <span class="st">"dados_crimes.csv"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> caminho.<span class="bu">open</span>(encoding<span class="op">=</span><span class="st">"utf-8-sig"</span>, newline<span class="op">=</span><span class="st">""</span>) <span class="im">as</span> arquivo:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    linhas <span class="op">=</span> <span class="bu">list</span>(csv.DictReader(arquivo))</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>colunas_esperadas <span class="op">=</span> {</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"estado"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"homicidios_mulheres"</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"feminicidios"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> linhas:</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"A base não contém observações."</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>colunas_encontradas <span class="op">=</span> <span class="bu">set</span>(linhas[<span class="dv">0</span>].keys())</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> colunas_encontradas <span class="op">!=</span> colunas_esperadas:</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Colunas encontradas: </span><span class="sc">{</span><span class="bu">sorted</span>(colunas_encontradas)<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Arquivo verificado: </span><span class="sc">{</span>caminho<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Número de observações: </span><span class="sc">{</span><span class="bu">len</span>(linhas)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>No terminal da raiz, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>python scripts<span class="op">/</span>verificar_dados<span class="op">.</span><span class="fu">py</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O Python não recria a análise. Ele realiza uma verificação independente e pequena: confirma que o arquivo existe, contém observações e possui as colunas esperadas.</p>
+</section>
+<section id="etapa-12-relatório-em-quarto" class="level2" data-number="10.15">
+<h2 data-number="10.15" class="anchored" data-anchor-id="etapa-12-relatório-em-quarto"><span class="header-section-number">10.15</span> Etapa 12 — Relatório em Quarto</h2>
+<p>No arquivo <code>relatorio.qmd</code>, insira:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Exemplo jurídico integrado"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Dados ilustrativos de três estados brasileiros"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objetivo</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>Este relatório apresenta uma base ilustrativa utilizada para demonstrar a</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>integração entre arquivos, código e publicação reproduzível.</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>::: {.cell}</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r .cell-code}</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>caminho_dados <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">file.exists</span>(<span class="st">"dados/dados_crimes.csv"</span>)) {</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dados/dados_crimes.csv"</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"../dados/dados_crimes.csv"</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>dados_crimes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  caminho_dados,</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">fileEncoding =</span> <span class="st">"UTF-8"</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>dados_crimes</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-stdout}</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="in">   estado homicidios_mulheres feminicidios</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="in">1    Acre                  22           11</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="in">2 Alagoas                  73           31</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="in">3   Amapá                  22            8</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## Uma verificação descritiva</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>::: {.cell}</span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r .cell-code}</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>dados_crimes<span class="sc">$</span>participacao_feminicidios <span class="ot">&lt;-</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(</span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>    <span class="dv">100</span> <span class="sc">*</span> dados_crimes<span class="sc">$</span>feminicidios <span class="sc">/</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>      dados_crimes<span class="sc">$</span>homicidios_mulheres,</span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>dados_crimes</span>
+<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-stdout}</span>
+<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="in">   estado homicidios_mulheres feminicidios participacao_feminicidios</span></span>
+<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="in">1    Acre                  22           11                      50.0</span></span>
+<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="in">2 Alagoas                  73           31                      42.5</span></span>
+<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="in">3   Amapá                  22            8                      36.4</span></span>
+<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a>Os valores são ilustrativos e não sustentam inferência sobre os estados.</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O primeiro bloco lê a base produzida pelo script. O segundo cria uma variável derivada. A ressalva final impede que o exemplo operacional seja confundido com uma conclusão empírica.</p>
+<p>No terminal da raiz, renderize:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>quarto render relatorio<span class="op">.</span><span class="fu">qmd</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O arquivo <code>relatorio.html</code> será criado ao lado da fonte, salvo se uma configuração de projeto determinar outro diretório.</p>
+</section>
+<section id="etapa-13-observar-o-projeto-no-positron" class="level2" data-number="10.16">
+<h2 data-number="10.16" class="anchored" data-anchor-id="etapa-13-observar-o-projeto-no-positron"><span class="header-section-number">10.16</span> Etapa 13 — Observar o projeto no Positron</h2>
+<p>Ao final das etapas anteriores, o Explorer deve mostrar os arquivos-fonte e os resultados produzidos. A sessão de R pode apresentar <code>dados_crimes</code> no painel de objetos, enquanto o terminal registra a verificação do Python e a execução do Quarto.</p>
+<p>Observe que nenhum desses painéis é o projeto. O projeto é a estrutura de arquivos preservada no computador. Objetos existentes apenas na memória desaparecem quando a sessão é encerrada; por isso, as operações necessárias devem permanecer nos scripts.</p>
+<!-- IMAGEM A INSERIR: figuras/parte-02-ambiente-trabalho/exemplo-integrado-positron.png — Positron com a raiz do exemplo no Explorer, script no editor, sessão de R e terminal. -->
+</section>
+<section id="etapa-14-registrar-a-nova-etapa" class="level2" data-number="10.17">
+<h2 data-number="10.17" class="anchored" data-anchor-id="etapa-14-registrar-a-nova-etapa"><span class="header-section-number">10.17</span> Etapa 14 — Registrar a nova etapa</h2>
+<p>Retorne ao painel <strong>Source Control</strong>. Examine separadamente os novos arquivos e confirme que <code>.venv</code>, históricos de sessão e credenciais não aparecem na lista. Depois:</p>
+<ol type="1">
+<li>selecione os arquivos correspondentes ao exemplo;</li>
+<li>escreva a mensagem <code>Adiciona o primeiro exemplo integrado</code>;</li>
+<li>selecione <strong>Commit</strong>;</li>
+<li>selecione <strong>Sync Changes</strong> ou <strong>Push</strong> para enviar o novo <em>commit</em> ao GitHub.</li>
+</ol>
+<p>O <em>commit</em> registra a versão local. <strong>Push</strong> envia os commits locais ao GitHub. <strong>Pull</strong> recebe commits existentes no remoto. <strong>Sync Changes</strong> combina o recebimento e o envio previstos pela interface.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Pessoa A&lt;br/&gt;commit local"] --&gt;|push| C["GitHub&lt;br/&gt;histórico compartilhado"]
+    C --&gt;|pull| B["Pessoa B&lt;br/&gt;cópia local"]
+    B --&gt;|commit e push| C
+    C --&gt;|pull| A
+
+    classDef local fill:#E8EEF5,stroke:#415A77,stroke-width:2px,color:#233F56;
+    classDef remoto fill:#F4E9D7,stroke:#B49A68,stroke-width:2px,color:#233F56;
+    class A,B local;
+    class C remoto;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Antes de começar uma nova etapa, cada participante deve receber as mudanças já compartilhadas. Antes de enviar, deve revisar seus próprios arquivos e criar um <em>commit</em> coerente. Quando duas pessoas alteram a mesma parte de um arquivo, o Git pode solicitar a resolução de um conflito; essa resolução exige comparar as versões e decidir qual conteúdo deve permanecer.</p>
+</section>
+<section id="etapa-15-revisão-de-leitura-por-um-agente" class="level2" data-number="10.18">
+<h2 data-number="10.18" class="anchored" data-anchor-id="etapa-15-revisão-de-leitura-por-um-agente"><span class="header-section-number">10.18</span> Etapa 15 — Revisão de leitura por um agente</h2>
+<p>Com os arquivos criados, um agente pode receber um pedido delimitado:</p>
+<blockquote class="blockquote">
+<p>Leia <code>README.md</code>, <code>scripts/criar_dados.R</code>, <code>scripts/verificar_dados.py</code> e <code>relatorio.qmd</code>. Não altere arquivos, não execute comandos e não use Git. Verifique se os nomes das colunas, os caminhos e a finalidade declarada são consistentes. Relate os problemas encontrados e apresente propostas para aprovação.</p>
+</blockquote>
+<p>O pedido identifica os arquivos, limita as ações e define o resultado esperado. Se o agente sugerir uma correção, a mudança deve ser examinada antes de nova autorização.</p>
+</section>
+<section id="como-as-ferramentas-se-complementam" class="level2" data-number="10.19">
+<h2 data-number="10.19" class="anchored" data-anchor-id="como-as-ferramentas-se-complementam"><span class="header-section-number">10.19</span> Como as ferramentas se complementam</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Elemento</th>
+<th>Função no exemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R</td>
+<td>cria a base e realiza o cálculo</td>
+</tr>
+<tr class="even">
+<td>Python</td>
+<td>verifica a estrutura do CSV</td>
+</tr>
+<tr class="odd">
+<td>Positron</td>
+<td>reúne arquivos, sessões e terminal</td>
+</tr>
+<tr class="even">
+<td>Quarto</td>
+<td>combina explicação, código e resultado</td>
+</tr>
+<tr class="odd">
+<td>Git</td>
+<td>registra versões locais do projeto</td>
+</tr>
+<tr class="even">
+<td>GitHub</td>
+<td>compartilha o histórico entre os colaboradores</td>
+</tr>
+<tr class="odd">
+<td>agente</td>
+<td>propõe, cria e revisa arquivos dentro do escopo autorizado</td>
+</tr>
+</tbody>
+</table>
+<p>Não é necessário utilizar duas linguagens em toda pesquisa. O exemplo usa R e Python para demonstrar que o ambiente pode integrá-las. A escolha deve decorrer da necessidade metodológica e da possibilidade de manter o trabalho compreensível.</p>
+</section>
+<section id="síntese" class="level2" data-number="10.20">
+<h2 data-number="10.20" class="anchored" data-anchor-id="síntese"><span class="header-section-number">10.20</span> Síntese</h2>
+<p>O exemplo começou em uma pasta vazia, criou um repositório local, registrou um primeiro <em>commit</em>, publicou o histórico no GitHub e incorporou um colaborador. Em seguida, um agente apoiou a estruturação aprovada, R produziu os dados, Python verificou sua estrutura e Quarto gerou o relatório. A etapa final registrou e sincronizou o novo resultado.</p>
+<p>Nos capítulos seguintes, essa estrutura será ampliada para um projeto de pesquisa. Passaremos da demonstração técnica para a definição das fontes, das regras de trabalho, da coleta, da extração e da organização do banco de dados.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Antes de avançar">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>Antes de avançar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><label><input type="checkbox">A pasta aberta no Positron é a raiz do exemplo?</label></li>
+<li><label><input type="checkbox">O script de R produz o CSV no caminho esperado?</label></li>
+<li><label><input type="checkbox">O script Python verifica o arquivo sem alterar os dados?</label></li>
+<li><label><input type="checkbox">O Quarto produz o HTML a partir do <code>.qmd</code>?</label></li>
+<li><label><input type="checkbox">Sei distinguir objetos da sessão e arquivos preservados?</label></li>
+<li><label><input type="checkbox">Distingo <em>commit</em>, <em>push</em>, <em>pull</em> e sincronização?</label></li>
+<li><label><input type="checkbox">O colaborador recebeu acesso por sua própria conta?</label></li>
+<li><label><input type="checkbox">O <code>AGENTS.md</code> registra limites de atuação do agente?</label></li>
+<li><label><input type="checkbox">O pedido ao agente limita leitura, escrita e execução?</label></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="referências-operacionais" class="level2" data-number="10.21">
+<h2 data-number="10.21" class="anchored" data-anchor-id="referências-operacionais"><span class="header-section-number">10.21</span> Referências operacionais</h2>
+<ul>
+<li><a href="https://positron.posit.co/git.html">Controle de versões Git no Positron</a></li>
+<li><a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository">Convite de colaboradores para um repositório pessoal</a></li>
+<li><a href="https://learn.chatgpt.com/docs/codex/ide">Extensão do Codex no editor</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/P2C05-agentes-projeto.html" class="pagination-link" aria-label="Agentes de inteligência artificial no projeto">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Agentes de inteligência artificial no projeto</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../capitulos/P2C07-introducao-r.html" class="pagination-link" aria-label="Introdução ao R">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introdução ao R</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

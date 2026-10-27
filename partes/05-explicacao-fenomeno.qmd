@@ -13,7 +13,7 @@ Nesta parte, avançamos da descrição para a explicação dos fenômenos juríd
 
 Fundamentos da regressão linear, estimação, interpretação e aplicações à pesquisa em Direito.
 
-[Acessar o capítulo](../capitulos/modelos-lineares.qmd)
+[Acessar o capítulo](../capitulos/P5C01-modelos-lineares.qmd)
 :::
 :::
 
@@ -23,7 +23,7 @@ Fundamentos da regressão linear, estimação, interpretação e aplicações à
 
 Modelos para variáveis dependentes qualitativas e dados com estruturas mais complexas.
 
-[Acessar o capítulo](../capitulos/modelos-avancados.qmd)
+[Acessar o capítulo](../capitulos/P5C02-modelos-avancados.qmd)
 :::
 :::
 

@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Alexandre Nicolella">
+
+<title>12&nbsp; Uma Introdução à Estatística – JURIMETRIA: Dados, Métodos e Evidência para o Direito</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../capitulos/P4C02-analise-descritiva.html" rel="next">
+<link href="../partes/04-descricao-fenomeno.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-af376c0a327698bc4256a7316fbe19a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo light-content">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JURIMETRIA: Dados, Métodos e Evidência para o Direito</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Jurimetria-USP/livro"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/04-descricao-fenomeno.html">Parte IV — Descrição do fenômeno</a></li><li class="breadcrumb-item"><a href="../capitulos/P4C01-introducao-estatistica.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../autores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sobre os autores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/01-fundamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte I — Fundamentos</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C01-metodo-cientifico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Método científico e desenho de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C02-pergunta-dados-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Da pergunta à conclusão</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C03-jurimetria-instrumento-pesquisa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Jurimetria como instrumento de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C04-litigios-desigualdades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Seleção dos litígios e desigualdades no sistema de justiça</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/02-ambiente-trabalho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte II — Ambiente de trabalho e ferramentas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C01-ambiente-computacional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ambiente computacional para a pesquisa jurimétrica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C02-r-python-linguagens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R e Python: linguagens do ambiente de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C03-positron-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C04-git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C05-agentes-projeto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Agentes de inteligência artificial no projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C06-exemplo-integrado-ecossistema.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Um exemplo integrado do ecossistema</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C07-introducao-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introdução ao R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Parte III — Construção do banco de dados</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/04-descricao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte IV — Descrição do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C01-introducao-estatistica.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C02-analise-descritiva.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C03-analise-sobrevivencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Análise de sobrevivência: tempo do processo</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/05-explicacao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte V — Explicação do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C01-modelos-lineares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C02-modelos-avancados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#porque-estudar-estatística" id="toc-porque-estudar-estatística" class="nav-link active" data-scroll-target="#porque-estudar-estatística"><span class="header-section-number">12.1</span> Porque Estudar Estatística?</a>
+  <ul class="collapse">
+  <li><a href="#os-dois-sistemas-cognitivos" id="toc-os-dois-sistemas-cognitivos" class="nav-link" data-scroll-target="#os-dois-sistemas-cognitivos"><span class="header-section-number">12.1.1</span> Os dois sistemas cognitivos</a></li>
+  </ul></li>
+  <li><a href="#conceitos-básicos-de-estatística" id="toc-conceitos-básicos-de-estatística" class="nav-link" data-scroll-target="#conceitos-básicos-de-estatística"><span class="header-section-number">12.2</span> Conceitos Básicos de Estatística</a>
+  <ul class="collapse">
+  <li><a href="#a-população-e-suas-características" id="toc-a-população-e-suas-características" class="nav-link" data-scroll-target="#a-população-e-suas-características"><span class="header-section-number">12.2.1</span> A População e suas Características</a></li>
+  <li><a href="#variáveis-aleatórias-bidimensionais" id="toc-variáveis-aleatórias-bidimensionais" class="nav-link" data-scroll-target="#variáveis-aleatórias-bidimensionais"><span class="header-section-number">12.2.2</span> Variáveis Aleatórias Bidimensionais</a></li>
+  </ul></li>
+  <li><a href="#conceitos-básicos-inferência-estatística" id="toc-conceitos-básicos-inferência-estatística" class="nav-link" data-scroll-target="#conceitos-básicos-inferência-estatística"><span class="header-section-number">12.3</span> Conceitos Básicos Inferência Estatística</a>
+  <ul class="collapse">
+  <li><a href="#exemplos-do-príncipio-no-dia-a-dia" id="toc-exemplos-do-príncipio-no-dia-a-dia" class="nav-link" data-scroll-target="#exemplos-do-príncipio-no-dia-a-dia"><span class="header-section-number">12.3.1</span> Exemplos do príncipio no dia a dia</a></li>
+  <li><a href="#população-amostra-parâmetros-e-estimadores" id="toc-população-amostra-parâmetros-e-estimadores" class="nav-link" data-scroll-target="#população-amostra-parâmetros-e-estimadores"><span class="header-section-number">12.3.2</span> População, Amostra, Parâmetros e Estimadores</a></li>
+  <li><a href="#população-e-amostra" id="toc-população-e-amostra" class="nav-link" data-scroll-target="#população-e-amostra"><span class="header-section-number">12.3.3</span> População e amostra</a></li>
+  <li><a href="#amostragem-aleatória-simples" id="toc-amostragem-aleatória-simples" class="nav-link" data-scroll-target="#amostragem-aleatória-simples"><span class="header-section-number">12.3.4</span> Amostragem Aleatória Simples</a></li>
+  </ul></li>
+  <li><a href="#estatística-e-parâmetro" id="toc-estatística-e-parâmetro" class="nav-link" data-scroll-target="#estatística-e-parâmetro"><span class="header-section-number">12.4</span> Estatística e Parâmetro</a></li>
+  <li><a href="#teste-de-hipotese-parâmetros." id="toc-teste-de-hipotese-parâmetros." class="nav-link" data-scroll-target="#teste-de-hipotese-parâmetros."><span class="header-section-number">12.5</span> Teste de Hipotese (Parâmetros).</a>
+  <ul class="collapse">
+  <li><a href="#construíndo-a-hipótese-nula" id="toc-construíndo-a-hipótese-nula" class="nav-link" data-scroll-target="#construíndo-a-hipótese-nula"><span class="header-section-number">12.5.1</span> Construíndo a Hipótese Nula</a></li>
+  <li><a href="#o-teste-estatístico" id="toc-o-teste-estatístico" class="nav-link" data-scroll-target="#o-teste-estatístico"><span class="header-section-number">12.5.2</span> O Teste Estatístico</a></li>
+  <li><a href="#erro-tipo-i-ei-e-erro-tipo-ii-eii" id="toc-erro-tipo-i-ei-e-erro-tipo-ii-eii" class="nav-link" data-scroll-target="#erro-tipo-i-ei-e-erro-tipo-ii-eii"><span class="header-section-number">12.5.3</span> Erro Tipo I (EI) e Erro Tipo II (EII)</a></li>
+  <li><a href="#procedimento-geral-do-teste-de-hipótese" id="toc-procedimento-geral-do-teste-de-hipótese" class="nav-link" data-scroll-target="#procedimento-geral-do-teste-de-hipótese"><span class="header-section-number">12.5.4</span> Procedimento Geral do Teste de Hipótese</a></li>
+  <li><a href="#os-cinco-passos-para-a-contrução-do-teste-de-hipótese" id="toc-os-cinco-passos-para-a-contrução-do-teste-de-hipótese" class="nav-link" data-scroll-target="#os-cinco-passos-para-a-contrução-do-teste-de-hipótese"><span class="header-section-number">12.5.5</span> Os Cinco passos para a contrução do teste de hipótese</a></li>
+  <li><a href="#introdução-ao-teste-de-hipótese-de-duas-populações-de-médias" id="toc-introdução-ao-teste-de-hipótese-de-duas-populações-de-médias" class="nav-link" data-scroll-target="#introdução-ao-teste-de-hipótese-de-duas-populações-de-médias"><span class="header-section-number">12.5.6</span> Introdução ao Teste de Hipótese de Duas Populações (de Médias)</a></li>
+  <li><a href="#aplicação-prática-sobre-teste-de-hipótese" id="toc-aplicação-prática-sobre-teste-de-hipótese" class="nav-link" data-scroll-target="#aplicação-prática-sobre-teste-de-hipótese"><span class="header-section-number">12.5.7</span> Aplicação Prática sobre Teste de Hipótese</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/04-descricao-fenomeno.html">Parte IV — Descrição do fenômeno</a></li><li class="breadcrumb-item"><a href="../capitulos/P4C01-introducao-estatistica.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></h1>
+<p class="subtitle lead">Conceitos iniciais</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>Alexandre Nicolella </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Data de Publicação</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">12 de março de 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="porque-estudar-estatística" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="porque-estudar-estatística"><span class="header-section-number">12.1</span> Porque Estudar Estatística?</h2>
+<p>Podemos dizer que a existência da estatística e de outras ciências está conectada a existência de problemas. Não somente a ciência mas o nosso trabalho está conectado a superação de problemas cotidianos. Tomar decisão é o dia a dia do gestor.</p>
+<p>Segundo Popper “we study not disciplines, but problems. Often, problems transcend the boundaries of a particular discipline”</p>
+<p>A questão central é: Como solucionamos os problemas? Utilizamos a melhor estratégia? A solução foi boa?</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[PROBLEMA] --&gt; B[Estratégia de Decisão]
+  B --&gt; C{Solução é BOA?}
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<section id="os-dois-sistemas-cognitivos" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="os-dois-sistemas-cognitivos"><span class="header-section-number">12.1.1</span> Os dois sistemas cognitivos</h3>
+<p>Os livros abaixo são boas referências sobre a tomada de decisão.</p>
+<div class="quarto-layout-panel" data-layout="[30,-40,30]">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 30.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://a.co/d/ilbbxRJ"><img src="../figuras/kahneman.jpg" class="img-fluid figure-img" style="width:50.0%"></a></p>
+<figcaption>Kahneman: Rápido e Devagar- Duas Formas de Pensar</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-figure-spacer quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<p>&nbsp;</p>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 30.0%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.amazon.com.br/Processo-Decis%C3%B3rio-Max-Bazerman/dp/8535277110/"><img src="../figuras/bazerman.jpg" class="img-fluid figure-img" style="width:50.0%"></a></p>
+<figcaption>Bazerman e Moore: Processo Decisório</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>Existem dois sistemas que utilizamos para tomar decisão. O chamado <strong>Sistema 1</strong> e o chamado <strong>Sistema 2</strong>. Segue uma breve descrição de cada um:</p>
+<p><strong>Sistema 1</strong>:</p>
+<ul>
+<li>Intuitivo, rápido, automático, sem esforço, implícito e emocional
+<ul>
+<li>Pressa,</li>
+<li>Falta de tempo,</li>
+<li>Problemas menos importante</li>
+<li>Mais Falhas/Erros</li>
+</ul></li>
+</ul>
+<p><strong>Sistema 2</strong></p>
+<ul>
+<li>Raciocíonio lento, consciente, esforçado, explícito, lógico
+<ul>
+<li>Requer tempo,</li>
+<li>Mais recursos</li>
+<li>Problemas mais importante</li>
+<li>Menos Falhas</li>
+</ul></li>
+</ul>
+<p>Para o Sistema 1 usamos a nossa intuição que chamamos de Heurística. Vejamos um pouco mais sobre esse sistema.</p>
+<p><strong>HEURÍSTICA</strong></p>
+<p>São rotinas inconscientes ou atalhos que o nosso cérebro utiliza para lidar com a complexidade.</p>
+<ul>
+<li>Modelo/Regras Intuitivas.</li>
+<li>Próprio do Sistema 1.</li>
+<li>Apesar de processo sofisticado, são passíveis de falhas. Intuição falha</li>
+</ul>
+<p><u><strong>Um Exemplo</strong></u></p>
+<p>Veja a figura abaixo retirada do livro do Bazerman.Responda rápido.</p>
+<p><strong>Qual delas tem o tampo mais quadrado?</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figuras/mesa.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Bazerman: Exemplo das mesas</figcaption>
+</figure>
+</div>
+<p>Se você achou que é a segunda mesa, você está alinhado com a grande maioria. Nesse caso você usou o seu sistema 1</p>
+<p>Vamos repitir a pergunta:</p>
+<p><strong>Qual delas tem o tampo mais quadrado?</strong></p>
+<p>Agora use uma régua para medir as mesas. Usamos aqui o sistema 2. Mais tempo e recursos são utlizados. Qual mesa agora você considera mais quadrada? Mudou sua opinião?</p>
+<p>Com a régua vemos que as mesas são iguais. Isso mostra que a nossa intuição <strong>FALHA</strong>.</p>
+<p><strong>Tipos de Heurísticas</strong></p>
+<ul>
+<li><p><strong>Heurística da disponibilidade</strong>: Usamos o que está mais próximo na memória para calcular a probabilidade.</p></li>
+<li><p><strong>Heurística da representatividade</strong>: Buscamos aquilo que reforça o padrão.</p></li>
+<li><p><strong>Heurística da hipótese positiva</strong>: Assumimos que uma determinada hipótese é verdadeira e não olhamos o contrafactual.</p></li>
+<li><p><strong>Heurística do afeto</strong>: Decisão considera o emocional. Seu humor afetam as decisões.</p></li>
+</ul>
+<p>Para contornar os problemas da intuição e seus viéses na tomada de decisão o primeiro passo é compreender que eles existem e estarmos alerta. E para problemas maiores o uso do sistema 2 torna-se relevante.</p>
+<p>Uma das principais ferramentas do sistema 2 é a Estatística. Com os avanços computacionais essa ciência tem se destacado como um dos elementos centrais do <em>data science</em>. Abaixo a figura resume as diversas áreas de desenvolvimento da análise de dados, obviamente não exaustiva:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figuras/analisedados.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Fluxograma da Análise de Dados</figcaption>
+</figure>
+</div>
+<p>Nosso objetivo é explorar nessa seção a análise descritiva. Chamado hoje no <em>Business Intelligence</em>, que e uma das áreas do <em>Data Science</em>.</p>
+</section>
+</section>
+<section id="conceitos-básicos-de-estatística" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="conceitos-básicos-de-estatística"><span class="header-section-number">12.2</span> Conceitos Básicos de Estatística</h2>
+<p>Novamente começamos com um problema e esse definirá a nossa análise. Vejamos alguns problemas que poderiam nos interessar…</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Problema 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O prefeito de Ribeirão Preto vai lançar uma política que fornece vouchers de alimentação para mulheres que estão em situação de pobreza.</p>
+<p><strong>Problema</strong>: <u>Qual o valor que devo reservar ao programa? Quantas mulheres serão atendidas?</u></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Problema 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O TJSP vai lançar um programa para reduzir o tempo médio em processos de feminicídio.</p>
+<p><strong>Problema</strong>: <u>Qual o tempo médio de um processo de feminicídio?</u></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Problema 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>O O governo federal vai lançar um programa para capacitar mulheres que estão fora do mercado de trabalho.</p>
+<p><strong>Problema</strong>: <u>Quantas mulheres serão alvos dessa política?</u></p>
+</div>
+</div>
+<section id="a-população-e-suas-características" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="a-população-e-suas-características"><span class="header-section-number">12.2.1</span> A População e suas Características</h3>
+<p>O <strong>problema</strong> nos define a <strong>população</strong> que estou interessado. Vamos seguir, a princípio, com o nosso probelma 1 para definirmos alguns conceitos importantes.</p>
+<p><strong>No problema 1</strong>: me interessa compreender a renda das mulheres que moram em Ribeirão Preto em dado ano. Para ficar simples vamos abreviar o que nos interessa</p>
+<p><span class="math display">\[X=\text{Renda das mulheres que moram em Ribeirão Preto em determinado ano}\]</span> Agora posso utilizar o <strong>X</strong> no lugar do nome. Olhando para a população e pensando que cada nível de renda pode ser representada por uma cor, teremos a seguinte imagem pouco de como a renda se distribui nessa população:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figuras/lego.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Renda pc das mulheres de Ribeirão Preto.</figcaption>
+</figure>
+</div>
+<p>A questão é: quais cores existem e quantas peças de cada cor temos? Para isso usamos um experimento</p>
+<p><strong>EXPERIMENTO ALEATÓRIO</strong></p>
+<p>O experimento em ciências sociais aplicadas em geral está associada a observação sistemática de pessoas, cidades, empresas ou processos. A ideia é:</p>
+<ul>
+<li>Sortear pessoas e observar a sua caracteristica de forma indefinida e sempre na mesma condição.<br>
+</li>
+<li>Não consigo dizer o que vai sair no próximo sorteio, apenas consigo descrever os resultados possíveis</li>
+<li>Se repetir o experimento um número grande de vezes uma regularidade aparece.</li>
+</ul>
+<p>Se eu conseguir sortear de forma indefinida e na mesma condição as mulheres que moram em Ribeirão Preto e perguntar sobre a sua renda. Eu consigo reorganizar a figura acima da seguinte forma:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figuras/lego_org.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Renda pc das mulheres de Ribeirão Preto.</figcaption>
+</figure>
+</div>
+<p><strong>ESPAÇO AMOSTRAL</strong></p>
+<p>Agora conseguimos organizar os nossos resultados em um lugar chamado espaço amostral. Nele teremos todas as cores (azul, branca, amarela…) que podem acontecer e o número de peças de cada cor (a chance). Em outras palavras teremos todos os possíveis valores de <span class="math inline">\(X\)</span> e suas probabilidades.</p>
+<p><strong>VARIÁVEL ALEATÓRIA</strong></p>
+<p>Quanto representamos esse espaço amostral em formato de números é o que chamamos de Variável Aleatória (V.A.). A V.A. é a <strong>combinação de tudo que pode acontecer</strong>, ou seja, todas as rendas que existem <strong>associadas a probabilidade</strong> de cada uma das rendas acontecerem.</p>
+<p>Existem dois tipos principais de variáveis aleatórias: discretas e contínuas.</p>
+<p><strong>VARIÁVEIS ALEATÓRIAS DISCRETAS</strong></p>
+<p>É um tipo de variável que conseguimos colocar em lista, seja finita ou infinita <span class="math inline">\(x_1; x_2;...; x_n;...\)</span> e associa-se a cada um dessses valores uma probabilidade <span class="math inline">\(p(x_1); p(x_2);...; p(x_n);...\)</span></p>
+<p>Podemos pensar aqui se a pessoa é casada, solteira, divorciada, viúva ou outra condição. Se no processo classificamos como homicídio ou feminicídio, se é procedente ou improcedente, se mora na área urbana ou rural…</p>
+<p>Na figura abaixo iremos coletar de 20 processos de homicídio e gostariamos de saber quando é classificado como feminicídio e quanto é classificado como homicídio (p=0,3).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>feminicidio <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(feminicidio,<span class="fu">dbinom</span>(feminicidio,<span class="at">size=</span><span class="dv">20</span>,<span class="at">prob=</span>.<span class="dv">3</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">'h'</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">'Distribuição Binomial (n=20, p=0.3)'</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab=</span><span class="st">'Probabilidade'</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span><span class="st">'Feminicídio'</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="P4C01-introducao-estatistica_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="480"></p>
+<figcaption>Distribuição Normal</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>VARIÁVEIS ALEATÓRIAS CONTÍNUAS</strong></p>
+<p>Por outro lado, uma variável aleatória contínua pode assumir infinito valores dentro de um intervalo específico. Agora temos infinitas possibilidades de resultados para <span class="math inline">\(X\)</span> e agora associamos uma <strong>função <span class="math inline">\(f(x)\)</span> que irá descrever o comportamento da probabilidade</strong>.</p>
+<p>Por exemplo, a altura de uma pessoa, a sua renda, a sua idade, o <strong>tempo que demora um processo</strong>.</p>
+<p>Abaixo temos uma representação de uma distriuição continua da renda das mulheres em Ribeirão Preto, chamada distribuição normal:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="at">all.names =</span> <span class="cn">TRUE</span>)) <span class="co">#will clear all objects includes hidden objects.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="dv">700</span>,<span class="dv">1300</span>,<span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fdnorm<span class="ot">&lt;-</span><span class="fu">dnorm</span>(<span class="at">x =</span> x, <span class="at">mean =</span> <span class="dv">1000</span>, <span class="at">sd=</span><span class="dv">100</span>)  </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>fdanorm<span class="ot">&lt;-</span><span class="fu">pnorm</span>(<span class="at">q =</span> x, <span class="at">mean =</span> <span class="dv">1000</span>, <span class="at">sd=</span><span class="dv">100</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="dv">1000</span>,<span class="dv">100</span>),<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">700</span>,<span class="dv">1300</span>),<span class="at">main=</span><span class="st">''</span>,<span class="at">xaxt=</span><span class="st">"n"</span>,<span class="at">xlab=</span><span class="st">"Renda pc Mulheres"</span>, <span class="at">ylab=</span><span class="st">"f(x)"</span>,<span class="at">col=</span><span class="st">"darkblue"</span>,<span class="at">cex.axis=</span><span class="fl">0.65</span>, <span class="at">cex.lab=</span><span class="fl">0.8</span>) </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>,<span class="at">at=</span><span class="fu">c</span>(<span class="dv">900</span>, <span class="dv">1000</span>, <span class="dv">1100</span>),<span class="at">labels =</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="fu">c</span>(<span class="st">"-DP(X)"</span>,<span class="st">"E(x)"</span>,<span class="st">"DP(x)"</span>),<span class="at">cex.axis=</span><span class="fl">0.65</span>, <span class="at">cex.lab=</span><span class="fl">0.8</span>) </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">1000</span>),<span class="at">y=</span><span class="fu">c</span>(<span class="dv">0</span>,fdnorm[x<span class="sc">==</span><span class="dv">1000</span>]),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">"black"</span>) </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="dv">1100</span>,<span class="dv">1100</span>),<span class="at">y=</span><span class="fu">c</span>(<span class="dv">0</span>,fdnorm[x<span class="sc">==</span><span class="dv">1100</span>]),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">"black"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x=</span><span class="fu">c</span>(<span class="dv">900</span>,<span class="dv">900</span>),<span class="at">y=</span><span class="fu">c</span>(<span class="dv">0</span>,fdnorm[x<span class="sc">==</span><span class="dv">900</span>]),<span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">"black"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="P4C01-introducao-estatistica_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="480"></p>
+<figcaption>Distribuição Normal</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="esperança-e-variância" class="level4" data-number="12.2.1.1">
+<h4 data-number="12.2.1.1" class="anchored" data-anchor-id="esperança-e-variância"><span class="header-section-number">12.2.1.1</span> Esperança e Variância</h4>
+<p>O formato das distribuições vistas dependem principalmente de dois parâmetros: A <strong>esperança</strong> (média ponderada) que é uma medida de centralidade e a <strong>variância</strong> que é uma medida de dispersão.</p>
+<p><strong>ESPERANÇA</strong> - <span class="math inline">\(E(X)\)</span></p>
+<p>A <strong>esperança</strong> de uma variável aleatória ou média populacional representa o valor médio que se <strong>espera observar</strong> se o fenômeno fosse repetido muitas vezes sob as mesmas condições. Em outras palavras, é uma medida de tendência central que indica para onde os <strong>resultados tendem a convergir</strong> (a média). É definida como a média ponderada de todos os possíveis resultados de <span class="math inline">\(X\)</span>, onde os pesos são dados pelas probabilidades desses resultados ocorrerem.</p>
+<ul>
+<li>Qual o tempo médio de um processo de homicídio até a sentença?</li>
+<li>Qual a a média de procedência de processos relacionados à violência contra a mulher?</li>
+</ul>
+<div class="callout callout-style-simple callout-note callout-titled" title="Definição Formal">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Definição Formal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A esperança de <span class="math inline">\(X\)</span>, <span class="math inline">\(E(X)\)</span>, é calculada como:</p>
+<p><span class="math display">\[E(X) = \sum_{x} x \cdot P(X = x)\]</span></p>
+<p>para variáveis discretas.</p>
+<p><span class="math display">\[E(X) = \int_{-\infty}^{\infty} x \cdot f(x)\]</span></p>
+<p>para variáveis contínuas</p>
+</div>
+</div>
+</div>
+<p><strong>VARIÂNCIA POPULACIONAL</strong> - <span class="math inline">\(Var(X)\)</span></p>
+<p>A <strong>variância</strong> é uma medida que captura como os dados populacionais se <strong>dispersão em relação a sua média</strong> (ou esperança). Suponha que conhecemos o tempo de tramitação de processos judiciais. A Variância é uma medida que nos ajuda a entender o <strong>quão espalhados estão os tempos de cada processo em relação ao tempo médio</strong>. Como não importa se durou mais ou menos que a média, usamos a medida do <strong>desvio ao quadrado</strong>!</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="Definição Formal">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Definição Formal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A Variância é uma medida de desvio em relação a média, ao quadrado, definida como:</p>
+<p><span class="math display">\[Var(X) =\frac{1}{N} \sum_{1}^{N} (X_i-E(X))^2\]</span></p>
+<p>Ou podemos assim representar:</p>
+<p><span class="math display">\[\text{Var}(X) = E(X^2) - [E(X)]^2\]</span></p>
+</div>
+</div>
+</div>
+<p><strong>DESVIO PADRÃO POPULACIONAL</strong> - <span class="math inline">\(DP(X)\)</span></p>
+<p>A variância é uma medida ao quadrado. Se estamos falando da renda seria uma medida da dispersão ao quadrado, ou seja, em <span class="math inline">\(R\$^{2}\)</span>, se for o tempo, <span class="math inline">\(T^{2}\)</span>. Para retornar a unidade original usamos a raiz quadrada da variância, que chamamos de desvio padrão.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="Definição Formal">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Definição Formal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>O desvio padrão é a raiz quadrada da variância:</p>
+<p><span class="math display">\[DP(X)=\sqrt{Var(X)}\]</span></p>
+</div>
+</div>
+</div>
+<p><strong>EXEMPLO</strong></p>
+<p>Vejamos o que acontece quando mudamos a esperança e o desvio padrão.</p>
+<ul>
+<li>No gráfico em azul temos a esperança igual a 10 e devio padrão de 2,5.</li>
+<li>No gráfico em vermelho temos esperança de 20 e desvio padrão de 10.</li>
+<li>E no grafico em verde temos esperança de 10 e desvio padrão de 1.</li>
+</ul>
+<p>Nota-se que quanto menor o desvio padrão mais concentrados são os valores que podem acontecer.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">10</span>,<span class="at">sd=</span><span class="fu">sqrt</span>(<span class="fl">2.5</span>)),<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.0</span>,<span class="fl">0.4</span>),<span class="at">xaxs=</span><span class="st">"i"</span>,<span class="at">yaxs=</span><span class="st">"i"</span>,<span class="at">ylab=</span><span class="st">""</span>, <span class="at">col=</span><span class="st">"darkblue"</span>) </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">new=</span>T)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">20</span>,<span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">10</span>)),<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.0</span>,<span class="fl">0.4</span>),<span class="at">xaxs=</span><span class="st">"i"</span>,<span class="at">yaxs=</span><span class="st">"i"</span>,<span class="at">ylab=</span><span class="st">""</span>, <span class="at">col=</span><span class="st">"darkred"</span>) </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">new=</span>T)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="at">mean=</span><span class="dv">20</span>,<span class="at">sd=</span><span class="fu">sqrt</span>(<span class="dv">1</span>)),<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">30</span>),<span class="at">ylim=</span><span class="fu">c</span>(<span class="fl">0.0</span>,<span class="fl">0.4</span>),<span class="at">xaxs=</span><span class="st">"i"</span>,<span class="at">yaxs=</span><span class="st">"i"</span>,<span class="at">ylab=</span><span class="st">""</span>, <span class="at">col=</span><span class="st">"darkgreen"</span>) </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="P4C01-introducao-estatistica_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Médias e desvios distintos entre distribuições</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="variáveis-aleatórias-bidimensionais" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="variáveis-aleatórias-bidimensionais"><span class="header-section-number">12.2.2</span> Variáveis Aleatórias Bidimensionais</h3>
+<p>Muito provavelmente nos interessa observar mais de uma característica de um experimento. Por exemplo, não somente a renda das mulheres em Ribeirão Preto nos interessa, mas o seu consumo alimentar também julgamos importante para o projeto.</p>
+<p>Portanto, queremos observar duas características de forma simultânea das mulheres: sua renda e seu consumo alimentar. Ou seja, duas características simultaneamente do mesmo experimento <span class="math inline">\(\epsilon\)</span> que foi observar as mulheres no município.</p>
+<p>Apesar de termos coletados duas informações, temos na realidade três informações. A informação da renda, a informação do consumo alimentar e a informação de como renda e consumo alimentar interagem.</p>
+<p><strong>VISUALIZAÇÃO GRÁFICA</strong></p>
+<p>Vejamos agora um exemplo de variável aleaória bidimensional:</p>
+<p><strong>Normal Bivariada</strong>:</p>
+<p>Abaixo tem-se uma variável aleatória <span class="math inline">\((X,Y)\)</span> com distribuição normal bivariada com a esperança de <span class="math inline">\(X\)</span> igual a 1, de <span class="math inline">\(Y\)</span> igual a 0, o desvio-padrões iguais a 3 e 2 respectivamente. Aqui consideremaos a correlação de 1 (veremos mais a frente esse conceito)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mnormt)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Para tornar reproduzível</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#cCriando a normal bivariada</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>x     <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="fl">0.1</span>) </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>y     <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="fl">0.1</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>mu    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="at">nrow=</span><span class="dv">2</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>f     <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) <span class="fu">dmnorm</span>(<span class="fu">cbind</span>(x, y), mu, sigma)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>z     <span class="ot">&lt;-</span> <span class="fu">outer</span>(x, y, f)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Criando um gráfico de superfície</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">persp</span>(x, y, z, <span class="at">theta=</span><span class="sc">-</span><span class="dv">30</span>, <span class="at">phi=</span><span class="dv">25</span>, <span class="at">expand=</span><span class="fl">0.6</span>, <span class="at">ticktype=</span><span class="st">'detailed'</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="P4C01-introducao-estatistica_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Normal Bivariada</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Surge aqui um conceito importante que tenta medir como as características da população se relacionam - uma medida do relacionamento. Assim:</p>
+<p><u>O que acontece com o consumo de alimentos quando a renda das mulheres sobem?</u></p>
+<section id="covariância-e-correlação" class="level4" data-number="12.2.2.1">
+<h4 data-number="12.2.2.1" class="anchored" data-anchor-id="covariância-e-correlação"><span class="header-section-number">12.2.2.1</span> Covariância e Correlação</h4>
+<p>Duas medidas que tentam mensurar o “grau de associação” linear entre X e Y são:</p>
+<p><strong>COVARIÂNCIA</strong></p>
+<p>A <strong>covariância</strong> mede como duas variáveis se <strong>movem conjuntamente</strong>. Quando <strong>uma aumenta</strong> e a outra <strong>tende a aumentar</strong> também, a <strong>covariância é positiva</strong>. Quando <strong>uma cresce</strong> e a outra <strong>tende a diminuir</strong>, a <strong>covariância é negativa</strong>. Em outras palavras, ela indica o sentido da associação entre as variáveis, se caminham na mesma direção ou em direções opostas.</p>
+<p>Por exemplo, podemos observar a covariância entre renda e consumo: quando a renda aumenta, o consumo normalmente também aumenta, indicando uma covariância positiva.</p>
+<p>Entretanto, a covariância é expressa nas unidades originais das variáveis (por exemplo, em reais e porcentagem), o que dificulta a comparação entre diferentes pares de variáveis.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="Definição Formal">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Definição Formal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A covariância pode ser assim medida:</p>
+<p><span class="math display">\[Cov(X,Y)=E[(X-E(X))(Y-E(Y))]= E(X.Y)-E(X).E(Y)\]</span></p>
+</div>
+</div>
+</div>
+<p><strong>CORRELAÇÃO</strong></p>
+<p>Para contornar o problema das diferentes unidades de medida, utilizamos a <strong>correlação</strong>, que é uma versão <strong>padronizada da covariância</strong>. Isto é, a covariância é <strong>dividida pelo desvios padrões</strong> das variáveis envolvidas. Ela mede a força e direção da <strong>relação linear</strong> entre duas variáveis, mas varia sempre entre –1 e 1, sem unidade de medida. Assim, uma correlação próxima de <strong>1</strong> indica associação positiva perfeita, <strong>–1</strong> associação negativa perfeita, e <strong>0</strong> ausência de relação linear.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="Definição Formal">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Definição Formal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A correlação pode ser assim medida:</p>
+<p><span class="math display">\[\rho_{X,Y}=\frac{E[(X-E(X))(Y-E(Y))]}{\sqrt{Var(X)Var(Y)}}=\frac{Cov(X,Y)}{DP(X).DP(Y)}\]</span></p>
+</div>
+</div>
+</div>
+<p><strong>Atenção</strong></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Correlação
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A correlação mede o <strong>GRAU DE ASSOCIAÇÃO LINEAR</strong>. Associações não lineares não são capturadas pela correlação.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Interpretando a Correlação
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A correlação <span class="math inline">\(\rho_{X,Y}\)</span> varia de -1 até 1. Sendo que:</p>
+<p><span class="math inline">\(\rho\)</span> próximo a 1 e -1 indicam alto grau de linearidade e <span class="math inline">\(\rho\)</span> próximo a 0 indica ausência de relação linear - mas não diz nada sobre relações não-lineares.</p>
+</div>
+</div>
+<p><strong>VISUALIZAÇÃO GRÁFICA</strong></p>
+<p>Veja no gráfico abaixo que a variável 4 e 5 possuem correlação perfeita, igual a -1. E as variáveis 3 e 1 não possuem grau de associação linear, correlação próxima a 0.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="P4C01-introducao-estatistica_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption>Gráfico de correlação para variáveis simuladas v1 a v5</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="conceitos-básicos-inferência-estatística" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="conceitos-básicos-inferência-estatística"><span class="header-section-number">12.3</span> Conceitos Básicos Inferência Estatística</h2>
+<p>Dado a nossa pergunta ou problema, <strong>gostariamos de saber as carcateística de uma população</strong>.</p>
+<p>Entretantom um <strong>processo de levantamento</strong> de informações é em geral <strong>caro</strong> e em muitas situações é destrutivo. Em ciências sociais estamos interessados em características de pessoas, empresas, municípios, estados, países etc. Não é destrutivo mas é uma coleta cara. Por exemplo, o Censo demográfico de 2010 custou R$ 1,3 bilhões, ou aproximadamente R$ 2,2 bi em reais de 2020. O valor é de aproximadamente R$ 35,00 por domicílio.</p>
+<p>Dessa forma <strong>nosso objetivo</strong> aqui é:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Objetivo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A partir de uma amostra da população realizar inferência sobre toda a população</p>
+</div>
+</div>
+<section id="exemplos-do-príncipio-no-dia-a-dia" class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="exemplos-do-príncipio-no-dia-a-dia"><span class="header-section-number">12.3.1</span> Exemplos do príncipio no dia a dia</h3>
+<p>Pense nessas situações:</p>
+<ul>
+<li><strong>Glicose</strong>: Para medir a glicose muitos pacientes usam uma gota de sangue e um pequeno aparelho. A partir dele sabem quanto tem no corpo todo, basta uma gota para termos boa certeza de quanto é taxa de glicose!</li>
+<li><strong>Sal</strong>: Para saber se a quantidade de sal está adequada em uma grande panela de arroz, basta uma pequena colher de chá para termos uma boa certeza!</li>
+<li><strong>Doçura</strong>: Abacaxis às vezes são vendidos em caminhões na rua. Quando paramos provamos e são doces. Compramos 4 por 10. Qual a certeza que esses que vc está levando estejam também doces? É diferente das situações anteriores?</li>
+</ul>
+<p>Com certeza vc deve ter pensado que essas situações tem grau de certeza variáveis. A diferença está em <strong>quão homogênea</strong> é a característica na população, o sal no arroz e a glicose no sangue devem ser muito bem distribuidas, ou seja, bem homogêneas. Já a doçura no abacaxi deve ter distribuição maior e provar apenas um abacaxi não nos dá uma ideia do todo.</p>
+<p>Esse é um <strong>erro muito comum</strong>, <u>a partir de uma ou poucas observações dizer que o todo se comporta da mesma maneira</u> , esse erro se agrava quando maior é a heterogeneidade!!!</p>
+</section>
+<section id="população-amostra-parâmetros-e-estimadores" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="população-amostra-parâmetros-e-estimadores"><span class="header-section-number">12.3.2</span> População, Amostra, Parâmetros e Estimadores</h3>
+</section>
+<section id="população-e-amostra" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="população-e-amostra"><span class="header-section-number">12.3.3</span> População e amostra</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[POPULAÇÃO] --&gt; B[Totalidade das observações sob Investigação]
+  A --&gt; C[AMOSTRA]
+  C --&gt; D[Subconjunto da População]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>A <strong>definição da população depende da pergunta de pesquisa</strong> ou análise. Se queremos saber qual o salário médio dos empregados do setor industrial no estado de São Paulo para determinado ano, nossa população são todos os funcionários das indústrias instaladas no estado de São Paulo para esse ano. Se queremos os determinantes do desempenho escolar dos alunos do ensino fundamental no Brasil em 2019, nossa população será esse grupo de alunos nesse ano. Se quisermos avaliar o gasto municipal no ano anterior as eleições no Brasil, temos nossa população formada pelos municípios para o ano de análise.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Dica</span>População
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Quem define a população é o objetivo do seu trabalho!! Ou seja, seu problema de pesquisa</p>
+</div>
+</div>
+</section>
+<section id="amostragem-aleatória-simples" class="level3" data-number="12.3.4">
+<h3 data-number="12.3.4" class="anchored" data-anchor-id="amostragem-aleatória-simples"><span class="header-section-number">12.3.4</span> Amostragem Aleatória Simples</h3>
+<p>Existem <strong>várias maneiras de fazer uma análise aleatória</strong>, uma delas é a simples. Vejamos primeiro um processo de amostragem não aleatório e que possui tendenciosidade. A figura abaixo mostra esse processo de amostragem errado:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figuras/bias.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Um processo de amostragem viesádo. Fonte:Data Basecamp</figcaption>
+</figure>
+</div>
+<p>Observa-se que existe uma <strong>supervalorização do vermelho</strong> e uma subvalorização do azul. Chegariamos a conclusão, caso isso fosse uma pesquisa eleitoral, que o candidato vermelho, segunda amostra teria mais chance de ganhar e o azul quase nenhuma chance. O que não condiz com a população. Dizemos que temos uma <strong>amostra viesada ou tendenciosa</strong>.</p>
+<p>Um processo de <strong>amostragem aleatório</strong> requer que as <strong>características presentes na população estejam presentes na amostras</strong> e estejam balanceadas, ou seja, que a <u>sua leitura represente bem o todo</u>.</p>
+</section>
+</section>
+<section id="estatística-e-parâmetro" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="estatística-e-parâmetro"><span class="header-section-number">12.4</span> Estatística e Parâmetro</h2>
+<p><strong>PARÂMETROS</strong></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[PARÂMETRO] --&gt; B[Medida que descreve uma característica da população]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Os <strong>parâmetros</strong> definem as <strong>características de uma população</strong>. Qual a renda média da população, qual o desemprego médio da população, qual o desempenho médio educacional, qual a expectativa de vida média na população, qual o tempo médio de processos de homicídios etc. São características que em geral <strong>não observamos</strong>.</p>
+<p>Uma pergunta, <strong>qual o tempo médio de um processo de feminicídio até a sentença?</strong> Perceba que mesmo características da população que conhecemos muitas vezes são não observadas. Temos que nos valer de <strong>uma parte</strong> e tentar <strong>estimar</strong> o que seriam os valores dessas características.</p>
+<p><strong>ESTATÍSTICAS</strong></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[ESTATÍSTICA] --&gt; B[Medida que descreve uma característica da amostra]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Vamos supor que <strong>coletamos mil processos judiciais</strong> para analisar o tempo de tramitação até a sentença. <strong>Cada processo representa uma realização de da variável aleatória</strong>, neste caso, o tempo necessário para que o processo tenha sentença. Esses processos pertencem a uma população maior de todos os processos existentes, e o que observamos é apenas uma amostra dessa população.</p>
+<p>A partir dessas <strong>observações amostrais</strong>, calculamos <strong>estatísticas</strong>, que são <strong>resumos numéricos</strong> dos dados amostrais, como médias, proporções, desvios, mínimos ou máximos. Essas estatísticas descrevem a amostra que temos em mãos. São estimativas dos parâmetros populacionais, que são os valores verdadeiros (e geralmente desconhecidos) da população como um todo.</p>
+<p>É importante notar, porém, que se repetíssemos o mesmo procedimento de coleta com outros mil processos, provavelmente obteríamos valores diferentes de médias e desvios. Isso ocorre porque as estatísticas variam de amostra para amostra.</p>
+<div class="callout callout-style-simple callout-note callout-titled" title="Definição Formal">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Definição Formal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Sejam <span class="math inline">\(x_1, x_2,..., x_{n}\)</span> os valores medidos a cada para cada medição de <span class="math inline">\(X\)</span>. Podemos definir uma estatística como:</p>
+<p><span class="math display">\[ t= H (x_1, x_2, ..., x_{n})\]</span></p>
+<p>Alguns exemplos de T:</p>
+<p><span class="math display">\[ \text{Média}: \ \overline{x}=\frac{\sum_{i=1}^{n} x_i}{n}\]</span></p>
+<p><span class="math display">\[ \text{Variância:} \ s^{2}= \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \overline{x})^{2} \]</span></p>
+<p><span class="math display">\[ x_{(1)}: Min\{x_1, ..., x_n\}\]</span></p>
+</div>
+</div>
+</div>
+<p>Vejamos a tabela abaixo que já faz uma primeira <strong>associação entre estatística e parâmetro</strong>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 26%">
+<col style="width: 22%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parâmetro</th>
+<th></th>
+<th>Estatística</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Esperança</td>
+<td><span class="math inline">\(E(X)=\mu\)</span></td>
+<td><span class="math inline">\(\bar{X}\)</span></td>
+<td>Média</td>
+</tr>
+<tr class="even">
+<td>Variância Pop.</td>
+<td><span class="math inline">\(Var(X)=\sigma^2\)</span></td>
+<td><span class="math inline">\(S^2;\sigma^2\)</span></td>
+<td>Variância Amostral</td>
+</tr>
+<tr class="odd">
+<td>Mediana Pop.</td>
+<td>Md</td>
+<td>md</td>
+<td>Mediana Amostral</td>
+</tr>
+<tr class="even">
+<td>Proporção Pop.</td>
+<td>p</td>
+<td><span class="math inline">\(\hat{p}\)</span></td>
+<td>Proporção Amostral</td>
+</tr>
+</tbody>
+</table>
+<p><span data-caption="TRUE">Tabela 1 - Parâmetros populacionais e as Estatísticas associadas</span></p>
+<p>Como regra geral, os parâmetros são representados por letras gregas e as estatística com letras do nosso alfabeto (latino) ou letra grega com com chapéu para indicar que é uma estatística.</p>
+<p><strong>ESTIMADORES</strong></p>
+<p>Um <strong>estimador é uma estatística</strong> calculada a partir da amostra que é usada para <strong>estimar um parâmetro desconhecido da população</strong>. Nos permitem fazer inferências sobre os parâmetros com base nos dados amostrais. Por exemplo, a média amostral é um estimador da média populacional, e a proporção amostral é um estimador da proporção populacional.</p>
+</section>
+<section id="teste-de-hipotese-parâmetros." class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="teste-de-hipotese-parâmetros."><span class="header-section-number">12.5</span> Teste de Hipotese (Parâmetros).</h2>
+<p>Algumas vezes gostariamos de testar se uma <strong>teoria é verossímil</strong> com a realidade ou mesmo testar <strong>teorias diferentes</strong> e verificar qual seria a <strong>mais plausível</strong> com base na realidade.</p>
+<p>Dessa forma, gostariamos de testar se uma <em>hipótese</em> sobre a população é mais plausível, ou seja, se os dados amostrais trazem evidências que apoiam ou não essa hipótese. Por exemplo:</p>
+<ul>
+<li>Verificar se um determinado medicamento não tem efeito sobre a mortalidade causada por um determinado virus ou se possui efeito.</li>
+<li>Verificar se a quantidade de gordura anunciado pelo fabricante de um produto realmente está correta ou é maior.</li>
+<li>Se a afirmativa de um canditado de que possui a maioria dos votos é verdadeira ou é menor.</li>
+<li>Verificar se as rendas entre duas comunidades são as mesmas para podermos lançar uma política de apoio</li>
+<li>Verifcar se uma política do aumento do recurso as empresas não afeta falência ou se tem efeito.</li>
+<li>se o tempo médio de encaminhamento e deferimento de medida protetiva de urgência é menor do que 48 horas em casos de violência doméstica e familiar contra a mulher.</li>
+</ul>
+<p>Aqui faremos algo muito parecido a <strong>presunção de inocência</strong>, assumimos que a pessoa ou empresa é <strong>“inocente”</strong>.</p>
+<ul>
+<li>O medicamento não tem efeito,</li>
+<li>O teor de gordura está certo,</li>
+<li>O candidato tem maioria,</li>
+<li>As comunidades possuem a mesma renda,</li>
+<li>O recurso financeiro não afeta o número de falências</li>
+<li>O deferimento ocorre em até 48h.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="A Intuição">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>A Intuição
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Partimos da premissa de que a <strong>hipótese inicial é a correta</strong> e tentamos verificar com os fatos (dados amostrais) se essa hipótese colocada <strong>é verossímil</strong>.</p>
+</div>
+</div>
+<section id="construíndo-a-hipótese-nula" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="construíndo-a-hipótese-nula"><span class="header-section-number">12.5.1</span> Construíndo a Hipótese Nula</h3>
+<p>Imaginemos o seguinte caso. Um estudo sobre a eficiência do Judiciário sugere que a duração média de um determinado tipo de processo na Justiça Federal é de <strong>600 dias</strong>. No entanto, advogados e operadores do direito argumentam que, na prática, esse tempo pode ser maior devido a atrasos processuais e recursos frequentes. A questão é: a estimativa oficial está correta ou os operadores do direito têm razão?</p>
+<p>Dessa forma, temos duas hipóteses distintas:</p>
+<ul>
+<li>A primeira afirma que o tempo médio de duração do processo, <span class="math inline">\(\mu\)</span>, é de <strong>600 dias</strong>,</li>
+<li>A segunda sugere que a duração real é superior a <strong>600 dias</strong>.</li>
+</ul>
+<p>Vamos assumir que a estimativa oficial está correta até que se prove o contrário, e chamaremos essa afirmativa de <strong>hipótese nula</strong> (<span class="math inline">\(H_0\)</span>):</p>
+<p><span class="math display">\[H_0: \quad \mu = 600 \text{ dias}\]</span></p>
+<p>Já a hipótese alternativa (<span class="math inline">\(H_1\)</span>), que representa a teoria concorrente dos operadores do direito, sugere que a média real de duração do processo é maior:</p>
+<p><span class="math display">\[ H_1: \quad \mu &gt; 600 \text{ dias}\]</span></p>
+<p>Nosso problema, então, é decidir se devemos <strong>aceitar ou rejeitar a hipótese nula</strong> <span class="math inline">\(H_0\)</span> (de que o tempo médio é de <strong>600 dias</strong>) em favor da hipótese alternativa <span class="math inline">\(H_1\)</span>, que afirma que os processos, na realidade, levam <strong>mais tempo</strong> para serem concluídos.</p>
+<p>Juntas:<br>
+<span class="math display">\[H_0: \quad \mu = 600\]</span> <span class="math display">\[H_1: \quad \mu &gt; 600\]</span></p>
+<p>Esse modelo pode ser aplicado utilizando dados reais de processos judiciais para verificar se a alegação dos operadores do direito se sustenta estatisticamente.</p>
+</section>
+<section id="o-teste-estatístico" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="o-teste-estatístico"><span class="header-section-number">12.5.2</span> O Teste Estatístico</h3>
+<p><em>Qual dessas duas hipóteses é mais plausível?</em></p>
+<p>Para isso devemos nos valer de um processo de amostragem, onde faremos <span class="math inline">\(n\)</span> medições do tempo médio dos processos (que chamaremos de X) e obteremos os valores em dias do tempo médio de cada processo amostrado <span class="math inline">\(x_1, x_2,...x_n\)</span>. Processo 1, <span class="math inline">\(x_1\)</span>, demorou 580 dias, processo 2, <span class="math inline">\(x_2\)</span>, demorou 720 dias, e assim por diante.</p>
+<p>Com base na amostra devemos realizar algum tipo de cálculo que nos permite inferir se rejeitamos ou não <span class="math inline">\(H_0\)</span>, se é plausível ou não a hipótese colocada. Isso é o que chamamos de teste estatístico. Um exemplo é a média amostral:</p>
+<p><span class="math display">\[\bar{X} = \frac{\sum_i^n(X_i)}{n}\]</span></p>
+<ul>
+<li><strong>Questão</strong>: quais valores de <span class="math inline">\(\bar{X}\)</span> são típicos se <span class="math inline">\(H_0\)</span> for verdadeira?</li>
+</ul>
+<div class="callout callout-style-simple callout-note callout-titled" title="Definição Formal">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Definição Formal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Considere uma amostragem de tamanho <span class="math inline">\(n\)</span>, sendo <span class="math inline">\(X_1, X_2, ..., X_n\)</span> as <span class="math inline">\(n\)</span> medições, e <span class="math inline">\(x_1, x_2,...x_n\)</span> os valores obtidos nessas medições. Um teste estatístico é uma estatística <span class="math inline">\(T\)</span> calculada a partir dos valores amostrais: <span class="math display">\[T = h(X_1,X_2, . . .,X_n)\]</span></p>
+<p>Que terá o seguinte valor com base na amostra observada:</p>
+<p><span class="math display">\[t = h(x_1,x_2, . . .,x_n)\]</span></p>
+<p>Decidindo qual o <span class="math inline">\(T\)</span> utilizar, ou seja, a função <span class="math inline">\(h\)</span> que será aplicado aos valores da amostra, devemos compreender qual é a distribuição dessa estatística sob a condição de que a hipótese <span class="math inline">\(H_0\)</span> for a verdadeira.</p>
+</div>
+</div>
+</div>
+<p><strong>A Intuição</strong></p>
+<p>Vejamos no nosso exemplo, gostariamos de verificar a hipótese de que a esperança do tempo médio, <span class="math inline">\(\mu\)</span> é de 600 dias. Como já vimos uma boa alternativa de teste estatístico poderia ser a média, <span class="math inline">\(\bar{X}\)</span>. Assim o teste estatístico seria:</p>
+<p><span class="math display">\[\bar{X} = \frac{\sum_i^n(X_i)}{n}\]</span></p>
+<p>Com base na amostra observada <span class="math inline">\(x_1, x_2, ..., x_3\)</span> poderiamos obter a estimativa do tempo médio, ou seja, <span class="math inline">\(\bar{x}\)</span>. Como saber se essa média calculada nos traz mais evidência a favor de <span class="math inline">\(H_0\)</span> ou <span class="math inline">\(H_1\)</span>? Veja a Figura abaixo para pensarmos no problema.</p>
+<p>A figura considera o estimador <span class="math inline">\(\bar{X}\)</span>. A esquerda temos os valores do estimador que atestam que a hipótese <span class="math inline">\(H_0\)</span> é a mais plausível, quando mais próxima a estimativa de 600 maior evidência que <span class="math inline">\(H_0\)</span> é verdadeira. Ao caminhar para a direita, os valores do estimador se distanciam de 600, e mais evidência de que <span class="math inline">\(H_0\)</span> não é plausível.</p>
+<p>Dessa forma, precisamos de um ponto no qual (interrogação na figura) onde valores menores do estimador são favoráveis a hipótese nula e valores maiores são mais favoráveis a hipótese alternativa. Por exemplo, se no nosso processo de amostragem obtivemos a estimativa de <span class="math inline">\(\bar{x}=700\)</span>, isso é mais favorável a <span class="math inline">\(H_0\)</span> ou <span class="math inline">\(H_1\)</span>?</p>
+<center>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figuras/testehipot1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Teste de Hipótese - intuição </figcaption>
+</figure>
+</div>
+</center>
+<p><strong>Encontrando os Valores Típicos sob <span class="math inline">\(H_0\)</span></strong></p>
+<p>Para saber qual seriam os <strong>valores típicos</strong> do estimador <span class="math inline">\(\bar{X}\)</span> sob <span class="math inline">\(H_0\)</span> imagine que a população <span class="math inline">\(X\)</span> seja <span class="math inline">\(N(600,100^2)\)</span>, ou seja, tem esperança 600 e desvio padrão populacional de 100. Essa é a afirmação da Justiça Federal, ou seja, nosso <span class="math inline">\(H_0\)</span>.</p>
+<p>Por definição sabemos que o estimador <span class="math inline">\(\bar{X}\)</span> terá uma distribuição (essa nos fornece os valores típicos sob <span class="math inline">\(H_0\)</span>) dada por:</p>
+<p><span class="math display">\[N(600,\frac{100^2}{n})\]</span>.</p>
+<p>Supondo que retiramos uma amostra de 25 processos, logo os valores típicos do estimador sob <span class="math inline">\(H_0\)</span> são <span class="math inline">\(N(600,\frac{100^2}{25})\)</span>. Vejamos abaixo a simulação do estimador <span class="math inline">\(\bar{X}\)</span>, os valores típicos para esse caso, e onde se encontra o valor de 700.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="dv">500</span>,<span class="dv">700</span>,<span class="fl">0.1</span>) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fdnorm<span class="ot">&lt;-</span><span class="fu">dnorm</span>(<span class="at">x =</span> x, <span class="at">mean =</span> <span class="dv">600</span>, <span class="at">sd=</span><span class="dv">20</span>)   </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>regiao<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">560</span>,<span class="dv">640</span>,<span class="fl">0.01</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>cord.x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">min</span>(regiao),regiao,<span class="fu">max</span>(regiao))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>cord.y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">dnorm</span>(regiao,<span class="at">mean=</span><span class="dv">600</span>, <span class="at">sd=</span><span class="dv">20</span>),<span class="dv">0</span>) </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="dv">600</span>,<span class="dv">20</span>),<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">500</span>,<span class="dv">700</span>),<span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">bar</span>(x)),<span class="at">type=</span><span class="st">"l"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">col=</span><span class="st">"steelblue4"</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">ylab=</span><span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"f("</span>, <span class="fu">bar</span>(x),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">")"</span>)),<span class="at">xaxt=</span><span class="st">"n"</span>,<span class="at">cex.axis=</span><span class="fl">0.65</span>, <span class="at">cex.lab=</span><span class="fl">0.8</span> ) </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>,<span class="at">at=</span><span class="fu">c</span>(<span class="dv">500</span>,<span class="dv">540</span>,<span class="dv">560</span>,<span class="dv">580</span>, <span class="dv">600</span>, <span class="dv">620</span>, <span class="dv">640</span>,<span class="dv">660</span>, <span class="dv">700</span>),<span class="at">labels =</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">c</span>(<span class="dv">500</span>,<span class="dv">540</span>,<span class="dv">560</span>,<span class="dv">580</span>, <span class="dv">600</span>, <span class="dv">620</span>, <span class="dv">640</span>,<span class="dv">660</span>, <span class="dv">700</span>),<span class="at">cex.axis=</span><span class="fl">0.7</span>, <span class="at">cex.lab=</span><span class="fl">0.8</span>) </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(cord.x,cord.y,<span class="at">col=</span><span class="st">'lightgray'</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">600</span>, <span class="at">col=</span><span class="st">"steelblue4"</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">602</span>, <span class="fl">0.001</span>, <span class="fu">expression</span>(mu))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="P4C01-introducao-estatistica_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Valores típicos da distribuiçao da média sob H0</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>No centro temos a <span class="math inline">\(E(\bar{X})=\mu=600\)</span>. Observamos que para o tamanho amostral que retiramos e sob <span class="math inline">\(H_0\)</span> os <strong>valores típicos</strong> oscilam mais ou menos entre <strong>560 e 640 - dois desvios padrão para cima e para baixo</strong> (lembrem-se que nesse intervalo temos mais de 95% das observaçoes).</p>
+<p>Quanto retiramos a amostra e calculamos o valor da média obtivemos <span class="math inline">\(\bar{x}=700\)</span>. Observe no gráfico acima onde está o valor de 700, muita a frente e notamos claramente que a probabilidade de obtermos esse valor de média com uma amostra retirada da população <span class="math inline">\(N(600,100^2)\)</span>, é praticamente 0.</p>
+<p>Portanto, existem evidências de que essa amostra não veio de uma população conforme descrita pela Justiça Federal e sim de processos com tempo médio (esperança) maior do que 600. Portanto, dizemos que rejeitamos <span class="math inline">\(H_0\)</span>.</p>
+</section>
+<section id="erro-tipo-i-ei-e-erro-tipo-ii-eii" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="erro-tipo-i-ei-e-erro-tipo-ii-eii"><span class="header-section-number">12.5.3</span> Erro Tipo I (EI) e Erro Tipo II (EII)</h3>
+<p>Aqui precisamos distinguir duas ideias, a primeiro é a existência da verdadeira população e a segunda é o que achamos ser a verdadeira população com base na análise que fizemos. Aqui surge o que chamamos de erro estatístico. Não temos como fugir dele, somente controlá-lo. Vejamos a tabela abaixo que resume as possibilidades:</p>
+<div id="tab-erro">
+<table class="caption-top table">
+<caption>Tipos de Erros em Estatística, EI e EII.</caption>
+<thead>
+<tr class="header">
+<th>A Decisão</th>
+<th>(<span class="math inline">\(H_0\)</span>) é verdadeiro</th>
+<th>(<span class="math inline">\(H_1\)</span>) é verdadeiro</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rejeitar (<span class="math inline">\(H_0\)</span>)</td>
+<td>Erro Tipo I (EI)</td>
+<td>Correto</td>
+</tr>
+<tr class="even">
+<td>Não Rejeitar (<span class="math inline">\(H_0\)</span>)</td>
+<td>Correto</td>
+<td>Erro Tipo II (EII)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Observe que a nossa decisão pode incorrer em dois erros diversos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Erro Tipo I e Erro Tipo II">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Erro Tipo I e Erro Tipo II
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Erro Tipo I e Erro Tipo II</strong></p>
+<p><em>Erro Tipo I (EI)</em>: ocorre quando “indevidamente” rejeitamemos <span class="math inline">\(H_0\)</span>. Nesse caso <span class="math inline">\(H_0\)</span> era verdadeira e rejeitamos.\</p>
+<p><em>Erro Tipo II (EII)</em>: ocorre quando “indevidamente” não rejeitamos <span class="math inline">\(H_0\)</span>. Nesse caso não rejeitamos <span class="math inline">\(H_0\)</span> e na verdade <span class="math inline">\(H_1\)</span> é verdadeira.</p>
+</div>
+</div>
+<p>O primeiro erro é o chamado na literatura médica de falso negativo, ou seja, classifica a pessoa não portadora da doença (negativa) e na verdade ela possui.</p>
+<p>O segundo tipo é o falso positivo, onde classifica-se a pessoa com a doença quando na realidade ela não possui.</p>
+<p>Nosso desafio agora é estabelecer um critério de decisão, o ponto a partir do qual dizemos que <span class="math inline">\(H_0\)</span> não parece mais provável (Figura Teste de Hipótese - Intuição). Essa chamaremos de região crítica ou de rejeição.</p>
+<ul>
+<li>EI <span class="math inline">\((\alpha)\)</span>- Dizer que o tempo médio é maior que 600, quando na realizadade ela é de 600.</li>
+<li>EII <span class="math inline">\((\beta)\)</span>- Dizer que tempo médio é de 600 quando na realidade ela é maior do que 600.</li>
+</ul>
+<p>Vamos retomar o nosso exemplo. Foi retirada uma amostra de <span class="math inline">\(n=25\)</span> processos e por definição a distribuição de <span class="math inline">\(\bar{X}\)</span> sob <span class="math inline">\(H_0\)</span> será <span class="math inline">\(N(600,\frac{100^2}{25})\)</span>. A hipótese a ser testada será:</p>
+<p><span class="math display">\[H_0: \qquad \mu=600\]</span> <span class="math display">\[H_1: \qquad \mu&gt;600\]</span></p>
+<p>Uma maneira de acharmos o valor a partir do qual teremos a região crítica ou de rejeição, seria controlar o Erro Tipo I <span class="math inline">\((\alpha)\)</span>. Podemos dizer que gostariamos de cometer o Erro Tipo I em apenas 5% dos casos.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Erro Estatístico">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Erro Estatístico
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A chance de retirarmos um amostra e o valor da estimativa ser maior que o valor de decisão é de 5% dos casos, os outros 95% sempre cairão na área de aceitação.</p>
+</div>
+</div>
+<p><span class="math display">\[P(Z_{\bar{X}} \geq z_c|H_0)=0.05= \alpha\]</span> Olhando a tabela temos:</p>
+<p><span class="math display">\[P(Z_{\bar{X}} \geq 1.65|H_0)=0.05= \alpha\]</span> <span class="math display">\[z_c =\frac{\bar{X}+600}{100/5}\]</span> <span class="math display">\[1.65 = \frac{\bar{X}+600}{20}\]</span> <span class="math display">\[\bar{X}=600+1.65*20=633\]</span></p>
+<p>Portanto,</p>
+<p><span class="math display">\[P(\bar{X}\geq 633|H_0)=0.05= \alpha\]</span></p>
+<div class="callout callout-style-simple callout-note callout-titled" title="Tabela Normal">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Tabela Normal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<center>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../figuras/normal.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Tabela da Norma Padrão </figcaption>
+</figure>
+</div>
+</center>
+</div>
+</div>
+</div>
+<p>Logo, temos agora uma regra de decisão que tenta controlar o Erro Tipo I. A nossa regra de decisão agora é rejeitar <span class="math inline">\(H_0\)</span> toda vez que o valor calculado da estimativa de <span class="math inline">\(\bar{X}\)</span> for maior do que 633 e aceitar quando for menor. Assim nossa região crítica será:</p>
+<p><span class="math display">\[RC =\{\bar{x} \in \mathbb{R} | \bar{x} \geq 633\}\]</span></p>
+<p>Isso implica que a probabilidade de rejeitarmos <span class="math inline">\(H_0\)</span> (de que o tempomédio não é de 600), e na verdade ela ser de 600 é de 5%.</p>
+<p>Vejamos o gráfico:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="dv">500</span>,<span class="dv">700</span>,<span class="fl">0.1</span>) </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fdnorm<span class="ot">&lt;-</span><span class="fu">dnorm</span>(<span class="at">x =</span> x, <span class="at">mean =</span> <span class="dv">600</span>, <span class="at">sd=</span><span class="dv">20</span>)  </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fdnorm1<span class="ot">&lt;-</span><span class="fu">dnorm</span>(<span class="at">x =</span> x, <span class="at">mean =</span> <span class="dv">660</span>, <span class="at">sd=</span><span class="dv">20</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>regiao<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">633</span>,<span class="dv">700</span>,<span class="fl">0.01</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cord.x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">min</span>(regiao),regiao,<span class="fu">max</span>(regiao))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>cord.y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">dnorm</span>(regiao,<span class="at">mean=</span><span class="dv">600</span>, <span class="at">sd=</span><span class="dv">20</span>),<span class="dv">0</span>) </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x,<span class="dv">600</span>,<span class="dv">20</span>),<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">500</span>,<span class="dv">700</span>),<span class="at">xlab=</span><span class="fu">expression</span>(<span class="fu">bar</span>(x)),<span class="at">type=</span><span class="st">"l"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">col=</span><span class="st">"steelblue4"</span>,<span class="at">lwd=</span><span class="dv">2</span>, <span class="at">ylab=</span><span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"f("</span>, <span class="fu">bar</span>(x),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">")"</span>)),<span class="at">xaxt=</span><span class="st">"n"</span>,<span class="at">cex.axis=</span><span class="fl">0.65</span>, <span class="at">cex.lab=</span><span class="fl">0.8</span> ) </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>,<span class="at">at=</span><span class="fu">c</span>(<span class="dv">500</span>,<span class="dv">540</span>,<span class="dv">560</span>,<span class="dv">580</span>, <span class="dv">600</span>, <span class="dv">620</span>, <span class="dv">633</span>,<span class="dv">660</span>, <span class="dv">700</span>),<span class="at">labels =</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>       <span class="fu">c</span>(<span class="dv">500</span>,<span class="dv">540</span>,<span class="dv">560</span>,<span class="dv">580</span>, <span class="dv">600</span>, <span class="dv">620</span>, <span class="dv">633</span>,<span class="dv">660</span>, <span class="dv">700</span>),<span class="at">cex.axis=</span><span class="fl">0.7</span>, <span class="at">cex.lab=</span><span class="fl">0.8</span>) </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">polygon</span>(cord.x,cord.y,<span class="at">col=</span><span class="st">'wheat4'</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">633</span>, <span class="at">col=</span><span class="st">"steelblue4"</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">600</span>, <span class="fl">0.001</span>, <span class="fu">expression</span>(mu))</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">660</span>, <span class="fl">0.005</span>, <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"EI="</span>, alpha, <span class="st">"=0.05"</span>)))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="P4C01-introducao-estatistica_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Erro Tipo I e a Região Crítica</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Em cinza tem-se a região crítica descrita acima. Logo todos os valores calculados de <span class="math inline">\(\bar{X}\)</span> que cairem acima de 633, dizemos que rejeitamos <span class="math inline">\(H_0\)</span>. Entretanto, percebam que poderiam fazer parte desta distribuição, apesar da chance ser pequena, 5%.</p>
+<p>Como não sabemos a distribuição sob <span class="math inline">\(H_1\)</span> não conseguimos calcular a probabilidade de não rejeitar <span class="math inline">\(H_0\)</span> e na verdade ela pertencer a distribuição de <span class="math inline">\(H_1\)</span>.</p>
+</section>
+<section id="procedimento-geral-do-teste-de-hipótese" class="level3" data-number="12.5.4">
+<h3 data-number="12.5.4" class="anchored" data-anchor-id="procedimento-geral-do-teste-de-hipótese"><span class="header-section-number">12.5.4</span> Procedimento Geral do Teste de Hipótese</h3>
+<section id="teste-para-um-parâmetro-populacional" class="level4" data-number="12.5.4.1">
+<h4 data-number="12.5.4.1" class="anchored" data-anchor-id="teste-para-um-parâmetro-populacional"><span class="header-section-number">12.5.4.1</span> Teste para um parâmetro populacional</h4>
+<p>Temos interesse em uma característica da população. Como vimos por exemplo, o tempo médio de um processo <span class="math inline">\(X\)</span>, ou mais especificamente na sua esperança <span class="math inline">\(E(X)=\mu\)</span>. Contruímos o teste sobre o parâmetro, podendo ser unicaudal ou bicaudal.</p>
+<p><strong>Hipótese Bicaudal</strong>:</p>
+<p>O teste bilateral ou bicaudal podemos observar valores maiores ou menores em relação a hipótese nula. Assim não temos nenhum conhecimento que nos permita dizer que podemos ter valores somente maiores ou somente menores. Temos a seguinte formulação geral:</p>
+<p><span class="math display">\[H_0: \qquad \theta=\theta_0\]</span></p>
+<p><span class="math display">\[H_1: \qquad \theta \neq \theta_0\]</span></p>
+<p><strong>Nível de significância</strong></p>
+<p>Retomando o nosso exemplo, ao rejeitarmos <span class="math inline">\(H_0\)</span> podemos cometer o erro de dizer que o tempo médio é maior que 600 dias, mas na realidade o tempo era efetivamente 600 dias.</p>
+<p>Tentamos controlar esse tipo de erro que é o nosso Erro Tipo I (EI). Temos que definir qual seria o tamanho desse erro, 10%, 5%, 1% etc. Esse percentual é o que chamamos de nível de significância. Quem define esse tamanho é o pesquisador e em geral, em ciência sociais, utilizamos os níveis acima.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Nível de Signficãncia">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Nível de Signficãncia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Nível de Significância</strong>:É a probabilidade máxima aceitável de cometer o erro tipo I e chamamos de <span class="math inline">\(\alpha\)</span>, sendo um valor entre <span class="math inline">\(0&lt;\alpha&lt;1\)</span></p>
+</div>
+</div>
+<p>Dessa forma, faremos o teste de hipótese para o parâmetro <span class="math inline">\(\theta\)</span> ao nível de significância de <span class="math inline">\(\alpha\)</span>. No nosso caso dizemos que iremos testar se o tempo médio dos processos é de 600, <span class="math inline">\(H_0: \mu=600\)</span>, ao nível de 5% de significância.</p>
+<p><strong>Valor Crítico e Região Crítica</strong></p>
+<p>Com base no nível de significância conseguiremos estabelecer qual é o valor crítico e qual seria a região de rejeição. Para o nosso caso encontramos o valor crítico de 633 e a nossa região foi estabelecida como <span class="math inline">\(RC =\{\bar{x} \in R | \bar{x} \geq 633\}\)</span>. Conforme calculamos anteiormente.</p>
+<p>Assim, de forma geral tem-se:</p>
+<p><span class="math display">\[RC =\{T \in C| H_0\}\]</span> <span class="math display">\[P(T \in C|H_0)\leq\alpha\]</span></p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Teste Unilateral e Bilateral">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Teste Unilateral e Bilateral
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A região critica depende do teste estatístico escolhido e se a hipótese é unilateral, ou seja, apenas de um lado da distribuição ou bilateral, os dois lados da distribuição. No caso unilateral utilizamos o nível de siginifcância, <span class="math inline">\(\alpha\)</span>, todo de um lado apenas. Se for o teste bilateral dividimos o nível de significância, ou seja, utilizamos<span class="math inline">\(\alpha /2\)</span>, metade para cada lado.</p>
+</div>
+</div>
+<p><strong>O Teste de Hipótese</strong></p>
+<p>Fazemos nosso processo de amostragem e obtemos o valor do teste estatístico. Se o valor do teste ficar fora da região crítica dizemos que não rejeitamos <span class="math inline">\(H_0\)</span>. Para o nosso caso, que não existe evidências de que o tempo médio dos processos é maior do 600 dias.</p>
+<p>Caso o teste estatítico produza uma estimativa na região crítica, rejeitamos <span class="math inline">\(H_0\)</span>, há evidências de que o tempo médio é maior do que aquela postulada pela Justiça Federal.</p>
+</section>
+</section>
+<section id="os-cinco-passos-para-a-contrução-do-teste-de-hipótese" class="level3" data-number="12.5.5">
+<h3 data-number="12.5.5" class="anchored" data-anchor-id="os-cinco-passos-para-a-contrução-do-teste-de-hipótese"><span class="header-section-number">12.5.5</span> Os Cinco passos para a contrução do teste de hipótese</h3>
+<ul>
+<li>Estabeleça as hipótese nula <span class="math inline">\(H_0\)</span> e a hipótese alternativa <span class="math inline">\(H_1\)</span></li>
+<li>Defina qual estimador do parâmetro populacional <span class="math inline">\(\theta\)</span> que será usado para testar <span class="math inline">\(H_0\)</span>: média, desvio padrão amostral, proporção amostral etc</li>
+<li>Defina o nível de significância - <span class="math inline">\(\alpha\)</span> e estabeleça qual o valor e a região crítica.</li>
+<li>Calcule a estimativa do teste estatístico.</li>
+<li>Se não pertencer a Região Crítica não rejeitamos <span class="math inline">\(H_0\)</span>, caso contrário rejeitamos a hipótese nula <span class="math inline">\(H_0\)</span>.</li>
+</ul>
+</section>
+<section id="introdução-ao-teste-de-hipótese-de-duas-populações-de-médias" class="level3" data-number="12.5.6">
+<h3 data-number="12.5.6" class="anchored" data-anchor-id="introdução-ao-teste-de-hipótese-de-duas-populações-de-médias"><span class="header-section-number">12.5.6</span> Introdução ao Teste de Hipótese de Duas Populações (de Médias)</h3>
+<p>O teste de hipótese é uma técnica estatística fundamental usada para tomar decisões baseadas em evidências amostrais. O teste de hipótese de duas populações é aplicado quando queremos comparar as médias de duas populações distintas e determinar se existe uma diferença estatisticamente significativa entre elas. Vamos explorar os principais conceitos deste teste:</p>
+<p><strong>Formulação das Hipóteses</strong></p>
+<p>No teste de hipótese de duas populações, formulamos duas hipóteses:</p>
+<ul>
+<li><strong>Hipótese Nula (<span class="math inline">\(H_0\)</span>)</strong>: Esta é a hipótese inicial que assume que não há diferença entre as médias das duas populações. Geralmente, é representada como</li>
+</ul>
+<p><span class="math display">\[H_0: \mu_1 = \mu_2\]</span>,</p>
+<p>onde <span class="math inline">\(\mu_1\)</span> e <span class="math inline">\(\mu_2\)</span> são as médias das duas populações.</p>
+<ul>
+<li><strong>Hipótese Alternativa (<span class="math inline">\(H_a\)</span> ou <span class="math inline">\(H_1\)</span>)</strong>: Esta é a hipótese que queremos testar, indicando que há uma diferença significativa entre as médias das duas populações. Pode ser definida como: <span class="math display">\[H_a: \mu_1 &gt; \mu_2\]</span> ou <span class="math display">\[H_a: \mu_1 &lt; \mu_2\]</span> ou</li>
+</ul>
+<p><span class="math display">\[H_a: \mu_1 \neq \mu_2\]</span>.</p>
+<p><strong>Estatística do Teste</strong></p>
+<p>O teste de hipótese de duas populações geralmente envolve o cálculo de uma estatística de teste específica para comparar as médias das amostras das duas populações. Uma das estatísticas comuns é o teste t de Student, especialmente quando as variâncias populacionais são desconhecidas e podem ser diferentes entre as populações.</p>
+<p><strong>Decisão do Teste</strong></p>
+<p>Após calcular a estatística de teste, comparamos o valor observado da estatística com um valor crítico ou calculamos um valor p associado. O valor p é a probabilidade de obter uma estatística de teste tão extrema quanto a observada, assumindo que a hipótese nula seja verdadeira. Com base no valor p (geralmente comparado com um nível de significância pré-definido, como 0,05), tomamos uma decisão de rejeitar ou não rejeitar a hipótese nula.</p>
+<p><strong>Conclusão do Teste</strong></p>
+<p>A conclusão do teste de hipótese de duas populações nos permite determinar se há evidências estatísticas suficientes para rejeitar a hipótese nula em favor da hipótese alternativa. Essa decisão tem implicações importantes em áreas como pesquisa científica, análise de dados e tomada de decisões em negócios e saúde.</p>
+</section>
+<section id="aplicação-prática-sobre-teste-de-hipótese" class="level3" data-number="12.5.7">
+<h3 data-number="12.5.7" class="anchored" data-anchor-id="aplicação-prática-sobre-teste-de-hipótese"><span class="header-section-number">12.5.7</span> Aplicação Prática sobre Teste de Hipótese</h3>
+<p>Essa seção tem o objetivo de aplicar o Teste de Hipótese utilizando o R. Vamos utilizar nosso banco de dados sobre feminicídio. E vamos criar uma variável que identifica se pertence as regiões norte, nordeste e centro oeste ou as regiões sul e sudeste.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construindo a base a partir dos arquivos do projeto</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_feminic22 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dados/dados_feminic.csv"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">";"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dec =</span> <span class="st">"."</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>df_t_feminic22 <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dados/dados_tent_feminic.csv"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">";"</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">dec =</span> <span class="st">"."</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.strings =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>),</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>final_fem_22 <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  df_feminic22,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  df_t_feminic22,</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"sigla"</span>,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">all =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"_tent"</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>final_fem_22 <span class="ot">&lt;-</span> final_fem_22[</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setdiff</span>(<span class="fu">names</span>(final_fem_22), <span class="fu">c</span>(<span class="st">"estado_tent"</span>, <span class="st">"regiao_tent"</span>))</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(final_fem_22)[<span class="fu">names</span>(final_fem_22) <span class="sc">==</span> <span class="st">"feminico_abs"</span>] <span class="ot">&lt;-</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">"feminic_abs"</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando a Binária que indica a região N, NE e CO</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>final_fem_22 <span class="ot">&lt;-</span> final_fem_22 <span class="sc">%&gt;%</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">N_NE_CO =</span> <span class="fu">case_when</span>(</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    regiao <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"N"</span>, <span class="st">"NE"</span>, <span class="st">"CO"</span>) <span class="sc">~</span> <span class="dv">1</span>,  <span class="co"># Regiões N, NE e CO recebem 1</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="dv">0</span>                             <span class="co"># Demais regiões recebem 0</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vamos olhar as médias entra as regiões norte, nordeste e centro oeste e as regiões sul e sudeste.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mean_1<span class="ot">&lt;-</span> <span class="fu">aggregate</span>(final_fem_22[<span class="dv">4</span><span class="sc">:</span><span class="dv">15</span>], <span class="fu">list</span>(final_fem_22<span class="sc">$</span>N_NE_CO), mean,  <span class="at">na.rm=</span>T)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(mean_1) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>     <span class="fu">kable_styling</span>()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="table caption-top table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Group.1</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">homic_abs</td>
+<td style="text-align: right;">249.71</td>
+<td style="text-align: right;">108.80</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">homic_tx</td>
+<td style="text-align: right;">3.60</td>
+<td style="text-align: right;">5.18</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">feminic_abs</td>
+<td style="text-align: right;">107.57</td>
+<td style="text-align: right;">34.20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">feminic_tx</td>
+<td style="text-align: right;">1.47</td>
+<td style="text-align: right;">1.72</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">part_feminic</td>
+<td style="text-align: right;">42.84</td>
+<td style="text-align: right;">35.98</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">rendapc</td>
+<td style="text-align: right;">1903.14</td>
+<td style="text-align: right;">1287.55</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">t_homic_abs</td>
+<td style="text-align: right;">453.57</td>
+<td style="text-align: right;">224.25</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">t_homic_tx</td>
+<td style="text-align: right;">8.91</td>
+<td style="text-align: right;">15.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">t_feminic_abs</td>
+<td style="text-align: right;">177.67</td>
+<td style="text-align: right;">78.79</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">t_feminic_tx</td>
+<td style="text-align: right;">3.25</td>
+<td style="text-align: right;">4.42</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">part_t_feminic</td>
+<td style="text-align: right;">26.24</td>
+<td style="text-align: right;">27.09</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">N_NE_CO</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Pode-se observar que existem em todas as variáveis existem diferenças entre as duas regiões. A questão é: Essas diferenças são estatisticamente significativas?</p>
+<p>Aproveitando um gráfico anterior que fizemos, vamos olhar a distribuição das taxas de feminicídio entre as regiões.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(final_fem_22, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(N_NE_CO, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Sul e Sudeste"</span>, <span class="st">"Norte, Nord. e C.Oeste"</span>)),  <span class="co"># Transformando em fatores</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">y =</span> feminic_tx, <span class="at">fill =</span> <span class="fu">factor</span>(N_NE_CO))) <span class="sc">+</span>                                   <span class="co"># Taxa de Feminicídio por Fator</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">trim =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span>                                                        <span class="co"># Cria o gráfico de violino</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"lightblue"</span>, <span class="st">"steelblue"</span>)) <span class="sc">+</span>                                           <span class="co"># Cor das violas</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">"median"</span>, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape=</span><span class="dv">19</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">color=</span><span class="st">"darkorange"</span>  ) <span class="sc">+</span>                <span class="co"># Vamos colocar o ponto mediana</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribuição da taxa de feminicídio por região do Brasil"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Região"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Taxa de Feminicídio (por 100 mil)"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Região"</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),              <span class="co"># Centraliza o título</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),                                         <span class="co"># Ajusta o tamanho dos rótulos no eixo X</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),                                         <span class="co"># Ajusta o tamanho dos rótulos no eixo Y</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="P4C01-introducao-estatistica_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Observa-se diferença entre as duas regiões, mas será que as médias são estatisticamente diferentes? Para isso temos que utilizar o Teste de Hipótese.</p>
+<p><strong>Relembrando os Passos</strong></p>
+<p>O teste de hipótese segue um processo estruturado de cinco etapas:</p>
+<ul>
+<li><p><strong>Definir as Hipóteses</strong> – Comece formulando a hipótese nula (<span class="math inline">\(H_0\)</span>) e a hipótese alternativa (<span class="math inline">\(H_1\)</span>). Em geral, a hipótese nula representa a ausência de efeito ou diferença, enquanto a hipótese alternativa sugere a existência de um efeito ou diferença.</p></li>
+<li><p><strong>Defina o Estimador</strong> - Defina qual estimador vai utilizar para inferir sobre o parâmetro populacional <span class="math inline">\(\theta\)</span>, o qual será usado para testar <span class="math inline">\(H_0\)</span>: média, desvio padrão amostral, proporção amostral etc</p></li>
+<li><p><strong>Estabelecer os Critérios de Decisão</strong> – Defina o nível de significância (<span class="math inline">\(\alpha\)</span>), que representa a probabilidade de rejeitar a hipótese nula quando ela é verdadeira (Erro Tipo I). Valores comuns de (<span class="math inline">\(\alpha\)</span>) são 0,05 (5%) e 0,01 (1%).</p></li>
+<li><p><strong>Analisar os Dados da Amostra</strong> – Calcule o teste estatístico com base nos dados amostrais. Esse teste estatístico vai ser utilizado para a comparação com os valores típicos que poderiam acontecer se a amostra tivesse vindo de <span class="math inline">\(H_0\)</span>.</p></li>
+<li><p><strong>Tomar uma Decisão e Interpretar os Resultados</strong> – Compare o valor calculado no teste com o valor crítico ou utilize o p-valor. Se o p-valor for menor que o nível de significância <span class="math inline">\(\alpha\)</span>, rejeita-se a hipótese nula em favor da hipótese alternativa. Caso contrário, não há evidências suficientes para rejeitar a hipótese nula, indicando que o efeito não é estatisticamente significativo.</p></li>
+</ul>
+<p><strong>Teste de Hipótese no R</strong></p>
+<p>A função <code>t.test()</code> no R possui vários argumentos importantes para a realização do teste t.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span>),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">0</span>, <span class="at">paired =</span> <span class="cn">FALSE</span>, <span class="at">var.equal =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>, …)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Abaixo estão os principais:</p>
+<ul>
+<li><strong><code>x</code>, <code>y</code></strong>: As duas amostras de dados a serem comparadas.<br>
+</li>
+<li><strong><code>alternative</code></strong>: Define a hipótese alternativa do teste (exemplo: <code>"two.sided"</code>, <code>"greater"</code>, <code>"less"</code>).<br>
+</li>
+<li><strong><code>mu</code></strong>: Especifica um valor de referência para a média populacional no teste.<br>
+</li>
+<li><strong><code>paired</code></strong>: Indica se o teste t deve ser pareado (<code>TRUE</code>) ou não pareado (<code>FALSE</code>).<br>
+</li>
+<li><strong><code>var.equal</code></strong>: Especifica se as variâncias das amostras devem ser assumidas como iguais (<code>TRUE</code>) ou não (<code>FALSE</code>).<br>
+</li>
+<li><strong><code>conf.level</code></strong>: Define o nível de confiança do intervalo (padrão de 95%).</li>
+</ul>
+<p>Esses parâmetros permitem personalizar o teste conforme a necessidade da análise estatística.</p>
+<p><strong>Teste sobre o Parâmetro</strong></p>
+<p>Uma reportagem em um portal de notícias indicou que a média da taxa de feminicídio nos estados brasileiros é igual a 2 assassinatos por 100 mil mulheres. Com base nos dados que coletamos gostaríamos de saber se eles carregam evidências favoráveis ou contra ao artigo.</p>
+<ul>
+<li><u>Definir as Hipóteses</u></li>
+</ul>
+<p><span class="math display">\[H_0: \mu = 2\]</span> <span class="math display">\[H_1:\mu \neq 2 \]</span></p>
+<ul>
+<li><u>Defina o Estimador</u></li>
+</ul>
+<p>Vamos utilizar a Média Amostral, <span class="math inline">\(\bar{X}\)</span>, para testar a hipótese nula <span class="math inline">\(H_0\)</span>.</p>
+<ul>
+<li><u>Estabelecer os Critérios de Decisão</u></li>
+</ul>
+<p>Vamos adotar <span class="math inline">\(\alpha= 0,05\)</span> (5%).</p>
+<ul>
+<li><u>Analisar os Dados da Amostra</u></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x=</span>final_fem_22<span class="sc">$</span>feminic_tx, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>),</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">2</span>, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  final_fem_22$feminic_tx
+t = -2.9276, df = 26, p-value = 0.007011
+alternative hypothesis: true mean is not equal to 2
+95 percent confidence interval:
+ 1.407411 1.896292
+sample estimates:
+mean of x 
+ 1.651852 </code></pre>
+</div>
+</div>
+<ul>
+<li><u>Tomar uma Decisão e Interpretar os Resultados</u></li>
+</ul>
+<p>Entendendo o resultado do teste:</p>
+<p><strong><code>One Sample t-test</code></strong>: Teste de uma amostra -&gt; taxa de feminicídio</p>
+<p><strong><code>data:  final_fem_22$feminic_tx</code></strong>: Indica a variável que utilizou</p>
+<p><strong><code>t = -2.9276, df = 26, p-value = 0.007011</code></strong>: O valor do teste t, o grau de liberdade e o p-valor</p>
+<p><strong><code>alternative hypothesis: true mean is not equal to 2</code></strong>: A hipótese alternativa é que a média não é igual a 2</p>
+<p><strong><code>95 percent confidence interval: 1.407411 1.896292</code></strong> : O intervalo de confiança de 95% para a média, indicando que a verdadeira média populacional está nesse intervalo.</p>
+<p><strong><code>sample estimates: mean of x  = 1.651852</code></strong>: A média amostral é de 1.65, a qual é a estimativa da verdadeira média populacional.</p>
+<p>Como o p-valor foi menor que o nível de significância <span class="math inline">\(\alpha\)</span>, rejeita-se a hipótese nula em favor da hipótese alternativa. Há evidências de que a média nacional é menor do que 2.</p>
+<p><strong>Teste Unicaudal</strong></p>
+<p>Podemos testar também a seguinte hipótese com nível de significância de 1%:</p>
+<p><span class="math display">\[H_0: \mu = 2\]</span> <span class="math display">\[H_1:\mu &lt; 2 \]</span> No R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x=</span>final_fem_22<span class="sc">$</span>feminic_tx, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"less"</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mu =</span> <span class="dv">2</span>, </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">conf.level =</span> <span class="fl">0.99</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One Sample t-test
+
+data:  final_fem_22$feminic_tx
+t = -2.9276, df = 26, p-value = 0.003505
+alternative hypothesis: true mean is less than 2
+99 percent confidence interval:
+     -Inf 1.946607
+sample estimates:
+mean of x 
+ 1.651852 </code></pre>
+</div>
+</div>
+<p>Novamente como o p-valor foi menor que o nível de significância <span class="math inline">\(\alpha\)</span>, rejeita-se a hipótese nula em favor da hipótese alternativa. Há evidências de que a média nacional é menor do que 2.</p>
+<p><strong>Teste para Diferença de Médias</strong></p>
+<ul>
+<li><u>Taxa de Feminicídio</u></li>
+</ul>
+<p>Vamos testar a hipótese de que as taxas de feminicídio são iguais entre as regiões norte, nordeste e centro oeste e as regiões sul e sudeste. Vamos permitir que as variâncias sejam diferentes entre as duas regiões</p>
+<p><span class="math display">\[H_0: \mu_{N-NE-CO} = \mu_{S-SD}\]</span> <span class="math display">\[H_1: \mu_{N-NE-CO} \neq \mu_{S-SD}\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(feminic_tx<span class="sc">~</span>N_NE_CO, <span class="at">data=</span>final_fem_22,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  feminic_tx by N_NE_CO
+t = -1.2049, df = 20.949, p-value = 0.2417
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ -0.6640345  0.1768916
+sample estimates:
+mean in group 0 mean in group 1 
+       1.471429        1.715000 </code></pre>
+</div>
+</div>
+<p>Como o p-valor foi maior que o nível de significância <span class="math inline">\(\alpha\)</span>, não rejeita-se a hipótese nula. Não há evidências de que as regiões possuem taxas diferentes de feminicídio.</p>
+<ul>
+<li><u>Renda pc</u></li>
+</ul>
+<p>Vejamos agora a renda per capita a 1% de significância :</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(rendapc<span class="sc">~</span>N_NE_CO, <span class="at">data=</span>final_fem_22,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">conf.level =</span> <span class="fl">0.99</span>) </span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  rendapc by N_NE_CO
+t = 4.6401, df = 22.301, p-value = 0.0001225
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+99 percent confidence interval:
+ 242.1018 989.0840
+sample estimates:
+mean in group 0 mean in group 1 
+       1903.143        1287.550 </code></pre>
+</div>
+</div>
+<p>Observa-se que rejeita-se a hipótese nula, e há evidências de que a média da renda per capita entre as duas regiões são diferentes.</p>
+<p><strong>Amostras Pareada</strong></p>
+<p>Vamos testar a diferença de média entre amostra pareadas. A amostra pareada é quando temos o mesmo indivíduo observado duas vezes. Vamos testar se existe diferença entre a participação do feminicídio sobre os homicídios e a participação da tentativa de feminicídio sobre as tentativas de feminicídio feminino.</p>
+<p><span class="math display">\[H_0: \mu_{part-feminic} = \mu_{part-t-feminic}\]</span> <span class="math display">\[H_1: \mu_{part-feminic} \neq \mu_{part-t-feminic}\]</span></p>
+<p>Utilizando a média amostral para testar a hipótese nula <span class="math inline">\(H_0\)</span> e considerando um nível de significância de 95%. No R temos:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x=</span>final_fem_22<span class="sc">$</span>part_feminic, <span class="at">y=</span>final_fem_22<span class="sc">$</span>part_t_feminic,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">alternative =</span> <span class="fu">c</span>(<span class="st">"two.sided"</span>),</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">paired =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">var.equal =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  final_fem_22$part_feminic and final_fem_22$part_t_feminic
+t = 3.457, df = 24, p-value = 0.002049
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+  4.105405 16.269795
+sample estimates:
+mean difference 
+        10.1876 </code></pre>
+</div>
+</div>
+<p>Como o p-valor foi menor que o nível de significância <span class="math inline">\(\alpha\)</span>, rejeita-se a hipótese nula em favor da hipótese alternativa. Há evidências de que a média da participação do feminicídio é maior do que a média da participação da tentativa de feminicídio. A estimativa dessa diferença é de 10 pontos percentuais a mais para participação do feminicídio.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../partes/04-descricao-fenomeno.html" class="pagination-link" aria-label="Parte IV — Descrição do fenômeno">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Parte IV — Descrição do fenômeno</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../capitulos/P4C02-analise-descritiva.html" class="pagination-link" aria-label="Análise Descritiva">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -47,7 +47,7 @@ O percurso está organizado em cinco grandes partes conectadas.
 
 Método científico, realismo jurídico e integração entre Direito, Estatística e Ciência de Dados.
 
-[Iniciar esta parte](capitulos/desenho-pesquisa-jurimetria.qmd)
+[Iniciar esta parte](capitulos/P1C01-metodo-cientifico.qmd)
 :::
 
 ::: {.g-col-12 .g-col-md-6 .cartao-home .cartao-problemas}
@@ -111,6 +111,6 @@ A abordagem enfatiza a integração entre Direito, Estatística e Ciência de Da
 ::: {.acoes-finais}
 [Sobre os autores](autores.qmd){.btn .btn-primary}
 
-[Iniciar o percurso](capitulos/desenho-pesquisa-jurimetria.qmd){.btn .btn-outline-primary}
+[Iniciar o percurso](capitulos/P1C01-metodo-cientifico.qmd){.btn .btn-outline-primary}
 :::
 :::

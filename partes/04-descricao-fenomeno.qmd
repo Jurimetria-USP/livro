@@ -13,7 +13,7 @@ Nesta parte, passamos da organização dos dados à descrição dos fenômenos j
 
 Conceitos fundamentais para compreender a produção, a organização e a análise de evidências.
 
-[Acessar o capítulo](../capitulos/introducao-estatistica.qmd)
+[Acessar o capítulo](../capitulos/P4C01-introducao-estatistica.qmd)
 :::
 :::
 
@@ -23,7 +23,7 @@ Conceitos fundamentais para compreender a produção, a organização e a análi
 
 Medidas, tabelas e representações gráficas para conhecer e comunicar as características dos dados.
 
-[Acessar o capítulo](../capitulos/analise-descritiva.qmd)
+[Acessar o capítulo](../capitulos/P4C02-analise-descritiva.qmd)
 :::
 :::
 
@@ -33,7 +33,7 @@ Medidas, tabelas e representações gráficas para conhecer e comunicar as carac
 
 Ferramentas para estudar a duração dos processos, a censura e o tempo até a ocorrência de eventos jurídicos.
 
-[Acessar o capítulo](../capitulos/analise-sobrevivencia.qmd)
+[Acessar o capítulo](../capitulos/P4C03-analise-sobrevivencia.qmd)
 :::
 :::
 
