@@ -1,0 +1,338 @@
+---
+title: "Um exemplo integrado do ecossistema"
+subtitle: "Da pasta vazia ao projeto jurídico colaborativo"
+author:
+  - Alexandre Nicolella
+  - José de Jesus Filho
+format: revealjs
+---
+
+## Objetivo da atividade
+
+Criar um projeto jurídico iniciado em uma pasta vazia e integrar:
+
+- Positron;
+- Git e GitHub;
+- Codex ou Claude Code;
+- R e Python;
+- Quarto.
+
+Os dados são ilustrativos e não sustentam conclusões sobre os estados.
+
+## Percurso
+
+1. Pasta nova no Positron
+2. Repositório Git local
+3. Primeiro commit
+4. Publicação no GitHub
+5. Colaboração
+6. Estrutura orientada por agente
+7. Dados e verificação
+8. Relatório Quarto
+9. Nova versão
+
+## Antes de começar
+
+O computador deve possuir:
+
+- Git, R, Python, Positron e Quarto;
+- uma conta no GitHub;
+- Codex ou Claude Code instalado no Positron.
+
+Esta atividade não repete a instalação das ferramentas.
+
+## 1. Criar e abrir a pasta {.secao background-color="#071739"}
+
+Crie a pasta `exemplo-juridico`.
+
+No Positron:
+
+1. selecione **File > Open Folder**;
+2. localize a pasta;
+3. selecione **Select Folder**;
+4. confirme a raiz no Explorer.
+
+Abra somente a pasta do projeto.
+
+## 2. Iniciar o Git local
+
+No painel **Source Control**, selecione **Initialize Repository**.
+
+Isso cria a pasta oculta `.git` e inicia o histórico local.
+
+Não cria:
+
+- repositório no GitHub;
+- `README.md`;
+- `.gitignore`;
+- `AGENTS.md`;
+- publicação na internet.
+
+## 3. Criar os primeiros arquivos
+
+Crie `README.md`:
+
+```markdown
+# Exemplo jurídico integrado
+
+Projeto didático para demonstrar a organização de uma
+pesquisa jurídica com ferramentas computacionais.
+
+Os dados utilizados neste exemplo são ilustrativos.
+```
+
+## O `.gitignore`
+
+```gitignore
+.Rhistory
+.RData
+.Ruserdata
+.venv/
+.env
+```
+
+Salve os dois arquivos e observe-os em **Changes**.
+
+## 4. Primeiro commit local
+
+No painel **Source Control**:
+
+1. examine os arquivos;
+2. selecione `+` para colocá-los em **Staged Changes**;
+3. escreva `Cria a estrutura inicial do projeto`;
+4. selecione **Commit**.
+
+O commit permanece no computador.
+
+## 5. Publicar no GitHub {.secao background-color="#071739"}
+
+Selecione **Publish Branch** ou **Publish to GitHub**:
+
+1. autentique a conta, se solicitado;
+2. confirme `exemplo-juridico`;
+3. escolha a visibilidade;
+4. confirme a publicação;
+5. abra o endereço e confira os arquivos.
+
+Essa operação cria o remoto, configura a ligação e envia o histórico existente.
+
+## 6. Convidar um colaborador
+
+No GitHub:
+
+1. abra **Settings**;
+2. escolha **Collaborators**;
+3. selecione **Add people**;
+4. informe o usuário exato;
+5. envie o convite.
+
+O colaborador precisa aceitar o convite em sua própria conta.
+
+## 7. Clonar no computador do colaborador
+
+Depois de aceitar o convite, o colaborador escolhe **New Folder from Git** no Positron.
+
+Ele informa o endereço, escolhe onde salvar e abre a pasta criada.
+
+O clone cria uma cópia local com arquivos e histórico. Cada participante trabalha em sua cópia e troca versões pelo GitHub.
+
+## 8. Abrir o agente {.secao background-color="#071739"}
+
+Primeiro pedido:
+
+> Examine `README.md` e `.gitignore`. Não altere arquivos e não execute comandos. Proponha uma estrutura mínima para um projeto jurídico didático que utilizará R, Python e Quarto. Explique cada elemento e aguarde aprovação.
+
+## Estrutura aprovada
+
+```text
+exemplo-juridico/
+├── dados/
+├── scripts/
+│   ├── criar_dados.R
+│   └── verificar_dados.py
+├── AGENTS.md
+├── .gitignore
+├── README.md
+└── relatorio.qmd
+```
+
+## 9. Criar `AGENTS.md`
+
+```markdown
+# Orientações do projeto
+
+Este é um projeto didático de análise de dados jurídicos.
+
+- Leia o README antes de propor alterações.
+- Não modifique arquivos sem autorização expressa.
+- Não execute Git nem publique arquivos.
+- Não invente dados, fontes ou resultados.
+- Preserve os exemplos aprovados.
+- Informe exatamente o que mudou.
+```
+
+## 10. Produzir a base em R {.secao background-color="#071739"}
+
+```r
+estados <- c("Acre", "Alagoas", "Amapá")
+homicidios_mulheres <- c(22, 73, 22)
+feminicidios <- c(11, 31, 8)
+
+dados_crimes <- data.frame(
+  estado = estados,
+  homicidios_mulheres = homicidios_mulheres,
+  feminicidios = feminicidios
+)
+```
+
+## Gravar o CSV
+
+```r
+write.csv(
+  dados_crimes,
+  "dados/dados_crimes.csv",
+  row.names = FALSE,
+  fileEncoding = "UTF-8"
+)
+
+dados_crimes
+```
+
+Execute `scripts/criar_dados.R` e confirme o arquivo no Explorer.
+
+## 11. Verificar em Python
+
+```python
+import csv
+from pathlib import Path
+
+caminho = Path("dados") / "dados_crimes.csv"
+
+with caminho.open(encoding="utf-8-sig", newline="") as arquivo:
+    linhas = list(csv.DictReader(arquivo))
+```
+
+## Conferir observações e colunas
+
+```python
+colunas_esperadas = {
+    "estado",
+    "homicidios_mulheres",
+    "feminicidios",
+}
+
+if not linhas:
+    raise ValueError("A base não contém observações.")
+
+if set(linhas[0].keys()) != colunas_esperadas:
+    raise ValueError("As colunas não correspondem ao esperado.")
+
+print(f"Número de observações: {len(linhas)}")
+```
+
+## Executar a verificação
+
+No terminal da raiz:
+
+```powershell
+python scripts/verificar_dados.py
+```
+
+Python não refaz a análise. Ele confirma que o arquivo existe, contém observações e possui as colunas esperadas.
+
+## 12. Criar o relatório Quarto {.secao background-color="#071739"}
+
+```yaml
+---
+title: "Exemplo jurídico integrado"
+subtitle: "Dados ilustrativos de três estados brasileiros"
+format: html
+---
+```
+
+## Importar a base
+
+````markdown
+```r
+dados_crimes <- read.csv(
+  "dados/dados_crimes.csv",
+  fileEncoding = "UTF-8"
+)
+
+dados_crimes
+```
+````
+
+## Criar uma variável
+
+````markdown
+```r
+dados_crimes$participacao_feminicidios <- round(
+  100 * dados_crimes$feminicidios /
+    dados_crimes$homicidios_mulheres,
+  1
+)
+
+dados_crimes
+```
+````
+
+Os valores continuam ilustrativos.
+
+## Renderizar
+
+```powershell
+quarto render relatorio.qmd
+```
+
+O HTML é produzido a partir da fonte `.qmd`. Objetos que existem apenas na sessão desaparecem quando ela termina; os procedimentos necessários permanecem nos scripts.
+
+## 13. Registrar a nova etapa {.secao background-color="#071739"}
+
+No painel **Source Control**:
+
+1. examine os arquivos novos;
+2. confirme que `.venv` e credenciais não aparecem;
+3. selecione os arquivos do exemplo;
+4. faça o commit `Adiciona o primeiro exemplo integrado`;
+5. selecione **Sync Changes** ou **Push**.
+
+## Commit, push, pull e sync
+
+| Operação | Função |
+|---|---|
+| commit | registra uma versão local |
+| push | envia commits locais ao GitHub |
+| pull | recebe commits do remoto |
+| sync | recebe e envia conforme a interface |
+
+Quando duas pessoas alteram o mesmo trecho, o Git pode exigir a resolução de um conflito.
+
+## 14. Revisão por agente
+
+> Leia `README.md`, os dois scripts e `relatorio.qmd`. Não altere arquivos, não execute comandos e não use Git. Verifique nomes das colunas, caminhos e finalidade declarada. Relate problemas e apresente propostas para aprovação.
+
+O pedido define arquivos, ações proibidas e produto esperado.
+
+## Como as ferramentas se complementam
+
+| Elemento | Função |
+|---|---|
+| R | cria a base e calcula |
+| Python | verifica o CSV |
+| Positron | reúne arquivos, sessões e terminal |
+| Quarto | combina explicação, código e resultado |
+| Git | registra versões locais |
+| GitHub | compartilha o histórico |
+| agente | propõe e revisa no escopo autorizado |
+
+## Verificação final {.exemplo background-color="#A1C2BB"}
+
+- [ ] A pasta aberta é a raiz correta?
+- [ ] R produz o CSV?
+- [ ] Python verifica sem alterar os dados?
+- [ ] Quarto produz o HTML?
+- [ ] Distingo commit, push, pull e sync?
+- [ ] O colaborador utiliza sua própria conta?
+- [ ] O agente recebeu limites claros?
+

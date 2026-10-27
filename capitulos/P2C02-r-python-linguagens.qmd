@@ -338,3 +338,7 @@ A instalação deve ser seguida por uma verificação simples. No Windows, R pod
 - [ ] `py list` apresenta os interpretadores conhecidos?
 - [ ] O teste mínimo funciona nas duas linguagens?
 :::
+
+## Slides da aula
+
+[Ver os slides — Ambiente computacional, R e Python](../slides/ambiente-trabalho/r-python/index.html){.btn .btn-primary target="_blank"}

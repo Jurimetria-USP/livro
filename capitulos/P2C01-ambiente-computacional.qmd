@@ -103,3 +103,7 @@ flowchart LR
 O primeiro capítulo apresentará R e Python e mostrará como instalar e verificar as duas linguagens. O segundo tratará do Positron como ambiente de trabalho e do Quarto como sistema para combinar texto, código e resultados. O terceiro distinguirá Git e GitHub, incluindo a criação da conta necessária à colaboração remota. O quarto apresentará Codex e Claude Code como extensões utilizadas no Positron e como agentes que atuam sobre os arquivos do projeto. Em seguida, o exemplo integrado reunirá esses componentes na criação de um projeto jurídico de pequena escala. A introdução ao R encerrará a parte como material de aprofundamento, com ênfase no `tidyverse` e no `dplyr`.
 
 Esse percurso prepara o ambiente que será utilizado nas etapas posteriores do livro. A finalidade não é acumular programas, mas estabelecer uma estrutura na qual os procedimentos possam ser identificados, executados e examinados.
+
+## Slides da aula
+
+[Ver os slides — Ambiente computacional, R e Python](../slides/ambiente-trabalho/r-python/index.html){.btn .btn-primary target="_blank"}

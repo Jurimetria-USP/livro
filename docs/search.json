@@ -462,6 +462,17 @@
     ]
   },
   {
+    "objectID": "capitulos/P2C01-ambiente-computacional.html#slides-da-aula",
+    "href": "capitulos/P2C01-ambiente-computacional.html#slides-da-aula",
+    "title": "5  Ambiente computacional para a pesquisa jurimétrica",
+    "section": "5.5 Slides da aula",
+    "text": "5.5 Slides da aula\nVer os slides — Ambiente computacional, R e Python",
+    "crumbs": [
+      "Parte II — Ambiente de trabalho e ferramentas",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Ambiente computacional para a pesquisa jurimétrica</span>"
+    ]
+  },
+  {
     "objectID": "capitulos/P2C02-r-python-linguagens.html",
     "href": "capitulos/P2C02-r-python-linguagens.html",
     "title": "6  R e Python: linguagens do ambiente de pesquisa",
@@ -533,6 +544,17 @@
     "title": "6  R e Python: linguagens do ambiente de pesquisa",
     "section": "6.6 Síntese",
     "text": "6.6 Síntese\nR e Python são linguagens que podem exercer funções complementares na pesquisa jurimétrica. R oferece um ambiente voltado à computação estatística, à análise e à visualização de dados. Python é uma linguagem de uso geral que pode apoiar automação, coleta, extração de informações, processamento de textos e análise.\nA instalação deve ser seguida por uma verificação simples. No Windows, R pode estar corretamente instalado sem estar disponível no PATH, e Python pode possuir diversos interpretadores. Reconhecer essas diferenças evita atribuir problemas de configuração ao código da pesquisa. A seleção dos interpretadores e a organização do ambiente de cada projeto serão tratadas no capítulo seguinte.\n\n\n\n\n\n\nDicaAntes de avançar\n\n\n\n\nConsigo explicar as funções gerais de R e Python?\nInstalei R a partir da página oficial?\nR.version.string informa a versão esperada?\npython --version identifica uma versão instalada?\npy list apresenta os interpretadores conhecidos?\nO teste mínimo funciona nas duas linguagens?",
+    "crumbs": [
+      "Parte II — Ambiente de trabalho e ferramentas",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>R e Python: linguagens do ambiente de pesquisa</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/P2C02-r-python-linguagens.html#slides-da-aula",
+    "href": "capitulos/P2C02-r-python-linguagens.html#slides-da-aula",
+    "title": "6  R e Python: linguagens do ambiente de pesquisa",
+    "section": "6.7 Slides da aula",
+    "text": "6.7 Slides da aula\nVer os slides — Ambiente computacional, R e Python",
     "crumbs": [
       "Parte II — Ambiente de trabalho e ferramentas",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>R e Python: linguagens do ambiente de pesquisa</span>"
@@ -704,6 +726,17 @@
     ]
   },
   {
+    "objectID": "capitulos/P2C03-positron-quarto.html#slides-da-aula",
+    "href": "capitulos/P2C03-positron-quarto.html#slides-da-aula",
+    "title": "7  Positron e Quarto: ambiente de trabalho e documentos reproduzíveis",
+    "section": "7.15 Slides da aula",
+    "text": "7.15 Slides da aula\nVer os slides — Positron e Quarto",
+    "crumbs": [
+      "Parte II — Ambiente de trabalho e ferramentas",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span>"
+    ]
+  },
+  {
     "objectID": "capitulos/P2C04-git-github.html",
     "href": "capitulos/P2C04-git-github.html",
     "title": "8  Git e GitHub: versões, colaboração e proteção do projeto",
@@ -869,6 +902,17 @@
     ]
   },
   {
+    "objectID": "capitulos/P2C04-git-github.html#slides-da-aula",
+    "href": "capitulos/P2C04-git-github.html#slides-da-aula",
+    "title": "8  Git e GitHub: versões, colaboração e proteção do projeto",
+    "section": "8.15 Slides da aula",
+    "text": "8.15 Slides da aula\nVer os slides — Git e GitHub",
+    "crumbs": [
+      "Parte II — Ambiente de trabalho e ferramentas",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Git e GitHub: versões, colaboração e proteção do projeto</span>"
+    ]
+  },
+  {
     "objectID": "capitulos/P2C05-agentes-projeto.html",
     "href": "capitulos/P2C05-agentes-projeto.html",
     "title": "9  Agentes de inteligência artificial no projeto",
@@ -1017,6 +1061,17 @@
     "title": "9  Agentes de inteligência artificial no projeto",
     "section": "9.13 Referências de instalação e consulta",
     "text": "9.13 Referências de instalação e consulta\n\nDocumentação oficial do Codex\nFluxos de trabalho com Codex e AGENTS.md\nConfiguração oficial do Claude Code",
+    "crumbs": [
+      "Parte II — Ambiente de trabalho e ferramentas",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Agentes de inteligência artificial no projeto</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/P2C05-agentes-projeto.html#slides-da-aula",
+    "href": "capitulos/P2C05-agentes-projeto.html#slides-da-aula",
+    "title": "9  Agentes de inteligência artificial no projeto",
+    "section": "9.14 Slides da aula",
+    "text": "9.14 Slides da aula\nVer os slides — Agentes de inteligência artificial",
     "crumbs": [
       "Parte II — Ambiente de trabalho e ferramentas",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Agentes de inteligência artificial no projeto</span>"
@@ -1265,6 +1320,17 @@
     ]
   },
   {
+    "objectID": "capitulos/P2C06-exemplo-integrado-ecossistema.html#slides-da-aula",
+    "href": "capitulos/P2C06-exemplo-integrado-ecossistema.html#slides-da-aula",
+    "title": "10  Um exemplo integrado do ecossistema",
+    "section": "10.22 Slides da aula",
+    "text": "10.22 Slides da aula\nVer os slides — Exemplo integrado do ecossistema",
+    "crumbs": [
+      "Parte II — Ambiente de trabalho e ferramentas",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Um exemplo integrado do ecossistema</span>"
+    ]
+  },
+  {
     "objectID": "capitulos/P2C07-introducao-r.html",
     "href": "capitulos/P2C07-introducao-r.html",
     "title": "11  Introdução ao R",
@@ -1501,6 +1567,17 @@
     "title": "11  Introdução ao R",
     "section": "11.21 Síntese",
     "text": "11.21 Síntese\nApresentamos apenas os fundamentos de R base necessários para ler objetos, vetores, operadores, funções e data.frame. O centro do capítulo foi o trabalho com dados por meio do pipe e do tidyverse: readr para importação, dplyr para manipulação, tidyr para transformação, stringr para textos, lubridate para datas e horas e forcats para categorias.\nO exemplo integrado apresentado no capítulo anterior mostrou como esses elementos podem participar de um projeto pequeno juntamente com Python, Positron, Quarto, Git e agentes de inteligência artificial.\n\n\n\n\n\n\nDicaAntes de avançar\n\n\n\n\nSei executar e preservar comandos em um script?\nDistingo objeto, vetor e data.frame?\nReconheço operadores aritméticos, comparativos e lógicos?\nSei selecionar linhas e colunas?\nCompreendo por que NA não equivale a zero?\nConsigo ler uma sequência construída com |&gt;?\nSei onde consultar o desenvolvimento completo desses conteúdos?",
+    "crumbs": [
+      "Parte II — Ambiente de trabalho e ferramentas",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Introdução ao R</span>"
+    ]
+  },
+  {
+    "objectID": "capitulos/P2C07-introducao-r.html#slides-da-aula",
+    "href": "capitulos/P2C07-introducao-r.html#slides-da-aula",
+    "title": "11  Introdução ao R",
+    "section": "11.22 Slides da aula",
+    "text": "11.22 Slides da aula\nVer os slides — Introdução ao R",
     "crumbs": [
       "Parte II — Ambiente de trabalho e ferramentas",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Introdução ao R</span>"

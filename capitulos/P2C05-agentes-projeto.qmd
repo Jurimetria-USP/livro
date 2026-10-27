@@ -240,3 +240,7 @@ O uso de agentes será retomado quando estruturarmos um projeto de pesquisa comp
 - [Documentação oficial do Codex](https://developers.openai.com/learn/codex)
 - [Fluxos de trabalho com Codex e `AGENTS.md`](https://developers.openai.com/cookbook/examples/codex/iterating-development-workflows-with-codex)
 - [Configuração oficial do Claude Code](https://code.claude.com/docs/en/setup)
+
+## Slides da aula
+
+[Ver os slides — Agentes de inteligência artificial](../slides/ambiente-trabalho/agentes-projeto/index.html){.btn .btn-primary target="_blank"}

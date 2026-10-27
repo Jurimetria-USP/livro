@@ -1,0 +1,249 @@
+---
+title: "Git e GitHub"
+subtitle: "Versões, colaboração e proteção do projeto"
+author:
+  - Alexandre Nicolella
+  - José de Jesus Filho
+format: revealjs
+---
+
+## Por que controlar versões?
+
+Textos são revistos, códigos são corrigidos e bases são reconstruídas.
+
+Arquivos chamados `final`, `final_2` e `final_agora_vai` não informam:
+
+- o que mudou;
+- quem realizou a mudança;
+- qual decisão produziu a nova versão;
+- como recuperar um estado anterior.
+
+## Objetivos da aula
+
+- distinguir Git de GitHub;
+- instalar e verificar o Git;
+- compreender repositórios local e remoto;
+- registrar uma versão local;
+- utilizar `.gitignore`;
+- proteger credenciais e dados jurídicos.
+
+## Git e GitHub não são iguais
+
+| Ferramenta | Local principal | Função |
+|---|---|---|
+| Git | computador | registrar e comparar versões |
+| GitHub | serviço remoto | hospedar repositórios e apoiar colaboração |
+
+Um repositório pode existir apenas no computador. Um repositório remoto não substitui o histórico local.
+
+## Instalação do Git {.secao background-color="#071739"}
+
+## Git para Windows
+
+![Página oficial de instalação do Git](../../../figuras/parte-02-ambiente-trabalho/git_install.png){fig-align="center" width="92%"}
+
+Para a primeira instalação, as opções padrão atendem à maior parte dos usos apresentados no livro.
+
+## Verificação
+
+Depois da instalação, reabra o terminal do Positron:
+
+```powershell
+git --version
+```
+
+Se o comando não for reconhecido, reinicie o Positron e confirme se o instalador incluiu o Git no `PATH`.
+
+## Identificação dos registros
+
+```powershell
+git config --global user.name "Nome do autor"
+git config --global user.email "endereco@exemplo.com"
+```
+
+Consulta:
+
+```powershell
+git config --global --list
+```
+
+Nome e e-mail identificam o autor do commit. Eles não autenticam a conta no GitHub.
+
+## Três elementos diferentes
+
+1. `user.name` e `user.email` identificam os registros locais.
+2. A conta do GitHub identifica a pessoa na plataforma.
+3. A autenticação autoriza o computador a acessar repositórios remotos.
+
+Para associar commits à conta, o e-mail do registro deve estar verificado no GitHub ou corresponder ao endereço privado fornecido pela plataforma.
+
+## Repositório local {.secao background-color="#071739"}
+
+## O que é um repositório?
+
+Um repositório Git é uma pasta de projeto acompanhada por metadados de versão.
+
+Ao iniciar o Git, surge a pasta oculta `.git`. Ela contém o histórico e as configurações locais.
+
+```powershell
+git status
+```
+
+O comando informa se a pasta atual pertence a um repositório e mostra o estado dos arquivos.
+
+## Confirme a raiz
+
+Antes de iniciar o versionamento, observe o caminho do terminal.
+
+Não crie, por engano, um repositório dentro de outro. Repositórios sobrepostos produzem históricos diferentes para pastas relacionadas.
+
+## Estados dos arquivos
+
+O Git distingue, de forma simplificada:
+
+- arquivo ainda não acompanhado;
+- arquivo acompanhado e modificado;
+- versão registrada no histórico.
+
+O Git não decide quais mudanças formam uma etapa coerente. Essa decisão pertence aos responsáveis pelo projeto.
+
+## Primeiro registro local
+
+```powershell
+git init
+git status
+git add .
+git status
+git commit -m "Cria a estrutura inicial do projeto"
+```
+
+Use `git add .` somente depois de examinar a pasta e conferir o `.gitignore`. Em caso de dúvida, selecione arquivos individualmente.
+
+## O commit permanece local
+
+O commit atualiza o histórico no computador.
+
+Ele não:
+
+- cria um repositório no GitHub;
+- envia arquivos à internet;
+- publica uma página;
+- autoriza outras pessoas a acessar o projeto.
+
+## Repositório remoto {.secao background-color="#071739"}
+
+## Funções do GitHub
+
+Um repositório remoto pode apoiar:
+
+- colaboração;
+- cópia remota;
+- revisão das mudanças;
+- publicação de páginas.
+
+A escolha entre repositório público e privado exige avaliar autoria, licenças, dados pessoais, sigilo e regras institucionais.
+
+## Ordem adotada no livro
+
+1. Organizar a pasta local.
+2. Iniciar o Git.
+3. Revisar os arquivos.
+4. Fazer o primeiro commit local.
+5. Criar ou escolher o repositório remoto.
+6. Sincronizar conscientemente.
+
+O exemplo integrado executará essa sequência pela interface do Positron.
+
+## Criando a conta no GitHub
+
+1. Acesse [github.com](https://github.com/).
+2. Selecione **Sign up**.
+3. Informe e confirme seu e-mail.
+4. Escolha uma senha exclusiva.
+5. Escolha um nome de usuário estável.
+6. Ative a autenticação em dois fatores.
+
+Cada participante deve utilizar sua própria conta.
+
+## `.gitignore` {.secao background-color="#071739"}
+
+## O que o arquivo faz?
+
+O `.gitignore` declara padrões que o Git deve deixar fora do acompanhamento.
+
+```gitignore
+.Rhistory
+.RData
+.Ruserdata
+.venv/
+.env
+*.tmp
+*.log
+dados/sensiveis/
+dados/identificados/
+```
+
+## O que o `.gitignore` não faz?
+
+- não elimina arquivos do computador;
+- não remove versões já registradas;
+- não decide se uma base pode ser publicada;
+- não substitui a revisão humana antes do commit.
+
+Se um arquivo sensível já entrou no histórico, apenas acrescentá-lo ao `.gitignore` não resolve o problema.
+
+## Credenciais e segredos
+
+Nunca versione:
+
+- senhas;
+- chaves de API;
+- tokens de acesso;
+- arquivos `.env` com credenciais.
+
+O código deve obter esses valores por variáveis de ambiente ou mecanismos próprios de credenciais.
+
+## Dados pessoais ou sigilosos
+
+Documentos processuais e bases identificadas exigem avaliação própria.
+
+A disponibilidade pública de um documento não elimina automaticamente os deveres de proteção, contextualização e uso adequado.
+
+## Arquivos locais e produtos gerados
+
+Ambientes virtuais, caches e históricos de sessão costumam ser reconstruíveis.
+
+HTML, tabelas e figuras também podem ser gerados novamente, mas alguns projetos precisam versioná-los para publicação. A decisão depende da forma de distribuição.
+
+No livro, `docs/` integra a publicação, embora seja uma saída gerada.
+
+## Revisão antes do commit ou envio
+
+- Quais arquivos mudaram?
+- A alteração pertence à etapa atual?
+- Há credenciais ou dados protegidos?
+- Algum arquivo grande entrou por engano?
+- Os resultados podem ser reconstruídos?
+- A documentação corresponde ao código?
+- Os responsáveis aprovaram a versão?
+
+## Git como registro metodológico
+
+O histórico pode documentar:
+
+- redefinição de uma variável;
+- mudança no critério de inclusão;
+- correção de um procedimento;
+- revisão textual após nova verificação.
+
+Cada commit deve reunir mudanças relacionadas e receber uma descrição informativa.
+
+## Verificação final {.exemplo background-color="#A1C2BB"}
+
+- [ ] `git --version` funciona?
+- [ ] Distingo Git de GitHub?
+- [ ] Identifiquei a raiz do projeto?
+- [ ] O `.gitignore` protege arquivos locais e dados não publicáveis?
+- [ ] Nenhuma credencial está nos arquivos?
+- [ ] A publicação permanece uma decisão expressa?
+

@@ -388,3 +388,7 @@ Nos capítulos seguintes, integraremos esse ambiente ao controle de versões e a
 - [Instalação do Quarto](https://quarto.org/docs/get-started/)
 - [Uso de Python e Jupyter em documentos Quarto](https://quarto.org/docs/computations/python.html)
 - [Verificação da instalação do Quarto](https://quarto.org/docs/cli/check.html)
+
+## Slides da aula
+
+[Ver os slides — Positron e Quarto](../slides/ambiente-trabalho/positron-quarto/index.html){.btn .btn-primary target="_blank"}

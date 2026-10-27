@@ -1,0 +1,451 @@
+---
+title: "Introdução ao R"
+subtitle: "Elementos para acompanhar as análises do livro"
+author:
+  - Alexandre Nicolella
+  - José de Jesus Filho
+format: revealjs
+---
+
+## Finalidade desta aula
+
+Esta apresentação oferece uma referência inicial para ler e executar os códigos do livro.
+
+O desenvolvimento completo, com exercícios, está em [Introdução ao R](https://anicolella.github.io/IntroducaoR/).
+
+## Como trabalhar
+
+- registre os exemplos em um script;
+- execute por partes;
+- use o console para observar resultados;
+- preserve no script apenas a sequência validada;
+- consulte a ajuda antes de adaptar uma função.
+
+```r
+?mean
+help(mean)
+example(mean)
+```
+
+## Objetos e atribuição {.secao background-color="#071739"}
+
+## Criando objetos
+
+```r
+total_processos <- 120
+tribunal <- "TJSP"
+decisao_publicada <- TRUE
+```
+
+Utilizamos `<-` para atribuição. Nomes devem indicar o conteúdo, com letras minúsculas e palavras separadas por `_`.
+
+R diferencia `tribunal`, `Tribunal` e `TRIBUNAL`.
+
+## Tipos básicos
+
+| Tipo | Exemplo | Uso |
+|---|---|---|
+| numérico | `120`, `3.5` | contagens e medidas |
+| texto | `"TJSP"` | nomes e categorias |
+| lógico | `TRUE`, `FALSE` | condições e indicadores |
+
+```r
+class(total_processos)
+class(tribunal)
+class(decisao_publicada)
+```
+
+## Vetores
+
+```r
+estados <- c("Acre", "Alagoas", "Amapá")
+homicidios_mulheres <- c(22, 73, 22)
+feminicidios <- c(11, 31, 8)
+```
+
+Um vetor reúne valores do mesmo tipo.
+
+```r
+estados[1]
+homicidios_mulheres[1:2]
+```
+
+## `[`, `[[` e `$`
+
+- `[` seleciona parte do objeto e preserva sua estrutura;
+- `[[` extrai um único elemento interno;
+- `$` seleciona uma coluna pelo nome.
+
+Essas diferenças aparecem especialmente em listas e estruturas compostas.
+
+## Funções e argumentos
+
+```r
+mean(feminicidios)
+
+round(
+  x = mean(feminicidios),
+  digits = 1
+)
+```
+
+Uma função recebe argumentos, executa um procedimento e devolve um resultado. Nomear argumentos torna o código mais claro.
+
+## Operadores {.secao background-color="#071739"}
+
+## Operadores aritméticos
+
+| Operador | Operação |
+|---|---|
+| `+` e `-` | soma e subtração |
+| `*` e `/` | multiplicação e divisão |
+| `^` | potência |
+| `%%` | resto da divisão |
+
+```r
+100 * feminicidios / homicidios_mulheres
+```
+
+## Comparação
+
+| Operador | Condição |
+|---|---|
+| `==` | igual a |
+| `!=` | diferente de |
+| `>` e `<` | maior e menor |
+| `>=` e `<=` | maior ou igual e menor ou igual |
+
+```r
+feminicidios >= 10
+```
+
+Não confunda atribuição com teste de igualdade.
+
+## Operadores lógicos
+
+| Operador | Significado |
+|---|---|
+| `&` | e, elemento a elemento |
+| `|` | ou, elemento a elemento |
+| `!` | negação |
+| `&&` | e, condição única |
+| `||` | ou, condição única |
+
+```r
+(feminicidios >= 10) &
+  (homicidios_mulheres > 20)
+```
+
+## Data frames {.secao background-color="#071739"}
+
+## Construção
+
+```r
+dados_crimes <- data.frame(
+  estado = estados,
+  homicidios_mulheres = homicidios_mulheres,
+  feminicidios = feminicidios
+)
+
+dados_crimes
+```
+
+Cada linha representa um estado. A unidade de observação precisa ser definida antes do código.
+
+## Inspeção da base
+
+```r
+dim(dados_crimes)
+names(dados_crimes)
+str(dados_crimes)
+head(dados_crimes)
+summary(dados_crimes)
+```
+
+Em bases jurídicas, uma linha pode representar processo, decisão, parte ou evento. Essa escolha define o significado das variáveis.
+
+## Indexação mínima
+
+```r
+# dados[linhas, colunas]
+dados_crimes[1:2, ]
+dados_crimes[, c("estado", "feminicidios")]
+dados_crimes$estado
+```
+
+Nos exemplos novos, priorizaremos os verbos do `dplyr`.
+
+## Criando uma variável
+
+```r
+dados_crimes$participacao_feminicidios <-
+  100 * dados_crimes$feminicidios /
+  dados_crimes$homicidios_mulheres
+```
+
+Adiante, utilizaremos `mutate()` para tornar a operação explícita.
+
+## Valores ausentes
+
+```r
+tempo_dias <- c(35, NA, 72)
+is.na(tempo_dias)
+sum(is.na(tempo_dias))
+mean(tempo_dias, na.rm = TRUE)
+```
+
+`NA` não equivale a zero, texto vazio ou ausência de ocorrência. Remover ausentes do cálculo não explica por que estão ausentes.
+
+## Importação e exportação {.secao background-color="#071739"}
+
+## CSV com `readr`
+
+```r
+dados <- read_csv("dados/base.csv")
+
+dados <- read_csv2("dados/base.csv")
+
+write_csv(dados, "dados/base_tratada.csv")
+```
+
+`read_csv2()` atende arquivos com ponto e vírgula como separador e vírgula decimal.
+
+## Outros formatos
+
+```r
+# Excel
+dados <- readxl::read_excel(
+  "dados/base.xlsx",
+  sheet = "feminicidio"
+)
+
+# Stata
+dados <- haven::read_dta("dados/base.dta")
+
+# RDS
+dados <- readRDS("dados/base.rds")
+saveRDS(dados, "dados/base.rds")
+```
+
+Confirme caminho, extensão, separador, codificação e aba.
+
+## Universo tidy {.secao background-color="#071739"}
+
+## Instalação e carregamento
+
+```r
+# Uma vez no computador
+install.packages("tidyverse")
+
+# Em cada nova sessão
+library(tidyverse)
+```
+
+Depois de carregar, utilizaremos diretamente os nomes das funções. `pacote::função()` continua útil para explicitar a origem ou resolver conflitos.
+
+## O pipe
+
+```r
+dados_crimes |>
+  filter(feminicidios >= 10) |>
+  select(estado, feminicidios)
+```
+
+`|>` envia o resultado de uma etapa para a seguinte. Cada linha declara uma operação do percurso.
+
+## `dplyr`: operações sobre linhas
+
+```r
+dados_crimes |>
+  filter(feminicidios >= 10) |>
+  arrange(desc(feminicidios))
+```
+
+`filter()` define quais observações permanecem. `arrange()` apenas modifica a ordem.
+
+## Operações sobre colunas
+
+```r
+dados_crimes |>
+  select(
+    estado,
+    homicidios_mulheres,
+    feminicidios
+  ) |>
+  mutate(
+    participacao_feminicidios =
+      100 * feminicidios / homicidios_mulheres
+  )
+```
+
+## Resumos
+
+```r
+dados_crimes |>
+  summarise(
+    total_homicidios_mulheres =
+      sum(homicidios_mulheres),
+    total_feminicidios =
+      sum(feminicidios)
+  )
+```
+
+Com `group_by()`, os resumos são calculados por grupo.
+
+## Ausentes no fluxo
+
+```r
+dados_crimes |>
+  summarise(
+    media_feminicidios =
+      mean(feminicidios, na.rm = TRUE),
+    ausentes = sum(is.na(feminicidios))
+  )
+```
+
+O cálculo retira `NA`, mas a documentação precisa registrar o tratamento e sua justificativa.
+
+## Formatos largo e longo {.secao background-color="#071739"}
+
+```r
+dados_longos <- dados_crimes |>
+  pivot_longer(
+    cols = c(
+      homicidios_mulheres,
+      feminicidios
+    ),
+    names_to = "indicador",
+    values_to = "valor"
+  )
+```
+
+Cada variável ocupa uma coluna, cada observação uma linha e cada valor uma célula.
+
+## Combinação de bases
+
+```r
+resultado <- base_processos |>
+  left_join(
+    base_tribunais,
+    by = "tribunal"
+  )
+```
+
+Antes da junção, verifique a chave e possíveis duplicações. `left_join()` preserva todas as linhas da base à esquerda.
+
+## Textos com `stringr` {.secao background-color="#071739"}
+
+## Substituição controlada
+
+```r
+descricao <- c(
+  "Proc. criminal",
+  "Processo criminal"
+)
+
+str_replace(
+  descricao,
+  "^Proc\\.",
+  "Processo"
+)
+```
+
+A expressão procura `Proc.` somente no início do texto.
+
+## Limpeza de textos
+
+```r
+movimentos <- c(
+  "  SENTENÇA",
+  "Decisão Interlocutória  "
+)
+
+movimentos |>
+  str_squish() |>
+  str_to_lower()
+```
+
+Padronização técnica não autoriza reunir categorias juridicamente distintas.
+
+## Datas e horas com `lubridate` {.secao background-color="#071739"}
+
+## Conversão
+
+```r
+library(lubridate)
+
+data_distribuicao <- dmy("10/03/2026")
+data_sentenca <- ymd("2026-11-25")
+
+momento_protocolo <- dmy_hms(
+  "10/03/2026 14:35:20",
+  tz = "America/Sao_Paulo"
+)
+```
+
+O nome da função indica a ordem dos componentes.
+
+## Componentes e intervalos
+
+```r
+year(data_sentenca)
+month(data_sentenca, label = TRUE)
+wday(data_sentenca, label = TRUE)
+hour(momento_protocolo)
+
+periodo <- interval(
+  data_distribuicao,
+  data_sentenca
+)
+
+time_length(periodo, unit = "days")
+```
+
+## A unidade temporal depende da pergunta
+
+- duração mede segundos exatos;
+- período utiliza unidades civis;
+- intervalo preserva início e fim;
+- dias úteis exigem calendário e feriados;
+- o fuso precisa ser explícito quando o horário importa.
+
+Antes do cálculo, verifique o significado jurídico dos eventos inicial e final.
+
+## Categorias com `forcats`
+
+```r
+resultado <- factor(
+  c("procedente", "improcedente", "parcial")
+)
+
+resultado <- fct_relevel(
+  resultado,
+  "improcedente",
+  "parcial",
+  "procedente"
+)
+```
+
+Reunir ou reordenar categorias exige justificativa jurídica e registro no código.
+
+## O que aprofundar
+
+O material [Introdução ao R](https://anicolella.github.io/IntroducaoR/) desenvolve:
+
+- objetos, funções e estruturas;
+- projetos reproduzíveis;
+- importação e qualidade dos dados;
+- `dplyr`, `tidyr` e combinações;
+- textos, datas, horas e categorias;
+- GitHub e ferramentas complementares.
+
+## Verificação final {.exemplo background-color="#A1C2BB"}
+
+- [ ] Sei preservar comandos em um script?
+- [ ] Distingo objeto, vetor e `data.frame`?
+- [ ] Reconheço operadores?
+- [ ] Sei selecionar linhas e colunas?
+- [ ] Compreendo por que `NA` não é zero?
+- [ ] Consigo ler uma sequência com `|>`?
+- [ ] Sei onde aprofundar o conteúdo?
+

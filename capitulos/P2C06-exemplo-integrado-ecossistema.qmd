@@ -420,3 +420,7 @@ Nos capítulos seguintes, essa estrutura será ampliada para um projeto de pesqu
 - [Controle de versões Git no Positron](https://positron.posit.co/git.html)
 - [Convite de colaboradores para um repositório pessoal](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository)
 - [Extensão do Codex no editor](https://learn.chatgpt.com/docs/codex/ide)
+
+## Slides da aula
+
+[Ver os slides — Exemplo integrado do ecossistema](../slides/ambiente-trabalho/exemplo-integrado/index.html){.btn .btn-primary target="_blank"}

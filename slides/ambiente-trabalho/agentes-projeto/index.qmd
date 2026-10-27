@@ -1,0 +1,216 @@
+---
+title: "Agentes de inteligência artificial no projeto"
+subtitle: "Codex, Claude Code, contexto e supervisão humana"
+author:
+  - Alexandre Nicolella
+  - José de Jesus Filho
+format: revealjs
+---
+
+## Objetivos da aula
+
+- distinguir conversa de atuação agêntica;
+- instalar as extensões no Positron;
+- abrir a ferramenta na pasta correta;
+- diferenciar leitura, escrita e execução;
+- compreender arquivos de orientação;
+- proteger dados, credenciais e decisões intelectuais.
+
+## De uma resposta para uma ação
+
+| Interação | Contexto | Efeito esperado |
+|---|---|---|
+| conversa | mensagem e anexos | explicação ou proposta |
+| agente com leitura | arquivos autorizados | diagnóstico do projeto |
+| agente com escrita | arquivos e regras | alteração local |
+| agente com execução | terminal e ferramentas | testes e renderizações |
+
+Quanto maior o efeito possível, mais específica deve ser a autorização.
+
+## O agente não possui autonomia irrestrita
+
+A atuação deve ser delimitada por:
+
+- escopo da tarefa;
+- arquivos autorizados;
+- permissões de leitura, escrita e execução;
+- regras do projeto;
+- aprovação humana;
+- validação do resultado.
+
+## Codex e Claude Code {.secao background-color="#071739"}
+
+## Codex no Positron
+
+O Codex pode ser utilizado por aplicativo, terminal ou extensão.
+
+Neste livro, utilizamos a extensão no Positron para manter arquivos, terminal e conversa no mesmo ambiente. O aplicativo e a interface de terminal são alternativas, não requisitos para a extensão.
+
+`codex --version` verifica somente a interface de terminal, não a extensão.
+
+## Claude Code no Positron
+
+O Claude Code também possui interface de terminal e integração com editores.
+
+Quando a interface de terminal está instalada:
+
+```powershell
+claude --version
+claude
+```
+
+O segundo comando deve ser executado na raiz do projeto que receberá o contexto.
+
+## Instalação das extensões
+
+1. Abra **Extensions** na barra lateral.
+2. Pesquise a ferramenta.
+3. Confira nome, publicador e documentação.
+4. Selecione **Install**.
+5. Recarregue o Positron, se solicitado.
+6. Abra o painel e autentique a conta.
+7. Examine as permissões solicitadas.
+
+## Verifique a procedência
+
+![Extensão do Claude Code publicada pela Anthropic](../../../figuras/parte-02-ambiente-trabalho/claude-code-extension.png){fig-align="center" width="92%"}
+
+Se a extensão oficial não aparecer, não instale outra apenas porque o nome é semelhante. Consulte a documentação do fornecedor.
+
+## Extensão e interface de terminal
+
+Ter a extensão instalada não torna obrigatória a instalação da interface de terminal.
+
+As extensões instaladas no VS Code também não aparecem automaticamente no Positron. Cada editor mantém sua própria instalação.
+
+## O contexto começa pela pasta {.secao background-color="#071739"}
+
+## Começando por uma pasta nova
+
+1. Crie uma pasta exclusiva para o trabalho.
+2. Abra-a com **File > Open Folder**.
+3. Confirme a raiz no Explorer.
+4. Abra o painel do agente.
+5. Confira o contexto e as permissões.
+6. Comece com leitura e proposta.
+
+Não abra uma pasta ampla que contenha pesquisas não relacionadas.
+
+## Leitura
+
+Na leitura, o agente inspeciona arquivos e relata o que encontrou.
+
+> Leia os arquivos de orientação e o capítulo indicado. Não altere arquivos. Identifique a estrutura atual, as fontes usadas e os pontos que exigem decisão dos autores.
+
+Esse é o modo adequado para conhecer um projeto e preparar uma proposta.
+
+## Escrita
+
+Na escrita, o agente cria ou altera arquivos dentro do escopo aprovado.
+
+A instrução deve indicar:
+
+- os caminhos permitidos;
+- o texto-base;
+- o que deve ser preservado;
+- as mudanças autorizadas;
+- o que depende de nova aprovação.
+
+## Execução
+
+Na execução, o agente utiliza terminal e ferramentas para rodar códigos, verificações ou renderizações.
+
+Autorizar escrita não autoriza automaticamente:
+
+- instalar programas;
+- executar Git;
+- publicar uma página;
+- enviar dados a serviços externos.
+
+## Fluxo de trabalho
+
+1. Pedido delimitado
+2. Leitura do projeto
+3. Proposta
+4. Aprovação humana
+5. Alteração autorizada
+6. Verificação
+7. Relato do que mudou
+
+Se a proposta não for aprovada, ela deve ser revista antes de qualquer alteração.
+
+## Contexto persistente {.secao background-color="#071739"}
+
+## Arquivos de orientação
+
+O Codex reconhece `AGENTS.md`. O Claude Code utiliza `CLAUDE.md` para função semelhante.
+
+Outros arquivos podem registrar:
+
+- objetivo e escopo;
+- fontes autorizadas;
+- decisões consolidadas;
+- padrões de escrita e código;
+- operações proibidas;
+- formas de validação.
+
+## Skills e instruções reutilizáveis
+
+Uma skill reúne instruções especializadas para tarefas recorrentes.
+
+Antes de criá-la, pergunte:
+
+- a regra pertence somente a este projeto?
+- a tarefa se repete em projetos diferentes?
+- trata-se de uma decisão pontual?
+
+Decisões vivas do projeto não devem virar automaticamente regras rígidas e gerais.
+
+## Primeiro pedido seguro
+
+> Esta pasta será utilizada para um novo projeto de pesquisa. Não crie nem altere arquivos e não execute comandos. Proponha uma estrutura inicial de pastas e documentos, explique a função de cada elemento e indique quais decisões precisam ser tomadas antes da criação. Aguarde aprovação.
+
+O pedido define objetivo, limites e produto esperado.
+
+## Supervisão humana {.secao background-color="#071739"}
+
+## Por que revisar?
+
+Um agente pode:
+
+- produzir código correto e método inadequado;
+- atribuir uma informação à fonte errada;
+- interpretar de modo incompleto uma decisão jurídica;
+- eliminar detalhes necessários ao argumento;
+- executar uma ação mais ampla que a intenção do pesquisador.
+
+## O que a supervisão inclui
+
+- leitura da proposta;
+- comparação com o texto-base;
+- revisão dos arquivos modificados;
+- execução controlada dos códigos;
+- exame dos resultados;
+- decisão expressa sobre versão e publicação.
+
+## Dados e credenciais
+
+Não inclua em prompts, códigos ou arquivos versionados:
+
+- senhas;
+- tokens;
+- chaves de API;
+- dados pessoais ou sigilosos sem autorização;
+- materiais de terceiros que não possam ser processados pelo serviço.
+
+Consulte as políticas institucionais antes de usar bases jurídicas protegidas.
+
+## Verificação final {.exemplo background-color="#A1C2BB"}
+
+- [ ] A ferramenta está na raiz correta?
+- [ ] O pedido identifica objetivo, arquivos e restrições?
+- [ ] A primeira etapa é de leitura?
+- [ ] Escrita e execução têm autorização específica?
+- [ ] Credenciais e dados protegidos ficaram fora do contexto?
+- [ ] A validação intelectual permanece com os autores?
+

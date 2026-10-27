@@ -517,3 +517,7 @@ O exemplo integrado apresentado no capítulo anterior mostrou como esses element
 - [ ] Sei onde consultar o desenvolvimento completo desses conteúdos?
 
 :::
+
+## Slides da aula
+
+[Ver os slides — Introdução ao R](../slides/ambiente-trabalho/introducao-r/index.html){.btn .btn-primary target="_blank"}
