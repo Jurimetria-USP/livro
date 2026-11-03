@@ -357,19 +357,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#conta-git-e-autenticação" id="toc-conta-git-e-autenticação" class="nav-link" data-scroll-target="#conta-git-e-autenticação"><span class="header-section-number">8.8.1</span> Conta, Git e autenticação</a></li>
   </ul></li>
-  <li><a href="#o-arquivo-.gitignore" id="toc-o-arquivo-.gitignore" class="nav-link" data-scroll-target="#o-arquivo-.gitignore"><span class="header-section-number">8.9</span> O arquivo <code>.gitignore</code></a></li>
-  <li><a href="#o-que-não-deve-ser-versionado" id="toc-o-que-não-deve-ser-versionado" class="nav-link" data-scroll-target="#o-que-não-deve-ser-versionado"><span class="header-section-number">8.10</span> O que não deve ser versionado</a>
+  <li><a href="#autenticação-entre-o-computador-e-o-github" id="toc-autenticação-entre-o-computador-e-o-github" class="nav-link" data-scroll-target="#autenticação-entre-o-computador-e-o-github"><span class="header-section-number">8.9</span> Autenticação entre o computador e o GitHub</a>
   <ul class="collapse">
-  <li><a href="#credenciais-e-segredos" id="toc-credenciais-e-segredos" class="nav-link" data-scroll-target="#credenciais-e-segredos"><span class="header-section-number">8.10.1</span> Credenciais e segredos</a></li>
-  <li><a href="#dados-pessoais-ou-sigilosos" id="toc-dados-pessoais-ou-sigilosos" class="nav-link" data-scroll-target="#dados-pessoais-ou-sigilosos"><span class="header-section-number">8.10.2</span> Dados pessoais ou sigilosos</a></li>
-  <li><a href="#arquivos-locais-ou-temporários" id="toc-arquivos-locais-ou-temporários" class="nav-link" data-scroll-target="#arquivos-locais-ou-temporários"><span class="header-section-number">8.10.3</span> Arquivos locais ou temporários</a></li>
-  <li><a href="#produtos-gerados" id="toc-produtos-gerados" class="nav-link" data-scroll-target="#produtos-gerados"><span class="header-section-number">8.10.4</span> Produtos gerados</a></li>
+  <li><a href="#etapa-1-verificar-se-já-existem-chaves" id="toc-etapa-1-verificar-se-já-existem-chaves" class="nav-link" data-scroll-target="#etapa-1-verificar-se-já-existem-chaves"><span class="header-section-number">8.9.1</span> Etapa 1 — verificar se já existem chaves</a></li>
+  <li><a href="#etapa-2-gerar-o-par-de-chaves" id="toc-etapa-2-gerar-o-par-de-chaves" class="nav-link" data-scroll-target="#etapa-2-gerar-o-par-de-chaves"><span class="header-section-number">8.9.2</span> Etapa 2 — gerar o par de chaves</a></li>
+  <li><a href="#etapa-3-iniciar-o-serviço-ssh-agent" id="toc-etapa-3-iniciar-o-serviço-ssh-agent" class="nav-link" data-scroll-target="#etapa-3-iniciar-o-serviço-ssh-agent"><span class="header-section-number">8.9.3</span> Etapa 3 — iniciar o serviço <code>ssh-agent</code></a></li>
+  <li><a href="#etapa-4-adicionar-a-chave-privada-ao-agente" id="toc-etapa-4-adicionar-a-chave-privada-ao-agente" class="nav-link" data-scroll-target="#etapa-4-adicionar-a-chave-privada-ao-agente"><span class="header-section-number">8.9.4</span> Etapa 4 — adicionar a chave privada ao agente</a></li>
+  <li><a href="#etapa-5-copiar-somente-a-chave-pública" id="toc-etapa-5-copiar-somente-a-chave-pública" class="nav-link" data-scroll-target="#etapa-5-copiar-somente-a-chave-pública"><span class="header-section-number">8.9.5</span> Etapa 5 — copiar somente a chave pública</a></li>
+  <li><a href="#etapa-6-cadastrar-a-chave-pública-no-github" id="toc-etapa-6-cadastrar-a-chave-pública-no-github" class="nav-link" data-scroll-target="#etapa-6-cadastrar-a-chave-pública-no-github"><span class="header-section-number">8.9.6</span> Etapa 6 — cadastrar a chave pública no GitHub</a></li>
+  <li><a href="#etapa-7-testar-a-conexão" id="toc-etapa-7-testar-a-conexão" class="nav-link" data-scroll-target="#etapa-7-testar-a-conexão"><span class="header-section-number">8.9.7</span> Etapa 7 — testar a conexão</a></li>
+  <li><a href="#se-aparecer-permission-denied-publickey" id="toc-se-aparecer-permission-denied-publickey" class="nav-link" data-scroll-target="#se-aparecer-permission-denied-publickey"><span class="header-section-number">8.9.8</span> Se aparecer <code>Permission denied (publickey)</code></a></li>
   </ul></li>
-  <li><a href="#uma-verificação-antes-de-registrar-ou-enviar" id="toc-uma-verificação-antes-de-registrar-ou-enviar" class="nav-link" data-scroll-target="#uma-verificação-antes-de-registrar-ou-enviar"><span class="header-section-number">8.11</span> Uma verificação antes de registrar ou enviar</a></li>
-  <li><a href="#git-como-registro-metodológico" id="toc-git-como-registro-metodológico" class="nav-link" data-scroll-target="#git-como-registro-metodológico"><span class="header-section-number">8.12</span> Git como registro metodológico</a></li>
-  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">8.13</span> Síntese</a></li>
-  <li><a href="#referências-de-instalação-e-consulta" id="toc-referências-de-instalação-e-consulta" class="nav-link" data-scroll-target="#referências-de-instalação-e-consulta"><span class="header-section-number">8.14</span> Referências de instalação e consulta</a></li>
-  <li><a href="#slides-da-aula" id="toc-slides-da-aula" class="nav-link" data-scroll-target="#slides-da-aula"><span class="header-section-number">8.15</span> Slides da aula</a></li>
+  <li><a href="#ssh-e-token-de-acesso-cumprem-funções-diferentes" id="toc-ssh-e-token-de-acesso-cumprem-funções-diferentes" class="nav-link" data-scroll-target="#ssh-e-token-de-acesso-cumprem-funções-diferentes"><span class="header-section-number">8.10</span> SSH e token de acesso cumprem funções diferentes</a>
+  <ul class="collapse">
+  <li><a href="#o-procedimento-realizado-em-aula" id="toc-o-procedimento-realizado-em-aula" class="nav-link" data-scroll-target="#o-procedimento-realizado-em-aula"><span class="header-section-number">8.10.1</span> O procedimento realizado em aula</a></li>
+  <li><a href="#criação-responsável-de-um-token" id="toc-criação-responsável-de-um-token" class="nav-link" data-scroll-target="#criação-responsável-de-um-token"><span class="header-section-number">8.10.2</span> Criação responsável de um token</a></li>
+  <li><a href="#tokens-usados-por-programas-do-r" id="toc-tokens-usados-por-programas-do-r" class="nav-link" data-scroll-target="#tokens-usados-por-programas-do-r"><span class="header-section-number">8.10.3</span> Tokens usados por programas do R</a></li>
+  </ul></li>
+  <li><a href="#o-arquivo-.gitignore" id="toc-o-arquivo-.gitignore" class="nav-link" data-scroll-target="#o-arquivo-.gitignore"><span class="header-section-number">8.11</span> O arquivo <code>.gitignore</code></a></li>
+  <li><a href="#o-que-não-deve-ser-versionado" id="toc-o-que-não-deve-ser-versionado" class="nav-link" data-scroll-target="#o-que-não-deve-ser-versionado"><span class="header-section-number">8.12</span> O que não deve ser versionado</a>
+  <ul class="collapse">
+  <li><a href="#credenciais-e-segredos" id="toc-credenciais-e-segredos" class="nav-link" data-scroll-target="#credenciais-e-segredos"><span class="header-section-number">8.12.1</span> Credenciais e segredos</a></li>
+  <li><a href="#dados-pessoais-ou-sigilosos" id="toc-dados-pessoais-ou-sigilosos" class="nav-link" data-scroll-target="#dados-pessoais-ou-sigilosos"><span class="header-section-number">8.12.2</span> Dados pessoais ou sigilosos</a></li>
+  <li><a href="#arquivos-locais-ou-temporários" id="toc-arquivos-locais-ou-temporários" class="nav-link" data-scroll-target="#arquivos-locais-ou-temporários"><span class="header-section-number">8.12.3</span> Arquivos locais ou temporários</a></li>
+  <li><a href="#produtos-gerados" id="toc-produtos-gerados" class="nav-link" data-scroll-target="#produtos-gerados"><span class="header-section-number">8.12.4</span> Produtos gerados</a></li>
+  </ul></li>
+  <li><a href="#uma-verificação-antes-de-registrar-ou-enviar" id="toc-uma-verificação-antes-de-registrar-ou-enviar" class="nav-link" data-scroll-target="#uma-verificação-antes-de-registrar-ou-enviar"><span class="header-section-number">8.13</span> Uma verificação antes de registrar ou enviar</a></li>
+  <li><a href="#git-como-registro-metodológico" id="toc-git-como-registro-metodológico" class="nav-link" data-scroll-target="#git-como-registro-metodológico"><span class="header-section-number">8.14</span> Git como registro metodológico</a></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">8.15</span> Síntese</a></li>
+  <li><a href="#referências-de-instalação-e-consulta" id="toc-referências-de-instalação-e-consulta" class="nav-link" data-scroll-target="#referências-de-instalação-e-consulta"><span class="header-section-number">8.16</span> Referências de instalação e consulta</a></li>
+  <li><a href="#slides-da-aula" id="toc-slides-da-aula" class="nav-link" data-scroll-target="#slides-da-aula"><span class="header-section-number">8.17</span> Slides da aula</a></li>
   </ul>
 </nav>
     </div>
@@ -422,6 +439,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>distinguir Git de GitHub;</li>
 <li>instalar e verificar o Git no Windows;</li>
 <li>criar uma conta no GitHub e reconhecer suas configurações iniciais;</li>
+<li>configurar e testar a autenticação por SSH no Windows;</li>
+<li>distinguir a autenticação por SSH do uso de tokens de acesso;</li>
 <li>compreender o que constitui um repositório local;</li>
 <li>reconhecer a diferença entre histórico local e repositório remoto;</li>
 <li>identificar arquivos que não devem ser versionados;</li>
@@ -489,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Após concluir o assistente, feche e reabra o terminal do Positron. Verifique a instalação:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O terminal deve informar a versão encontrada. Se o comando não for reconhecido, reinicie o Positron e verifique se o instalador incluiu o Git no <code>PATH</code> do Windows.</p>
-<div id="fig-git-install" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Página oficial do Git com as opções de instalação para Windows x64 e ARM64.">
+<div id="fig-git-install" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Página oficial do Git com as opções de instalação para Windows x64 e ARM64." data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-git-install-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/git_install.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Página oficial do Git com as opções de instalação para Windows x64 e ARM64.">
@@ -618,8 +637,223 @@ Figura&nbsp;8.1: Página oficial de instalação do Git para Windows.
 </div>
 </section>
 </section>
-<section id="o-arquivo-.gitignore" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="o-arquivo-.gitignore"><span class="header-section-number">8.9</span> O arquivo <code>.gitignore</code></h2>
+<section id="autenticação-entre-o-computador-e-o-github" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="autenticação-entre-o-computador-e-o-github"><span class="header-section-number">8.9</span> Autenticação entre o computador e o GitHub</h2>
+<p>Até este ponto, o Git está instalado, a autoria dos registros foi configurada e a conta do GitHub foi criada. Ainda falta autorizar a comunicação entre o computador e a plataforma. Nesta seção, essa autenticação será configurada por <strong>SSH</strong> (<em>Secure Shell Protocol</em>).</p>
+<p>O SSH utiliza um par de chaves relacionadas:</p>
+<ul>
+<li>a <strong>chave privada</strong> permanece no computador e não deve ser compartilhada;</li>
+<li>a <strong>chave pública</strong> é cadastrada na conta do GitHub.</li>
+</ul>
+<p>Quando o computador inicia uma conexão, o GitHub verifica se a chave privada apresentada corresponde à chave pública cadastrada. A chave privada não é enviada ao GitHub. Esse procedimento permite autenticar o computador sem inserir a senha da conta em cada operação.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="A chave pública pode ser compartilhada; a chave privada, não">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>A chave pública pode ser compartilhada; a chave privada, não
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Os dois arquivos costumam ter nomes semelhantes. O arquivo da chave pública termina em <code>.pub</code>. O arquivo de mesmo nome sem essa extensão contém a chave privada. Não copie, envie ou inclua a chave privada em um repositório, conversa, gravação ou captura de tela.</p>
+</div>
+</div>
+<p>O procedimento a seguir acompanha a sequência realizada em aula e a <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">documentação oficial do GitHub</a>. Os comandos foram adaptados ao PowerShell e ao terminal do Positron no Windows.</p>
+<section id="etapa-1-verificar-se-já-existem-chaves" class="level3" data-number="8.9.1">
+<h3 data-number="8.9.1" class="anchored" data-anchor-id="etapa-1-verificar-se-já-existem-chaves"><span class="header-section-number">8.9.1</span> Etapa 1 — verificar se já existem chaves</h3>
+<p>Abra o terminal do Positron e execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-ChildItem</span> <span class="st">"</span><span class="va">$HOME</span><span class="st">\.ssh"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O comando consulta a pasta oculta <code>.ssh</code> da conta atual do Windows. Se ela não existir, o terminal informará que o caminho não foi encontrado. Isso não representa um problema: a pasta será criada na etapa seguinte.</p>
+<p>Se aparecerem arquivos como <code>id_ed25519</code> e <code>id_ed25519.pub</code>, já existe um par de chaves. Antes de criar outra chave, verifique se a chave pública já está cadastrada no GitHub. Não substitua uma chave existente sem conhecer os serviços que a utilizam.</p>
+</section>
+<section id="etapa-2-gerar-o-par-de-chaves" class="level3" data-number="8.9.2">
+<h3 data-number="8.9.2" class="anchored" data-anchor-id="etapa-2-gerar-o-par-de-chaves"><span class="header-section-number">8.9.2</span> Etapa 2 — gerar o par de chaves</h3>
+<p>No mesmo terminal, execute o comando abaixo, substituindo o endereço pelo correio eletrônico associado à conta do GitHub:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ssh-keygen <span class="op">-</span>t ed25519 <span class="op">-</span>C <span class="st">"endereco@exemplo.com"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O programa solicitará três informações.</p>
+<ol type="1">
+<li><strong>Local do arquivo:</strong> pressione <strong>Enter</strong> para aceitar o caminho sugerido, desde que ele não substitua uma chave existente.</li>
+<li><strong>Frase secreta:</strong> informe uma frase secreta para proteger a chave privada.</li>
+<li><strong>Confirmação:</strong> digite novamente a mesma frase.</li>
+</ol>
+<p>Durante a digitação da frase secreta, nenhum caractere aparece na tela. Esse comportamento é esperado. Ao final, o terminal informa os caminhos da chave privada e da chave pública e apresenta uma imagem textual denominada <em>randomart</em>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Por que utilizar uma frase secreta?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Por que utilizar uma frase secreta?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A frase secreta acrescenta proteção caso outra pessoa obtenha uma cópia da chave privada. O <code>ssh-agent</code>, configurado na próxima etapa, pode manter essa autorização durante a sessão para evitar que a frase seja repetida a cada operação.</p>
+</div>
+</div>
+</section>
+<section id="etapa-3-iniciar-o-serviço-ssh-agent" class="level3" data-number="8.9.3">
+<h3 data-number="8.9.3" class="anchored" data-anchor-id="etapa-3-iniciar-o-serviço-ssh-agent"><span class="header-section-number">8.9.3</span> Etapa 3 — iniciar o serviço <code>ssh-agent</code></h3>
+<p>No Windows, a configuração inicial do serviço pode exigir permissão administrativa. Feche o terminal comum, procure <strong>PowerShell</strong> no menu Iniciar e selecione <strong>Executar como administrador</strong>. Nessa janela, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Service</span> <span class="op">-</span>Name ssh-agent <span class="op">|</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Set-Service</span> <span class="op">-</span>StartupType Manual</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">Start-Service</span> ssh-agent</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O primeiro comando permite que o serviço seja iniciado quando necessário. O segundo inicia o serviço. A ausência de uma mensagem após <code>Start-Service</code> geralmente indica que o comando foi concluído.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Use a janela administrativa somente nesta etapa">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Use a janela administrativa somente nesta etapa
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Depois de iniciar o serviço, feche o PowerShell aberto como administrador. Os comandos seguintes devem ser executados no terminal comum do Positron. Essa separação reduz o risco de alterar arquivos ou executar programas com permissões administrativas sem necessidade.</p>
+</div>
+</div>
+</section>
+<section id="etapa-4-adicionar-a-chave-privada-ao-agente" class="level3" data-number="8.9.4">
+<h3 data-number="8.9.4" class="anchored" data-anchor-id="etapa-4-adicionar-a-chave-privada-ao-agente"><span class="header-section-number">8.9.4</span> Etapa 4 — adicionar a chave privada ao agente</h3>
+<p>De volta ao terminal comum do Positron, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ssh-add <span class="st">"</span><span class="va">$HOME</span><span class="st">\.ssh\id_ed25519"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Se a chave tiver outro nome, substitua <code>id_ed25519</code> pelo nome correspondente. O programa poderá solicitar a frase secreta criada anteriormente. Uma mensagem com a expressão <code>Identity added</code> confirma que a chave foi adicionada.</p>
+<p>Para conferir as chaves mantidas pelo agente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ssh-add <span class="op">-</span>l</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="etapa-5-copiar-somente-a-chave-pública" class="level3" data-number="8.9.5">
+<h3 data-number="8.9.5" class="anchored" data-anchor-id="etapa-5-copiar-somente-a-chave-pública"><span class="header-section-number">8.9.5</span> Etapa 5 — copiar somente a chave pública</h3>
+<p>Consulte novamente os arquivos da pasta <code>.ssh</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-ChildItem</span> <span class="st">"</span><span class="va">$HOME</span><span class="st">\.ssh"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Confirme que o arquivo escolhido termina em <code>.pub</code>. Depois, copie seu conteúdo para a área de transferência:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Content</span> <span class="st">"</span><span class="va">$HOME</span><span class="st">\.ssh\id_ed25519.pub"</span> <span class="op">|</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Set-Clipboard</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esse comando não apresenta a chave na tela. Ele apenas copia o conteúdo do arquivo público. Se a chave tiver outro nome, ajuste o caminho.</p>
+</section>
+<section id="etapa-6-cadastrar-a-chave-pública-no-github" class="level3" data-number="8.9.6">
+<h3 data-number="8.9.6" class="anchored" data-anchor-id="etapa-6-cadastrar-a-chave-pública-no-github"><span class="header-section-number">8.9.6</span> Etapa 6 — cadastrar a chave pública no GitHub</h3>
+<p>Com a chave pública na área de transferência:</p>
+<ol type="1">
+<li>entre na conta do GitHub;</li>
+<li>selecione a fotografia do perfil e abra <strong>Settings</strong>;</li>
+<li>na seção <strong>Access</strong>, abra <strong>SSH and GPG keys</strong>;</li>
+<li>selecione <strong>New SSH key</strong> ou <strong>Add SSH key</strong>;</li>
+<li>em <strong>Title</strong>, escreva um nome que permita reconhecer o computador, como <code>Notebook pessoal</code>;</li>
+<li>em <strong>Key type</strong>, escolha <strong>Authentication Key</strong>;</li>
+<li>cole a chave pública no campo <strong>Key</strong>;</li>
+<li>selecione <strong>Add SSH key</strong> e confirme a identidade, se solicitado.</li>
+</ol>
+<p>O título não precisa seguir uma convenção técnica. Sua função é permitir que o titular da conta reconheça e revogue a chave de um computador que tenha sido substituído, perdido ou deixado de usar.</p>
+</section>
+<section id="etapa-7-testar-a-conexão" class="level3" data-number="8.9.7">
+<h3 data-number="8.9.7" class="anchored" data-anchor-id="etapa-7-testar-a-conexão"><span class="header-section-number">8.9.7</span> Etapa 7 — testar a conexão</h3>
+<p>No terminal comum, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ssh <span class="op">-</span>T git@github<span class="op">.</span><span class="fu">com</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Na primeira conexão, o terminal poderá informar que ainda não reconhece o servidor e apresentar sua impressão digital. Compare-a com as <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints">impressões digitais publicadas pelo GitHub</a>. Se os valores coincidirem, responda <code>yes</code>.</p>
+<p>Uma configuração correta produz uma mensagem semelhante a esta:</p>
+<pre class="text"><code>Hi NOME-DE-USUARIO! You've successfully authenticated,
+but GitHub does not provide shell access.</code></pre>
+<p>A mensagem confirma a autenticação. A referência à ausência de acesso ao <em>shell</em> não é um erro: o GitHub aceita a conexão para operações Git, mas não oferece uma sessão interativa no servidor. Segundo a documentação oficial, esse teste também pode terminar com código de saída <code>1</code>, mesmo quando a autenticação foi bem-sucedida.</p>
+</section>
+<section id="se-aparecer-permission-denied-publickey" class="level3" data-number="8.9.8">
+<h3 data-number="8.9.8" class="anchored" data-anchor-id="se-aparecer-permission-denied-publickey"><span class="header-section-number">8.9.8</span> Se aparecer <code>Permission denied (publickey)</code></h3>
+<p>Essa mensagem indica que o GitHub não conseguiu relacionar a conexão a uma chave pública autorizada. Verifique, nesta ordem:</p>
+<ol type="1">
+<li>se a chave privada foi adicionada ao agente com <code>ssh-add -l</code>;</li>
+<li>se a chave cadastrada no GitHub é a pública, terminada em <code>.pub</code>;</li>
+<li>se a chave foi cadastrada na conta correta;</li>
+<li>se o comando utiliza exatamente <code>git@github.com</code>;</li>
+<li>se o serviço <code>ssh-agent</code> está ativo.</li>
+</ol>
+<p>No Windows, o OpenSSH do sistema e o programa incluído no Git para Windows podem coexistir. Se o teste funcionar, mas o Git continuar solicitando credenciais ou ignorando a chave, a documentação do GitHub recomenda indicar explicitamente o OpenSSH do Windows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>git config <span class="op">--</span>global core<span class="op">.</span><span class="fu">sshCommand</span> <span class="st">"C:/Windows/System32/OpenSSH/ssh.exe"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esse comando deve ser usado apenas quando houver esse conflito. Ele não é necessário em uma instalação que já utiliza a chave corretamente.</p>
+</section>
+</section>
+<section id="ssh-e-token-de-acesso-cumprem-funções-diferentes" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="ssh-e-token-de-acesso-cumprem-funções-diferentes"><span class="header-section-number">8.10</span> SSH e token de acesso cumprem funções diferentes</h2>
+<p>Na aula, depois da configuração do SSH, também foi criado um token. Os dois mecanismos não constituem duas metades da mesma conexão e não precisam ser usados simultaneamente em todas as atividades.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mecanismo</th>
+<th>O que autentica ou autoriza</th>
+<th>Uso principal neste livro</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SSH</td>
+<td>o computador diante do GitHub</td>
+<td>operações Git com um endereço remoto SSH</td>
+</tr>
+<tr class="even">
+<td>token de acesso pessoal</td>
+<td>um programa ou uma operação com permissões definidas</td>
+<td>acesso por HTTPS ou à API do GitHub</td>
+</tr>
+</tbody>
+</table>
+<p>O token pertence à conta que o criou. Ele não pertence necessariamente a um projeto, mas suas permissões podem e devem ser limitadas a determinados repositórios e tarefas. Um token utilizado por um pacote do R para consultar a API do GitHub, por exemplo, tem função diferente da chave SSH utilizada pelo Git para sincronizar um repositório.</p>
+<p>Quando o endereço remoto utiliza SSH, a chave SSH é suficiente para as operações Git usuais. Criar um token adicional apenas para <code>pull</code> e <code>push</code> não é necessário. Um token pode ser exigido quando um programa acessa a API do GitHub ou quando a conexão utiliza HTTPS.</p>
+<section id="o-procedimento-realizado-em-aula" class="level3" data-number="8.10.1">
+<h3 data-number="8.10.1" class="anchored" data-anchor-id="o-procedimento-realizado-em-aula"><span class="header-section-number">8.10.1</span> O procedimento realizado em aula</h3>
+<p>Na atividade realizada em aula, o percurso adotado foi:</p>
+<ol type="1">
+<li>abrir <strong>Settings → Developer settings → Personal access tokens → Tokens (classic)</strong>;</li>
+<li>selecionar <strong>Generate new token (classic)</strong>;</li>
+<li>atribuir um nome ao token e definir validade de 90 dias;</li>
+<li>marcar todas as permissões apresentadas;</li>
+<li>gerar e copiar o token, que não voltaria a ser exibido pelo GitHub;</li>
+<li>guardar temporariamente o valor em um arquivo local não versionado;</li>
+<li>solicitar ao agente executado no ambiente local que transferisse o valor para o arquivo <code>.Renviron</code>, sem reproduzir o token na conversa.</li>
+</ol>
+<p>Nesse procedimento, o token não foi digitado no chat. Ele permaneceu em arquivos locais durante a transferência. Isso reduz a exposição na conversa, mas não significa que o agente não tenha acessado o segredo: para ler o arquivo de origem e escrever o arquivo de destino, o programa recebeu acesso ao conteúdo. Por essa razão, a operação somente deve ser realizada com um agente local autorizado, em arquivos excluídos do controle de versões e após a conferência dos caminhos envolvidos.</p>
+<p>O procedimento descreve o que foi feito na aula. A seleção de todas as permissões produziu um token amplo, adequado ao conjunto de atividades então previsto, mas também aumentou o alcance da credencial. Em novos projetos, as permissões devem ser definidas de acordo com a finalidade do token.</p>
+</section>
+<section id="criação-responsável-de-um-token" class="level3" data-number="8.10.2">
+<h3 data-number="8.10.2" class="anchored" data-anchor-id="criação-responsável-de-um-token"><span class="header-section-number">8.10.2</span> Criação responsável de um token</h3>
+<p>Os menus e os tipos de token podem mudar. Consulte sempre a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">documentação oficial sobre tokens de acesso pessoal</a>. Em termos gerais, o percurso começa em:</p>
+<p><strong>Settings → Developer settings → Personal access tokens</strong></p>
+<p>Quando o serviço utilizado aceitar esse formato, prefira um token com permissões específicas (<em>fine-grained personal access token</em>). Durante a criação:</p>
+<ol type="1">
+<li>identifique a finalidade do token;</li>
+<li>estabeleça uma data de expiração;</li>
+<li>limite o acesso aos repositórios necessários;</li>
+<li>conceda somente as permissões exigidas pela atividade;</li>
+<li>copie o token quando ele for apresentado;</li>
+<li>revogue-o quando deixar de ser necessário.</li>
+</ol>
+<p>Não selecione todas as permissões por conveniência. Um token permite realizar ações em nome de sua conta dentro dos limites concedidos. Quanto mais amplas forem as permissões, maior será o impacto de uma exposição.</p>
+</section>
+<section id="tokens-usados-por-programas-do-r" class="level3" data-number="8.10.3">
+<h3 data-number="8.10.3" class="anchored" data-anchor-id="tokens-usados-por-programas-do-r"><span class="header-section-number">8.10.3</span> Tokens usados por programas do R</h3>
+<p>Alguns pacotes do R podem precisar de um token para consultar a API do GitHub. Nesses casos, a credencial pode ser disponibilizada por uma variável de ambiente. O arquivo usual do R recebe o nome <code>.Renviron</code>; <code>R_ENVIRON</code> é o nome de uma variável que pode apontar para outro arquivo de configuração e não deve ser confundido com o nome padrão do arquivo.</p>
+<p>O token pode ser inserido pelo próprio usuário ou transferido por uma ferramenta local autorizada. Em qualquer dos casos, o procedimento não deve expor o valor no código, no histórico do terminal ou em uma conversa. O arquivo <code>.Renviron</code>, assim como <code>.env</code>, deve permanecer fora do controle de versões.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Não exponha o segredo na conversa">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Não exponha o segredo na conversa
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Não cole tokens, senhas ou chaves privadas em conversas com o Codex, Claude Code ou outro sistema. Quando uma ferramenta local for utilizada para transportar uma credencial entre arquivos, limite a autorização aos arquivos necessários, confirme que ambos estão fora do controle de versões e determine expressamente que o valor não seja exibido na conversa nem nos registros da execução.</p>
+<p>Se um segredo for exibido em aula, gravação, captura de tela, conversa ou repositório, considere-o exposto e revogue-o antes de criar outro.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="o-arquivo-.gitignore" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="o-arquivo-.gitignore"><span class="header-section-number">8.11</span> O arquivo <code>.gitignore</code></h2>
 <p>O <code>.gitignore</code> declara padrões de arquivos que o Git deve deixar fora do acompanhamento. Um projeto de pesquisa pode começar com:</p>
 <pre class="gitignore"><code># Sessão local do R
 .Rhistory
@@ -641,28 +875,28 @@ dados/identificados/</code></pre>
 <p>Em projetos Python administrados pelo <code>uv</code>, apenas <code>.venv/</code> é excluída. Os arquivos <code>pyproject.toml</code>, <code>.python-version</code> e <code>uv.lock</code> documentam a versão do Python e as dependências e, por isso, devem permanecer no controle de versões. Depois de obter o repositório, outro participante poderá executar <code>uv sync</code> para reconstruir o ambiente local.</p>
 <p>O <code>.gitignore</code> atua preventivamente. Se um arquivo já foi incorporado ao histórico, acrescentá-lo depois ao <code>.gitignore</code> não elimina as versões anteriores.</p>
 </section>
-<section id="o-que-não-deve-ser-versionado" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="o-que-não-deve-ser-versionado"><span class="header-section-number">8.10</span> O que não deve ser versionado</h2>
+<section id="o-que-não-deve-ser-versionado" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="o-que-não-deve-ser-versionado"><span class="header-section-number">8.12</span> O que não deve ser versionado</h2>
 <p>Em pesquisas jurídicas, a revisão deve considerar pelo menos quatro grupos.</p>
-<section id="credenciais-e-segredos" class="level3" data-number="8.10.1">
-<h3 data-number="8.10.1" class="anchored" data-anchor-id="credenciais-e-segredos"><span class="header-section-number">8.10.1</span> Credenciais e segredos</h3>
+<section id="credenciais-e-segredos" class="level3" data-number="8.12.1">
+<h3 data-number="8.12.1" class="anchored" data-anchor-id="credenciais-e-segredos"><span class="header-section-number">8.12.1</span> Credenciais e segredos</h3>
 <p>Senhas, chaves de API, tokens de acesso e arquivos <code>.env</code> não devem ser registrados no repositório. O código deve obter esses valores de variáveis de ambiente ou de mecanismos próprios de gerenciamento de credenciais.</p>
 </section>
-<section id="dados-pessoais-ou-sigilosos" class="level3" data-number="8.10.2">
-<h3 data-number="8.10.2" class="anchored" data-anchor-id="dados-pessoais-ou-sigilosos"><span class="header-section-number">8.10.2</span> Dados pessoais ou sigilosos</h3>
+<section id="dados-pessoais-ou-sigilosos" class="level3" data-number="8.12.2">
+<h3 data-number="8.12.2" class="anchored" data-anchor-id="dados-pessoais-ou-sigilosos"><span class="header-section-number">8.12.2</span> Dados pessoais ou sigilosos</h3>
 <p>Documentos processuais, bases identificadas e informações sujeitas a sigilo exigem avaliação própria. A disponibilidade pública do documento em uma fonte não elimina automaticamente os deveres de proteção, contextualização e uso adequado.</p>
 </section>
-<section id="arquivos-locais-ou-temporários" class="level3" data-number="8.10.3">
-<h3 data-number="8.10.3" class="anchored" data-anchor-id="arquivos-locais-ou-temporários"><span class="header-section-number">8.10.3</span> Arquivos locais ou temporários</h3>
+<section id="arquivos-locais-ou-temporários" class="level3" data-number="8.12.3">
+<h3 data-number="8.12.3" class="anchored" data-anchor-id="arquivos-locais-ou-temporários"><span class="header-section-number">8.12.3</span> Arquivos locais ou temporários</h3>
 <p>Caches, históricos de sessão, ambientes virtuais e arquivos temporários dependem do computador e costumam ser reconstruídos. Incluí-los aumenta o repositório sem documentar uma decisão de pesquisa.</p>
 </section>
-<section id="produtos-gerados" class="level3" data-number="8.10.4">
-<h3 data-number="8.10.4" class="anchored" data-anchor-id="produtos-gerados"><span class="header-section-number">8.10.4</span> Produtos gerados</h3>
+<section id="produtos-gerados" class="level3" data-number="8.12.4">
+<h3 data-number="8.12.4" class="anchored" data-anchor-id="produtos-gerados"><span class="header-section-number">8.12.4</span> Produtos gerados</h3>
 <p>HTML, tabelas e figuras podem ser reconstruídos a partir das fontes, mas alguns projetos precisam versioná-los para publicação. A decisão depende da forma de distribuição. Neste livro, por exemplo, os arquivos de <code>docs/</code> integram a publicação da página, embora sejam gerados pelos arquivos-fonte.</p>
 </section>
 </section>
-<section id="uma-verificação-antes-de-registrar-ou-enviar" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="uma-verificação-antes-de-registrar-ou-enviar"><span class="header-section-number">8.11</span> Uma verificação antes de registrar ou enviar</h2>
+<section id="uma-verificação-antes-de-registrar-ou-enviar" class="level2" data-number="8.13">
+<h2 data-number="8.13" class="anchored" data-anchor-id="uma-verificação-antes-de-registrar-ou-enviar"><span class="header-section-number">8.13</span> Uma verificação antes de registrar ou enviar</h2>
 <p>Antes de criar uma versão ou publicar mudanças, examine:</p>
 <ul>
 <li>quais arquivos foram modificados;</li>
@@ -675,14 +909,14 @@ dados/identificados/</code></pre>
 </ul>
 <p>A documentação do GitHub recomenda revisar individualmente os arquivos selecionados e evitar comandos indiscriminados quando houver risco de incorporar conteúdo sensível.</p>
 </section>
-<section id="git-como-registro-metodológico" class="level2" data-number="8.12">
-<h2 data-number="8.12" class="anchored" data-anchor-id="git-como-registro-metodológico"><span class="header-section-number">8.12</span> Git como registro metodológico</h2>
+<section id="git-como-registro-metodológico" class="level2" data-number="8.14">
+<h2 data-number="8.14" class="anchored" data-anchor-id="git-como-registro-metodológico"><span class="header-section-number">8.14</span> Git como registro metodológico</h2>
 <p>O histórico do Git não registra apenas programação. Em uma pesquisa, ele pode documentar quando uma variável foi redefinida, quando um critério de inclusão foi alterado ou quando um texto foi revisto após nova verificação. Para cumprir essa função, cada versão precisa reunir mudanças relacionadas e receber uma descrição informativa.</p>
 <p>O Git não explica por si só o fundamento de uma decisão. Critérios de coleta, limpeza e análise também devem aparecer nos documentos metodológicos do projeto.</p>
 </section>
-<section id="síntese" class="level2" data-number="8.13">
-<h2 data-number="8.13" class="anchored" data-anchor-id="síntese"><span class="header-section-number">8.13</span> Síntese</h2>
-<p>Neste capítulo, distinguimos Git e GitHub, verificamos a instalação do Git e identificamos as funções do repositório local e do remoto. Também discutimos o papel do <code>.gitignore</code> e os riscos associados a credenciais, dados jurídicos protegidos e arquivos gerados.</p>
+<section id="síntese" class="level2" data-number="8.15">
+<h2 data-number="8.15" class="anchored" data-anchor-id="síntese"><span class="header-section-number">8.15</span> Síntese</h2>
+<p>Neste capítulo, distinguimos Git e GitHub, verificamos a instalação do Git e identificamos as funções do repositório local e do remoto. Configuramos a autenticação do computador por SSH e diferenciamos esse mecanismo dos tokens utilizados por programas, conexões HTTPS e acesso à API. Também discutimos o papel do <code>.gitignore</code> e os riscos associados a credenciais, dados jurídicos protegidos e arquivos gerados.</p>
 <p>O capítulo não executou o fluxo completo de envio e recebimento de versões. Essas operações serão feitas quando houver um projeto definido e uma decisão expressa sobre o repositório remoto.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Antes de avançar">
 <div class="callout-header d-flex align-content-center">
@@ -697,6 +931,9 @@ dados/identificados/</code></pre>
 <ul class="task-list">
 <li><label><input type="checkbox">O comando <code>git --version</code> funciona no terminal?</label></li>
 <li><label><input type="checkbox">Sei distinguir repositório local de remoto?</label></li>
+<li><label><input type="checkbox">A chave privada permanece somente no computador?</label></li>
+<li><label><input type="checkbox">O teste <code>ssh -T git@github.com</code> identifica minha conta?</label></li>
+<li><label><input type="checkbox">Sei distinguir a finalidade da chave SSH e a de um token?</label></li>
 <li><label><input type="checkbox">A raiz do projeto está identificada?</label></li>
 <li><label><input type="checkbox">O <code>.gitignore</code> protege arquivos locais e dados não publicáveis?</label></li>
 <li><label><input type="checkbox">Nenhuma credencial aparece nos arquivos do projeto?</label></li>
@@ -705,18 +942,22 @@ dados/identificados/</code></pre>
 </div>
 </div>
 </section>
-<section id="referências-de-instalação-e-consulta" class="level2" data-number="8.14">
-<h2 data-number="8.14" class="anchored" data-anchor-id="referências-de-instalação-e-consulta"><span class="header-section-number">8.14</span> Referências de instalação e consulta</h2>
+<section id="referências-de-instalação-e-consulta" class="level2" data-number="8.16">
+<h2 data-number="8.16" class="anchored" data-anchor-id="referências-de-instalação-e-consulta"><span class="header-section-number">8.16</span> Referências de instalação e consulta</h2>
 <ul>
 <li><a href="https://git-scm.com/install/windows">Instalação do Git no Windows</a></li>
 <li><a href="https://docs.github.com/en/get-started/start-your-journey/what-is-github">Diferença entre Git e GitHub</a></li>
 <li><a href="https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address">Configuração do endereço associado aos commits</a></li>
+<li><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Geração de uma chave SSH e configuração do agente</a></li>
+<li><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">Cadastro de uma chave SSH na conta do GitHub</a></li>
+<li><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection">Teste da conexão SSH</a></li>
+<li><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">Gerenciamento de tokens de acesso pessoal</a></li>
 <li><a href="https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files">Como ignorar arquivos</a></li>
 <li><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository">Prevenção da inclusão de dados sensíveis</a></li>
 </ul>
 </section>
-<section id="slides-da-aula" class="level2" data-number="8.15">
-<h2 data-number="8.15" class="anchored" data-anchor-id="slides-da-aula"><span class="header-section-number">8.15</span> Slides da aula</h2>
+<section id="slides-da-aula" class="level2" data-number="8.17">
+<h2 data-number="8.17" class="anchored" data-anchor-id="slides-da-aula"><span class="header-section-number">8.17</span> Slides da aula</h2>
 <p><a href="../slides/ambiente-trabalho/git-github/index.html" class="btn btn-primary" target="_blank">Ver os slides — Git e GitHub</a></p>
 
 

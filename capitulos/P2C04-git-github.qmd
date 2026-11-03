@@ -20,6 +20,8 @@ Ao final deste capítulo, você deverá ser capaz de:
 - distinguir Git de GitHub;
 - instalar e verificar o Git no Windows;
 - criar uma conta no GitHub e reconhecer suas configurações iniciais;
+- configurar e testar a autenticação por SSH no Windows;
+- distinguir a autenticação por SSH do uso de tokens de acesso;
 - compreender o que constitui um repositório local;
 - reconhecer a diferença entre histórico local e repositório remoto;
 - identificar arquivos que não devem ser versionados;
@@ -200,6 +202,223 @@ Uma versão local correta não deve ser enviada automaticamente. Antes da public
 
 :::
 
+## Autenticação entre o computador e o GitHub
+
+Até este ponto, o Git está instalado, a autoria dos registros foi configurada e a conta do GitHub foi criada. Ainda falta autorizar a comunicação entre o computador e a plataforma. Nesta seção, essa autenticação será configurada por **SSH** (*Secure Shell Protocol*).
+
+O SSH utiliza um par de chaves relacionadas:
+
+- a **chave privada** permanece no computador e não deve ser compartilhada;
+- a **chave pública** é cadastrada na conta do GitHub.
+
+Quando o computador inicia uma conexão, o GitHub verifica se a chave privada apresentada corresponde à chave pública cadastrada. A chave privada não é enviada ao GitHub. Esse procedimento permite autenticar o computador sem inserir a senha da conta em cada operação.
+
+::: {.callout-important title="A chave pública pode ser compartilhada; a chave privada, não"}
+
+Os dois arquivos costumam ter nomes semelhantes. O arquivo da chave pública termina em `.pub`. O arquivo de mesmo nome sem essa extensão contém a chave privada. Não copie, envie ou inclua a chave privada em um repositório, conversa, gravação ou captura de tela.
+
+:::
+
+O procedimento a seguir acompanha a sequência realizada em aula e a [documentação oficial do GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). Os comandos foram adaptados ao PowerShell e ao terminal do Positron no Windows.
+
+### Etapa 1 — verificar se já existem chaves
+
+Abra o terminal do Positron e execute:
+
+```powershell
+Get-ChildItem "$HOME\.ssh"
+```
+
+O comando consulta a pasta oculta `.ssh` da conta atual do Windows. Se ela não existir, o terminal informará que o caminho não foi encontrado. Isso não representa um problema: a pasta será criada na etapa seguinte.
+
+Se aparecerem arquivos como `id_ed25519` e `id_ed25519.pub`, já existe um par de chaves. Antes de criar outra chave, verifique se a chave pública já está cadastrada no GitHub. Não substitua uma chave existente sem conhecer os serviços que a utilizam.
+
+### Etapa 2 — gerar o par de chaves
+
+No mesmo terminal, execute o comando abaixo, substituindo o endereço pelo correio eletrônico associado à conta do GitHub:
+
+```powershell
+ssh-keygen -t ed25519 -C "endereco@exemplo.com"
+```
+
+O programa solicitará três informações.
+
+1. **Local do arquivo:** pressione **Enter** para aceitar o caminho sugerido, desde que ele não substitua uma chave existente.
+2. **Frase secreta:** informe uma frase secreta para proteger a chave privada.
+3. **Confirmação:** digite novamente a mesma frase.
+
+Durante a digitação da frase secreta, nenhum caractere aparece na tela. Esse comportamento é esperado. Ao final, o terminal informa os caminhos da chave privada e da chave pública e apresenta uma imagem textual denominada *randomart*.
+
+::: {.callout-note title="Por que utilizar uma frase secreta?"}
+
+A frase secreta acrescenta proteção caso outra pessoa obtenha uma cópia da chave privada. O `ssh-agent`, configurado na próxima etapa, pode manter essa autorização durante a sessão para evitar que a frase seja repetida a cada operação.
+
+:::
+
+### Etapa 3 — iniciar o serviço `ssh-agent`
+
+No Windows, a configuração inicial do serviço pode exigir permissão administrativa. Feche o terminal comum, procure **PowerShell** no menu Iniciar e selecione **Executar como administrador**. Nessa janela, execute:
+
+```powershell
+Get-Service -Name ssh-agent |
+  Set-Service -StartupType Manual
+
+Start-Service ssh-agent
+```
+
+O primeiro comando permite que o serviço seja iniciado quando necessário. O segundo inicia o serviço. A ausência de uma mensagem após `Start-Service` geralmente indica que o comando foi concluído.
+
+::: {.callout-warning title="Use a janela administrativa somente nesta etapa"}
+
+Depois de iniciar o serviço, feche o PowerShell aberto como administrador. Os comandos seguintes devem ser executados no terminal comum do Positron. Essa separação reduz o risco de alterar arquivos ou executar programas com permissões administrativas sem necessidade.
+
+:::
+
+### Etapa 4 — adicionar a chave privada ao agente
+
+De volta ao terminal comum do Positron, execute:
+
+```powershell
+ssh-add "$HOME\.ssh\id_ed25519"
+```
+
+Se a chave tiver outro nome, substitua `id_ed25519` pelo nome correspondente. O programa poderá solicitar a frase secreta criada anteriormente. Uma mensagem com a expressão `Identity added` confirma que a chave foi adicionada.
+
+Para conferir as chaves mantidas pelo agente:
+
+```powershell
+ssh-add -l
+```
+
+### Etapa 5 — copiar somente a chave pública
+
+Consulte novamente os arquivos da pasta `.ssh`:
+
+```powershell
+Get-ChildItem "$HOME\.ssh"
+```
+
+Confirme que o arquivo escolhido termina em `.pub`. Depois, copie seu conteúdo para a área de transferência:
+
+```powershell
+Get-Content "$HOME\.ssh\id_ed25519.pub" |
+  Set-Clipboard
+```
+
+Esse comando não apresenta a chave na tela. Ele apenas copia o conteúdo do arquivo público. Se a chave tiver outro nome, ajuste o caminho.
+
+### Etapa 6 — cadastrar a chave pública no GitHub
+
+Com a chave pública na área de transferência:
+
+1. entre na conta do GitHub;
+2. selecione a fotografia do perfil e abra **Settings**;
+3. na seção **Access**, abra **SSH and GPG keys**;
+4. selecione **New SSH key** ou **Add SSH key**;
+5. em **Title**, escreva um nome que permita reconhecer o computador, como `Notebook pessoal`;
+6. em **Key type**, escolha **Authentication Key**;
+7. cole a chave pública no campo **Key**;
+8. selecione **Add SSH key** e confirme a identidade, se solicitado.
+
+O título não precisa seguir uma convenção técnica. Sua função é permitir que o titular da conta reconheça e revogue a chave de um computador que tenha sido substituído, perdido ou deixado de usar.
+
+### Etapa 7 — testar a conexão
+
+No terminal comum, execute:
+
+```powershell
+ssh -T git@github.com
+```
+
+Na primeira conexão, o terminal poderá informar que ainda não reconhece o servidor e apresentar sua impressão digital. Compare-a com as [impressões digitais publicadas pelo GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints). Se os valores coincidirem, responda `yes`.
+
+Uma configuração correta produz uma mensagem semelhante a esta:
+
+```text
+Hi NOME-DE-USUARIO! You've successfully authenticated,
+but GitHub does not provide shell access.
+```
+
+A mensagem confirma a autenticação. A referência à ausência de acesso ao *shell* não é um erro: o GitHub aceita a conexão para operações Git, mas não oferece uma sessão interativa no servidor. Segundo a documentação oficial, esse teste também pode terminar com código de saída `1`, mesmo quando a autenticação foi bem-sucedida.
+
+### Se aparecer `Permission denied (publickey)`
+
+Essa mensagem indica que o GitHub não conseguiu relacionar a conexão a uma chave pública autorizada. Verifique, nesta ordem:
+
+1. se a chave privada foi adicionada ao agente com `ssh-add -l`;
+2. se a chave cadastrada no GitHub é a pública, terminada em `.pub`;
+3. se a chave foi cadastrada na conta correta;
+4. se o comando utiliza exatamente `git@github.com`;
+5. se o serviço `ssh-agent` está ativo.
+
+No Windows, o OpenSSH do sistema e o programa incluído no Git para Windows podem coexistir. Se o teste funcionar, mas o Git continuar solicitando credenciais ou ignorando a chave, a documentação do GitHub recomenda indicar explicitamente o OpenSSH do Windows:
+
+```powershell
+git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe"
+```
+
+Esse comando deve ser usado apenas quando houver esse conflito. Ele não é necessário em uma instalação que já utiliza a chave corretamente.
+
+## SSH e token de acesso cumprem funções diferentes
+
+Na aula, depois da configuração do SSH, também foi criado um token. Os dois mecanismos não constituem duas metades da mesma conexão e não precisam ser usados simultaneamente em todas as atividades.
+
+| Mecanismo | O que autentica ou autoriza | Uso principal neste livro |
+|---|---|---|
+| SSH | o computador diante do GitHub | operações Git com um endereço remoto SSH |
+| token de acesso pessoal | um programa ou uma operação com permissões definidas | acesso por HTTPS ou à API do GitHub |
+
+O token pertence à conta que o criou. Ele não pertence necessariamente a um projeto, mas suas permissões podem e devem ser limitadas a determinados repositórios e tarefas. Um token utilizado por um pacote do R para consultar a API do GitHub, por exemplo, tem função diferente da chave SSH utilizada pelo Git para sincronizar um repositório.
+
+Quando o endereço remoto utiliza SSH, a chave SSH é suficiente para as operações Git usuais. Criar um token adicional apenas para `pull` e `push` não é necessário. Um token pode ser exigido quando um programa acessa a API do GitHub ou quando a conexão utiliza HTTPS.
+
+### O procedimento realizado em aula
+
+Na atividade realizada em aula, o percurso adotado foi:
+
+1. abrir **Settings → Developer settings → Personal access tokens → Tokens (classic)**;
+2. selecionar **Generate new token (classic)**;
+3. atribuir um nome ao token e definir validade de 90 dias;
+4. marcar todas as permissões apresentadas;
+5. gerar e copiar o token, que não voltaria a ser exibido pelo GitHub;
+6. guardar temporariamente o valor em um arquivo local não versionado;
+7. solicitar ao agente executado no ambiente local que transferisse o valor para o arquivo `.Renviron`, sem reproduzir o token na conversa.
+
+Nesse procedimento, o token não foi digitado no chat. Ele permaneceu em arquivos locais durante a transferência. Isso reduz a exposição na conversa, mas não significa que o agente não tenha acessado o segredo: para ler o arquivo de origem e escrever o arquivo de destino, o programa recebeu acesso ao conteúdo. Por essa razão, a operação somente deve ser realizada com um agente local autorizado, em arquivos excluídos do controle de versões e após a conferência dos caminhos envolvidos.
+
+O procedimento descreve o que foi feito na aula. A seleção de todas as permissões produziu um token amplo, adequado ao conjunto de atividades então previsto, mas também aumentou o alcance da credencial. Em novos projetos, as permissões devem ser definidas de acordo com a finalidade do token.
+
+### Criação responsável de um token
+
+Os menus e os tipos de token podem mudar. Consulte sempre a [documentação oficial sobre tokens de acesso pessoal](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens). Em termos gerais, o percurso começa em:
+
+**Settings → Developer settings → Personal access tokens**
+
+Quando o serviço utilizado aceitar esse formato, prefira um token com permissões específicas (*fine-grained personal access token*). Durante a criação:
+
+1. identifique a finalidade do token;
+2. estabeleça uma data de expiração;
+3. limite o acesso aos repositórios necessários;
+4. conceda somente as permissões exigidas pela atividade;
+5. copie o token quando ele for apresentado;
+6. revogue-o quando deixar de ser necessário.
+
+Não selecione todas as permissões por conveniência. Um token permite realizar ações em nome de sua conta dentro dos limites concedidos. Quanto mais amplas forem as permissões, maior será o impacto de uma exposição.
+
+### Tokens usados por programas do R
+
+Alguns pacotes do R podem precisar de um token para consultar a API do GitHub. Nesses casos, a credencial pode ser disponibilizada por uma variável de ambiente. O arquivo usual do R recebe o nome `.Renviron`; `R_ENVIRON` é o nome de uma variável que pode apontar para outro arquivo de configuração e não deve ser confundido com o nome padrão do arquivo.
+
+O token pode ser inserido pelo próprio usuário ou transferido por uma ferramenta local autorizada. Em qualquer dos casos, o procedimento não deve expor o valor no código, no histórico do terminal ou em uma conversa. O arquivo `.Renviron`, assim como `.env`, deve permanecer fora do controle de versões.
+
+::: {.callout-important title="Não exponha o segredo na conversa"}
+
+Não cole tokens, senhas ou chaves privadas em conversas com o Codex, Claude Code ou outro sistema. Quando uma ferramenta local for utilizada para transportar uma credencial entre arquivos, limite a autorização aos arquivos necessários, confirme que ambos estão fora do controle de versões e determine expressamente que o valor não seja exibido na conversa nem nos registros da execução.
+
+Se um segredo for exibido em aula, gravação, captura de tela, conversa ou repositório, considere-o exposto e revogue-o antes de criar outro.
+
+:::
+
 ## O arquivo `.gitignore`
 
 O `.gitignore` declara padrões de arquivos que o Git deve deixar fora do acompanhamento. Um projeto de pesquisa pode começar com:
@@ -271,7 +490,7 @@ O Git não explica por si só o fundamento de uma decisão. Critérios de coleta
 
 ## Síntese
 
-Neste capítulo, distinguimos Git e GitHub, verificamos a instalação do Git e identificamos as funções do repositório local e do remoto. Também discutimos o papel do `.gitignore` e os riscos associados a credenciais, dados jurídicos protegidos e arquivos gerados.
+Neste capítulo, distinguimos Git e GitHub, verificamos a instalação do Git e identificamos as funções do repositório local e do remoto. Configuramos a autenticação do computador por SSH e diferenciamos esse mecanismo dos tokens utilizados por programas, conexões HTTPS e acesso à API. Também discutimos o papel do `.gitignore` e os riscos associados a credenciais, dados jurídicos protegidos e arquivos gerados.
 
 O capítulo não executou o fluxo completo de envio e recebimento de versões. Essas operações serão feitas quando houver um projeto definido e uma decisão expressa sobre o repositório remoto.
 
@@ -279,6 +498,9 @@ O capítulo não executou o fluxo completo de envio e recebimento de versões. E
 
 - [ ] O comando `git --version` funciona no terminal?
 - [ ] Sei distinguir repositório local de remoto?
+- [ ] A chave privada permanece somente no computador?
+- [ ] O teste `ssh -T git@github.com` identifica minha conta?
+- [ ] Sei distinguir a finalidade da chave SSH e a de um token?
 - [ ] A raiz do projeto está identificada?
 - [ ] O `.gitignore` protege arquivos locais e dados não publicáveis?
 - [ ] Nenhuma credencial aparece nos arquivos do projeto?
@@ -291,6 +513,10 @@ O capítulo não executou o fluxo completo de envio e recebimento de versões. E
 - [Instalação do Git no Windows](https://git-scm.com/install/windows)
 - [Diferença entre Git e GitHub](https://docs.github.com/en/get-started/start-your-journey/what-is-github)
 - [Configuração do endereço associado aos commits](https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address)
+- [Geração de uma chave SSH e configuração do agente](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+- [Cadastro de uma chave SSH na conta do GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+- [Teste da conexão SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection)
+- [Gerenciamento de tokens de acesso pessoal](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
 - [Como ignorar arquivos](https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files)
 - [Prevenção da inclusão de dados sensíveis](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)
 
