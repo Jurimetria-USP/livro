@@ -359,12 +359,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#objetos-e-gráficos" id="toc-objetos-e-gráficos" class="nav-link" data-scroll-target="#objetos-e-gráficos"><span class="header-section-number">7.5.5</span> Objetos e gráficos</a></li>
   </ul></li>
   <li><a href="#selecionando-r-ou-python" id="toc-selecionando-r-ou-python" class="nav-link" data-scroll-target="#selecionando-r-ou-python"><span class="header-section-number">7.6</span> Selecionando R ou Python</a></li>
-  <li><a href="#ambiente-virtual-do-python-no-projeto" id="toc-ambiente-virtual-do-python-no-projeto" class="nav-link" data-scroll-target="#ambiente-virtual-do-python-no-projeto"><span class="header-section-number">7.7</span> Ambiente virtual do Python no projeto</a>
+  <li><a href="#gerenciamento-do-python-com-uv" id="toc-gerenciamento-do-python-com-uv" class="nav-link" data-scroll-target="#gerenciamento-do-python-com-uv"><span class="header-section-number">7.7</span> Gerenciamento do Python com <code>uv</code></a>
   <ul class="collapse">
-  <li><a href="#conferindo-uma-versão-compatível" id="toc-conferindo-uma-versão-compatível" class="nav-link" data-scroll-target="#conferindo-uma-versão-compatível"><span class="header-section-number">7.7.1</span> Conferindo uma versão compatível</a></li>
-  <li><a href="#criando-o-ambiente-no-terminal-integrado" id="toc-criando-o-ambiente-no-terminal-integrado" class="nav-link" data-scroll-target="#criando-o-ambiente-no-terminal-integrado"><span class="header-section-number">7.7.2</span> Criando o ambiente no terminal integrado</a></li>
-  <li><a href="#iniciando-a-sessão-python-no-positron" id="toc-iniciando-a-sessão-python-no-positron" class="nav-link" data-scroll-target="#iniciando-a-sessão-python-no-positron"><span class="header-section-number">7.7.3</span> Iniciando a sessão Python no Positron</a></li>
-  <li><a href="#ambiente-virtual-e-controle-de-versões" id="toc-ambiente-virtual-e-controle-de-versões" class="nav-link" data-scroll-target="#ambiente-virtual-e-controle-de-versões"><span class="header-section-number">7.7.4</span> Ambiente virtual e controle de versões</a></li>
+  <li><a href="#instalação-do-uv-no-windows" id="toc-instalação-do-uv-no-windows" class="nav-link" data-scroll-target="#instalação-do-uv-no-windows"><span class="header-section-number">7.7.1</span> Instalação do <code>uv</code> no Windows</a></li>
+  <li><a href="#preparação-de-um-projeto" id="toc-preparação-de-um-projeto" class="nav-link" data-scroll-target="#preparação-de-um-projeto"><span class="header-section-number">7.7.2</span> Preparação de um projeto</a></li>
+  <li><a href="#arquivos-criados-pelo-uv" id="toc-arquivos-criados-pelo-uv" class="nav-link" data-scroll-target="#arquivos-criados-pelo-uv"><span class="header-section-number">7.7.3</span> Arquivos criados pelo <code>uv</code></a></li>
+  <li><a href="#execução-sem-ativação-manual" id="toc-execução-sem-ativação-manual" class="nav-link" data-scroll-target="#execução-sem-ativação-manual"><span class="header-section-number">7.7.4</span> Execução sem ativação manual</a></li>
+  <li><a href="#iniciando-a-sessão-python-no-positron" id="toc-iniciando-a-sessão-python-no-positron" class="nav-link" data-scroll-target="#iniciando-a-sessão-python-no-positron"><span class="header-section-number">7.7.5</span> Iniciando a sessão Python no Positron</a></li>
+  <li><a href="#uv-e-controle-de-versões" id="toc-uv-e-controle-de-versões" class="nav-link" data-scroll-target="#uv-e-controle-de-versões"><span class="header-section-number">7.7.6</span> <code>uv</code> e controle de versões</a></li>
   </ul></li>
   <li><a href="#o-que-é-o-quarto" id="toc-o-que-é-o-quarto" class="nav-link" data-scroll-target="#o-que-é-o-quarto"><span class="header-section-number">7.8</span> O que é o Quarto?</a></li>
   <li><a href="#instalação-e-verificação-do-quarto" id="toc-instalação-e-verificação-do-quarto" class="nav-link" data-scroll-target="#instalação-e-verificação-do-quarto"><span class="header-section-number">7.9</span> Instalação e verificação do Quarto</a>
@@ -435,7 +437,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>instalar e abrir o Positron no Windows;</li>
 <li>reconhecer editor, console, terminal, Explorer, objetos e gráficos;</li>
 <li>selecionar uma instalação de R ou Python;</li>
-<li>criar e selecionar um ambiente virtual de Python para o projeto;</li>
+<li>instalar o <code>uv</code> e utilizá-lo para administrar Python e as dependências do projeto;</li>
 <li>instalar e verificar o Quarto;</li>
 <li>compreender quando o Jupyter é necessário para executar Python em documentos Quarto;</li>
 <li>criar e renderizar um documento <code>.qmd</code> mínimo;</li>
@@ -481,7 +483,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>concluir a instalação e abrir o programa.</li>
 </ol>
 <p>No Windows, a documentação do Positron também recomenda manter atualizado o Microsoft Visual C++ Redistributable. O Positron exige uma versão compatível do R para iniciar uma sessão dessa linguagem; versões antigas podem ser encontradas no computador, mas desconsideradas pela IDE.</p>
-<div id="fig-positron-download" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Página oficial do Positron com os botões de download para Windows x64 e ARM64.">
+<div id="fig-positron-download" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Página oficial do Positron com os botões de download para Windows x64 e ARM64." data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-positron-download-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/install_positron.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Página oficial do Positron com os botões de download para Windows x64 e ARM64.">
@@ -518,7 +520,7 @@ Figura&nbsp;7.1: Página oficial de download do Positron com as opções para Wi
 </section>
 <section id="componentes-do-positron" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="componentes-do-positron"><span class="header-section-number">7.5</span> Componentes do Positron</h2>
-<div id="fig-positron-componentes" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Captura da interface do Positron com marcações para Editor, Console, Terminal, Variables, Explorer e Plots.">
+<div id="fig-positron-componentes" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Captura da interface do Positron com marcações para Editor, Console, Terminal, Variables, Explorer e Plots." data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-positron-componentes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="../figuras/positron-ambiente-anotado.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;7.2: Principais componentes do ambiente de trabalho no Positron: editor, console, terminal, painel de objetos, Explorer com a raiz do projeto e painel de gráficos."><img src="../figuras/positron-ambiente-anotado.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Captura da interface do Positron com marcações para Editor, Console, Terminal, Variables, Explorer e Plots."></a>
@@ -587,66 +589,109 @@ Figura&nbsp;7.2: Principais componentes do ambiente de trabalho no Positron: edi
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.version)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Quando uma instalação de R não aparece, primeiro verifique se ela está em uma pasta padrão do Windows, como <code>C:\Program Files\R</code>. A indicação manual de um executável é uma medida de diagnóstico, não uma etapa obrigatória da instalação comum.</p>
 </section>
-<section id="ambiente-virtual-do-python-no-projeto" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="ambiente-virtual-do-python-no-projeto"><span class="header-section-number">7.7</span> Ambiente virtual do Python no projeto</h2>
-<p>O <strong>interpretador</strong> é o programa que executa o código Python. A instalação principal disponibiliza um interpretador no sistema. Um ambiente virtual cria um espaço isolado que utiliza uma versão de Python e um conjunto próprio de pacotes.</p>
-<p>Em regra, cria-se um ambiente virtual para cada projeto, e não para cada arquivo ou programa. Essa separação evita que a atualização exigida por um trabalho modifique o funcionamento de outro. A pasta do ambiente costuma receber o nome <code>.venv</code> e permanece na raiz do projeto.</p>
-<p>O ambiente virtual não contém os códigos, os dados ou os documentos da pesquisa e não restringe o Python à pasta do projeto. Quando o ambiente está selecionado ou ativado, os comandos utilizam o interpretador e os pacotes associados àquele trabalho. Fora dele, o interpretador instalado no sistema continua disponível.</p>
-<p>O ambiente de Python também é independente da sessão de R. O Positron pode manter uma sessão de R aberta e, ao mesmo tempo, utilizar uma <code>.venv</code> para executar códigos em Python.</p>
-<section id="conferindo-uma-versão-compatível" class="level3" data-number="7.7.1">
-<h3 data-number="7.7.1" class="anchored" data-anchor-id="conferindo-uma-versão-compatível"><span class="header-section-number">7.7.1</span> Conferindo uma versão compatível</h3>
-<p>O Positron pode localizar uma versão do Python e ainda classificá-la como <strong>Unsupported</strong>. Isso significa que a instalação existe, mas não é compatível com a versão atual da IDE. No momento da preparação deste material, utilizamos Python 3.14. Para verificar as versões instaladas, abra o terminal integrado pelo menu <strong>Terminal &gt; New Terminal</strong> e execute:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>py list</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Se Python 3.14 não estiver disponível, instale-o pelo Python Install Manager:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>py install <span class="dv">3.14</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="gerenciamento-do-python-com-uv" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="gerenciamento-do-python-com-uv"><span class="header-section-number">7.7</span> Gerenciamento do Python com <code>uv</code></h2>
+<p>O <strong>interpretador</strong> executa o código Python. Os pacotes acrescentam funcionalidades utilizadas pelo projeto. Para impedir que as dependências de um trabalho interfiram em outro, utilizaremos o <code>uv</code> como gerenciador de versões, pacotes e ambientes Python.</p>
+<p>O <code>uv</code> é instalado uma vez no Windows e pode ser usado em todos os projetos. Em cada pasta, ele registra a versão de Python e as dependências necessárias. Internamente, o <code>uv</code> cria uma pasta <code>.venv</code>, mas o aluno não precisa utilizar <code>python -m venv</code>, instalar pacotes com <code>pip</code> nem ativar manualmente o ambiente. Os comandos serão executados por meio de <code>uv run</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="`uv` e `.venv` não são a mesma coisa">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span><code>uv</code> e <code>.venv</code> não são a mesma coisa
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Neste livro, <code>uv</code> é a ferramenta responsável por criar e administrar o ambiente Python do projeto. <code>.venv</code> é apenas o nome da pasta local em que esse ambiente é armazenado. A presença dessa pasta não significa que o procedimento antigo com <code>python -m venv</code> esteja sendo utilizado. O ambiente será criado ou reconstruído pelo <code>uv</code>, e os comandos Python serão executados com <code>uv run</code>.</p>
+<p>O Jupyter também será registrado e instalado pelo <code>uv</code>. Essa dependência permanecerá disponível para os capítulos e projetos que venham a executar blocos Python durante a renderização de documentos Quarto.</p>
+</div>
+</div>
+<section id="instalação-do-uv-no-windows" class="level3" data-number="7.7.1">
+<h3 data-number="7.7.1" class="anchored" data-anchor-id="instalação-do-uv-no-windows"><span class="header-section-number">7.7.1</span> Instalação do <code>uv</code> no Windows</h3>
+<p>No terminal integrado do Positron, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>winget install <span class="op">--</span>id<span class="op">=</span>astral-sh<span class="op">.</span><span class="fu">uv</span> <span class="op">-</span>e</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Depois da instalação, feche completamente o Positron, abra-o novamente e verifique:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>uv <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Se o comando funcionar em um terminal externo, mas não no Positron, a IDE ainda está utilizando a versão anterior da variável <code>PATH</code>. Reiniciar o Positron atualiza esse contexto.</p>
 </section>
-<section id="criando-o-ambiente-no-terminal-integrado" class="level3" data-number="7.7.2">
-<h3 data-number="7.7.2" class="anchored" data-anchor-id="criando-o-ambiente-no-terminal-integrado"><span class="header-section-number">7.7.2</span> Criando o ambiente no terminal integrado</h3>
-<p>Em um projeto existente, abra sua pasta principal no Positron. Em um projeto novo, crie a pasta, abra-a com <strong>File &gt; Open Folder</strong> e somente então prossiga. Use <strong>Terminal &gt; New Terminal</strong>; não abra um terminal separado pelo menu Iniciar do Windows.</p>
-<p>O terminal integrado pode apresentar <code>PS</code> no início da linha porque utiliza o PowerShell como shell no Windows. Antes de criar o ambiente, confirme a localização:</p>
+<section id="preparação-de-um-projeto" class="level3" data-number="7.7.2">
+<h3 data-number="7.7.2" class="anchored" data-anchor-id="preparação-de-um-projeto"><span class="header-section-number">7.7.2</span> Preparação de um projeto</h3>
+<p>Abra a pasta principal com <strong>File &gt; Open Folder</strong> e confirme a localização no terminal integrado:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Location</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>O caminho deve corresponder à raiz do projeto, e não a uma pasta do sistema como <code>C:\Windows\System32</code>. Em seguida, crie o ambiente explicitamente com Python 3.14:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>py <span class="op">-</span>V<span class="op">:</span><span class="dv">3.14</span> <span class="op">-</span>m venv <span class="op">.</span><span class="fu">venv</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>O comando cria a pasta <code>.venv</code>. Ao identificá-la, o Positron pode perguntar: <strong>“We noticed a new environment has been created. Do you want to select it for the workspace folder?”</strong>. Selecione <strong>Yes</strong>. Essa escolha associa o ambiente à pasta aberta no Positron e não encerra uma sessão de R que já esteja funcionando.</p>
+<p>O caminho deve corresponder à raiz do projeto, e não a uma pasta do sistema como <code>C:\Windows\System32</code>. Em uma pasta ainda não configurada, execute:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>uv init <span class="op">--</span>bare</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>uv python pin <span class="dv">3.14</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dt">uv</span> sync</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>uv init --bare</code> cria uma configuração mínima sem impor uma estrutura de pacote Python. <code>uv python pin 3.14</code> registra a versão escolhida. <code>uv sync</code> cria ou atualiza o ambiente administrado pelo projeto.</p>
+</section>
+<section id="arquivos-criados-pelo-uv" class="level3" data-number="7.7.3">
+<h3 data-number="7.7.3" class="anchored" data-anchor-id="arquivos-criados-pelo-uv"><span class="header-section-number">7.7.3</span> Arquivos criados pelo <code>uv</code></h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Elemento</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>pyproject.toml</code></td>
+<td>declara o projeto e suas dependências</td>
+</tr>
+<tr class="even">
+<td><code>.python-version</code></td>
+<td>registra a versão de Python escolhida</td>
+</tr>
+<tr class="odd">
+<td><code>uv.lock</code></td>
+<td>fixa as versões resolvidas das dependências</td>
+</tr>
+<tr class="even">
+<td><code>.venv/</code></td>
+<td>contém o ambiente local reconstruível</td>
+</tr>
+</tbody>
+</table>
+<p>Os três primeiros arquivos documentam o ambiente e devem acompanhar o projeto. A pasta <code>.venv/</code> permanece apenas no computador e deve constar do <code>.gitignore</code>.</p>
+</section>
+<section id="execução-sem-ativação-manual" class="level3" data-number="7.7.4">
+<h3 data-number="7.7.4" class="anchored" data-anchor-id="execução-sem-ativação-manual"><span class="header-section-number">7.7.4</span> Execução sem ativação manual</h3>
+<p>Verifique a versão e o executável utilizados:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>uv run python <span class="op">--</span>version</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>uv run python <span class="op">-</span>c <span class="st">"import sys; print(sys.executable)"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O primeiro comando deve informar Python 3.14. O segundo deve apresentar o interpretador associado à pasta <code>.venv</code> do projeto. Não é necessário executar <code>Activate.ps1</code>; <code>uv run</code> seleciona automaticamente o ambiente correto.</p>
+</section>
+<section id="iniciando-a-sessão-python-no-positron" class="level3" data-number="7.7.5">
+<h3 data-number="7.7.5" class="anchored" data-anchor-id="iniciando-a-sessão-python-no-positron"><span class="header-section-number">7.7.5</span> Iniciando a sessão Python no Positron</h3>
+<p>Depois que o <code>uv</code> criar o ambiente, use a Paleta de Comandos (<code>Ctrl + Shift + P</code>) e execute <strong>Interpreter: Discover All Interpreters</strong>. Em seguida, execute <strong>Interpreter: Start New Console Session</strong> e selecione o Python localizado em <code>.venv\Scripts\python.exe</code>.</p>
+<p>O Positron pode perguntar se deve selecionar o novo ambiente para a pasta aberta. Selecione <strong>Yes</strong>. A sessão iniciada deve identificar Python 3.14 e a <code>.venv</code> do projeto. A <a href="#fig-python-sessao-venv" class="quarto-xref">Figura&nbsp;<span>7.4</span></a> mostra o resultado esperado e registra que sessões de Python e R podem permanecer disponíveis no mesmo ambiente de trabalho.</p>
 <div id="fig-python-selecionar-venv" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-python-selecionar-venv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/py_venv_select.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:70.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-selecionar-venv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;7.3: Seleção do ambiente virtual Python para a pasta de trabalho no Positron.
+Figura&nbsp;7.3: Seleção do ambiente Python administrado pelo <code>uv</code> para a pasta de trabalho no Positron.
 </figcaption>
 </figure>
 </div>
-<p>Para ativar o ambiente também no terminal integrado, execute:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\<span class="op">.</span><span class="fu">venv</span>\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Depois da ativação, o início da linha costuma apresentar <code>(.venv)</code>. Verifique a versão e o executável utilizados:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>python <span class="op">--</span>version</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>python <span class="op">-</span>c <span class="st">"import sys; print(sys.executable)"</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A primeira instrução deve informar Python 3.14. A segunda deve apresentar um caminho terminado em <code>.venv\Scripts\python.exe</code>.</p>
-</section>
-<section id="iniciando-a-sessão-python-no-positron" class="level3" data-number="7.7.3">
-<h3 data-number="7.7.3" class="anchored" data-anchor-id="iniciando-a-sessão-python-no-positron"><span class="header-section-number">7.7.3</span> Iniciando a sessão Python no Positron</h3>
-<p>Depois de criar o ambiente, use a Paleta de Comandos (<code>Ctrl + Shift + P</code>) e execute <strong>Interpreter: Discover All Interpreters</strong>. Em seguida, execute <strong>Interpreter: Start New Console Session</strong> e selecione o ambiente Python associado à pasta do projeto.</p>
-<p>A sessão iniciada deve identificar Python 3.14 e a <code>.venv</code> do projeto, sem a classificação <strong>Unsupported</strong>. A <a href="#fig-python-sessao-venv" class="quarto-xref">Figura&nbsp;<span>7.4</span></a> mostra o resultado esperado e também registra que as sessões de Python e R permanecem disponíveis no mesmo ambiente de trabalho.</p>
 <div id="fig-python-sessao-venv" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-python-sessao-venv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/py_venv_session.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-python-sessao-venv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;7.4: Sessão Python 3.14 iniciada no Positron com o ambiente virtual do projeto selecionado.
+Figura&nbsp;7.4: Sessão Python 3.14 iniciada no Positron com o ambiente do projeto selecionado.
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="ambiente-virtual-e-controle-de-versões" class="level3" data-number="7.7.4">
-<h3 data-number="7.7.4" class="anchored" data-anchor-id="ambiente-virtual-e-controle-de-versões"><span class="header-section-number">7.7.4</span> Ambiente virtual e controle de versões</h3>
-<p>A pasta <code>.venv</code> é reconstruível e não deve ser enviada ao repositório. O arquivo <code>.gitignore</code>, localizado na raiz do projeto, deve conter:</p>
+<section id="uv-e-controle-de-versões" class="level3" data-number="7.7.6">
+<h3 data-number="7.7.6" class="anchored" data-anchor-id="uv-e-controle-de-versões"><span class="header-section-number">7.7.6</span> <code>uv</code> e controle de versões</h3>
+<p>O <code>.gitignore</code> deve conter:</p>
 <pre class="gitignore"><code>.venv/</code></pre>
-<p>Essa regra mantém o ambiente no computador e impede que seus arquivos sejam incorporados ao controle de versões. O arquivo <code>.gitignore</code>, ao contrário, faz parte do projeto e deve ser preservado no repositório.</p>
-<p>Para encerrar a ativação do ambiente naquele terminal, execute:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>deactivate</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Essa regra exclui somente o ambiente reconstruível. <code>pyproject.toml</code>, <code>.python-version</code> e <code>uv.lock</code> devem permanecer disponíveis para que outra pessoa execute <code>uv sync</code> e reconstrua o mesmo ambiente.</p>
 </section>
 </section>
 <section id="o-que-é-o-quarto" class="level2" data-number="7.8">
@@ -657,7 +702,7 @@ Figura&nbsp;7.4: Sessão Python 3.14 iniciada no Positron com o ambiente virtual
 <section id="instalação-e-verificação-do-quarto" class="level2" data-number="7.9">
 <h2 data-number="7.9" class="anchored" data-anchor-id="instalação-e-verificação-do-quarto"><span class="header-section-number">7.9</span> Instalação e verificação do Quarto</h2>
 <p>No Windows, baixe o instalador <code>.msi</code> na <a href="https://quarto.org/docs/get-started/">página oficial de instalação do Quarto</a> e conclua o assistente. A <a href="#fig-quarto-download" class="quarto-xref">Figura&nbsp;<span>7.5</span></a> mostra onde localizar o instalador para Windows. Feche e reabra o terminal após a instalação.</p>
-<div id="fig-quarto-download" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Página oficial do Quarto com o instalador MSI para Windows.">
+<div id="fig-quarto-download" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Página oficial do Quarto com o instalador MSI para Windows." data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-quarto-download-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/quarto_install.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Página oficial do Quarto com o instalador MSI para Windows.">
@@ -668,11 +713,11 @@ Figura&nbsp;7.5: Página oficial do Quarto com o instalador para Windows.
 </figure>
 </div>
 <p>Primeiro, confirme que o comando está disponível:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>quarto <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>quarto <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Depois, execute a verificação geral:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>quarto check</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>quarto check</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O primeiro comando informa apenas a versão instalada. O segundo examina a instalação do Quarto e as integrações encontradas no computador, como R, <code>knitr</code>, Python e Jupyter. Nem todas essas integrações são obrigatórias: o resultado esperado depende das linguagens que o projeto utiliza. A <a href="#fig-quarto-check" class="quarto-xref">Figura&nbsp;<span>7.6</span></a> mostra uma verificação em um projeto que utiliza R e Python.</p>
-<div id="fig-quarto-check" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Terminal integrado do Positron executando quarto check e reconhecendo R, knitr, Python e Jupyter.">
+<div id="fig-quarto-check" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Terminal integrado do Positron executando quarto check e reconhecendo R, knitr, Python e Jupyter." data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-quarto-check-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/quarto_check.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Terminal integrado do Positron executando quarto check e reconhecendo R, knitr, Python e Jupyter.">
@@ -686,11 +731,11 @@ Figura&nbsp;7.6: Verificação geral do Quarto no terminal integrado do Positron
 <h3 data-number="7.9.1" class="anchored" data-anchor-id="jupyter-para-documentos-quarto-com-python"><span class="header-section-number">7.9.1</span> Jupyter para documentos Quarto com Python</h3>
 <p>A sessão Python do Positron não exige uma instalação separada do Jupyter. Para versões compatíveis do Python, o Positron fornece o kernel necessário para iniciar o console. Por isso, a sessão Python 3.14 pode funcionar antes da instalação do Jupyter no ambiente virtual.</p>
 <p>A situação é diferente quando um documento Quarto contém blocos executáveis de Python. Nesse caso, o Quarto utiliza o mecanismo do Jupyter para executar o código durante a renderização. Se o projeto utilizar somente blocos de R, essa instalação não é necessária.</p>
-<p>Para preparar a <code>.venv</code> para documentos Quarto com Python, abra o terminal integrado na raiz do projeto. Para evitar que o instalador utilize por engano outra versão disponível no sistema, indique diretamente o executável do ambiente virtual:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\<span class="op">.</span><span class="fu">venv</span>\Scripts\python<span class="op">.</span><span class="fu">exe</span> <span class="op">-</span>m pip install jupyter</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Esse comando instala o Jupyter especificamente na <code>.venv</code> do projeto, mesmo que o terminal ainda não esteja ativado. Depois da instalação, verifique o Jupyter pelo mesmo executável:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\<span class="op">.</span><span class="fu">venv</span>\Scripts\python<span class="op">.</span><span class="fu">exe</span> <span class="op">-</span>m jupyter <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="fig-jupyter-venv-versao" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Terminal integrado do Positron com a pasta .venv ativa e a lista de componentes e versões do Jupyter.">
+<p>Para preparar o projeto para documentos Quarto com Python, abra o terminal integrado na raiz e registre o Jupyter como dependência de desenvolvimento:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>uv add <span class="op">--</span>dev jupyter</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O <code>uv</code> atualiza <code>pyproject.toml</code> e <code>uv.lock</code>, instala os componentes na <code>.venv</code> e preserva a possibilidade de reconstrução. Verifique:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>uv run python <span class="op">-</span>m jupyter <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-jupyter-venv-versao" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Terminal integrado do Positron com a pasta .venv ativa e a lista de componentes e versões do Jupyter." data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-jupyter-venv-versao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/jupyter_venv_version.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Terminal integrado do Positron com a pasta .venv ativa e a lista de componentes e versões do Jupyter.">
@@ -700,11 +745,10 @@ Figura&nbsp;7.7: Verificação dos componentes do Jupyter instalados no ambiente
 </figcaption>
 </figure>
 </div>
-<p>A <a href="#fig-jupyter-venv-versao" class="quarto-xref">Figura&nbsp;<span>7.7</span></a> confirma que o comando foi executado com a <code>.venv</code> ativa e que os componentes utilizados pelo Quarto estão disponíveis. Alguns componentes opcionais podem aparecer como não instalados sem impedir a execução de documentos Quarto ou o uso do console do Positron.</p>
-<p>Por fim, confirme que a <code>.venv</code> está ativada no terminal e verifique se o Quarto reconhece essa integração:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\<span class="op">.</span><span class="fu">venv</span>\Scripts\Activate<span class="op">.</span><span class="fu">ps1</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>quarto check jupyter</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<p>O resultado deve registrar que a instalação do Python foi localizada, apresentar o caminho do interpretador dentro de <code>.venv</code> e identificar o Jupyter. Se aparecer um aviso de ambiente não ativado, retorne à ativação da <code>.venv</code> antes de instalar novamente qualquer pacote.</p>
+<p>A <a href="#fig-jupyter-venv-versao" class="quarto-xref">Figura&nbsp;<span>7.7</span></a> registra os componentes utilizados pelo Quarto. Alguns componentes opcionais podem aparecer como não instalados sem impedir a execução de documentos Quarto ou o uso do console do Positron.</p>
+<p>Por fim, execute a verificação do Quarto dentro do ambiente administrado pelo <code>uv</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>uv run quarto check jupyter</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O resultado deve registrar a instalação do Python, apresentar o interpretador do projeto e identificar o Jupyter.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Confirme o interpretador antes de instalar">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -715,7 +759,7 @@ Figura&nbsp;7.7: Verificação dos componentes do Jupyter instalados no ambiente
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Se a instalação utilizar um caminho externo à pasta <code>.venv</code>, interrompa o procedimento e retorne à raiz do projeto. A indicação explícita <code>.\.venv\Scripts\python.exe -m pip install jupyter</code> evita que outra versão do Python disponível no sistema receba os pacotes do projeto.</p>
+<p>Se <code>uv run python -c "import sys; print(sys.executable)"</code> indicar um caminho externo ao projeto, interrompa o procedimento e confirme a pasta aberta e os arquivos de configuração antes de instalar novamente qualquer dependência.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Ordem das ferramentas">
@@ -728,7 +772,7 @@ Figura&nbsp;7.7: Verificação dos componentes do Jupyter instalados no ambiente
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Primeiro instalamos Python e confirmamos seu funcionamento. Depois apresentamos o Positron e criamos a <code>.venv</code>. O Jupyter somente é instalado quando passamos a executar Python dentro de documentos Quarto.</p>
+<p>Primeiro instalamos Python e confirmamos seu funcionamento. Depois apresentamos o Positron e o <code>uv</code>, que administra o ambiente do projeto. O Jupyter somente é acrescentado quando passamos a executar Python dentro de documentos Quarto.</p>
 </div>
 </div>
 </section>
@@ -736,40 +780,40 @@ Figura&nbsp;7.7: Verificação dos componentes do Jupyter instalados no ambiente
 <section id="primeiro-documento-quarto" class="level2" data-number="7.10">
 <h2 data-number="7.10" class="anchored" data-anchor-id="primeiro-documento-quarto"><span class="header-section-number">7.10</span> Primeiro documento Quarto</h2>
 <p>Crie um arquivo chamado <code>exemplo.qmd</code> e insira:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Exemplo jurídico"</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Uma tabela simples</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>O documento combina texto, código e resultado.</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>::: {.cell}</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r .cell-code}</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>estados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Acre"</span>, <span class="st">"Alagoas"</span>, <span class="st">"Amapá"</span>)</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>feminicidios <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">31</span>, <span class="dv">8</span>)</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">estado =</span> estados, <span class="at">feminicidios =</span> feminicidios)</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-stdout}</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="in">   estado feminicidios</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="in">1    Acre           11</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="in">2 Alagoas           31</span></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="in">3   Amapá            8</span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Exemplo jurídico"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Uma tabela simples</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>O documento combina texto, código e resultado.</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>::: {.cell}</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{.r .cell-code}</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>estados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Acre"</span>, <span class="st">"Alagoas"</span>, <span class="st">"Amapá"</span>)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>feminicidios <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">31</span>, <span class="dv">8</span>)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">estado =</span> estados, <span class="at">feminicidios =</span> feminicidios)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>::: {.cell-output .cell-output-stdout}</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="in">   estado feminicidios</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="in">1    Acre           11</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="in">2 Alagoas           31</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="in">3   Amapá            8</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O bloco delimitado por <code>---</code> é o <strong>YAML</strong>. Ele deve começar na primeira linha do documento. O título e o formato são metadados; o restante contém a prosa e o bloco de código.</p>
 <p>No terminal, localizado na mesma pasta do arquivo, execute:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>quarto render exemplo<span class="op">.</span><span class="fu">qmd</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>quarto render exemplo<span class="op">.</span><span class="fu">qmd</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Em um documento isolado, o resultado <code>exemplo.html</code> tende a ser criado ao lado da fonte. Em um projeto Quarto, o arquivo <code>_quarto.yml</code> pode definir outro destino, como <code>docs/</code>. Portanto, a localização da saída depende da configuração do projeto.</p>
 </section>
 <section id="arquivo-fonte-e-arquivo-gerado" class="level2" data-number="7.11">
@@ -854,7 +898,9 @@ Figura&nbsp;7.7: Verificação dos componentes do Jupyter instalados no ambiente
 <li><label><input type="checkbox">A pasta principal está aberta no Explorer?</label></li>
 <li><label><input type="checkbox">Consigo distinguir editor, console e terminal?</label></li>
 <li><label><input type="checkbox">Sei qual versão do R ou do Python está ativa?</label></li>
-<li><label><input type="checkbox">A <code>.venv</code> foi criada na raiz do projeto com uma versão compatível do Python?</label></li>
+<li><label><input type="checkbox">O <code>uv</code> foi instalado e reconhecido no terminal do Positron?</label></li>
+<li><label><input type="checkbox"><code>.python-version</code> registra Python 3.14?</label></li>
+<li><label><input type="checkbox"><code>uv run python --version</code> utiliza a versão esperada?</label></li>
 <li><label><input type="checkbox">A regra <code>.venv/</code> está registrada no <code>.gitignore</code>?</label></li>
 <li><label><input type="checkbox">Os comandos <code>quarto --version</code> e <code>quarto check</code> reconhecem a instalação?</label></li>
 <li><label><input type="checkbox">Se o projeto usa blocos Python, o Jupyter está instalado na <code>.venv</code> e é reconhecido pelo Quarto?</label></li>
@@ -873,6 +919,8 @@ Figura&nbsp;7.7: Verificação dos componentes do Jupyter instalados no ambiente
 <li><a href="https://quarto.org/docs/get-started/">Instalação do Quarto</a></li>
 <li><a href="https://quarto.org/docs/computations/python.html">Uso de Python e Jupyter em documentos Quarto</a></li>
 <li><a href="https://quarto.org/docs/cli/check.html">Verificação da instalação do Quarto</a></li>
+<li><a href="https://docs.astral.sh/uv/getting-started/installation/">Instalação do <code>uv</code></a></li>
+<li><a href="https://docs.astral.sh/uv/guides/projects/">Projetos administrados pelo <code>uv</code></a></li>
 </ul>
 </section>
 <section id="slides-da-aula" class="level2" data-number="7.15">

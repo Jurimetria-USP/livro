@@ -192,6 +192,8 @@ dados/identificados/
 
 Se um arquivo sensível já entrou no histórico, apenas acrescentá-lo ao `.gitignore` não resolve o problema.
 
+Em projetos Python com `uv`, `.venv/` permanece ignorada. `pyproject.toml`, `.python-version` e `uv.lock` devem ser versionados, pois permitem reconstruir o ambiente com `uv sync`.
+
 ## Credenciais e segredos
 
 Nunca versione:

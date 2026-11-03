@@ -105,3 +105,13 @@ O primeiro capítulo corresponderá ao conteúdo do capítulo original até a se
 **Decisão:** a redação do livro adotará linguagem acadêmica, direta e precisa, sem adjetivação avaliativa. Listas serão utilizadas apenas quando contribuírem para classificações, enumerações técnicas, limitações, atividades ou verificações.
 
 **Justificativa:** o padrão favorece a clareza argumentativa e distingue a exposição analítica da linguagem própria de apresentações.
+
+## 27 de outubro de 2026
+
+### Gerenciamento do ambiente Python
+
+**Decisão:** os projetos apresentados na Parte II utilizarão `uv` para selecionar a versão do Python, registrar dependências e administrar o ambiente local. O percurso principal não utilizará a criação manual com `python -m venv`, a instalação direta com `pip` nem a ativação manual do ambiente.
+
+O `uv` poderá criar internamente a pasta `.venv`, que permanecerá no `.gitignore`. Os arquivos `pyproject.toml`, `.python-version` e `uv.lock` integrarão o projeto e permitirão reconstruir o ambiente com `uv sync`.
+
+**Justificativa:** o procedimento centraliza a versão do Python e as dependências em arquivos reproduzíveis e reduz diferenças de configuração entre os participantes.

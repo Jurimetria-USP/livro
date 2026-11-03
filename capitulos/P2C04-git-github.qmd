@@ -225,6 +225,8 @@ dados/identificados/
 
 Esse arquivo deve ser adaptado ao projeto. Ignorar toda a pasta de dados pode impedir o versionamento de bases públicas ou simuladas que deveriam acompanhar o código. Por outro lado, bases identificadas ou protegidas não devem entrar em um repositório público.
 
+Em projetos Python administrados pelo `uv`, apenas `.venv/` é excluída. Os arquivos `pyproject.toml`, `.python-version` e `uv.lock` documentam a versão do Python e as dependências e, por isso, devem permanecer no controle de versões. Depois de obter o repositório, outro participante poderá executar `uv sync` para reconstruir o ambiente local.
+
 O `.gitignore` atua preventivamente. Se um arquivo já foi incorporado ao histórico, acrescentá-lo depois ao `.gitignore` não elimina as versões anteriores.
 
 ## O que não deve ser versionado

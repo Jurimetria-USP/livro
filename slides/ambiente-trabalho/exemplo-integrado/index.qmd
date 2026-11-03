@@ -27,9 +27,10 @@ Os dados são ilustrativos e não sustentam conclusões sobre os estados.
 4. Publicação no GitHub
 5. Colaboração
 6. Estrutura orientada por agente
-7. Dados e verificação
-8. Relatório Quarto
-9. Nova versão
+7. Ambiente Python com `uv`
+8. Dados e verificação
+9. Relatório Quarto
+10. Nova versão
 
 ## Antes de começar
 
@@ -151,9 +152,12 @@ exemplo-juridico/
 │   ├── criar_dados.R
 │   └── verificar_dados.py
 ├── AGENTS.md
+├── .python-version
 ├── .gitignore
+├── pyproject.toml
 ├── README.md
-└── relatorio.qmd
+├── relatorio.qmd
+└── uv.lock
 ```
 
 ## 9. Criar `AGENTS.md`
@@ -171,7 +175,32 @@ Este é um projeto didático de análise de dados jurídicos.
 - Informe exatamente o que mudou.
 ```
 
-## 10. Produzir a base em R {.secao background-color="#071739"}
+## 10. Preparar Python com `uv` {.secao background-color="#071739"}
+
+Na raiz do projeto:
+
+```powershell
+uv init --bare
+uv python pin 3.14
+uv sync
+```
+
+O `uv` registra a versão e cria o ambiente automaticamente.
+
+## Verificar o ambiente
+
+```powershell
+uv run python --version
+uv run python -c "import sys; print(sys.executable)"
+```
+
+Outro participante poderá reconstruir o ambiente com:
+
+```powershell
+uv sync
+```
+
+## 11. Produzir a base em R {.secao background-color="#071739"}
 
 ```r
 estados <- c("Acre", "Alagoas", "Amapá")
@@ -200,7 +229,7 @@ dados_crimes
 
 Execute `scripts/criar_dados.R` e confirme o arquivo no Explorer.
 
-## 11. Verificar em Python
+## 12. Verificar em Python
 
 ```python
 import csv
@@ -235,12 +264,12 @@ print(f"Número de observações: {len(linhas)}")
 No terminal da raiz:
 
 ```powershell
-python scripts/verificar_dados.py
+uv run python scripts/verificar_dados.py
 ```
 
 Python não refaz a análise. Ele confirma que o arquivo existe, contém observações e possui as colunas esperadas.
 
-## 12. Criar o relatório Quarto {.secao background-color="#071739"}
+## 13. Criar o relatório Quarto {.secao background-color="#071739"}
 
 ```yaml
 ---
@@ -287,7 +316,7 @@ quarto render relatorio.qmd
 
 O HTML é produzido a partir da fonte `.qmd`. Objetos que existem apenas na sessão desaparecem quando ela termina; os procedimentos necessários permanecem nos scripts.
 
-## 13. Registrar a nova etapa {.secao background-color="#071739"}
+## 14. Registrar a nova etapa {.secao background-color="#071739"}
 
 No painel **Source Control**:
 
@@ -320,6 +349,7 @@ O pedido define arquivos, ações proibidas e produto esperado.
 |---|---|
 | R | cria a base e calcula |
 | Python | verifica o CSV |
+| `uv` | administra Python e as dependências |
 | Positron | reúne arquivos, sessões e terminal |
 | Quarto | combina explicação, código e resultado |
 | Git | registra versões locais |
@@ -331,6 +361,8 @@ O pedido define arquivos, ações proibidas e produto esperado.
 - [ ] A pasta aberta é a raiz correta?
 - [ ] R produz o CSV?
 - [ ] Python verifica sem alterar os dados?
+- [ ] `uv run python --version` utiliza Python 3.14?
+- [ ] Os arquivos do `uv` estão preservados?
 - [ ] Quarto produz o HTML?
 - [ ] Distingo commit, push, pull e sync?
 - [ ] O colaborador utiliza sua própria conta?

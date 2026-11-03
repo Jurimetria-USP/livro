@@ -489,7 +489,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Após concluir o assistente, feche e reabra o terminal do Positron. Verifique a instalação:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O terminal deve informar a versão encontrada. Se o comando não for reconhecido, reinicie o Positron e verifique se o instalador incluiu o Git no <code>PATH</code> do Windows.</p>
-<div id="fig-git-install" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Página oficial do Git com as opções de instalação para Windows x64 e ARM64." data-fig-align="center">
+<div id="fig-git-install" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Página oficial do Git com as opções de instalação para Windows x64 e ARM64.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-git-install-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/git_install.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Página oficial do Git com as opções de instalação para Windows x64 e ARM64.">
@@ -638,6 +638,7 @@ Figura&nbsp;8.1: Página oficial de instalação do Git para Windows.
 dados/sensiveis/
 dados/identificados/</code></pre>
 <p>Esse arquivo deve ser adaptado ao projeto. Ignorar toda a pasta de dados pode impedir o versionamento de bases públicas ou simuladas que deveriam acompanhar o código. Por outro lado, bases identificadas ou protegidas não devem entrar em um repositório público.</p>
+<p>Em projetos Python administrados pelo <code>uv</code>, apenas <code>.venv/</code> é excluída. Os arquivos <code>pyproject.toml</code>, <code>.python-version</code> e <code>uv.lock</code> documentam a versão do Python e as dependências e, por isso, devem permanecer no controle de versões. Depois de obter o repositório, outro participante poderá executar <code>uv sync</code> para reconstruir o ambiente local.</p>
 <p>O <code>.gitignore</code> atua preventivamente. Se um arquivo já foi incorporado ao histórico, acrescentá-lo depois ao <code>.gitignore</code> não elimina as versões anteriores.</p>
 </section>
 <section id="o-que-não-deve-ser-versionado" class="level2" data-number="8.10">

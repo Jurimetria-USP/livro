@@ -1095,6 +1095,7 @@ José de Jesus Filho
 <li>Publicação no GitHub</li>
 <li>Colaboração</li>
 <li>Estrutura orientada por agente</li>
+<li>Ambiente Python com <code>uv</code></li>
 <li>Dados e verificação</li>
 <li>Relatório Quarto</li>
 <li>Nova versão</li>
@@ -1210,9 +1211,12 @@ José de Jesus Filho
 <span id="cb3-4"><a href aria-label="4"></a>│   ├── criar_dados.R</span>
 <span id="cb3-5"><a href aria-label="5"></a>│   └── verificar_dados.py</span>
 <span id="cb3-6"><a href aria-label="6"></a>├── AGENTS.md</span>
-<span id="cb3-7"><a href aria-label="7"></a>├── .gitignore</span>
-<span id="cb3-8"><a href aria-label="8"></a>├── README.md</span>
-<span id="cb3-9"><a href aria-label="9"></a>└── relatorio.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-7"><a href aria-label="7"></a>├── .python-version</span>
+<span id="cb3-8"><a href aria-label="8"></a>├── .gitignore</span>
+<span id="cb3-9"><a href aria-label="9"></a>├── pyproject.toml</span>
+<span id="cb3-10"><a href aria-label="10"></a>├── README.md</span>
+<span id="cb3-11"><a href aria-label="11"></a>├── relatorio.qmd</span>
+<span id="cb3-12"><a href aria-label="12"></a>└── uv.lock</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="criar-agents.md" class="slide level2 center">
 <h2>9. Criar <code>AGENTS.md</code></h2>
@@ -1227,101 +1231,116 @@ José de Jesus Filho
 <span id="cb4-9"><a href aria-label="9"></a><span class="ss">- </span>Preserve os exemplos aprovados.</span>
 <span id="cb4-10"><a href aria-label="10"></a><span class="ss">- </span>Informe exatamente o que mudou.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
+<section id="preparar-python-com-uv" class="slide level2 secao center" data-background-color="#071739">
+<h2>10. Preparar Python com <code>uv</code></h2>
+<p>Na raiz do projeto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href aria-label="1"></a>uv init <span class="op">--</span>bare</span>
+<span id="cb5-2"><a href aria-label="2"></a>uv python pin <span class="dv">3.14</span></span>
+<span id="cb5-3"><a href aria-label="3"></a><span class="dt">uv</span> sync</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O <code>uv</code> registra a versão e cria o ambiente automaticamente.</p>
+</section>
+<section id="verificar-o-ambiente" class="slide level2 center">
+<h2>Verificar o ambiente</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href aria-label="1"></a>uv run python <span class="op">--</span>version</span>
+<span id="cb6-2"><a href aria-label="2"></a>uv run python <span class="op">-</span>c <span class="st">&quot;import sys; print(sys.executable)&quot;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Outro participante poderá reconstruir o ambiente com:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href aria-label="1"></a>uv sync</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
 <section id="produzir-a-base-em-r" class="slide level2 secao center" data-background-color="#071739">
-<h2>10. Produzir a base em R</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href aria-label="1"></a>estados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Acre&quot;</span>, <span class="st">&quot;Alagoas&quot;</span>, <span class="st">&quot;Amapá&quot;</span>)</span>
-<span id="cb5-2"><a href aria-label="2"></a>homicidios_mulheres <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">73</span>, <span class="dv">22</span>)</span>
-<span id="cb5-3"><a href aria-label="3"></a>feminicidios <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">31</span>, <span class="dv">8</span>)</span>
-<span id="cb5-4"><a href aria-label="4"></a></span>
-<span id="cb5-5"><a href aria-label="5"></a>dados_crimes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb5-6"><a href aria-label="6"></a>  <span class="at">estado =</span> estados,</span>
-<span id="cb5-7"><a href aria-label="7"></a>  <span class="at">homicidios_mulheres =</span> homicidios_mulheres,</span>
-<span id="cb5-8"><a href aria-label="8"></a>  <span class="at">feminicidios =</span> feminicidios</span>
-<span id="cb5-9"><a href aria-label="9"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h2>11. Produzir a base em R</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href aria-label="1"></a>estados <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Acre&quot;</span>, <span class="st">&quot;Alagoas&quot;</span>, <span class="st">&quot;Amapá&quot;</span>)</span>
+<span id="cb8-2"><a href aria-label="2"></a>homicidios_mulheres <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">73</span>, <span class="dv">22</span>)</span>
+<span id="cb8-3"><a href aria-label="3"></a>feminicidios <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">31</span>, <span class="dv">8</span>)</span>
+<span id="cb8-4"><a href aria-label="4"></a></span>
+<span id="cb8-5"><a href aria-label="5"></a>dados_crimes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-6"><a href aria-label="6"></a>  <span class="at">estado =</span> estados,</span>
+<span id="cb8-7"><a href aria-label="7"></a>  <span class="at">homicidios_mulheres =</span> homicidios_mulheres,</span>
+<span id="cb8-8"><a href aria-label="8"></a>  <span class="at">feminicidios =</span> feminicidios</span>
+<span id="cb8-9"><a href aria-label="9"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="gravar-o-csv" class="slide level2 center">
 <h2>Gravar o CSV</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href aria-label="1"></a><span class="fu">write.csv</span>(</span>
-<span id="cb6-2"><a href aria-label="2"></a>  dados_crimes,</span>
-<span id="cb6-3"><a href aria-label="3"></a>  <span class="st">&quot;dados/dados_crimes.csv&quot;</span>,</span>
-<span id="cb6-4"><a href aria-label="4"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb6-5"><a href aria-label="5"></a>  <span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span></span>
-<span id="cb6-6"><a href aria-label="6"></a>)</span>
-<span id="cb6-7"><a href aria-label="7"></a></span>
-<span id="cb6-8"><a href aria-label="8"></a>dados_crimes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href aria-label="1"></a><span class="fu">write.csv</span>(</span>
+<span id="cb9-2"><a href aria-label="2"></a>  dados_crimes,</span>
+<span id="cb9-3"><a href aria-label="3"></a>  <span class="st">&quot;dados/dados_crimes.csv&quot;</span>,</span>
+<span id="cb9-4"><a href aria-label="4"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-5"><a href aria-label="5"></a>  <span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span></span>
+<span id="cb9-6"><a href aria-label="6"></a>)</span>
+<span id="cb9-7"><a href aria-label="7"></a></span>
+<span id="cb9-8"><a href aria-label="8"></a>dados_crimes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Execute <code>scripts/criar_dados.R</code> e confirme o arquivo no Explorer.</p>
 </section>
 <section id="verificar-em-python" class="slide level2 center">
-<h2>11. Verificar em Python</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href aria-label="1"></a><span class="im">import</span> csv</span>
-<span id="cb7-2"><a href aria-label="2"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
-<span id="cb7-3"><a href aria-label="3"></a></span>
-<span id="cb7-4"><a href aria-label="4"></a>caminho <span class="op">=</span> Path(<span class="st">&quot;dados&quot;</span>) <span class="op">/</span> <span class="st">&quot;dados_crimes.csv&quot;</span></span>
-<span id="cb7-5"><a href aria-label="5"></a></span>
-<span id="cb7-6"><a href aria-label="6"></a><span class="cf">with</span> caminho.<span class="bu">open</span>(encoding<span class="op">=</span><span class="st">&quot;utf-8-sig&quot;</span>, newline<span class="op">=</span><span class="st">&quot;&quot;</span>) <span class="im">as</span> arquivo:</span>
-<span id="cb7-7"><a href aria-label="7"></a>    linhas <span class="op">=</span> <span class="bu">list</span>(csv.DictReader(arquivo))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h2>12. Verificar em Python</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href aria-label="1"></a><span class="im">import</span> csv</span>
+<span id="cb10-2"><a href aria-label="2"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb10-3"><a href aria-label="3"></a></span>
+<span id="cb10-4"><a href aria-label="4"></a>caminho <span class="op">=</span> Path(<span class="st">&quot;dados&quot;</span>) <span class="op">/</span> <span class="st">&quot;dados_crimes.csv&quot;</span></span>
+<span id="cb10-5"><a href aria-label="5"></a></span>
+<span id="cb10-6"><a href aria-label="6"></a><span class="cf">with</span> caminho.<span class="bu">open</span>(encoding<span class="op">=</span><span class="st">&quot;utf-8-sig&quot;</span>, newline<span class="op">=</span><span class="st">&quot;&quot;</span>) <span class="im">as</span> arquivo:</span>
+<span id="cb10-7"><a href aria-label="7"></a>    linhas <span class="op">=</span> <span class="bu">list</span>(csv.DictReader(arquivo))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="conferir-observações-e-colunas" class="slide level2 center">
 <h2>Conferir observações e colunas</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href aria-label="1"></a>colunas_esperadas <span class="op">=</span> {</span>
-<span id="cb8-2"><a href aria-label="2"></a>    <span class="st">&quot;estado&quot;</span>,</span>
-<span id="cb8-3"><a href aria-label="3"></a>    <span class="st">&quot;homicidios_mulheres&quot;</span>,</span>
-<span id="cb8-4"><a href aria-label="4"></a>    <span class="st">&quot;feminicidios&quot;</span>,</span>
-<span id="cb8-5"><a href aria-label="5"></a>}</span>
-<span id="cb8-6"><a href aria-label="6"></a></span>
-<span id="cb8-7"><a href aria-label="7"></a><span class="cf">if</span> <span class="kw">not</span> linhas:</span>
-<span id="cb8-8"><a href aria-label="8"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&quot;A base não contém observações.&quot;</span>)</span>
-<span id="cb8-9"><a href aria-label="9"></a></span>
-<span id="cb8-10"><a href aria-label="10"></a><span class="cf">if</span> <span class="bu">set</span>(linhas[<span class="dv">0</span>].keys()) <span class="op">!=</span> colunas_esperadas:</span>
-<span id="cb8-11"><a href aria-label="11"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&quot;As colunas não correspondem ao esperado.&quot;</span>)</span>
-<span id="cb8-12"><a href aria-label="12"></a></span>
-<span id="cb8-13"><a href aria-label="13"></a><span class="bu">print</span>(<span class="ss">f&quot;Número de observações: </span><span class="sc">{</span><span class="bu">len</span>(linhas)<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href aria-label="1"></a>colunas_esperadas <span class="op">=</span> {</span>
+<span id="cb11-2"><a href aria-label="2"></a>    <span class="st">&quot;estado&quot;</span>,</span>
+<span id="cb11-3"><a href aria-label="3"></a>    <span class="st">&quot;homicidios_mulheres&quot;</span>,</span>
+<span id="cb11-4"><a href aria-label="4"></a>    <span class="st">&quot;feminicidios&quot;</span>,</span>
+<span id="cb11-5"><a href aria-label="5"></a>}</span>
+<span id="cb11-6"><a href aria-label="6"></a></span>
+<span id="cb11-7"><a href aria-label="7"></a><span class="cf">if</span> <span class="kw">not</span> linhas:</span>
+<span id="cb11-8"><a href aria-label="8"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&quot;A base não contém observações.&quot;</span>)</span>
+<span id="cb11-9"><a href aria-label="9"></a></span>
+<span id="cb11-10"><a href aria-label="10"></a><span class="cf">if</span> <span class="bu">set</span>(linhas[<span class="dv">0</span>].keys()) <span class="op">!=</span> colunas_esperadas:</span>
+<span id="cb11-11"><a href aria-label="11"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&quot;As colunas não correspondem ao esperado.&quot;</span>)</span>
+<span id="cb11-12"><a href aria-label="12"></a></span>
+<span id="cb11-13"><a href aria-label="13"></a><span class="bu">print</span>(<span class="ss">f&quot;Número de observações: </span><span class="sc">{</span><span class="bu">len</span>(linhas)<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="executar-a-verificação" class="slide level2 center">
 <h2>Executar a verificação</h2>
 <p>No terminal da raiz:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb9-1"><a href aria-label="1"></a>python scripts<span class="op">/</span>verificar_dados<span class="op">.</span><span class="fu">py</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href aria-label="1"></a>uv run python scripts<span class="op">/</span>verificar_dados<span class="op">.</span><span class="fu">py</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Python não refaz a análise. Ele confirma que o arquivo existe, contém observações e possui as colunas esperadas.</p>
 </section>
 <section id="criar-o-relatório-quarto" class="slide level2 secao center" data-background-color="#071739">
-<h2>12. Criar o relatório Quarto</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href aria-label="1"></a><span class="pp">---</span></span>
-<span id="cb10-2"><a href aria-label="2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Exemplo jurídico integrado&quot;</span></span>
-<span id="cb10-3"><a href aria-label="3"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Dados ilustrativos de três estados brasileiros&quot;</span></span>
-<span id="cb10-4"><a href aria-label="4"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb10-5"><a href aria-label="5"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h2>13. Criar o relatório Quarto</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb13-1"><a href aria-label="1"></a><span class="pp">---</span></span>
+<span id="cb13-2"><a href aria-label="2"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Exemplo jurídico integrado&quot;</span></span>
+<span id="cb13-3"><a href aria-label="3"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Dados ilustrativos de três estados brasileiros&quot;</span></span>
+<span id="cb13-4"><a href aria-label="4"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb13-5"><a href aria-label="5"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="importar-a-base" class="slide level2 center">
 <h2>Importar a base</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href aria-label="1"></a><span class="in">```r</span></span>
-<span id="cb11-2"><a href aria-label="2"></a>dados_crimes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb11-3"><a href aria-label="3"></a>  <span class="st">&quot;dados/dados_crimes.csv&quot;</span>,</span>
-<span id="cb11-4"><a href aria-label="4"></a>  <span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span></span>
-<span id="cb11-5"><a href aria-label="5"></a>)</span>
-<span id="cb11-6"><a href aria-label="6"></a></span>
-<span id="cb11-7"><a href aria-label="7"></a>dados_crimes</span>
-<span id="cb11-8"><a href aria-label="8"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href aria-label="1"></a><span class="in">```r</span></span>
+<span id="cb14-2"><a href aria-label="2"></a>dados_crimes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb14-3"><a href aria-label="3"></a>  <span class="st">&quot;dados/dados_crimes.csv&quot;</span>,</span>
+<span id="cb14-4"><a href aria-label="4"></a>  <span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span></span>
+<span id="cb14-5"><a href aria-label="5"></a>)</span>
+<span id="cb14-6"><a href aria-label="6"></a></span>
+<span id="cb14-7"><a href aria-label="7"></a>dados_crimes</span>
+<span id="cb14-8"><a href aria-label="8"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="criar-uma-variável" class="slide level2 center">
 <h2>Criar uma variável</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href aria-label="1"></a><span class="in">```r</span></span>
-<span id="cb12-2"><a href aria-label="2"></a>dados_crimes<span class="sc">$</span>participacao_feminicidios <span class="ot">&lt;-</span> <span class="fu">round</span>(</span>
-<span id="cb12-3"><a href aria-label="3"></a>  <span class="dv">100</span> <span class="sc">*</span> dados_crimes<span class="sc">$</span>feminicidios <span class="sc">/</span></span>
-<span id="cb12-4"><a href aria-label="4"></a>    dados_crimes<span class="sc">$</span>homicidios_mulheres,</span>
-<span id="cb12-5"><a href aria-label="5"></a>  <span class="dv">1</span></span>
-<span id="cb12-6"><a href aria-label="6"></a>)</span>
-<span id="cb12-7"><a href aria-label="7"></a></span>
-<span id="cb12-8"><a href aria-label="8"></a>dados_crimes</span>
-<span id="cb12-9"><a href aria-label="9"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href aria-label="1"></a><span class="in">```r</span></span>
+<span id="cb15-2"><a href aria-label="2"></a>dados_crimes<span class="sc">$</span>participacao_feminicidios <span class="ot">&lt;-</span> <span class="fu">round</span>(</span>
+<span id="cb15-3"><a href aria-label="3"></a>  <span class="dv">100</span> <span class="sc">*</span> dados_crimes<span class="sc">$</span>feminicidios <span class="sc">/</span></span>
+<span id="cb15-4"><a href aria-label="4"></a>    dados_crimes<span class="sc">$</span>homicidios_mulheres,</span>
+<span id="cb15-5"><a href aria-label="5"></a>  <span class="dv">1</span></span>
+<span id="cb15-6"><a href aria-label="6"></a>)</span>
+<span id="cb15-7"><a href aria-label="7"></a></span>
+<span id="cb15-8"><a href aria-label="8"></a>dados_crimes</span>
+<span id="cb15-9"><a href aria-label="9"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Os valores continuam ilustrativos.</p>
 </section>
 <section id="renderizar" class="slide level2 center">
 <h2>Renderizar</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb13-1"><a href aria-label="1"></a>quarto render relatorio<span class="op">.</span><span class="fu">qmd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource powershell number-lines code-with-copy"><code class="sourceCode powershell"><span id="cb16-1"><a href aria-label="1"></a>quarto render relatorio<span class="op">.</span><span class="fu">qmd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O HTML é produzido a partir da fonte <code>.qmd</code>. Objetos que existem apenas na sessão desaparecem quando ela termina; os procedimentos necessários permanecem nos scripts.</p>
 </section>
 <section id="registrar-a-nova-etapa" class="slide level2 secao center" data-background-color="#071739">
-<h2>13. Registrar a nova etapa</h2>
+<h2>14. Registrar a nova etapa</h2>
 <p>No painel <strong>Source Control</strong>:</p>
 <ol type="1">
 <li>examine os arquivos novos;</li>
@@ -1387,22 +1406,26 @@ José de Jesus Filho
 <td>verifica o CSV</td>
 </tr>
 <tr class="odd">
+<td><code>uv</code></td>
+<td>administra Python e as dependências</td>
+</tr>
+<tr class="even">
 <td>Positron</td>
 <td>reúne arquivos, sessões e terminal</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Quarto</td>
 <td>combina explicação, código e resultado</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Git</td>
 <td>registra versões locais</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>GitHub</td>
 <td>compartilha o histórico</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>agente</td>
 <td>propõe e revisa no escopo autorizado</td>
 </tr>
@@ -1415,6 +1438,8 @@ José de Jesus Filho
 <li><label><input type="checkbox">A pasta aberta é a raiz correta?</label></li>
 <li><label><input type="checkbox">R produz o CSV?</label></li>
 <li><label><input type="checkbox">Python verifica sem alterar os dados?</label></li>
+<li><label><input type="checkbox"><code>uv run python --version</code> utiliza Python 3.14?</label></li>
+<li><label><input type="checkbox">Os arquivos do <code>uv</code> estão preservados?</label></li>
 <li><label><input type="checkbox">Quarto produz o HTML?</label></li>
 <li><label><input type="checkbox">Distingo commit, push, pull e sync?</label></li>
 <li><label><input type="checkbox">O colaborador utiliza sua própria conta?</label></li>

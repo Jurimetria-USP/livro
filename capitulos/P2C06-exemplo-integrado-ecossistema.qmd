@@ -14,7 +14,6 @@ Os capítulos anteriores apresentaram as ferramentas separadamente. Este capítu
 Utilizaremos dados ilustrativos de três estados brasileiros sobre homicídios de mulheres e feminicídios. Os valores servem apenas para acompanhar o fluxo computacional e não devem ser interpretados como uma análise substantiva do fenômeno.
 
 ::: {.callout-note title="Objetivos do capítulo"}
-
 Ao final deste capítulo, você deverá ser capaz de:
 
 - criar uma pasta de projeto e abri-la como raiz no Positron;
@@ -24,11 +23,11 @@ Ao final deste capítulo, você deverá ser capaz de:
 - publicar o repositório no GitHub e convidar um colaborador;
 - distinguir *commit* local, envio, recebimento e sincronização;
 - abrir Codex ou Claude Code no contexto da pasta;
+- configurar Python 3.14 e as dependências do projeto com `uv`;
 - executar um script de R que produz uma base;
 - utilizar Python para verificar o arquivo produzido;
 - renderizar um relatório Quarto;
 - registrar uma nova etapa sem misturar mudanças não relacionadas.
-
 :::
 
 ## O percurso do exemplo
@@ -61,10 +60,10 @@ Este capítulo pressupõe que as etapas anteriores foram concluídas. O computad
 
 Crie uma pasta chamada `exemplo-juridico` em um local destinado aos projetos da disciplina. No Positron:
 
-1. selecione **File > Open Folder**;
-2. localize `exemplo-juridico`;
-3. selecione **Select Folder**;
-4. confirme que `EXEMPLO-JURIDICO` aparece no primeiro nível do Explorer.
+1.  selecione **File \> Open Folder**;
+2.  localize `exemplo-juridico`;
+3.  selecione **Select Folder**;
+4.  confirme que `EXEMPLO-JURIDICO` aparece no primeiro nível do Explorer.
 
 Nesse momento, a pasta pode estar vazia. Abrir a pasta no Positron define a raiz utilizada pelo Explorer, pelo terminal, pelo Git e pelos agentes.
 
@@ -84,7 +83,7 @@ O Positron executará a inicialização do Git na pasta aberta. O procedimento c
 
 Se o botão não aparecer, confirme se a pasta correta está aberta e se o Git foi reconhecido. O terminal pode ser usado apenas para diagnóstico:
 
-```powershell
+``` powershell
 git status
 ```
 
@@ -94,7 +93,7 @@ No Explorer, selecione o botão **New File** e crie, um por vez, `README.md` e `
 
 No `README.md`, registre:
 
-```markdown
+``` markdown
 # Exemplo jurídico integrado
 
 Projeto didático para demonstrar a organização de uma pesquisa jurídica
@@ -106,7 +105,7 @@ Os dados utilizados neste exemplo são ilustrativos.
 
 No `.gitignore`, indique arquivos locais que não devem ser versionados:
 
-```gitignore
+``` gitignore
 .Rhistory
 .RData
 .Ruserdata
@@ -120,10 +119,10 @@ Salve os dois arquivos. O painel **Source Control** deverá mostrá-los como alt
 
 No painel **Source Control**:
 
-1. examine os arquivos apresentados em **Changes**;
-2. selecione o sinal `+` ao lado de cada arquivo para incluí-lo em **Staged Changes**;
-3. escreva a mensagem `Cria a estrutura inicial do projeto`;
-4. selecione **Commit**.
+1.  examine os arquivos apresentados em **Changes**;
+2.  selecione o sinal `+` ao lado de cada arquivo para incluí-lo em **Staged Changes**;
+3.  escreva a mensagem `Cria a estrutura inicial do projeto`;
+4.  selecione **Commit**.
 
 Esse *commit* registra a primeira versão no computador. Ele ainda não foi enviado ao GitHub.
 
@@ -131,11 +130,11 @@ Esse *commit* registra a primeira versão no computador. Ele ainda não foi envi
 
 Depois do primeiro *commit*, o painel **Source Control** pode apresentar **Publish Branch** ou **Publish to GitHub**. Selecione a opção disponível e:
 
-1. autentique sua conta do GitHub, se solicitado;
-2. confirme o nome `exemplo-juridico`;
-3. escolha se o repositório será público ou privado;
-4. confirme a publicação;
-5. abra o endereço indicado e confira `README.md` e `.gitignore`.
+1.  autentique sua conta do GitHub, se solicitado;
+2.  confirme o nome `exemplo-juridico`;
+3.  escolha se o repositório será público ou privado;
+4.  confirme a publicação;
+5.  abra o endereço indicado e confira `README.md` e `.gitignore`.
 
 Essa operação cria o repositório remoto, associa-o ao repositório local e envia o histórico existente. Publicar o repositório não significa publicar uma página; GitHub Pages constitui outra decisão.
 
@@ -143,11 +142,11 @@ Essa operação cria o repositório remoto, associa-o ao repositório local e en
 
 Na página do repositório no GitHub:
 
-1. abra **Settings**;
-2. na seção **Access**, escolha **Collaborators**;
-3. selecione **Add people**;
-4. pesquise o nome de usuário exato do colaborador;
-5. envie o convite.
+1.  abra **Settings**;
+2.  na seção **Access**, escolha **Collaborators**;
+3.  selecione **Add people**;
+4.  pesquise o nome de usuário exato do colaborador;
+5.  envie o convite.
 
 O colaborador somente terá acesso depois de aceitar o convite. Cada participante utiliza sua própria conta; senhas e códigos de autenticação não são compartilhados.
 
@@ -165,23 +164,26 @@ Com `exemplo-juridico` aberto no Positron, abra o painel do Codex ou do Claude C
 
 Depois de revisar a proposta, autorize apenas a estrutura aprovada. Um resultado possível é:
 
-```text
+``` text
 exemplo-juridico/
 ├── dados/
 ├── scripts/
 │   ├── criar_dados.R
 │   └── verificar_dados.py
 ├── AGENTS.md
+├── .python-version
 ├── .gitignore
+├── pyproject.toml
 ├── README.md
-└── relatorio.qmd
+├── relatorio.qmd
+└── uv.lock
 ```
 
 ## Etapa 9 — Criar as orientações do agente
 
 Crie `AGENTS.md` pelo botão **New File** ou autorize o Codex a criá-lo com o conteúdo aprovado:
 
-```markdown
+``` markdown
 # Orientações do projeto
 
 Este é um projeto didático de análise de dados jurídicos.
@@ -197,16 +199,41 @@ Este é um projeto didático de análise de dados jurídicos.
 O `AGENTS.md` orienta o Codex quando ele trabalha nessa pasta. Se o projeto também utilizar Claude Code, as orientações comuns podem ser adaptadas em `CLAUDE.md`. A elaboração de regras mais completas será retomada na Parte III.
 
 ::: {.callout-warning title="Exemplo distinto de uma estrutura definitiva"}
-
 Esta organização foi reduzida para tornar visível a integração das ferramentas. O projeto de uma pesquisa real exigirá pastas, documentação, regras e procedimentos adicionais.
-
 :::
 
-## Etapa 10 — Produção da base em R
+## Etapa 10 — Preparar Python com `uv`
+
+No terminal integrado, confirme que o caminho corresponde à raiz de `exemplo-juridico`. Depois execute:
+
+``` powershell
+uv init --bare
+uv python pin 3.14
+uv sync
+```
+
+O primeiro comando cria a configuração mínima do projeto. O segundo registra Python 3.14. O terceiro cria ou atualiza automaticamente o ambiente local. Não é necessário utilizar `python -m venv` nem ativar manualmente `.venv`.
+
+Verifique:
+
+``` powershell
+uv run python --version
+uv run python -c "import sys; print(sys.executable)"
+```
+
+O projeto passa a conter `pyproject.toml`, `.python-version` e `uv.lock`. Esses arquivos devem ser preservados. A pasta `.venv/` continua excluída pelo `.gitignore`.
+
+Quando outro participante obtiver o repositório, poderá reconstruir o ambiente executando:
+
+``` powershell
+uv sync
+```
+
+## Etapa 11 — Produção da base em R
 
 No arquivo `scripts/criar_dados.R`, registre:
 
-```r
+``` r
 # Dados ilustrativos de três estados brasileiros
 
 estados <- c("Acre", "Alagoas", "Amapá")
@@ -233,11 +260,11 @@ O script reúne os vetores em um `data.frame` e grava o resultado em `dados/dado
 
 Com o arquivo aberto no editor, execute o script em uma sessão de R. Depois, confirme no Explorer que a pasta `dados/` contém o CSV.
 
-## Etapa 11 — Verificação em Python
+## Etapa 12 — Verificação em Python
 
 No arquivo `scripts/verificar_dados.py`, utilize apenas a biblioteca padrão do Python:
 
-```python
+``` python
 import csv
 from pathlib import Path
 
@@ -268,17 +295,17 @@ print(f"Número de observações: {len(linhas)}")
 
 No terminal da raiz, execute:
 
-```powershell
-python scripts/verificar_dados.py
+``` powershell
+uv run python scripts/verificar_dados.py
 ```
 
 O Python não recria a análise. Ele realiza uma verificação independente e pequena: confirma que o arquivo existe, contém observações e possui as colunas esperadas.
 
-## Etapa 12 — Relatório em Quarto
+## Etapa 13 — Relatório em Quarto
 
 No arquivo `relatorio.qmd`, insira:
 
-````markdown
+```` markdown
 ---
 title: "Exemplo jurídico integrado"
 subtitle: "Dados ilustrativos de três estados brasileiros"
@@ -330,13 +357,13 @@ O primeiro bloco lê a base produzida pelo script. O segundo cria uma variável 
 
 No terminal da raiz, renderize:
 
-```powershell
+``` powershell
 quarto render relatorio.qmd
 ```
 
 O arquivo `relatorio.html` será criado ao lado da fonte, salvo se uma configuração de projeto determinar outro diretório.
 
-## Etapa 13 — Observar o projeto no Positron
+## Etapa 14 — Observar o projeto no Positron
 
 Ao final das etapas anteriores, o Explorer deve mostrar os arquivos-fonte e os resultados produzidos. A sessão de R pode apresentar `dados_crimes` no painel de objetos, enquanto o terminal registra a verificação do Python e a execução do Quarto.
 
@@ -344,14 +371,14 @@ Observe que nenhum desses painéis é o projeto. O projeto é a estrutura de arq
 
 <!-- IMAGEM A INSERIR: figuras/parte-02-ambiente-trabalho/exemplo-integrado-positron.png — Positron com a raiz do exemplo no Explorer, script no editor, sessão de R e terminal. -->
 
-## Etapa 14 — Registrar a nova etapa
+## Etapa 15 — Registrar a nova etapa
 
 Retorne ao painel **Source Control**. Examine separadamente os novos arquivos e confirme que `.venv`, históricos de sessão e credenciais não aparecem na lista. Depois:
 
-1. selecione os arquivos correspondentes ao exemplo;
-2. escreva a mensagem `Adiciona o primeiro exemplo integrado`;
-3. selecione **Commit**;
-4. selecione **Sync Changes** ou **Push** para enviar o novo *commit* ao GitHub.
+1.  selecione os arquivos correspondentes ao exemplo;
+2.  escreva a mensagem `Adiciona o primeiro exemplo integrado`;
+3.  selecione **Commit**;
+4.  selecione **Sync Changes** ou **Push** para enviar o novo *commit* ao GitHub.
 
 O *commit* registra a versão local. **Push** envia os commits locais ao GitHub. **Pull** recebe commits existentes no remoto. **Sync Changes** combina o recebimento e o envio previstos pela interface.
 
@@ -373,7 +400,7 @@ flowchart LR
 
 Antes de começar uma nova etapa, cada participante deve receber as mudanças já compartilhadas. Antes de enviar, deve revisar seus próprios arquivos e criar um *commit* coerente. Quando duas pessoas alteram a mesma parte de um arquivo, o Git pode solicitar a resolução de um conflito; essa resolução exige comparar as versões e decidir qual conteúdo deve permanecer.
 
-## Etapa 15 — Revisão de leitura por um agente
+## Etapa 16 — Revisão de leitura por um agente
 
 Com os arquivos criados, um agente pode receber um pedido delimitado:
 
@@ -383,15 +410,16 @@ O pedido identifica os arquivos, limita as ações e define o resultado esperado
 
 ## Como as ferramentas se complementam
 
-| Elemento | Função no exemplo |
-|---|---|
-| R | cria a base e realiza o cálculo |
-| Python | verifica a estrutura do CSV |
-| Positron | reúne arquivos, sessões e terminal |
-| Quarto | combina explicação, código e resultado |
-| Git | registra versões locais do projeto |
-| GitHub | compartilha o histórico entre os colaboradores |
-| agente | propõe, cria e revisa arquivos dentro do escopo autorizado |
+| Elemento | Função no exemplo                                          |
+|----------|------------------------------------------------------------|
+| R        | cria a base e realiza o cálculo                            |
+| Python   | verifica a estrutura do CSV                                |
+| `uv`     | registra Python e as dependências e reconstrói o ambiente  |
+| Positron | reúne arquivos, sessões e terminal                         |
+| Quarto   | combina explicação, código e resultado                     |
+| Git      | registra versões locais do projeto                         |
+| GitHub   | compartilha o histórico entre os colaboradores             |
+| agente   | propõe, cria e revisa arquivos dentro do escopo autorizado |
 
 Não é necessário utilizar duas linguagens em toda pesquisa. O exemplo usa R e Python para demonstrar que o ambiente pode integrá-las. A escolha deve decorrer da necessidade metodológica e da possibilidade de manter o trabalho compreensível.
 
@@ -402,17 +430,17 @@ O exemplo começou em uma pasta vazia, criou um repositório local, registrou um
 Nos capítulos seguintes, essa estrutura será ampliada para um projeto de pesquisa. Passaremos da demonstração técnica para a definição das fontes, das regras de trabalho, da coleta, da extração e da organização do banco de dados.
 
 ::: {.callout-tip title="Antes de avançar"}
-
 - [ ] A pasta aberta no Positron é a raiz do exemplo?
 - [ ] O script de R produz o CSV no caminho esperado?
 - [ ] O script Python verifica o arquivo sem alterar os dados?
+- [ ] `uv run python --version` utiliza Python 3.14?
+- [ ] `pyproject.toml`, `.python-version` e `uv.lock` estão preservados?
 - [ ] O Quarto produz o HTML a partir do `.qmd`?
 - [ ] Sei distinguir objetos da sessão e arquivos preservados?
 - [ ] Distingo *commit*, *push*, *pull* e sincronização?
 - [ ] O colaborador recebeu acesso por sua própria conta?
 - [ ] O `AGENTS.md` registra limites de atuação do agente?
 - [ ] O pedido ao agente limita leitura, escrita e execução?
-
 :::
 
 ## Referências operacionais

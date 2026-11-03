@@ -21,7 +21,7 @@ Ao final deste capítulo, você deverá ser capaz de:
 - instalar e abrir o Positron no Windows;
 - reconhecer editor, console, terminal, Explorer, objetos e gráficos;
 - selecionar uma instalação de R ou Python;
-- criar e selecionar um ambiente virtual de Python para o projeto;
+- instalar o `uv` e utilizá-lo para administrar Python e as dependências do projeto;
 - instalar e verificar o Quarto;
 - compreender quando o Jupyter é necessário para executar Python em documentos Quarto;
 - criar e renderizar um documento `.qmd` mínimo;
@@ -146,88 +146,93 @@ print(sys.version)
 
 Quando uma instalação de R não aparece, primeiro verifique se ela está em uma pasta padrão do Windows, como `C:\Program Files\R`. A indicação manual de um executável é uma medida de diagnóstico, não uma etapa obrigatória da instalação comum.
 
-## Ambiente virtual do Python no projeto
+## Gerenciamento do Python com `uv`
 
-O **interpretador** é o programa que executa o código Python. A instalação principal disponibiliza um interpretador no sistema. Um ambiente virtual cria um espaço isolado que utiliza uma versão de Python e um conjunto próprio de pacotes.
+O **interpretador** executa o código Python. Os pacotes acrescentam funcionalidades utilizadas pelo projeto. Para impedir que as dependências de um trabalho interfiram em outro, utilizaremos o `uv` como gerenciador de versões, pacotes e ambientes Python.
 
-Em regra, cria-se um ambiente virtual para cada projeto, e não para cada arquivo ou programa. Essa separação evita que a atualização exigida por um trabalho modifique o funcionamento de outro. A pasta do ambiente costuma receber o nome `.venv` e permanece na raiz do projeto.
+O `uv` é instalado uma vez no Windows e pode ser usado em todos os projetos. Em cada pasta, ele registra a versão de Python e as dependências necessárias. Internamente, o `uv` cria uma pasta `.venv`, mas o aluno não precisa utilizar `python -m venv`, instalar pacotes com `pip` nem ativar manualmente o ambiente. Os comandos serão executados por meio de `uv run`.
 
-O ambiente virtual não contém os códigos, os dados ou os documentos da pesquisa e não restringe o Python à pasta do projeto. Quando o ambiente está selecionado ou ativado, os comandos utilizam o interpretador e os pacotes associados àquele trabalho. Fora dele, o interpretador instalado no sistema continua disponível.
+::: {.callout-note title="`uv` e `.venv` não são a mesma coisa"}
+Neste livro, `uv` é a ferramenta responsável por criar e administrar o ambiente Python do projeto. `.venv` é apenas o nome da pasta local em que esse ambiente é armazenado. A presença dessa pasta não significa que o procedimento antigo com `python -m venv` esteja sendo utilizado. O ambiente será criado ou reconstruído pelo `uv`, e os comandos Python serão executados com `uv run`.
 
-O ambiente de Python também é independente da sessão de R. O Positron pode manter uma sessão de R aberta e, ao mesmo tempo, utilizar uma `.venv` para executar códigos em Python.
+O Jupyter também será registrado e instalado pelo `uv`. Essa dependência permanecerá disponível para os capítulos e projetos que venham a executar blocos Python durante a renderização de documentos Quarto.
+:::
 
-### Conferindo uma versão compatível
+### Instalação do `uv` no Windows
 
-O Positron pode localizar uma versão do Python e ainda classificá-la como **Unsupported**. Isso significa que a instalação existe, mas não é compatível com a versão atual da IDE. No momento da preparação deste material, utilizamos Python 3.14. Para verificar as versões instaladas, abra o terminal integrado pelo menu **Terminal > New Terminal** e execute:
-
-```powershell
-py list
-```
-
-Se Python 3.14 não estiver disponível, instale-o pelo Python Install Manager:
+No terminal integrado do Positron, execute:
 
 ```powershell
-py install 3.14
+winget install --id=astral-sh.uv -e
 ```
 
-### Criando o ambiente no terminal integrado
+Depois da instalação, feche completamente o Positron, abra-o novamente e verifique:
 
-Em um projeto existente, abra sua pasta principal no Positron. Em um projeto novo, crie a pasta, abra-a com **File > Open Folder** e somente então prossiga. Use **Terminal > New Terminal**; não abra um terminal separado pelo menu Iniciar do Windows.
+```powershell
+uv --version
+```
 
-O terminal integrado pode apresentar `PS` no início da linha porque utiliza o PowerShell como shell no Windows. Antes de criar o ambiente, confirme a localização:
+Se o comando funcionar em um terminal externo, mas não no Positron, a IDE ainda está utilizando a versão anterior da variável `PATH`. Reiniciar o Positron atualiza esse contexto.
+
+### Preparação de um projeto
+
+Abra a pasta principal com **File > Open Folder** e confirme a localização no terminal integrado:
 
 ```powershell
 Get-Location
 ```
 
-O caminho deve corresponder à raiz do projeto, e não a uma pasta do sistema como `C:\Windows\System32`. Em seguida, crie o ambiente explicitamente com Python 3.14:
+O caminho deve corresponder à raiz do projeto, e não a uma pasta do sistema como `C:\Windows\System32`. Em uma pasta ainda não configurada, execute:
 
 ```powershell
-py -V:3.14 -m venv .venv
+uv init --bare
+uv python pin 3.14
+uv sync
 ```
 
-O comando cria a pasta `.venv`. Ao identificá-la, o Positron pode perguntar: **“We noticed a new environment has been created. Do you want to select it for the workspace folder?”**. Selecione **Yes**. Essa escolha associa o ambiente à pasta aberta no Positron e não encerra uma sessão de R que já esteja funcionando.
+`uv init --bare` cria uma configuração mínima sem impor uma estrutura de pacote Python. `uv python pin 3.14` registra a versão escolhida. `uv sync` cria ou atualiza o ambiente administrado pelo projeto.
 
-![Seleção do ambiente virtual Python para a pasta de trabalho no Positron.](../figuras/parte-02-ambiente-trabalho/py_venv_select.png){#fig-python-selecionar-venv fig-align="center" width="70%"}
+### Arquivos criados pelo `uv`
 
-Para ativar o ambiente também no terminal integrado, execute:
+| Elemento | Função |
+|---|---|
+| `pyproject.toml` | declara o projeto e suas dependências |
+| `.python-version` | registra a versão de Python escolhida |
+| `uv.lock` | fixa as versões resolvidas das dependências |
+| `.venv/` | contém o ambiente local reconstruível |
+
+Os três primeiros arquivos documentam o ambiente e devem acompanhar o projeto. A pasta `.venv/` permanece apenas no computador e deve constar do `.gitignore`.
+
+### Execução sem ativação manual
+
+Verifique a versão e o executável utilizados:
 
 ```powershell
-.\.venv\Scripts\Activate.ps1
+uv run python --version
+uv run python -c "import sys; print(sys.executable)"
 ```
 
-Depois da ativação, o início da linha costuma apresentar `(.venv)`. Verifique a versão e o executável utilizados:
-
-```powershell
-python --version
-python -c "import sys; print(sys.executable)"
-```
-
-A primeira instrução deve informar Python 3.14. A segunda deve apresentar um caminho terminado em `.venv\Scripts\python.exe`.
+O primeiro comando deve informar Python 3.14. O segundo deve apresentar o interpretador associado à pasta `.venv` do projeto. Não é necessário executar `Activate.ps1`; `uv run` seleciona automaticamente o ambiente correto.
 
 ### Iniciando a sessão Python no Positron
 
-Depois de criar o ambiente, use a Paleta de Comandos (`Ctrl + Shift + P`) e execute **Interpreter: Discover All Interpreters**. Em seguida, execute **Interpreter: Start New Console Session** e selecione o ambiente Python associado à pasta do projeto.
+Depois que o `uv` criar o ambiente, use a Paleta de Comandos (`Ctrl + Shift + P`) e execute **Interpreter: Discover All Interpreters**. Em seguida, execute **Interpreter: Start New Console Session** e selecione o Python localizado em `.venv\Scripts\python.exe`.
 
-A sessão iniciada deve identificar Python 3.14 e a `.venv` do projeto, sem a classificação **Unsupported**. A [Figura @fig-python-sessao-venv] mostra o resultado esperado e também registra que as sessões de Python e R permanecem disponíveis no mesmo ambiente de trabalho.
+O Positron pode perguntar se deve selecionar o novo ambiente para a pasta aberta. Selecione **Yes**. A sessão iniciada deve identificar Python 3.14 e a `.venv` do projeto. A [Figura @fig-python-sessao-venv] mostra o resultado esperado e registra que sessões de Python e R podem permanecer disponíveis no mesmo ambiente de trabalho.
 
-![Sessão Python 3.14 iniciada no Positron com o ambiente virtual do projeto selecionado.](../figuras/parte-02-ambiente-trabalho/py_venv_session.png){#fig-python-sessao-venv fig-align="center" width="100%"}
+![Seleção do ambiente Python administrado pelo `uv` para a pasta de trabalho no Positron.](../figuras/parte-02-ambiente-trabalho/py_venv_select.png){#fig-python-selecionar-venv fig-align="center" width="70%"}
 
-### Ambiente virtual e controle de versões
+![Sessão Python 3.14 iniciada no Positron com o ambiente do projeto selecionado.](../figuras/parte-02-ambiente-trabalho/py_venv_session.png){#fig-python-sessao-venv fig-align="center" width="100%"}
 
-A pasta `.venv` é reconstruível e não deve ser enviada ao repositório. O arquivo `.gitignore`, localizado na raiz do projeto, deve conter:
+### `uv` e controle de versões
+
+O `.gitignore` deve conter:
 
 ```gitignore
 .venv/
 ```
 
-Essa regra mantém o ambiente no computador e impede que seus arquivos sejam incorporados ao controle de versões. O arquivo `.gitignore`, ao contrário, faz parte do projeto e deve ser preservado no repositório.
-
-Para encerrar a ativação do ambiente naquele terminal, execute:
-
-```powershell
-deactivate
-```
+Essa regra exclui somente o ambiente reconstruível. `pyproject.toml`, `.python-version` e `uv.lock` devem permanecer disponíveis para que outra pessoa execute `uv sync` e reconstrua o mesmo ambiente.
 
 ## O que é o Quarto?
 
@@ -263,37 +268,36 @@ A sessão Python do Positron não exige uma instalação separada do Jupyter. Pa
 
 A situação é diferente quando um documento Quarto contém blocos executáveis de Python. Nesse caso, o Quarto utiliza o mecanismo do Jupyter para executar o código durante a renderização. Se o projeto utilizar somente blocos de R, essa instalação não é necessária.
 
-Para preparar a `.venv` para documentos Quarto com Python, abra o terminal integrado na raiz do projeto. Para evitar que o instalador utilize por engano outra versão disponível no sistema, indique diretamente o executável do ambiente virtual:
+Para preparar o projeto para documentos Quarto com Python, abra o terminal integrado na raiz e registre o Jupyter como dependência de desenvolvimento:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install jupyter
+uv add --dev jupyter
 ```
 
-Esse comando instala o Jupyter especificamente na `.venv` do projeto, mesmo que o terminal ainda não esteja ativado. Depois da instalação, verifique o Jupyter pelo mesmo executável:
+O `uv` atualiza `pyproject.toml` e `uv.lock`, instala os componentes na `.venv` e preserva a possibilidade de reconstrução. Verifique:
 
 ```powershell
-.\.venv\Scripts\python.exe -m jupyter --version
+uv run python -m jupyter --version
 ```
 
 ![Verificação dos componentes do Jupyter instalados no ambiente virtual do projeto.](../figuras/parte-02-ambiente-trabalho/jupyter_venv_version.png){#fig-jupyter-venv-versao fig-align="center" width="100%" fig-alt="Terminal integrado do Positron com a pasta .venv ativa e a lista de componentes e versões do Jupyter."}
 
-A [Figura @fig-jupyter-venv-versao] confirma que o comando foi executado com a `.venv` ativa e que os componentes utilizados pelo Quarto estão disponíveis. Alguns componentes opcionais podem aparecer como não instalados sem impedir a execução de documentos Quarto ou o uso do console do Positron.
+A [Figura @fig-jupyter-venv-versao] registra os componentes utilizados pelo Quarto. Alguns componentes opcionais podem aparecer como não instalados sem impedir a execução de documentos Quarto ou o uso do console do Positron.
 
-Por fim, confirme que a `.venv` está ativada no terminal e verifique se o Quarto reconhece essa integração:
+Por fim, execute a verificação do Quarto dentro do ambiente administrado pelo `uv`:
 
 ```powershell
-.\.venv\Scripts\Activate.ps1
-quarto check jupyter
+uv run quarto check jupyter
 ```
 
-O resultado deve registrar que a instalação do Python foi localizada, apresentar o caminho do interpretador dentro de `.venv` e identificar o Jupyter. Se aparecer um aviso de ambiente não ativado, retorne à ativação da `.venv` antes de instalar novamente qualquer pacote.
+O resultado deve registrar a instalação do Python, apresentar o interpretador do projeto e identificar o Jupyter.
 
 ::: {.callout-warning title="Confirme o interpretador antes de instalar"}
-Se a instalação utilizar um caminho externo à pasta `.venv`, interrompa o procedimento e retorne à raiz do projeto. A indicação explícita `.\.venv\Scripts\python.exe -m pip install jupyter` evita que outra versão do Python disponível no sistema receba os pacotes do projeto.
+Se `uv run python -c "import sys; print(sys.executable)"` indicar um caminho externo ao projeto, interrompa o procedimento e confirme a pasta aberta e os arquivos de configuração antes de instalar novamente qualquer dependência.
 :::
 
 ::: {.callout-note title="Ordem das ferramentas"}
-Primeiro instalamos Python e confirmamos seu funcionamento. Depois apresentamos o Positron e criamos a `.venv`. O Jupyter somente é instalado quando passamos a executar Python dentro de documentos Quarto.
+Primeiro instalamos Python e confirmamos seu funcionamento. Depois apresentamos o Positron e o `uv`, que administra o ambiente do projeto. O Jupyter somente é acrescentado quando passamos a executar Python dentro de documentos Quarto.
 :::
 
 ## Primeiro documento Quarto
@@ -371,7 +375,9 @@ Nos capítulos seguintes, integraremos esse ambiente ao controle de versões e a
 - [ ] A pasta principal está aberta no Explorer?
 - [ ] Consigo distinguir editor, console e terminal?
 - [ ] Sei qual versão do R ou do Python está ativa?
-- [ ] A `.venv` foi criada na raiz do projeto com uma versão compatível do Python?
+- [ ] O `uv` foi instalado e reconhecido no terminal do Positron?
+- [ ] `.python-version` registra Python 3.14?
+- [ ] `uv run python --version` utiliza a versão esperada?
 - [ ] A regra `.venv/` está registrada no `.gitignore`?
 - [ ] Os comandos `quarto --version` e `quarto check` reconhecem a instalação?
 - [ ] Se o projeto usa blocos Python, o Jupyter está instalado na `.venv` e é reconhecido pelo Quarto?
@@ -388,6 +394,8 @@ Nos capítulos seguintes, integraremos esse ambiente ao controle de versões e a
 - [Instalação do Quarto](https://quarto.org/docs/get-started/)
 - [Uso de Python e Jupyter em documentos Quarto](https://quarto.org/docs/computations/python.html)
 - [Verificação da instalação do Quarto](https://quarto.org/docs/cli/check.html)
+- [Instalação do `uv`](https://docs.astral.sh/uv/getting-started/installation/)
+- [Projetos administrados pelo `uv`](https://docs.astral.sh/uv/guides/projects/)
 
 ## Slides da aula
 

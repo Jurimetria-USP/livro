@@ -118,13 +118,13 @@ O processo de observar pode ser limitado por dados insuficientes ou difíceis de
 
 #### Observções devem ser:
 
--   Ter clara noção de quais os fenômenos relevantes
--   Encontramos uma maneira de garantir que não negligenciamos nada no processo de fazer nossas observações?
--   Não viesada: Cegueira a mudança e Cegueira desatenta <https://www.youtube.com/watch?v=FaAIW8WFBq8>
--   O que sabemos com certeza? O que é baseado em fatos e o que é baseado em conjecturas ou suposição?
-    -   Evite suposições inocentemente incorporadas
--   Consideramos alguma informação comparativa necessária?
--   As nossas observações foram contaminadas por expectativas ou crenças?
+- Ter clara noção de quais os fenômenos relevantes
+- Encontramos uma maneira de garantir que não negligenciamos nada no processo de fazer nossas observações?
+- Não viesada: Cegueira a mudança e Cegueira desatenta <https://www.youtube.com/watch?v=FaAIW8WFBq8>
+- O que sabemos com certeza? O que é baseado em fatos e o que é baseado em conjecturas ou suposição?
+  - Evite suposições inocentemente incorporadas
+- Consideramos alguma informação comparativa necessária?
+- As nossas observações foram contaminadas por expectativas ou crenças?
 
 #### Como conseguir boas observações e evitar viéses?
 
@@ -242,11 +242,11 @@ No entanto, trata-se da forma mais **rara** de estudo nas **Ciências Sociais Ap
 
 ::::: columns
 ::: {.column width="75%"}
--   **Estudo**: Sherman, Lawrence W., et al. *Effects of face-to-face restorative justice on victims of crime in four randomized, controlled trials.* **Journal of experimental criminology** 1.3 (2005): 367-395.
+- **Estudo**: Sherman, Lawrence W., et al. *Effects of face-to-face restorative justice on victims of crime in four randomized, controlled trials.* **Journal of experimental criminology** 1.3 (2005): 367-395.
 
--   **Objetivo**: O estudo avaliou o impacto de programas de justiça restaurativa, onde as vítimas e ofensores se encontram em conferências mediadas, em casos de crimes violentos - quatro experimentos controlados.
+- **Objetivo**: O estudo avaliou o impacto de programas de justiça restaurativa, onde as vítimas e ofensores se encontram em conferências mediadas, em casos de crimes violentos - quatro experimentos controlados.
 
--   **Resultado**: As meta-análises das oito estimativas sugerem o sucesso da justiça restaurativa, tanto como um ritual de interação quanto como uma política para reduzir os danos às vítimas.
+- **Resultado**: As meta-análises das oito estimativas sugerem o sucesso da justiça restaurativa, tanto como um ritual de interação quanto como uma política para reduzir os danos às vítimas.
 :::
 
 ::: {.column width="25%"}
@@ -266,9 +266,9 @@ Um exemplo clássico de estudo prospectivo é o *Million Women Study* (2003), qu
 
 ::::: columns
 ::: {.column width="75%"}
--   **Estudo**: Beral, Valerie, et al. *"Breast cancer and hormone-replacement therapy: the Million Women Study."* **The Lancet** 362.9392 (2003): 1330-1331
--   **Objetivo**: O Million Women Study foi criado para investigar os efeitos de tipos específicos de TRH no câncer de mama incidente e fatal.Foram recrutadas 1.084.110 mulheres do Reino Unido com idades entre 50 e 64 anos para o Million Women Study entre 1996 e 2001.
--   **Resultado**: O uso atual de TRH está **associado** a um risco aumentado de câncer de mama incidente e fatal.
+- **Estudo**: Beral, Valerie, et al. *"Breast cancer and hormone-replacement therapy: the Million Women Study."* **The Lancet** 362.9392 (2003): 1330-1331
+- **Objetivo**: O Million Women Study foi criado para investigar os efeitos de tipos específicos de TRH no câncer de mama incidente e fatal.Foram recrutadas 1.084.110 mulheres do Reino Unido com idades entre 50 e 64 anos para o Million Women Study entre 1996 e 2001.
+- **Resultado**: O uso atual de TRH está **associado** a um risco aumentado de câncer de mama incidente e fatal.
 :::
 
 ::: {.column width="25%"}
@@ -287,8 +287,8 @@ Geralmente, o pesquisador trabalha com dois grupos, controle e tratamento, compo
 
 Efeitos do chumbo em crianças. Pesquisa com 4.000 crianças de 4 e 15 anos entre 1999 e 2002. Incluiu 135 crianças com transtorno de déficit de atenção e hiperatividade (TDAH). Exames de sangue foram feitos em todas as 4.000.
 
--   As 135 crianças com TDAH apresentaram níveis de chumbo no sangue muito maior do que nas outras crianças.
-    -   Tinham quatro vezes mais probabilidade de ter níveis elevados de chumbo no sangue
+- As 135 crianças com TDAH apresentaram níveis de chumbo no sangue muito maior do que nas outras crianças.
+  - Tinham quatro vezes mais probabilidade de ter níveis elevados de chumbo no sangue
 
 A **Questão** é, pode-se concluir que a exposição ao chumbo pode causar TDAH?
 :::
@@ -297,7 +297,7 @@ Mesmo os melhores estudos retrospectivos oferecem apenas evidências limitadas d
 
 Observa-se que Correspondência reversa às vezes é possível em estudos retrospectivos. Ou seja TDAH -\> Chumbo....
 
--   E é esse o caso nesse estudo: crianças com TDAH são mais propensas a comer tinta com chumbo ou inalar pó de tinta por causa de sua hiperatividade.
+- E é esse o caso nesse estudo: crianças com TDAH são mais propensas a comer tinta com chumbo ou inalar pó de tinta por causa de sua hiperatividade.
 
 ::: callout-warning
 ## Cuidado
@@ -313,11 +313,11 @@ Um exemplo aplicado às Ciências Sociais é o estudo de Severi, FC; Jesus Filho
 
 ::::: columns
 ::: {.column width="75%"}
--   **Estudo** Severi, FC; Jesus Filho, J. *"Há diferenças remuneratórias por gênero na magistratura brasileira?."* **Revista de Administração Pública** 56.2 (2022): 208-225.
+- **Estudo** Severi, FC; Jesus Filho, J. *"Há diferenças remuneratórias por gênero na magistratura brasileira?."* **Revista de Administração Pública** 56.2 (2022): 208-225.
 
--   **Objetivo**: testar a hipótese de que há clara diferença entre as remunerações médias percebidas por juízes e juízas de 8 tribunais de justiça brasileiros.
+- **Objetivo**: testar a hipótese de que há clara diferença entre as remunerações médias percebidas por juízes e juízas de 8 tribunais de justiça brasileiros.
 
--   **Resultado**: As diferenças nas médias remuneratórias persistem mesmo após o pareamento, o que pode ser explicado pelos mediadores de gênero, que operam gerando melhores oportunidades para homens em desfavor das mulheres.
+- **Resultado**: As diferenças nas médias remuneratórias persistem mesmo após o pareamento, o que pode ser explicado pelos mediadores de gênero, que operam gerando melhores oportunidades para homens em desfavor das mulheres.
 :::
 
 ::: {.column width="25%"}
@@ -329,16 +329,16 @@ Um exemplo aplicado às Ciências Sociais é o estudo de Severi, FC; Jesus Filho
 
 Richard Feynman enfatiza que o método científico baseia-se em propor hipóteses, derivar previsões e testá-las por meio da observação e do experimento. Se os resultados não confirmam a previsão, a hipótese deve ser rejeitada, independentemente de sua origem. Assim segundo o autor temos o seguinte percurso:
 
--   **Faça uma Observação**
-    -   Observe um fenômeno no mundo natural.
--   **Formule uma Hipótese**
-    -   Crie uma possível explicação para o fenômeno.
--   **Faça Previsões**
-    -   Preveja o que acontecerá se sua hipótese estiver correta.
--   **Teste com Experimentos**
-    -   Conduza experimentos para testar as previsões.
--   **Reavalie a Hipótese**
-    -   Se os resultados não batem com as previsões, a hipótese está errada.
+- **Faça uma Observação**
+  - Observe um fenômeno no mundo natural.
+- **Formule uma Hipótese**
+  - Crie uma possível explicação para o fenômeno.
+- **Faça Previsões**
+  - Preveja o que acontecerá se sua hipótese estiver correta.
+- **Teste com Experimentos**
+  - Conduza experimentos para testar as previsões.
+- **Reavalie a Hipótese**
+  - Se os resultados não batem com as previsões, a hipótese está errada.
 
 Essa visão mostra que a ciência é, acima de tudo, um compromisso ético com a verdade empírica e a disposição de submeter ideias à crítica. O método científico é mais do que um procedimento: é uma atitude de curiosidade, dúvida e verificação constante.
 

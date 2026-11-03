@@ -1260,6 +1260,7 @@ José de Jesus Filho
 <li>não substitui a revisão humana antes do commit.</li>
 </ul>
 <p>Se um arquivo sensível já entrou no histórico, apenas acrescentá-lo ao <code>.gitignore</code> não resolve o problema.</p>
+<p>Em projetos Python com <code>uv</code>, <code>.venv/</code> permanece ignorada. <code>pyproject.toml</code>, <code>.python-version</code> e <code>uv.lock</code> devem ser versionados, pois permitem reconstruir o ambiente com <code>uv sync</code>.</p>
 </section>
 <section id="credenciais-e-segredos" class="slide level2 center">
 <h2>Credenciais e segredos</h2>

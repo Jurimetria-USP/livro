@@ -226,7 +226,7 @@ Python pode apoiar:
 - automação de tarefas;
 - análise de dados.
 
-As dependências de cada projeto serão isoladas em um ambiente virtual na aula sobre Positron.
+Na aula sobre Positron, utilizaremos o `uv` para registrar Python 3.14, administrar os pacotes e reconstruir o ambiente de cada projeto.
 
 ## Instalação do Python no Windows
 
@@ -275,7 +275,7 @@ Instalações antigas podem fazer com que `python` e `py` apontem para versões 
 
 ## Como distribuir as tarefas
 
-Uma organização possível utiliza Python para obter ou extrair informações e R para estruturar a base, realizar análises estatísticas e produzir resultados.
+Uma organização possível utiliza Python para obter ou extrair informações e R para estruturar a base, realizar análises estatísticas e produzir resultados. O `uv` manterá a versão e as dependências de Python registradas no projeto.
 
 A divisão deve considerar:
 
