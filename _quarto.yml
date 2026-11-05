@@ -42,6 +42,8 @@ book:
         - capitulos/P2C06-exemplo-integrado-ecossistema.qmd
         - capitulos/P2C07-introducao-r.qmd
     - part: "Parte III — Construção do banco de dados"
+      chapters:
+        - capitulos/P3C03-limpeza-estruturacao.qmd
     - part: partes/04-descricao-fenomeno.qmd
       chapters:
         - capitulos/P4C01-introducao-estatistica.qmd
