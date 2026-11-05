@@ -120,7 +120,7 @@ O `uv` poderá criar internamente a pasta `.venv`, que permanecerá no `.gitigno
 
 ### Capítulo de análise de conteúdo
 
-**Decisão:** a Parte III recebe o capítulo `P3C02-analise-conteudo.qmd`, sobre análise de conteúdo de decisões judiciais, concordância entre anotadores e validação de modelos de linguagem.
+**Decisão:** a Parte III recebe o capítulo `P3C02-analise-conteudo.qmd`, sobre análise de conteúdo de textos jurídicos, concordância entre anotadores e validação de modelos de linguagem.
 
 O caso são decisões de pronúncia em processos de feminicídio, coletadas no Banco de Sentenças (CJPG) do TJSP com os códigos de assunto 3750, 50368 e 50708, apenas pelo acesso público, sem login.
 

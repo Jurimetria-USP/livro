@@ -1,5 +1,5 @@
 ---
-title: "Análise de conteúdo de decisões judiciais"
+title: "Análise de conteúdo de textos jurídicos"
 subtitle: "Do documento à variável, da divergência à validação"
 format: html
 execute:
