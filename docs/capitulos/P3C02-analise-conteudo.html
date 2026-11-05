@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>12&nbsp; Análise de conteúdo de decisões judiciais – JURIMETRIA: Dados, Métodos e Evidência para o Direito</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../capitulos/P3C03-limpeza-estruturacao.html" rel="next">
+<link href="../capitulos/P2C07-introducao-r.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-dd5fa769cd8cd11b6d61b3c64d2f60b9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo light-content">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JURIMETRIA: Dados, Métodos e Evidência para o Direito</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Jurimetria-USP/livro"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/P3C02-analise-conteudo.html">Parte III — Construção do banco de dados</a></li><li class="breadcrumb-item"><a href="../capitulos/P3C02-analise-conteudo.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de conteúdo de decisões judiciais</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../autores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sobre os autores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/01-fundamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte I — Fundamentos</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C01-metodo-cientifico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Método científico e desenho de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C02-pergunta-dados-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Da pergunta à conclusão</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C03-jurimetria-instrumento-pesquisa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Jurimetria como instrumento de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C04-litigios-desigualdades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Seleção dos litígios e desigualdades no sistema de justiça</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/02-ambiente-trabalho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte II — Ambiente de trabalho e ferramentas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C01-ambiente-computacional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ambiente computacional para a pesquisa jurimétrica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C02-r-python-linguagens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R e Python: linguagens do ambiente de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C03-positron-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C04-git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C05-agentes-projeto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Agentes de inteligência artificial no projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C06-exemplo-integrado-ecossistema.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Um exemplo integrado do ecossistema</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C07-introducao-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introdução ao R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Parte III — Construção do banco de dados</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P3C02-analise-conteudo.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de conteúdo de decisões judiciais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P3C03-limpeza-estruturacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Limpeza e estruturação de dados jurídicos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/04-descricao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte IV — Descrição do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C01-introducao-estatistica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C02-analise-descritiva.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C03-analise-sobrevivencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Análise de sobrevivência: tempo do processo</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/05-explicacao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte V — Explicação do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C01-modelos-lineares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C02-modelos-avancados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução"><span class="header-section-number">12.1</span> Introdução</a></li>
+  <li><a href="#o-que-é-análise-de-conteúdo-jurídico" id="toc-o-que-é-análise-de-conteúdo-jurídico" class="nav-link" data-scroll-target="#o-que-é-análise-de-conteúdo-jurídico"><span class="header-section-number">12.2</span> O que é análise de conteúdo jurídico</a>
+  <ul class="collapse">
+  <li><a href="#confiabilidade-e-validade" id="toc-confiabilidade-e-validade" class="nav-link" data-scroll-target="#confiabilidade-e-validade"><span class="header-section-number">12.2.1</span> Confiabilidade e validade</a></li>
+  </ul></li>
+  <li><a href="#o-caso-a-pronúncia-em-processos-de-feminicídio" id="toc-o-caso-a-pronúncia-em-processos-de-feminicídio" class="nav-link" data-scroll-target="#o-caso-a-pronúncia-em-processos-de-feminicídio"><span class="header-section-number">12.3</span> O caso: a pronúncia em processos de feminicídio</a></li>
+  <li><a href="#coleta-no-banco-de-sentenças" id="toc-coleta-no-banco-de-sentenças" class="nav-link" data-scroll-target="#coleta-no-banco-de-sentenças"><span class="header-section-number">12.4</span> Coleta no Banco de Sentenças</a></li>
+  <li><a href="#o-livro-de-códigos" id="toc-o-livro-de-códigos" class="nav-link" data-scroll-target="#o-livro-de-códigos"><span class="header-section-number">12.5</span> O livro de códigos</a></li>
+  <li><a href="#medir-a-concordância" id="toc-medir-a-concordância" class="nav-link" data-scroll-target="#medir-a-concordância"><span class="header-section-number">12.6</span> Medir a concordância</a>
+  <ul class="collapse">
+  <li><a href="#a-concordância-observada" id="toc-a-concordância-observada" class="nav-link" data-scroll-target="#a-concordância-observada"><span class="header-section-number">12.6.1</span> A concordância observada</a></li>
+  <li><a href="#a-correção-pelo-acaso" id="toc-a-correção-pelo-acaso" class="nav-link" data-scroll-target="#a-correção-pelo-acaso"><span class="header-section-number">12.6.2</span> A correção pelo acaso</a></li>
+  <li><a href="#o-alfa-de-krippendorff" id="toc-o-alfa-de-krippendorff" class="nav-link" data-scroll-target="#o-alfa-de-krippendorff"><span class="header-section-number">12.6.3</span> O alfa de Krippendorff</a></li>
+  <li><a href="#respostas-múltiplas-a-distância-masi" id="toc-respostas-múltiplas-a-distância-masi" class="nav-link" data-scroll-target="#respostas-múltiplas-a-distância-masi"><span class="header-section-number">12.6.4</span> Respostas múltiplas: a distância MASI</a></li>
+  <li><a href="#quando-o-coeficiente-é-baixo-e-a-concordância-é-alta" id="toc-quando-o-coeficiente-é-baixo-e-a-concordância-é-alta" class="nav-link" data-scroll-target="#quando-o-coeficiente-é-baixo-e-a-concordância-é-alta"><span class="header-section-number">12.6.5</span> Quando o coeficiente é baixo e a concordância é alta</a></li>
+  <li><a href="#como-interpretar" id="toc-como-interpretar" class="nav-link" data-scroll-target="#como-interpretar"><span class="header-section-number">12.6.6</span> Como interpretar</a></li>
+  <li><a href="#dos-dados-da-plataforma-ao-coeficiente" id="toc-dos-dados-da-plataforma-ao-coeficiente" class="nav-link" data-scroll-target="#dos-dados-da-plataforma-ao-coeficiente"><span class="header-section-number">12.6.7</span> Dos dados da plataforma ao coeficiente</a></li>
+  </ul></li>
+  <li><a href="#adjudicação-e-padrão-ouro" id="toc-adjudicação-e-padrão-ouro" class="nav-link" data-scroll-target="#adjudicação-e-padrão-ouro"><span class="header-section-number">12.7</span> Adjudicação e padrão-ouro</a></li>
+  <li><a href="#uma-leitura-crítica-os-sete-mitos-da-anotação" id="toc-uma-leitura-crítica-os-sete-mitos-da-anotação" class="nav-link" data-scroll-target="#uma-leitura-crítica-os-sete-mitos-da-anotação"><span class="header-section-number">12.8</span> Uma leitura crítica: os sete mitos da anotação</a></li>
+  <li><a href="#o-modelo-de-linguagem-como-codificador" id="toc-o-modelo-de-linguagem-como-codificador" class="nav-link" data-scroll-target="#o-modelo-de-linguagem-como-codificador"><span class="header-section-number">12.9</span> O modelo de linguagem como codificador</a></li>
+  <li><a href="#atividade-da-leitura-à-validação" id="toc-atividade-da-leitura-à-validação" class="nav-link" data-scroll-target="#atividade-da-leitura-à-validação"><span class="header-section-number">12.10</span> Atividade: da leitura à validação</a></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">12.11</span> Síntese</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências"><span class="header-section-number">12.12</span> Referências</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../capitulos/P3C02-analise-conteudo.html">Parte III — Construção do banco de dados</a></li><li class="breadcrumb-item"><a href="../capitulos/P3C02-analise-conteudo.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de conteúdo de decisões judiciais</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de conteúdo de decisões judiciais</span></h1>
+<p class="subtitle lead">Do documento à variável, da divergência à validação</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">12.1</span> Introdução</h2>
+<p>Uma decisão judicial não chega à pesquisa como dado. Ela chega como texto: narra fatos, resume provas, enfrenta teses e decide. Para que centenas de decisões possam ser comparadas, alguém precisa ler cada uma delas e registrar, segundo regras explícitas, as mesmas informações. Esse procedimento transforma o documento em variáveis e constitui uma etapa de medição. Como toda medição, está sujeita a erro.</p>
+<p>Modelos de linguagem podem hoje executar parte dessa leitura. A possibilidade não elimina o problema de medição: desloca-o. Para saber se um modelo lê bem, precisamos de uma referência; para confiar na referência, precisamos saber se leitores humanos, trabalhando de forma independente, chegam às mesmas respostas.</p>
+<p>Neste capítulo, seguimos esse percurso com um caso: decisões de pronúncia em processos de feminicídio do Tribunal de Justiça de São Paulo.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Objetivos do capítulo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Objetivos do capítulo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ao final do capítulo, você deverá ser capaz de:</p>
+<ul>
+<li>distinguir unidade de análise, variável, livro de códigos e anotação;</li>
+<li>diferenciar confiabilidade e validade;</li>
+<li>coletar decisões públicas no Banco de Sentenças do TJSP com o pacote <code>tjsp</code>;</li>
+<li>elaborar e testar um questionário de análise de conteúdo;</li>
+<li>calcular e interpretar a concordância observada, o kappa e o alfa de Krippendorff;</li>
+<li>explicar por que a concordância observada isolada pode enganar;</li>
+<li>examinar criticamente a noção de padrão-ouro;</li>
+<li>planejar a validação de um modelo de linguagem como codificador.</li>
+</ul>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Pergunta&lt;br/&gt;de pesquisa] --&gt; B[Coleta das&lt;br/&gt;decisões]
+  B --&gt; C[Livro de&lt;br/&gt;códigos]
+  C --&gt; D[Pré-teste]
+  D --&gt;|revisão| C
+  D --&gt; E[Anotação&lt;br/&gt;independente]
+  E --&gt; F[Medida de&lt;br/&gt;concordância]
+  F --&gt; G[Adjudicação]
+  G --&gt; H[Validação&lt;br/&gt;do modelo]
+  H --&gt; I[Banco de&lt;br/&gt;dados]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="o-que-é-análise-de-conteúdo-jurídico" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="o-que-é-análise-de-conteúdo-jurídico"><span class="header-section-number">12.2</span> O que é análise de conteúdo jurídico</h2>
+<p>A análise de conteúdo é um método para produzir inferências replicáveis e válidas a partir de textos (Krippendorff, 2018). Hall e Wright (2008) examinaram 122 estudos que aplicaram o método a decisões judiciais e o defendem como base de uma metodologia empírica própria do Direito. Segundo eles, o método é mais adequado quando cada decisão deve receber o mesmo peso. Ele difere, portanto, da leitura doutrinária, que seleciona os precedentes mais influentes: aqui, importa o conjunto.</p>
+<p>Quatro termos organizam o trabalho:</p>
+<ul>
+<li><strong>Unidade de análise:</strong> o que recebe uma resposta. Pode ser a decisão, o réu, a vítima ou o trecho. Uma decisão de pronúncia com duas vítimas mostra por que essa escolha precisa anteceder a coleta.</li>
+<li><strong>Variável:</strong> a informação registrada para cada unidade.</li>
+<li><strong>Livro de códigos:</strong> o conjunto de perguntas, opções e orientações que define cada variável. É o instrumento de medição.</li>
+<li><strong>Anotação:</strong> a resposta dada por uma pessoa ou por um modelo a uma pergunta, para uma unidade.</li>
+</ul>
+<section id="confiabilidade-e-validade" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="confiabilidade-e-validade"><span class="header-section-number">12.2.1</span> Confiabilidade e validade</h3>
+<p>Uma anotação é confiável quando pessoas diferentes, seguindo as mesmas instruções, produzem resultados semelhantes. É válida quando captura aquilo que se pretende medir. As duas propriedades não se confundem. Artstein e Poesio (2008, p.&nbsp;557) descrevem a confiabilidade como pré-requisito para demonstrar a validade, mas advertem que a boa concordância não a garante, pois dois observadores podem compartilhar o mesmo preconceito e ambos estarem errados.</p>
+<p>No Direito, a advertência tem efeito direto. Duas anotadoras formadas na mesma faculdade podem concordar por compartilharem uma leitura, e não porque o texto a imponha.</p>
+<p>Krippendorff estabelece três exigências para que a concordância informe sobre a reprodutibilidade (Artstein; Poesio, 2008, p.&nbsp;574): um esquema de codificação exaustivo, claro e utilizável, com instruções passo a passo; critérios explícitos para a escolha de quem codifica; e trabalho independente. A consequência prática é que <strong>discutir um caso durante a anotação contamina a medida</strong>. A conversa tem lugar antes, no pré-teste, e depois, na adjudicação.</p>
+</section>
+</section>
+<section id="o-caso-a-pronúncia-em-processos-de-feminicídio" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="o-caso-a-pronúncia-em-processos-de-feminicídio"><span class="header-section-number">12.3</span> O caso: a pronúncia em processos de feminicídio</h2>
+<p>Nos crimes dolosos contra a vida, a pronúncia encerra a primeira fase do procedimento do júri. Convencido da materialidade e de indícios suficientes de autoria, o juiz admite a acusação e submete o réu a julgamento pelo Tribunal do Júri (art. 413 do Código de Processo Penal). O § 1º do mesmo artigo exige que a decisão indique o dispositivo legal em que o réu é considerado incurso e especifique as qualificadoras e causas de aumento.</p>
+<p>A escolha dessa decisão tem razão metodológica. A pronúncia costuma resumir depoimentos, responder às teses das partes e decidir se as circunstâncias do crime seguem para os jurados. Oferece, portanto, tanto informações objetivas, como a data da decisão, quanto questões interpretativas, como a presença de razões da condição do sexo feminino.</p>
+<p>A legislação acrescenta um aspecto relevante. O feminicídio foi introduzido como qualificadora do homicídio (art. 121, § 2º, VI, do Código Penal) pela Lei nº 13.104/2015. A Lei nº 14.994/2024 revogou esse inciso e criou o crime autônomo do art. 121-A, com pena de reclusão de 20 a 40 anos. Segundo o § 1º do novo artigo, há razões da condição do sexo feminino quando o crime envolve violência doméstica e familiar ou menosprezo ou discriminação à condição de mulher. Decisões de um mesmo período podem, assim, aplicar dispositivos diferentes, conforme a data do fato. O questionário precisa prever essa situação.</p>
+</section>
+<section id="coleta-no-banco-de-sentenças" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="coleta-no-banco-de-sentenças"><span class="header-section-number">12.4</span> Coleta no Banco de Sentenças</h2>
+<p>O Banco de Sentenças do TJSP, conhecido como CJPG, permite consultar decisões de primeiro grau sem identificação do usuário. A coleta a seguir usa o pacote <code>tjsp</code> para a busca e permanece no acesso público.</p>
+<p>Os códigos de assunto de feminicídio são 3750, 50368 e 50708. A busca é delimitada pela data e gravada em arquivos HTML, que preservam o resultado como foi recebido.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>tjsp<span class="sc">::</span><span class="fu">tjsp_baixar_cjpg</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">assunto =</span> <span class="fu">c</span>(<span class="st">"3750"</span>, <span class="st">"50368"</span>, <span class="st">"50708"</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">inicio =</span> <span class="st">"01/01/2025"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">fim =</span> <span class="st">"31/12/2025"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">diretorio =</span> <span class="st">"html"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>decisoes <span class="ot">&lt;-</span> tjsp<span class="sc">::</span><span class="fu">tjsp_ler_cjpg</span>(<span class="at">diretorio =</span> <span class="st">"html"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(cd_doc, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A coleta revela três cuidados que valem para qualquer pesquisa com esse tipo de fonte.</p>
+<p><strong>A busca devolve mais do que o tipo de decisão desejado.</strong> O assunto identifica o processo, não o ato decidido. O resultado mistura pronúncias, impronúncias, sentenças posteriores ao júri e outras decisões. A triagem deve observar o ato de decidir. Procurar apenas a palavra “pronunciado” captura também a sentença em que se lê que o réu “foi pronunciado”, ou seja, um ato posterior. Por isso, a regra procura o verbo no dispositivo, e uma amostra do resultado é conferida à mão.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>classificar_decisao <span class="ot">&lt;-</span> <span class="cf">function</span>(julgado) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  final <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_to_lower</span>(stringr<span class="sc">::</span><span class="fu">str_sub</span>(julgado, <span class="sc">-</span><span class="dv">3000</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(final) <span class="sc">~</span> <span class="st">"sem texto"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    stringr<span class="sc">::</span><span class="fu">str_detect</span>(final, <span class="st">"</span><span class="sc">\\</span><span class="st">bimpronuncio</span><span class="sc">\\</span><span class="st">b|</span><span class="sc">\\</span><span class="st">bpara impronunciar</span><span class="sc">\\</span><span class="st">b"</span>) <span class="sc">~</span> <span class="st">"impronúncia"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    stringr<span class="sc">::</span><span class="fu">str_detect</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      final,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"</span><span class="sc">\\</span><span class="st">bpronuncio</span><span class="sc">\\</span><span class="st">b|</span><span class="sc">\\</span><span class="st">bpara pronunciar</span><span class="sc">\\</span><span class="st">b|</span><span class="sc">\\</span><span class="st">bde se pronunciar</span><span class="sc">\\</span><span class="st">b|</span><span class="sc">\\</span><span class="st">bseja o mesmo pronunciado</span><span class="sc">\\</span><span class="st">b"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">~</span> <span class="st">"pronúncia"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    stringr<span class="sc">::</span><span class="fu">str_detect</span>(final, <span class="st">"impronúncia"</span>) <span class="sc">~</span> <span class="st">"impronúncia"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="st">"outra"</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">classificar_decisao</span>(<span class="fu">c</span>(</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ante o exposto, PRONUNCIO o réu para que seja julgado pelo Júri."</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"O réu, qualificado nos autos, foi pronunciado e levado a julgamento."</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ante o exposto, IMPRONUNCIO o acusado."</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "pronúncia"   "outra"       "impronúncia"</code></pre>
+</div>
+</div>
+<p><strong>Nem toda decisão traz o texto na página de resultados.</strong> Parte delas é listada apenas com os metadados. Selecionar somente as que têm texto restringiria a amostra sem que nada o indicasse. A verificação é simples: contar os valores ausentes antes de filtrar e, para essas decisões, obter o texto no documento.</p>
+<p><strong>O corpus tem limites próprios.</strong> Ele reúne decisões disponibilizadas no banco público e, por isso, não representa todos os casos de feminicídio: processos em segredo de justiça não devem aparecer, e um processo só entra na base depois de haver decisão. Para perguntas sobre o tempo até a decisão, por exemplo, partir de decisões condicionaria a análise ao desfecho, e o ponto de partida adequado seria a lista de processos distribuídos. Para perguntas sobre como as pronúncias são fundamentadas, o recorte é adequado, desde que declarado.</p>
+<p>Um script completo reúne essas etapas, inclusive o sorteio com semente fixa e a obtenção dos PDFs pelo link público do inteiro teor: <a href="https://github.com/Jurimetria-USP/livro/blob/main/scripts/coletar-cjpg-feminicidio.R"><code>scripts/coletar-cjpg-feminicidio.R</code></a>.</p>
+</section>
+<section id="o-livro-de-códigos" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="o-livro-de-códigos"><span class="header-section-number">12.5</span> O livro de códigos</h2>
+<p>Uma boa pergunta permite que outra pessoa chegue à mesma resposta sem consultar quem a escreveu. Isso exige definir a unidade, o que fazer quando a decisão é omissa e como tratar os casos de fronteira.</p>
+<p>A forma da pergunta condiciona a medida. A <a href="#tbl-tipos-pergunta" class="quarto-xref">Tabela&nbsp;<span>12.1</span></a> resume os tipos usados aqui.</p>
+<div id="tbl-tipos-pergunta" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tipos-pergunta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;12.1: Tipos de pergunta e medidas de concordância
+</figcaption>
+<div aria-describedby="tbl-tipos-pergunta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Exemplo</th>
+<th>Medida de concordância</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sim/não</td>
+<td>A decisão pronuncia por crime tentado?</td>
+<td>Alfa nominal</td>
+</tr>
+<tr class="even">
+<td>Escolha única</td>
+<td>Qual era a relação entre o réu e a vítima?</td>
+<td>Alfa nominal</td>
+</tr>
+<tr class="odd">
+<td>Múltipla escolha</td>
+<td>Quais meios de prova a decisão cita?</td>
+<td>Alfa com distância MASI</td>
+</tr>
+<tr class="even">
+<td>Data</td>
+<td>Qual é a data do fato?</td>
+<td>Concordância exata ou alfa de intervalo</td>
+</tr>
+<tr class="odd">
+<td>Número</td>
+<td>Quantos golpes a decisão menciona?</td>
+<td>ICC ou alfa de intervalo</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Cinco cuidados evitam a maior parte dos problemas:</p>
+<ul>
+<li><strong>Separar “não” de “não informado”.</strong> Afirmar que não havia medida protetiva é diferente de nada dizer sobre o assunto.</li>
+<li><strong>Separar o que a decisão relata do que ela reconhece.</strong> A acusação pode alegar uma qualificadora que o juiz afasta. “A denúncia imputa” e “a decisão mantém” são duas variáveis.</li>
+<li><strong>Definir a regra para mais de uma vítima ou réu.</strong> Sem regra, cada pessoa escolherá uma vítima diferente, e a divergência nada dirá sobre o conteúdo.</li>
+<li><strong>Usar perguntas condicionais com parcimônia.</strong> Quem responde “não” à pergunta anterior não responde à seguinte, e isso reduz o número de casos em que a concordância pode ser medida.</li>
+<li><strong>Testar antes de anotar.</strong> Algumas decisões lidas e discutidas em grupo mostram opções que faltam e orientações ambíguas. As decisões usadas no pré-teste não entram na medida de concordância, porque ela só vale para o instrumento já estabilizado.</li>
+</ul>
+<p>Esse último ponto merece atenção. Acrescentar regras enquanto os dados são gerados viola a primeira exigência de Krippendorff (Artstein; Poesio, 2008, p.&nbsp;574): a medida passa a descrever um instrumento que mudou no caminho.</p>
+</section>
+<section id="medir-a-concordância" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="medir-a-concordância"><span class="header-section-number">12.6</span> Medir a concordância</h2>
+<section id="a-concordância-observada" class="level3" data-number="12.6.1">
+<h3 data-number="12.6.1" class="anchored" data-anchor-id="a-concordância-observada"><span class="header-section-number">12.6.1</span> A concordância observada</h3>
+<p>A medida mais intuitiva é a proporção de casos em que duas pessoas deram a mesma resposta. Usamos o exemplo da Tabela 1 de Artstein e Poesio (2008, p.&nbsp;558): duas pessoas classificam 100 enunciados como afirmação (<code>S</code>) ou pedido de informação (<code>I</code>).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(irr)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>exemplo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">coder_a =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"S"</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">"I"</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">"S"</span>, <span class="dv">10</span>), <span class="fu">rep</span>(<span class="st">"I"</span>, <span class="dv">50</span>)),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">coder_b =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"S"</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">"S"</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">"I"</span>, <span class="dv">10</span>), <span class="fu">rep</span>(<span class="st">"I"</span>, <span class="dv">50</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="at">B =</span> exemplo<span class="sc">$</span>coder_b, <span class="at">A =</span> exemplo<span class="sc">$</span>coder_a)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   A
+B    I  S
+  I 50 10
+  S 20 20</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>concordancia_observada <span class="ot">&lt;-</span> <span class="fu">mean</span>(exemplo<span class="sc">$</span>coder_a <span class="sc">==</span> exemplo<span class="sc">$</span>coder_b)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>concordancia_observada</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7</code></pre>
+</div>
+</div>
+<p>As duas concordam em 70% dos casos. O número parece razoável, mas não informa quanto dessa concordância ocorreria mesmo se respondessem ao acaso. O problema se agrava quando uma categoria predomina. Artstein e Poesio mostram que, se 95% dos casos pertencem a uma categoria, o acaso produz cerca de 90,5% de concordância, de modo que 90% observados são piores que o esperado (2008, p.&nbsp;559).</p>
+</section>
+<section id="a-correção-pelo-acaso" class="level3" data-number="12.6.2">
+<h3 data-number="12.6.2" class="anchored" data-anchor-id="a-correção-pelo-acaso"><span class="header-section-number">12.6.2</span> A correção pelo acaso</h3>
+<p>Os coeficientes dessa família compartilham a mesma estrutura, em que <span class="math inline">\(A_o\)</span> é a concordância observada e <span class="math inline">\(A_e\)</span> é a esperada ao acaso:</p>
+<p><span class="math display">\[
+\text{coeficiente} = \frac{A_o - A_e}{1 - A_e}
+\]</span></p>
+<p>O valor 1 indica concordância perfeita e o valor 0 indica concordância igual à do acaso. Valores negativos indicam concordância inferior a ela. Os coeficientes diferem na forma de estimar <span class="math inline">\(A_e\)</span>. O kappa de Cohen (1960), por exemplo, considera a distribuição de respostas de cada codificador.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>marginal_a <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(exemplo<span class="sc">$</span>coder_a))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>marginal_b <span class="ot">&lt;-</span> <span class="fu">prop.table</span>(<span class="fu">table</span>(exemplo<span class="sc">$</span>coder_b))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>concordancia_esperada <span class="ot">&lt;-</span> <span class="fu">sum</span>(marginal_a <span class="sc">*</span> marginal_b)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>concordancia_esperada</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.54</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(concordancia_observada <span class="sc">-</span> concordancia_esperada) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> concordancia_esperada)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3478261</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kappa2</span>(exemplo)<span class="sc">$</span>value</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3478261</code></pre>
+</div>
+</div>
+<p>O resultado reproduz o valor de 0,348 publicado na Tabela 2 do artigo (Artstein; Poesio, 2008, p.&nbsp;560). Uma concordância de 70% corresponde, depois da correção, a um coeficiente baixo.</p>
+</section>
+<section id="o-alfa-de-krippendorff" class="level3" data-number="12.6.3">
+<h3 data-number="12.6.3" class="anchored" data-anchor-id="o-alfa-de-krippendorff"><span class="header-section-number">12.6.3</span> O alfa de Krippendorff</h3>
+<p>O alfa é formulado em termos de discordância, com <span class="math inline">\(D_o\)</span> observada e <span class="math inline">\(D_e\)</span> esperada:</p>
+<p><span class="math display">\[
+\alpha = 1 - \frac{D_o}{D_e}
+\]</span></p>
+<p>Três propriedades o tornam adequado para a análise de conteúdo jurídico: aceita qualquer número de codificadores, tolera dados ausentes e admite funções de distância que distinguem discordâncias graves de discordâncias leves (Hayes; Krippendorff, 2007; Artstein; Poesio, 2008). A tolerância a ausências é relevante quando cada pessoa anota apenas parte das decisões.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>matriz_exemplo <span class="ot">&lt;-</span> exemplo <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), \(x) <span class="fu">as.numeric</span>(<span class="fu">factor</span>(x)))) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>() <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>()</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kripp.alpha</span>(matriz_exemplo, <span class="at">method =</span> <span class="st">"nominal"</span>)<span class="sc">$</span>value</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.343956</code></pre>
+</div>
+</div>
+</section>
+<section id="respostas-múltiplas-a-distância-masi" class="level3" data-number="12.6.4">
+<h3 data-number="12.6.4" class="anchored" data-anchor-id="respostas-múltiplas-a-distância-masi"><span class="header-section-number">12.6.4</span> Respostas múltiplas: a distância MASI</h3>
+<p>Quando a resposta é um conjunto, como os meios de prova citados, tratar conjuntos diferentes como simplesmente discordantes ignora sobreposições parciais. A distância MASI (Passonneau, 2006) combina a semelhança entre os conjuntos com um fator que considera se um contém o outro.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>distancia_masi <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b) {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">setequal</span>(a, b)) <span class="fu">return</span>(<span class="dv">0</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  jaccard <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">intersect</span>(a, b)) <span class="sc">/</span> <span class="fu">length</span>(<span class="fu">union</span>(a, b))</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  monotonicidade <span class="ot">&lt;-</span> <span class="fu">case_when</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">all</span>(a <span class="sc">%in%</span> b) <span class="sc">|</span> <span class="fu">all</span>(b <span class="sc">%in%</span> a) <span class="sc">~</span> <span class="dv">2</span> <span class="sc">/</span> <span class="dv">3</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">length</span>(<span class="fu">intersect</span>(a, b)) <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">3</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> <span class="dv">0</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">-</span> jaccard <span class="sc">*</span> monotonicidade</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">distancia_masi</span>(<span class="fu">c</span>(<span class="st">"laudo"</span>, <span class="st">"vítima"</span>), <span class="fu">c</span>(<span class="st">"laudo"</span>, <span class="st">"vítima"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">distancia_masi</span>(<span class="fu">c</span>(<span class="st">"laudo"</span>, <span class="st">"vítima"</span>), <span class="fu">c</span>(<span class="st">"laudo"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6666667</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">distancia_masi</span>(<span class="fu">c</span>(<span class="st">"laudo"</span>, <span class="st">"vítima"</span>), <span class="fu">c</span>(<span class="st">"laudo"</span>, <span class="st">"testemunha"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8888889</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">distancia_masi</span>(<span class="fu">c</span>(<span class="st">"laudo"</span>), <span class="fu">c</span>(<span class="st">"testemunha"</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p>Artstein e Poesio (2008, p.&nbsp;591) recomendam o alfa quando as categorias não são igualmente distintas, em especial nas interpretações com valores em conjunto, observando que a escolha dos pesos afeta o resultado.</p>
+</section>
+<section id="quando-o-coeficiente-é-baixo-e-a-concordância-é-alta" class="level3" data-number="12.6.5">
+<h3 data-number="12.6.5" class="anchored" data-anchor-id="quando-o-coeficiente-é-baixo-e-a-concordância-é-alta"><span class="header-section-number">12.6.5</span> Quando o coeficiente é baixo e a concordância é alta</h3>
+<p>Considere um caso construído para fins de ilustração: em 100 decisões, duas pessoas respondem se a vítima era estrangeira. Elas concordam que não em 96, e cada uma marca “sim” em duas decisões diferentes.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>rara <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">96</span>), <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">96</span>), <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(rara[<span class="dv">1</span>, ] <span class="sc">==</span> rara[<span class="dv">2</span>, ])</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.96</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kripp.alpha</span>(rara, <span class="at">method =</span> <span class="st">"nominal"</span>)<span class="sc">$</span>value</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.01530612</code></pre>
+</div>
+</div>
+<p>A concordância é de 96% e o alfa fica em torno de zero. O fenômeno, descrito por Feinstein e Cicchetti (1990), ocorre porque, em categorias raras, o acaso já explica quase toda a concordância. O coeficiente não está errado: em nenhum dos dois casos positivos as pessoas identificaram a mesma decisão. A leitura adequada informa o coeficiente, a concordância observada e o número de casos positivos.</p>
+<p>Situação extrema ocorre quando todas as respostas são iguais. A discordância esperada é zero e o alfa fica indeterminado. Alguns programas devolvem 1 nesse caso, por convenção. O mais transparente é registrar a ausência de variação, que por si só indica que a pergunta não diferenciou as decisões da amostra.</p>
+</section>
+<section id="como-interpretar" class="level3" data-number="12.6.6">
+<h3 data-number="12.6.6" class="anchored" data-anchor-id="como-interpretar"><span class="header-section-number">12.6.6</span> Como interpretar</h3>
+<p>Os limites mais citados vêm de Krippendorff, como relatam Artstein e Poesio (2008, p.&nbsp;576): valores acima de 0,8 são considerados confiáveis, e valores entre 0,67 e 0,8 permitem conclusões provisórias. Os mesmos autores relatam que, em sua experiência, apenas valores acima de 0,8 asseguraram anotação de qualidade razoável, mas duvidam que um único limite sirva a todos os propósitos (2008, p.&nbsp;591). Recomendam relatar o número de codificadores, se trabalharam de forma independente, se usaram apenas o manual e a tabela de concordância.</p>
+<p>Dois cuidados completam a leitura. O primeiro é informar o número efetivo de casos: em perguntas condicionais, ele pode ser muito menor que o total de decisões, e o mesmo coeficiente tem peso diferente com 40 casos ou com 4. O segundo é apresentar a incerteza, que pode ser estimada por bootstrap, sorteando decisões com reposição.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>alfa_bootstrap <span class="ot">&lt;-</span> <span class="cf">function</span>(matriz, <span class="at">repeticoes =</span> <span class="dv">1000</span>, <span class="at">semente =</span> <span class="dv">123</span>) {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(semente)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dbl</span>(<span class="fu">seq_len</span>(repeticoes), \(i) {</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    casos <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">ncol</span>(matriz), <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kripp.alpha</span>(matriz[, casos, <span class="at">drop =</span> <span class="cn">FALSE</span>], <span class="at">method =</span> <span class="st">"nominal"</span>)<span class="sc">$</span>value</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  }) <span class="sc">|&gt;</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">quantile</span>(<span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="fu">alfa_bootstrap</span>(matriz_exemplo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     2.5%     97.5% 
+0.1462558 0.5348447 </code></pre>
+</div>
+</div>
+</section>
+<section id="dos-dados-da-plataforma-ao-coeficiente" class="level3" data-number="12.6.7">
+<h3 data-number="12.6.7" class="anchored" data-anchor-id="dos-dados-da-plataforma-ao-coeficiente"><span class="header-section-number">12.6.7</span> Dos dados da plataforma ao coeficiente</h3>
+<p>Plataformas de anotação como o LegalAnno exportam uma linha por anotador, documento e pergunta. O formato pode ser convertido na matriz exigida por <code>kripp.alpha()</code>, com uma linha por anotador, uma coluna por documento e <code>NA</code> onde não houve resposta.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>alfa_por_pergunta <span class="ot">&lt;-</span> <span class="cf">function</span>(anotacoes) {</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  anotacoes <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(assignment_status <span class="sc">==</span> <span class="st">"complete"</span>, question_type <span class="sc">!=</span> <span class="st">"freetext"</span>, value <span class="sc">!=</span> <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(question_label) <span class="sc">|&gt;</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_modify</span>(\(respostas, chave) {</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>      matriz <span class="ot">&lt;-</span> respostas <span class="sc">|&gt;</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">codigo =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(value))) <span class="sc">|&gt;</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(annotator_id, document_id, codigo) <span class="sc">|&gt;</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> document_id, <span class="at">values_from =</span> codigo) <span class="sc">|&gt;</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(<span class="sc">-</span>annotator_id) <span class="sc">|&gt;</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">as.matrix</span>()</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>      n_efetivo <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">colSums</span>(<span class="sc">!</span><span class="fu">is.na</span>(matriz)) <span class="sc">&gt;=</span> <span class="dv">2</span>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>      observada <span class="ot">&lt;-</span> <span class="fu">apply</span>(matriz, <span class="dv">2</span>, \(x) {</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>        x <span class="ot">&lt;-</span> x[<span class="sc">!</span><span class="fu">is.na</span>(x)]</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">length</span>(x) <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="fu">return</span>(<span class="cn">NA_real_</span>)</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mean</span>(<span class="fu">combn</span>(x, <span class="dv">2</span>, \(par) par[<span class="dv">1</span>] <span class="sc">==</span> par[<span class="dv">2</span>]))</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>      sem_variacao <span class="ot">&lt;-</span> <span class="fu">n_distinct</span>(<span class="fu">as.vector</span>(matriz), <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">&lt;</span> <span class="dv">2</span></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">tibble</span>(</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>        n_efetivo,</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">concordancia =</span> <span class="fu">mean</span>(observada, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">alfa =</span> <span class="cf">if</span> (sem_variacao) <span class="cn">NA_real_</span> <span class="cf">else</span> <span class="fu">kripp.alpha</span>(matriz, <span class="at">method =</span> <span class="st">"nominal"</span>)<span class="sc">$</span>value</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    }) <span class="sc">|&gt;</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(alfa)</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A função trata cada resposta como categoria nominal, o que é adequado para perguntas de sim/não e de escolha única. As perguntas de múltipla escolha requerem a distância MASI, e as numéricas, uma medida própria. O exemplo a seguir usa respostas construídas apenas para testar a função.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>teste <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">document_id =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"d1"</span>, <span class="st">"d2"</span>, <span class="st">"d3"</span>, <span class="st">"d4"</span>), <span class="at">each =</span> <span class="dv">2</span>),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">annotator_id =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A1"</span>, <span class="st">"A2"</span>), <span class="at">times =</span> <span class="dv">4</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">assignment_status =</span> <span class="st">"complete"</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">question_label =</span> <span class="st">"Pronuncia por crime tentado?"</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">question_type =</span> <span class="st">"boolean"</span>,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="fu">c</span>(<span class="st">"Sim"</span>, <span class="st">"Sim"</span>, <span class="st">"Não"</span>, <span class="st">"Não"</span>, <span class="st">"Sim"</span>, <span class="st">"Não"</span>, <span class="st">"Não"</span>, <span class="st">"Não"</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="fu">alfa_por_pergunta</span>(teste)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  question_label               n_efetivo concordancia  alfa
+  &lt;chr&gt;                            &lt;int&gt;        &lt;dbl&gt; &lt;dbl&gt;
+1 Pronuncia por crime tentado?         4         0.75 0.533</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="adjudicação-e-padrão-ouro" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="adjudicação-e-padrão-ouro"><span class="header-section-number">12.7</span> Adjudicação e padrão-ouro</h2>
+<p>A concordância mede o instrumento, mas a análise precisa de um valor por decisão. Quando as respostas divergem, uma terceira pessoa examina o caso e define o valor final, chamado padrão-ouro. Quem anotou um documento não deve adjudicá-lo. Convém decidir com a decisão inteira à vista, pois a resposta a uma pergunta costuma depender do restante do caso.</p>
+<p>A adjudicação é útil, mas tem um custo: ela converte várias leituras em uma só. Se as respostas originais forem descartadas, o banco final deixará de registrar que aquela decisão dividiu seus leitores. Por isso, as anotações individuais devem ser preservadas ao lado do valor adjudicado.</p>
+</section>
+<section id="uma-leitura-crítica-os-sete-mitos-da-anotação" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="uma-leitura-crítica-os-sete-mitos-da-anotação"><span class="header-section-number">12.8</span> Uma leitura crítica: os sete mitos da anotação</h2>
+<p>Aroyo e Welty (2015) questionam a ideia de que a anotação recupera uma verdade única. Para eles, a divergência entre anotadores é sinal, e não apenas ruído. Os dados dos autores vêm da extração de relações em textos médicos, com grande número de trabalhadores por sentença, e a passagem para o Direito exige cautela. O texto serve, contudo, como roteiro para examinar qualquer protocolo. A <a href="#tbl-mitos" class="quarto-xref">Tabela&nbsp;<span>12.2</span></a> aplica os sete mitos a uma pesquisa com pronúncias.</p>
+<div id="tbl-mitos" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mitos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;12.2: Os sete mitos de Aroyo e Welty aplicados a uma pesquisa com pronúncias
+</figcaption>
+<div aria-describedby="tbl-mitos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mito</th>
+<th>Argumento dos autores</th>
+<th>Pergunta para o protocolo jurídico</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Há uma única verdade</td>
+<td>Várias interpretações podem ser razoáveis para o mesmo texto</td>
+<td>O padrão-ouro registra uma leitura correta ou a leitura que prevaleceu?</td>
+</tr>
+<tr class="even">
+<td>Divergir é ruim</td>
+<td>A divergência pode indicar ambiguidade do texto ou da categoria, e não só baixa qualidade</td>
+<td>A baixa concordância em “razões da condição do sexo feminino” é falha do instrumento ou característica do conceito?</td>
+</tr>
+<tr class="odd">
+<td>Orientações detalhadas ajudam</td>
+<td>Orientações muito precisas eliminam divergência sem aumentar a qualidade, forçando escolhas</td>
+<td>A nova regra resolveu a dúvida ou apenas a escondeu?</td>
+</tr>
+<tr class="even">
+<td>Uma anotação basta</td>
+<td>Uma única perspectiva não capta as interpretações possíveis</td>
+<td>Quantas decisões foram lidas por mais de uma pessoa?</td>
+</tr>
+<tr class="odd">
+<td>Especialistas são melhores</td>
+<td>No estudo, especialistas não superaram de forma significativa os não especialistas e tendiam a ver relações que sabiam verdadeiras, mesmo sem expressão no texto</td>
+<td>Quem conhece o processo penal responde o que está na decisão ou o que supõe que deveria estar?</td>
+</tr>
+<tr class="even">
+<td>Todos os exemplos são iguais</td>
+<td>Há casos claros e casos vagos, e a divergência ajuda a distingui-los</td>
+<td>A análise trata do mesmo modo a decisão clara e a decisão ambígua?</td>
+</tr>
+<tr class="odd">
+<td>Feito uma vez, vale para sempre</td>
+<td>Os significados mudam com o tempo</td>
+<td>Uma categoria criada antes da Lei nº 14.994/2024 ainda mede o mesmo fenômeno?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Não é preciso rejeitar a adjudicação para aproveitar a crítica. Uma pesquisa pode precisar de um valor único para estimar um modelo. O que a crítica recomenda é preservar a informação: guardar as respostas individuais, examinar a concordância por decisão, além de por pergunta, e tratar as decisões que dividem os leitores como objeto de análise. A variação entre rótulos também é discutida por Plank (2022), e a análise estatística de anotações é tratada de forma ampla por Paun, Artstein e Poesio (2022).</p>
+<p>Há um limite prático. Os autores estabilizaram as distribuições com cerca de 15 trabalhadores por sentença (Aroyo; Welty, 2015, p.&nbsp;18-19), quantidade que costuma estar fora do alcance de uma pesquisa com decisões longas. Duas ou três pessoas por decisão permitem medir a concordância, mas não estimar a distribuição das interpretações em cada caso.</p>
+</section>
+<section id="o-modelo-de-linguagem-como-codificador" class="level2" data-number="12.9">
+<h2 data-number="12.9" class="anchored" data-anchor-id="o-modelo-de-linguagem-como-codificador"><span class="header-section-number">12.9</span> O modelo de linguagem como codificador</h2>
+<p>Depois de definir o instrumento e a referência, é possível perguntar se um modelo responde como as pessoas. Estudos mostram resultados promissores em tarefas de anotação de texto (Gilardi et al., 2023; Ziems et al., 2024), e Halterman e Keith (2025) discutem especificamente o uso de modelos com livros de códigos. O desempenho, porém, depende da tarefa, e é necessário medi-lo em cada aplicação.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Decisões com&lt;br/&gt;padrão-ouro] --&gt; B[Conjunto de&lt;br/&gt;desenvolvimento]
+  A --&gt; C[Conjunto&lt;br/&gt;de teste]
+  B --&gt; D[Ajustar&lt;br/&gt;o prompt]
+  D --&gt; B
+  D --&gt; E[Congelar&lt;br/&gt;o prompt]
+  E --&gt; F[Rodar uma vez&lt;br/&gt;no teste]
+  C --&gt; F
+  F --&gt; G[Relatar&lt;br/&gt;os resultados]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Quatro regras orientam a validação:</p>
+<ol type="1">
+<li><strong>Separar desenvolvimento e teste.</strong> O prompt é ajustado olhando os erros em um conjunto de decisões e avaliado em outro, que só é usado depois de o prompt ser congelado. Ajustar o prompt com base nos erros do teste tornaria a avaliação otimista.</li>
+<li><strong>Comparar com a concordância humana.</strong> Uma acurácia de 85% significa pouco isoladamente. Em uma pergunta em que as pessoas concordam 95% das vezes, é um desempenho inferior; naquela em que concordam 70%, pode igualar o limite da própria medida.</li>
+<li><strong>Separar casos fáceis e difíceis.</strong> A acurácia global é dominada pelas decisões em que todos concordam. O resultado deve ser apresentado separadamente para os casos de consenso e para os adjudicados, que são aqueles em que a ajuda do modelo seria mais valiosa.</li>
+<li><strong>Examinar a direção dos erros.</strong> Em perguntas de sim/não, informar sensibilidade e especificidade. Um modelo que tende a afirmar a presença de uma circunstância não produz apenas ruído: desloca a frequência estimada e as análises seguintes.</li>
+</ol>
+<p>Quando o modelo diverge do padrão-ouro, nem sempre é ele quem erra. Rever essas divergências pode corrigir o padrão-ouro, mas a revisão feita já conhecendo a resposta do modelo tende a favorecê-lo. Por isso, o resultado anterior à revisão deve ser relatado, e qualquer correção precisa ser descrita.</p>
+</section>
+<section id="atividade-da-leitura-à-validação" class="level2" data-number="12.10">
+<h2 data-number="12.10" class="anchored" data-anchor-id="atividade-da-leitura-à-validação"><span class="header-section-number">12.10</span> Atividade: da leitura à validação</h2>
+<p>A atividade percorre o método com um conjunto de pronúncias e um questionário comum. Cada decisão é lida por ao menos duas pessoas.</p>
+<ol type="1">
+<li><strong>Leitura do instrumento.</strong> Leia o livro de códigos e registre as dúvidas antes de abrir as decisões.</li>
+<li><strong>Pré-teste.</strong> Em grupo, responda ao questionário para duas decisões, reservadas para esse fim, e proponha ajustes.</li>
+<li><strong>Anotação independente.</strong> Responda ao questionário nas decisões atribuídas, sem consultar os colegas.</li>
+<li><strong>Concordância.</strong> Exporte as anotações e aplique <code>alfa_por_pergunta()</code>. Quais perguntas têm a menor concordância? E quais têm alta concordância com alfa baixo?</li>
+<li><strong>Diagnóstico.</strong> Escolha uma pergunta com baixa concordância e examine as decisões divergentes. A causa é falta de atenção, orientação ambígua, categoria inadequada ou ambiguidade real do texto?</li>
+<li><strong>Adjudicação.</strong> Resolva as divergências de decisões que você não anotou e registre a justificativa.</li>
+<li><strong>Validação do modelo.</strong> Ajuste o prompt no conjunto de desenvolvimento, congele-o e avalie-o uma única vez no conjunto de teste.</li>
+<li><strong>Comparação.</strong> Em quais perguntas o modelo alcança a concordância humana? O que os erros indicam: limite do modelo ou limite do instrumento?</li>
+</ol>
+</section>
+<section id="síntese" class="level2" data-number="12.11">
+<h2 data-number="12.11" class="anchored" data-anchor-id="síntese"><span class="header-section-number">12.11</span> Síntese</h2>
+<p>A análise de conteúdo transforma decisões em variáveis por meio de um instrumento explícito. A concordância entre leitores independentes indica se o instrumento pode ser reproduzido, mas não prova que ele mede o que se pretende. Os coeficientes corrigidos pelo acaso impedem que categorias predominantes inflem a medida; devem ser lidos, contudo, com a concordância observada, o número de casos e a incerteza. A divergência, por sua vez, não é apenas um defeito a eliminar: pode revelar a ambiguidade do texto e do conceito jurídico. Um modelo de linguagem entra nesse percurso como mais um codificador, sujeito à mesma exigência de validação.</p>
+</section>
+<section id="referências" class="level2" data-number="12.12">
+<h2 data-number="12.12" class="anchored" data-anchor-id="referências"><span class="header-section-number">12.12</span> Referências</h2>
+<ul>
+<li>Aroyo, L.; Welty, C. Truth is a lie: crowd truth and the seven myths of human annotation. <em>AI Magazine</em>, v. 36, n.&nbsp;1, p.&nbsp;15-24, 2015. <a href="https://doi.org/10.1609/aimag.v36i1.2564" class="uri">https://doi.org/10.1609/aimag.v36i1.2564</a></li>
+<li>Artstein, R.; Poesio, M. Inter-coder agreement for computational linguistics. <em>Computational Linguistics</em>, v. 34, n.&nbsp;4, p.&nbsp;555-596, 2008. <a href="https://aclanthology.org/J08-4004/" class="uri">https://aclanthology.org/J08-4004/</a></li>
+<li>Cohen, J. A coefficient of agreement for nominal scales. <em>Educational and Psychological Measurement</em>, v. 20, n.&nbsp;1, p.&nbsp;37-46, 1960. <a href="https://doi.org/10.1177/001316446002000104" class="uri">https://doi.org/10.1177/001316446002000104</a></li>
+<li>Feinstein, A. R.; Cicchetti, D. V. High agreement but low kappa: I. The problems of two paradoxes. <em>Journal of Clinical Epidemiology</em>, v. 43, n.&nbsp;6, p.&nbsp;543-549, 1990. <a href="https://doi.org/10.1016/0895-4356(90)90158-L" class="uri">https://doi.org/10.1016/0895-4356(90)90158-L</a></li>
+<li>Gilardi, F.; Alizadeh, M.; Kubli, M. ChatGPT outperforms crowd workers for text-annotation tasks. <em>Proceedings of the National Academy of Sciences</em>, v. 120, n.&nbsp;30, 2023. <a href="https://doi.org/10.1073/pnas.2305016120" class="uri">https://doi.org/10.1073/pnas.2305016120</a></li>
+<li>Hall, M. A.; Wright, R. F. Systematic content analysis of judicial opinions. <em>California Law Review</em>, v. 96, n.&nbsp;1, p.&nbsp;63-122, 2008. <a href="https://doi.org/10.15779/Z38R99R" class="uri">https://doi.org/10.15779/Z38R99R</a></li>
+<li>Halterman, A.; Keith, K. A. Codebook LLMs: evaluating LLMs as measurement tools for political science concepts. <em>Political Analysis</em>, v. 34, n.&nbsp;2, p.&nbsp;188-204, 2025. <a href="https://doi.org/10.1017/pan.2025.10017" class="uri">https://doi.org/10.1017/pan.2025.10017</a></li>
+<li>Hayes, A. F.; Krippendorff, K. Answering the call for a standard reliability measure for coding data. <em>Communication Methods and Measures</em>, v. 1, n.&nbsp;1, p.&nbsp;77-89, 2007. <a href="https://doi.org/10.1080/19312450709336664" class="uri">https://doi.org/10.1080/19312450709336664</a></li>
+<li>Krippendorff, K. <em>Content analysis: an introduction to its methodology</em>. 4. ed.&nbsp;Thousand Oaks: Sage, 2018.</li>
+<li>Passonneau, R. Measuring agreement on set-valued items (MASI) for semantic and pragmatic annotation. In: <em>Proceedings of the Fifth International Conference on Language Resources and Evaluation (LREC)</em>, 2006.</li>
+<li>Paun, S.; Artstein, R.; Poesio, M. <em>Statistical methods for annotation analysis</em>. Cham: Springer, 2022. <a href="https://doi.org/10.1007/978-3-031-03763-4" class="uri">https://doi.org/10.1007/978-3-031-03763-4</a></li>
+<li>Plank, B. The “problem” of human label variation: on ground truth in data, modeling and evaluation. In: <em>Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing</em>, p.&nbsp;10671-10682, 2022.</li>
+<li>Ziems, C. et al.&nbsp;Can large language models transform computational social science? <em>Computational Linguistics</em>, v. 50, n.&nbsp;1, p.&nbsp;237-291, 2024. <a href="https://doi.org/10.1162/coli_a_00502" class="uri">https://doi.org/10.1162/coli_a_00502</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/P2C07-introducao-r.html" class="pagination-link" aria-label="Introdução ao R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introdução ao R</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../capitulos/P3C03-limpeza-estruturacao.html" class="pagination-link" aria-label="Limpeza e estruturação de dados jurídicos">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Limpeza e estruturação de dados jurídicos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
