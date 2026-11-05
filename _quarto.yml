@@ -43,6 +43,7 @@ book:
         - capitulos/P2C07-introducao-r.qmd
     - part: "Parte III — Construção do banco de dados"
       chapters:
+        - capitulos/P3C02-analise-conteudo.qmd
         - capitulos/P3C03-limpeza-estruturacao.qmd
     - part: partes/04-descricao-fenomeno.qmd
       chapters:

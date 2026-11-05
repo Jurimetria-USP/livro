@@ -47,6 +47,11 @@ Os materiais poderão ser revistos e adaptados quando forem relevantes para os c
 
 Os materiais poderão ser revistos e adaptados de acordo com o percurso e o público do Livro de Jurimetria.
 
+### Validador (LegalAnno)
+
+- **Pasta:** `~/projetos/validador`
+- **Função no projeto:** fonte complementar para a metodologia de anotação, concordância e avaliação de modelos de linguagem. A bibliografia dessa fonte foi montada de memória e cada referência deve ser conferida antes do uso. Resultados de projetos específicos não são incorporados ao livro.
+
 ## Referência visual
 
 ### Tema moderno

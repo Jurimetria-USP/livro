@@ -115,3 +115,15 @@ O primeiro capítulo corresponderá ao conteúdo do capítulo original até a se
 O `uv` poderá criar internamente a pasta `.venv`, que permanecerá no `.gitignore`. Os arquivos `pyproject.toml`, `.python-version` e `uv.lock` integrarão o projeto e permitirão reconstruir o ambiente com `uv sync`.
 
 **Justificativa:** o procedimento centraliza a versão do Python e as dependências em arquivos reproduzíveis e reduz diferenças de configuração entre os participantes.
+
+## 5 de novembro de 2026
+
+### Capítulo de análise de conteúdo
+
+**Decisão:** a Parte III recebe o capítulo `P3C02-analise-conteudo.qmd`, sobre análise de conteúdo de decisões judiciais, concordância entre anotadores e validação de modelos de linguagem.
+
+O caso são decisões de pronúncia em processos de feminicídio, coletadas no Banco de Sentenças (CJPG) do TJSP com os códigos de assunto 3750, 50368 e 50708, apenas pelo acesso público, sem login.
+
+As decisões não aparecem no livro nem são versionadas no repositório. Elas são usadas na atividade prática e ficam em uma pasta local ignorada pelo Git. A anotação é feita no LegalAnno, e o livro apresenta os cálculos em R. Resultados de anotação só entram no livro depois de anotação real, sem dados simulados.
+
+**Justificativa:** a extração é a etapa da Parte III que ainda não tinha capítulo, e o caso permite ensinar o método com documentos jurídicos públicos.

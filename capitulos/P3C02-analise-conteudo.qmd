@@ -1,0 +1,417 @@
+---
+title: "Análise de conteúdo de decisões judiciais"
+subtitle: "Do documento à variável, da divergência à validação"
+format: html
+execute:
+  eval: true
+  warning: false
+  message: false
+---
+
+## Introdução
+
+Uma decisão judicial não chega à pesquisa como dado. Ela chega como texto: narra fatos, resume provas, enfrenta teses e decide. Para que centenas de decisões possam ser comparadas, alguém precisa ler cada uma delas e registrar, segundo regras explícitas, as mesmas informações. Esse procedimento transforma o documento em variáveis e constitui uma etapa de medição. Como toda medição, está sujeita a erro.
+
+Modelos de linguagem podem hoje executar parte dessa leitura. A possibilidade não elimina o problema de medição: desloca-o. Para saber se um modelo lê bem, precisamos de uma referência; para confiar na referência, precisamos saber se leitores humanos, trabalhando de forma independente, chegam às mesmas respostas.
+
+Neste capítulo, seguimos esse percurso com um caso: decisões de pronúncia em processos de feminicídio do Tribunal de Justiça de São Paulo.
+
+::: {.callout-note title="Objetivos do capítulo"}
+
+Ao final do capítulo, você deverá ser capaz de:
+
+- distinguir unidade de análise, variável, livro de códigos e anotação;
+- diferenciar confiabilidade e validade;
+- coletar decisões públicas no Banco de Sentenças do TJSP com o pacote `tjsp`;
+- elaborar e testar um questionário de análise de conteúdo;
+- calcular e interpretar a concordância observada, o kappa e o alfa de Krippendorff;
+- explicar por que a concordância observada isolada pode enganar;
+- examinar criticamente a noção de padrão-ouro;
+- planejar a validação de um modelo de linguagem como codificador.
+
+:::
+
+```{mermaid}
+flowchart LR
+  A[Pergunta<br/>de pesquisa] --> B[Coleta das<br/>decisões]
+  B --> C[Livro de<br/>códigos]
+  C --> D[Pré-teste]
+  D -->|revisão| C
+  D --> E[Anotação<br/>independente]
+  E --> F[Medida de<br/>concordância]
+  F --> G[Adjudicação]
+  G --> H[Validação<br/>do modelo]
+  H --> I[Banco de<br/>dados]
+```
+
+## O que é análise de conteúdo jurídico
+
+A análise de conteúdo é um método para produzir inferências replicáveis e válidas a partir de textos (Krippendorff, 2018). Hall e Wright (2008) examinaram 122 estudos que aplicaram o método a decisões judiciais e o defendem como base de uma metodologia empírica própria do Direito. Segundo eles, o método é mais adequado quando cada decisão deve receber o mesmo peso. Ele difere, portanto, da leitura doutrinária, que seleciona os precedentes mais influentes: aqui, importa o conjunto.
+
+Quatro termos organizam o trabalho:
+
+- **Unidade de análise:** o que recebe uma resposta. Pode ser a decisão, o réu, a vítima ou o trecho. Uma decisão de pronúncia com duas vítimas mostra por que essa escolha precisa anteceder a coleta.
+- **Variável:** a informação registrada para cada unidade.
+- **Livro de códigos:** o conjunto de perguntas, opções e orientações que define cada variável. É o instrumento de medição.
+- **Anotação:** a resposta dada por uma pessoa ou por um modelo a uma pergunta, para uma unidade.
+
+### Confiabilidade e validade
+
+Uma anotação é confiável quando pessoas diferentes, seguindo as mesmas instruções, produzem resultados semelhantes. É válida quando captura aquilo que se pretende medir. As duas propriedades não se confundem. Artstein e Poesio (2008, p. 557) descrevem a confiabilidade como pré-requisito para demonstrar a validade, mas advertem que a boa concordância não a garante, pois dois observadores podem compartilhar o mesmo preconceito e ambos estarem errados.
+
+No Direito, a advertência tem efeito direto. Duas anotadoras formadas na mesma faculdade podem concordar por compartilharem uma leitura, e não porque o texto a imponha.
+
+Krippendorff estabelece três exigências para que a concordância informe sobre a reprodutibilidade (Artstein; Poesio, 2008, p. 574): um esquema de codificação exaustivo, claro e utilizável, com instruções passo a passo; critérios explícitos para a escolha de quem codifica; e trabalho independente. A consequência prática é que **discutir um caso durante a anotação contamina a medida**. A conversa tem lugar antes, no pré-teste, e depois, na adjudicação.
+
+## O caso: a pronúncia em processos de feminicídio
+
+Nos crimes dolosos contra a vida, a pronúncia encerra a primeira fase do procedimento do júri. Convencido da materialidade e de indícios suficientes de autoria, o juiz admite a acusação e submete o réu a julgamento pelo Tribunal do Júri (art. 413 do Código de Processo Penal). O § 1º do mesmo artigo exige que a decisão indique o dispositivo legal em que o réu é considerado incurso e especifique as qualificadoras e causas de aumento.
+
+A escolha dessa decisão tem razão metodológica. A pronúncia costuma resumir depoimentos, responder às teses das partes e decidir se as circunstâncias do crime seguem para os jurados. Oferece, portanto, tanto informações objetivas, como a data da decisão, quanto questões interpretativas, como a presença de razões da condição do sexo feminino.
+
+A legislação acrescenta um aspecto relevante. O feminicídio foi introduzido como qualificadora do homicídio (art. 121, § 2º, VI, do Código Penal) pela Lei nº 13.104/2015. A Lei nº 14.994/2024 revogou esse inciso e criou o crime autônomo do art. 121-A, com pena de reclusão de 20 a 40 anos. Segundo o § 1º do novo artigo, há razões da condição do sexo feminino quando o crime envolve violência doméstica e familiar ou menosprezo ou discriminação à condição de mulher. Decisões de um mesmo período podem, assim, aplicar dispositivos diferentes, conforme a data do fato. O questionário precisa prever essa situação.
+
+## Coleta no Banco de Sentenças
+
+O Banco de Sentenças do TJSP, conhecido como CJPG, permite consultar decisões de primeiro grau sem identificação do usuário. A coleta a seguir usa o pacote `tjsp` para a busca e permanece no acesso público.
+
+Os códigos de assunto de feminicídio são 3750, 50368 e 50708. A busca é delimitada pela data e gravada em arquivos HTML, que preservam o resultado como foi recebido.
+
+```{r}
+#| eval: false
+library(tidyverse)
+
+tjsp::tjsp_baixar_cjpg(
+  assunto = c("3750", "50368", "50708"),
+  inicio = "01/01/2025",
+  fim = "31/12/2025",
+  diretorio = "html"
+)
+
+decisoes <- tjsp::tjsp_ler_cjpg(diretorio = "html") |>
+  distinct(cd_doc, .keep_all = TRUE)
+```
+
+A coleta revela três cuidados que valem para qualquer pesquisa com esse tipo de fonte.
+
+**A busca devolve mais do que o tipo de decisão desejado.** O assunto identifica o processo, não o ato decidido. O resultado mistura pronúncias, impronúncias, sentenças posteriores ao júri e outras decisões. A triagem deve observar o ato de decidir. Procurar apenas a palavra "pronunciado" captura também a sentença em que se lê que o réu "foi pronunciado", ou seja, um ato posterior. Por isso, a regra procura o verbo no dispositivo, e uma amostra do resultado é conferida à mão.
+
+```{r}
+classificar_decisao <- function(julgado) {
+  final <- stringr::str_to_lower(stringr::str_sub(julgado, -3000))
+  dplyr::case_when(
+    is.na(final) ~ "sem texto",
+    stringr::str_detect(final, "\\bimpronuncio\\b|\\bpara impronunciar\\b") ~ "impronúncia",
+    stringr::str_detect(
+      final,
+      "\\bpronuncio\\b|\\bpara pronunciar\\b|\\bde se pronunciar\\b|\\bseja o mesmo pronunciado\\b"
+    ) ~ "pronúncia",
+    stringr::str_detect(final, "impronúncia") ~ "impronúncia",
+    .default = "outra"
+  )
+}
+
+classificar_decisao(c(
+  "Ante o exposto, PRONUNCIO o réu para que seja julgado pelo Júri.",
+  "O réu, qualificado nos autos, foi pronunciado e levado a julgamento.",
+  "Ante o exposto, IMPRONUNCIO o acusado."
+))
+```
+
+**Nem toda decisão traz o texto na página de resultados.** Parte delas é listada apenas com os metadados. Selecionar somente as que têm texto restringiria a amostra sem que nada o indicasse. A verificação é simples: contar os valores ausentes antes de filtrar e, para essas decisões, obter o texto no documento.
+
+**O corpus tem limites próprios.** Ele reúne decisões disponibilizadas no banco público e, por isso, não representa todos os casos de feminicídio: processos em segredo de justiça não devem aparecer, e um processo só entra na base depois de haver decisão. Para perguntas sobre o tempo até a decisão, por exemplo, partir de decisões condicionaria a análise ao desfecho, e o ponto de partida adequado seria a lista de processos distribuídos. Para perguntas sobre como as pronúncias são fundamentadas, o recorte é adequado, desde que declarado.
+
+Um script completo reúne essas etapas, inclusive o sorteio com semente fixa e a obtenção dos PDFs pelo link público do inteiro teor: [`scripts/coletar-cjpg-feminicidio.R`](https://github.com/Jurimetria-USP/livro/blob/main/scripts/coletar-cjpg-feminicidio.R).
+
+## O livro de códigos
+
+Uma boa pergunta permite que outra pessoa chegue à mesma resposta sem consultar quem a escreveu. Isso exige definir a unidade, o que fazer quando a decisão é omissa e como tratar os casos de fronteira.
+
+A forma da pergunta condiciona a medida. A @tbl-tipos-pergunta resume os tipos usados aqui.
+
+| Tipo | Exemplo | Medida de concordância |
+|---|---|---|
+| Sim/não | A decisão pronuncia por crime tentado? | Alfa nominal |
+| Escolha única | Qual era a relação entre o réu e a vítima? | Alfa nominal |
+| Múltipla escolha | Quais meios de prova a decisão cita? | Alfa com distância MASI |
+| Data | Qual é a data do fato? | Concordância exata ou alfa de intervalo |
+| Número | Quantos golpes a decisão menciona? | ICC ou alfa de intervalo |
+
+: Tipos de pergunta e medidas de concordância {#tbl-tipos-pergunta}
+
+Cinco cuidados evitam a maior parte dos problemas:
+
+- **Separar "não" de "não informado".** Afirmar que não havia medida protetiva é diferente de nada dizer sobre o assunto.
+- **Separar o que a decisão relata do que ela reconhece.** A acusação pode alegar uma qualificadora que o juiz afasta. "A denúncia imputa" e "a decisão mantém" são duas variáveis.
+- **Definir a regra para mais de uma vítima ou réu.** Sem regra, cada pessoa escolherá uma vítima diferente, e a divergência nada dirá sobre o conteúdo.
+- **Usar perguntas condicionais com parcimônia.** Quem responde "não" à pergunta anterior não responde à seguinte, e isso reduz o número de casos em que a concordância pode ser medida.
+- **Testar antes de anotar.** Algumas decisões lidas e discutidas em grupo mostram opções que faltam e orientações ambíguas. As decisões usadas no pré-teste não entram na medida de concordância, porque ela só vale para o instrumento já estabilizado.
+
+Esse último ponto merece atenção. Acrescentar regras enquanto os dados são gerados viola a primeira exigência de Krippendorff (Artstein; Poesio, 2008, p. 574): a medida passa a descrever um instrumento que mudou no caminho.
+
+## Medir a concordância
+
+### A concordância observada
+
+A medida mais intuitiva é a proporção de casos em que duas pessoas deram a mesma resposta. Usamos o exemplo da Tabela 1 de Artstein e Poesio (2008, p. 558): duas pessoas classificam 100 enunciados como afirmação (`S`) ou pedido de informação (`I`).
+
+```{r}
+library(tidyverse)
+library(irr)
+
+exemplo <- tibble(
+  coder_a = c(rep("S", 20), rep("I", 20), rep("S", 10), rep("I", 50)),
+  coder_b = c(rep("S", 20), rep("S", 20), rep("I", 10), rep("I", 50))
+)
+
+table(B = exemplo$coder_b, A = exemplo$coder_a)
+
+concordancia_observada <- mean(exemplo$coder_a == exemplo$coder_b)
+concordancia_observada
+```
+
+As duas concordam em 70% dos casos. O número parece razoável, mas não informa quanto dessa concordância ocorreria mesmo se respondessem ao acaso. O problema se agrava quando uma categoria predomina. Artstein e Poesio mostram que, se 95% dos casos pertencem a uma categoria, o acaso produz cerca de 90,5% de concordância, de modo que 90% observados são piores que o esperado (2008, p. 559).
+
+### A correção pelo acaso
+
+Os coeficientes dessa família compartilham a mesma estrutura, em que $A_o$ é a concordância observada e $A_e$ é a esperada ao acaso:
+
+$$
+\text{coeficiente} = \frac{A_o - A_e}{1 - A_e}
+$$
+
+O valor 1 indica concordância perfeita e o valor 0 indica concordância igual à do acaso. Valores negativos indicam concordância inferior a ela. Os coeficientes diferem na forma de estimar $A_e$. O kappa de Cohen (1960), por exemplo, considera a distribuição de respostas de cada codificador.
+
+```{r}
+marginal_a <- prop.table(table(exemplo$coder_a))
+marginal_b <- prop.table(table(exemplo$coder_b))
+
+concordancia_esperada <- sum(marginal_a * marginal_b)
+concordancia_esperada
+
+(concordancia_observada - concordancia_esperada) / (1 - concordancia_esperada)
+
+kappa2(exemplo)$value
+```
+
+O resultado reproduz o valor de 0,348 publicado na Tabela 2 do artigo (Artstein; Poesio, 2008, p. 560). Uma concordância de 70% corresponde, depois da correção, a um coeficiente baixo.
+
+### O alfa de Krippendorff
+
+O alfa é formulado em termos de discordância, com $D_o$ observada e $D_e$ esperada:
+
+$$
+\alpha = 1 - \frac{D_o}{D_e}
+$$
+
+Três propriedades o tornam adequado para a análise de conteúdo jurídico: aceita qualquer número de codificadores, tolera dados ausentes e admite funções de distância que distinguem discordâncias graves de discordâncias leves (Hayes; Krippendorff, 2007; Artstein; Poesio, 2008). A tolerância a ausências é relevante quando cada pessoa anota apenas parte das decisões.
+
+```{r}
+matriz_exemplo <- exemplo |>
+  mutate(across(everything(), \(x) as.numeric(factor(x)))) |>
+  as.matrix() |>
+  t()
+
+kripp.alpha(matriz_exemplo, method = "nominal")$value
+```
+
+### Respostas múltiplas: a distância MASI
+
+Quando a resposta é um conjunto, como os meios de prova citados, tratar conjuntos diferentes como simplesmente discordantes ignora sobreposições parciais. A distância MASI (Passonneau, 2006) combina a semelhança entre os conjuntos com um fator que considera se um contém o outro.
+
+```{r}
+distancia_masi <- function(a, b) {
+  if (setequal(a, b)) return(0)
+
+  jaccard <- length(intersect(a, b)) / length(union(a, b))
+
+  monotonicidade <- case_when(
+    all(a %in% b) | all(b %in% a) ~ 2 / 3,
+    length(intersect(a, b)) > 0 ~ 1 / 3,
+    .default = 0
+  )
+
+  1 - jaccard * monotonicidade
+}
+
+distancia_masi(c("laudo", "vítima"), c("laudo", "vítima"))
+distancia_masi(c("laudo", "vítima"), c("laudo"))
+distancia_masi(c("laudo", "vítima"), c("laudo", "testemunha"))
+distancia_masi(c("laudo"), c("testemunha"))
+```
+
+Artstein e Poesio (2008, p. 591) recomendam o alfa quando as categorias não são igualmente distintas, em especial nas interpretações com valores em conjunto, observando que a escolha dos pesos afeta o resultado.
+
+### Quando o coeficiente é baixo e a concordância é alta
+
+Considere um caso construído para fins de ilustração: em 100 decisões, duas pessoas respondem se a vítima era estrangeira. Elas concordam que não em 96, e cada uma marca "sim" em duas decisões diferentes.
+
+```{r}
+rara <- rbind(
+  c(rep(0, 96), 1, 1, 0, 0),
+  c(rep(0, 96), 0, 0, 1, 1)
+)
+
+mean(rara[1, ] == rara[2, ])
+
+kripp.alpha(rara, method = "nominal")$value
+```
+
+A concordância é de 96% e o alfa fica em torno de zero. O fenômeno, descrito por Feinstein e Cicchetti (1990), ocorre porque, em categorias raras, o acaso já explica quase toda a concordância. O coeficiente não está errado: em nenhum dos dois casos positivos as pessoas identificaram a mesma decisão. A leitura adequada informa o coeficiente, a concordância observada e o número de casos positivos.
+
+Situação extrema ocorre quando todas as respostas são iguais. A discordância esperada é zero e o alfa fica indeterminado. Alguns programas devolvem 1 nesse caso, por convenção. O mais transparente é registrar a ausência de variação, que por si só indica que a pergunta não diferenciou as decisões da amostra.
+
+### Como interpretar
+
+Os limites mais citados vêm de Krippendorff, como relatam Artstein e Poesio (2008, p. 576): valores acima de 0,8 são considerados confiáveis, e valores entre 0,67 e 0,8 permitem conclusões provisórias. Os mesmos autores relatam que, em sua experiência, apenas valores acima de 0,8 asseguraram anotação de qualidade razoável, mas duvidam que um único limite sirva a todos os propósitos (2008, p. 591). Recomendam relatar o número de codificadores, se trabalharam de forma independente, se usaram apenas o manual e a tabela de concordância.
+
+Dois cuidados completam a leitura. O primeiro é informar o número efetivo de casos: em perguntas condicionais, ele pode ser muito menor que o total de decisões, e o mesmo coeficiente tem peso diferente com 40 casos ou com 4. O segundo é apresentar a incerteza, que pode ser estimada por bootstrap, sorteando decisões com reposição.
+
+```{r}
+alfa_bootstrap <- function(matriz, repeticoes = 1000, semente = 123) {
+  set.seed(semente)
+  map_dbl(seq_len(repeticoes), \(i) {
+    casos <- sample(ncol(matriz), replace = TRUE)
+    kripp.alpha(matriz[, casos, drop = FALSE], method = "nominal")$value
+  }) |>
+    quantile(probs = c(0.025, 0.975), na.rm = TRUE)
+}
+
+alfa_bootstrap(matriz_exemplo)
+```
+
+### Dos dados da plataforma ao coeficiente
+
+Plataformas de anotação como o LegalAnno exportam uma linha por anotador, documento e pergunta. O formato pode ser convertido na matriz exigida por `kripp.alpha()`, com uma linha por anotador, uma coluna por documento e `NA` onde não houve resposta.
+
+```{r}
+alfa_por_pergunta <- function(anotacoes) {
+  anotacoes |>
+    filter(assignment_status == "complete", question_type != "freetext", value != "") |>
+    group_by(question_label) |>
+    group_modify(\(respostas, chave) {
+      matriz <- respostas |>
+        mutate(codigo = as.numeric(factor(value))) |>
+        select(annotator_id, document_id, codigo) |>
+        pivot_wider(names_from = document_id, values_from = codigo) |>
+        select(-annotator_id) |>
+        as.matrix()
+
+      n_efetivo <- sum(colSums(!is.na(matriz)) >= 2)
+      observada <- apply(matriz, 2, \(x) {
+        x <- x[!is.na(x)]
+        if (length(x) < 2) return(NA_real_)
+        mean(combn(x, 2, \(par) par[1] == par[2]))
+      })
+      sem_variacao <- n_distinct(as.vector(matriz), na.rm = TRUE) < 2
+
+      tibble(
+        n_efetivo,
+        concordancia = mean(observada, na.rm = TRUE),
+        alfa = if (sem_variacao) NA_real_ else kripp.alpha(matriz, method = "nominal")$value
+      )
+    }) |>
+    ungroup() |>
+    arrange(alfa)
+}
+```
+
+A função trata cada resposta como categoria nominal, o que é adequado para perguntas de sim/não e de escolha única. As perguntas de múltipla escolha requerem a distância MASI, e as numéricas, uma medida própria. O exemplo a seguir usa respostas construídas apenas para testar a função.
+
+```{r}
+teste <- tibble(
+  document_id = rep(c("d1", "d2", "d3", "d4"), each = 2),
+  annotator_id = rep(c("A1", "A2"), times = 4),
+  assignment_status = "complete",
+  question_label = "Pronuncia por crime tentado?",
+  question_type = "boolean",
+  value = c("Sim", "Sim", "Não", "Não", "Sim", "Não", "Não", "Não")
+)
+
+alfa_por_pergunta(teste)
+```
+
+## Adjudicação e padrão-ouro
+
+A concordância mede o instrumento, mas a análise precisa de um valor por decisão. Quando as respostas divergem, uma terceira pessoa examina o caso e define o valor final, chamado padrão-ouro. Quem anotou um documento não deve adjudicá-lo. Convém decidir com a decisão inteira à vista, pois a resposta a uma pergunta costuma depender do restante do caso.
+
+A adjudicação é útil, mas tem um custo: ela converte várias leituras em uma só. Se as respostas originais forem descartadas, o banco final deixará de registrar que aquela decisão dividiu seus leitores. Por isso, as anotações individuais devem ser preservadas ao lado do valor adjudicado.
+
+## Uma leitura crítica: os sete mitos da anotação
+
+Aroyo e Welty (2015) questionam a ideia de que a anotação recupera uma verdade única. Para eles, a divergência entre anotadores é sinal, e não apenas ruído. Os dados dos autores vêm da extração de relações em textos médicos, com grande número de trabalhadores por sentença, e a passagem para o Direito exige cautela. O texto serve, contudo, como roteiro para examinar qualquer protocolo. A @tbl-mitos aplica os sete mitos a uma pesquisa com pronúncias.
+
+| Mito | Argumento dos autores | Pergunta para o protocolo jurídico |
+|---|---|---|
+| Há uma única verdade | Várias interpretações podem ser razoáveis para o mesmo texto | O padrão-ouro registra uma leitura correta ou a leitura que prevaleceu? |
+| Divergir é ruim | A divergência pode indicar ambiguidade do texto ou da categoria, e não só baixa qualidade | A baixa concordância em "razões da condição do sexo feminino" é falha do instrumento ou característica do conceito? |
+| Orientações detalhadas ajudam | Orientações muito precisas eliminam divergência sem aumentar a qualidade, forçando escolhas | A nova regra resolveu a dúvida ou apenas a escondeu? |
+| Uma anotação basta | Uma única perspectiva não capta as interpretações possíveis | Quantas decisões foram lidas por mais de uma pessoa? |
+| Especialistas são melhores | No estudo, especialistas não superaram de forma significativa os não especialistas e tendiam a ver relações que sabiam verdadeiras, mesmo sem expressão no texto | Quem conhece o processo penal responde o que está na decisão ou o que supõe que deveria estar? |
+| Todos os exemplos são iguais | Há casos claros e casos vagos, e a divergência ajuda a distingui-los | A análise trata do mesmo modo a decisão clara e a decisão ambígua? |
+| Feito uma vez, vale para sempre | Os significados mudam com o tempo | Uma categoria criada antes da Lei nº 14.994/2024 ainda mede o mesmo fenômeno? |
+
+: Os sete mitos de Aroyo e Welty aplicados a uma pesquisa com pronúncias {#tbl-mitos}
+
+Não é preciso rejeitar a adjudicação para aproveitar a crítica. Uma pesquisa pode precisar de um valor único para estimar um modelo. O que a crítica recomenda é preservar a informação: guardar as respostas individuais, examinar a concordância por decisão, além de por pergunta, e tratar as decisões que dividem os leitores como objeto de análise. A variação entre rótulos também é discutida por Plank (2022), e a análise estatística de anotações é tratada de forma ampla por Paun, Artstein e Poesio (2022).
+
+Há um limite prático. Os autores estabilizaram as distribuições com cerca de 15 trabalhadores por sentença (Aroyo; Welty, 2015, p. 18-19), quantidade que costuma estar fora do alcance de uma pesquisa com decisões longas. Duas ou três pessoas por decisão permitem medir a concordância, mas não estimar a distribuição das interpretações em cada caso.
+
+## O modelo de linguagem como codificador
+
+Depois de definir o instrumento e a referência, é possível perguntar se um modelo responde como as pessoas. Estudos mostram resultados promissores em tarefas de anotação de texto (Gilardi et al., 2023; Ziems et al., 2024), e Halterman e Keith (2025) discutem especificamente o uso de modelos com livros de códigos. O desempenho, porém, depende da tarefa, e é necessário medi-lo em cada aplicação.
+
+```{mermaid}
+flowchart LR
+  A[Decisões com<br/>padrão-ouro] --> B[Conjunto de<br/>desenvolvimento]
+  A --> C[Conjunto<br/>de teste]
+  B --> D[Ajustar<br/>o prompt]
+  D --> B
+  D --> E[Congelar<br/>o prompt]
+  E --> F[Rodar uma vez<br/>no teste]
+  C --> F
+  F --> G[Relatar<br/>os resultados]
+```
+
+Quatro regras orientam a validação:
+
+1. **Separar desenvolvimento e teste.** O prompt é ajustado olhando os erros em um conjunto de decisões e avaliado em outro, que só é usado depois de o prompt ser congelado. Ajustar o prompt com base nos erros do teste tornaria a avaliação otimista.
+2. **Comparar com a concordância humana.** Uma acurácia de 85% significa pouco isoladamente. Em uma pergunta em que as pessoas concordam 95% das vezes, é um desempenho inferior; naquela em que concordam 70%, pode igualar o limite da própria medida.
+3. **Separar casos fáceis e difíceis.** A acurácia global é dominada pelas decisões em que todos concordam. O resultado deve ser apresentado separadamente para os casos de consenso e para os adjudicados, que são aqueles em que a ajuda do modelo seria mais valiosa.
+4. **Examinar a direção dos erros.** Em perguntas de sim/não, informar sensibilidade e especificidade. Um modelo que tende a afirmar a presença de uma circunstância não produz apenas ruído: desloca a frequência estimada e as análises seguintes.
+
+Quando o modelo diverge do padrão-ouro, nem sempre é ele quem erra. Rever essas divergências pode corrigir o padrão-ouro, mas a revisão feita já conhecendo a resposta do modelo tende a favorecê-lo. Por isso, o resultado anterior à revisão deve ser relatado, e qualquer correção precisa ser descrita.
+
+## Atividade: da leitura à validação
+
+A atividade percorre o método com um conjunto de pronúncias e um questionário comum. Cada decisão é lida por ao menos duas pessoas.
+
+1. **Leitura do instrumento.** Leia o livro de códigos e registre as dúvidas antes de abrir as decisões.
+2. **Pré-teste.** Em grupo, responda ao questionário para duas decisões, reservadas para esse fim, e proponha ajustes.
+3. **Anotação independente.** Responda ao questionário nas decisões atribuídas, sem consultar os colegas.
+4. **Concordância.** Exporte as anotações e aplique `alfa_por_pergunta()`. Quais perguntas têm a menor concordância? E quais têm alta concordância com alfa baixo?
+5. **Diagnóstico.** Escolha uma pergunta com baixa concordância e examine as decisões divergentes. A causa é falta de atenção, orientação ambígua, categoria inadequada ou ambiguidade real do texto?
+6. **Adjudicação.** Resolva as divergências de decisões que você não anotou e registre a justificativa.
+7. **Validação do modelo.** Ajuste o prompt no conjunto de desenvolvimento, congele-o e avalie-o uma única vez no conjunto de teste.
+8. **Comparação.** Em quais perguntas o modelo alcança a concordância humana? O que os erros indicam: limite do modelo ou limite do instrumento?
+
+## Síntese
+
+A análise de conteúdo transforma decisões em variáveis por meio de um instrumento explícito. A concordância entre leitores independentes indica se o instrumento pode ser reproduzido, mas não prova que ele mede o que se pretende. Os coeficientes corrigidos pelo acaso impedem que categorias predominantes inflem a medida; devem ser lidos, contudo, com a concordância observada, o número de casos e a incerteza. A divergência, por sua vez, não é apenas um defeito a eliminar: pode revelar a ambiguidade do texto e do conceito jurídico. Um modelo de linguagem entra nesse percurso como mais um codificador, sujeito à mesma exigência de validação.
+
+## Referências
+
+- Aroyo, L.; Welty, C. Truth is a lie: crowd truth and the seven myths of human annotation. *AI Magazine*, v. 36, n. 1, p. 15-24, 2015. <https://doi.org/10.1609/aimag.v36i1.2564>
+- Artstein, R.; Poesio, M. Inter-coder agreement for computational linguistics. *Computational Linguistics*, v. 34, n. 4, p. 555-596, 2008. <https://aclanthology.org/J08-4004/>
+- Cohen, J. A coefficient of agreement for nominal scales. *Educational and Psychological Measurement*, v. 20, n. 1, p. 37-46, 1960. <https://doi.org/10.1177/001316446002000104>
+- Feinstein, A. R.; Cicchetti, D. V. High agreement but low kappa: I. The problems of two paradoxes. *Journal of Clinical Epidemiology*, v. 43, n. 6, p. 543-549, 1990. <https://doi.org/10.1016/0895-4356(90)90158-L>
+- Gilardi, F.; Alizadeh, M.; Kubli, M. ChatGPT outperforms crowd workers for text-annotation tasks. *Proceedings of the National Academy of Sciences*, v. 120, n. 30, 2023. <https://doi.org/10.1073/pnas.2305016120>
+- Hall, M. A.; Wright, R. F. Systematic content analysis of judicial opinions. *California Law Review*, v. 96, n. 1, p. 63-122, 2008. <https://doi.org/10.15779/Z38R99R>
+- Halterman, A.; Keith, K. A. Codebook LLMs: evaluating LLMs as measurement tools for political science concepts. *Political Analysis*, v. 34, n. 2, p. 188-204, 2025. <https://doi.org/10.1017/pan.2025.10017>
+- Hayes, A. F.; Krippendorff, K. Answering the call for a standard reliability measure for coding data. *Communication Methods and Measures*, v. 1, n. 1, p. 77-89, 2007. <https://doi.org/10.1080/19312450709336664>
+- Krippendorff, K. *Content analysis: an introduction to its methodology*. 4. ed. Thousand Oaks: Sage, 2018.
+- Passonneau, R. Measuring agreement on set-valued items (MASI) for semantic and pragmatic annotation. In: *Proceedings of the Fifth International Conference on Language Resources and Evaluation (LREC)*, 2006.
+- Paun, S.; Artstein, R.; Poesio, M. *Statistical methods for annotation analysis*. Cham: Springer, 2022. <https://doi.org/10.1007/978-3-031-03763-4>
+- Plank, B. The "problem" of human label variation: on ground truth in data, modeling and evaluation. In: *Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing*, p. 10671-10682, 2022.
+- Ziems, C. et al. Can large language models transform computational social science? *Computational Linguistics*, v. 50, n. 1, p. 237-291, 2024. <https://doi.org/10.1162/coli_a_00502>
