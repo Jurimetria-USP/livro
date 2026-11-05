@@ -281,8 +281,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Parte III — Construção do banco de dados</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Parte III — Construção do banco de dados</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P3C03-limpeza-estruturacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Limpeza e estruturação de dados jurídicos</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -296,19 +309,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/P4C01-introducao-estatistica.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/P4C02-analise-descritiva.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/P4C03-analise-sobrevivencia.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Análise de sobrevivência: tempo do processo</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Análise de sobrevivência: tempo do processo</span></span></a>
   </div>
 </li>
       </ul>
@@ -325,13 +338,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/P5C01-modelos-lineares.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../capitulos/P5C02-modelos-avancados.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
   </div>
 </li>
       </ul>
@@ -483,7 +496,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>concluir a instalação e abrir o programa.</li>
 </ol>
 <p>No Windows, a documentação do Positron também recomenda manter atualizado o Microsoft Visual C++ Redistributable. O Positron exige uma versão compatível do R para iniciar uma sessão dessa linguagem; versões antigas podem ser encontradas no computador, mas desconsideradas pela IDE.</p>
-<div id="fig-positron-download" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Página oficial do Positron com os botões de download para Windows x64 e ARM64." data-fig-align="center">
+<div id="fig-positron-download" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Página oficial do Positron com os botões de download para Windows x64 e ARM64.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-positron-download-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/install_positron.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Página oficial do Positron com os botões de download para Windows x64 e ARM64.">
@@ -520,7 +533,7 @@ Figura&nbsp;7.1: Página oficial de download do Positron com as opções para Wi
 </section>
 <section id="componentes-do-positron" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="componentes-do-positron"><span class="header-section-number">7.5</span> Componentes do Positron</h2>
-<div id="fig-positron-componentes" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Captura da interface do Positron com marcações para Editor, Console, Terminal, Variables, Explorer e Plots." data-fig-align="center">
+<div id="fig-positron-componentes" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Captura da interface do Positron com marcações para Editor, Console, Terminal, Variables, Explorer e Plots.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-positron-componentes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="../figuras/positron-ambiente-anotado.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;7.2: Principais componentes do ambiente de trabalho no Positron: editor, console, terminal, painel de objetos, Explorer com a raiz do projeto e painel de gráficos."><img src="../figuras/positron-ambiente-anotado.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Captura da interface do Positron com marcações para Editor, Console, Terminal, Variables, Explorer e Plots."></a>
@@ -702,7 +715,7 @@ Figura&nbsp;7.4: Sessão Python 3.14 iniciada no Positron com o ambiente do proj
 <section id="instalação-e-verificação-do-quarto" class="level2" data-number="7.9">
 <h2 data-number="7.9" class="anchored" data-anchor-id="instalação-e-verificação-do-quarto"><span class="header-section-number">7.9</span> Instalação e verificação do Quarto</h2>
 <p>No Windows, baixe o instalador <code>.msi</code> na <a href="https://quarto.org/docs/get-started/">página oficial de instalação do Quarto</a> e conclua o assistente. A <a href="#fig-quarto-download" class="quarto-xref">Figura&nbsp;<span>7.5</span></a> mostra onde localizar o instalador para Windows. Feche e reabra o terminal após a instalação.</p>
-<div id="fig-quarto-download" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Página oficial do Quarto com o instalador MSI para Windows." data-fig-align="center">
+<div id="fig-quarto-download" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Página oficial do Quarto com o instalador MSI para Windows.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-quarto-download-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/quarto_install.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Página oficial do Quarto com o instalador MSI para Windows.">
@@ -717,7 +730,7 @@ Figura&nbsp;7.5: Página oficial do Quarto com o instalador para Windows.
 <p>Depois, execute a verificação geral:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>quarto check</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O primeiro comando informa apenas a versão instalada. O segundo examina a instalação do Quarto e as integrações encontradas no computador, como R, <code>knitr</code>, Python e Jupyter. Nem todas essas integrações são obrigatórias: o resultado esperado depende das linguagens que o projeto utiliza. A <a href="#fig-quarto-check" class="quarto-xref">Figura&nbsp;<span>7.6</span></a> mostra uma verificação em um projeto que utiliza R e Python.</p>
-<div id="fig-quarto-check" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Terminal integrado do Positron executando quarto check e reconhecendo R, knitr, Python e Jupyter." data-fig-align="center">
+<div id="fig-quarto-check" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Terminal integrado do Positron executando quarto check e reconhecendo R, knitr, Python e Jupyter.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-quarto-check-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/quarto_check.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Terminal integrado do Positron executando quarto check e reconhecendo R, knitr, Python e Jupyter.">
@@ -735,7 +748,7 @@ Figura&nbsp;7.6: Verificação geral do Quarto no terminal integrado do Positron
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>uv add <span class="op">--</span>dev jupyter</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O <code>uv</code> atualiza <code>pyproject.toml</code> e <code>uv.lock</code>, instala os componentes na <code>.venv</code> e preserva a possibilidade de reconstrução. Verifique:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>uv run python <span class="op">-</span>m jupyter <span class="op">--</span>version</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="fig-jupyter-venv-versao" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Terminal integrado do Positron com a pasta .venv ativa e a lista de componentes e versões do Jupyter." data-fig-align="center">
+<div id="fig-jupyter-venv-versao" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Terminal integrado do Positron com a pasta .venv ativa e a lista de componentes e versões do Jupyter.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-jupyter-venv-versao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../figuras/parte-02-ambiente-trabalho/jupyter_venv_version.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%" alt="Terminal integrado do Positron com a pasta .venv ativa e a lista de componentes e versões do Jupyter.">
