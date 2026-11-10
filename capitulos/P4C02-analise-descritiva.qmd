@@ -1619,6 +1619,198 @@ correlacao_pearson = base[[
 
 :::
 
+## Comparação de médias entre dois grupos
+
+### Teste t para o valor da indenização segundo o perfil do agressor
+
+Os boxplots apresentados anteriormente permitem comparar descritivamente as indenizações segundo o perfil registrado para o agressor. Nesta seção, examinaremos uma pergunta inferencial: o valor médio da indenização difere entre os acórdãos em que o agressor foi classificado como homem e aqueles em que foi classificado como mulher?
+
+A comparação utiliza a mesma base adotada depois das decisões sobre zeros e valores extremos: indenizações positivas até o percentil 97,5. Mantemos somente as categorias `Homem` e `Mulher`. Registros classificados como `Homem e mulher`, `Organização` ou `Não informado` não integram este teste específico.
+
+```{r}
+dados_teste_agressor <- base_indenizacoes_recorte |>
+  filter(
+    perfil_agressor %in% c("Homem", "Mulher")
+  ) |>
+  mutate(
+    perfil_agressor = factor(
+      perfil_agressor,
+      levels = c("Homem", "Mulher")
+    )
+  )
+
+resumo_teste_agressor <- dados_teste_agressor |>
+  group_by(perfil_agressor) |>
+  summarise(
+    numero_acordaos = n(),
+    media = mean(valor_indenizacao_jul2026),
+    desvio_padrao = sd(valor_indenizacao_jul2026),
+    erro_padrao = desvio_padrao / sqrt(numero_acordaos),
+    mediana = median(valor_indenizacao_jul2026),
+    .groups = "drop"
+  )
+
+resumo_teste_agressor |>
+  mutate(
+    across(
+      c(media, desvio_padrao, erro_padrao, mediana),
+      formatar_moeda
+    )
+  ) |>
+  kbl(
+    col.names = c(
+      "Perfil do agressor",
+      "Acórdãos",
+      "Média",
+      "Desvio-padrão",
+      "Erro-padrão",
+      "Mediana"
+    ),
+    align = "c",
+    caption = "Indenizações segundo o perfil do agressor"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+O teste é bilateral porque a pergunta se refere à existência de diferença, sem estabelecer previamente qual grupo teria a maior média. As hipóteses são:
+
+$$
+H_0:\mu_{\text{homem}}=\mu_{\text{mulher}}
+$$
+
+$$
+H_1:\mu_{\text{homem}}\neq\mu_{\text{mulher}}
+$$
+
+#### Teste t de Student com variâncias iguais
+
+O teste t de Student para duas amostras independentes compara a diferença entre as médias com a variabilidade esperada dessa diferença. Em sua formulação clássica, ele pressupõe que os dois grupos possuem a mesma variância populacional. A estatística utiliza uma variância conjunta, ou *pooled*:
+
+$$
+t=
+\frac{\bar{X}_{H}-\bar{X}_{M}}
+{s_p\sqrt{\frac{1}{n_H}+\frac{1}{n_M}}}
+$$
+
+em que $s_p^2$ é a variância conjunta dos grupos:
+
+$$
+s_p^2=
+\frac{(n_H-1)s_H^2+(n_M-1)s_M^2}
+{n_H+n_M-2}
+$$
+
+No R, `var.equal = TRUE` solicita essa versão do teste.
+
+```{r}
+teste_student <- t.test(
+  valor_indenizacao_jul2026 ~ perfil_agressor,
+  data = dados_teste_agressor,
+  alternative = "two.sided",
+  var.equal = TRUE,
+  conf.level = 0.95
+)
+```
+
+#### Teste t de Welch
+
+O teste de Welch também compara duas médias, mas não pressupõe variâncias iguais. O erro-padrão é calculado separadamente a partir da variância e do tamanho de cada grupo:
+
+$$
+t=
+\frac{\bar{X}_{H}-\bar{X}_{M}}
+{\sqrt{\frac{s_H^2}{n_H}+\frac{s_M^2}{n_M}}}
+$$
+
+Os graus de liberdade são aproximados pela equação de Welch–Satterthwaite. Essa adaptação é indicada quando os grupos possuem variâncias ou tamanhos diferentes. No R, ela é a opção padrão de `t.test()` e corresponde a `var.equal = FALSE`.
+
+```{r}
+teste_welch <- t.test(
+  valor_indenizacao_jul2026 ~ perfil_agressor,
+  data = dados_teste_agressor,
+  alternative = "two.sided",
+  var.equal = FALSE,
+  conf.level = 0.95
+)
+
+media_homem <- resumo_teste_agressor |>
+  filter(perfil_agressor == "Homem") |>
+  pull(media)
+
+media_mulher <- resumo_teste_agressor |>
+  filter(perfil_agressor == "Mulher") |>
+  pull(media)
+
+diferenca_medias <- media_homem - media_mulher
+
+resultados_testes_t <- tibble(
+  teste = c(
+    "t de Student — variâncias iguais",
+    "t de Welch — variâncias distintas"
+  ),
+  diferenca_medias = diferenca_medias,
+  estatistica_t = c(
+    unname(teste_student$statistic),
+    unname(teste_welch$statistic)
+  ),
+  graus_liberdade = c(
+    unname(teste_student$parameter),
+    unname(teste_welch$parameter)
+  ),
+  valor_p = c(
+    teste_student$p.value,
+    teste_welch$p.value
+  ),
+  limite_inferior = c(
+    teste_student$conf.int[1],
+    teste_welch$conf.int[1]
+  ),
+  limite_superior = c(
+    teste_student$conf.int[2],
+    teste_welch$conf.int[2]
+  )
+)
+
+resultados_testes_t |>
+  mutate(
+    diferenca_medias = formatar_moeda(diferenca_medias),
+    estatistica_t = round(estatistica_t, 3),
+    graus_liberdade = round(graus_liberdade, 2),
+    valor_p = formatC(
+      valor_p,
+      format = "e",
+      digits = 3
+    ),
+    limite_inferior = formatar_moeda(limite_inferior),
+    limite_superior = formatar_moeda(limite_superior)
+  ) |>
+  kbl(
+    col.names = c(
+      "Teste",
+      "Diferença das médias",
+      "Estatística t",
+      "Graus de liberdade",
+      "Valor-p",
+      "Limite inferior",
+      "Limite superior"
+    ),
+    align = "c",
+    caption = "Testes de diferença entre as médias das indenizações"
+  ) |>
+  kable_styling(full_width = FALSE) |>
+  scroll_box(width = "100%")
+```
+
+Na base analisada, a indenização média foi de `r formatar_moeda(media_homem)` quando o agressor foi classificado como homem e de `r formatar_moeda(media_mulher)` quando foi classificado como mulher. A diferença estimada, calculada como média do primeiro grupo menos a média do segundo, foi de `r formatar_moeda(diferenca_medias)`.
+
+Os dois testes produzem valores-p inferiores a 0,05 e intervalos de confiança que não incluem zero. Portanto, rejeitamos a hipótese de igualdade das médias no recorte analisado. Como os desvios-padrão e os tamanhos dos grupos são diferentes, adotamos o resultado de Welch como referência principal. A estatística t foi `r round(unname(teste_welch$statistic), 3)`, com `r round(unname(teste_welch$parameter), 2)` graus de liberdade e valor-p igual a `r formatC(teste_welch$p.value, format = "e", digits = 3)`.
+
+::: {.callout-warning title="Como interpretar o resultado"}
+
+O teste indica uma diferença entre as médias dos dois grupos de acórdãos incluídos na comparação. Ele não demonstra que o gênero do agressor causa uma alteração no valor da indenização. Tribunal, características do caso, pedido formulado, provas disponíveis e outras variáveis podem estar relacionados simultaneamente ao perfil registrado e ao valor fixado. O resultado também depende das decisões adotadas anteriormente: exclusão dos zeros e recorte da cauda superior no percentil 97,5.
+
+:::
+
 ## Limites da análise
 
 Os resultados descrevem os acórdãos incluídos no banco. Eles não representam automaticamente todos os episódios de violência de gênero digital, todos os processos judiciais ou todos os tribunais brasileiros. A amostra depende dos critérios de busca, da disponibilidade dos documentos, da seleção dos tribunais e da confirmação temática dos casos.

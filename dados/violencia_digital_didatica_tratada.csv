@@ -11,18 +11,18 @@ caso_009,TJSP,2016,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,
 caso_010,TJSP,2020,Mulher,Homem e mulher,Não,1,0,0,0,0,0,0,0,1,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_011,TJSP,2023,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3445.32
 caso_012,TJPR,2023,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2000,2296.88
-caso_013,TJDFT,2017,Mulher,Mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,23713.67
+caso_013,TJDF,2017,Mulher,Mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,23713.67
 caso_014,TJPR,2018,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,1000,1513.05
 caso_015,TJSP,2020,Mulher,Mulher,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,3000,4298.37
 caso_016,TJSP,2025,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_017,TJDFT,2025,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,5000,5222.14
+caso_017,TJDF,2025,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,5000,5222.14
 caso_018,TJSP,2024,Homem e mulher,Homem e mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10990.03
 caso_019,TJPR,2021,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,500,657.27
 caso_020,TJSP,2014,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_021,TJSP,2025,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10444.29
 caso_022,TJSP,2014,Mulher,Mulher,Não,0,1,1,0,0,0,1,0,1,0,Sim,Não,Procedente,1,Convertido de salários mínimos,108600,210075.35
 caso_023,TJSP,2023,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,5000,5742.2
-caso_024,TJDFT,2015,Mulher,Homem,Não,0,1,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,26484.44
+caso_024,TJDF,2015,Mulher,Homem,Não,0,1,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,26484.44
 caso_025,TJSP,2013,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Convertido de salários mínimos,33900,69839.91
 caso_026,TJPR,2020,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_027,TJPR,2019,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
@@ -37,7 +37,7 @@ caso_035,TJCE,,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valo
 caso_036,TJSP,2021,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,40000,52581.93
 caso_037,TJPR,2020,Homem,Homem,Não,0,1,0,0,1,0,1,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,7000,10029.53
 caso_038,TJPR,2020,Mulher,Homem,Não,0,1,0,1,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,7163.95
-caso_039,TJDFT,2011,Mulher,Homem,Não,0,0,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,30000,69095.21
+caso_039,TJDF,2011,Mulher,Homem,Não,0,0,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,30000,69095.21
 caso_040,TJPR,2025,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2000,2088.86
 caso_041,TJSP,2022,Mulher,Mulher,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5971.45
 caso_042,TJSP,2017,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Não,Não,Procedente,1,Não informado,,
@@ -48,10 +48,10 @@ caso_046,TJSP,2021,Mulher,Mulher,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,
 caso_047,TJPR,2024,Mulher,Mulher,Não,0,1,1,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,1000,1099
 caso_048,TJSP,2016,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_049,TJSP,2023,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2000,2296.88
-caso_050,TJDFT,2025,Não informado,Homem,Não,0,1,0,1,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,100000,104442.87
+caso_050,TJDF,2025,Não informado,Homem,Não,0,1,0,1,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,100000,104442.87
 caso_051,TJSP,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,20000,26290.97
 caso_052,TJSP,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,0,0
-caso_053,TJDFT,2021,Mulher,Não informado,Sim,0,1,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Não informado,,
+caso_053,TJDF,2021,Mulher,Não informado,Sim,0,1,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Não informado,,
 caso_054,TJSP,2025,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Procedente,1,Valor informado em reais,30000,31332.86
 caso_055,TJSP,2024,Homem,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
 caso_056,TJSP,2022,Homem e mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,3000,3582.87
@@ -62,20 +62,20 @@ caso_060,TJSP,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Procedente,1
 caso_061,TJSP,2016,Mulher,Mulher,Sim,0,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,15000,24356.7
 caso_062,TJSP,2025,Mulher,Homem,Não,0,0,0,0,0,1,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10444.29
 caso_063,TJPR,2023,Mulher,Homem,Não,0,1,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2000,2296.88
-caso_064,TJDFT,2019,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,15000,21987.36
-caso_065,TJDFT,2024,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,8000,8792.02
+caso_064,TJDF,2019,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,15000,21987.36
+caso_065,TJDF,2024,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,8000,8792.02
 caso_066,TJPR,2020,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,4298.37
 caso_067,TJPR,2018,Homem,Mulher,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_068,TJSP,2020,Mulher,Homem e mulher,Não,0,0,0,0,0,1,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,7163.95
 caso_069,TJSP,2017,Mulher,Homem e mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,15809.12
 caso_070,TJSP,2022,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Não,Sim,Parcialmente procedente,0,Valor informado em reais,17200,20541.79
 caso_071,TJSP,2022,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,11942.9
-caso_072,TJDFT,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+caso_072,TJDF,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_073,TJSP,2024,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,2000,2198.01
-caso_074,TJDFT,2025,Homem e mulher,Mulher,Não,0,0,0,0,1,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,25000,26110.72
+caso_074,TJDF,2025,Homem e mulher,Mulher,Não,0,0,0,0,1,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,25000,26110.72
 caso_075,TJPR,2024,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,1000,1099
 caso_076,TJSP,2025,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10444.29
-caso_077,TJDFT,2024,Mulher,Homem,Não,0,0,1,0,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,8000,8792.02
+caso_077,TJDF,2024,Mulher,Homem,Não,0,0,1,0,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,8000,8792.02
 caso_078,TJSP,2024,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,5000,5495.01
 caso_079,TJPR,2025,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_080,TJSP,2019,Mulher,Não informado,Sim,0,0,0,0,1,0,0,1,0,0,Não,Sim,Procedente,1,Não informado,,
@@ -83,7 +83,7 @@ caso_081,TJSP,2020,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,1,0,Sim,Não,Parcialmente 
 caso_082,TJSP,2022,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3582.87
 caso_083,TJCE,,Mulher,Não informado,Sim,0,1,0,0,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Não informado,,
 caso_084,TJSP,2019,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,14658.24
-caso_085,TJDFT,2025,Mulher,Homem,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3133.29
+caso_085,TJDF,2025,Mulher,Homem,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3133.29
 caso_086,TJPR,2021,Mulher,Mulher,Não,0,1,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2000,2629.1
 caso_087,TJSP,2014,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,0,0
 caso_088,TJSP,2022,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,40000,47771.61
@@ -95,7 +95,7 @@ caso_093,TJSP,2022,Mulher,Homem,Não,0,1,0,1,0,0,0,0,0,0,Não,Não,Procedente,1,
 caso_094,TJSP,2019,Mulher,Homem e mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_095,TJPR,2024,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2000,2198.01
 caso_096,TJSP,2023,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,5000,5742.2
-caso_097,TJDFT,2017,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,15000,23713.67
+caso_097,TJDF,2017,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,15000,23713.67
 caso_098,TJSP,2022,Homem e mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_099,TJSP,2015,Mulher,Mulher,Sim,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,60000,105937.78
 caso_100,TJSP,2024,Mulher,Não informado,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,16485.04
@@ -104,7 +104,7 @@ caso_102,TJSP,2022,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,V
 caso_103,TJSP,2023,Mulher,Homem,Não,0,0,1,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,12000,13781.28
 caso_104,TJSP,2025,Mulher,Mulher,Não,0,0,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5222.14
 caso_105,TJPR,2023,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,12000,13781.28
-caso_106,TJDFT,2017,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,23713.67
+caso_106,TJDF,2017,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,23713.67
 caso_107,TJSP,2021,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_108,TJSP,2025,Mulher,Homem,Não,0,1,0,1,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,10000,10444.29
 caso_109,TJPR,2019,Mulher,Mulher,Não,0,1,0,0,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,1000,1465.82
@@ -114,7 +114,7 @@ caso_112,TJSP,2025,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improc
 caso_113,TJSP,2022,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,1500,1791.44
 caso_114,TJSP,2025,Mulher,Homem,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_115,TJSP,2020,Mulher,Homem,Não,0,0,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,50000,71639.48
-caso_116,TJDFT,2023,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,6000,6890.64
+caso_116,TJDF,2023,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,6000,6890.64
 caso_117,TJSP,2013,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Não informado,,
 caso_118,TJSP,2015,Mulher,Homem e mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,12000,21187.56
 caso_119,TJPR,2022,Mulher,Mulher,Não,0,0,0,1,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2000,2388.58
@@ -128,14 +128,14 @@ caso_126,TJSP,2025,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,V
 caso_127,TJSP,2022,Mulher,Homem,Sim,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_128,TJCE,2023,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_129,TJSP,2019,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_130,TJDFT,2023,Mulher,Mulher,Não,0,1,1,1,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5742.2
+caso_130,TJDF,2023,Mulher,Mulher,Não,0,1,1,1,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5742.2
 caso_131,TJPR,2023,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Não,Não,Parcialmente procedente,0,Valor informado em reais,8000,9187.52
 caso_132,TJSP,2019,Mulher,Mulher,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,7329.12
 caso_133,TJSP,2018,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,40000,60522.14
 caso_134,TJSP,2015,Mulher,Homem,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_135,TJSP,2022,Mulher,Homem,Sim,0,1,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_136,TJSP,2021,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_137,TJDFT,2020,Não informado,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,30000,42983.69
+caso_137,TJDF,2020,Não informado,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,30000,42983.69
 caso_138,TJSP,2021,Mulher,Homem e mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Parcialmente procedente,0,Valor informado em reais,15000,19718.22
 caso_139,TJSP,2025,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_140,TJSP,2022,Mulher,Homem e mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
@@ -145,22 +145,22 @@ caso_143,TJSP,2023,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcia
 caso_144,TJPR,2020,Mulher,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3500,5014.76
 caso_145,TJPR,2021,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4500,5915.47
 caso_146,TJSP,2025,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_147,TJDFT,2017,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+caso_147,TJDF,2017,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_148,TJPR,2019,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_149,TJSP,2020,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,7163.95
 caso_150,TJSP,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3943.64
 caso_151,TJPR,2024,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5495.01
 caso_152,TJPR,2023,Mulher,Mulher,Não,0,1,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_153,TJDFT,2019,Mulher,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+caso_153,TJDF,2019,Mulher,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_154,TJPR,2023,Mulher,Homem,Não,0,0,1,0,0,1,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,2000,2296.88
 caso_155,TJSP,2019,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Não,Sim,Procedente,1,Não informado,,
 caso_156,TJPR,2023,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,20000,22968.8
 caso_157,TJPR,2025,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,0,0
 caso_158,TJPR,2016,Mulher,Homem e mulher,Não,0,0,1,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,1000,1623.78
 caso_159,TJSP,2019,Mulher,Homem e mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,14658.24
-caso_160,TJDFT,2020,Homem,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
+caso_160,TJDF,2020,Homem,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
 caso_161,TJSP,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,6572.74
-caso_162,TJDFT,2018,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,6000,9078.32
+caso_162,TJDF,2018,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,6000,9078.32
 caso_163,TJSP,2017,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_164,TJSP,2022,Mulher,Mulher,Não,0,1,0,1,0,0,0,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,0,0
 caso_165,TJSP,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,6572.74
@@ -175,9 +175,9 @@ caso_173,TJSP,2021,Homem e mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Proce
 caso_174,TJSP,2023,Homem e mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,6000,6890.64
 caso_175,TJSP,2017,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,10000,15809.12
 caso_176,TJGO,,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,13200,
-caso_177,TJDFT,2023,Mulher,Homem,Não,0,0,1,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,10000,11484.4
+caso_177,TJDF,2023,Mulher,Homem,Não,0,0,1,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,10000,11484.4
 caso_178,TJSP,2024,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
-caso_179,TJDFT,2024,Mulher,Mulher,Não,0,1,0,1,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3297.01
+caso_179,TJDF,2024,Mulher,Mulher,Não,0,1,0,1,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3297.01
 caso_180,TJSP,2017,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_181,TJSP,2025,Homem,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_182,TJCE,,Mulher,Mulher,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,8000,
@@ -190,7 +190,7 @@ caso_188,TJSP,2018,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,
 caso_189,TJSP,2022,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_190,TJSP,2018,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,9540,14434.53
 caso_191,TJSP,2025,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,5000,5222.14
-caso_192,TJDFT,2020,Mulher,Mulher,Não,0,1,0,0,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,7163.95
+caso_192,TJDF,2020,Mulher,Mulher,Não,0,1,0,0,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,7163.95
 caso_193,TJSP,2020,Mulher,Homem e mulher,Não,1,0,0,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,14327.9
 caso_194,TJSP,2023,Homem e mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,1000,1148.44
 caso_195,TJSP,2018,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,7565.27
@@ -214,7 +214,7 @@ caso_212,TJSP,2025,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente 
 caso_213,TJPR,2019,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_214,TJSP,2020,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,3000,4298.37
 caso_215,TJSP,2010,Mulher,Homem,Não,0,0,0,0,0,0,1,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,12450,30645.2
-caso_216,TJDFT,2024,Homem,Homem,Não,0,0,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10990.03
+caso_216,TJDF,2024,Homem,Homem,Não,0,0,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10990.03
 caso_217,TJSP,2020,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Sim,Improcedente,0,Valor informado em reais,0,0
 caso_218,TJPR,2023,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6000,6890.64
 caso_219,TJSP,2015,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,17656.3
@@ -235,13 +235,13 @@ caso_233,TJGO,2024,Mulher,Homem,Não,0,0,1,0,0,0,0,0,1,0,Sim,Não,Não consta,,V
 caso_234,TJSP,2022,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,12000,14331.48
 caso_235,TJSP,2022,Mulher,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,5000,5971.45
 caso_236,TJPR,2022,Mulher,Mulher,Não,0,1,0,1,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5971.45
-caso_237,TJDFT,2022,Homem,Mulher,Não,0,0,1,0,0,0,0,0,1,0,Sim,Não,Parcialmente procedente,0,Não informado,,
+caso_237,TJDF,2022,Homem,Mulher,Não,0,0,1,0,0,0,0,0,1,0,Sim,Não,Parcialmente procedente,0,Não informado,,
 caso_238,TJCE,2025,Mulher,Homem,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,10444.29
 caso_239,TJGO,2021,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
 caso_240,TJSP,2019,Mulher,Homem e mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_241,TJSP,2025,Mulher,Homem e mulher,Não,0,1,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_242,TJSP,2014,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,10000,19343.95
-caso_243,TJDFT,2021,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+caso_243,TJDF,2021,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_244,TJSP,2022,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_245,TJSP,2022,Mulher,Mulher,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5971.45
 caso_246,TJSP,2024,Homem e mulher,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6060,6659.96
@@ -274,7 +274,7 @@ caso_272,TJSP,2014,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcia
 caso_273,TJSP,2022,Mulher,Homem e mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_274,TJSP,2013,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,10300.87
 caso_275,TJPR,2020,Homem,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Não,Sim,Parcialmente procedente,0,Valor informado em reais,5000,7163.95
-caso_276,TJDFT,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+caso_276,TJDF,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_277,TJPR,2024,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_278,TJPR,2023,Mulher,Mulher,Não,0,0,1,1,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_279,TJPR,2025,Mulher,Mulher,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,1000,1044.43
@@ -299,21 +299,21 @@ caso_297,TJSP,2022,Mulher,Mulher,Não,0,1,0,0,0,1,0,0,0,0,Não,Sim,Parcialmente 
 caso_298,TJSP,2022,Mulher,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,3000,3582.87
 caso_299,TJSP,2025,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,25000,26110.72
 caso_300,TJSP,2011,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,4650,10709.76
-caso_301,TJDFT,2024,Homem,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5495.01
+caso_301,TJDF,2024,Homem,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5495.01
 caso_302,TJPR,2023,Mulher,Mulher,Não,0,1,1,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4000,4593.76
-caso_303,TJDFT,2024,Mulher,Mulher,Não,0,1,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5495.01
+caso_303,TJDF,2024,Mulher,Mulher,Não,0,1,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5495.01
 caso_304,TJSP,2024,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5495.01
 caso_305,TJSP,2015,Homem,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,17656.3
 caso_306,TJSP,2023,Mulher,Organização,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_307,TJSP,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,15000,16485.04
 caso_308,TJPR,2025,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10444.29
-caso_309,TJDFT,2014,Homem,Mulher,Não,1,1,0,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,4000,7737.58
+caso_309,TJDF,2014,Homem,Mulher,Não,1,1,0,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,4000,7737.58
 caso_310,TJSP,2021,Mulher,Homem,Não,0,1,0,1,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
-caso_311,TJDFT,2023,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,35000,40195.41
-caso_312,TJDFT,2015,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,30000,52968.89
-caso_313,TJDFT,2023,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,11484.4
+caso_311,TJDF,2023,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,35000,40195.41
+caso_312,TJDF,2015,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,30000,52968.89
+caso_313,TJDF,2023,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,11484.4
 caso_314,TJSP,2018,Mulher,Homem,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_315,TJDFT,2012,Homem,Não informado,Sim,0,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,32840.42
+caso_315,TJDF,2012,Homem,Não informado,Sim,0,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,32840.42
 caso_316,TJSP,2025,Mulher,Não informado,Sim,0,1,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,15666.43
 caso_317,TJSP,2018,Mulher,Mulher,Não,0,1,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,7565.27
 caso_318,TJSP,2022,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
@@ -336,7 +336,7 @@ caso_334,TJPR,2014,Homem e mulher,Não informado,Não,1,0,0,0,0,0,0,0,0,0,Sim,N�
 caso_335,TJSP,2022,Mulher,Mulher,Não,0,1,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5971.45
 caso_336,TJPR,2025,Mulher,Mulher,Não,0,1,1,1,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,8000,8355.43
 caso_337,TJSP,2023,Homem e mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,7000,8039.08
-caso_338,TJDFT,2010,Mulher,Mulher,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4000,9845.85
+caso_338,TJDF,2010,Mulher,Mulher,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4000,9845.85
 caso_339,TJGO,2023,Mulher,Mulher,Não,0,0,1,0,0,0,1,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,0,0
 caso_340,TJSP,2024,Mulher,Mulher,Não,0,1,0,1,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,5000,5495.01
 caso_341,TJSP,2019,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
@@ -369,8 +369,8 @@ caso_367,TJCE,2020,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Sim,Improcedente,
 caso_368,TJPR,2023,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Sim,Parcialmente procedente,0,Valor informado em reais,3000,3445.32
 caso_369,TJSP,2022,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,15000,17914.36
 caso_370,TJSP,2017,Mulher,Homem e mulher,Não,0,0,0,0,0,0,0,1,1,0,Sim,Não,Procedente,1,Valor informado em reais,6500,10275.93
-caso_371,TJDFT,2025,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5222.14
-caso_372,TJDFT,2024,Mulher,Mulher,Não,0,0,0,1,0,0,1,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,50000,54950.14
+caso_371,TJDF,2025,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5222.14
+caso_372,TJDF,2024,Mulher,Mulher,Não,0,0,0,1,0,0,1,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,50000,54950.14
 caso_373,TJSP,2019,Mulher,Homem,Sim,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_374,TJSP,2012,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,1000,2189.36
 caso_375,TJSP,2024,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,16485.04
@@ -385,8 +385,8 @@ caso_383,TJAM,2014,Mulher,Homem,Não,1,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,V
 caso_384,TJSP,2011,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Não informado,,
 caso_385,TJPR,2020,Mulher,Homem,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,1500,2149.18
 caso_386,TJSP,2018,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
-caso_387,TJDFT,2019,Homem,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
-caso_388,TJDFT,2019,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+caso_387,TJDF,2019,Homem,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+caso_388,TJDF,2019,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_389,TJPR,2023,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3445.32
 caso_390,TJSP,2023,Mulher,Homem e mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,11484.4
 caso_391,TJSP,2018,Mulher,Homem e mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
@@ -398,7 +398,7 @@ caso_396,TJPR,2024,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,
 caso_397,TJSP,2024,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3297.01
 caso_398,TJSP,2025,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10444.29
 caso_399,TJSP,2015,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
-caso_400,TJDFT,2024,Mulher,Organização,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,20000,21980.05
+caso_400,TJDF,2024,Mulher,Organização,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,20000,21980.05
 caso_401,TJSP,2019,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_402,TJPR,2018,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,18000,27234.96
 caso_403,TJSP,2022,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,3000,3582.87
@@ -410,12 +410,12 @@ caso_408,TJSP,2019,Mulher,Organização,Sim,0,1,0,0,0,0,0,0,0,0,Não,Não,Parcia
 caso_409,TJSP,2025,Homem e mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,20000,20888.57
 caso_410,TJGO,2018,Mulher,Homem,Não,0,0,0,0,0,1,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,10000,15130.53
 caso_411,TJPR,2024,Mulher,Homem e mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,1000,1099
-caso_412,TJDFT,2020,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,30000,42983.69
+caso_412,TJDF,2020,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,30000,42983.69
 caso_413,TJSP,2017,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_414,TJSP,2020,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,0,0
 caso_415,TJSP,2016,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Não,Sim,Improcedente,0,Valor informado em reais,0,0
 caso_416,TJPR,2023,Mulher,Homem,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,11484.4
-caso_417,TJDFT,2018,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,15000,22695.8
+caso_417,TJDF,2018,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,15000,22695.8
 caso_418,TJSP,2025,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,3000,3133.29
 caso_419,TJSP,2024,Homem,Mulher,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10990.03
 caso_420,TJPR,2019,Mulher,Homem,Não,1,0,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15000,21987.36
@@ -423,12 +423,12 @@ caso_421,TJSP,2016,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Não,Sim,Parcialmente p
 caso_422,TJSP,2024,Mulher,Mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5495.01
 caso_423,TJSP,2023,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_424,TJSP,2022,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_425,TJDFT,2025,Mulher,Homem,Não,0,0,1,0,0,1,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+caso_425,TJDF,2025,Mulher,Homem,Não,0,0,1,0,0,1,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_426,TJSP,2025,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_427,TJDFT,2024,Mulher,Homem,Não,0,1,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,42000,46158.11
+caso_427,TJDF,2024,Mulher,Homem,Não,0,1,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,42000,46158.11
 caso_428,TJSP,2025,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,10000,10444.29
 caso_429,TJSP,2025,Mulher,Mulher,Não,0,0,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3133.29
-caso_430,TJDFT,2013,Mulher,Mulher,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2500,5150.44
+caso_430,TJDF,2013,Mulher,Mulher,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2500,5150.44
 caso_431,TJSP,2023,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_432,TJAM,2023,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,30000,34453.2
 caso_433,TJPR,2021,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,2000,2629.1
@@ -437,7 +437,7 @@ caso_435,TJPR,2025,Mulher,Homem,Não,1,0,0,0,0,1,0,0,0,0,Sim,Não,Improcedente,0
 caso_436,TJSP,2019,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,8000,11726.59
 caso_437,TJPR,2015,Homem,Homem e mulher,Não,0,0,1,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,40000,70625.19
 caso_438,TJGO,2021,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,7000,9201.84
-caso_439,TJDFT,2014,Mulher,Homem e mulher,Não,0,1,0,0,0,0,1,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+caso_439,TJDF,2014,Mulher,Homem e mulher,Não,0,1,0,0,0,0,1,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_440,TJSP,2023,Mulher,Homem e mulher,Não,0,0,0,1,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,5000,5742.2
 caso_441,TJSP,2023,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_442,TJPR,2023,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,27000,31007.88
@@ -447,7 +447,7 @@ caso_445,TJSP,2019,Mulher,Homem,Não,0,0,1,0,1,0,0,0,1,0,Sim,Não,Procedente,1,V
 caso_446,TJSP,2016,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,12000,19485.36
 caso_447,TJSP,2024,Mulher,Mulher,Não,0,0,1,0,0,1,1,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10990.03
 caso_448,TJSP,2024,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_449,TJDFT,2014,Homem,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,4000,7737.58
+caso_449,TJDF,2014,Homem,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,4000,7737.58
 caso_450,TJSP,2020,Mulher,Homem,Sim,0,0,0,1,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,7000,10029.53
 caso_451,TJPR,2025,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5222.14
 caso_452,TJGO,2023,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,2000,2296.88
@@ -455,7 +455,7 @@ caso_453,TJSP,2020,Mulher,Mulher,Não,0,0,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,
 caso_454,TJSP,2012,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_455,TJSP,2014,Mulher,Homem,Não,0,0,1,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,20000,38687.91
 caso_456,TJPR,2016,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,20000,32475.6
-caso_457,TJDFT,2025,Mulher,Mulher,Não,0,1,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,10444.29
+caso_457,TJDF,2025,Mulher,Mulher,Não,0,1,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,10444.29
 caso_458,TJSP,2018,Homem e mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,2500,3782.63
 caso_459,TJSP,2014,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
 caso_460,TJSP,2017,Mulher,Homem,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
@@ -472,7 +472,7 @@ caso_470,TJSP,2013,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improc
 caso_471,TJPR,2018,Mulher,Mulher,Não,1,0,0,0,0,1,0,0,0,0,Sim,Sim,Procedente,1,Não informado,,
 caso_472,TJPR,2024,Mulher,Mulher,Não,0,1,0,0,0,1,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10990.03
 caso_473,TJSP,2023,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5742.2
-caso_474,TJDFT,2019,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Não informado,,
+caso_474,TJDF,2019,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Não informado,,
 caso_475,TJSP,2022,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,0,0
 caso_476,TJSP,2020,Mulher,Homem,Sim,1,0,0,0,0,0,1,0,1,0,Não,Sim,Parcialmente procedente,0,Valor informado em reais,1000,1432.79
 caso_477,TJAM,2018,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,2000,3026.11
@@ -492,7 +492,7 @@ caso_490,TJPR,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,
 caso_491,TJPR,2023,Homem e mulher,Organização,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,20000,22968.8
 caso_492,TJSP,2021,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_493,TJSP,2022,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,43000,51354.48
-caso_494,TJDFT,,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,8000,
+caso_494,TJDF,,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,8000,
 caso_495,TJSP,2025,Homem,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4000,4177.71
 caso_496,TJCE,2024,Mulher,Mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,50000,54950.14
 caso_497,TJSP,2018,Mulher,Homem,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,4539.16
@@ -504,8 +504,8 @@ caso_502,TJPR,2023,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,V
 caso_503,TJPR,2022,Mulher,Mulher,Não,0,1,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,6000,7165.74
 caso_504,TJSP,2024,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_505,TJGO,2022,Mulher,Homem,Não,0,0,1,0,0,1,1,1,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,15000,17914.36
-caso_506,TJDFT,2024,Homem,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,11250,12363.78
-caso_507,TJDFT,2019,Homem,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Sim,Improcedente,0,Não informado,,
+caso_506,TJDF,2024,Homem,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,11250,12363.78
+caso_507,TJDF,2019,Homem,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Sim,Improcedente,0,Não informado,,
 caso_508,TJSP,2025,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,10444.29
 caso_509,TJSP,2020,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Não,Sim,Procedente,1,Valor informado em reais,10000,14327.9
 caso_510,TJSP,2021,Homem e mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,20000,26290.97
@@ -521,7 +521,7 @@ caso_519,TJPR,2014,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Não,Sim,Procedente,1,V
 caso_520,TJSP,2024,Mulher,Homem e mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_521,TJPR,2023,Mulher,Mulher,Não,0,1,1,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,2000,2296.88
 caso_522,TJSP,2022,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_523,TJDFT,2022,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,50000,59714.52
+caso_523,TJDF,2022,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,50000,59714.52
 caso_524,TJSP,2024,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_525,TJGO,2016,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,1448,2351.23
 caso_526,TJPR,2023,Homem,Mulher,Não,0,1,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3445.32
@@ -539,7 +539,7 @@ caso_537,TJPR,2025,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Não,Sim,Improcedente,
 caso_538,TJSP,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5971.45
 caso_539,TJSP,2024,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10990.03
 caso_540,TJSP,2020,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,8000,11462.32
-caso_541,TJDFT,2023,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5742.2
+caso_541,TJDF,2023,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5742.2
 caso_542,TJSP,2018,Mulher,Homem,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_543,TJCE,2025,Mulher,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5222.14
 caso_544,TJCE,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
@@ -550,13 +550,13 @@ caso_548,TJSP,2025,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Proced
 caso_549,TJSP,2023,Mulher,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_550,TJPR,2022,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5971.45
 caso_551,TJSP,2018,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
-caso_552,TJDFT,2013,Mulher,Mulher,Não,0,1,0,0,1,0,1,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+caso_552,TJDF,2013,Mulher,Mulher,Não,0,1,0,0,1,0,1,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_553,TJGO,2021,Mulher,Mulher,Não,0,1,0,1,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_554,TJPR,2024,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5495.01
-caso_555,TJDFT,2015,Mulher,Homem,Não,0,1,0,1,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,17656.3
+caso_555,TJDF,2015,Mulher,Homem,Não,0,1,0,1,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,17656.3
 caso_556,TJSP,2024,Mulher,Não informado,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10000,10990.03
 caso_557,TJPR,2023,Mulher,Homem,Não,1,1,0,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,5000,5742.2
-caso_558,TJDFT,2021,Mulher,Homem,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,7000,9201.84
+caso_558,TJDF,2021,Mulher,Homem,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,7000,9201.84
 caso_559,TJSP,2014,Mulher,Não informado,Sim,0,0,0,0,1,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Não informado,,
 caso_560,TJPR,2021,Mulher,Homem,Não,1,0,1,0,0,1,0,0,0,0,Não,Sim,Procedente,1,Valor informado em reais,4000,5258.19
 caso_561,TJSP,2019,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,50000,73291.22
@@ -565,14 +565,14 @@ caso_563,TJSP,2010,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcia
 caso_564,TJSP,2014,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
 caso_565,TJSP,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_566,TJPR,2023,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,5000,5742.2
-caso_567,TJDFT,2023,Mulher,Não informado,Sim,0,1,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,6000,6890.64
+caso_567,TJDF,2023,Mulher,Não informado,Sim,0,1,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,6000,6890.64
 caso_568,TJSP,2021,Mulher,Homem e mulher,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5000,6572.74
 caso_569,TJPR,2024,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_570,TJSP,2024,Mulher,Mulher,Não,0,1,0,0,0,1,0,0,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5495.01
 caso_571,TJSP,2011,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,1000,2303.17
 caso_572,TJCE,,Homem,Mulher,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,2000,
 caso_573,TJSP,2016,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,15760,25590.77
-caso_574,TJDFT,2025,Mulher,Mulher,Não,0,0,1,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3133.29
+caso_574,TJDF,2025,Mulher,Mulher,Não,0,0,1,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3133.29
 caso_575,TJSP,2025,Mulher,Mulher,Não,0,0,0,1,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,30000,31332.86
 caso_576,TJSP,2024,Homem,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5495.01
 caso_577,TJSP,2022,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,11942.9
@@ -581,17 +581,17 @@ caso_579,TJPR,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente 
 caso_580,TJSP,2017,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
 caso_581,TJPR,2024,Mulher,Homem,Não,0,0,0,1,0,1,0,1,0,0,Não,Sim,Procedente,1,Valor informado em reais,3000,3297.01
 caso_582,TJSP,2020,Não informado,Homem,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
-caso_583,TJDFT,2010,Mulher,Homem,Não,1,0,0,0,0,1,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+caso_583,TJDF,2010,Mulher,Homem,Não,1,0,0,0,0,1,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_584,TJSP,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,6572.74
 caso_585,TJSP,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2000,2629.1
 caso_586,TJGO,2023,Mulher,Homem,Não,0,0,1,1,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,3000,3445.32
 caso_587,TJCE,2021,Mulher,Organização,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_588,TJPR,2021,Homem,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_589,TJSP,2016,Mulher,Mulher,Não,0,0,1,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,20000,32475.6
-caso_590,TJDFT,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+caso_590,TJDF,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_591,TJSP,2022,Homem e mulher,Mulher,Não,0,0,1,1,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_592,TJSP,2024,Homem e mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,5495.01
-caso_593,TJDFT,2018,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,10000,15130.53
+caso_593,TJDF,2018,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,10000,15130.53
 caso_594,TJSP,2013,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,35000,72106.1
 caso_595,TJPR,2023,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_596,TJSP,2024,Mulher,Mulher,Não,0,1,0,0,0,1,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,10000,10990.03
@@ -611,7 +611,7 @@ caso_609,TJPR,2014,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Proced
 caso_610,TJSP,2025,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3000,3133.29
 caso_611,TJPR,2015,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
 caso_612,TJSP,2024,Mulher,Homem,Sim,1,0,0,0,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10000,10990.03
-caso_613,TJDFT,2021,Homem,Mulher,Não,1,0,0,0,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6000,7887.29
+caso_613,TJDF,2021,Homem,Mulher,Não,1,0,0,0,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6000,7887.29
 caso_614,TJSP,2021,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,7500,9859.11
 caso_615,TJPR,2021,Mulher,Homem,Sim,0,0,0,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,25000,32863.71
 caso_616,TJSP,2021,Mulher,Homem,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,50000,65727.41
@@ -640,4 +640,4 @@ caso_638,TJSP,2023,Mulher,Não informado,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcia
 caso_639,TJSP,2020,Mulher,Mulher,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,9980,14299.24
 caso_640,TJSP,2024,Homem,Homem e mulher,Não,0,1,0,0,0,1,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
 caso_641,TJSP,2018,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5000,7565.27
-caso_642,TJDFT,2024,Mulher,Mulher,Não,0,1,0,0,0,1,0,0,0,0,Não,Sim,Parcialmente procedente,0,Valor informado em reais,8000,8792.02
+caso_642,TJDF,2024,Mulher,Mulher,Não,0,1,0,0,0,1,0,0,0,0,Não,Sim,Parcialmente procedente,0,Valor informado em reais,8000,8792.02
