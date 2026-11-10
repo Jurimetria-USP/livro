@@ -1,9 +1,6 @@
 ---
-title: "Análise Descritiva"
-subtitle: "Tirando Informação dos Dados"
-author:
-- Alexandre Nicolella
-date: "03/12/2024"
+title: "Análise descritiva de dados jurídicos"
+subtitle: "Posição, variabilidade, distribuições, categorias e associações"
 format: html
 execute:
   eval: true
@@ -15,1021 +12,1621 @@ execute:
 #| include: false
 #| eval: true
 knitr::opts_knit$set(root.dir = normalizePath(".."))
+options(scipen = 999)
 ```
 
-## Cadeia de Valor do Conhecimento
+## Introdução
 
-A construção do conhecimento é um caminho longo e complexo. A cadeia de valor do conhecimento é um modelo que busca representar esse caminho. Vejamos a Figura abaixo:
+A análise descritiva organiza as informações contidas em um banco de dados. Ela apresenta a composição da amostra, resume a posição e a dispersão das variáveis numéricas e identifica padrões de distribuição e associação. Essas operações constituem uma etapa necessária entre a construção do banco e a elaboração de modelos estatísticos.
 
-![Ermine, J.L (2013): Cadeia de Valor do Conhecimento](../figuras/knowledgeVC.png){width="80%"}
+Neste capítulo, utilizaremos o banco tratado no capítulo anterior. Ele reúne 642 acórdãos sobre violência de gênero digital e contém informações sobre tribunal, ano, perfil das partes, participação de plataformas, tipos de prova, suficiência probatória, resultado em primeira instância e indenização.
 
-Para cumprir esse longo percurso a Ciência de Dados tem um papel fundamental na atualidade.
+O banco primário é de propriedade do InternetLab e deriva de pesquisa desenvolvida pela instituição. A base utilizada no livro corresponde a um recorte didático, sem identificadores processuais e campos textuais, posteriormente estruturado e tratado conforme as decisões documentadas no capítulo anterior.
 
-A Ciência de Dados é uma área interdisciplinar que combina conhecimentos de estatística, matemática, computação, e no nosso caso do Direito, para extrair conhecimento a partir de dados.
+O percurso está organizado em cinco blocos:
 
-![Estratégia Interdisciplinas](../figuras/combina.png){width="70%"}
+1. medidas de posição;
+2. medidas de variabilidade;
+3. distribuições;
+4. variáveis categóricas;
+5. medidas de associação.
 
-A Ciência de Dados é um processo que envolve diversas etapas, como a coleta de dados, a organização dos dados, a análise dos dados, a interpretação dos resultados, entre outras. Vejamos a figura sobre ciclo de vida da ciência de dados:
+::: {.callout-note title="Objetivos do capítulo"}
 
-![Ciclo de Vida da Ciência de Dados](../figuras/cicloDS.png){width="70%"}
+Ao final do capítulo, você deverá ser capaz de selecionar estatísticas compatíveis com o tipo de variável, interpretar medidas numéricas e frequências, representar distribuições graficamente e examinar associações sem atribuir a elas uma interpretação causal automática.
 
-O ciclo de vida da ciência de dados é um modelo que descreve as etapas envolvidas no processo de análise de dados. Esse modelo é composto por cinco etapas principais:
-
-1.  **Coleta de Dados**: Busca de informações que possam ser úteis para responder a uma pergunta de pesquisa. Esses dados podem ser coletados de diversas fontes, como pesquisas de campo, bases de dados, entrevistas, entre outros.
-
-2.  **Limpar e Organização**: Pesquisador organiza os dados coletados de forma a facilitar a análise. Isso pode envolver a criação de tabelas, limpeza, estruturação, entre outros aspectos.
-
-3.  **Análise Descritiva**: Busca descrever os dados coletados de forma a identificar padrões, tendências, relações entre variáveis, entre outros aspectos. Isso pode envolver a utilização de estatísticas descritivas, gráficos, mapas, entre outros recursos.
-
-4.  **Análise Exploratória**: Explorar os dados coletados de forma a identificar padrões, tendências, relações entre variáveis, entre outros aspectos. Isso pode envolver a utilização de técnicas estatísticas mais avançadas, como regressão, análise de cluster, análise fatorial, entre outras.
-
-5.  **Interpretação dos Resultados**: Interpretar os resultados obtidos na análise descritiva e exploratória de forma a responder à pergunta de pesquisa. Isso pode envolver a elaboração de conclusões, recomendações, entre outros aspectos.
-
-## Estatísticas Descritivas: Medidas Numéricas a partir da amostra
-
-A análise descritiva é uma etapa fundamental no processo de análise de dados. Ela consiste em descrever os dados coletados de forma a identificar padrões, tendências, relações entre variáveis, entre outros aspectos.
-
-Vamos entender 3 padrões importantes nessa etapa:
-
-1.  **Medidas de Posição**: São medidas que indicam a posição de um valor em relação aos demais valores de um conjunto de dados.
-
-2.  **Medidas de Variabilidade**: São medidas que indicam o grau de dispersão dos valores de um conjunto de dados.
-
-3.  **Medidas de Associação**: São medidas que indicam a relação entre duas ou mais variáveis de um conjunto de dados.
-
-Vamos entender os resultados dessas medidas para dois conjuntos distintos de variáveis:
-
-1.  **Variáveis Discretas**: São variáveis que podem assumir um número finito de valores. Por exemplo, o número de filhos de uma pessoa, o número de processos em uma Vara, procedente ou improcedente.
-
-2.  **Variáveis Contínuas**: São variáveis que podem assumir um número infinito de valores. Por exemplo, a renda per capita, a taxa de feminicídio, tempo do processo, dosimetria da pena.
-
-**CASO DE ESTUDO:**
-
-Vamos tentar entender essas medidas a partir de um banco de dados real e pequeno. Será utilizado um banco de dados extraído do [Anuário da Segurança Pública (2023)](https://publicacoes.forumseguranca.org.br/items/6b3e3a1b-3bd2-40f7-b280-7419c8eb3b39){.external target="_blank"}, com informações sobre a taxa de feminicídio, a taxa de tentativa de feminicídio, a taxa de homicídio de mulheres, a renda per capita, entre outras variáveis.
-
-As medidas numéricas que veremos para as três padrões a serem observados são:
-
-**MEDIDAS DE POSIÇÃO:**
-
--   Média,
--   Mediana,
--   Moda,
--   Percentis,
--   Quartis.
-
-**MEDIDAS DE VARIABILIDADE:**
-
--   Amplitude,
--   Amplitude interquartil,
--   Variância,
--   Desvio Padrão e
--   Coeficiente de Variação.
-
-**MEDIDAS DE ASSOCIAÇÃO:**
-
--   Covariancia e
--   Coeficiente de Correlção.
-
-Vamos apresentar as fórmulas de algumas dessas principais medidas. Primeiramente, vamos importar e organizar nosso banco de dados:
-
-```{r}
-df_feminic22 <- read.table(
-  "dados/dados_feminic.csv",
-  header = TRUE,
-  sep = ";",
-  dec = ".",
-  na.strings = c("", "NA"),
-  check.names = FALSE
-)
-
-df_t_feminic22 <- read.table(
-  "dados/dados_tent_feminic.csv",
-  header = TRUE,
-  sep = ";",
-  dec = ".",
-  na.strings = c("", "NA"),
-  check.names = FALSE
-)
-
-final_fem_22 <- merge(
-  df_feminic22,
-  df_t_feminic22,
-  by = "sigla",
-  all = TRUE,
-  suffixes = c("", "_tent")
-)
-
-final_fem_22 <- final_fem_22[
-  setdiff(names(final_fem_22), c("estado_tent", "regiao_tent"))
-]
-
-names(final_fem_22)[names(final_fem_22) == "feminico_abs"] <-
-  "feminic_abs"
-
-names(final_fem_22)[names(final_fem_22) == "estado"] <-
-  "estados"
-
-# Indicador utilizado nas análises seguintes do capítulo
-final_fem_22$mais_50 <- ifelse(
-  final_fem_22$part_feminic >= 50,
-  1,
-  0
-)
-
-```
-
-Visualizando as primeiras 10 linhas do banco de dados:
-
-```{r warning=FALSE, message=FALSE}
-library(kableExtra)
-
-final_fem_22 |> 
-  head(10) |> 
-  kbl(digits = 2,  ) %>%
-     kable_styling()
-```
-
-::: {.callout-note appearance="simple" collapse="true" title="Descrição do Banco de Dados"}
-1.  **homic_abs**: Número absoluto de homicídios feminínos registrados em 2022.
-
-2.  **homic_tx**: Taxa de homicídios feminino 100 mil mulheres.
-
-3.  **feminic_abs**: Número absoluto de feminicídios registrados em 2022.
-
-4.  **feminic_tx**: Taxa de feminicídios por 100 mil mulheres.
-
-5.  **part_feminic**: Participação percentual dos feminicídios no total de homicídios femininos.
-
-6.  **rendapc**: Renda per capita do Estado.
-
-7.  **mais_50**: Proporção de feminicídios acima de 50%.
-
-8.  **t_homic_abs**: Número absoluto da tentativa de homicídios femininos
-
-9.  **t_homic_tx**: Taxa de tentativa de homicídios para 100 mil mulheres.
-
-10. **t_feminic_abs**: Número absoluto de tentativa de feminicídios.
-
-11. **t_feminic_tx**: Taxa de tentativa de feminicídios por 100 mil mulheres.
-
-12. **part_t_feminic**: Participação percentual da tentativa de feminicídios em relação ao total de tentativas de homicídios femininos.
 :::
 
-### Gráficos no R
+## Análise preliminar
 
-O ggplot2 é um pacote do R utilizado para criar gráficos estatísticos de forma poderosa e flexível. Apesar de parecer complexo, é fácil de aprender, pois possui princípios básicos simples e poucos casos excepcionais.O ggplot2 é projetado para ser utilizado iterativamente: você começa com os dados brutos e adiciona camadas de anotações ou resumos estatísticos.
+### Cadeia de valor do conhecimento
 
-**A GRAMÁTICA DOS GRÁFICOS**
+A análise descritiva integra um percurso que começa com registros dispersos e termina com informação interpretável. A cadeia de valor do conhecimento representa a passagem dos dados à informação, da informação ao conhecimento e do conhecimento à decisão. A estatística descritiva participa desse percurso ao resumir os registros, tornar padrões visíveis e indicar questões que exigem investigação posterior.
 
-O ggplot2 é um pacote do R que implementa a Grammar of Graphics (Wilkinson, 2005), uma abordagem para criar gráficos estatísticos. Ele organiza os gráficos em componentes fundamentais, permitindo flexibilidade e personalização.
+![Cadeia de valor do conhecimento. Fonte: Ermine (2013).](../figuras/knowledgeVC.png){width="80%" fig-align="center"}
 
-Um gráfico no ggplot2 é construído combinando os seguintes elementos:
+A ciência de dados combina conhecimentos de estatística, computação e do domínio substantivo da pesquisa. Na jurimetria, a interpretação depende também do desenho da pesquisa, das instituições jurídicas e do processo que deu origem aos dados.
 
-1.  **Dados**: A base de dados a ser visualizada.
-2.  **Mapeamentos estéticos**(aes): Define como variáveis são associadas a atributos visuais (cor, forma, tamanho).
-3.  **Camadas** (layers): Compostas por:
-    -   **Geoms**: Elementos visuais - tipos de gráficos (pontos, linhas, barras).
-    -   **Stats**: Transformações estatísticas ou ajustar modelos.
-    -   **Escalas** (scales): Determina as esclaas de x e y (eixos, legendas, cores).
-4.  **Sistemas de coordenadas** (coord): Define como os dados são posicionados no gráfico (ex.: cartesiano ou polar).
-5.  **Facetamento** (facet): Divide os dados em subconjuntos para gerar gráficos separados.
-6.  **Tema** (theme): Personaliza detalhes visuais, como fontes e cores de fundo.
+![Integração entre áreas na ciência de dados.](../figuras/combina.png){width="70%" fig-align="center"}
 
-Clique abaixo para ver alguns tipos de gráficos que podem ser criados com o ggplot2:
+### O ciclo da ciência de dados
 
-::: {.callout-note appearance="simple" collapse="true" title="Veja aqui Algumas Possibilidades de Camadas"}
--   `geom_area()`: cria um gráfico de área.\
--   `geom_density()`: cria um gráfico de densidade de kernel.\
--   `geom_dotplot()`: cria um gráfico de pontos.\
--   `geom_freqpoly()`: cria um polígono de frequência.\
--   `geom_histogram()`: cria um histograma.\
--   `stat_ecdf()`: plota a função de densidade acumulada empírica.\
--   `stat_qq()`: cria um gráfico quantil-quantil.\
--   `geom_bar()`: cria um gráfico de barras.
-:::
+O ciclo da ciência de dados não termina com a construção do banco. Depois da coleta, da extração, da limpeza e da estruturação, é necessário descrever as observações, avaliar sua distribuição, identificar associações e interpretar os resultados à luz da pergunta de pesquisa.
 
-Vejamos um exemplo inicial de um gráfico da taxa de homicídio feminino e a taxa de feminicídio por Estado no Brasil
+![Ciclo de vida da ciência de dados.](../figuras/cicloDS.png){width="70%" fig-align="center"}
 
-Primeiro, definindo os dados que serão utilizados e os eixos x e y, vejamos o que ocorre:
+Neste livro, o percurso é organizado em etapas relacionadas:
+
+1. **coleta e extração:** obtenção dos documentos e registro das informações relevantes;
+2. **limpeza e estruturação:** padronização das categorias, tratamento das ausências e construção do banco analisável;
+3. **análise descritiva:** síntese da posição, da variabilidade e das distribuições;
+4. **análise exploratória:** exame de padrões e associações que podem orientar novas perguntas;
+5. **interpretação:** retorno ao problema jurídico para avaliar o alcance e os limites dos resultados.
+
+### O que será analisado
+
+Trabalharemos com três grupos de medidas. As **medidas de posição** indicam onde os valores se concentram; as **medidas de variabilidade** descrevem sua dispersão; e as **medidas de associação** examinam como duas variáveis se comportam conjuntamente. Essas medidas serão combinadas com tabelas e gráficos adequados a variáveis numéricas e categóricas.
+
+## Preparando o banco
 
 ```{r}
-library(ggplot2)
-ggplot(data = final_fem_22, aes(x = homic_tx, y = feminic_tx))
-```
-
-Agora podemos adicionar uma camada de pontos ao gráfico:
-
-```{r}
-ggplot(data = final_fem_22, aes(x = homic_tx, y = feminic_tx))+
-  geom_point()
-```
-
-Podemos fazer com que cada ponto seja associado a uma região do Brasil:
-
-```{r}
-ggplot(data = final_fem_22, aes(x = homic_tx, y = feminic_tx, colour=regiao))+
-  geom_point()
-```
-
-Ou podemos fazer que todos os pontos seja azul escuro:
-
-```{r}
-ggplot(data = final_fem_22, aes(x = homic_tx, y = feminic_tx))+
-  geom_point(color="darkblue")
-```
-
-Para as cores uma possibilidade bem flexível é usar cores [Hexadecimais](https://htmlcolorcodes.com/). Vamos usar a cor `#6e94bd` para os pontos:
-
-Podemos mudar o tamanho `size`, a transparência com `alpha` e a forma `shape` dos pontos:
-
-```{r}
-ggplot(data = final_fem_22, aes(x = homic_tx, y = feminic_tx))+
-  geom_point(color="#6e94bd", size=3, alpha=0.7,  shape=17) +
-  scale_x_continuous(limits = c(0, 13))
-```
-
-::: {.callout-note appearance="simple" collapse="true" title="Clique aqui para ver os `shapes` disponíveis"}
--   **shape = 0**: quadrado\
--   **shape = 1**: círculo\
--   **shape = 2**: triângulo apontando para cima\
--   **shape = 3**: sinal de mais (+)\
--   **shape = 4**: cruz (x)\
--   **shape = 5**: losango\
--   **shape = 6**: triângulo apontando para baixo\
--   **shape = 7**: quadrado com cruz\
--   **shape = 8**: estrela\
--   **shape = 9**: losango com sinal de mais\
--   **shape = 10**: círculo com sinal de mais\
--   **shape = 11**: triângulos apontando para cima e para baixo\
--   **shape = 12**: quadrado com sinal de mais\
--   **shape = 13**: círculo com cruz\
--   **shape = 14**: quadrado com triângulo apontando para baixo\
--   **shape = 15**: quadrado preenchido\
--   **shape = 16**: círculo preenchido\
--   **shape = 17**: triângulo preenchido apontando para cima\
--   **shape = 18**: losango preenchido\
--   **shape = 19**: círculo sólido\
--   **shape = 20**: ponto (círculo menor)\
--   **shape = 21**: círculo preenchido azul\
--   **shape = 22**: quadrado preenchido azul\
--   **shape = 23**: losango preenchido azul\
--   **shape = 24**: triângulo preenchido apontando para cima azul\
--   **shape = 25**: triângulo preenchido apontando para baixo azul
-:::
-
-Agora vamos adicionar uma escala para o eixo de x entre 0 e 13 e vamos dividir o gráfico por região:
-
-```{r}
-ggplot(data = final_fem_22, aes(x = homic_tx, y = feminic_tx))+
-  geom_point(color="#6e94bd", size=3, alpha=0.7,  shape=17) +
-  scale_x_continuous(limits = c(0, 13))+
-  facet_wrap(~regiao)
-```
-
-Pode-se também adicionar uma linha de tendência ao gráfico:
-
-```{r warning=FALSE, message=FALSE}
-ggplot(data = final_fem_22, aes(x = homic_tx, y = feminic_tx))+
-  geom_point(color="#6e94bd", size=3, alpha=0.7,  shape=17) +
-  scale_x_continuous(limits = c(0, 13))+
-  geom_smooth(method = "lm", se=FALSE , color="orange")+
-  facet_wrap(~regiao)
-```
-
-E por fim pode-se mudar o título e os rótulos dos eixos:
-
-```{r warning=FALSE, message=FALSE}
-
-library(ggthemes)
-ggplot(data = final_fem_22, aes(x = homic_tx, y = feminic_tx))+
-geom_point(color="#6e94bd", size=3, alpha=0.7,  shape=17) +
-scale_x_continuous(limits = c(0, 13))+
-geom_smooth(method = "lm", se=FALSE , color="orange")+
-facet_wrap(~regiao)+  
-labs(title="Homicídios e Feminicídios por Região", x="Homicídios", y="Feminicídios")+
-theme_bw()
-```
-
-Para os temas pode acessar a [Galeria](https://r-graph-gallery.com/package/ggthemes.html) ou [Exemplos Dinâmicos](https://r-graph-gallery.com/ggplot2-package.html#theme-widget).
-
-## Medidas de Posição:
-
-**MÉDIA AMOSTRAL:**
-
-$$\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$$
-
-```{r, warning=F}
-mean(final_fem_22$feminic_tx)
-```
-
-A média da taxa de Feminicídio entre os Estados do Brasil é de 1,65 por 100 mil mulheres em 2022 .
-
-```{r, warning=F}
-library(kableExtra)
-
-mean_1<- aggregate(final_fem_22[4:15], list(final_fem_22$regiao), mean,  na.rm=T)
-
-t(mean_1) %>% 
-  kbl(digits = 2) %>%
-     kable_styling()
-```
-
-**MEDIANA:**
-
-Organize os dados em ordem crescente.
-
-a)  Para um numero impar de observações a mediana é o valor que ocupa a posição central.
-
-b)  para um número par de observações, a mediana é a média dos dois valores centrais.
-
-```{r, warning=F}
-median(final_fem_22$feminic_tx)
-```
-
-Veja que a mediana é um valor diferente da média. Elas medem coisas diferentes. Veja o exemplo abaixo
-
-```{r, warning=F}
-median(c(1,3, 14))
-mean(c(1,3, 14))
-```
-
-Mediana e média são bastante distintas. Vamos fazer uma tabela com a Média e Mediana, para o nosso conjunto de dados.
-
-```{r, warning=F}
-
-fun1 <- function(x, na.rm = TRUE) c(Media=mean(x, na.rm = TRUE), Mediana=median(x, na.rm = TRUE))
-
-median_1 <- (sapply(final_fem_22[4:15], fun1))
-
-t(median_1) %>% 
-  kbl(digits = 2) %>%
-     kable_styling()
-
-```
-
-**MODA:**
-
-Moda é o valor que ocorre com mais frequência.
-
-```{r, warning=F}
-moda <- function(x, na.rm=T) {
-modal <- unique(x, na.rm=T)
-modal[which.max(tabulate(match(x, modal)))]
-}
-moda(final_fem_22$feminic_tx)
-```
-
-```{r, warning=F}
-
-fun1 <- function(x, na.rm = TRUE) c(Media=mean(x, na.rm = TRUE), Mediana=median(x, na.rm = TRUE), Moda=moda(x))
-
-median_1 <- (sapply(final_fem_22[4:15], fun1))
-
-t(median_1) %>% 
-  kbl(digits = 2) %>%
-     kable_styling()
-
-```
-
-#### Visualizando as medidas por categorias
-
-**Gráfico de Pizza**
-
-O gráfico de pizza indica as proporções de uma determinada variável de classe. Aqui utilizamos a média do número de feminicídios absoluto por região.
-
-```{r}
-ggplot(mean_1, aes(x = "", y = feminic_abs, fill = Group.1)) +
-  geom_col(width = 1, color = "lightgray") +
-  coord_polar(theta = "y") +
-  labs(title = "Média Feminicídio por Região", fill = "Região") +
-  theme_minimal() +
-  theme(axis.title = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks = element_blank())+ 
-  scale_fill_brewer(palette="PuBu")
-```
-
-```{r eval=FALSE ,echo=FALSE}
-# Maneira Tradicional
-pie(mean_1$feminic_abs , main = "Média Feminicídio por Região", 
-    labels = c("CO","N","NE","S","SD"), border="lightgray")
-```
-
-::: {.callout-tip title="Exercício"}
-**PERGUNTA**: Qual a proporção de estados que possuem taxas de feminicídio acima de 50%?
-:::
-
-::: {.callout-warning title="Veja a Resposta" appearance="simple" collapse="true"}
-**RESPOSTA**: Participação é uma variável disecreta do tipo 0 ou 1 (binárias) que indica se a taxa de feminicídio é maior que 50%.
-
-```{r message=FALSE, warning=FALSE}
 library(dplyr)
-final_fem_22 |> 
-  group_by(mais_50) |>
-  summarise(cont = n()) |> 
-  mutate(mais_50F = factor(mais_50, levels = c(0, 1), labels = c("Abaixo de 50%", "Acima de 50%"))) |> 
-  ggplot( aes(x="", y =cont, fill=mais_50F)) +
-  geom_bar(stat="identity", width = 1, color = "lightgray") +
-  coord_polar(theta = "y", start=0)+
-  labs(title = "Participação do Feminicídio no Total de Homicídios Femininos", fill = "Participação Feminicídio") +
-  theme_minimal() +
-  theme(axis.title = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks = element_blank())+
-  scale_fill_brewer(palette="Blues")
-```
-:::
-
-**Gráfico de Barra**
-
-Em geral a utilização do gráfico de barras está relacionado ao entendimento da frequência de valores associados a uma determinada categoria. Por exemplo, imagine que temos um banco de dados com as pessoas classificadas como: i)Não trabalha; ii)Trabalha e iii)Desempregado. Teríamos três categorias e a frequência de pessoas em cada categoria. Poderíamos ainda dividir essa categoria entre homens e mulheres. Essa é a utilização mais padrão do gráfico de barras. Vejamos alguns gráficos:
-
-```{r}
-ggplot(final_fem_22, aes(x = reorder(estados, -feminic_tx), y = feminic_tx)) +
-  geom_bar(stat = "identity", fill = "salmon2", alpha=0.5, color = "lightsalmon4") +
-  labs(title = "Taxa de Feminicídio por Estado",
-       x = "",
-       y = "Tx. por 100 mil") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 9)) 
-```
-
-Vamos fazer um gráfico de barras para a participação do Feminicídio no total de homicídios femininos por Estado.
-
-```{r}
-ggplot(final_fem_22, aes(x = reorder(estados, -part_feminic), y = part_feminic)) + # Ordem decrescente
-  geom_col( fill = "#3f566f", alpha=0.7, color = "#4c5471") +                      # Adiciona as barras, cor das barras, transparencia 
-  labs(                                                                            # e cor da borda
-    title = "Participação da Taxa de Feminicídio no Total por Estado",             # Título do gráfico
-    x = "",                                                                        # Rótulo do eixo x
-    y = "Tx. por 100 mil"                                                          # Rótulo do eixo y
-  ) +
-  theme_bw() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 9))              # Ajusta o tamanho do texto do eixo x
-```
-
-**Gráfico de Barras Agrupadas**
-
-Vamos fazer um gráfico de barras agrupadas para a taxa de feminicídio e taxa de tentativa de feminicídio por região. Vamos passo a passo:
-
-1.  Transformar os dados em formato long
-
-```{r message=FALSE, warning=FALSE}
+library(readr)
 library(tidyr)
-library(dplyr)
+library(tibble)
+library(ggplot2)
+library(kableExtra)
+library(ggcorrplot)
 
-# Transformar os dados no formato long
-tx_long <- final_fem_22 %>%
-  arrange(desc(feminic_tx)) %>%                          # Ordena pelos valores de feinic_tx, decrescente
-  select(estados, regiao, feminic_tx, t_feminic_tx) %>%  # Seleciona as colunas de interesse
-  pivot_longer(cols = c(feminic_tx, t_feminic_tx),       # Converte para formato longo
-               names_to = "tipo",                        # Nome da coluna que identificará as variáveis
-               values_to = "taxa")                       # Nome da coluna que armazenará os valores
-
-head(tx_long)
+base <- read_csv(
+  "dados/violencia_digital_didatica_tratada.csv",
+  na = c("", "NA"),
+  show_col_types = FALSE
+)
 ```
 
-2.  Criar o gráfico de barras lado a lado
+Cada linha corresponde a um acórdão. Assim, uma contagem representa acórdãos, e não pessoas, fatos ou documentos existentes nos processos de origem.
 
-```{r message=FALSE, warning=FALSE}
-# Criar o gráfico de barras lado a lado
-ggplot(tx_long, aes(x = reorder(estados, -taxa), y = taxa, fill = tipo)) +
-  geom_bar(stat = "identity",alpha=0.7,  position = "dodge", color = "white") +               # Barras lado a lado posição dodge faz isso
+```{r}
+dim(base)
+```
+
+```{r}
+glimpse(base)
+```
+
+Criamos funções auxiliares para calcular percentuais e identificar a moda de uma variável numérica.
+
+```{r}
+calcular_percentual <- function(n) {
+  round(100 * n / sum(n), 1)
+}
+
+calcular_moda <- function(x) {
+  x <- x[!is.na(x)]
+  frequencias <- table(x)
+  modas <- names(frequencias)[
+    frequencias == max(frequencias)
+  ]
+  paste(modas, collapse = "; ")
+}
+
+formatar_moeda <- function(x) {
+  ifelse(
+    is.na(x),
+    "NA",
+    paste0(
+      "R$ ",
+      format(
+        round(x, 2),
+        big.mark = ".",
+        decimal.mark = ",",
+        nsmall = 2,
+        scientific = FALSE,
+        trim = TRUE
+      )
+    )
+  )
+}
+
+indicadores_prova <- c(
+  "prova_documental",
+  "prova_print",
+  "prova_depoimento_testemunhal",
+  "prova_audio_video",
+  "prova_imei_ip_url",
+  "prova_boletim_ocorrencia",
+  "prova_imagem",
+  "prova_ata_notarial",
+  "prova_outros"
+)
+
+base <- base |>
+  mutate(
+    numero_provas = if_else(
+      prova_nao_cita == 1,
+      NA_real_,
+      rowSums(
+        across(all_of(indicadores_prova)),
+        na.rm = TRUE
+      )
+    )
+  )
+
+limite_superior_975 <- quantile(
+  base$valor_indenizacao_jul2026[
+    base$valor_indenizacao_jul2026 > 0
+  ],
+  probs = 0.975,
+  na.rm = TRUE
+)
+
+base_indenizacoes_recorte <- base |>
+  filter(
+    valor_indenizacao_jul2026 > 0,
+    valor_indenizacao_jul2026 <= limite_superior_975
+  )
+```
+
+## Medidas de posição
+
+Medidas de posição indicam onde os valores de uma distribuição se concentram. Utilizaremos as indenizações atualizadas para julho de 2026, o que permite comparar valores registrados em anos diferentes.
+
+### Média
+
+A média aritmética é a soma dos valores dividida pelo número de observações válidas:
+
+$$
+\bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i
+$$
+
+A média utiliza todas as observações e, por isso, é sensível a valores extremos.
+
+```{r}
+media_com_zero <- mean(
+  base$valor_indenizacao_jul2026,
+  na.rm = TRUE
+)
+
+media_com_zero
+```
+
+O argumento `na.rm = TRUE` retira apenas os valores ausentes do cálculo. Os valores iguais a zero permanecem na média.
+
+### Mediana
+
+A mediana divide os valores ordenados em duas partes. Metade das observações fica abaixo dela e metade, acima. Em distribuições assimétricas, ela costuma representar o centro com menor influência dos extremos.
+
+```{r}
+mediana_com_zero <- median(
+  base$valor_indenizacao_jul2026,
+  na.rm = TRUE
+)
+
+mediana_com_zero
+```
+
+### Moda
+
+A moda corresponde ao valor mais frequente. Uma distribuição pode apresentar uma ou mais modas.
+
+```{r}
+moda_com_zero <- calcular_moda(
+  base$valor_indenizacao_jul2026
+)
+
+moda_com_zero
+```
+
+### Quartis e percentis
+
+Os quartis dividem a distribuição ordenada em quatro partes. O primeiro quartil corresponde ao percentil 25; o segundo, à mediana; e o terceiro, ao percentil 75.
+
+```{r}
+resumo_posicao <- base |>
+  summarise(
+    observacoes_validas = sum(
+      !is.na(valor_indenizacao_jul2026)
+    ),
+    media = mean(
+      valor_indenizacao_jul2026,
+      na.rm = TRUE
+    ),
+    mediana = median(
+      valor_indenizacao_jul2026,
+      na.rm = TRUE
+    ),
+    moda = calcular_moda(
+      valor_indenizacao_jul2026
+    ),
+    primeiro_quartil = quantile(
+      valor_indenizacao_jul2026,
+      0.25,
+      na.rm = TRUE,
+      names = FALSE
+    ),
+    terceiro_quartil = quantile(
+      valor_indenizacao_jul2026,
+      0.75,
+      na.rm = TRUE,
+      names = FALSE
+    )
+  )
+
+resumo_posicao |>
+  mutate(
+    media = formatar_moeda(media),
+    mediana = formatar_moeda(mediana),
+    primeiro_quartil = formatar_moeda(primeiro_quartil),
+    terceiro_quartil = formatar_moeda(terceiro_quartil)
+  ) |>
+  kbl(
+    align = "c",
+    caption = "Medidas de posição das indenizações, incluindo zero"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+Percentis permitem examinar outros pontos da distribuição. O comando abaixo calcula os percentis 1, 5, 25, 50, 75, 95 e 99:
+
+```{r}
+percentis_indenizacao <- quantile(
+  base$valor_indenizacao_jul2026,
+  probs = c(0.01, 0.05, 0.25, 0.50, 0.75, 0.95, 0.99),
+  na.rm = TRUE
+)
+
+tibble(
+  percentil = names(percentis_indenizacao),
+  valor = formatar_moeda(
+    as.numeric(percentis_indenizacao)
+  )
+) |>
+  kbl(
+    align = "c",
+    caption = "Percentis dos valores de indenização"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+## Medidas de variabilidade
+
+Medidas de variabilidade descrevem a dispersão. Duas distribuições podem apresentar a mesma média e concentrações distintas.
+
+### Amplitude
+
+A amplitude é a diferença entre o maior e o menor valor:
+
+$$
+A=x_{\max}-x_{\min}
+$$
+
+Como depende apenas dos extremos, ela é sensível a observações atípicas.
+
+```{r}
+amplitude_com_zero <- diff(
+  range(
+    base$valor_indenizacao_jul2026,
+    na.rm = TRUE
+  )
+)
+
+amplitude_com_zero
+```
+
+Esse resultado considera todos os valores monetários informados, inclusive os iguais a zero.
+
+### Amplitude interquartil
+
+A amplitude interquartil descreve a dispersão dos 50% centrais:
+
+$$
+AIQ=Q_3-Q_1
+$$
+
+```{r}
+aiq_com_zero <- IQR(
+  base$valor_indenizacao_jul2026,
+  na.rm = TRUE
+)
+
+aiq_com_zero
+```
+
+Como utiliza os quartis, a amplitude interquartil é menos influenciada pelos extremos do que a amplitude total.
+
+### Variância e desvio-padrão
+
+A variância amostral mede os desvios quadráticos em torno da média:
+
+$$
+s^2=\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1}
+$$
+
+O desvio-padrão é a raiz da variância e retorna à unidade monetária:
+
+$$
+s=\sqrt{s^2}
+$$
+
+```{r}
+variancia_com_zero <- var(
+  base$valor_indenizacao_jul2026,
+  na.rm = TRUE
+)
+
+variancia_com_zero
+```
+
+```{r}
+desvio_padrao_com_zero <- sd(
+  base$valor_indenizacao_jul2026,
+  na.rm = TRUE
+)
+
+desvio_padrao_com_zero
+```
+
+A variância está expressa em unidades monetárias ao quadrado. O desvio-padrão retorna à unidade dos valores de indenização e, por isso, possui interpretação mais direta.
+
+### Coeficiente de variação
+
+O coeficiente de variação relaciona o desvio-padrão à média:
+
+$$
+CV=\frac{s}{\bar{x}}\times 100
+$$
+
+```{r}
+cv_com_zero <- 100 *
+  desvio_padrao_com_zero /
+  media_com_zero
+
+cv_com_zero
+```
+
+O coeficiente de variação expressa o desvio-padrão como percentual da média. Ele deve ser interpretado com cautela quando a média se aproxima de zero ou quando a distribuição contém muitos zeros.
+
+## Decisões sobre zeros e valores extremos
+
+As medidas anteriores utilizaram todos os valores monetários informados. Esse primeiro diagnóstico revelou duas questões que precisam ser decididas antes dos gráficos e das análises seguintes: o significado dos zeros e a influência dos maiores valores.
+
+### O papel dos valores iguais a zero
+
+No banco didático, não é possível assegurar apenas pela variável monetária se zero significa inexistência de indenização, inexistência de pedido ou informação não localizada. Por isso, apresentamos primeiro os resultados completos e, a partir daqui, comparamos três recortes:
+
+1. todos os valores informados, incluindo zero;
+2. somente indenizações positivas;
+3. indenizações positivas até o percentil 97,5.
+
+```{r}
+comparacao_posicao <- bind_rows(
+  base |>
+    filter(!is.na(valor_indenizacao_jul2026)) |>
+    summarise(
+      grupo = "Incluindo zero",
+      n = n(),
+      media = mean(valor_indenizacao_jul2026),
+      mediana = median(valor_indenizacao_jul2026),
+      primeiro_quartil = quantile(
+        valor_indenizacao_jul2026,
+        0.25
+      ),
+      terceiro_quartil = quantile(
+        valor_indenizacao_jul2026,
+        0.75
+      )
+    ),
+  base |>
+    filter(valor_indenizacao_jul2026 > 0) |>
+    summarise(
+      grupo = "Somente positivas",
+      n = n(),
+      media = mean(valor_indenizacao_jul2026),
+      mediana = median(valor_indenizacao_jul2026),
+      primeiro_quartil = quantile(
+        valor_indenizacao_jul2026,
+        0.25
+      ),
+      terceiro_quartil = quantile(
+        valor_indenizacao_jul2026,
+        0.75
+      )
+    ),
+  base_indenizacoes_recorte |>
+    summarise(
+      grupo = "Positivas até P97,5",
+      n = n(),
+      media = mean(valor_indenizacao_jul2026),
+      mediana = median(valor_indenizacao_jul2026),
+      primeiro_quartil = quantile(
+        valor_indenizacao_jul2026,
+        0.25
+      ),
+      terceiro_quartil = quantile(
+        valor_indenizacao_jul2026,
+        0.75
+      )
+    )
+)
+
+```
+
+A comparação mostra quanto a média, a mediana e os quartis dependem da decisão sobre os zeros e a cauda superior. O recorte não modifica o banco original; ele cria uma base derivada para as análises seguintes.
+
+### Variabilidade entre indenizações positivas
+
+Agora excluímos os registros iguais a zero e calculamos as mesmas medidas somente entre as indenizações positivas. Esse recorte evita misturar a existência de indenização com sua magnitude. Em seguida, retiramos apenas os valores acima do percentil 97,5 para observar quanto da dispersão decorre da cauda superior.
+
+#### Amplitude das indenizações positivas
+
+```{r}
+amplitude_positivos <- diff(
+  range(
+    base$valor_indenizacao_jul2026[
+      base$valor_indenizacao_jul2026 > 0
+    ],
+    na.rm = TRUE
+  )
+)
+
+amplitude_positivos
+```
+
+#### Amplitude interquartil das indenizações positivas
+
+```{r}
+aiq_positivos <- IQR(
+  base$valor_indenizacao_jul2026[
+    base$valor_indenizacao_jul2026 > 0
+  ],
+  na.rm = TRUE
+)
+
+aiq_positivos
+```
+
+#### Variância e desvio-padrão das indenizações positivas
+
+```{r}
+variancia_positivos <- var(
+  base$valor_indenizacao_jul2026[
+    base$valor_indenizacao_jul2026 > 0
+  ],
+  na.rm = TRUE
+)
+
+variancia_positivos
+```
+
+```{r}
+desvio_padrao_positivos <- sd(
+  base$valor_indenizacao_jul2026[
+    base$valor_indenizacao_jul2026 > 0
+  ],
+  na.rm = TRUE
+)
+
+desvio_padrao_positivos
+```
+
+#### Coeficiente de variação das indenizações positivas
+
+```{r}
+media_positivos <- mean(
+  base$valor_indenizacao_jul2026[
+    base$valor_indenizacao_jul2026 > 0
+  ],
+  na.rm = TRUE
+)
+
+cv_positivos <- 100 *
+  desvio_padrao_positivos /
+  media_positivos
+
+cv_positivos
+```
+
+#### Recorte superior das indenizações positivas
+
+O banco de análise mantém os valores positivos até o percentil 97,5. Ele será utilizado nos gráficos seguintes para tornar visível a região em que se concentra a maior parte das indenizações. O banco original permanece inalterado.
+
+```{r}
+tibble(
+  limite = "Percentil 97,5",
+  valor = formatar_moeda(as.numeric(limite_superior_975))
+) |>
+  kbl(
+    align = "c",
+    caption = "Limite superior do recorte"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+### Comparação final das medidas de posição e variabilidade
+
+Depois de calcular cada medida separadamente, reunimos posição e variabilidade nos três recortes. Essa tabela encerra a decisão metodológica. A partir da próxima seção, utilizaremos apenas as indenizações positivas até o percentil 97,5.
+
+```{r}
+calcular_variabilidade <- function(dados, grupo) {
+  dados |>
+    summarise(
+      grupo = grupo,
+      n = n(),
+      minimo = min(valor_indenizacao_jul2026),
+      maximo = max(valor_indenizacao_jul2026),
+      amplitude = maximo - minimo,
+      amplitude_interquartil = IQR(
+        valor_indenizacao_jul2026
+      ),
+      variancia = var(valor_indenizacao_jul2026),
+      desvio_padrao = sd(valor_indenizacao_jul2026),
+      coeficiente_variacao = 100 *
+        desvio_padrao /
+        mean(valor_indenizacao_jul2026)
+    )
+}
+
+resumo_variabilidade <- bind_rows(
+  base |>
+    filter(!is.na(valor_indenizacao_jul2026)) |>
+    calcular_variabilidade("Incluindo zero"),
+  base |>
+    filter(valor_indenizacao_jul2026 > 0) |>
+    calcular_variabilidade("Somente positivas"),
+  base_indenizacoes_recorte |>
+    calcular_variabilidade("Positivas até P97,5")
+)
+
+comparacao_final <- comparacao_posicao |>
+  left_join(
+    resumo_variabilidade,
+    by = c("grupo", "n")
+  ) |>
+  select(
+    grupo,
+    n,
+    media,
+    mediana,
+    primeiro_quartil,
+    terceiro_quartil,
+    amplitude,
+    amplitude_interquartil,
+    variancia,
+    desvio_padrao,
+    coeficiente_variacao
+  ) |>
+  pivot_longer(
+    cols = -grupo,
+    names_to = "medida",
+    values_to = "valor"
+  ) |>
+  mutate(
+    medida = recode(
+      medida,
+      n = "Observações",
+      media = "Média",
+      mediana = "Mediana",
+      primeiro_quartil = "Primeiro quartil",
+      terceiro_quartil = "Terceiro quartil",
+      amplitude = "Amplitude",
+      amplitude_interquartil = "Amplitude interquartil",
+      variancia = "Variância",
+      desvio_padrao = "Desvio-padrão",
+      coeficiente_variacao = "Coeficiente de variação"
+    ),
+    valor = case_when(
+      medida == "Observações" ~ format(
+        round(valor),
+        scientific = FALSE,
+        trim = TRUE
+      ),
+      medida == "Coeficiente de variação" ~ paste0(
+        round(valor, 1),
+        "%"
+      ),
+      TRUE ~ formatar_moeda(valor)
+    )
+  ) |>
+  select(medida, grupo, valor) |>
+  pivot_wider(
+    names_from = grupo,
+    values_from = valor
+  )
+
+comparacao_final |>
+  kbl(
+    align = "c",
+    caption = "Medidas de posição e variabilidade segundo o recorte analítico"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+As diferenças entre as colunas mostram como as decisões sobre zeros e cauda superior alteram a descrição dos valores. Não se trata de escolher a coluna que produz o resultado mais conveniente, mas de relacionar cada recorte à pergunta substantiva e à qualidade do registro.
+
+::: {.callout-note collapse="true" title="Equivalente em Python: posição e variabilidade"}
+
+```{python}
+#| eval: false
+valor = base["valor_indenizacao_jul2026"].dropna()
+positivos = valor[valor > 0]
+limite_superior = positivos.quantile(0.975)
+positivos_recorte = positivos[positivos <= limite_superior]
+
+resumo = {
+    "media": valor.mean(),
+    "mediana": valor.median(),
+    "primeiro_quartil": valor.quantile(0.25),
+    "terceiro_quartil": valor.quantile(0.75),
+    "amplitude": valor.max() - valor.min(),
+    "amplitude_interquartil": valor.quantile(0.75) - valor.quantile(0.25),
+    "variancia": valor.var(),
+    "desvio_padrao": valor.std()
+}
+```
+
+:::
+
+## Distribuições gráficas
+
+Uma distribuição informa quais valores uma variável assume e com que frequência. Para variáveis numéricas, histogramas e boxplots ajudam a identificar concentração, assimetria e valores extremos. Para variáveis temporais, gráficos de barras permitem visualizar a composição da amostra ao longo do período.
+
+### Distribuição temporal
+
+Começamos examinando quando os acórdãos foram decididos. A série descreve a composição temporal do banco, e não a incidência anual da violência de gênero digital.
+
+```{r}
+distribuicao_anos <- base |>
+  count(
+    ano_decisao,
+    name = "numero_acordaos"
+  ) |>
+  arrange(ano_decisao)
+
+distribuicao_anos
+```
+
+```{r}
+ggplot(
+  filter(distribuicao_anos, !is.na(ano_decisao)),
+  aes(x = ano_decisao, y = numero_acordaos)
+) +
+  geom_line(
+    color = "#233F56",
+    linewidth = 1
+  ) +
+  geom_point(
+    color = "#B49A68",
+    size = 2
+  ) +
+  scale_x_continuous(
+    breaks = seq(2010, 2025, by = 2)
+  ) +
   labs(
-    title = "Comparação das Taxas de Feminicídio por Estado",                     # Título do gráfico
-    x = "", # Rótulo do eixo x                                                    # Rótulo do eixo x, y e legenda
-    y = "Tx. por 100 mil",                                                        
-    fill = "Tipo de Taxa"                                                                
+    x = "Ano do acórdão",
+    y = "Número de acórdãos",
+    title = "Evolução anual dos acórdãos incluídos no banco"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+O gráfico descreve os documentos incluídos no banco. Ele não mede diretamente a incidência da violência de gênero digital, pois a frequência de acórdãos também depende da coleta, da publicação e da tramitação judicial.
+
+### Histograma das indenizações positivas
+
+O histograma divide a amplitude dos valores em intervalos e representa quantas observações pertencem a cada intervalo. Para evitar a ambiguidade dos zeros e tornar visível a região central, o gráfico utiliza indenizações positivas até o percentil 97,5.
+
+```{r}
+ggplot(
+  base_indenizacoes_recorte,
+  aes(x = valor_indenizacao_jul2026)
+) +
+  geom_histogram(
+    bins = 30,
+    fill = "#415A77",
+    color = "white"
+  ) +
+  geom_vline(
+    xintercept = median(
+      base_indenizacoes_recorte$valor_indenizacao_jul2026,
+      na.rm = TRUE
+    ),
+    color = "#B49A68",
+    linewidth = 1
+  ) +
+  scale_x_continuous(
+    labels = function(x) {
+      paste0(
+        "R$ ",
+        format(
+          x,
+          big.mark = ".",
+          decimal.mark = ",",
+          scientific = FALSE,
+          trim = TRUE
+        )
+      )
+    }
+  ) +
+  labs(
+    x = "Indenização em valores de julho de 2026",
+    y = "Número de acórdãos",
+    title = "Distribuição das indenizações positivas",
+    subtitle = "Valores até P97,5; a linha indica a mediana"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+A concentração de observações em valores baixos e a presença de indenizações elevadas produzem uma distribuição assimétrica à direita. Nessa situação, média e mediana devem ser apresentadas conjuntamente.
+
+### Densidade de kernel
+
+A densidade de kernel oferece uma representação contínua da mesma distribuição. Ela suaviza o histograma e facilita a identificação das regiões em que os valores se concentram. A área sob a curva é igual a um; sua altura representa densidade, e não número de casos.
+
+```{r}
+ggplot(
+  base_indenizacoes_recorte,
+  aes(x = valor_indenizacao_jul2026)
+) +
+  geom_density(
+    fill = "#E8EEF5",
+    color = "#233F56",
+    linewidth = 1,
+    alpha = 0.8
+  ) +
+  scale_x_continuous(labels = formatar_moeda) +
+  labs(
+    x = "Indenização em valores de julho de 2026",
+    y = "Densidade",
+    title = "Densidade das indenizações positivas",
+    subtitle = "Valores até P97,5"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+### Comparação de densidades entre grupos
+
+Também podemos comparar distribuições entre grupos. O gráfico seguinte separa as indenizações positivas conforme a plataforma integra ou não a ação. A comparação é descritiva e não atribui à presença da plataforma qualquer efeito sobre o valor.
+
+```{r}
+ggplot(
+  base_indenizacoes_recorte,
+  aes(
+    x = valor_indenizacao_jul2026,
+    color = plataforma_parte,
+    fill = plataforma_parte
+  )
+) +
+  geom_density(alpha = 0.25, linewidth = 1) +
+  scale_color_manual(
+    values = c("Não" = "#233F56", "Sim" = "#B49A68")
   ) +
   scale_fill_manual(
-        values = c("feminic_tx" = "#7185cc", "t_feminic_tx" = "#c2986f"),              # Definir as cores para cada variável
-        labels = c("feminic_tx" = "Feminicídio", "t_feminic_tx" = "Tentativa de Fem.") # Definir os rótulos para cada variável
-                    ) +  
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 8))                    # Ajusta o tamanho do texto do eixo x
-```
-
-**Gráfico de Linha**
-
-O gráfico de linha ou pontos é muito utilizado para visualização da evolução de séries. É um gráfico que nos permite ver a evolução dos salários entre homens e mulheres, evolução dos preços dos alimentos, evolução do número de casos de feminicídio, evolução dos processos em determinada Vara.
-
-Nosso banco é uma fotografia e não uma evolução, o que torna esse tipo de visualização menos útil. Vejamos a como a taxa de feminicídio evolui com o aumento do número total Homicídios Femininos.
-
-```{r message=FALSE, warning=FALSE}
-# Ordenar os dados pelo número absoluto de homicídios do menor para o maior
-final_fem_22 <- final_fem_22[order(-final_fem_22$homic_abs),]
-
-# Criar o gráfico com ggplot2
-ggplot(final_fem_22, aes(x = homic_abs)) +
-# Linha para 't_feminic_tx'
-  geom_line(aes(y = t_feminic_tx, color = "Tentativa"), linewidth = 0.8, alpha=0.4) +
-  geom_point(aes(y = t_feminic_tx, color = "Tentativa"), size = 3, shape = 17) +
-# Linha para 'feminic_tx'
-  geom_line(aes(y = feminic_tx, color = "Feminicídio"), linewidth = 0.8, alpha=0.4) +
-  geom_point(aes(y = feminic_tx, color = "Feminicídio"), size = 3, shape = 19) +
-# Escala de cores para as linhas
-  scale_color_manual(
-    values = c("Tentativa" = "#c2986f", "Feminicídio" = "#7185cc")
+    values = c("Não" = "#233F56", "Sim" = "#B49A68")
   ) +
-# Títulos e rótulos
+  scale_x_continuous(labels = formatar_moeda) +
   labs(
-    title = "Tentativa e Feminicídio: Taxa",
-    x = "Total de Homicídios",
-    y = "Taxa / 100 mil",
-    color = "Tipo"
+    x = "Indenização em valores de julho de 2026",
+    y = "Densidade",
+    color = "Plataforma integra a ação",
+    fill = "Plataforma integra a ação",
+    title = "Densidade das indenizações segundo a participação da plataforma",
+    subtitle = "Valores positivos até P97,5"
   ) +
- # Ajustes de tema
-  theme_minimal() +
-  theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),  # Centraliza o título, tamanho e negrito
-    legend.position = "top",                                           # Posiciona a legenda no topo
-    legend.title = element_text(size = 10),                            # Ajusta o tamanho do título da legenda
-    legend.text = element_text(size = 9)                               # Ajusta o tamanho do texto da legenda
-  )
-
+  theme_minimal(base_size = 12)
 ```
 
-::: {.callout-tip title="Exercício"}
-**PERGUNTA**: Será que quanto maior for a renda per capita, menor será a taxa de feminicídio?
-:::
+### Boxplot e valores extremos
 
-::: {.callout-warning title="Veja a Resposta" appearance="simple" collapse="true"}
-**RESPOSTA**: Renda e taxa de feminicídio são variáveis continuas. O ideal seria utilizar um gráfico de dispersão para verificar a relação entre essas variáveis.
-
-```{r message=FALSE, warning=FALSE}
-ggplot(data = final_fem_22, aes(x = rendapc, y = feminic_tx))+
-geom_point(color="#6e94bd", size=3, alpha=0.7,  shape=17) +
-geom_smooth(method = "lm", se=TRUE , color="orange")+
-labs(title="Renda pc e taxa de Feminicídios por Estado", x="Renda pc", y="Tx 100 mil")+
-theme_bw()
-```
-:::
-
-**PERCENTIL:**
-
-O p-esimo percentil é um valor tal que ao menos p por cento das observações são menores ou iguais à ele e pelo menos (100-p) por cento das observações são maiores ou iguais a esse valor.
-
-*Etapas para calcular o p-ésimo percentil*
-
-**Etapa 1**: Organize os dados em ordem crescente.
-
-**Etapa 2**: Calcule um indice, $i$ tal que $$i = \frac{p}{100} \times n$$ onde $p$ é o percentil procurado
-
-**Etapa 3**:
-
-a)  Se $i$ não for um número inteiro, arredondeo-o para cima. O próximo número inteiro maior que $i$ denota a posição do p-esimo percentil.
-b)  Se $i$ for um número inteiro o p-esimo percentil será a média dos valores que o ocupam as posições $i$ e $i + 1$.
-
-```{r, warning=F}
-
-quantile(final_fem_22$feminic_tx, probs = c(0.10,0.30,0.60,0.85), na.rm=T)
-
-```
-
-**QUARTIS:**
-
-Os quartis são medidas estatísticas que dividem um conjunto de dados ordenados em quatro partes iguais. É um caso particular do percentil.
-
-O três quartis são:
-
-**Primeiro Quartil (Q1)**: Representa o valor abaixo do qual está situada a primeira quarta parte (ou 25% inferiores) dos dados quando eles estão ordenados em ordem crescente. O primeiro quartil é o valor que divide os dados em 25% (ou 0.25) abaixo e 75% (ou 0.75) acima desse ponto.
-
-**Segundo Quartil (Q2)**: Corresponde à mediana dos dados, dividindo o conjunto em duas metades iguais. É o valor que separa os 50% inferiores dos 50% superiores dos dados.
-
-**Terceiro Quartil (Q3)**: Indica o valor acima do qual está situada a terceira quarta parte (ou 25% superiores) dos dados quando eles estão ordenados. Assim como o primeiro quartil, o terceiro quartil divide os dados em 75% (ou 0.75) abaixo e 25% (ou 0.25) acima desse ponto
-
-```{r, warning=F}
-
-quantile(final_fem_22$feminic_tx, na.rm=T)
-
-```
-
-## Medidas de Variabilidade
-
-**AMPLITUDE:**
-
-Amplitude é a diferença entre o valor mínimo e máximo de uma série de dados.
-
-$$\text{Amplitude} = \text{Maior Valor} - \text{Menor Valor}$$
+O boxplot resume uma distribuição por meio de cinco referências. A caixa começa no primeiro quartil e termina no terceiro, contendo os 50% centrais dos dados. A linha interna representa a mediana. Os bigodes avançam até as observações situadas, em regra, a no máximo 1,5 amplitude interquartil dos limites da caixa. Pontos além desses limites são assinalados como extremos, mas não devem ser automaticamente tratados como erros.
 
 ```{r}
-min_max<-range(final_fem_22$feminic_tx)
-amp<-min_max[2]-min_max[1]
-amp
-```
-
-**AMPLITUDE INTERQUANTIL:**
-
-A amplitude interquartil é dada pela diferenca entre o terceiro ($Q_3$) e o primeiro quartil ($Q_1$).
-
-$$IQR = Q_3 - Q_1$$
-
-```{r}
-qs<-quantile(final_fem_22$feminic_tx, na.rm=T)
-iq<-qs[4]-qs[2]
-IQR(final_fem_22$feminic_tx)
-iq
-```
-
-**VARIÂNCIA E DESVIO PADRÃO AMOSTRAL**:
-
-A variância amostral é uma medida estatística que indica o quão dispersos estão os dados em relação à média amostral. Em outras palavras, ela quantifica a extensão das diferenças individuais entre os valores observados e a média da amostra.
-
-Definimos a variância amostral como:
-
-$$s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}$$ onde $\bar{x}$ é a média amostral.
-
-Vejamos a variância da taxa de feminicídio e do femnicídio absoluto:
-
-```{r}
-var(final_fem_22$feminic_tx, na.rm=T)
-
-var(final_fem_22$feminic_abs, na.rm=T)
-
-```
-
-O **Desvio padrão amostral** é derivado da variância. Podemos qualcular essa estatística da seguinte maneira:
-
-$$s = \sqrt{s^2} = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}}$$
-
-Para os nossos dados anteriores:
-
-```{r}
-
-# Tx Feminicídio
-sd(final_fem_22$feminic_tx, na.rm=T)
-
-#Feminicídio Absoluto
-sd(final_fem_22$feminic_abs, na.rm=T)
-
-
-```
-
-Vamos consolidar agora nossas estatísticas descritivas em uma tabela:
-
-```{r, warning=F}
-
-fun1 <- function(x, na.rm = TRUE) c(Media=mean(x, na.rm = TRUE), Mediana=median(x, na.rm = TRUE), Var=var(x, na.rm = TRUE), DP=sd(x, na.rm = TRUE))
-
-est_descrit <- (sapply(final_fem_22[4:15], fun1))
-
-t(est_descrit) %>% 
-  kbl(digits = 1) %>%
-     kable_styling()
-
-```
-
-**COEFICIENTE DE VARIAÇÃO**:
-
-O coeficiente de variação (CV) é uma medida de dispersão relativa que expressa a variabilidade dos dados como uma porcentagem da média.
-
-$$\text{CV} = \left( \frac{\text{Desvio padrão}}{\text{Média}} \right) \times 100\%$$
-
-```{r}
-# O R nao tem nehuma funçao para isso, mas podemos fazer isso rapidamente
-print((sd(final_fem_22$feminic_abs, na.rm = TRUE)/ mean(final_fem_22$feminic_abs, na.rm = TRUE)) * 100)
-print((sd(final_fem_22$t_feminic_abs, na.rm = TRUE)/ mean(final_fem_22$t_feminic_abs, na.rm = TRUE)) * 100)
-
-```
-
-Para entendermos vamos supor que existam duas variáveis com mesmo desvio padrão, igual a 10. A primeira terá média de 10 e a segunda de 20, vejamos a diferença no coeficiente de variação.
-
-$\text{CV}_{X_1}=\frac{10}{10}.100=100\%$ e $\text{CV}_{X_2}=\frac{10}{20}.100=50\%$
-
-A variabilidade relativa é menor para a segunda variável. No exemplo acima a taxa de feminicídio tem uma variabilidade relativa maior (91%) do que a tentativa de feminicídio (74%) entre os Estados Brasileiros.
-
-#### Visualizando a Distribuição dos Dados
-
-**Boxplot**
-
-O boxplot é um gráfico que traz muitas informações e pode ser visto como a distribuição de probabilidade dos dados. O box ou caixa contém 50% dos dados. O limite superior indica o percentil de 75% (*Q3*) e o limite inferior indica o percentil de 25% (*Q1*). A linha que corta o box indica a mediana, ou seja, *Q2*. Os bigodes são calculados com base na distância interquantílica, ou seja,
-
-*Limite inferior: Q1-1,5(Q3-Q1)*
-
-*Limite superior:Q3+1,5(Q3-Q1)*
-
-Dados fora desses limites são classificados como suspeitos de serem outliers. Podemos observar a assimetria dos dados quando a mediana não está no meio da caixa, indicando maior densidade na menor distância entre os quartis Q1 ou Q3 e a mediana Q2. Vejamos agora o boxplot da taxa de feminicídio e da taxa de feminicídio por região.
-
-```{r}
-ggplot(final_fem_22, aes(y = feminic_tx)) +
-  geom_boxplot(fill = "steelblue", color = "darkblue", alpha=0.7,  # Linhas tracejadas no boxplot
-    outlier.shape = 16, outlier.color = "red", outlier.size = 3) + # Boxplot com preenchimento azul e bordas pretas
+ggplot(
+  base_indenizacoes_recorte,
+  aes(x = "", y = valor_indenizacao_jul2026)
+) +
+  geom_boxplot(
+    fill = "#E8EEF5",
+    color = "#233F56",
+    outlier.color = "#B49A68"
+  ) +
+  scale_y_continuous(
+    labels = function(x) {
+      paste0(
+        "R$ ",
+        format(
+          x,
+          big.mark = ".",
+          decimal.mark = ",",
+          scientific = FALSE,
+          trim = TRUE
+        )
+      )
+    }
+  ) +
   labs(
-    title = "Boxplot da Taxa de Feminicídio no Brasil, 2022", # Título do gráfico
-    x = "",                                                   # Sem rótulo no eixo x
-    y = "Tx de Feminicídio / 100 mil"                        # Rótulo do eixo y
+    x = NULL,
+    y = "Indenização em valores de julho de 2026",
+    title = "Boxplot das indenizações positivas",
+    subtitle = "Valores até P97,5"
   ) +
-  coord_flip() + # Inverte os eixos para horizontalidade
-  scale_x_continuous(limits = c(-0.8, 0.8)) +                      # Limita o eixo y entre 0 e 6
-  theme_bw() + # Tema limpo e moderno
-  theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"), # Centraliza e estiliza o título
-    axis.text.y = element_text(size = 10), # Ajusta o tamanho do texto no eixo y
-    axis.title.y = element_text(size = 12) # Ajusta o tamanho do rótulo do eixo y
-  )
+  theme_minimal(base_size = 12)
 ```
 
 ```{r}
-ggplot(final_fem_22, aes(x = regiao, y = feminic_tx, fill = regiao)) +
-  geom_boxplot( 
-    color = "darkblue", alpha=0.7,                                     # Boxplot linha azul, outlier vermelho e transparete 
-    outlier.shape = 16, outlier.color = "red", outlier.size = 3
-              ) + 
-  labs(
-    title = "Boxplot da Taxa de Feminicídio no Brasil, 2022",         # Título do gráfico, x e y e nome da legenda
-    x = "Região",                                                   
-    y = "Tx de Feminicídio / 100 mil",
-    fill = "Região"  # Rótulo do eixo y
-      ) +
-  coord_flip() +                                                      # Inverte os eixos para horizontalidade
-  theme_bw() + 
-  theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"), # Centraliza e estiliza o título
-    axis.text.y = element_text(size = 10),                           # Ajusta o tamanho do texto no eixo y
-    axis.title.y = element_text(size = 12),                          # Ajusta o tamanho do rótulo do eixo y
-    legend.position = c(0.9,0.7)                                     # Posição da Legenda quadrado de 1x1
-  )+
-scale_fill_brewer(palette="Blues")
-```
-
-O Violin Plot é muito parecido com o BoxPlot mas com a densidade de kernel rotacionada em cada um dos lados. Assim, indica a distribuição dos dados em cada ponto e vem anotado a mediana na forma de um ponto ou marca e um pequeno boxplot no centro do violin plot.
-
-```{r}
-library(dplyr)
-
-final_fem_22 <- final_fem_22 %>%
-  mutate(N_NE_CO = case_when(
-    regiao %in% c("N", "NE", "CO") ~ 1,  # Região Norte, Nordeste e Centro-Oeste recebem 1
-    TRUE ~ 0                             # Demais regiões recebem 0
-  ))
-
-# Verificar a distribuição da variável N_NE_CO por região
-table(final_fem_22$N_NE_CO, final_fem_22$regiao)
-```
-
-```{r, warning=FALSE, message=FALSE}
-ggplot(final_fem_22, aes(x = factor(N_NE_CO, labels = c("Sul e Sudeste", "Norte, Nord. e C.Oeste")),  # Transformando em fatores
-                         y = feminic_tx, fill = factor(N_NE_CO))) +                                   # Taxa de Feminicídio por Fator
-  geom_violin(trim = FALSE, color = "white") +                                                        # Cria o gráfico de violino
-  scale_fill_manual(values = c("lightblue", "steelblue")) +                                           # Cor das violas
-  stat_summary(fun="median", geom = "point", shape=19, size=3, color="darkorange"  ) +                # Vamos colocar o ponto mediana
-  labs(
-    title = "Violin Plots da taxa de feminicídio por região do Brasil",
-    x = "Região",
-    y = "Taxa de Feminicídio (por 100 mil)",
-    fill = "Região"
-  ) +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),              # Centraliza o título
-    axis.text.x = element_text(size = 12),                                         # Ajusta o tamanho dos rótulos no eixo X
-    axis.text.y = element_text(size = 10),                                         # Ajusta o tamanho dos rótulos no eixo Y
-    legend.position = "none"  )
-```
-
-**Gráfico de Densidade**
-
-Visualizar a distribuição empírica dos dados fornece uma grande quantidade de informação. Um gráfico básico em análise descritiva é o histograma, o qual fornece a distribuição de probabilidade empírica dos dados em um formato de barras. A área do histograma é igual a 1 e altura da sua barra da a densidade de observações em cada classe. "#c2986f", "Feminicídio" = "#7185cc")
-
-```{r,warnings=FALSE}
-
-ggplot(final_fem_22, aes(x = feminic_tx)) +
-  geom_histogram(bins = 8, fill = "#7185cc", color = "white", alpha = 0.7) +    # bins são os números de barras
-# Linha vertical com 70% de transparência, que mostra a média da taxa de feminicídio
-  geom_vline(aes(xintercept = mean(feminic_tx)), color = "#c2986f", size = 1, alpha = 0.7,linetype = "dashed") +  
-  labs(
-    x = "Taxa de Feminicídio",                                                  # Título do eixo X, y e grafico
-    y = "Frequência",  
-    title = "Histograma da Taxa de Feminicídio"   
-  ) +
-  theme_minimal() + 
- theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),              # Centraliza o título
-    axis.text.x = element_text(size = 12),                                         # Ajusta o tamanho dos rótulos no eixo X
-    axis.text.y = element_text(size = 10))
-```
-
-Uma outra maneira de visualizar os dados é utilizando uma distribuição continua e não mais a discreta. Para isso, utiliza-se a densidade de Kernel para visualização da distribuição de probabilidade da taxa de feminicídio. Vejamos
-
-```{r}
- ggplot(final_fem_22, aes(x = feminic_tx)) +
-  geom_density(fill = "#7185cc", color = "darkblue", alpha = 0.6) +   # Curva de densidade e preenchimento
-   scale_x_continuous(limits = c(0, 4)) +                               # Limita o eixo X entre 0 e 10  
-  labs(
-    x = "Taxa de Feminicídio",                                          # Título do eixo X, Y e Gráfico
-    y = "Densidade",  
-    title = "Densidade de Kernel para a Taxa de Feminicídio"  
-  ) +
-  theme_minimal()  + 
- theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),              # Centraliza o título
-    axis.text.x = element_text(size = 12),                                         # Ajusta o tamanho dos rótulos no eixo X
-    axis.text.y = element_text(size = 10))
-```
-
-Podemos analisar mais de uma variável juntamente no gráfico acima. Vamos ver a Taxa de Feminicídio e a Tentativa de Feminicídio
-
-```{r message=FALSE, warning=FALSE}
- ggplot(final_fem_22) +
-  geom_density(aes(x = feminic_tx), fill = "#7185cc", color = "#7185cc", alpha = 0.6) +     # Curva de densidade e preenchimento
-  geom_density(aes(x = t_feminic_tx), fill = "#c2986f", color = "#c2986f", alpha = 0.6) +   # Curva de densidade e preenchimento
-  scale_x_continuous(limits = c(0, 15)) +                                                   # Limita o eixo X entre 0 e 10  
-  labs(
-    x = "Taxa de Feminicídio",                                                             # Título do eixo X, Y e Gráfico
-    y = "Densidade",  
-    title = "Densidade de Kernel para a Taxa de Feminicídio",
-    fill = "Tipo" 
-  ) +
-  theme_minimal()  +
- theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),              # Centraliza o título
-    axis.text.x = element_text(size = 12),                                         # Ajusta o tamanho dos rótulos no eixo X
-    axis.text.y = element_text(size = 10)
-    )
-```
-
-Outra forma útil de visualizar os dados a é distribuição por classe, por exemplo distribuição de salários entre homens e mulheres, distribuição do tempo do processo por vara, distribuição da taxa de feminicídio por região. Vamos utilizar a densidade de Kernel para analisar a distribuição dos valores da taxa de feminicídio por região. Para isso precisa instalar o pacote `sm`.
-
-```{r,message=F, warning=F}
-ggplot(final_fem_22, aes(x = feminic_tx, fill = factor(N_NE_CO))) + # Curvas de densidade para as duas regiões
-  geom_density(alpha = 0.6, color = "white") +
-  scale_fill_manual(values = c("1" = "#7185cc", "0" = "#c2986f"), 
-                    labels = c("Norte, Nordeste, Centro-Oeste", "Sul e Sudeste")) +
-  scale_x_continuous(limits = c(0, 5)) +
-  # Adicionar rótulos e título
-  labs(
-    x = "Taxa de Feminicídio", 
-    y = "Densidade",  
-    title = "Comparação da Taxa de Feminicídio entre Regiões", 
-    fill = "Região"
-  ) +
-  
-  # Ajustar o tema e a aparência do gráfico
-  theme_minimal() +
-  theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-    axis.text.x = element_text(size = 12),
-    axis.text.y = element_text(size = 10),
-    legend.position = "top",  # Posição da legenda
-    legend.title = element_text(size = 10),
-    legend.text = element_text(size = 8)
-  )
-```
-
-::: {.callout-tip title="Exercício"}
-**PERGUNTA**: Gostaria de ter uma distribuição das Tentativa de Feminicídio por Estado mostrando os quartis, mediana e média.
-
-Dica: Utlizar a densidade e o boxplot?
-:::
-
-::: {.callout-warning title="Veja a Resposta" appearance="simple" collapse="true"}
-**RESPOSTA**: Aqui segue uma sugestão de plotar a densidade juntamente com o boxplot, possibilitando em um mesmo gráfico uma maior quantidade de observação. Veja abaixo:
-
-```{r, warning=FALSE, message=FALSE}
-library(ggplot2)
-library(gridExtra)
-
-
-# Criar o histograma com ggplot2
-dens_t_f <- ggplot(final_fem_22, aes(x = t_feminic_tx)) +
-  geom_density(fill = "#7185cc", color = "darkblue", alpha = 0.6) +
-  geom_vline(aes(xintercept = mean(t_feminic_tx, na.rm=TRUE)), color = "#c2986f", size = 1, alpha = 0.7,linetype = "dashed") +  
-  scale_x_continuous(limits = c(0, 15)) +
-  labs(x = "Taxa de Feminicídio", y = "Frequência") +
-  theme_minimal()  +
-  theme(
-    panel.background = element_blank(),  # Remove o fundo do gráfico
-    plot.background = element_blank(),   # Remove o fundo do gráfico
-    axis.line = element_blank(),         # Remove as linhas dos eixos X e Y
-    axis.ticks = element_blank()        # Remove os ticks dos eixos X e Y
-  )
-
-
-# Criar o boxplot com ggplot2
-bp_t_f <- ggplot(final_fem_22, aes(x = feminic_tx)) +
-  geom_boxplot(fill = "#c2986f", color = "darkblue", outlier.shape = 16, outlier.size = 3) +
-  labs(x = NULL, y = NULL) +
-  theme(
-    panel.background = element_blank(),  # Remove o fundo do painel
-    plot.background = element_blank(),   # Remove o fundo do gráfico
-    axis.line = element_blank(),         # Remove as linhas dos eixos X e Y
-    axis.ticks = element_blank(),        # Remove os ticks dos eixos X e Y
-    axis.text = element_blank() )         # Remove os textos dos eixos X e Y
-  
-
-# Organizar os gráficos usando grid.arrange
-grid.arrange( bp_t_f, dens_t_f,
-             ncol = 1, heights = c(1, 4))
-```
-:::
-
-## Medidas de Associação
-
-**COVARIÂNCIA AMOSTRAL**
-
-Covariância entre duas variáveis: A covariância entre duas variáveis X e Y é uma medida estatística que descreve como essas variáveis variam juntas. Em outras palavras, a covariância indica a tendência de X e Y de se moverem na mesma direção (covariância positiva) ou em direções opostas (covariância negativa).
-
-$$\text{Cov}(X, Y) = \frac{1}{n-1} \sum_{i=1}^{n} (X_i - \bar{X})(Y_i - \bar{Y})$$
-
-```{r}
- cov(final_fem_22$feminic_tx, final_fem_22$homic_tx)
-```
-
-**CORRELAÇÃO**
-
-O coeficiente de correlação entre duas variáveis X e Y é uma medida estatística que descreve a força e a direção da relação linear entre essas variáveis. O coeficiente de correlação é frequentemente representado pelo coeficiente de correlação de Pearson, $r_{XY}$.
-
-$$r_{XY} = \frac{\text{Cov}(X, Y)}{s_X s_Y}$$ O coeficiente de correlação de Pearson é uma medida amplamente utilizada para avaliar a relação linear entre variáveis, pois fornece uma interpretação padronizada da força e direção da relação, independentemente das unidades das variáveis.
-
-```{r}
- cor(final_fem_22$feminic_tx, final_fem_22$homic_tx)
-
-```
-
-#### Visualizando a Associação
-
-**Scatter Plot**
-
-O Scatter Plot é conhecido como o gráfico de dispersão. Ele relaciona duas ou três variáveis, ou seja, plota $X$ contra $Y$. Muito utilizado para ver o comportamento conjunto de duas séries.
-
-Como já visto que renda pc e a taxa de feminicídio não mostram um comportamento conjunto:
-
-```{r message=FALSE, warning=FALSE}
-ggplot(data = final_fem_22, aes(x = rendapc, y = feminic_tx))+
-  geom_point(color="#6e94bd", size=3, alpha=0.7,  shape=17) +
-  scale_y_continuous(limits = c(0, 5)) +
-  geom_smooth(method = "lm", se=TRUE , color="orange")+
-  labs(title="Renda pc e taxa de Feminicídios por Estado", x="Renda pc", y="Tx 100 mil")+
-  theme_bw()
-```
-
-Ao observar o homicídio absoluto e o feminicídio absoluto, estados com maiores números de homicídio tendem a ter maior número de feminicídios.
-
-```{r message=FALSE, warning=FALSE}
-# Primeiro vou fzer a correlação
-correl1<-cor(final_fem_22$part_feminic, final_fem_22$homic_tx)
-
-#Depois montamos o Gráfico e anotamos a correlação no gráfico
-ggplot(data = final_fem_22, aes(x = part_feminic, y = homic_tx))+
-  geom_point(color="#6e94bd", size=3, alpha=0.7,  shape=17) +
-  geom_smooth(method = "lm", se=TRUE , color="orange")+
-  labs(title="Taxa de Homicídio por 100 mil mulheres e a Participação do Feminicídio",
-       x="Participação do Feminicídio", 
-       y="Taxa de Homicídio")+
-  annotate(
-    "text", 
-    x=40, y=9,
-    label = paste("Correlação: ", round(correl1, 2)), 
-    color = "#6e94bd", size = 4, hjust = 0
-  ) +
-  theme_bw()
-```
-
-**Correlograma**
-
-Correlograma é uma maneira de analisar todas as correlações de umaúnca vez a partir de uma matriz.
-
-```{r,message=F, warning=F}
-library(corrgram)
-correl <- final_fem_22[c(
-  "homic_tx", "feminic_tx", "part_feminic", "rendapc",
-  "t_feminic_tx", "part_t_feminic", "mais_50"
-)]
-corrgram(correl, order=TRUE, lower.panel=panel.shade, upper.panel=panel.cor,  main="Correlação entre as diversas variáveis") 
-
-
-```
-
-```{r message=FALSE, warning=FALSE}
-#install.packages("ggcorrplot")
-library(ggcorrplot)
-correl2 <- round(
-  cor(
-    final_fem_22[c(
-      "homic_tx", "feminic_abs", "feminic_tx",
-      "part_feminic", "rendapc", "t_feminic_abs"
-    )],
-    use = "pairwise.complete.obs"
-  ),
-  2
+estatisticas_boxplot <- boxplot.stats(
+  base_indenizacoes_recorte$valor_indenizacao_jul2026
 )
-ggcorrplot(correl2, hc.order = TRUE, type = "lower",        # Matriz de correlação, coloca de forma ordenada e inferior
-           lab = TRUE, lab_size = 3, lab_col = "#616161",   #  mostra os valores tamanho 4
-           outline.col = "white",
-           ggtheme = ggplot2::theme_minimal,
-           colors = c("#6D9EC1", "white", "#c2986f"))+     # cores utilizadas
-# Colocando nomes  
-  labs(title = "Correlação entre as Diversas Variáveis")+   # Título
-#Trocando os nomes das variáveis
-  scale_y_discrete(labels = c("Feminic. Abs.", "Part. Feminic.", "Renda pc",  # Nomes no eixo X
-                              "Taxa Homic.", "Homic. Abs.")) +  
-  scale_x_discrete(labels = c("Part. Feminic.", "Renda pc", 
-                              "Taxa Homic.", "Homic. Abs.", "Taxa Feminic."))  # Nomes no eixo Y
+
+tibble(
+  limite_inferior = estatisticas_boxplot$stats[1],
+  limite_superior = estatisticas_boxplot$stats[5],
+  numero_valores_extremos = length(
+    estatisticas_boxplot$out
+  )
+)
 ```
 
-Salvando nosso banco para a próxima seção
+Uma observação identificada como extrema pelo boxplot não deve ser excluída automaticamente. Ela pode representar um caso juridicamente relevante, uma característica incomum ou um erro. A decisão exige retorno ao contexto e à fonte.
+
+### Boxplot por tribunal
+
+O gráfico seguinte compara a posição e a dispersão das indenizações positivas entre tribunais. Como alguns tribunais têm poucos casos, a leitura deve considerar conjuntamente o número de observações de cada grupo.
 
 ```{r}
-#| eval: false
-
-save(final_fem_22, file = "final_fem_22.RData")
+ggplot(
+  base_indenizacoes_recorte,
+  aes(
+    x = reorder(tribunal, valor_indenizacao_jul2026, median),
+    y = valor_indenizacao_jul2026
+  )
+) +
+  geom_boxplot(
+    fill = "#E8EEF5",
+    color = "#233F56",
+    outlier.color = "#B49A68"
+  ) +
+  scale_y_continuous(labels = formatar_moeda) +
+  labs(
+    x = NULL,
+    y = "Indenização em valores de julho de 2026",
+    title = "Indenizações positivas por tribunal",
+    subtitle = "Valores positivos até P97,5"
+  ) +
+  theme_minimal(base_size = 12)
 ```
+
+::: {.callout-note collapse="true" title="Equivalente em Python: distribuições"}
+
+```{python}
+#| eval: false
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+positivos = base[base["valor_indenizacao_jul2026"] > 0].copy()
+limite_superior = positivos["valor_indenizacao_jul2026"].quantile(0.975)
+positivos = positivos[
+    positivos["valor_indenizacao_jul2026"] <= limite_superior
+]
+
+sns.histplot(
+    data=positivos,
+    x="valor_indenizacao_jul2026",
+    bins=30
+)
+plt.show()
+
+sns.boxplot(
+    data=positivos,
+    x="tribunal",
+    y="valor_indenizacao_jul2026"
+)
+plt.show()
+```
+
+:::
+
+## Descrição de variáveis categóricas
+
+Variáveis categóricas são descritas por frequências absolutas e relativas. Se uma categoria aparece em \(n_j\) dos \(n\) acórdãos, sua proporção é:
+
+$$
+p_j=\frac{n_j}{n}
+$$
+
+### Tribunais
+
+Vamos analisar como os 642 acórdãos se distribuem entre os tribunais. A frequência revela a composição do banco e ajuda a identificar quais tribunais exercem maior influência sobre os resultados agregados.
+
+```{r}
+distribuicao_tribunais <- base |>
+  count(
+    tribunal,
+    name = "numero_acordaos",
+    sort = TRUE
+  ) |>
+  mutate(
+    percentual = calcular_percentual(numero_acordaos)
+  )
+
+distribuicao_tribunais |>
+  kbl(
+    col.names = c("Tribunal", "Acórdãos", "Percentual"),
+    align = "c",
+    caption = "Distribuição dos acórdãos por tribunal"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+O gráfico de setores representa a participação de cada tribunal no total. Ele oferece uma leitura imediata da composição, enquanto o gráfico de barras apresentado em seguida permite comparar as frequências com maior precisão.
+
+```{r}
+ggplot(
+  distribuicao_tribunais,
+  aes(
+    x = "",
+    y = numero_acordaos,
+    fill = tribunal
+  )
+) +
+  geom_col(color = "white") +
+  coord_polar(theta = "y") +
+  scale_fill_manual(
+    values = c(
+      "#233F56",
+      "#415A77",
+      "#B49A68",
+      "#6F879D",
+      "#8A7655",
+      "#A9B7C5"
+    )
+  ) +
+  labs(
+    x = NULL,
+    y = NULL,
+    fill = "Tribunal",
+    title = "Participação dos tribunais no banco"
+  ) +
+  theme_void(base_size = 12)
+```
+
+```{r}
+ggplot(
+  distribuicao_tribunais,
+  aes(
+    x = reorder(tribunal, numero_acordaos),
+    y = numero_acordaos
+  )
+) +
+  geom_col(fill = "#233F56") +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = "Número de acórdãos",
+    title = "Acórdãos por tribunal"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+A concentração no TJSP e no TJPR deve ser considerada em qualquer comparação agregada. As frequências totais refletem a composição do banco e não pesos equivalentes entre tribunais.
+
+### Perfis e participação das plataformas
+
+Nesta etapa, descreveremos quem aparece como vítima, quem aparece como agressor e em quantos acórdãos a plataforma integra a ação. As três variáveis contextualizam os casos e ajudam a interpretar as análises posteriores.
+
+```{r}
+distribuicao_perfis <- bind_rows(
+  base |>
+    count(categoria = perfil_vitima) |>
+    mutate(variavel = "Perfil da vítima"),
+
+  base |>
+    count(categoria = perfil_agressor) |>
+    mutate(variavel = "Perfil do agressor"),
+
+  base |>
+    count(categoria = plataforma_parte) |>
+    mutate(variavel = "Plataforma integra a ação")
+) |>
+  group_by(variavel) |>
+  mutate(
+    percentual = round(100 * n / sum(n), 1)
+  ) |>
+  ungroup() |>
+  select(variavel, categoria, n, percentual)
+
+distribuicao_perfis |>
+  kbl(
+    col.names = c("Variável", "Categoria", "Acórdãos", "Percentual"),
+    align = "c",
+    caption = "Perfis das partes e participação das plataformas"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+```{r}
+ggplot(
+  distribuicao_perfis,
+  aes(
+    x = reorder(categoria, percentual),
+    y = percentual,
+    fill = variavel
+  )
+) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  facet_wrap(
+    ~ variavel,
+    scales = "free_y"
+  ) +
+  scale_fill_manual(
+    values = c("#233F56", "#415A77", "#B49A68")
+  ) +
+  labs(
+    x = NULL,
+    y = "Percentual de acórdãos"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+### Indenização segundo o perfil da vítima e do agressor
+
+Os perfis registrados no banco permitem examinar se a distribuição das indenizações varia entre os grupos. Trata-se de uma comparação descritiva: diferenças entre caixas ou densidades não demonstram que o gênero produz determinado valor de indenização. Para manter coerência com os gráficos anteriores, utilizamos valores positivos até o percentil 97,5.
+
+```{r}
+dados_perfis_indenizacao <- bind_rows(
+  base_indenizacoes_recorte |>
+    transmute(
+      perfil = perfil_vitima,
+      tipo = "Perfil da vítima",
+      valor_indenizacao_jul2026
+    ),
+  base_indenizacoes_recorte |>
+    transmute(
+      perfil = perfil_agressor,
+      tipo = "Perfil do agressor",
+      valor_indenizacao_jul2026
+    )
+)
+
+ggplot(
+  dados_perfis_indenizacao,
+  aes(
+    x = perfil,
+    y = valor_indenizacao_jul2026,
+    fill = perfil
+  )
+) +
+  geom_boxplot(
+    color = "#233F56",
+    outlier.color = "#B49A68",
+    show.legend = FALSE
+  ) +
+  facet_wrap(~ tipo, scales = "free_x") +
+  scale_fill_manual(
+    values = c(
+      "Homem" = "#415A77",
+      "Mulher" = "#B49A68",
+      "Homem e mulher" = "#6F879D",
+      "Não informado" = "#A9B7C5",
+      "Organização" = "#8A7655"
+    )
+  ) +
+  scale_y_continuous(labels = formatar_moeda) +
+  labs(
+    x = NULL,
+    y = "Indenização em valores de julho de 2026",
+    title = "Indenizações segundo os perfis registrados",
+    subtitle = "Valores positivos até P97,5"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1
+    )
+  )
+```
+
+### Tipos de prova: categorias de múltipla resposta
+
+Um acórdão pode registrar mais de um tipo de prova. Os indicadores probatórios não são categorias mutuamente exclusivas. A análise mede quantos acórdãos registram cada prova e não reparte os casos em grupos excludentes.
+
+```{r}
+indicadores_prova <- c(
+  "prova_documental",
+  "prova_print",
+  "prova_depoimento_testemunhal",
+  "prova_audio_video",
+  "prova_imei_ip_url",
+  "prova_boletim_ocorrencia",
+  "prova_imagem",
+  "prova_ata_notarial",
+  "prova_outros",
+  "prova_nao_cita"
+)
+
+rotulos_prova <- c(
+  prova_documental = "Prova documental",
+  prova_print = "Print",
+  prova_depoimento_testemunhal =
+    "Depoimento e prova testemunhal",
+  prova_audio_video = "Áudio e vídeo",
+  prova_imei_ip_url = "IMEI, IP ou URL",
+  prova_boletim_ocorrencia =
+    "Boletim de ocorrência",
+  prova_imagem = "Imagem",
+  prova_ata_notarial = "Ata notarial",
+  prova_outros = "Outros",
+  prova_nao_cita = "Não cita"
+)
+
+frequencia_provas <- base |>
+  select(id_caso, all_of(indicadores_prova)) |>
+  pivot_longer(
+    cols = all_of(indicadores_prova),
+    names_to = "tipo_prova",
+    values_to = "presenca"
+  ) |>
+  filter(presenca == 1) |>
+  count(tipo_prova, name = "numero_acordaos") |>
+  mutate(
+    tipo_prova = recode(
+      tipo_prova,
+      !!!rotulos_prova
+    ),
+    percentual_acordaos = round(
+      100 * numero_acordaos / nrow(base),
+      1
+    )
+  ) |>
+  arrange(desc(numero_acordaos))
+
+total_registros_probatorios <- sum(
+  frequencia_provas$numero_acordaos
+)
+
+tabela_provas <- bind_rows(
+  frequencia_provas,
+  tibble(
+    tipo_prova = "Total de registros probatórios",
+    numero_acordaos = total_registros_probatorios,
+    percentual_acordaos = round(
+      100 * total_registros_probatorios / nrow(base),
+      1
+    )
+  )
+)
+
+tabela_provas |>
+  kbl(
+    col.names = c(
+      "Tipo de prova",
+      "Número de registros",
+      "% dos 642 acórdãos"
+    ),
+    align = "c",
+    caption = "Tipos de prova registrados nos acórdãos"
+  ) |>
+  kable_styling(full_width = FALSE) |>
+  row_spec(nrow(tabela_provas), bold = TRUE)
+```
+
+Os percentuais usam os 642 acórdãos como denominador. Como um acórdão pode apresentar várias provas, a soma pode superar 100%. Cada percentual responde à pergunta: em que proporção dos acórdãos essa categoria aparece?
+
+```{r}
+ggplot(
+  frequencia_provas,
+  aes(
+    x = reorder(tipo_prova, percentual_acordaos),
+    y = percentual_acordaos
+  )
+) +
+  geom_col(fill = "#233F56") +
+  coord_flip() +
+  labs(
+    x = NULL,
+    y = "Percentual de acórdãos",
+    title = "Tipos de prova registrados"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+::: {.callout-important title="O denominador da porcentagem"}
+
+Dividir pelo total de acórdãos mede a presença da prova nos casos. Dividir pelo total de registros probatórios mede a composição das menções a provas. As duas operações são possíveis, mas respondem a perguntas diferentes.
+
+:::
+
+::: {.callout-note collapse="true" title="Equivalente em Python: categorias e gráficos"}
+
+```{python}
+#| eval: false
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+tribunais = (
+    base["tribunal"]
+    .value_counts()
+    .rename_axis("tribunal")
+    .reset_index(name="numero_acordaos")
+)
+
+sns.countplot(
+    data=base,
+    x="tribunal",
+    hue="suficiencia_probatoria"
+)
+plt.show()
+```
+
+:::
+
+## Associação entre variáveis categóricas
+
+Associação indica que a distribuição de uma variável se altera segundo os valores de outra. Ela não demonstra que uma variável causa a outra. Em dados jurídicos observacionais, características do caso, tribunal, prova, estratégia processual e seleção dos litígios podem estar relacionadas simultaneamente.
+
+### Tabela de contingência
+
+Uma tabela de contingência cruza duas variáveis categóricas. As frequências absolutas mostram quantos casos ocupam cada combinação; os percentuais condicionais mostram como uma variável se distribui dentro das categorias da outra.
+
+Para aplicar o procedimento uma única vez, examinaremos a relação entre o perfil do agressor registrado no acórdão e o resultado em primeira instância. A pergunta é descritiva: a composição dos resultados varia entre as categorias de perfil do agressor?
+
+```{r}
+tabela_agressor_resultado <- table(
+  `Perfil do agressor` = base$perfil_agressor,
+  `Resultado em primeira instância` =
+    base$resultado_primeira_instancia
+)
+
+addmargins(tabela_agressor_resultado) |>
+  kbl(
+    align = "c",
+    caption = "Perfil do agressor e resultado em primeira instância"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+```{r}
+percentuais_agressor_resultado <- round(
+  100 * prop.table(
+    tabela_agressor_resultado,
+    margin = 1
+  ),
+  1
+)
+
+percentuais_agressor_resultado |>
+  kbl(
+    align = "c",
+    caption = "Distribuição percentual do resultado dentro de cada perfil"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+Os percentuais por linha respondem: dentro de cada perfil do agressor, como os acórdãos se distribuem entre os resultados de primeira instância? A comparação é facilitada por um gráfico de barras proporcionais.
+
+```{r}
+resultado_agressor <- base |>
+  count(
+    perfil_agressor,
+    resultado_primeira_instancia,
+    name = "numero_acordaos"
+  ) |>
+  group_by(perfil_agressor) |>
+  mutate(
+    percentual = 100 * numero_acordaos /
+      sum(numero_acordaos)
+  ) |>
+  ungroup()
+
+ggplot(
+  resultado_agressor,
+  aes(
+    x = perfil_agressor,
+    y = percentual,
+    fill = resultado_primeira_instancia
+  )
+) +
+  geom_col() +
+  scale_fill_manual(
+    values = c(
+      "Improcedente" = "#B49A68",
+      "Não consta" = "#A9B7C5",
+      "Parcialmente procedente" = "#6F879D",
+      "Procedente" = "#233F56"
+    )
+  ) +
+  labs(
+    x = "Perfil do agressor",
+    y = "Percentual dentro do perfil",
+    fill = "Resultado em primeira instância",
+    title = "Resultado segundo o perfil do agressor"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1
+    )
+  )
+```
+
+### Teste do qui-quadrado
+
+O teste de qui-quadrado compara frequências observadas e esperadas sob a hipótese de independência:
+
+$$
+\chi^2=\sum\frac{(O-E)^2}{E}
+$$
+
+```{r}
+teste_agressor_resultado <- suppressWarnings(
+  chisq.test(
+    tabela_agressor_resultado,
+    correct = FALSE
+  )
+)
+
+tibble(
+  qui_quadrado = unname(
+      teste_agressor_resultado$statistic
+  ),
+  graus_liberdade = unname(
+      teste_agressor_resultado$parameter
+  ),
+  valor_p = teste_agressor_resultado$p.value
+) |>
+  kbl(
+    digits = 4,
+    align = "c",
+    caption = "Teste do qui-quadrado"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+O teste parte da hipótese de que as variáveis são independentes. Ele compara as frequências observadas com as frequências esperadas caso a distribuição da suficiência não variasse entre os resultados. Um valor-p pequeno indica incompatibilidade entre os dados e a hipótese de independência, mas não informa a intensidade da associação nem demonstra causalidade. A interpretação deve considerar também as proporções, o tamanho da amostra e as frequências esperadas. Para uma apresentação geral, consulte Bussab e Morettin, *Estatística básica*.
+
+### V de Cramér
+
+O V de Cramér resume a intensidade da associação entre variáveis categóricas. Ele utiliza a estatística do qui-quadrado, mas a transforma para uma escala que varia de 0 a 1:
+
+$$
+V=\sqrt{\frac{\chi^2}{n\min(r-1,c-1)}}
+$$
+
+```{r}
+calcular_cramers_v <- function(tabela) {
+  teste <- suppressWarnings(
+    chisq.test(tabela, correct = FALSE)
+  )
+
+  n <- sum(tabela)
+  dimensao <- min(
+    nrow(tabela) - 1,
+    ncol(tabela) - 1
+  )
+
+  sqrt(
+    unname(teste$statistic) /
+      (n * dimensao)
+  )
+}
+
+valor_cramers_v <- calcular_cramers_v(
+  tabela_agressor_resultado
+)
+
+tibble(
+  medida = "V de Cramér",
+  valor = valor_cramers_v
+) |>
+  kbl(
+    digits = 4,
+    align = "c",
+    caption = "Intensidade da associação"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+O V de Cramér varia de 0 a 1. Como orientação inicial, valores inferiores a 0,10 podem ser descritos como muito fracos; entre 0,10 e 0,30, fracos; entre 0,30 e 0,50, moderados; e acima de 0,50, fortes. Esses limites são heurísticos. A interpretação deve considerar o tamanho da tabela, a pergunta jurídica e as proporções observadas.
+
+O valor-p não mede a intensidade da associação. Por isso, deve ser apresentado com as proporções e com uma medida de tamanho da associação.
+
+As categorias “Organização” e “Não informado”, assim como resultados pouco frequentes, podem produzir frequências esperadas reduzidas. O exemplo deve, portanto, ser interpretado junto com a tabela e os percentuais, sem atribuição causal ao perfil registrado.
+
+## Associação entre variáveis numéricas
+
+A covariância descreve a variação conjunta de duas variáveis:
+
+$$
+\operatorname{cov}(X,Y)=
+\frac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{n-1}
+$$
+
+A correlação de Pearson padroniza a covariância e mede associação linear:
+
+$$
+r=\frac{\operatorname{cov}(X,Y)}{s_Xs_Y}
+$$
+
+Como exemplo, relacionamos o ano do acórdão ao valor atualizado das indenizações positivas. A covariância será calculada primeiro; em seguida, a correlação de Pearson permitirá expressar a associação em uma escala de -1 a 1.
+
+```{r}
+dados_correlacao <- base_indenizacoes_recorte |>
+  filter(
+    !is.na(ano_decisao)
+  )
+
+covariancia_ano_valor <- cov(
+  dados_correlacao$ano_decisao,
+  dados_correlacao$valor_indenizacao_jul2026
+)
+
+tibble(
+  medida = "Covariância",
+  valor = covariancia_ano_valor
+) |>
+  kbl(
+    digits = 2,
+    align = "c",
+    caption = "Covariância entre ano e valor da indenização"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+```{r}
+correlacao_pearson <- cor(
+  dados_correlacao$ano_decisao,
+  dados_correlacao$valor_indenizacao_jul2026,
+  method = "pearson"
+)
+
+tibble(
+  medida = "Correlação de Pearson",
+  valor = correlacao_pearson
+) |>
+  kbl(
+    digits = 4,
+    align = "c",
+    caption = "Correlação de Pearson entre ano e valor da indenização"
+  ) |>
+  kable_styling(full_width = FALSE)
+```
+
+```{r}
+ggplot(
+  dados_correlacao,
+  aes(
+    x = ano_decisao,
+    y = valor_indenizacao_jul2026
+  )
+) +
+  geom_point(
+    color = "#415A77",
+    alpha = 0.45
+  ) +
+  geom_smooth(
+    method = "lm",
+    se = FALSE,
+    color = "#B49A68"
+  ) +
+  scale_y_continuous(
+    labels = function(x) {
+      paste0(
+        "R$ ",
+        format(
+          x,
+          big.mark = ".",
+          decimal.mark = ",",
+          scientific = FALSE,
+          trim = TRUE
+        )
+      )
+    }
+  ) +
+  labs(
+    x = "Ano do acórdão",
+    y = "Indenização positiva em julho de 2026",
+    title = "Ano e valor atualizado da indenização",
+    subtitle = "Indenizações positivas até P97,5"
+  ) +
+  theme_minimal(base_size = 12)
+```
+
+Uma correlação próxima de zero indica ausência de associação linear relevante no conjunto analisado. Ela não demonstra ausência de relações condicionais. Uma correlação elevada, por sua vez, não estabelece causalidade.
+
+### Correlograma
+
+O correlograma resume simultaneamente as correlações lineares entre as variáveis numéricas selecionadas. Utilizaremos o ano da decisão, o valor atualizado da indenização, o número de tipos de prova, a procedência e a suficiência probatória. As duas últimas são indicadores binários; nesse caso, a correlação de Pearson equivale à correlação ponto-bisserial. A cor representa o sentido e a intensidade da associação, e o número registra o coeficiente.
+
+```{r}
+matriz_correlacao <- base_indenizacoes_recorte |>
+  mutate(
+    suficiencia_bin = if_else(
+      suficiencia_probatoria == "Sim",
+      1,
+      0
+    )
+  ) |>
+  select(
+    ano_decisao,
+    valor_indenizacao_jul2026,
+    numero_provas,
+    procedente_bin,
+    suficiencia_bin
+  ) |>
+  cor(
+    use = "pairwise.complete.obs",
+    method = "pearson"
+  )
+
+colnames(matriz_correlacao) <- c(
+  "Ano",
+  "Indenização",
+  "Número de provas",
+  "Procedente",
+  "Prova suficiente"
+)
+rownames(matriz_correlacao) <- colnames(matriz_correlacao)
+
+ggcorrplot(
+  matriz_correlacao,
+  lab = TRUE,
+  lab_size = 4,
+  colors = c("#B49A68", "#F7F7F3", "#233F56")
+) +
+  labs(title = "Correlograma das variáveis numéricas") +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1
+    )
+  )
+```
+
+::: {.callout-note collapse="true" title="Equivalente em Python: medidas de associação"}
+
+Os comandos abaixo apresentam operações equivalentes em Python. Eles não são executados na renderização.
+
+```{python}
+#| eval: false
+import pandas as pd
+
+base = pd.read_csv(
+    "dados/violencia_digital_didatica_tratada.csv"
+)
+
+tabela = pd.crosstab(
+    base["perfil_agressor"],
+    base["resultado_primeira_instancia"],
+    margins=True
+)
+
+percentuais = pd.crosstab(
+    base["perfil_agressor"],
+    base["resultado_primeira_instancia"],
+    normalize="index"
+) * 100
+
+correlacao_pearson = base[[
+    "ano_decisao",
+    "valor_indenizacao_jul2026"
+]].corr(method="pearson")
+```
+
+:::
+
+## Limites da análise
+
+Os resultados descrevem os acórdãos incluídos no banco. Eles não representam automaticamente todos os episódios de violência de gênero digital, todos os processos judiciais ou todos os tribunais brasileiros. A amostra depende dos critérios de busca, da disponibilidade dos documentos, da seleção dos tribunais e da confirmação temática dos casos.
+
+As associações também não devem ser interpretadas como efeitos causais. Suficiência, resultado e indenização podem estar relacionados a características que não integram o recorte didático, ao conteúdo concreto das provas, à estratégia das partes e à seleção dos processos que chegam à segunda instância.
+
+## Síntese
+
+O capítulo apresentou medidas de posição, variabilidade, distribuições, variáveis categóricas e associações. Para as indenizações, distinguimos a existência de valor positivo de sua magnitude. Para os tipos de prova, utilizamos percentuais por acórdão e preservamos a múltipla resposta. Para as relações categóricas, combinamos tabelas de contingência, percentuais condicionais, qui-quadrado e V de Cramér.
+
+Essas ferramentas organizam os padrões observados e indicam questões para análises posteriores. Elas não substituem a interpretação jurídica nem autorizam, isoladamente, conclusões causais.
