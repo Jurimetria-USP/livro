@@ -19,21 +19,22 @@ options(scipen = 999)
 
 A análise descritiva organiza as informações contidas em um banco de dados. Ela apresenta a composição da amostra, resume a posição e a dispersão das variáveis numéricas e identifica padrões de distribuição e associação. Essas operações constituem uma etapa necessária entre a construção do banco e a elaboração de modelos estatísticos.
 
-Neste capítulo, utilizaremos o banco tratado no capítulo anterior. Ele reúne 642 acórdãos sobre violência de gênero digital e contém informações sobre tribunal, ano, perfil das partes, participação de plataformas, tipos de prova, suficiência probatória, resultado em primeira instância e indenização.
+Neste capítulo, utilizaremos o banco produzido no capítulo de limpeza e estruturação. Ele reúne 642 acórdãos sobre violência de gênero digital e contém informações sobre tribunal, ano, perfil das partes, participação de plataformas, tipos de prova, suficiência probatória, resultado em primeira instância e indenização.
 
 O banco primário é de propriedade do InternetLab e deriva de pesquisa desenvolvida pela instituição. A base utilizada no livro corresponde a um recorte didático, sem identificadores processuais e campos textuais, posteriormente estruturado e tratado conforme as decisões documentadas no capítulo anterior.
 
-O percurso está organizado em cinco blocos:
+O percurso está organizado em seis blocos:
 
 1. medidas de posição;
 2. medidas de variabilidade;
 3. distribuições;
 4. variáveis categóricas;
-5. medidas de associação.
+5. medidas de associação;
+6. comparação de médias entre dois grupos.
 
 ::: {.callout-note title="Objetivos do capítulo"}
 
-Ao final do capítulo, você deverá ser capaz de selecionar estatísticas compatíveis com o tipo de variável, interpretar medidas numéricas e frequências, representar distribuições graficamente e examinar associações sem atribuir a elas uma interpretação causal automática.
+Ao final do capítulo, você deverá ser capaz de selecionar estatísticas compatíveis com o tipo de variável, interpretar medidas numéricas e frequências, representar distribuições graficamente, examinar associações e comparar médias entre dois grupos sem atribuir automaticamente uma interpretação causal aos resultados.
 
 :::
 
@@ -926,6 +927,65 @@ plt.show()
 
 :::
 
+### Indenização segundo o perfil da vítima e do agressor
+
+Os perfis registrados no banco permitem examinar se a distribuição das indenizações varia entre os grupos. Trata-se de uma comparação descritiva: diferenças entre caixas ou densidades não demonstram que o gênero produz determinado valor de indenização. Para manter coerência com os gráficos anteriores, utilizamos valores positivos até o percentil 97,5.
+
+```{r}
+dados_perfis_indenizacao <- bind_rows(
+  base_indenizacoes_recorte |>
+    transmute(
+      perfil = perfil_vitima,
+      tipo = "Perfil da vítima",
+      valor_indenizacao_jul2026
+    ),
+  base_indenizacoes_recorte |>
+    transmute(
+      perfil = perfil_agressor,
+      tipo = "Perfil do agressor",
+      valor_indenizacao_jul2026
+    )
+)
+
+ggplot(
+  dados_perfis_indenizacao,
+  aes(
+    x = perfil,
+    y = valor_indenizacao_jul2026,
+    fill = perfil
+  )
+) +
+  geom_boxplot(
+    color = "#233F56",
+    outlier.color = "#B49A68",
+    show.legend = FALSE
+  ) +
+  facet_wrap(~ tipo, scales = "free_x") +
+  scale_fill_manual(
+    values = c(
+      "Homem" = "#415A77",
+      "Mulher" = "#B49A68",
+      "Homem e mulher" = "#6F879D",
+      "Não informado" = "#A9B7C5",
+      "Organização" = "#8A7655"
+    )
+  ) +
+  scale_y_continuous(labels = formatar_moeda) +
+  labs(
+    x = NULL,
+    y = "Indenização em valores de julho de 2026",
+    title = "Indenizações segundo os perfis registrados",
+    subtitle = "Valores positivos até P97,5"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_text(
+      angle = 45,
+      hjust = 1
+    )
+  )
+```
+
 ## Descrição de variáveis categóricas
 
 Variáveis categóricas são descritas por frequências absolutas e relativas. Se uma categoria aparece em \(n_j\) dos \(n\) acórdãos, sua proporção é:
@@ -1067,65 +1127,6 @@ ggplot(
     y = "Percentual de acórdãos"
   ) +
   theme_minimal(base_size = 12)
-```
-
-### Indenização segundo o perfil da vítima e do agressor
-
-Os perfis registrados no banco permitem examinar se a distribuição das indenizações varia entre os grupos. Trata-se de uma comparação descritiva: diferenças entre caixas ou densidades não demonstram que o gênero produz determinado valor de indenização. Para manter coerência com os gráficos anteriores, utilizamos valores positivos até o percentil 97,5.
-
-```{r}
-dados_perfis_indenizacao <- bind_rows(
-  base_indenizacoes_recorte |>
-    transmute(
-      perfil = perfil_vitima,
-      tipo = "Perfil da vítima",
-      valor_indenizacao_jul2026
-    ),
-  base_indenizacoes_recorte |>
-    transmute(
-      perfil = perfil_agressor,
-      tipo = "Perfil do agressor",
-      valor_indenizacao_jul2026
-    )
-)
-
-ggplot(
-  dados_perfis_indenizacao,
-  aes(
-    x = perfil,
-    y = valor_indenizacao_jul2026,
-    fill = perfil
-  )
-) +
-  geom_boxplot(
-    color = "#233F56",
-    outlier.color = "#B49A68",
-    show.legend = FALSE
-  ) +
-  facet_wrap(~ tipo, scales = "free_x") +
-  scale_fill_manual(
-    values = c(
-      "Homem" = "#415A77",
-      "Mulher" = "#B49A68",
-      "Homem e mulher" = "#6F879D",
-      "Não informado" = "#A9B7C5",
-      "Organização" = "#8A7655"
-    )
-  ) +
-  scale_y_continuous(labels = formatar_moeda) +
-  labs(
-    x = NULL,
-    y = "Indenização em valores de julho de 2026",
-    title = "Indenizações segundo os perfis registrados",
-    subtitle = "Valores positivos até P97,5"
-  ) +
-  theme_minimal(base_size = 12) +
-  theme(
-    axis.text.x = element_text(
-      angle = 45,
-      hjust = 1
-    )
-  )
 ```
 
 ### Tipos de prova: categorias de múltipla resposta
@@ -1819,6 +1820,6 @@ As associações também não devem ser interpretadas como efeitos causais. Sufi
 
 ## Síntese
 
-O capítulo apresentou medidas de posição, variabilidade, distribuições, variáveis categóricas e associações. Para as indenizações, distinguimos a existência de valor positivo de sua magnitude. Para os tipos de prova, utilizamos percentuais por acórdão e preservamos a múltipla resposta. Para as relações categóricas, combinamos tabelas de contingência, percentuais condicionais, qui-quadrado e V de Cramér.
+O capítulo apresentou medidas de posição, variabilidade, distribuições, variáveis categóricas, associações e comparação de médias. Para as indenizações, distinguimos a existência de valor positivo de sua magnitude. Para os tipos de prova, utilizamos percentuais por acórdão e preservamos a múltipla resposta. Para as relações categóricas, combinamos tabelas de contingência, percentuais condicionais, qui-quadrado e V de Cramér. Na comparação entre dois grupos, aplicamos o teste t de Student e o teste de Welch, explicitando as diferentes hipóteses sobre as variâncias.
 
 Essas ferramentas organizam os padrões observados e indicam questões para análises posteriores. Elas não substituem a interpretação jurídica nem autorizam, isoladamente, conclusões causais.
