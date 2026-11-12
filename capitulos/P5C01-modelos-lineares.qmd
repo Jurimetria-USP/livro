@@ -1129,11 +1129,11 @@ media_ajustada_homem <- mean(
 
 resumo_agressor <- data.frame(
   Grupo = c("Agressora mulher", "Agressor homem"),
-  `Média observada (R$)` = c(
+  `Média observada (reais)` = c(
     mean(dados_modelos$valor_indenizacao_jul2026[dados_modelos$agressor_homem == 0]),
     mean(dados_modelos$valor_indenizacao_jul2026[dados_modelos$agressor_homem == 1])
   ),
-  `Média prevista ajustada (R$)` = c(
+  `Média prevista ajustada (reais)` = c(
     media_ajustada_mulher,
     media_ajustada_homem
   ),
@@ -1149,21 +1149,33 @@ kable(
 grafico_binario <- resumo_agressor |>
   mutate(Grupo = factor(Grupo, levels = c("Agressora mulher", "Agressor homem")))
 
-ggplot(grafico_binario, aes(x = Grupo, y = `Média prevista ajustada (R$)`, color = Grupo)) +
+ggplot(grafico_binario, aes(x = Grupo, y = `Média prevista ajustada (reais)`, color = Grupo)) +
   geom_point(size = 4) +
   geom_text(
-    aes(label = sprintf("R$ %.2f", `Média prevista ajustada (R$)`)),
+    aes(label = sprintf("R$ %.2f", `Média prevista ajustada (reais)`)),
     vjust = -1,
     show.legend = FALSE
   ) +
   scale_color_manual(values = c("Agressora mulher" = cor_verde, "Agressor homem" = cor_azul)) +
   labs(x = NULL, y = "Média prevista ajustada (R$)") +
-  expand_limits(y = max(grafico_binario$`Média prevista ajustada (R$)`) * 1.18) +
+  expand_limits(y = max(grafico_binario$`Média prevista ajustada (reais)`) * 1.18) +
   theme_minimal(base_size = 10) +
   theme(panel.grid.minor = element_blank(), legend.position = "none")
 ```
 
 O fator de retrans­formação corrige a passagem da escala logarítmica para reais. Sem essa correção, a exponencial da previsão no log representa um valor típico retrans­formado, mas não a média aritmética condicional da indenização.
+
+::: callout-note
+## Como foi calculada a média prevista ajustada?
+
+Para obter o valor referente à agressora mulher, definimos `agressor_homem = 0` nos 349 processos. Em cada observação, mantivemos o número de provas, o tribunal e a participação da plataforma originalmente registrados. O modelo produziu, assim, um valor predito para cada processo como se a agressora fosse mulher. A média desses 349 valores preditos, após a correção de retrans­formação, foi R$ 11.495,63.
+
+O coeficiente estimado para agressor homem foi 0,4887. No modelo log–nível, esse coeficiente corresponde à razão $e^{0{,}4887}=1{,}6302$, isto é, a uma diferença de 63,02%. Como o modelo não contém interação com o perfil do agressor, essa razão é constante para todas as combinações das demais variáveis. Aplicando-a à média prevista para agressora mulher, obtemos:
+
+$$R\$\,11.495{,}63 \times 1{,}6302 = R\$\,18.740{,}42.$$
+
+Portanto, apenas o perfil do agressor foi alterado. As demais características permaneceram com a distribuição observada no banco. O valor apresentado para cada grupo é uma média de previsões ajustadas, e não o intercepto $\widehat\beta_0$ isoladamente.
+:::
 
 ### Categorias múltiplas: os tribunais
 
