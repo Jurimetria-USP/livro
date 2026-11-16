@@ -18,7 +18,7 @@ knitr::opts_knit$set(root.dir = normalizePath(".."))
 
 Uma base de dados não está pronta para análise apenas porque pode ser aberta no R. Categorias equivalentes podem estar registradas com grafias diferentes, respostas múltiplas podem ocupar várias colunas e valores monetários podem combinar números, textos e ausências. Antes de calcular frequências ou medidas estatísticas, precisamos conhecer a estrutura dos registros e documentar as decisões necessárias para torná-los comparáveis.
 
-Neste capítulo, trabalharemos com uma base didática composta por 642 acórdãos sobre violência de gênero digital. Cada linha representa um acórdão e cada coluna registra uma característica do caso, das provas ou da decisão judicial.
+Neste capítulo, trabalharemos com uma base didática composta por 642 acórdãos sobre violência de gênero digital. O banco pertence ao InternetLab e resulta de uma parceria de pesquisa entre essa instituição e a Universidade de São Paulo (USP). Para uso didático, foram retirados identificadores processuais, campos textuais e outras informações que poderiam permitir a identificação dos casos. Cada linha da versão anonimizada representa um acórdão e cada coluna registra uma característica do caso, das provas ou da decisão judicial.
 
 ::: {.callout-note title="Objetivos do capítulo"}
 
@@ -36,7 +36,7 @@ Ao final do capítulo, você deverá ser capaz de:
 
 ## Como a base foi construída
 
-A base utilizada neste capítulo deriva de uma pesquisa sobre a relação entre os elementos probatórios registrados nos acórdãos, o reconhecimento de sua suficiência e os resultados de demandas cíveis de violência de gênero digital. A base primária foi estruturada pelo InternetLab e posteriormente refinada pelos autores do estudo.
+A base utilizada neste capítulo deriva de uma pesquisa sobre a relação entre os elementos probatórios registrados nos acórdãos, o reconhecimento de sua suficiência e os resultados de demandas cíveis de violência de gênero digital. A base primária foi estruturada no âmbito da parceria entre o InternetLab e a USP e pertence ao InternetLab. O livro utiliza somente um recorte didático anonimizado desse material.
 
 O corpo empírico inicial foi constituído pela coleta automatizada de acórdãos cíveis em grau de apelação, julgados entre 2010 e 2025 e disponibilizados nos portais dos Tribunais de Justiça do Amazonas, Ceará, Distrito Federal e Territórios, Goiás, Paraná e São Paulo. A seleção considerou a diversidade regional e a viabilidade da coleta automatizada, com preferência por tribunais que utilizavam o sistema ESAJ.
 
@@ -60,7 +60,7 @@ flowchart LR
 
 ::: {.callout-note title="O banco didático"}
 
-O arquivo utilizado no livro não reproduz as mais de 130 variáveis da pesquisa. Ele contém somente as 14 variáveis necessárias ao percurso didático deste capítulo. Identificadores processuais e campos textuais foram retirados, e os casos receberam códigos sequenciais. Essa preparação anterior protege os registros e permite concentrar a aula nas decisões de limpeza e estruturação. As variáveis selecionadas, contudo, preservam os valores que precisam ser examinados e tratados.
+O arquivo utilizado no livro não reproduz as mais de 130 variáveis da pesquisa. Ele contém somente as 14 variáveis necessárias ao percurso didático deste capítulo. Identificadores processuais, campos textuais e outras informações potencialmente identificadoras foram retirados, e os casos receberam códigos sequenciais. Essa anonimização antecede os tratamentos ensinados nas próximas seções, protege os registros e permite concentrar a aula nas decisões de limpeza e estruturação. As variáveis selecionadas, contudo, preservam os valores que precisam ser examinados e tratados.
 
 :::
 
@@ -73,6 +73,7 @@ library(dplyr)
 library(readr)
 library(tidyr)
 library(tibble)
+library(kableExtra)
 
 base_inicial <- read_csv(
   "dados/violencia_digital_didatica_inicial.csv",
@@ -207,38 +208,7 @@ frequencia_tribunal <- base_limpa |>
 frequencia_tribunal
 ```
 
-Não há valores ausentes. Cinco siglas já estão padronizadas, mas o Tribunal de Justiça do Distrito Federal e dos Territórios aparece como `TJDF`. Adotaremos a sigla institucional `TJDFT`. Criamos uma variável com nome de trabalho mais curto e mantemos um controle para valores inesperados em futuras versões da base.
-
-```{r}
-base_limpa <- base_limpa |>
-  mutate(
-    tribunal = case_when(
-      `Tribunal:` == "TJDF" ~ "TJDFT",
-
-      `Tribunal:` %in% c(
-        "TJAM",
-        "TJCE",
-        "TJGO",
-        "TJPR",
-        "TJSP"
-      ) ~ `Tribunal:`,
-
-      is.na(`Tribunal:`) ~ "Não informado",
-
-      TRUE ~ "Revisar"
-    )
-  )
-```
-
-```{r}
-base_limpa |>
-  count(
-    tribunal_original = `Tribunal:`,
-    tribunal,
-    name = "numero_acordaos",
-    sort = TRUE
-  )
-```
+Não há valores ausentes ou siglas inconsistentes para a finalidade deste capítulo. Manteremos os registros como recebidos, inclusive `TJDF`. O nome curto `tribunal` será atribuído somente na construção do banco final, sem alterar as categorias observadas.
 
 A distribuição entre os tribunais é desigual: o TJSP reúne 403 acórdãos e o TJPR, 139, enquanto os outros quatro tribunais somam 100 casos. Essa característica não exige ponderação automática na limpeza, mas deverá ser considerada nas comparações posteriores.
 
@@ -297,34 +267,12 @@ Oito acórdãos permanecem sem ano. Eles não serão excluídos da base, mas nã
 
 ::: {.callout-note collapse="true" title="Equivalente em Python"}
 
-O trecho abaixo apresenta o mesmo tratamento para tribunal e ano em Python. Ele não é executado na renderização do capítulo.
+O trecho abaixo apresenta o mesmo tratamento do ano em Python. Ele não é executado na renderização do capítulo.
 
 ```{python}
 #| eval: false
 import numpy as np
 import pandas as pd
-
-tribunais_validos = [
-    "TJAM",
-    "TJCE",
-    "TJGO",
-    "TJPR",
-    "TJSP"
-]
-
-base_limpa["tribunal"] = np.select(
-    [
-        base_limpa["Tribunal:"].eq("TJDF"),
-        base_limpa["Tribunal:"].isin(tribunais_validos),
-        base_limpa["Tribunal:"].isna()
-    ],
-    [
-        "TJDFT",
-        base_limpa["Tribunal:"],
-        "Não informado"
-    ],
-    default="Revisar"
-)
 
 ano_texto = base_limpa["Ano da decisão"].replace({
     "2O23": "2023"
@@ -670,86 +618,7 @@ frequencia_plataforma_parte <- base_limpa |>
 frequencia_plataforma_parte
 ```
 
-A inspeção mostra somente as categorias `Sim` e `Não`, sem valores ausentes ou grafias inconsistentes. Portanto, não há correção substantiva a realizar. A limpeza de dados também pode confirmar que uma variável já está adequada para a análise.
-
-### Criando uma variável com nome de trabalho
-
-Preservamos a coluna original e criamos `plataforma_parte`, com um nome mais curto. As categorias permanecem legíveis como `Sim` e `Não`. Também mantemos controles para ausências e valores inesperados em futuras versões da fonte.
-
-```{r}
-base_limpa <- base_limpa |>
-  mutate(
-    plataforma_parte = case_when(
-      `A plataforma é parte na ação:` == "Sim" ~
-        "Sim",
-
-      `A plataforma é parte na ação:` == "Não" ~
-        "Não",
-
-      is.na(`A plataforma é parte na ação:`) ~
-        "Não informado",
-
-      TRUE ~ "Revisar"
-    )
-  )
-```
-
-### Conferindo a transformação
-
-```{r}
-base_limpa |>
-  count(
-    plataforma_original =
-      `A plataforma é parte na ação:`,
-    plataforma_parte,
-    name = "numero_casos",
-    sort = TRUE
-  )
-```
-
-Confirmamos também que nenhum registro ficou pendente de revisão:
-
-```{r}
-sum(base_limpa$plataforma_parte == "Revisar")
-```
-
-Neste momento, não converteremos `Sim` e `Não` para 1 e 0. Uma codificação numérica poderá ser criada posteriormente quando um cálculo ou modelo exigir essa representação.
-
-::: {.callout-note collapse="true" title="Equivalente em Python"}
-
-O trecho abaixo apresenta a mesma operação em Python. Ele não é executado na renderização do capítulo.
-
-```{python}
-#| eval: false
-import numpy as np
-
-base_limpa["plataforma_parte"] = np.select(
-    [
-        base_limpa[
-            "A plataforma é parte na ação:"
-        ].eq("Sim"),
-        base_limpa[
-            "A plataforma é parte na ação:"
-        ].eq("Não"),
-        base_limpa[
-            "A plataforma é parte na ação:"
-        ].isna()
-    ],
-    [
-        "Sim",
-        "Não",
-        "Não informado"
-    ],
-    default="Revisar"
-)
-
-print(
-    base_limpa["plataforma_parte"]
-    .value_counts(dropna=False)
-)
-```
-
-:::
+A inspeção mostra somente as categorias `Sim` e `Não`, sem valores ausentes ou grafias inconsistentes. Portanto, não há transformação substantiva a realizar. A limpeza de dados também pode confirmar que uma variável já está adequada para a análise. O nome curto `plataforma_parte` será atribuído apenas na construção do banco final.
 
 ## Tipos de prova
 
@@ -906,42 +775,12 @@ provas_classificadas |>
   )
 ```
 
-### Duas formas de contar provas
-
-::: {.callout-note title="Uma decisão metodológica"}
-
-No artigo, tipos próximos foram agrupados para apresentar a frequência dos registros probatórios. Assim, se um acórdão menciona `Testemunha` e `Depoimento`, os dois registros integram a categoria “Depoimento e prova testemunhal”. Essa contagem é adequada quando a pergunta se refere aos tipos de prova registrados.
-
-Para construir uma variável binária por acórdão, a pergunta é diferente: o processo registra ou não aquela categoria? Nesse caso, o mesmo acórdão recebe valor `1`, ainda que contenha duas denominações pertencentes ao grupo. As duas operações são possíveis, mas medem objetos distintos. Por isso, a unidade de contagem e a ordem entre agrupar e deduplicar devem ser informadas.
-
-:::
-
-As frequências publicadas no artigo foram as seguintes:
-
-```{r}
-frequencias_artigo <- tribble(
-  ~categoria_prova, ~numero_registros,
-  "Prova documental", 188,
-  "Print", 168,
-  "Depoimento e prova testemunhal", 114,
-  "Áudio e vídeo", 93,
-  "IMEI/IP/URL", 59,
-  "Boletim de ocorrência", 58,
-  "Imagem", 51,
-  "Ata notarial", 23,
-  "Outros", 35,
-  "Não cita", 133
-)
-
-frequencias_artigo
-```
-
 ### O significado de “Não cita”
 
 `Não cita` indica que o acórdão não especifica o tipo de prova. A expressão não permite concluir que nenhuma prova foi produzida nos autos. Além disso, três acórdãos registram simultaneamente `Não cita` e alguma prova identificada.
 
 ```{r}
-casos_nao_cita_com_prova <- provas_classificadas |>
+classificacao_nao_cita <- provas_classificadas |>
   distinct(id_caso, categoria_prova) |>
   group_by(id_caso) |>
   summarise(
@@ -951,19 +790,28 @@ casos_nao_cita_com_prova <- provas_classificadas |>
       any(categoria_prova != "Não cita"),
     .groups = "drop"
   ) |>
-  filter(
-    registra_nao_cita,
-    registra_prova_identificada
+  filter(registra_nao_cita) |>
+  mutate(
+    situacao = if_else(
+      registra_prova_identificada,
+      "Não cita acompanhado de prova identificada",
+      "Somente não cita"
+    )
   )
 
-casos_nao_cita_com_prova
+classificacao_nao_cita |>
+  count(situacao, name = "numero_acordaos") |>
+  kbl(
+    col.names = c("Situação", "Acórdãos"),
+    align = "c",
+    caption = "Formas de ocorrência da categoria ‘Não cita’"
+  ) |>
+  kable_styling(full_width = FALSE)
 ```
 
-Nesses três casos, prevalecerá a informação mais específica: manteremos as provas identificadas e não atribuiremos o indicador `prova_nao_cita`. Essa é uma decisão de limpeza, não uma correção do conteúdo do acórdão.
+Quando `Não cita` aparece acompanhado de alguma prova identificada, prevalece a informação mais específica: mantemos as provas identificadas e não classificamos o acórdão como um caso sem tipo de prova informado. Quando `Não cita` aparece sozinho, preservamos a informação de que o acórdão não especifica o meio probatório. Essa é uma decisão de limpeza, não uma correção do conteúdo do acórdão.
 
-### Criando os indicadores binários
-
-Agora resumimos as respostas por acórdão. Cada indicador recebe `1` quando a categoria está registrada e `0` quando não está. A deduplicação ocorre depois do agrupamento, de modo que cada acórdão seja contado no máximo uma vez em cada categoria.
+Para preservar uma linha por acórdão e permitir múltiplos tipos de prova, resumimos as categorias em indicadores binários. Cada indicador recebe `1` quando a categoria está registrada e `0` quando não está. Essa estrutura larga será utilizada no capítulo de análise descritiva. A deduplicação garante que cada acórdão seja contado no máximo uma vez em cada categoria.
 
 ```{r}
 provas_por_caso <- provas_classificadas |>
@@ -1010,106 +858,7 @@ base_limpa <- base_limpa |>
   left_join(provas_por_caso, by = "id_caso")
 ```
 
-Conferimos o número de acórdãos em cada categoria binária:
-
-```{r}
-indicadores_prova <- c(
-  "prova_documental",
-  "prova_print",
-  "prova_depoimento_testemunhal",
-  "prova_audio_video",
-  "prova_imei_ip_url",
-  "prova_boletim_ocorrencia",
-  "prova_imagem",
-  "prova_ata_notarial",
-  "prova_outros",
-  "prova_nao_cita"
-)
-
-frequencias_binarias <- base_limpa |>
-  summarise(
-    across(
-      all_of(indicadores_prova),
-      ~ sum(.x, na.rm = TRUE)
-    )
-  ) |>
-  pivot_longer(
-    cols = everything(),
-    names_to = "indicador",
-    values_to = "numero_acordaos"
-  ) |>
-  arrange(desc(numero_acordaos))
-
-frequencias_binarias
-```
-
-As frequências binárias não precisam coincidir com a tabela do artigo. Além da deduplicação dentro das categorias agrupadas, o banco didático classifica todos os registros residuais como `Outros` e desconsidera `Não cita` quando o mesmo acórdão informa uma prova específica. A diferença é resultado das decisões metodológicas explicitadas, e não de perda de observações.
-
-As quatro colunas originais foram preservadas. Os novos indicadores não substituem a fonte: eles registram, de forma reproduzível, as decisões adotadas para a análise.
-
-::: {.callout-note collapse="true" title="Equivalente em Python"}
-
-O trecho abaixo ilustra a criação do objeto auxiliar e dos indicadores em Python. Ele não é executado na renderização do capítulo.
-
-```{python}
-#| eval: false
-colunas_prova = [
-    "Quais são as provas: prova_1",
-    "prova_2",
-    "prova_3",
-    "prova_4"
-]
-
-provas_longas = (
-    base_limpa[["id_caso", *colunas_prova]]
-    .melt(
-        id_vars="id_caso",
-        var_name="posicao_prova",
-        value_name="prova_original"
-    )
-    .dropna(subset=["prova_original"])
-)
-
-# O dicionário completo deve reproduzir as categorias
-# explicitadas no código em R.
-mapa_provas = {
-    "Prova documental": "Prova documental",
-    "Prova Documental": "Prova documental",
-    "Print": "Print",
-    "Testemunha": "Depoimento e prova testemunhal",
-    "Depoimento": "Depoimento e prova testemunhal",
-    "Áudio": "Áudio e vídeo",
-    "Vídeo": "Áudio e vídeo",
-    "Link URL": "IMEI/IP/URL",
-    "Endereço de IP": "IMEI/IP/URL",
-    "IMEI": "IMEI/IP/URL",
-    "Boletim de Ocorrência": "Boletim de ocorrência",
-    "Boletim de ocorrência": "Boletim de ocorrência",
-    "Imagem": "Imagem",
-    "Ata notarial": "Ata notarial",
-    "Não cita": "Não cita"
-}
-
-provas_longas["categoria_prova"] = (
-    provas_longas["prova_original"]
-    .map(mapa_provas)
-    .fillna("Outros")
-)
-
-indicadores = (
-    provas_longas
-    .assign(valor=1)
-    .pivot_table(
-        index="id_caso",
-        columns="categoria_prova",
-        values="valor",
-        aggfunc="max",
-        fill_value=0
-    )
-)
-```
-
-:::
+As quatro colunas originais permanecem em `base_limpa`. Os indicadores não substituem a fonte; registram, de forma reproduzível, a presença ou ausência de cada categoria no banco final.
 
 ## Suficiência probatória
 
@@ -1135,88 +884,7 @@ frequencia_suficiencia <- base_limpa |>
 frequencia_suficiencia
 ```
 
-A variável contém apenas as respostas `Sim` e `Não`, sem valores ausentes ou grafias divergentes. Portanto, não precisamos reagrupar categorias. Ainda assim, criaremos uma variável com nome mais curto para documentar o tratamento e facilitar as análises posteriores.
-
-### Criando a variável tratada
-
-```{r}
-base_limpa <- base_limpa |>
-  mutate(
-    suficiencia_probatoria = case_when(
-      `As provas foram consideradas suficientes pelo juiz/juíza?` ==
-        "Sim" ~ "Sim",
-
-      `As provas foram consideradas suficientes pelo juiz/juíza?` ==
-        "Não" ~ "Não",
-
-      is.na(
-        `As provas foram consideradas suficientes pelo juiz/juíza?`
-      ) ~ "Não informado",
-
-      TRUE ~ "Revisar"
-    )
-  )
-```
-
-Mantemos `Sim` e `Não` como categorias legíveis. Uma codificação numérica poderá ser criada posteriormente caso algum cálculo ou modelo exija valores 1 e 0.
-
-### Conferindo a transformação
-
-Cruzamos a informação original com a variável criada:
-
-```{r}
-base_limpa |>
-  count(
-    suficiencia_original =
-      `As provas foram consideradas suficientes pelo juiz/juíza?`,
-    suficiencia_probatoria,
-    name = "numero_acordaos",
-    sort = TRUE
-  )
-```
-
-Também verificamos se algum registro ficou pendente de classificação:
-
-```{r}
-sum(base_limpa$suficiencia_probatoria == "Revisar")
-```
-
-O resultado indica 548 acórdãos nos quais as provas foram consideradas suficientes e 94 nos quais foram consideradas insuficientes. Essa variável poderá ser relacionada aos tipos de prova na etapa de análise, sem alterar as decisões de limpeza registradas nesta seção.
-
-::: {.callout-note collapse="true" title="Equivalente em Python"}
-
-O trecho abaixo apresenta a mesma classificação em Python. Ele não é executado na renderização do capítulo.
-
-```{python}
-#| eval: false
-import numpy as np
-
-coluna_suficiencia = (
-    "As provas foram consideradas suficientes "
-    "pelo juiz/juíza?"
-)
-
-base_limpa["suficiencia_probatoria"] = np.select(
-    [
-        base_limpa[coluna_suficiencia].eq("Sim"),
-        base_limpa[coluna_suficiencia].eq("Não"),
-        base_limpa[coluna_suficiencia].isna()
-    ],
-    [
-        "Sim",
-        "Não",
-        "Não informado"
-    ],
-    default="Revisar"
-)
-
-print(
-    base_limpa["suficiencia_probatoria"]
-    .value_counts(dropna=False)
-)
-```
-
-:::
+A variável contém apenas as respostas `Sim` e `Não`, sem valores ausentes ou grafias divergentes. Portanto, não precisamos reagrupar nem recodificar suas categorias. O resultado indica 548 acórdãos nos quais as provas foram consideradas suficientes e 94 nos quais foram consideradas insuficientes. O nome curto `suficiencia_probatoria` será atribuído somente na construção do banco final.
 
 ## Contestação da prova
 
@@ -1244,86 +912,7 @@ frequencia_contestacao <- base_limpa |>
 frequencia_contestacao
 ```
 
-O campo contém apenas as respostas `Sim` e `Não`, sem valores ausentes ou grafias divergentes. Não há necessidade de reagrupar categorias.
-
-### Criando a variável tratada
-
-```{r}
-base_limpa <- base_limpa |>
-  mutate(
-    contestacao_prova = case_when(
-      `Houve contestação sobre a forma de apresentação ou obtenção das provas?` ==
-        "Sim" ~ "Sim",
-
-      `Houve contestação sobre a forma de apresentação ou obtenção das provas?` ==
-        "Não" ~ "Não",
-
-      is.na(
-        `Houve contestação sobre a forma de apresentação ou obtenção das provas?`
-      ) ~ "Não informado",
-
-      TRUE ~ "Revisar"
-    )
-  )
-```
-
-Mantemos categorias textuais porque elas são diretamente interpretáveis. A representação numérica poderá ser criada posteriormente, caso seja necessária para algum cálculo ou modelo.
-
-### Conferindo a transformação
-
-```{r}
-base_limpa |>
-  count(
-    contestacao_original =
-      `Houve contestação sobre a forma de apresentação ou obtenção das provas?`,
-    contestacao_prova,
-    name = "numero_acordaos",
-    sort = TRUE
-  )
-```
-
-Verificamos também se algum registro ficou pendente de classificação:
-
-```{r}
-sum(base_limpa$contestacao_prova == "Revisar")
-```
-
-O resultado indica 61 acórdãos com contestação sobre a forma de apresentação ou obtenção da prova e 581 sem contestação registrada.
-
-::: {.callout-note collapse="true" title="Equivalente em Python"}
-
-O trecho abaixo apresenta a mesma classificação em Python. Ele não é executado na renderização do capítulo.
-
-```{python}
-#| eval: false
-import numpy as np
-
-coluna_contestacao = (
-    "Houve contestação sobre a forma de apresentação "
-    "ou obtenção das provas?"
-)
-
-base_limpa["contestacao_prova"] = np.select(
-    [
-        base_limpa[coluna_contestacao].eq("Sim"),
-        base_limpa[coluna_contestacao].eq("Não"),
-        base_limpa[coluna_contestacao].isna()
-    ],
-    [
-        "Sim",
-        "Não",
-        "Não informado"
-    ],
-    default="Revisar"
-)
-
-print(
-    base_limpa["contestacao_prova"]
-    .value_counts(dropna=False)
-)
-```
-
-:::
+O campo contém apenas as respostas `Sim` e `Não`, sem valores ausentes ou grafias divergentes. Não há necessidade de reagrupar nem recodificar suas categorias. O resultado indica 61 acórdãos com contestação sobre a forma de apresentação ou obtenção da prova e 581 sem contestação registrada. O nome curto `contestacao_prova` será atribuído somente na construção do banco final.
 
 ## Decisão de primeira instância
 
@@ -1582,7 +1171,17 @@ tabela_salario_minimo <- tribble(
   2022L, 1212
 )
 
-tabela_salario_minimo
+tabela_salario_minimo |>
+  kbl(
+    col.names = c("Ano de referência", "Salário mínimo"),
+    align = "c",
+    caption = "Salários mínimos utilizados na conversão",
+    format.args = list(
+      big.mark = ".",
+      decimal.mark = ","
+    )
+  ) |>
+  kable_styling(full_width = FALSE)
 ```
 
 Os valores foram estabelecidos pelo [Decreto nº 7.872/2012](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/decreto/d7872.htm), pelo [Decreto nº 8.166/2013](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/decreto/d8166.htm), pelo [Decreto nº 8.381/2014](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/decreto/d8381.htm) e pela [Lei nº 14.358/2022](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/l14358.htm).
@@ -1651,7 +1250,25 @@ base_limpa |>
     quantidade_salarios_minimos,
     salario_minimo,
     valor_indenizacao_nominal
-  )
+  ) |>
+  kbl(
+    col.names = c(
+      "Caso",
+      "Ano",
+      "Registro original",
+      "Quantidade de salários mínimos",
+      "Salário mínimo",
+      "Valor nominal"
+    ),
+    align = "c",
+    caption = "Conversão dos registros em salários mínimos",
+    format.args = list(
+      big.mark = ".",
+      decimal.mark = ","
+    )
+  ) |>
+  kable_styling(full_width = FALSE) |>
+  scroll_box(width = "100%")
 ```
 
 ### Verificando situações que exigem cautela
@@ -1681,7 +1298,23 @@ casos_valor_revisao <- base_limpa |>
     valor_indenizacao_nominal
   )
 
-casos_valor_revisao
+casos_valor_revisao |>
+  kbl(
+    col.names = c(
+      "Caso",
+      "Resultado",
+      "Registro original",
+      "Valor nominal"
+    ),
+    align = "c",
+    caption = "Situações monetárias que exigem consulta à fonte",
+    format.args = list(
+      big.mark = ".",
+      decimal.mark = ","
+    )
+  ) |>
+  kable_styling(full_width = FALSE) |>
+  scroll_box(width = "100%")
 ```
 
 Esses registros são mantidos como recebidos. A limpeza de dados deve documentar inconsistências aparentes, mas não substituir informações sem evidência adicional.
@@ -1724,7 +1357,14 @@ indices_ipca_julho <- tribble(
   2026L, 7657.73
 )
 
-indices_ipca_julho
+indices_ipca_julho |>
+  kbl(
+    col.names = c("Ano de referência", "Número-índice do IPCA"),
+    align = "c",
+    caption = "Números-índice do IPCA em julho",
+    digits = 2
+  ) |>
+  kable_styling(full_width = FALSE)
 ```
 
 :::
@@ -1733,33 +1373,33 @@ indices_ipca_julho
 
 O fator de atualização corresponde à razão entre o índice do período de destino e o índice do período de origem:
 
-\[
+$$
 \text{Fator de atualização}
 =
 \frac{\text{IPCA de julho de 2026}}
 {\text{IPCA de julho do ano de referência}}
-\]
+$$
 
 O valor atualizado é obtido multiplicando o valor nominal por esse fator:
 
-\[
+$$
 \text{Valor em julho de 2026}
 =
 \text{Valor nominal}
 \times
 \frac{\text{IPCA de julho de 2026}}
 {\text{IPCA de julho do ano de referência}}
-\]
+$$
 
 Por exemplo, para atualizar R$ 10.000,00 de julho de 2015:
 
-\[
-10.000
+$$
+10\,000
 \times
-\frac{7.657,73}{4.337,11}
+\frac{7\,657{,}73}{4\,337{,}11}
 =
-17.656,30
-\]
+17\,656{,}30
+$$
 
 Portanto, R$ 10.000,00 de julho de 2015 correspondem aproximadamente a R$ 17.656,30 em valores de julho de 2026.
 
@@ -1802,7 +1442,22 @@ casos_sem_ano_ipca <- base_limpa |>
     valor_indenizacao_jul2026
   )
 
-casos_sem_ano_ipca
+casos_sem_ano_ipca |>
+  kbl(
+    col.names = c(
+      "Caso",
+      "Ano original",
+      "Valor nominal",
+      "Valor atualizado"
+    ),
+    align = "c",
+    caption = "Valores sem ano disponível para atualização",
+    format.args = list(
+      big.mark = ".",
+      decimal.mark = ","
+    )
+  ) |>
+  kable_styling(full_width = FALSE)
 ```
 
 Conferimos alguns valores nominais e atualizados, sem substituir nenhuma das variáveis:
@@ -1821,7 +1476,26 @@ base_limpa |>
     fator_atualizacao_ipca,
     valor_indenizacao_jul2026
   ) |>
-  slice_head(n = 10)
+  slice_head(n = 10) |>
+  kbl(
+    col.names = c(
+      "Caso",
+      "Ano",
+      "Valor nominal",
+      "Índice de julho",
+      "Fator de atualização",
+      "Valor em julho de 2026"
+    ),
+    align = "c",
+    caption = "Exemplos de atualização monetária",
+    digits = 2,
+    format.args = list(
+      big.mark = ".",
+      decimal.mark = ","
+    )
+  ) |>
+  kable_styling(full_width = FALSE) |>
+  scroll_box(width = "100%")
 ```
 
 O banco conserva tanto `valor_indenizacao_nominal`, em reais correntes do ano de referência, quanto `valor_indenizacao_jul2026`, em valores comparáveis de julho de 2026. Essa separação permite revisar a atualização e utilizar a medida adequada em cada análise.
@@ -1950,14 +1624,17 @@ indicadores_prova_final <- c(
 base_final <- base_limpa |>
   select(
     id_caso,
-    tribunal,
+    tribunal = `Tribunal:`,
     ano_decisao,
     perfil_vitima,
     perfil_agressor,
-    plataforma_parte,
+    plataforma_parte =
+      `A plataforma é parte na ação:`,
     all_of(indicadores_prova_final),
-    suficiencia_probatoria,
-    contestacao_prova,
+    suficiencia_probatoria =
+      `As provas foram consideradas suficientes pelo juiz/juíza?`,
+    contestacao_prova =
+      `Houve contestação sobre a forma de apresentação ou obtenção das provas?`,
     resultado_primeira_instancia,
     procedente_bin,
     forma_registro_valor,
@@ -2003,28 +1680,7 @@ dicionario_base_final
 
 ### Verificações de integridade
 
-Antes de gravar o arquivo, confirmamos que nenhuma linha foi perdida e que cada identificador permanece único.
-
-```{r}
-validacao_estrutura <- tibble(
-  verificacao = c(
-    "Número de linhas",
-    "Número de identificadores distintos",
-    "Número de colunas",
-    "Identificadores duplicados"
-  ),
-  resultado = c(
-    nrow(base_final),
-    n_distinct(base_final$id_caso),
-    ncol(base_final),
-    sum(duplicated(base_final$id_caso))
-  )
-)
-
-validacao_estrutura
-```
-
-As variáveis binárias devem conter somente `0`, `1` ou, quando a informação não consta, `NA`. Os valores monetários não podem ser negativos, e nenhuma categoria pode permanecer marcada como `Revisar`.
+Antes de gravar o arquivo, fazemos uma verificação compacta das condições essenciais: preservação das linhas, unicidade dos identificadores, ausência de categorias pendentes e validade dos valores monetários.
 
 ```{r}
 variaveis_binarias <- c(
@@ -2043,47 +1699,49 @@ variaveis_categoricas <- c(
   "forma_registro_valor"
 )
 
-validacao_conteudo <- tibble(
-  verificacao = c(
-    "Valores binários válidos",
-    "Categorias pendentes de revisão",
-    "Valores nominais negativos",
-    "Valores atualizados negativos",
-    "Anos não identificados",
-    "Valores atualizados disponíveis"
-  ),
-  resultado = c(
-    all(
-      vapply(
-        base_final[variaveis_binarias],
-        function(x) all(is.na(x) | x %in% c(0, 1)),
-        logical(1)
-      )
-    ),
-    sum(
-      vapply(
-        base_final[variaveis_categoricas],
-        function(x) sum(x == "Revisar", na.rm = TRUE),
-        integer(1)
-      )
-    ),
-    sum(
-      base_final$valor_indenizacao_nominal < 0,
-      na.rm = TRUE
-    ),
-    sum(
-      base_final$valor_indenizacao_jul2026 < 0,
-      na.rm = TRUE
-    ),
-    sum(is.na(base_final$ano_decisao)),
-    sum(!is.na(base_final$valor_indenizacao_jul2026))
+categorias_pendentes <- sum(
+  vapply(
+    base_final[variaveis_categoricas],
+    function(x) sum(x == "Revisar", na.rm = TRUE),
+    integer(1)
   )
 )
 
-validacao_conteudo
+valores_monetarios_negativos <- sum(
+  base_final$valor_indenizacao_nominal < 0,
+  na.rm = TRUE
+) + sum(
+  base_final$valor_indenizacao_jul2026 < 0,
+  na.rm = TRUE
+)
+
+validacao_final <- tibble(
+  verificacao = c(
+    "Número de linhas",
+    "Identificadores distintos",
+    "Identificadores duplicados",
+    "Categorias pendentes de revisão",
+    "Valores monetários negativos"
+  ),
+  resultado = c(
+    nrow(base_final),
+    n_distinct(base_final$id_caso),
+    sum(duplicated(base_final$id_caso)),
+    categorias_pendentes,
+    valores_monetarios_negativos
+  )
+)
+
+validacao_final |>
+  kbl(
+    col.names = c("Verificação", "Resultado"),
+    align = "c",
+    caption = "Verificações de integridade do banco final"
+  ) |>
+  kable_styling(full_width = FALSE)
 ```
 
-Além das tabelas de conferência, utilizamos testes que interrompem a execução caso uma condição essencial deixe de ser atendida:
+Os testes abaixo interrompem a execução se alguma condição indispensável deixar de ser atendida.
 
 ```{r}
 stopifnot(
@@ -2091,27 +1749,14 @@ stopifnot(
   n_distinct(base_final$id_caso) == 642,
   ncol(base_final) == 23,
   anyDuplicated(base_final$id_caso) == 0,
+  categorias_pendentes == 0,
+  valores_monetarios_negativos == 0,
   all(
     vapply(
       base_final[variaveis_binarias],
       function(x) all(is.na(x) | x %in% c(0, 1)),
       logical(1)
     )
-  ),
-  !any(
-    vapply(
-      base_final[variaveis_categoricas],
-      function(x) any(x == "Revisar", na.rm = TRUE),
-      logical(1)
-    )
-  ),
-  all(
-    base_final$valor_indenizacao_nominal >= 0,
-    na.rm = TRUE
-  ),
-  all(
-    base_final$valor_indenizacao_jul2026 >= 0,
-    na.rm = TRUE
   )
 )
 ```
@@ -2136,6 +1781,15 @@ O trecho abaixo ilustra a seleção, a validação e a gravação do banco final
 
 ```{python}
 #| eval: false
+base_limpa = base_limpa.rename(columns={
+    "Tribunal:": "tribunal",
+    "A plataforma é parte na ação:": "plataforma_parte",
+    "As provas foram consideradas suficientes pelo juiz/juíza?":
+        "suficiencia_probatoria",
+    "Houve contestação sobre a forma de apresentação ou obtenção das provas?":
+        "contestacao_prova"
+})
+
 colunas_finais = [
     "id_caso",
     "tribunal",
