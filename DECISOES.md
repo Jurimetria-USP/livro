@@ -127,3 +127,17 @@ O caso são decisões de pronúncia em processos de feminicídio, coletadas no B
 As decisões não aparecem no livro nem são versionadas no repositório. Elas são usadas na atividade prática e ficam em uma pasta local ignorada pelo Git. A anotação é feita no LegalAnno, e o livro apresenta os cálculos em R. Resultados de anotação só entram no livro depois de anotação real, sem dados simulados.
 
 **Justificativa:** a extração é a etapa da Parte III que ainda não tinha capítulo, e o caso permite ensinar o método com documentos jurídicos públicos.
+
+## 16 de novembro de 2026
+
+### Capítulos sobre o tempo do processo
+
+**Decisão:** o antigo capítulo de análise de sobrevivência foi reescrito e dividido em dois. A Parte IV mantém `P4C03-analise-sobrevivencia.qmd`, agora intitulado "O tempo do processo: análise de duração", com a parte descritiva: censura, desenho da coleta, Kaplan-Meier, taxa de resolutividade, fases do processo, desfechos concorrentes, taxa entre os decididos e tempo médio de pendência nos prazos. A Parte V recebe `P5C03-modelos-duracao.qmd`, "Modelos para o tempo do processo", com o modelo de Cox, Cox por desfecho e Fine-Gray, fragilidade, seleção, censura intervalar e desenho amostral.
+
+Os exemplos com código usam uma base simulada, gerada por `scripts/simular-base-didatica-duracao.R`, que guarda a trajetória verdadeira de cada processo para comparar as estimativas com a verdade.
+
+A nomenclatura põe o termo jurídico à frente, com o termo estatístico entre parênteses e um quadro de equivalências: análise de duração, termo inicial, probabilidade de pendência, taxa de resolutividade, razão de taxas, desfechos concorrentes, incidência acumulada e tempo médio de pendência no prazo.
+
+Trabalhos ainda não publicados e projetos aplicados dos autores entram apenas pelas contribuições de método, sem resultados, números ou trechos literais.
+
+**Justificativa:** a descrição e a explicação do tempo do processo correspondem às Partes IV e V; a base simulada permite mostrar o tamanho de cada viés; a nomenclatura aproxima os conceitos do vocabulário processual.

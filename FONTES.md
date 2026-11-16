@@ -52,6 +52,11 @@ Os materiais poderão ser revistos e adaptados de acordo com o percurso e o púb
 - **Pasta:** `~/projetos/validador`
 - **Função no projeto:** fonte complementar para a metodologia de anotação, concordância e avaliação de modelos de linguagem. A bibliografia dessa fonte foi montada de memória e cada referência deve ser conferida antes do uso. Resultados de projetos específicos não são incorporados ao livro.
 
+### Pesquisas sobre o tempo do processo
+
+- **Materiais:** projeto `hc_sobrevivencia` (artigo em avaliação), publicação "O tempo do processo judicial" no blog direitoemdados (2022), projeto `analise_duracao` e texto de projeto aplicado sobre ações com perícia, todos de José de Jesus Filho.
+- **Função no projeto:** fontes de método, vocabulário e bibliografia para os capítulos sobre o tempo do processo. Resultados, números e trechos literais do artigo em avaliação e do projeto aplicado não são incorporados ao livro.
+
 ## Referência visual
 
 ### Tema moderno

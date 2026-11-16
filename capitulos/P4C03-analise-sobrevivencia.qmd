@@ -1,5 +1,6 @@
 ---
-title: "Análise de sobrevivência: tempo do processo"
+title: "O tempo do processo: análise de duração"
+subtitle: "Pendência, prazos e desfechos concorrentes"
 format: html
 author:
 - José de Jesus Filho
@@ -11,996 +12,1007 @@ execute:
 
 ```{r}
 #| include: false
-#| eval: true
 knitr::opts_knit$set(root.dir = normalizePath(".."))
+```
+
+```{r}
+#| include: false
+library(tidyverse)
+library(survival)
+library(ggsurvfit)
+library(survRM2)
+
+# Números do texto com vírgula decimal.
+num <- function(x, d = 0) {
+  format(round(x, d), nsmall = d, big.mark = ".", decimal.mark = ",")
+}
+pct <- function(x, d = 1) paste0(num(100 * x, d), "%")
+
+cores_vara <- c(
+  "Vara A" = "#2a78d6", "Vara B" = "#eb6834",
+  "Vara C" = "#1baf7a", "Vara D" = "#eda100"
+)
+cores_desfecho <- c(
+  "Pendente" = "#c9c8c0", "Extinto" = "#e87ba4",
+  "Improcedente" = "#eb6834", "Procedente" = "#1baf7a", "Acordo" = "#2a78d6"
+)
+theme_set(theme_minimal(base_size = 12))
 ```
 
 ## Introdução
 
-A análise de sobrevivência (ou análise de duração) estuda o **tempo até que um evento ocorra**.\
-No direito, os eventos mais comuns são:
+O processo judicial acontece no tempo. Entre a distribuição de uma ação e a sentença, entre o pedido de liminar e a decisão que o aprecia, entre a prisão e a audiência de custódia, transcorre um intervalo que tem consequências para as partes e para o próprio direito. A Constituição assegura a todos a razoável duração do processo (art. 5º, LXXVIII), mas o ordenamento raramente fixa, em dias, quanto é razoável. Badaró e Lopes Jr. (2006) chamam essa ausência de prazo máximo para os atos processuais penais de "doutrina do não-prazo". Sem um parâmetro legal, a medida do tempo do processo passa a depender de evidência empírica.
 
--   sentença,
--   acórdão,
--   extinção,
--   arquivamento,
--   concessão ou denegação de liminar,
--   prescrição.
+Perguntas sobre tempo aparecem em toda parte. Quem pensa em ajuizar uma ação quer saber quanto dura um processo como o seu. O custo de litigar cresce com a duração, em honorários, provisões e custo de oportunidade. A prescrição depende do tempo transcorrido. Tribunais, corregedorias, Ministério Público, Defensoria e procuradorias usam medidas de duração para identificar gargalos, e reformas processuais, mutirões e a adoção do processo eletrônico costumam ser avaliados pelo efeito que produzem sobre o tempo.
 
-O processo judicial é um fenômeno temporal. Métodos simples como médias, histogramas ou regressões lineares são inadequados porque:
+A estatística tem uma família de métodos para esse tipo de pergunta, conhecida como análise de sobrevivência, porque nasceu do estudo do tempo até a morte. Neste livro, ela é chamada de análise de duração. A mudança não é apenas de nome. Os métodos foram desenvolvidos para resolver dois problemas que qualquer conjunto de processos apresenta e que a média e o histograma ignoram:
 
--   ignoram **censura** (processos ainda pendentes),
--   ignoram **riscos concorrentes** (ex.: extinção impede sentença),
--   distorcem estimativas de tempo,
--   produzem decisões equivocadas.
+- **Censura:** na data da coleta, parte dos processos ainda não terminou, e o tempo deles é desconhecido, embora se saiba que é maior que o já transcorrido.
+- **Desfechos concorrentes:** o processo pode terminar de várias formas, e uma delas impede as outras. Quem teve a inicial indeferida não terá sentença de mérito.
 
-A análise de sobrevivência é o método estatístico adequado.
+Neste capítulo, seguimos uma base de processos simulados, construída para que se conheça a resposta verdadeira de cada pergunta. Isso permite comparar cada estimativa com o valor que ela deveria alcançar e ver o tamanho do erro dos atalhos. Os modelos de regressão para o tempo do processo ficam para o capítulo "Modelos para o tempo do processo", na Parte V.
 
-------------------------------------------------------------------------
+::: {.callout-note title="Objetivos do capítulo"}
 
-## Parte I — Motivação e fundamentos jurídicos
+Ao final do capítulo, você deverá ser capaz de:
 
-### 1. Decidir se ingressa com ação
+- definir termo inicial, ato de interesse, censura e data da coleta a partir dos movimentos processuais;
+- explicar por que excluir os processos pendentes distorce o tempo estimado;
+- estimar e interpretar a probabilidade de pendência pelo método de Kaplan-Meier;
+- calcular e ler a taxa de resolutividade e a razão de taxas;
+- estimar a incidência acumulada de desfechos concorrentes pelo método de Aalen-Johansen;
+- reconhecer a armadilha da taxa de êxito entre os processos decididos;
+- calcular o tempo médio de pendência dentro de um prazo legal;
+- descrever o processo como uma sucessão de fases.
 
-A pergunta mais frequente:\
-**“Quanto tempo dura um processo como o meu?”**
+:::
 
-Estimativas confiáveis ajudam a decidir se vale judicializar ou buscar alternativas.
+```{mermaid}
+flowchart LR
+  A[Pergunta<br/>de pesquisa] --> B[Termo inicial<br/>e ato de interesse]
+  B --> C[Movimentos<br/>processuais]
+  C --> D[Par tempo<br/>e ato]
+  D --> E[Probabilidade<br/>de pendência]
+  E --> F[Desfechos<br/>concorrentes]
+  F --> G[Prazo e tempo<br/>médio restrito]
+  G --> H[Fases do<br/>processo]
+```
 
-### 2. Estimar custos do processo
+### Vocabulário
 
-Processos mais longos têm custos maiores:
+A análise de duração foi formulada na linguagem da medicina e da engenharia: sobrevivência, risco, falha, morte. Para o direito, alguns desses termos soam estranhos ou enganam. Uma sentença não é um "risco", e a parte não "sobrevive" ao processo. O quadro abaixo fixa a correspondência adotada no livro. Os nomes próprios dos estimadores (Kaplan-Meier, Aalen-Johansen, Cox, Fine-Gray) são mantidos.
 
--   honorários,
--   provisões,
--   custo de oportunidade,
--   desgaste operacional,
--   imobilização de ativos.
+| Termo estatístico | Termo adotado no livro | Leitura jurídica |
+|---|---|---|
+| Análise de sobrevivência | Análise de duração | Estudo do tempo até um ato processual |
+| Origem do tempo | Termo inicial | Distribuição, ajuizamento, prisão, fato |
+| Evento | Ato de interesse ou desfecho | Sentença, decisão liminar, acordo |
+| Tempo do evento | Termo final | Data do ato de interesse |
+| Função de sobrevivência, $S(t)$ | Probabilidade de pendência | Chance de o processo seguir sem o ato depois de $t$ dias |
+| $1 - S(t)$ | Probabilidade acumulada do ato | Chance de o ato já ter ocorrido até $t$ |
+| Conjunto em risco | Processos pendentes em $t$ | Processos que ainda podem receber o ato |
+| *Hazard*, $h(t)$ | Taxa de resolutividade (ou taxa do ato: de julgamento, de acordo) | Fração dos pendentes que recebe o ato por unidade de tempo |
+| *Hazard ratio* | Razão de taxas | Velocidade relativa entre dois grupos de pendentes |
+| Riscos concorrentes | Desfechos concorrentes | Formas de término que se excluem |
+| *Cumulative incidence function* | Incidência acumulada do desfecho | Chance de terminar de uma forma até $t$ |
+| *Restricted mean survival time* | Tempo médio de pendência no prazo | Quanto do prazo, em média, o processo consome |
+| Modelo multiestado | Modelo de fases processuais | Passagens entre fases do processo |
+| Censura | Censura | Processo pendente na data da coleta |
 
-### 3. Estimar risco de prescrição
+## Os elementos de uma análise de duração
 
-A análise de duração permite:
+Toda análise de duração começa por cinco definições, e cada uma é uma decisão substantiva, não um detalhe técnico.
 
--   estimar risco de prescrição intercorrente,
--   avaliar janelas críticas,
--   calcular probabilidade de não decisão até certo prazo.
+A primeira é a unidade de análise: o processo, o pedido (uma liminar dentro do processo), o recurso ou o réu. A segunda é o termo inicial, o momento em que o relógio começa a correr. A terceira é o ato de interesse, cuja data é o termo final. A quarta é a data da coleta, o último dia em que o processo foi observado. A quinta, decorrência das anteriores, é a regra que transforma o registro do tribunal no par (tempo, ato).
 
-### 4. Governança judicial
+O quadro a seguir mostra essas escolhas para uma ação de procedimento comum que depende de perícia, o tipo de processo da base usada no capítulo.
 
-Usada por:
+| Elemento | Definição adotada | Alternativa descartada e por quê |
+|---|---|---|
+| Termo inicial | Data da distribuição | A citação depende do andamento do próprio processo e excluiria quem foi extinto antes dela |
+| Ato de interesse | Primeiro desfecho em primeiro grau: acordo homologado, procedência, improcedência ou extinção sem mérito | O trânsito em julgado mistura o tempo do recurso, que pede outra análise |
+| Termo final | Data do movimento que registra o desfecho | A data da publicação vem dias depois e varia por razões administrativas |
+| Data da coleta | Dia em que os movimentos do processo foram baixados | A data da análise atribuiria ao processo um período que ninguém observou |
 
--   TJs, CNJ, MP, DPE, AGU, procuradorias.
+A definição do ato de interesse depende da pergunta. Num estudo sobre o pedido de liminar em *habeas corpus*, por exemplo, o ato pode ser definido como a primeira decisão que encerra a apreciação do pedido: deferimento, indeferimento, julgamento direto do mérito ou não conhecimento. Uma decisão que apenas adia a apreciação, à espera de informações, não é ato de interesse. O pedido continua pendente, e o relógio continua correndo até a decisão seguinte.
 
-Permite identificar gargalos e desigualdades.
+### A base simulada
 
-### 5. Avaliação de políticas públicas
+A base reúne 4.000 ações distribuídas entre janeiro de 2024 e dezembro de 2025 a quatro varas, por sorteio. Os dados são inteiramente simulados pelo script `scripts/simular-base-didatica-duracao.R` e não reproduzem processos, varas ou resultados reais. A simulação imita a estrutura de uma ação que depende de perícia: a inicial pode receber ordem de emenda e ser indeferida; recebida a inicial, há citação, contestação e nomeação de perito; o laudo pode levar a um acordo ou à sentença.
 
-Exemplo:
+São dois arquivos. O primeiro tem um processo por linha, com as características conhecidas na distribuição e a data em que os movimentos foram coletados (em três lotes, em janeiro de 2026). O segundo tem um movimento por linha, no formato que os pacotes de coleta devolvem.
 
--   impacto do processo eletrônico,
--   mutirões,
--   reformas processuais.
+```{r}
+processos <- read_csv("dados/duracao_processos_simulados.csv")
+movimentos <- read_csv("dados/duracao_movimentos_simulados.csv")
 
-------------------------------------------------------------------------
+movimentos |>
+  filter(processo == "SIM-0001")
+```
 
-## Parte II — Conceitos essenciais da análise de duração
+A base de processos também tem colunas iniciadas por `real_`, com a trajetória completa de cada processo: o desfecho e a data em que ele ocorreria, mesmo depois da coleta. Nenhuma pesquisa real dispõe dessas colunas. Elas existem aqui apenas para medir o erro de cada estimativa e não entram nas análises, salvo quando o texto compara uma estimativa com a verdade.
 
-### Variáveis básicas
+### Do movimento ao par (tempo, ato)
 
--   **T**: tempo até evento\
--   **δ**: indicador de evento (1=evento; 0=censura)\
--   **Evento**: decisão, sentença etc.\
--   **Censura**: processo pendente\
--   **Risco concorrente**: evento que impede o evento principal
+O ato de interesse é identificado pelos títulos dos movimentos. Uma tabela de regras associa cada título que registra um desfecho à categoria correspondente.
 
-### Censura
+```{r}
+regras <- tribble(
+  ~movimento,                                   ~desfecho,
+  "Homologado o acordo",                        "acordo",
+  "Julgado procedente o pedido",                "procedente",
+  "Julgado procedente em parte o pedido",       "procedente",
+  "Julgado improcedente o pedido",              "improcedente",
+  "Extinto o processo sem resolução do mérito", "extinto",
+  "Indeferida a petição inicial",               "extinto"
+)
+```
 
-Censura ocorre quando:
+A função abaixo aplica as regras: guarda o primeiro desfecho de cada processo e, para os que não têm desfecho, usa a data da coleta como termo final. O tempo é medido em dias e convertido em meses.
 
--   o evento ainda não ocorreu,
--   mas pode ocorrer no futuro.
+```{r}
+montar_base <- function(processos, movimentos, regras) {
+  desfechos <- movimentos |>
+    inner_join(regras, by = "movimento") |>
+    slice_min(data, by = processo, with_ties = FALSE) |>
+    select(processo, data_desfecho = data, desfecho)
 
-Processos pendentes são censurados à direita.
+  processos |>
+    left_join(desfechos, by = "processo") |>
+    mutate(
+      desfecho = coalesce(desfecho, "pendente"),
+      data_fim = coalesce(data_desfecho, data_coleta),
+      dias = as.numeric(data_fim - data_distribuicao),
+      meses = dias / 30.4375,
+      status = as.integer(desfecho != "pendente")
+    )
+}
 
-### Riscos concorrentes
+base <- montar_base(processos, movimentos, regras)
 
-Não são censura.
+base |>
+  count(desfecho)
+```
 
-Exemplos:
+A variável `status` vale 1 quando o desfecho foi observado e 0 quando o processo estava pendente na data da coleta. O par (`meses`, `status`) é a matéria-prima de tudo o que segue.
 
--   sentença de mérito (evento principal),
--   extinção sem mérito (evento concorrente).
+```{r}
+#| include: false
+n_pendentes <- sum(base$status == 0)
+```
 
-O método adequado é:
+Na coleta, `r num(n_pendentes)` processos (`r pct(n_pendentes / nrow(base))`) estavam pendentes. O que fazer com eles é o primeiro problema da análise de duração.
 
--   **CIF**
--   modelos **Fine–Gray**
+## Censura
 
-e não Kaplan–Meier.
+Um processo distribuído há cinco meses e ainda pendente não tem tempo desconhecido. Sabemos que o tempo dele é maior que cinco meses. Essa informação parcial chama-se censura, e a análise de duração existe para aproveitá-la em vez de descartá-la.
 
-------------------------------------------------------------------------
+Há três tipos de censura:
 
-## Parte III — Funções fundamentais
+- **À direita:** o ato ainda não ocorreu na data da coleta. O tempo é maior que o observado. É o caso dos processos pendentes, o mais comum.
+- **À esquerda:** sabe-se que o ato já ocorreu, mas não quando. Ao consultar os autos, verifica-se que a liminar foi apreciada, mas o sistema não registra a data da decisão.
+- **Intervalar:** sabe-se que o ato ocorreu entre duas datas. O laudo pericial chegou depois da nomeação do perito e antes da ordem para que as partes se manifestassem sobre ele, mas a juntada não tem movimento próprio.
 
-### Função de sobrevivência
+Os métodos deste capítulo tratam a censura à direita. A censura intervalar é tratada no capítulo de modelos.
+
+### O que pode e o que não pode ser censura
+
+Os métodos supõem censura não informativa: o motivo pelo qual o processo deixou de ser observado não pode ter relação com o tempo que faltava para o ato. A data da coleta cumpre esse requisito, porque é fixada pelo pesquisador, e não pelo processo.
+
+Um desfecho de outro tipo não cumpre. Se o ato de interesse é a sentença de mérito e o processo foi extinto por indeferimento da inicial, tratá-lo como censurado equivale a supor que ele ainda poderia receber sentença de mérito, o que é falso. A seção sobre desfechos concorrentes mostra a consequência desse erro.
+
+### A data da censura é a data da observação
+
+O termo final de um processo pendente é o dia em que ele foi observado pela última vez, e não o dia em que a análise é feita. Na base simulada, os movimentos foram baixados em três lotes, com uma semana de intervalo. Se a análise usasse a data de hoje, cada processo pendente ganharia semanas de seguimento sem nenhuma decisão, semanas que ninguém observou.
+
+```{r}
+base_hoje <- base |>
+  mutate(
+    data_fim = coalesce(data_desfecho, as.Date("2026-03-02")),
+    meses = as.numeric(data_fim - data_distribuicao) / 30.4375
+  )
+
+pend_coleta <- summary(survfit(Surv(meses, status) ~ 1, data = base), times = 12)$surv
+pend_hoje <- summary(survfit(Surv(meses, status) ~ 1, data = base_hoje), times = 12)$surv
+```
+
+```{r}
+#| include: false
+pend_real <- mean(as.numeric(processos$real_data_desfecho - processos$data_distribuicao) / 30.4375 > 12)
+stopifnot(pend_hoje > pend_coleta, abs(pend_coleta - pend_real) < 0.02)
+```
+
+Com a censura na data da coleta, a probabilidade de um processo seguir pendente após 12 meses é estimada em `r pct(pend_coleta)`, próxima da verdadeira (`r pct(pend_real)`). Com a censura na data da análise, sobe para `r pct(pend_hoje)`. O erro faz os processos parecerem mais lentos do que são.
+
+### Evento não detectado vira censura
+
+Um desfecho que a tabela de regras não reconhece não desaparece da análise. O processo continua pendente na base, como se esperasse uma decisão que já aconteceu. Nada quebra, e por isso o erro é silencioso.
+
+Suponha que a tabela de regras tivesse apenas o título "Extinto o processo sem resolução do mérito" para a extinção. A extinção por indeferimento da petição inicial tem título próprio e ficaria de fora.
+
+```{r}
+regras_incompletas <- regras |>
+  filter(movimento != "Indeferida a petição inicial")
+
+base_incompleta <- montar_base(processos, movimentos, regras_incompletas)
+
+bind_rows(
+  completa = count(base, desfecho),
+  incompleta = count(base_incompleta, desfecho),
+  .id = "regras"
+) |>
+  pivot_wider(names_from = regras, values_from = n)
+```
+
+```{r}
+#| include: false
+n_nao_detectados <- sum(base_incompleta$desfecho == "pendente") - n_pendentes
+```
+
+Com as regras incompletas, `r num(n_nao_detectados)` processos extintos passam por pendentes. A prevenção é simples, porque a lista de títulos de movimento é finita e cabe numa revisão manual. Antes de estimar qualquer coisa, liste todos os títulos e confira cada um contra a definição do ato de interesse.
+
+```{r}
+movimentos |>
+  count(movimento, sort = TRUE)
+```
+
+A lista também revela títulos que parecem desfechos e não são. "Indeferida a tutela de urgência" começa com a mesma palavra que "Indeferida a petição inicial", mas não encerra o processo; uma regra que procurasse apenas o termo "Indeferida" contaria a decisão sobre a tutela como extinção. Uma segunda checagem usa a coerência entre movimentos: processos que constam como pendentes, mas já foram arquivados definitivamente, são candidatos a evento não detectado.
+
+```{r}
+arquivados <- movimentos |>
+  filter(movimento == "Arquivado definitivamente") |>
+  distinct(processo)
+
+base_incompleta |>
+  filter(desfecho == "pendente") |>
+  semi_join(arquivados, by = "processo") |>
+  nrow()
+```
+
+```{r}
+#| include: false
+n_arquivados_pend <- base_incompleta |>
+  filter(desfecho == "pendente") |>
+  semi_join(arquivados, by = "processo") |>
+  nrow()
+n_arquivados_pend_ok <- base |>
+  filter(desfecho == "pendente") |>
+  semi_join(arquivados, by = "processo") |>
+  nrow()
+stopifnot(n_arquivados_pend > 0, n_arquivados_pend_ok == 0)
+```
+
+Com as regras completas, nenhum processo pendente está arquivado.
+
+## O desenho da coleta
+
+Antes de qualquer estimador, a forma como os processos entram na base decide o que pode ser estimado. Há três desenhos comuns.
+
+- **Coorte por distribuição:** todos os processos distribuídos num período, decididos ou não, observados até a data da coleta. É o desenho que a análise de duração pressupõe (Corrêa; Stern, 2025).
+- **Decididos num período:** as sentenças publicadas num ano, por exemplo, como num banco de sentenças. Só entram processos que já terminaram.
+- **Acervo:** os processos em tramitação numa data. Entram os que estavam pendentes naquele dia.
+
+Na coorte, o atalho mais comum é calcular a média apenas dos processos já decididos. O atalho descarta exatamente os mais lentos, que ainda esperam.
+
+```{r}
+real_meses <- as.numeric(processos$real_data_desfecho - processos$data_distribuicao) / 30.4375
+
+tibble(
+  medida = c(
+    "Média real (todos, sem censura)",
+    "Média só dos decididos",
+    "Média com pendentes encerrados na coleta"
+  ),
+  meses = c(
+    mean(real_meses),
+    mean(base$meses[base$status == 1]),
+    mean(base$meses)
+  )
+)
+```
+
+```{r}
+#| include: false
+media_real <- mean(real_meses)
+media_decididos <- mean(base$meses[base$status == 1])
+media_tudo <- mean(base$meses)
+stopifnot(media_decididos < media_real, media_tudo < media_decididos)
+```
+
+Os dois atalhos subestimam o tempo: `r num(media_decididos, 1)` e `r num(media_tudo, 1)` meses, contra `r num(media_real, 1)` meses verdadeiros. O viés seria maior com seguimento mais curto.
+
+O acervo erra no sentido oposto. Um processo longo fica mais tempo em tramitação e, por isso, tem mais chance de estar no acervo em qualquer data. Os processos de um acervo são, em média, mais longos que os processos de uma coorte.
+
+```{r}
+data_acervo <- as.Date("2025-06-30")
+
+acervo <- base |>
+  mutate(real_meses = real_meses) |>
+  filter(data_distribuicao <= data_acervo, data_fim > data_acervo) |>
+  mutate(entrada = as.numeric(data_acervo - data_distribuicao) / 30.4375)
+
+mean(acervo$real_meses)
+```
+
+```{r}
+#| include: false
+media_acervo <- mean(acervo$real_meses)
+stopifnot(media_acervo > media_real + 1)
+```
+
+Os `r num(nrow(acervo))` processos em tramitação em 30 de junho de 2025 duram, em média, `r num(media_acervo, 1)` meses, contra `r num(media_real, 1)` meses de todos os processos. Medidas como o tempo médio dos processos pendentes descrevem o acervo, e não o tempo que um processo novo deve esperar.
+
+O desenho dos decididos num período não tem viés de sentido fixo. Se a entrada de processos é estável há muito tempo, os decididos num ano podem representar bem as durações; se a entrada cresce ou diminui, ou se a janela começa pouco depois do início da série, as durações curtas ou as longas ficam sobrerrepresentadas. Em todos os casos, o desenho não observa os processos que ainda não terminaram.
+
+::: {.callout-tip title="Entrada tardia"}
+
+Quando a base parte do acervo, ainda é possível estimar o tempo corretamente, desde que cada processo entre na análise apenas a partir do momento em que passou a ser observado. Em R, isso se faz com o tempo de entrada no objeto `Surv()`:
+
+```{r}
+km_acervo_ingenuo <- survfit(Surv(meses, status) ~ 1, data = acervo)
+km_acervo_entrada <- survfit(Surv(entrada, meses, status) ~ 1, data = acervo)
+
+c(
+  ingenuo = unname(quantile(km_acervo_ingenuo, 0.5)$quantile),
+  entrada_tardia = unname(quantile(km_acervo_entrada, 0.5)$quantile),
+  real = median(real_meses)
+)
+```
+
+O processo distribuído há dez meses na data do acervo só conta a partir do décimo mês: antes disso, ele não estava sob observação, e quem terminou antes dele nunca entrou na base.
+
+:::
+
+```{r}
+#| include: false
+med_acervo_ing <- unname(quantile(km_acervo_ingenuo, 0.5)$quantile)
+med_acervo_ent <- unname(quantile(km_acervo_entrada, 0.5)$quantile)
+stopifnot(
+  med_acervo_ing > median(real_meses) + 1,
+  abs(med_acervo_ent - median(real_meses)) < 0.5
+)
+```
+
+## O estimador de Kaplan-Meier
+
+A probabilidade de pendência, $S(t)$, é a probabilidade de o processo seguir sem o ato de interesse depois de $t$ dias:
 
 $$
 S(t) = P(T > t)
 $$
 
-Interpretação: probabilidade de o processo ainda estar pendente após (t) dias.
-
-### Função de risco (hazard)
+Se não houvesse censura, bastaria contar a proporção de processos com tempo maior que $t$. Com censura, essa proporção não pode ser calculada, porque não se sabe se um processo pendente aos cinco meses ainda estará pendente aos seis. O estimador de Kaplan-Meier (Kaplan; Meier, 1958) contorna o problema dividindo o tempo em etapas. Em cada dia em que há ao menos um ato, calcula-se a fração dos processos pendentes que recebeu o ato. A probabilidade de seguir pendente é o produto das frações dos que não receberam:
 
 $$
-h(t) =
-\lim_{\Delta t \to 0}
-\frac{P(t \le T < t + \Delta t \mid T \ge t)}{\Delta t}
+\hat S(t) = \prod_{t_i \le t} \left(1 - \frac{d_i}{n_i}\right)
 $$
 
-Interpretação jurídica: taxa instantânea de decisão em (t).
+em que $d_i$ é o número de atos no dia $t_i$ e $n_i$ é o número de processos pendentes imediatamente antes de $t_i$. O processo censurado conta entre os pendentes até a data da coleta e sai da conta depois dela, sem ser tratado como decidido.
 
-### Função de risco acumulado
+### Um exemplo à mão
 
-$$
-H(t) = \int_0^t h(u)\,du
-$$
-
-------------------------------------------------------------------------
-
-## Parte IV — Estimador de Kaplan–Meier
-
-Método não paramétrico:
-
-$$
-S(t_i)
-= S(t_{i-1})
-\left(
-1 - \frac{d_i}{n_i}
-\right)
-$$
-
-onde:
-
--   (d_i) = número de decisões no tempo (t_i)\
--   (n_i) = processos “em risco” imediatamente antes de (t_i)
-
-Interpretável como:
-
--   probabilidade de pendência,
--   mediana de tempo,
--   comparação básica entre grupos.
-
-## Parte V — Figura 1: Curva Kaplan–Meier
-
-Nesta seção, simulamos um conjunto de dados para demonstrar a curva de Kaplan–Meier.\
-Isso permite visualizar a **probabilidade de pendência** ao longo do tempo.
+Dez processos, com o tempo em dias até a sentença ou até a coleta:
 
 ```{r}
-library(survival)
-library(survminer)
-
-set.seed(1)
-n <- 400
-dur <- rexp(n, 1/100)
-status <- rbinom(n, 1, 0.7)  # 70% eventos observados
-
-base <- data.frame(
-  duracao = dur * 200,
-  status = status
-)
-
-km <- survfit(Surv(duracao, status) ~ 1, data = base)
-
-ggsurvplot(
-  km,
-  ggtheme = theme_light(),
-  xlab = "Tempo (dias)",
-  ylab = "Probabilidade de pendência",
-  title = "Curva Kaplan–Meier (simulada)"
+exemplo <- tribble(
+  ~processo, ~dias, ~status,
+   1,  30, 1,
+   2,  45, 0,
+   3,  45, 1,
+   4,  60, 1,
+   5,  80, 0,
+   6,  90, 1,
+   7,  90, 1,
+   8, 120, 0,
+   9, 150, 1,
+  10, 200, 0
 )
 ```
 
-## Parte VI — Comparação entre grupos
-
-A comparação entre curvas de sobrevivência é fundamental para entender diferenças estruturais entre:
-
--   varas,
--   câmaras,
--   classes processuais,
--   ritos,
--   tipos de processo,
--   processos físicos vs eletrônicos.
-
-O método clássico utilizado é o **teste log-rank**, que compara as distribuições de sobrevivência considerando a censura.
-
-Em seguida, simulamos dois grupos para ilustrar como essa análise funciona.
-
-## Parte VII — Figura 2: Comparação de grupos
-
-A comparação entre curvas de sobrevivência é fundamental para identificar diferenças estruturais entre grupos de processos, como:
-
--   câmaras ou turmas julgadoras,
--   varas distintas,
--   processos físicos versus eletrônicos,
--   classes ou assuntos processuais.
-
-A técnica usada é o **Kaplan–Meier estratificado**, acompanhada do **teste log-rank**, que avalia se as diferenças entre as curvas são estatisticamente significativas.
-
-A seguir, simulamos dois grupos (“Câmara 1” e “Câmara 2”), ajustamos as curvas Kaplan–Meier e plotamos o resultado.
+A tabela abaixo refaz o cálculo do estimador. Em cada dia, `pendentes` conta os processos ainda sob observação, `decididos` os que receberam o ato e `censurados` os que saíram da observação naquele dia.
 
 ```{r}
-# Criando grupos simulados
-set.seed(2)
-base$grupo <- ifelse(runif(n) > 0.5, "Câmara 1", "Câmara 2")
+exemplo |>
+  group_by(dias) |>
+  summarise(decididos = sum(status), censurados = sum(1 - status)) |>
+  mutate(
+    pendentes = nrow(exemplo) - lag(cumsum(decididos + censurados), default = 0),
+    taxa = decididos / pendentes,
+    pendencia = cumprod(1 - taxa)
+  )
+```
 
-# Ajustando modelo Kaplan–Meier estratificado
-km2 <- survfit(Surv(duracao, status) ~ grupo, data = base)
+No dia 30, um dos dez processos foi decidido, e a probabilidade de pendência cai para 0,9. No dia 45, um processo é decidido e outro é censurado; o censurado ainda conta entre os pendentes naquele dia (convenção usual), e a probabilidade cai para $0{,}9 \times 8/9 = 0{,}8$. Nos dias 80, 120 e 200, só há censura: a curva não cai, mas o número de pendentes diminui, e cada ato posterior passa a pesar mais. A mediana é o primeiro dia em que a pendência fica igual ou abaixo de 0,5: 90 dias. A média dos seis processos decididos (77,5 dias) subestima o tempo, porque ignora os quatro processos que ainda esperavam.
 
-# Plotando curvas dos dois grupos
-ggsurvplot(
-  km2,
-  ggtheme = theme_minimal(),
-  xlab = "Tempo (dias)",
-  ylab = "Probabilidade de pendência",
-  title = "Comparação entre grupos (simulada)",
-  conf.int = TRUE
+A função `survfit()` do pacote `survival` faz o mesmo cálculo:
+
+```{r}
+survfit(Surv(dias, status) ~ 1, data = exemplo) |>
+  summary()
+```
+
+### A curva da base simulada
+
+Na base completa, o mesmo estimador produz a curva de pendência. O pacote `ggsurvfit` desenha a curva com o intervalo de confiança e a tabela de processos pendentes em cada momento.
+
+```{r}
+#| fig-cap: "Probabilidade de pendência desde a distribuição (Kaplan-Meier, IC 95%). Dados simulados."
+km <- survfit2(Surv(meses, status) ~ 1, data = base)
+
+km |>
+  ggsurvfit(linewidth = 0.8, color = "#2a78d6") +
+  add_confidence_interval(fill = "#2a78d6") +
+  add_risktable(risktable_stats = "n.risk", stats_label = list(n.risk = "Pendentes")) +
+  scale_x_continuous(breaks = seq(0, 24, 3)) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = "Meses desde a distribuição", y = "Probabilidade de pendência")
+```
+
+```{r}
+km
+```
+
+```{r}
+#| include: false
+med_km <- unname(quantile(km, 0.5)$quantile)
+s_km <- summary(km, times = c(6, 12))$surv
+s_real <- sapply(c(6, 12), \(t) mean(real_meses > t))
+stopifnot(abs(med_km - median(real_meses)) < 0.3, all(abs(s_km - s_real) < 0.02))
+```
+
+A mediana estimada é de `r num(med_km, 1)` meses, e a verdadeira, de `r num(median(real_meses), 1)` meses. Aos 6 e aos 12 meses, a probabilidade de pendência estimada é de `r pct(s_km[1])` e `r pct(s_km[2])`; as verdadeiras são `r pct(s_real[1])` e `r pct(s_real[2])`. O estimador recupera a verdade a partir de dados em que um terço dos processos estava pendente.
+
+A curva se lê pela vertical e pela horizontal. Pela vertical: aos 12 meses, cerca de `r pct(s_km[2], 0)` dos processos ainda não tiveram desfecho. Pela horizontal: metade dos processos tem desfecho até `r num(med_km, 1)` meses. A curva informa quando os processos terminam, e não como terminam. Ela não diz nada sobre a chance de vitória.
+
+## Comparação entre grupos
+
+As curvas podem ser estimadas por grupo. Na base, os processos são sorteados entre quatro varas.
+
+```{r}
+#| fig-cap: "Probabilidade de pendência por vara (Kaplan-Meier). Dados simulados."
+km_vara <- survfit2(Surv(meses, status) ~ vara, data = base)
+
+km_vara |>
+  ggsurvfit(linewidth = 0.8) +
+  scale_color_manual(values = cores_vara) +
+  scale_x_continuous(breaks = seq(0, 24, 3)) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = "Meses desde a distribuição", y = "Probabilidade de pendência")
+```
+
+A curva da Vara D fica acima das outras: os processos dela ficam pendentes por mais tempo. O teste log-rank verifica se as diferenças entre as curvas poderiam ser atribuídas ao acaso. Em cada dia em que há atos, o teste compara o número de atos observados em cada grupo com o número esperado se todos os grupos tivessem a mesma taxa, e soma as diferenças ao longo do tempo.
+
+```{r}
+survdiff(Surv(meses, status) ~ vara, data = base)
+```
+
+A coluna `Observed` mostra os desfechos observados em cada vara, e `Expected`, os esperados se as quatro varas tivessem o mesmo ritmo. A Vara D teve muito menos desfechos que o esperado, e a Vara A, mais. O valor-p muito pequeno indica que diferenças desse tamanho dificilmente surgiriam por acaso.
+
+Três cautelas acompanham o teste. O valor-p não mede o tamanho da diferença: com milhares de processos, diferenças pequenas também são significativas, e o tamanho deve ser lido nas curvas, na mediana ou no tempo médio no prazo. O teste resume a curva inteira e perde força quando as curvas se cruzam, porque diferenças de sinal oposto se compensam. Por fim, datas registradas em dias produzem muitos empates, que o teste trata sem dificuldade, mas que limitam a precisão de comparações nos primeiros dias.
+
+Comparações entre varas, câmaras ou comarcas costumam ser lidas como diferenças de desempenho. Antes dessa leitura, é preciso saber se os grupos recebem processos comparáveis. Aqui, o sorteio garante que sim; em dados reais, a distribuição entre órgãos pode depender da matéria, do território ou da prevenção.
+
+## Limitações do Kaplan-Meier
+
+O estimador de Kaplan-Meier é o ponto de partida, e não o ponto de chegada. Seis limitações orientam o restante do capítulo e o capítulo de modelos.
+
+1. **Um ato por vez.** O estimador trata todos os desfechos como um só ou trata os desfechos diferentes do ato de interesse como censura. A segunda opção é errada, como mostra a seção sobre desfechos concorrentes.
+2. **Censura não informativa.** Se os processos deixam de ser observados por razões ligadas ao tempo que faltava, as estimativas ficam viesadas.
+3. **A média não é identificável.** Sem seguimento até o último processo, a área sob a curva inteira não pode ser calculada; a mediana pode nem ser atingida, quando mais da metade dos processos segue pendente. O tempo médio dentro de um prazo resolve o problema.
+4. **Estimar além do seguimento.** A curva só existe até o último tempo observado.
+5. **Coortes com seguimentos diferentes.** Processos distribuídos no fim do período foram observados por pouco tempo e só informam sobre o início da curva.
+6. **Sem ajuste.** O estimador compara grupos, mas não separa o efeito de uma característica do efeito de outras. Esse é o papel dos modelos de regressão.
+
+O quarto e o quinto pontos se combinam numa armadilha de código. Considere as coortes semestrais de distribuição. A do segundo semestre de 2025 foi observada por, no máximo, sete meses.
+
+```{r}
+base <- base |>
+  mutate(coorte = paste0(
+    format(data_distribuicao, "%Y"), "-S",
+    if_else(as.integer(format(data_distribuicao, "%m")) <= 6, 1, 2)
+  ))
+
+km_coorte <- survfit(Surv(meses, status) ~ coorte, data = base)
+
+summary(km_coorte, times = 12, extend = TRUE)$surv
+summary(km_coorte, times = 12, extend = TRUE)$n.risk
+```
+
+```{r}
+#| include: false
+s12_coorte <- summary(km_coorte, times = 12, extend = TRUE)
+stopifnot(s12_coorte$n.risk[4] == 0)
+```
+
+Com `extend = TRUE`, a função devolve uma probabilidade de pendência aos 12 meses para a coorte de 2025-S2 (`r pct(s12_coorte$surv[4])`), embora nenhum processo dessa coorte tenha sido observado por 12 meses (a coluna `n.risk` vale zero). O valor é apenas o último ponto da curva repetido. Uma regra prática é anular as estimativas quando restam poucos processos pendentes sob observação, por exemplo menos de 30.
+
+## Taxa de resolutividade
+
+A fração $d_i / n_i$ que aparece no estimador de Kaplan-Meier tem nome próprio. É a taxa de resolutividade: entre os processos pendentes num momento, a fração que recebe o ato. Na estatística, é o *hazard*. Quando o ato é a sentença, pode-se falar em taxa de julgamento; quando é o acordo, em taxa de acordo.
+
+Em tempo contínuo, a taxa é definida como limite:
+
+$$
+h(t) = \lim_{\Delta t \to 0} \frac{P(t \le T < t + \Delta t \mid T \ge t)}{\Delta t}
+$$
+
+A leitura é a mesma: entre os que chegaram a $t$ sem o ato, a velocidade com que o ato acontece. A taxa não é uma probabilidade. É medida por unidade de tempo e pode ser maior que 1 quando a unidade é longa.
+
+A curva de pendência mostra o resultado acumulado; a taxa mostra o ritmo em cada momento. Para estimá-la por mês, divide-se o seguimento de cada processo em períodos mensais e, em cada mês, divide-se o número de desfechos pelo tempo que os processos passaram pendentes naquele mês.
+
+```{r}
+#| fig-cap: "Taxa mensal de resolutividade por vara: desfechos por processo pendente por mês. Dados simulados."
+taxas <- survSplit(
+  Surv(meses, status) ~ vara, data = base,
+  cut = 1:24, start = "inicio", episode = "mes"
+) |>
+  group_by(vara, mes) |>
+  summarise(
+    desfechos = sum(status),
+    tempo_pendente = sum(meses - inicio),
+    .groups = "drop"
+  ) |>
+  mutate(mes = mes - 1, taxa = desfechos / tempo_pendente) |>
+  filter(mes <= 12)
+
+ggplot(taxas, aes(mes, taxa, color = vara)) +
+  geom_line(linewidth = 0.8) +
+  geom_point(size = 2) +
+  scale_color_manual(values = cores_vara) +
+  scale_x_continuous(breaks = seq(0, 12, 3)) +
+  labs(x = "Mês desde a distribuição", y = "Taxa mensal de resolutividade", color = NULL)
+```
+
+Nos primeiros meses, a taxa é baixa e igual nas quatro varas: só há extinções, como o indeferimento da inicial, que não dependem do ritmo da vara. Depois do quinto mês, com a chegada dos laudos, a taxa sobe, mais rápido nas Varas A e B e mais devagar na Vara D. A taxa explica a forma da curva de pendência: onde a taxa é alta, a curva cai depressa. O gráfico para no 12º mês porque, depois dele, restam poucos processos pendentes em cada vara, e a taxa mensal passa a oscilar ao acaso.
+
+### Taxa acumulada
+
+A soma das taxas ao longo do tempo é a taxa acumulada, estimada pelo método de Nelson-Aalen como $\hat H(t) = \sum_{t_i \le t} d_i / n_i$. Ela está ligada à probabilidade de pendência pela relação aproximada $S(t) \approx e^{-H(t)}$. Na prática, é mais usada como ferramenta de diagnóstico, porque a inclinação da curva acumulada é a taxa: trechos íngremes indicam meses de muitos desfechos; trechos planos, meses de pouca atividade. O objeto do `survfit()` guarda a taxa acumulada na coluna `cumhaz`.
+
+```{r}
+survfit(Surv(meses, status) ~ 1, data = base) |>
+  summary(times = c(3, 6, 9, 12)) |>
+  with(tibble(meses = time, taxa_acumulada = cumhaz, pendencia = surv))
+```
+
+### Razão de taxas
+
+A taxa permite comparar grupos de forma multiplicativa. A razão de taxas entre duas varas é a taxa de uma dividida pela da outra. Com o mesmo desdobramento do seguimento, calcula-se a razão entre a Vara D e a Vara A antes e depois do quarto mês, quando começam a chegar os laudos.
+
+```{r}
+razao <- survSplit(
+  Surv(meses, status) ~ vara, data = base,
+  cut = 4, start = "inicio", episode = "periodo"
+) |>
+  filter(vara %in% c("Vara A", "Vara D")) |>
+  mutate(periodo = if_else(periodo == 1, "Até 4 meses", "Depois de 4 meses")) |>
+  group_by(periodo, vara) |>
+  summarise(taxa = sum(status) / sum(meses - inicio), .groups = "drop") |>
+  pivot_wider(names_from = vara, values_from = taxa) |>
+  mutate(razao_D_A = `Vara D` / `Vara A`)
+
+razao
+```
+
+```{r}
+#| include: false
+stopifnot(razao$razao_D_A[2] < 0.7, razao$razao_D_A[1] > razao$razao_D_A[2] + 0.15)
+```
+
+Até o quarto mês, quando quase todo desfecho é extinção, a taxa da Vara D é `r pct(razao$razao_D_A[1], 0)` da taxa da Vara A. Depois, com as sentenças, cai para `r pct(razao$razao_D_A[2], 0)`. A razão de taxas mede velocidade entre os processos pendentes. Não é uma razão entre durações nem entre probabilidades de ganhar. O exemplo também mostra que a razão pode mudar ao longo do processo, o que importa para o modelo de Cox, apresentado no capítulo de modelos.
+
+## O processo como sucessão de fases
+
+Até aqui, o processo teve dois estados: pendente ou com desfecho. O processo real passa por fases. A ação é distribuída, a inicial pode receber ordem de emenda, o réu é citado, o perito é nomeado, o laudo chega, as partes se manifestam, o processo vai concluso e é sentenciado; da sentença cabe recurso, e só depois vem o trânsito em julgado.
+
+```{mermaid}
+flowchart LR
+    D[Distribuído] --> E[Emenda da inicial]
+    D --> C[Citação e resposta]
+    E --> C
+    C --> P[Perícia]
+    P --> L[Laudo juntado]
+    L --> S[Concluso para sentença]
+
+    E -->|inicial indeferida| X((Extinto))
+    C -->|desistência| X
+    L -->|laudo favorável| A((Acordo))
+    S --> PR((Procedente))
+    S --> IM((Improcedente))
+
+    PR --> REC[Recurso]
+    IM --> REC
+    REC --> TJ((Trânsito<br/>em julgado))
+    REC -.->|sentença anulada| P
+
+    C -.-> SU[Suspensão]
+    SU -.-> C
+```
+
+O diagrama distingue fases transitórias, das quais o processo sai (perícia, conclusão), e fases terminais, das quais não sai (o trânsito em julgado). Cada passagem entre fases tem a sua própria taxa: a taxa de chegada do laudo, a taxa de acordo depois do laudo, a taxa de sentença depois da conclusão. As linhas tracejadas mostram pausas e voltas. A suspensão para o relógio da fase sem encerrar o processo; a anulação da sentença no recurso devolve o processo à instrução.
+
+O mapa das fases tem ciclos, mas a trajetória de cada processo, vista no tempo, não volta atrás: é uma sequência de passagens com datas, como o histórico de commits de um repositório Git (capítulo "Git e GitHub: versões, colaboração e proteção do projeto"), com uma linha principal e ramos que se reencontram com ela, como agravos e embargos.
+
+Nos dados, os movimentos funcionam como inspeções do estado do processo. A tradução de movimentos em fases é a camada que muda de um tribunal para outro. Em bases como o DataJud, os movimentos vêm com os códigos da Tabela Processual Unificada do Conselho Nacional de Justiça, e a tradução pode ser feita por código, e não pelo texto do título. Algumas passagens não têm movimento próprio, como a juntada do laudo em muitos sistemas, e só são conhecidas dentro de um intervalo de datas.
+
+Os desfechos concorrentes, tema da próxima seção, são o caso mais simples desse esquema: uma fase transitória (pendente) e várias fases terminais (os desfechos).
+
+## Desfechos concorrentes
+
+Na base, o processo termina de quatro formas: acordo, procedência, improcedência ou extinção sem mérito. As formas se excluem. Quem fez acordo não terá sentença, e quem teve a inicial indeferida não terá laudo. Na estatística, são os riscos concorrentes; aqui, desfechos concorrentes.
+
+Suponha que a pergunta seja a probabilidade de um processo terminar em improcedência até 12 meses. O atalho é aplicar o Kaplan-Meier com a improcedência como ato e os demais desfechos como censura, e ler $1 - \hat S(t)$. O atalho trata o processo que fez acordo como se ainda pudesse ser julgado improcedente e redistribui a probabilidade dele entre os que continuam pendentes.
+
+O estimador adequado é o de Aalen-Johansen (Aalen; Johansen, 1978). Em cada momento, a probabilidade de terminar pelo desfecho $k$ é a probabilidade de ter chegado ali pendente, estimada pelo Kaplan-Meier de todos os desfechos juntos, vezes a fração dos pendentes que terminou pelo desfecho $k$:
+
+$$
+\hat F_k(t) = \sum_{t_i \le t} \hat S(t_{i-1}) \, \frac{d_{k,i}}{n_i}
+$$
+
+O resultado é a incidência acumulada do desfecho $k$. As incidências de todos os desfechos, somadas à probabilidade de pendência, dão 1 em todo momento (Putter; Fiocco; Geskus, 2007; Austin; Lee; Fine, 2016).
+
+No `survfit()`, basta informar o desfecho como fator, com a censura como primeiro nível.
+
+```{r}
+base <- base |>
+  mutate(desfecho_f = factor(
+    desfecho,
+    levels = c("pendente", "acordo", "procedente", "improcedente", "extinto")
+  ))
+
+aj <- survfit(Surv(meses, desfecho_f) ~ 1, data = base)
+
+summary(aj, times = c(6, 12, 18))$pstate |>
+  round(3)
+```
+
+A primeira coluna é a probabilidade de seguir pendente, e as demais, a incidência acumulada de cada desfecho. O gráfico de áreas empilhadas mostra a composição ao longo do tempo.
+
+```{r}
+#| fig-cap: "Situação dos processos por mês desde a distribuição (Aalen-Johansen). Dados simulados."
+rotulos <- c(
+  "(s0)" = "Pendente", acordo = "Acordo", procedente = "Procedente",
+  improcedente = "Improcedente", extinto = "Extinto"
+)
+
+situacao <- tibble(meses = seq(0, 16, 0.25)) |>
+  bind_cols(as_tibble(summary(aj, times = seq(0, 16, 0.25))$pstate)) |>
+  setNames(c("meses", aj$states)) |>
+  pivot_longer(-meses, names_to = "estado", values_to = "prob") |>
+  mutate(estado = factor(rotulos[estado], levels = names(cores_desfecho)))
+
+ggplot(situacao, aes(meses, prob, fill = estado)) +
+  geom_area(color = "white", linewidth = 0.4) +
+  scale_fill_manual(values = cores_desfecho) +
+  scale_x_continuous(breaks = seq(0, 16, 2)) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = "Meses desde a distribuição", y = NULL, fill = NULL)
+```
+
+A extinção é precoce e quase toda ocorre nos primeiros seis meses. O acordo vem logo depois dos laudos, e as sentenças, procedentes ou improcedentes, chegam mais tarde.
+
+### O erro de tratar outro desfecho como censura
+
+A comparação abaixo usa a improcedência. A base simulada permite calcular a incidência verdadeira, com as colunas `real_`.
+
+```{r}
+km_improcedente <- survfit(Surv(meses, desfecho == "improcedente") ~ 1, data = base)
+
+tibble(
+  meses = c(6, 12, 18),
+  verdade = sapply(meses, \(t) mean(real_meses <= t & processos$real_desfecho == "improcedente")),
+  aalen_johansen = summary(aj, times = meses)$pstate[, 4],
+  um_menos_km = 1 - summary(km_improcedente, times = meses)$surv
 )
 ```
 
-Também executamos o teste log-rank, que verifica se as curvas são diferentes entre si:
-
 ```{r}
-survdiff(Surv(duracao, status) ~ grupo, data = base)
+#| include: false
+aj12 <- summary(aj, times = 12)$pstate[1, ]
+imp_aj12 <- unname(aj12[4])
+imp_km12 <- 1 - summary(km_improcedente, times = 12)$surv
+imp_real12 <- mean(real_meses <= 12 & processos$real_desfecho == "improcedente")
+stopifnot(imp_km12 > imp_aj12 + 0.1, abs(imp_aj12 - imp_real12) < 0.02)
 ```
 
-### Interpretação jurídica do teste log-rank
+Aos 12 meses, a incidência verdadeira de improcedência é de `r pct(imp_real12)`, e o estimador de Aalen-Johansen chega a `r pct(imp_aj12)`. O atalho do Kaplan-Meier estima `r pct(imp_km12)`. O erro cresce com o tempo, porque cada acordo e cada extinção, tratados como censura, transferem probabilidade para a improcedência.
 
-Um valor de **χ² elevado** indica maior diferença entre as curvas Kaplan–Meier comparadas.
+O Kaplan-Meier continua correto para o desfecho composto. Quando a pergunta é quanto tempo leva até qualquer desfecho, todos os desfechos são o ato de interesse, e não há concorrência. O erro está apenas em estimar um desfecho específico tratando os outros como censura. Por isso, uma estratégia comum é usar o desfecho composto na análise principal e decompô-lo por tipo com o Aalen-Johansen.
 
-Um **p-valor pequeno (p \< 0.05)** sugere que os tempos de tramitação são estatisticamente diferentes entre os grupos analisados.
+### A sentença também concorre
 
-No contexto judicial, esse resultado pode revelar:
+Os desfechos concorrentes não se limitam aos modos de encerramento do processo. Sempre que o ato de interesse é um acontecimento intermediário, a própria sentença pode impedi-lo. Num estudo sobre o tempo até a apreciação de um pedido liminar, o julgamento do mérito torna o pedido prejudicado. Num estudo sobre acordos, a sentença encerra a fase em que o acordo seria homologado. Num estudo sobre a prescrição intercorrente, o pagamento ou a extinção por outro motivo impedem que ela ocorra.
 
--   diferenças de desempenho entre câmaras julgadoras;
--   gargalos estruturais que afetam o tempo de decisão;
--   impacto de especialização, sobrecarga ou volume de casos;
--   desigualdades territoriais entre comarcas ou regiões.
+O raciocínio é o mesmo: o acontecimento que impede o ato de interesse não é censura. Ou ele é incorporado a um desfecho composto, ou entra como desfecho concorrente, com a incidência acumulada de cada um.
 
-Este tipo de comparação é especialmente útil para órgãos como **CNJ**, **Corregedorias**, **Ministério Público**, **Defensoria Pública**, **AGU** e procuradorias estaduais/municipais, pois permite identificar pontos críticos no fluxo processual e orientar intervenções estruturadas baseadas em evidências.
+### As fases como estados
 
-## Parte VIII — Modelo de Cox (Riscos Proporcionais)
-
-O **modelo de riscos proporcionais de Cox** é um dos métodos mais utilizados em análise de sobrevivência quando se deseja incluir **covariáveis explicativas** que influenciam o tempo até a decisão.
-
-Ele permite responder perguntas como:
-
--   “Processos da Câmara 1 têm taxa maior de decisão do que os da Câmara 2?”
--   “Réu preso acelera a decisão?”
--   “Processos eletrônicos têm maior hazard?”
--   “Certas classes processuais demoram mais?”
-
-O modelo não exige especificar a forma da função de risco de base, o que o torna flexível e adequado para fenômenos jurídicos.
-
-------------------------------------------------------------------------
-
-### Fórmula do modelo
-
-O modelo é definido por:
-
-$$
-h(t; X) = h_0(t)\exp(X\beta)
-$$
-
-onde:
-
--   (h(t; X)): taxa de risco no tempo (t) dado o vetor de covariáveis (X),
--   (h_0(t)): risco de base (não parametrizado),
--   (X\beta): efeitos multiplicativos das covariáveis,
--   (\exp(\beta)): *razão de riscos* (**hazard ratio**).
-
-------------------------------------------------------------------------
-
-### Interpretação jurídica
-
--   **(**\exp(\beta) \> 1) → a variável **aumenta** a taxa de decisão (processos mais rápidos).\
--   **(**\exp(\beta) \< 1) → a variável **reduz** a taxa de decisão (processos mais lentos).\
--   Exemplo comum:
-    -   réu preso → hazard ratio \> 1 (julga mais rápido);\
-    -   execução fiscal → hazard ratio \< 1 (demora mais).
-
-O modelo é amplamente usado em estudos de produtividade judicial, eficiência processual e tempo até decisão.
-
-------------------------------------------------------------------------
-
-### Exemplo em R — Ajuste do modelo
-
-A seguir, incluímos duas covariáveis simuladas:
-
--   `x1`: variável binária (ex.: réu preso vs solto),\
--   `x2`: variável contínua (ex.: número de partes, valor da causa etc.).
+O mesmo estimador se estende a fases intermediárias. Na base, o laudo tem movimento próprio. Cada processo pode ser descrito em até dois trechos: da distribuição ao laudo e do laudo ao desfecho. O `survfit()` estima, em cada momento, a probabilidade de o processo estar em cada fase.
 
 ```{r}
-# Criando covariáveis simuladas
-set.seed(3)
-base$x1 <- rbinom(n, 1, 0.4)   # variável binária simulada
-base$x2 <- rnorm(n, 10, 3)    # variável contínua simulada
+laudos <- movimentos |>
+  filter(movimento == "Laudo pericial juntado") |>
+  select(processo, data_laudo = data)
 
-# Ajuste do modelo de Cox
-coxmod <- coxph(Surv(duracao, status) ~ x1 + x2, data = base)
+trechos <- base |>
+  left_join(laudos, by = "processo") |>
+  mutate(t_laudo = as.numeric(data_laudo - data_distribuicao) / 30.4375)
 
-# Sumário do modelo
-summary(coxmod)
+fases <- bind_rows(
+  trechos |>
+    transmute(
+      processo, inicio = 0,
+      fim = coalesce(t_laudo, meses),
+      estado = if_else(is.na(t_laudo), desfecho, "laudo")
+    ),
+  trechos |>
+    filter(!is.na(t_laudo)) |>
+    transmute(processo, inicio = t_laudo, fim = meses, estado = desfecho)
+) |>
+  filter(fim > inicio) |>
+  mutate(estado = factor(
+    estado,
+    levels = c("pendente", "laudo", "acordo", "procedente", "improcedente", "extinto")
+  ))
+
+fit_fases <- survfit(Surv(inicio, fim, estado) ~ 1, data = fases, id = processo)
+
+summary(fit_fases, times = c(3, 6, 9, 12))$pstate |>
+  round(3)
 ```
 
-### Como interpretar a saída
-
-O resultado do modelo de Cox inclui os seguintes elementos fundamentais:
-
--   **coef**: valor estimado de (\beta).\
--   **exp(coef)**: *hazard ratio* — o principal indicador interpretativo.\
--   **Pr(\>\|z\|)**: p-valor do teste de significância da covariável.\
--   **Concordance**: medida de qualidade preditiva do modelo (0.5 = aleatório; \>0.7 = bom).
-
-#### Exemplos de interpretação
-
--   Se **exp(coef)** para `x1` = **1.40**:\
-    \> “Processos do grupo `x1 = 1` têm **40% maior taxa de decisão** do que processos do grupo `x1 = 0`.”
-
--   Se **exp(coef)** para `x2` = **0.92**:\
-    \> “Cada unidade adicional em `x2` **reduz a taxa de decisão em 8%**.”
-
-------------------------------------------------------------------------
-
-### Observações importantes para pesquisas jurídicas
-
--   O modelo de Cox assume **proporcionalidade dos riscos**.\
-    Este pressuposto **deve ser testado** com:
-
 ```{r}
-  cox.zph(coxmod)
+#| include: false
+ocupacao <- summary(fit_fases, times = c(6, 12))$pstate
+stopifnot(ocupacao[1, 2] > ocupacao[1, 1])
 ```
 
-## Parte IX — Risco acumulado (Nelson–Aalen)
+A primeira coluna é a probabilidade de o processo seguir sem laudo e sem desfecho; a segunda, de estar com o laudo juntado à espera do desfecho. Aos seis meses, `r pct(ocupacao[1, 2])` dos processos estão com o laudo juntado, mais do que os que ainda aguardam o laudo (`r pct(ocupacao[1, 1])`). Aos doze meses, `r pct(ocupacao[2, 2])` continuam nessa fase. A leitura por fases mostra onde os processos estão parados, e não apenas quando terminam.
 
-A função de **risco acumulado** (*cumulative hazard*) representa a soma da taxa instantânea de decisão ao longo do tempo.\
-Ela é definida por:
+## A armadilha da taxa entre os decididos
+
+Uma medida comum em relatórios é a taxa de êxito entre os processos já decididos. Na base, considere êxito o acordo ou a procedência e compare as varas aos 6, 9 e 12 meses.
+
+A taxa entre os decididos até $t$ é a razão entre duas incidências acumuladas:
 
 $$
-H(t) = \int_0^t h(u)\,du
+p(t) = \frac{F_{\text{êxito}}(t)}{F_{\text{êxito}}(t) + F_{\text{improcedência}}(t)}
 $$
 
-Enquanto a curva de **sobrevivência** mostra a probabilidade de o processo continuar pendente, o risco acumulado mostra **a intensidade acumulada de decisões ao longo do tempo**.
-
-O estimador mais usado é o **Nelson–Aalen**, adequado para dados censurados.
-
-------------------------------------------------------------------------
-
-### Por que o risco acumulado importa no direito?
-
-O hazard acumulado é especialmente útil para:
-
--   avaliar períodos de maior atividade decisória;
--   comparar intensidade de julgamento entre câmaras, varas ou regiões;
--   identificar fases do processo com maior probabilidade de decisão (ex.: após conclusão, após parecer do MP, após sessão de julgamento);
--   entender comportamentos sazonais ou estruturais (ex.: impacto de mutirões);
--   analisar mudanças antes e depois de reformas processuais.
-
-A leitura típica é:
-
--   curva **subindo rápido** → decisões concentradas;
--   curva **subindo lentamente** → baixa taxa de julgamento;
--   curva **plana** → período de inatividade decisória.
-
-------------------------------------------------------------------------
-
-### Figura — Risco acumulado (estimador Nelson–Aalen)
-
-A seguir, calculamos o hazard acumulado usando o mesmo conjunto de dados simulado anteriormente:
+Ela depende de $t$ sempre que o êxito e a improcedência chegam em ritmos diferentes.
 
 ```{r}
-# Usando o objeto 'km' já estimado anteriormente:
-plot(
-  km,
-  fun = "cumhaz",
-  xlab = "Tempo (dias)",
-  ylab = "Risco acumulado (Nelson–Aalen)",
-  main = "Figura — Risco acumulado (estimativa Nelson–Aalen)",
-  col = "darkblue",
-  lwd = 2
+base <- base |>
+  mutate(desfecho_3 = factor(
+    case_when(
+      desfecho %in% c("acordo", "procedente") ~ "exito",
+      .default = desfecho
+    ),
+    levels = c("pendente", "exito", "improcedente", "extinto")
+  ))
+
+aj_vara <- survfit(Surv(meses, desfecho_3) ~ vara, data = base)
+s_vara <- summary(aj_vara, times = c(6, 9, 12))
+
+taxa_decididos <- tibble(
+  vara = str_remove(s_vara$strata, "vara="),
+  meses = s_vara$time,
+  exito = s_vara$pstate[, 2],
+  improcedente = s_vara$pstate[, 3]
+) |>
+  mutate(taxa_entre_decididos = exito / (exito + improcedente))
+
+verdade_final <- processos |>
+  filter(real_desfecho != "extinto") |>
+  group_by(vara) |>
+  summarise(taxa_final_verdadeira = mean(real_desfecho %in% c("acordo", "procedente")))
+
+taxa_decididos |>
+  select(vara, meses, taxa_entre_decididos) |>
+  pivot_wider(names_from = meses, values_from = taxa_entre_decididos, names_prefix = "meses_") |>
+  left_join(verdade_final, by = "vara")
+```
+
+```{r}
+#| include: false
+p9 <- taxa_decididos |> filter(meses == 9)
+p9_A <- p9$taxa_entre_decididos[p9$vara == "Vara A"]
+p9_D <- p9$taxa_entre_decididos[p9$vara == "Vara D"]
+vf <- verdade_final$taxa_final_verdadeira
+stopifnot(p9_D > p9_A + 0.08, max(vf) - min(vf) < 0.03)
+```
+
+Aos 9 meses, a Vara D parece a mais favorável ao autor: `r pct(p9_D, 0)` de êxito entre os decididos, contra `r pct(p9_A, 0)` na Vara A. A última coluna mostra a taxa que cada vara terá quando todos os processos terminarem: praticamente igual nas quatro, entre `r pct(min(vf), 0)` e `r pct(max(vf), 0)`. A Vara D não é mais favorável. É mais lenta para sentenciar. Os acordos, que vêm logo depois do laudo e não dependem da vara, chegam no mesmo ritmo em todas; as improcedências da Vara D, que dependem da sentença, ainda não chegaram.
+
+A taxa entre os decididos mede a velocidade dos desfechos tanto quanto o desfecho. No conjunto da base, o vício pode quase se cancelar. É nas comparações entre grupos com ritmos diferentes que ele inverte conclusões. A pergunta útil tem horizonte: qual a chance de êxito em até 12 meses, lida na incidência acumulada.
+
+### Condicionar no futuro
+
+Um erro aparentado é comparar o tempo dos processos conforme o desfecho que tiveram: os processos com acordo terminam mais rápido que os julgados improcedentes? A comparação condiciona no futuro, porque o grupo de cada processo só é conhecido no fim. Ela descreve os dados, mas não serve para prever o tempo de um processo novo nem para explicar por que ele demora (Andersen; Keiding, 2012).
+
+Uma alternativa que condiciona apenas no presente é a fração de cada desfecho entre os processos decididos em cada período: entre os que terminaram no quinto mês, quantos terminaram em acordo?
+
+```{r}
+base |>
+  filter(status == 1) |>
+  mutate(periodo = cut(meses, c(0, 3, 6, 9, 12, Inf), labels = c("0-3", "3-6", "6-9", "9-12", "12+"))) |>
+  count(periodo, desfecho) |>
+  group_by(periodo) |>
+  mutate(fracao = round(n / sum(n), 2)) |>
+  select(-n) |>
+  pivot_wider(names_from = desfecho, values_from = fracao, values_fill = 0)
+```
+
+Até o terceiro mês, praticamente todo desfecho é extinção. A fração de acordos atinge o máximo logo depois da chegada dos laudos e cai em seguida, quando as sentenças passam a predominar.
+
+## Prazos e tempo médio de pendência
+
+A mediana e a curva de pendência respondem a perguntas sobre a distribuição do tempo. O direito processual pensa o tempo de outra forma: em prazos. O Código de Processo Civil fixa 5, 10 e 30 dias para o juiz proferir despachos, decisões interlocutórias e sentenças (art. 226, I a III). O juiz tem 48 horas para decidir sobre medidas protetivas de urgência (Lei 11.340/2006, art. 18). A audiência de custódia deve ocorrer em até 24 horas da prisão (Código de Processo Penal, art. 310).
+
+O tempo médio de pendência restrito a um prazo $\tau$ (em inglês, *restricted mean survival time*, RMST) é a área sob a curva de pendência entre zero e $\tau$:
+
+$$
+\text{RMST}(\tau) = \int_0^\tau S(t)\, dt
+$$
+
+Ele mede quanto do prazo, em média, o processo passa pendente. Ao contrário da média simples, pode ser estimado mesmo com censura, desde que haja seguimento até $\tau$, e ao contrário da razão de taxas, é expresso em dias e não depende da suposição de que a diferença entre grupos seja constante no tempo (Royston; Parmar, 2013; Uno et al., 2014). Quando $\tau$ é um prazo legal, a leitura é direta: do prazo de 10 dias, quantos dias o pedido consome em média.
+
+Na base, um terço das ações traz pedido de tutela de urgência, decidido em dias. A decisão sobre a tutela é uma decisão interlocutória, com o prazo de 10 dias do art. 226, II, do Código de Processo Civil. Há um cuidado na definição do ato: a decisão que apenas posterga a apreciação não é decisão sobre o pedido.
+
+```{r}
+decisoes_tutela <- c("Concedida a tutela de urgência", "Indeferida a tutela de urgência")
+
+tutela <- processos |>
+  filter(tutela_pedida) |>
+  left_join(
+    movimentos |>
+      filter(movimento %in% decisoes_tutela) |>
+      slice_min(data, by = processo, with_ties = FALSE) |>
+      select(processo, data_decisao = data),
+    by = "processo"
+  ) |>
+  mutate(
+    status = as.integer(!is.na(data_decisao)),
+    dias = as.numeric(coalesce(data_decisao, data_coleta) - data_distribuicao)
+  )
+
+km_tutela <- survfit(Surv(dias, status) ~ 1, data = tutela)
+print(km_tutela, rmean = 10)
+```
+
+```{r}
+#| include: false
+rmst_tutela <- summary(km_tutela, rmean = 10)$table[["rmean"]]
+dentro_prazo <- 1 - summary(km_tutela, times = 10)$surv
+```
+
+O tempo médio de pendência no prazo de 10 dias é de `r num(rmst_tutela, 1)` dias: em média, o pedido passa metade do prazo à espera de decisão. A proporção decidida dentro do prazo é $1 - \hat S(10)$, igual a `r pct(dentro_prazo)`.
+
+A diferença de tempo médio no prazo entre dois grupos é uma medida de efeito em dias. O pacote `survRM2` calcula a diferença com intervalo de confiança.
+
+```{r}
+tutela_AD <- tutela |>
+  filter(vara %in% c("Vara A", "Vara D")) |>
+  mutate(vara_D = as.integer(vara == "Vara D"))
+
+comparacao <- rmst2(tutela_AD$dias, tutela_AD$status, tutela_AD$vara_D, tau = 10)
+comparacao$unadjusted.result
+```
+
+```{r}
+#| include: false
+dif_rmst <- comparacao$unadjusted.result[1, ]
+stopifnot(dif_rmst[["lower .95"]] > 0)
+```
+
+Dentro do prazo de 10 dias, os pedidos da Vara D ficam, em média, `r num(dif_rmst[["Est."]], 1)` dia a mais pendentes que os da Vara A (IC 95%: `r num(dif_rmst[["lower .95"]], 1)` a `r num(dif_rmst[["upper .95"]], 1)`).
+
+A definição do ato pesa. Se a decisão que posterga a apreciação fosse contada como decisão, o tempo de espera seria subestimado:
+
+```{r}
+tutela_errada <- processos |>
+  filter(tutela_pedida) |>
+  left_join(
+    movimentos |>
+      filter(movimento %in% c(decisoes_tutela, "Postergada a apreciação da tutela de urgência")) |>
+      slice_min(data, by = processo, with_ties = FALSE) |>
+      select(processo, data_decisao = data),
+    by = "processo"
+  ) |>
+  mutate(
+    status = as.integer(!is.na(data_decisao)),
+    dias = as.numeric(coalesce(data_decisao, data_coleta) - data_distribuicao)
+  )
+
+summary(survfit(Surv(dias, status) ~ 1, data = tutela_errada), rmean = 10)$table[["rmean"]]
+```
+
+```{r}
+#| include: false
+rmst_errado <- summary(survfit(Surv(dias, status) ~ 1, data = tutela_errada), rmean = 10)$table[["rmean"]]
+stopifnot(rmst_errado < rmst_tutela - 1)
+```
+
+### Prazos em horas, registros em dias
+
+Prazos de 24 ou 48 horas esbarram num limite do registro: os sistemas processuais costumam guardar a data do ato, mas não a hora. Um pedido decidido no mesmo dia da distribuição ($t = 0$) foi certamente decidido em menos de 24 horas. Um pedido decidido no dia seguinte ($t = 1$) pode ter levado 3 ou 40 horas. A partir de $t = 2$, certamente passou de 24 horas.
+
+A proporção decidida em 24 horas não pode ser estimada como um número, mas pode ser cercada por limites (Manski, 2003; Sun, 2006):
+
+$$
+P(T = 0) \le P(T \le 24\,\text{h}) \le P(T \le 1)
+$$
+
+```{r}
+limites <- summary(km_tutela, times = c(0, 1))
+
+tibble(
+  limite = c("Inferior: decidido no mesmo dia", "Superior: decidido até o dia seguinte"),
+  estimativa = 1 - limites$surv,
+  ic_inferior = 1 - limites$upper,
+  ic_superior = 1 - limites$lower
 )
 ```
 
-### Interpretação jurídica da curva
-
-Algumas interpretações práticas importantes:
-
--   **A inclinação da curva mostra a intensidade de julgamento.**\
-    Uma curva mais inclinada indica períodos com maior taxa de decisões.
-
--   **Mudanças abruptas na curva podem indicar eventos institucionais**, como:
-
-    -   mutirões,\
-    -   reformas procedimentais,\
-    -   mudanças de competência,\
-    -   alteração na composição da câmara ou vara.
-
--   **Comparações entre curvas de diferentes grupos** podem revelar:
-
-    -   gargalos,\
-    -   desigualdades territoriais,\
-    -   priorização de temas,\
-    -   impacto de diferentes rotinas administrativas.
-
--   **Curvas de hazard acumulado são complementares às curvas Kaplan–Meier:**
-
-    -   KM → mostra o *tempo de pendência*.\
-    -   Hazard acumulado → mostra a *intensidade decisória ao longo do tempo*.
-
-------------------------------------------------------------------------
-
-### Observação técnica
-
-Em análises jurídicas aplicadas, o hazard acumulado é uma ferramenta poderosa para:
-
--   diagnósticos institucionais,\
--   análises longitudinais,\
--   estudos de impacto antes–depois,\
--   auditorias de fluxo processual.
-
-O método **Nelson–Aalen** é robusto, não exige suposições paramétricas e lida bem com censura.
-
-## Parte X — Introdução aos riscos concorrentes (Competing Risks)
-
-Em muitos contextos jurídicos, um processo pode terminar de múltiplas maneiras mutuamente exclusivas.\
-Por exemplo:
-
--   **Evento 1:** sentença de mérito\
--   **Evento 2:** extinção sem resolução de mérito\
--   **Evento 3:** acordo homologado\
--   **Censura:** processo ainda pendente
-
-Quando diferentes tipos de eventos **impedem** o evento principal de ocorrer, estamos diante de **riscos concorrentes** (*competing risks*).
-
-------------------------------------------------------------------------
-
-### O erro mais comum: tratar risco concorrente como censura
-
-Este é um dos erros metodológicos mais graves em pesquisas de jurimetria.
-
--   Se o processo é **extinto sem mérito**, ele *não poderá mais* receber sentença de mérito.\
-    Logo, não se trata de censura, mas de um **evento concorrente**.
-
--   Se houver acordo, o processo também **não poderá** ter sentença de mérito.
-
-Tratar esses eventos como censura:
-
--   **superestima** a probabilidade do evento principal,\
--   gera **curvas Kaplan–Meier distorcidas**,\
--   prejudica comparações entre grupos,\
--   inviabiliza estimativas confiáveis de tempo.
-
-------------------------------------------------------------------------
-
-### Quando usar competing risks?
-
-Use modelos de riscos concorrentes quando:
-
--   há **múltiplas formas de resolução** do processo;
--   um evento **impede** o outro de ocorrer;
--   eventos são **excludentes**.
-
-Exemplos jurídicos típicos:
-
--   ação civil pública → acordo homologado vs sentença;\
--   execução fiscal → prescrição vs pagamento espontâneo vs extinção;\
--   processo criminal → acordo de não persecução penal vs sentença;\
--   habeas corpus → perda de objeto vs julgamento de mérito;\
--   ações previdenciárias → acordo vs procedência vs improcedência.
-
-------------------------------------------------------------------------
-
-### Consequências jurídicas de ignorar riscos concorrentes
-
-Ignorar competing risks pode levar a:
-
--   conclusões erradas sobre duração processual,
--   diagnósticos incorretos de produtividade,
--   estimativas enviesadas sobre prescrição,
--   comparações injustas entre varas/câmaras,
--   análises contrafactuais inconsistentes.
-
-É um problema especialmente frequente em:
-
--   relatórios judiciais,
--   trabalhos acadêmicos,
--   estudos empíricos sem acompanhamento estatístico especializado.
-
-------------------------------------------------------------------------
-
-### Métodos adequados
-
-Quando há riscos concorrentes, substituir Kaplan–Meier por:
-
-#### **CIF — Cumulative Incidence Function**
-
-A CIF estima a probabilidade acumulada de cada tipo de evento ocorrer.
-
-#### **Modelo de Fine–Gray**
-
-Permite:
-
--   incluir covariáveis,
--   modelar cada risco concorrente separadamente,
--   comparar grupos com rigor estatístico.
-
-------------------------------------------------------------------------
-
-### Representação gráfica típica
-
-Enquanto a KM mostra uma curva única de sobrevivência, a CIF mostra:
-
--   uma curva para o evento principal,
--   uma curva para o evento concorrente,
--   ambas reduzindo a sobrevivência.
-
-Isso reflete mais adequadamente o fenômeno jurídico.
-
-------------------------------------------------------------------------
-
-### Intuição jurídica
-
-Pense assim:
-
--   **KM responde:**\
-    “Qual a probabilidade do processo **continuar pendente** ao longo do tempo?”
-
--   **CIF responde:**\
-    “Qual a probabilidade do processo **terminar desta forma específica** ao longo do tempo?”
-
-Essa diferença é decisiva em análises sobre:
-
--   **prescrição**,\
--   **extinções**,\
--   **acordos**,\
--   **perda de objeto**,\
--   **tipos de sentença**.
-
-------------------------------------------------------------------------
-
-### Conclusão da Parte X
-
-Riscos concorrentes são a regra, não a exceção, nos dados judiciais.\
-Ignorá-los distorce conclusões e compromete decisões estratégicas, institucionais e acadêmicas.
-
-As seções seguintes mostram como estimar corretamente a **CIF** e como visualizar esses resultados.
-
-## Parte XI — Função de Incidência Cumulativa (CIF) para riscos concorrentes
-
-Quando há múltiplos eventos possíveis e mutuamente excludentes, como:
-
--   sentença de mérito,\
--   extinção sem resolução de mérito,\
--   acordo homologado,\
--   prescrição,
-
-não podemos usar Kaplan–Meier para estimar a probabilidade de cada tipo de desfecho.\
-Nesses casos, o método correto é a **Função de Incidência Cumulativa (CIF)**.
-
-------------------------------------------------------------------------
-
-### O que a CIF estima?
-
-A **CIF — Cumulative Incidence Function** estima a probabilidade acumulada de cada tipo específico de evento ocorrer ao longo do tempo.
-
-Em termos simples:
-
--   CIF do evento 1 → probabilidade de sentença de mérito até o tempo (t).\
--   CIF do evento 2 → probabilidade de extinção até o tempo (t).\
--   CIF do evento 3 → probabilidade de acordo até o tempo (t).
-
-Ela responde:
-
-> **“Qual é a probabilidade do processo terminar desta forma específica até o tempo t?”**
-
-Enquanto a KM não consegue separar os tipos de eventos, a CIF consegue.
-
-------------------------------------------------------------------------
-
-### Interpretação jurídica
-
-A CIF permite:
-
--   analisar **competição entre modos de encerramento**,\
--   medir risco de **extinção sem mérito**,\
--   identificar padrões de **acordos ao longo do tempo**,\
--   avaliar risco de **perda de objeto** (comum em habeas corpus),\
--   estimar probabilidade de **prescrição intercorrente** em execuções.
-
-É a abordagem estatística correta para praticamente todas as análises de encerramento processual.
-
-------------------------------------------------------------------------
-
-### Exemplo em R — Estimando CIF
-
-Vamos simular dados com três categorias:
-
--   0 = censura (processo pendente)\
--   1 = sentença de mérito (evento principal)\
--   2 = extinção sem mérito (evento concorrente)
+Se o prazo de referência para a tutela fosse de 24 horas, a proporção cumprida estaria entre `r pct(1 - limites$surv[1], 0)` e `r pct(1 - limites$surv[2], 0)`. Os limites são largos, e qualquer número único dentro do intervalo dependeria de uma suposição sobre a hora das decisões que os dados não sustentam. Quando os dois limites levam à mesma conclusão (por exemplo, ambos abaixo de 50%), a falta da hora não afeta a conclusão.
+
+## Do registro do tribunal ao par (tempo, ato)
+
+Boa parte dos erros em análises de duração não está no estimador, e sim na passagem do registro do tribunal ao par (tempo, ato). O quadro reúne armadilhas frequentes.
+
+| Armadilha | O que acontece | Como tratar |
+|---|---|---|
+| Estimar além do seguimento | A função repete o último valor depois do último tempo observado | Anular estimativas com poucos processos sob observação |
+| Coortes com seguimentos diferentes | Coortes recentes só informam sobre o início da curva | Comparar coortes em horizontes que todas alcançaram |
+| Fonte que omite eventos | A base agregada marca como pendente um processo já decidido | Conferir uma amostra na consulta processual do tribunal |
+| Atraso de indexação | Bases agregadas são atualizadas em lotes, com semanas de atraso | Usar como data de censura a da última atualização da fonte |
+| Falso evento | "Suspensão do prazo" registra a suspensão geral dos prazos do foro, e não a do processo | Revisar a lista completa de títulos contra a definição de cada ato |
+| Mudança de sistema | A migração entre sistemas processuais muda o vocabulário dos movimentos | Montar uma tabela de tradução para cada sistema |
+| Covariável que muda com o tempo | A gratuidade de justiça é decidida depois do ajuizamento | Medi-la só em quem já teve tempo de tê-la decidida, ou tratá-la como dependente do tempo |
+| Desfecho revertido | A sentença é anulada ou reformada no recurso | Tratar o desfecho de primeiro grau como fase, e não como fim |
+
+O falso evento aparece na base simulada. Todos os processos em andamento em 20 de dezembro receberam o movimento "Suspensão do prazo".
 
 ```{r}
-library(cmprsk)
-
-set.seed(7)
-evento <- sample(0:2, n, replace = TRUE, prob = c(0.3, 0.5, 0.2))
-
-fit_cif <- cuminc(
-  ftime  = base$duracao,
-  fstatus = evento,
-  group = base$grupo
-)
-
+movimentos |>
+  filter(movimento == "Suspensão do prazo") |>
+  count(data)
 ```
 
-```{r}
-plot(
-fit_cif,
-xlab = "Tempo (dias)",
-ylab = "Incidência cumulativa",
-main = "Figura — CIF para riscos concorrentes (simulação)",
-col = 1:4,
-lwd = 2
-)
+Uma regra que tratasse esse movimento como suspensão do processo pararia o relógio de milhares de processos ao mesmo tempo.
 
-```
+As armadilhas têm uma raiz comum: a data de censura e o conjunto de atos possíveis são propriedades da fonte, e não do processo. Cada fonte exige a sua conferência. O DataJud, a base nacional do Conselho Nacional de Justiça, não traz os processos sigilosos e informa a classe e o órgão atuais, de modo que processos redistribuídos ou reclassificados perdem o histórico. A consulta processual de cada tribunal traz os sigilosos apenas com credencial e pode exigir autenticação.
 
-Essa figura mostra, por exemplo:
+## Atividade
 
--   curva 1 → probabilidade acumulada de sentença,
--   curva 2 → probabilidade acumulada de extinção,
--   curvas separadas para cada grupo.
+A atividade usa a base simulada do capítulo.
 
-------------------------------------------------------------------------
+1. **Definição.** Escreva, antes de abrir os dados, a definição do termo inicial, do ato de interesse e da censura para a pergunta "quanto tempo leva até a sentença de mérito?". Acordo e extinção são atos de interesse, desfechos concorrentes ou censura?
+2. **Regras.** Liste os títulos de movimento e monte a tabela de regras para a sua definição. Algum título ficou de fora? Algum processo pendente está arquivado?
+3. **Pendência.** Estime a probabilidade de pendência por faixa de valor da causa. Em que faixa os processos demoram mais?
+4. **Desfechos concorrentes.** Estime a incidência acumulada de acordo por vara. As varas diferem na velocidade do acordo?
+5. **Taxa entre os decididos.** Calcule a taxa de êxito entre os decididos aos 6 e aos 15 meses para processos com e sem inicial instruída. A diferença entre os grupos muda com o horizonte?
+6. **Prazo.** Calcule o tempo médio de pendência da tutela de urgência no prazo de 5 dias, que seria o de um despacho. Que fração dos pedidos é decidida nesse prazo?
+7. **Erro deliberado.** Repita o item 4 tratando a sentença e a extinção como censura. Quanto a incidência de acordo aos 12 meses muda?
 
-### Como interpretar a CIF
+## Síntese
 
--   Uma **curva CIF mais alta** indica maior proporção acumulada daquele desfecho.
--   Se a CIF do **grupo A** sobe mais rapidamente para sentenças, então o grupo A **julga mais rapidamente**.
--   Se a CIF do **grupo B** sobe mais rapidamente para extinções, o grupo B **extingue mais processos**.
--   As CIFs permitem compreender **prioridades administrativas**, **padrões decisórios** e **comportamentos específicos** de cada órgão julgador.
+A análise de duração estuda o tempo até um ato processual a partir de cinco definições: unidade, termo inicial, ato de interesse, termo final e data da coleta. O processo pendente na coleta não tem tempo desconhecido, mas censurado, e o estimador de Kaplan-Meier aproveita essa informação parcial. Excluir os pendentes ou partir do acervo distorce o tempo em sentidos opostos.
 
-------------------------------------------------------------------------
+A taxa de resolutividade, fração dos pendentes que recebe o ato em cada momento, é o elemento de que são feitas a curva de pendência e a razão de taxas entre grupos. Quando o processo pode terminar de várias formas, a incidência acumulada de cada uma é estimada pelo método de Aalen-Johansen; tratar os outros desfechos como censura superestima a incidência. A taxa de êxito entre os decididos mistura desfecho e velocidade, e só faz sentido com horizonte. O tempo médio de pendência num prazo traduz a curva para a linguagem dos prazos processuais.
 
-### Comparação jurídica entre grupos
+O capítulo "Modelos para o tempo do processo", na Parte V, retoma a mesma base para ajustar por características dos processos, comparar o modelo de Cox com o de Fine-Gray e tratar a heterogeneidade entre peritos, a seleção e a censura intervalar.
 
-A CIF responde perguntas que Kaplan–Meier não consegue responder, como:
+## Referências
 
--   “Qual câmara extingue mais processos sem mérito?”
--   “Qual vara tem maior probabilidade de acordo ao longo do tempo?”
--   “Há desigualdade territorial na probabilidade de julgamento?”
--   “Qual grupo apresenta maior risco de prescrição intercorrente?”
-
-Essas interpretações são fundamentais para diagnósticos institucionais e análises de políticas públicas.
-
-------------------------------------------------------------------------
-
-### Quando usar Fine–Gray (modelos com covariáveis)
-
-Para incluir covariáveis em contexto de riscos concorrentes, o método adequado é o **modelo de Fine–Gray**, que modela o *subdistribution hazard*.
-
-Esse modelo permite:
-
--   comparar grupos **ajustando por covariáveis**,
--   controlar por classe, vara, rito, réu preso etc.,
--   obter **hazard ratios** específicos para cada tipo de risco.
-
-Com Fine–Gray, é possível fazer análises mais completas e comparações justas entre unidades judiciais.
-
-------------------------------------------------------------------------
-
-### Conclusão da Parte XI
-
-A **CIF** é uma ferramenta indispensável para análises jurídicas realistas porque:
-
--   separa e quantifica cada forma de encerramento processual,
--   evita as distorções do estimador Kaplan–Meier,
--   melhora a precisão de diagnósticos institucionais,
--   previne interpretações equivocadas sobre produtividade,
--   permite inferências mais sólidas sobre risco temporal,
--   prepara o terreno para modelagens mais avançadas como Fine–Gray.
-
-Seu uso adequado é decisivo para uma jurimetria confiável e metodologicamente rigorosa.
-
-## Parte XII — Interpretação jurídica aplicada
-
-A análise de sobrevivência, o risco acumulado e os métodos de riscos concorrentes ganham significado real quando interpretados à luz do funcionamento do sistema de justiça.\
-Esta seção mostra como essas ferramentas estatísticas revelam padrões concretos do comportamento processual.
-
-------------------------------------------------------------------------
-
-### Exemplos reais aplicáveis
-
-Os métodos apresentados permitem responder questões como:
-
--   **Habeas corpus**:\
-    Qual câmara julga HCs com maior rapidez?\
-    Há diferença entre turmas criminais?\
-    Há maior risco de perda de objeto em determinados períodos?
-
--   **Varas da Fazenda Pública**:\
-    Processos levam significativamente mais tempo?\
-    Há varas que concentram maior volume de extinções sem mérito?
-
--   **Execuções fiscais**:\
-    Qual é a probabilidade acumulada de prescrição intercorrente?\
-    Qual é o risco concorrente de pagamento espontâneo?
-
--   **Processos eletrônicos (PJe) vs físicos**:\
-    A mudança tecnológica reduziu tempos de tramitação?\
-    Em que momentos a diferença é maior?
-
--   **Comparações territoriais**:\
-    Comarcas do interior são mais lentas que as da capital?\
-    Há desigualdades regionais na probabilidade de julgamento?
-
-------------------------------------------------------------------------
-
-### Observações jurídicas importantes
-
-####  Sobrevivência não é probabilidade de vitória
-
-A curva Kaplan–Meier mostra a **probabilidade de pendência**, e não o resultado final do processo.
-
-####  Hazard não é probabilidade direta
-
-O **hazard** é uma **taxa instantânea** de decisão, não uma probabilidade bruta.\
-Um hazard alto em dado período indica maior ritmo decisório naquele intervalo.
-
-####  Competing risks revelam padrões escondidos
-
-A CIF mostra prioridades decisórias, como:
-
--   câmaras que **extinguem mais processos**,\
--   varas que **julgam menos no mérito**,\
--   órgãos que **acordam mais frequentemente**,\
--   tendências de **perda de objeto**.
-
-Essas informações não aparecem na KM tradicional.
-
-####  As curvas complementares
-
--   **KM** → probabilidade de o processo *continuar pendente*.\
--   **Hazard acumulado** → intensidade decisória.\
--   **CIF** → probabilidade acumulada de cada tipo específico de encerramento.
-
-Somadas, fornecem uma visão completa da dinâmica processual.
-
-------------------------------------------------------------------------
-
-### Exemplos de interpretações estratégicas
-
--   Se a CIF de extinções sobe mais rápido que a de sentenças, isso pode indicar:
-    -   priorização administrativa por extinção,\
-    -   problemas de admissibilidade,\
-    -   falhas documentais,\
-    -   litigância predatória.
--   Se uma vara tem hazard acumulado muito baixo, pode indicar:
-    -   falta de estrutura,\
-    -   alto volume de casos,\
-    -   problemas procedimentais.
--   Se a KM de um grupo não cai por muito tempo (“curva alta”), indica:
-    -   lentidão estrutural,\
-    -   baixo ritmo decisório,\
-    -   filas de trabalho represadas.
-
-------------------------------------------------------------------------
-
-### Aplicações institucionais
-
-Os métodos desta aula são usados por:
-
--   **CNJ** para monitoramento de produtividade;\
--   **Corregedorias** para identificar gargalos;\
--   **MP** e **DPE** para priorização de casos urgentes;\
--   **AGU** e procuradorias para estimar:
-    -   tempo até sentença,\
-    -   risco de prescrição,\
-    -   custo jurídico previsível;\
--   **Tribunais** para embasar mutirões, redistribuições e políticas de gestão.
-
-------------------------------------------------------------------------
-
-### Conclusão da Parte XII
-
-Interpretar corretamente curvas de KM, hazard acumulado e CIF permite:
-
--   compreender o funcionamento real do Judiciário,\
--   diagnosticar problemas com precisão estatística,\
--   orientar decisões estratégicas,\
--   reduzir ineficiências,\
--   indicar reformas processuais necessárias.
-
-A análise de sobrevivência não é apenas estatística:\
-é **uma lente para entender a justiça como fenômeno temporal e institucional**.
-
-## Parte XIII — Erros metodológicos comuns em análises de duração no direito
-
-A análise de sobrevivência aplicada ao Judiciário exige cuidados específicos.\
-Erros metodológicos são frequentes em estudos, relatórios técnicos e até publicações acadêmicas.\
-Nesta seção, listamos os principais problemas e explicamos suas consequências.
-
-------------------------------------------------------------------------
-
-###  Usar apenas processos decididos (complete case)
-
-Este é o erro mais frequente.
-
-Excluir processos pendentes **viola o pressuposto** de que dados censurados devem ser mantidos na análise.\
-Isso produz:
-
--   **superestimação do tempo** (muitas vezes em 20%–40%),\
--   distorção na mediana,\
--   viés na comparação entre varas e câmaras,\
--   inferências equivocadas sobre produtividade.
-
-Em execuções fiscais, por exemplo, excluir pendentes pode mascarar risco de prescrição.
-
-------------------------------------------------------------------------
-
-###  Tratar riscos concorrentes como censura
-
-Quando há extinção, acordo ou perda de objeto, **o evento principal não pode mais ocorrer**.
-
-Classificar esses eventos como censura leva a:
-
--   curvas KM **artificialmente altas**,\
--   probabilidade de julgamento superestimada,\
--   erros graves em diagnósticos institucionais,\
--   interpretações injustas de desempenho entre grupos.
-
-O método correto nesses casos é **CIF** (e Fine–Gray para modelagem).
-
-------------------------------------------------------------------------
-
-###  Misturar eventos diferentes no mesmo desfecho
-
-Outro erro comum é:
-
--   tratar sentença, acordo e extinção como um único “evento”.
-
-Isso destrói a interpretabilidade jurídica, pois combina fenômenos distintos:
-
--   mérito,\
--   autocomposição,\
--   filtragem processual.
-
-O resultado é estatisticamente incorreto e juridicamente inútil.
-
-------------------------------------------------------------------------
-
-###  Usar apenas médias ou medianas brutas
-
-A média de duração é **sempre enviesada** quando há:
-
--   censura,
--   assimetria,
--   longas caudas,
--   eventos raros.
-
-Só curvas KM ou CIF fornecem estimativas adequadas.
-
-A **mediana KM** é muito mais informativa que a mediana simples.
-
-------------------------------------------------------------------------
-
-###  Não verificar proporcionalidade dos riscos (modelo de Cox)
-
-Cox pressupõe riscos proporcionais ao longo do tempo.
-
-Ignorar isso pode levar a:
-
--   coeficientes sem validade interpretativa,\
--   hazard ratios enganosos,\
--   conclusões inconsistentes.
-
-O teste recomendado é:
-
-```{r} 
-cox.zph(coxmod) 
-```
-
-Se a proporcionalidade falhar:
-
--   estratificar o modelo,
--   usar termos tempo-dependentes,
--   ou usar métodos alternativos.
-
-------------------------------------------------------------------------
-
-###  Ignorar heterogeneidade institucional
-
-Processos judiciais variam enormemente entre:
-
--   varas,
--   câmaras,
--   comarcas,
--   classes processuais,
--   ritos,
--   perfis de litigantes.
-
-Não controlar por essa heterogeneidade leva a:
-
--   conclusões espúrias,
--   comparações injustas,
--   diagnósticos incompletos.
-
-Modelos devem sempre incluir covariáveis relevantes.
-
-------------------------------------------------------------------------
-
-###  Não documentar o critério de corte temporal
-
-Pesquisadores costumam usar datas de extração diferentes sem informar:
-
--   a data de corte da censura,
--   o período observado,
--   o tempo máximo considerado.
-
-A falta dessa documentação compromete:
-
--   replicação,
--   comparabilidade entre estudos,
--   transparência metodológica.
-
-------------------------------------------------------------------------
-
-###  Falta de consistência na definição do evento
-
-É essencial definir claramente:
-
--   o que é “evento”,
--   quando ocorre,
--   se há múltiplos desfechos,
--   se há riscos concorrentes.
-
-Definições inconsistentes geram:
-
--   bancos impossíveis de reproduzir,
--   estimativas incoerentes,
--   interpretações comprometidas.
-
-------------------------------------------------------------------------
-
-###  Desconsiderar mudanças institucionais ao longo do tempo
-
-Mudanças como:
-
--   implantação do PJe,
--   aumento de magistrados,
--   mutirões,
--   reformas legais,
--   redistribuição de competência,
-
-podem alterar o **hazard** ao longo do tempo.
-
-Análises longitudinais precisam incorporar esses efeitos para evitar conclusões equivocadas.
-
-------------------------------------------------------------------------
-
-### Conclusão da Parte XIII
-
-Evitar esses erros é essencial para:
-
--   análises confiáveis,
--   inferências estatísticas sólidas,
--   diagnósticos institucionais corretos,
--   decisões estratégicas fundamentadas.
-
-Pesquisa empírica rigorosa exige atenção especial a:
-
--   censura,
--   riscos concorrentes,
--   definição de eventos,
--   heterogeneidade institucional,
--   e pressupostos dos modelos de sobrevivência.
+- Aalen, O. O.; Johansen, S. An empirical transition matrix for non-homogeneous Markov chains based on censored observations. *Scandinavian Journal of Statistics*, v. 5, n. 3, p. 141-150, 1978.
+- Andersen, P. K.; Keiding, N. Interpretability and importance of functionals in competing risks and multistate models. *Statistics in Medicine*, v. 31, n. 11-12, p. 1074-1088, 2012. <https://doi.org/10.1002/sim.4385>
+- Austin, P. C.; Lee, D. S.; Fine, J. P. Introduction to the analysis of survival data in the presence of competing risks. *Circulation*, v. 133, n. 6, p. 601-609, 2016. <https://doi.org/10.1161/CIRCULATIONAHA.115.017719>
+- Badaró, G. H.; Lopes Jr., A. *Direito ao processo penal no prazo razoável*. Rio de Janeiro: Lumen Juris, 2006.
+- Corrêa, F.; Stern, R. B. Another note on the censoring problem: a state of the art assessment and a review of methods for empirical case-outcome studies. *SSRN*, 2025. <https://ssrn.com/abstract=5340259>
+- Kaplan, E. L.; Meier, P. Nonparametric estimation from incomplete observations. *Journal of the American Statistical Association*, v. 53, n. 282, p. 457-481, 1958. <https://doi.org/10.1080/01621459.1958.10501452>
+- Manski, C. F. *Partial identification of probability distributions*. New York: Springer, 2003.
+- Putter, H.; Fiocco, M.; Geskus, R. B. Tutorial in biostatistics: competing risks and multi-state models. *Statistics in Medicine*, v. 26, n. 11, p. 2389-2430, 2007. <https://doi.org/10.1002/sim.2712>
+- Royston, P.; Parmar, M. K. B. Restricted mean survival time: an alternative to the hazard ratio for the design and analysis of randomized trials with a time-to-event outcome. *BMC Medical Research Methodology*, v. 13, 152, 2013. <https://doi.org/10.1186/1471-2288-13-152>
+- Sun, J. *The statistical analysis of interval-censored failure time data*. New York: Springer, 2006.
+- Uno, H. et al. Moving beyond the hazard ratio in quantifying the between-group difference in survival analysis. *Journal of Clinical Oncology*, v. 32, n. 22, p. 2380-2385, 2014. <https://doi.org/10.1200/JCO.2014.55.2208>

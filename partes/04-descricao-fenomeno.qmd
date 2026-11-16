@@ -29,9 +29,9 @@ Medidas, tabelas e representações gráficas para conhecer e comunicar as carac
 
 ::: {.g-col-12 .g-col-md-4}
 ::: {.cartao-home}
-### Análise de sobrevivência: tempo do processo
+### O tempo do processo: análise de duração
 
-Ferramentas para estudar a duração dos processos, a censura e o tempo até a ocorrência de eventos jurídicos.
+Pendência, censura, desfechos concorrentes e tempo médio dentro dos prazos processuais.
 
 [Acessar o capítulo](../capitulos/P4C03-analise-sobrevivencia.qmd)
 :::

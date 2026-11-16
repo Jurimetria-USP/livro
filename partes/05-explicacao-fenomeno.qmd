@@ -3,11 +3,11 @@ title: "Parte V — Explicação do fenômeno"
 toc: false
 ---
 
-Nesta parte, avançamos da descrição para a explicação dos fenômenos jurídicos. O percurso começa pelos modelos lineares e segue para modelos adequados a diferentes tipos de resultado e estruturas de dados.
+Nesta parte, avançamos da descrição para a explicação dos fenômenos jurídicos. O percurso começa pelos modelos lineares, segue para modelos adequados a diferentes tipos de resultado e estruturas de dados e termina com os modelos para o tempo do processo.
 
 ::: {.grid}
 
-::: {.g-col-12 .g-col-md-6}
+::: {.g-col-12 .g-col-md-4}
 ::: {.cartao-home}
 ### Modelos Lineares
 
@@ -17,13 +17,23 @@ Fundamentos da regressão linear, estimação, interpretação e aplicações à
 :::
 :::
 
-::: {.g-col-12 .g-col-md-6}
+::: {.g-col-12 .g-col-md-4}
 ::: {.cartao-home}
 ### Modelos Avançados
 
 Modelos para variáveis dependentes qualitativas e dados com estruturas mais complexas.
 
 [Acessar o capítulo](../capitulos/P5C02-modelos-avancados.qmd)
+:::
+:::
+
+::: {.g-col-12 .g-col-md-4}
+::: {.cartao-home}
+### Modelos para o tempo do processo
+
+Modelo de Cox, desfechos concorrentes, fragilidade, seleção e censura intervalar.
+
+[Acessar o capítulo](../capitulos/P5C03-modelos-duracao.qmd)
 :::
 :::
 

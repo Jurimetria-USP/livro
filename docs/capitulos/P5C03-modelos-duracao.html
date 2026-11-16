@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="José de Jesus Filho">
+
+<title>19&nbsp; Modelos para o tempo do processo – JURIMETRIA: Dados, Métodos e Evidência para o Direito</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../capitulos/P5C02-modelos-avancados.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-dd5fa769cd8cd11b6d61b3c64d2f60b9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo light-content">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JURIMETRIA: Dados, Métodos e Evidência para o Direito</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Jurimetria-USP/livro"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/05-explicacao-fenomeno.html">Parte V — Explicação do fenômeno</a></li><li class="breadcrumb-item"><a href="../capitulos/P5C03-modelos-duracao.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelos para o tempo do processo</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../autores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sobre os autores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/01-fundamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte I — Fundamentos</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C01-metodo-cientifico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Método científico e desenho de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C02-pergunta-dados-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Da pergunta à conclusão</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C03-jurimetria-instrumento-pesquisa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Jurimetria como instrumento de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C04-litigios-desigualdades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Seleção dos litígios e desigualdades no sistema de justiça</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/02-ambiente-trabalho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte II — Ambiente de trabalho e ferramentas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C01-ambiente-computacional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ambiente computacional para a pesquisa jurimétrica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C02-r-python-linguagens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R e Python: linguagens do ambiente de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C03-positron-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C04-git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C05-agentes-projeto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Agentes de inteligência artificial no projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C06-exemplo-integrado-ecossistema.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Um exemplo integrado do ecossistema</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C07-introducao-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introdução ao R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Parte III — Construção do banco de dados</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P3C02-analise-conteudo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de conteúdo de textos jurídicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P3C03-limpeza-estruturacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Limpeza e estruturação de dados jurídicos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/04-descricao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte IV — Descrição do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C01-introducao-estatistica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C02-analise-descritiva.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Análise Descritiva</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C03-analise-sobrevivencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">O tempo do processo: análise de duração</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/05-explicacao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte V — Explicação do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C01-modelos-lineares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C02-modelos-avancados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C03-modelos-duracao.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelos para o tempo do processo</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução"><span class="header-section-number">19.1</span> Introdução</a></li>
+  <li><a href="#razão-de-taxas-e-o-modelo-de-cox" id="toc-razão-de-taxas-e-o-modelo-de-cox" class="nav-link" data-scroll-target="#razão-de-taxas-e-o-modelo-de-cox"><span class="header-section-number">19.2</span> Razão de taxas e o modelo de Cox</a>
+  <ul class="collapse">
+  <li><a href="#proporcionalidade" id="toc-proporcionalidade" class="nav-link" data-scroll-target="#proporcionalidade"><span class="header-section-number">19.2.1</span> Proporcionalidade</a></li>
+  </ul></li>
+  <li><a href="#covariáveis-no-tempo" id="toc-covariáveis-no-tempo" class="nav-link" data-scroll-target="#covariáveis-no-tempo"><span class="header-section-number">19.3</span> Covariáveis no tempo</a>
+  <ul class="collapse">
+  <li><a href="#o-viés-do-tempo-imortal" id="toc-o-viés-do-tempo-imortal" class="nav-link" data-scroll-target="#o-viés-do-tempo-imortal"><span class="header-section-number">19.3.1</span> O viés do tempo imortal</a></li>
+  </ul></li>
+  <li><a href="#desfechos-concorrentes-com-covariáveis" id="toc-desfechos-concorrentes-com-covariáveis" class="nav-link" data-scroll-target="#desfechos-concorrentes-com-covariáveis"><span class="header-section-number">19.4</span> Desfechos concorrentes com covariáveis</a>
+  <ul class="collapse">
+  <li><a href="#a-discordância-é-informação" id="toc-a-discordância-é-informação" class="nav-link" data-scroll-target="#a-discordância-é-informação"><span class="header-section-number">19.4.1</span> A discordância é informação</a></li>
+  <li><a href="#o-artefato-da-coorte-recente" id="toc-o-artefato-da-coorte-recente" class="nav-link" data-scroll-target="#o-artefato-da-coorte-recente"><span class="header-section-number">19.4.2</span> O artefato da coorte recente</a></li>
+  </ul></li>
+  <li><a href="#heterogeneidade-não-observada-o-perito" id="toc-heterogeneidade-não-observada-o-perito" class="nav-link" data-scroll-target="#heterogeneidade-não-observada-o-perito"><span class="header-section-number">19.5</span> Heterogeneidade não observada: o perito</a></li>
+  <li><a href="#seleção-e-censura-informativa" id="toc-seleção-e-censura-informativa" class="nav-link" data-scroll-target="#seleção-e-censura-informativa"><span class="header-section-number">19.6</span> Seleção e censura informativa</a></li>
+  <li><a href="#censura-intervalar" id="toc-censura-intervalar" class="nav-link" data-scroll-target="#censura-intervalar"><span class="header-section-number">19.7</span> Censura intervalar</a></li>
+  <li><a href="#amostragem-para-variáveis-caras" id="toc-amostragem-para-variáveis-caras" class="nav-link" data-scroll-target="#amostragem-para-variáveis-caras"><span class="header-section-number">19.8</span> Amostragem para variáveis caras</a></li>
+  <li><a href="#fases-com-covariáveis" id="toc-fases-com-covariáveis" class="nav-link" data-scroll-target="#fases-com-covariáveis"><span class="header-section-number">19.9</span> Fases com covariáveis</a></li>
+  <li><a href="#atividade" id="toc-atividade" class="nav-link" data-scroll-target="#atividade"><span class="header-section-number">19.10</span> Atividade</a></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">19.11</span> Síntese</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências"><span class="header-section-number">19.12</span> Referências</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/05-explicacao-fenomeno.html">Parte V — Explicação do fenômeno</a></li><li class="breadcrumb-item"><a href="../capitulos/P5C03-modelos-duracao.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelos para o tempo do processo</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelos para o tempo do processo</span></h1>
+<p class="subtitle lead">Razão de taxas, desfechos concorrentes e seleção</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>José de Jesus Filho </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">19.1</span> Introdução</h2>
+<p>O capítulo “O tempo do processo: análise de duração”, na Parte IV, descreveu o tempo do processo com curvas de pendência, incidências acumuladas e tempos médios dentro de prazos. As curvas comparam grupos, mas não separam o efeito de uma característica do efeito de outras, nem acomodam características contínuas ou que mudam ao longo do processo. Este capítulo trata dos modelos de regressão para o tempo, na mesma lógica dos modelos para variáveis qualitativas do capítulo “Modelos avançados”: lá, o exponencial de um coeficiente do logit é uma razão de chances; aqui, o exponencial de um coeficiente do modelo de Cox é uma razão de taxas.</p>
+<p>O capítulo usa a mesma base simulada, com a mesma vantagem: conhecemos o mecanismo que gerou os dados. Na simulação, as varas diferem apenas na velocidade com que sentenciam; a chance final de cada desfecho é a mesma nas quatro. O laudo pericial decide boa parte dos casos, e os peritos diferem entre si. Cada modelo será lido contra esse mecanismo.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Objetivos do capítulo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Objetivos do capítulo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ao final do capítulo, você deverá ser capaz de:</p>
+<ul>
+<li>ajustar e interpretar o modelo de Cox e verificar a proporcionalidade das taxas;</li>
+<li>classificar covariáveis pelo momento em que passam a ser conhecidas e evitar o viés do tempo imortal;</li>
+<li>distinguir as perguntas respondidas pelo modelo de Cox por desfecho e pelo modelo de Fine-Gray;</li>
+<li>usar a fragilidade para tratar a heterogeneidade entre peritos ou juízos;</li>
+<li>reconhecer problemas de seleção e de censura informativa;</li>
+<li>tratar a censura intervalar e reconhecer quando o estimador usual falha;</li>
+<li>escolher o desenho amostral para variáveis extraídas das peças processuais.</li>
+</ul>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Curvas por&lt;br/&gt;grupo] --&gt; B[Modelo de Cox:&lt;br/&gt;razão de taxas]
+  B --&gt; C[Covariáveis&lt;br/&gt;no tempo]
+  C --&gt; D[Cox por desfecho&lt;br/&gt;e Fine-Gray]
+  D --&gt; E[Fragilidade]
+  E --&gt; F[Seleção e censura&lt;br/&gt;informativa]
+  F --&gt; G[Censura&lt;br/&gt;intervalar]
+  G --&gt; H[Desenho&lt;br/&gt;amostral]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>A base é montada como no capítulo anterior: a tabela de regras transforma os movimentos no par (tempo, desfecho).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>processos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dados/duracao_processos_simulados.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>movimentos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dados/duracao_movimentos_simulados.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>regras <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>movimento,                                   <span class="sc">~</span>desfecho,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Homologado o acordo"</span>,                        <span class="st">"acordo"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Julgado procedente o pedido"</span>,                <span class="st">"procedente"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Julgado procedente em parte o pedido"</span>,       <span class="st">"procedente"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Julgado improcedente o pedido"</span>,              <span class="st">"improcedente"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Extinto o processo sem resolução do mérito"</span>, <span class="st">"extinto"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Indeferida a petição inicial"</span>,               <span class="st">"extinto"</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> processos <span class="sc">|&gt;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    movimentos <span class="sc">|&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">inner_join</span>(regras, <span class="at">by =</span> <span class="st">"movimento"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">slice_min</span>(data, <span class="at">by =</span> processo, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(processo, <span class="at">data_desfecho =</span> data, desfecho),</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">"processo"</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">desfecho =</span> <span class="fu">coalesce</span>(desfecho, <span class="st">"pendente"</span>),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_fim =</span> <span class="fu">coalesce</span>(data_desfecho, data_coleta),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">meses =</span> <span class="fu">as.numeric</span>(data_fim <span class="sc">-</span> data_distribuicao) <span class="sc">/</span> <span class="fl">30.4375</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">status =</span> <span class="fu">as.integer</span>(desfecho <span class="sc">!=</span> <span class="st">"pendente"</span>),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">desfecho_3 =</span> <span class="fu">factor</span>(</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">case_when</span>(desfecho <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"acordo"</span>, <span class="st">"procedente"</span>) <span class="sc">~</span> <span class="st">"exito"</span>, <span class="at">.default =</span> desfecho),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"pendente"</span>, <span class="st">"exito"</span>, <span class="st">"improcedente"</span>, <span class="st">"extinto"</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">faixa_valor =</span> <span class="fu">factor</span>(</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>      faixa_valor,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"até R$ 30 mil"</span>, <span class="st">"R$ 30 mil a R$ 100 mil"</span>, <span class="st">"acima de R$ 100 mil"</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">coorte =</span> <span class="fu">paste0</span>(</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">format</span>(data_distribuicao, <span class="st">"%Y"</span>), <span class="st">"-S"</span>,</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">if_else</span>(<span class="fu">as.integer</span>(<span class="fu">format</span>(data_distribuicao, <span class="st">"%m"</span>)) <span class="sc">&lt;=</span> <span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="razão-de-taxas-e-o-modelo-de-cox" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="razão-de-taxas-e-o-modelo-de-cox"><span class="header-section-number">19.2</span> Razão de taxas e o modelo de Cox</h2>
+<p>O modelo de Cox (Cox, 1972) descreve a taxa de resolutividade de um processo com características <span class="math inline">\(x\)</span> como uma taxa básica, comum a todos, multiplicada por um fator que depende das características:</p>
+<p><span class="math display">\[
+h(t \mid x) = h_0(t) \exp(\beta_1 x_1 + \dots + \beta_p x_p)
+\]</span></p>
+<p>A taxa básica <span class="math inline">\(h_0(t)\)</span> pode ter qualquer forma e não é estimada diretamente; por isso o modelo é chamado de semiparamétrico. O que se estima são os coeficientes, e o exponencial de cada um é uma razão de taxas: quantas vezes a taxa de um processo com a característica é maior que a de um processo sem ela, mantidas as demais. A suposição central é que essa razão seja constante ao longo do tempo, a proporcionalidade das taxas.</p>
+<p>O modelo abaixo tem como ato qualquer desfecho e, como covariáveis, a vara, a faixa do valor da causa, o pedido de tutela de urgência e a inicial instruída com documentos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Surv</span>(meses, status) <span class="sc">~</span> vara <span class="sc">+</span> faixa_valor <span class="sc">+</span> tutela_pedida <span class="sc">+</span> inicial_instruida,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> base</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cox)<span class="sc">$</span>conf.int[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>)] <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                  exp(coef) lower .95 upper .95
+varaVara B                             0.82      0.74      0.91
+varaVara C                             0.72      0.64      0.80
+varaVara D                             0.48      0.43      0.54
+faixa_valorR$ 30 mil a R$ 100 mil      0.92      0.84      1.00
+faixa_valoracima de R$ 100 mil         0.84      0.76      0.93
+tutela_pedidaTRUE                      1.19      1.10      1.29
+inicial_instruidaTRUE                  0.84      0.78      0.91</code></pre>
+</div>
+</div>
+<p>A razão de taxas da Vara D em relação à Vara A é 0,48: entre os processos ainda pendentes, num mesmo momento, a taxa de desfecho na Vara D é cerca de metade da taxa na Vara A, mantidas as demais características. Processos com pedido de tutela têm taxa 19% maior.</p>
+<p>Três leituras devem ser evitadas. A razão de taxas não é razão entre durações: uma razão de 0,5 não significa que o processo dure o dobro. Não é razão entre probabilidades de ganhar: o ato aqui é qualquer desfecho, inclusive a improcedência. E não é uma medida de quanto um processo individual seria mais rápido em outra vara, porque compara conjuntos de processos ainda pendentes, cuja composição muda com o tempo (Hernán, 2010).</p>
+<section id="proporcionalidade" class="level3" data-number="19.2.1">
+<h3 data-number="19.2.1" class="anchored" data-anchor-id="proporcionalidade"><span class="header-section-number">19.2.1</span> Proporcionalidade</h3>
+<p>A função <code>cox.zph()</code> testa se cada razão de taxas é constante no tempo, com base nos resíduos de Schoenfeld (Therneau; Grambsch, 2000).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(cox)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  chisq df       p
+vara              35.37  3 1.0e-07
+faixa_valor        2.18  2    0.34
+tutela_pedida      1.56  1    0.21
+inicial_instruida 37.02  1 1.2e-09
+GLOBAL            78.97  7 2.2e-14</code></pre>
+</div>
+</div>
+<p>A proporcionalidade é rejeitada para a vara. Não é surpresa: no capítulo anterior, a razão de taxas entre as Varas D e A era próxima de 0,8 nos primeiros quatro meses, quando quase todo desfecho é extinção, e caía para cerca de 0,6 depois. O gráfico dos resíduos mostra o coeficiente da Vara D mudando ao longo do tempo; a linha pontilhada é o coeficiente único estimado pelo modelo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>zph_coeficientes <span class="ot">&lt;-</span> <span class="fu">cox.zph</span>(cox, <span class="at">terms =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(zph_coeficientes, <span class="at">var =</span> <span class="st">"varaVara D"</span>, <span class="at">resid =</span> <span class="cn">FALSE</span>, <span class="at">xlab =</span> <span class="st">"Meses"</span>, <span class="at">ylab =</span> <span class="st">"Coeficiente da Vara D (escala log)"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fu">coef</span>(cox)[[<span class="st">"varaVara D"</span>]], <span class="at">lty =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="P5C03-modelos-duracao_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Coeficiente da Vara D ao longo do tempo (resíduos de Schoenfeld). Dados simulados.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Há três saídas usuais. A primeira é estratificar o modelo pela variável que viola a suposição, deixando cada estrato com a sua taxa básica; o efeito dela deixa de ser estimado, mas o das demais fica ajustado. A segunda é dividir o seguimento em períodos e estimar um coeficiente por período. A terceira é modelar o efeito como função do tempo. A segunda é a mais fácil de comunicar:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>periodos <span class="ot">&lt;-</span> <span class="fu">survSplit</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Surv</span>(meses, status) <span class="sc">~</span> ., <span class="at">data =</span> base, <span class="at">cut =</span> <span class="dv">4</span>, <span class="at">episode =</span> <span class="st">"periodo"</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, \(k) {</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coxph</span>(</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Surv</span>(tstart, meses, status) <span class="sc">~</span> vara <span class="sc">+</span> faixa_valor <span class="sc">+</span> tutela_pedida <span class="sc">+</span> inicial_instruida,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">filter</span>(periodos, periodo <span class="sc">==</span> k)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coef</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">exp</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>}) <span class="sc">|&gt;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_names</span>(<span class="st">"Até 4 meses"</span>, <span class="st">"Depois de 4 meses"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(<span class="at">termo =</span> <span class="fu">names</span>(<span class="fu">coef</span>(cox)), <span class="at">.name_repair =</span> <span class="st">"minimal"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">relocate</span>(termo)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+  termo                             `Até 4 meses` `Depois de 4 meses`
+  &lt;chr&gt;                                     &lt;dbl&gt;               &lt;dbl&gt;
+1 varaVara B                                 0.82                0.82
+2 varaVara C                                 0.76                0.7 
+3 varaVara D                                 0.82                0.42
+4 faixa_valorR$ 30 mil a R$ 100 mil          0.9                 0.93
+5 faixa_valoracima de R$ 100 mil             0.93                0.82
+6 tutela_pedidaTRUE                          1.05                1.23
+7 inicial_instruidaTRUE                      0.36                1.04</code></pre>
+</div>
+</div>
+<p>A razão de taxas da Vara D é 0,82 até o quarto mês e 0,42 depois. O coeficiente único do primeiro modelo era uma média ponderada das duas fases. A inicial instruída, que o teste também apontou, mostra outro padrão: reduz a taxa de desfecho no início (0,36), porque evita a emenda e o indeferimento, e quase não a altera depois (1,04).</p>
+<p>A saída do <code>summary()</code> também traz a concordância, a proporção de pares de processos em que o modelo ordena corretamente quem termina primeiro. Ela é útil para comparar modelos ajustados na mesma base, mas não tem limiar universal de qualidade, e um modelo explicativo pode ser útil com concordância modesta.</p>
+</section>
+</section>
+<section id="covariáveis-no-tempo" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="covariáveis-no-tempo"><span class="header-section-number">19.3</span> Covariáveis no tempo</h2>
+<p>No processo judicial, cada característica passa a ser conhecida numa data, e essa data decide o papel dela no modelo. A pergunta é: o que se sabe no termo inicial?</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tipo</th>
+<th>Exemplos</th>
+<th>Conhecida em</th>
+<th>Papel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Ex ante</td>
+<td>Valor da causa, pedido de tutela, documentos da inicial</td>
+<td>Distribuição</td>
+<td>Previsão: é o que se sabe quando a ação é proposta</td>
+</tr>
+<tr class="even">
+<td>Designada depois, ao acaso</td>
+<td>Vara (sorteio na distribuição)</td>
+<td>Logo após a distribuição</td>
+<td>Controle: o sorteio a torna independente das características ex ante</td>
+</tr>
+<tr class="odd">
+<td>Designada depois, por escolha</td>
+<td>Perito nomeado pelo juiz</td>
+<td>Semanas ou meses depois</td>
+<td>Controle, com cautela: a escolha pode depender do caso</td>
+</tr>
+<tr class="even">
+<td>Mediadora</td>
+<td>Conclusão do laudo</td>
+<td>No meio do processo</td>
+<td>Explicação do caminho; nunca como covariável fixa no termo inicial</td>
+</tr>
+</tbody>
+</table>
+<section id="o-viés-do-tempo-imortal" class="level3" data-number="19.3.1">
+<h3 data-number="19.3.1" class="anchored" data-anchor-id="o-viés-do-tempo-imortal"><span class="header-section-number">19.3.1</span> O viés do tempo imortal</h3>
+<p>Suponha que se queira medir o efeito de um laudo favorável sobre a taxa de êxito. O atalho é criar uma variável fixa, “teve laudo favorável”, e incluí-la no modelo como se fosse conhecida na distribuição. O atalho credita ao grupo do laudo favorável todo o tempo anterior ao laudo, durante o qual nenhum êxito podia ocorrer. Esse tempo é chamado de imortal, porque é garantido pela própria definição do grupo (Suissa, 2008).</p>
+<p>A forma correta é tratar o laudo como covariável dependente do tempo: o processo conta no grupo sem laudo favorável até a data do laudo e no grupo com laudo favorável depois dela. A função <code>tmerge()</code> divide o seguimento de cada processo nesses trechos.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>laudos <span class="ot">&lt;-</span> movimentos <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(movimento <span class="sc">==</span> <span class="st">"Laudo pericial juntado"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(processo, <span class="at">data_laudo =</span> data)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>com_laudo <span class="ot">&lt;-</span> base <span class="sc">|&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(laudos, <span class="at">by =</span> <span class="st">"processo"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="fu">row_number</span>(),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">t_laudo =</span> <span class="fu">as.numeric</span>(data_laudo <span class="sc">-</span> data_distribuicao) <span class="sc">/</span> <span class="fl">30.4375</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">laudo_favoravel_fixo =</span> <span class="sc">!</span><span class="fu">is.na</span>(t_laudo) <span class="sc">&amp;</span> real_laudo_favoravel <span class="sc">%in%</span> <span class="cn">TRUE</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>trechos <span class="ot">&lt;-</span> <span class="fu">tmerge</span>(</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(com_laudo, id, vara),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(com_laudo, id, meses, desfecho_3),</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> id,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">exito =</span> <span class="fu">event</span>(meses, <span class="fu">as.integer</span>(desfecho_3 <span class="sc">==</span> <span class="st">"exito"</span>))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>trechos <span class="ot">&lt;-</span> <span class="fu">tmerge</span>(</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  trechos,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  com_laudo <span class="sc">|&gt;</span> <span class="fu">filter</span>(laudo_favoravel_fixo) <span class="sc">|&gt;</span> <span class="fu">select</span>(id, t_laudo),</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> id,</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">laudo_favoravel =</span> <span class="fu">tdc</span>(t_laudo)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">fixo =</span> <span class="fu">exp</span>(<span class="fu">coef</span>(<span class="fu">coxph</span>(<span class="fu">Surv</span>(meses, desfecho_3 <span class="sc">==</span> <span class="st">"exito"</span>) <span class="sc">~</span> laudo_favoravel_fixo, <span class="at">data =</span> com_laudo))),</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">dependente_do_tempo =</span> <span class="fu">exp</span>(<span class="fu">coef</span>(<span class="fu">coxph</span>(<span class="fu">Surv</span>(tstart, tstop, exito) <span class="sc">~</span> laudo_favoravel, <span class="at">data =</span> trechos)))</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      fixo.laudo_favoravel_fixoTRUE dependente_do_tempo.laudo_favoravel 
+                               14.3                                38.9 </code></pre>
+</div>
+</div>
+<p>As duas especificações dão razões muito diferentes: 14,3 com a variável fixa e 38,9 com a dependente do tempo. Só a segunda compara, em cada momento, processos que já têm laudo favorável com processos que não têm. A primeira dilui o efeito nos meses anteriores ao laudo e, além disso, condiciona no futuro, porque classifica cada processo pelo que aconteceu depois do termo inicial.</p>
+<p>O exemplo usa a coluna <code>real_laudo_favoravel</code>, que só a simulação tem. Em dados reais, a conclusão do laudo precisa ser extraída da peça, com o cuidado de análise de conteúdo discutido no capítulo “Análise de conteúdo de textos jurídicos”.</p>
+</section>
+</section>
+<section id="desfechos-concorrentes-com-covariáveis" class="level2" data-number="19.4">
+<h2 data-number="19.4" class="anchored" data-anchor-id="desfechos-concorrentes-com-covariáveis"><span class="header-section-number">19.4</span> Desfechos concorrentes com covariáveis</h2>
+<p>Com desfechos concorrentes, há dois modelos de regressão, e eles respondem a perguntas diferentes (Lau; Cole; Gange, 2009; Austin; Lee; Fine, 2016).</p>
+<ul>
+<li><strong>Modelo de Cox por desfecho.</strong> Modela a taxa de resolutividade de um desfecho entre os processos ainda pendentes, tratando os outros desfechos como censura. Responde: entre os processos pendentes, com que velocidade o êxito acontece?</li>
+<li><strong>Modelo de Fine-Gray.</strong> Modela a incidência acumulada do desfecho (Fine; Gray, 1999). Responde: qual a probabilidade de o processo terminar em êxito até o tempo <span class="math inline">\(t\)</span>? O processo que teve outro desfecho permanece no conjunto de referência, com peso decrescente, porque também ele faz parte de quem não teve êxito.</li>
+</ul>
+<p>No Cox por desfecho, tratar os outros desfechos como censura não é erro, porque o modelo estima uma taxa, e não uma probabilidade acumulada. O erro, visto no capítulo anterior, é transformar essa taxa em probabilidade com <span class="math inline">\(1 - \hat S(t)\)</span>.</p>
+<p>Em R, o Cox por desfecho é um <code>coxph()</code> com o êxito como ato. O Fine-Gray é obtido com a função <code>finegray()</code>, que monta os pesos, seguida de um <code>coxph()</code> ponderado.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>formula_exito <span class="ot">&lt;-</span> <span class="er">~</span> vara <span class="sc">+</span> faixa_valor <span class="sc">+</span> tutela_pedida <span class="sc">+</span> inicial_instruida <span class="sc">+</span> coorte</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cox_exito <span class="ot">&lt;-</span> <span class="fu">coxph</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update</span>(formula_exito, <span class="fu">Surv</span>(meses, desfecho_3 <span class="sc">==</span> <span class="st">"exito"</span>) <span class="sc">~</span> .),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> base</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>dados_fg <span class="ot">&lt;-</span> <span class="fu">finegray</span>(<span class="fu">Surv</span>(meses, desfecho_3) <span class="sc">~</span> ., <span class="at">data =</span> base, <span class="at">etype =</span> <span class="st">"exito"</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>fine_gray <span class="ot">&lt;-</span> <span class="fu">coxph</span>(</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update</span>(formula_exito, <span class="fu">Surv</span>(fgstart, fgstop, fgstatus) <span class="sc">~</span> .),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> fgwt, <span class="at">data =</span> dados_fg</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>comparacao <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">termo =</span> <span class="fu">names</span>(<span class="fu">coef</span>(cox_exito)),</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">cox_por_desfecho =</span> <span class="fu">exp</span>(<span class="fu">coef</span>(cox_exito)),</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">fine_gray =</span> <span class="fu">exp</span>(<span class="fu">coef</span>(fine_gray))</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>comparacao <span class="sc">|&gt;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">round</span>(x, <span class="dv">2</span>)))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   termo                             cox_por_desfecho fine_gray
+   &lt;chr&gt;                                        &lt;dbl&gt;     &lt;dbl&gt;
+ 1 varaVara B                                    0.91      1.05
+ 2 varaVara C                                    0.73      0.93
+ 3 varaVara D                                    0.5       0.81
+ 4 faixa_valorR$ 30 mil a R$ 100 mil             0.96      1   
+ 5 faixa_valoracima de R$ 100 mil                0.89      1.01
+ 6 tutela_pedidaTRUE                             1.2       1.08
+ 7 inicial_instruidaTRUE                         1.2       1.48
+ 8 coorte2024-S2                                 0.96      0.88
+ 9 coorte2025-S1                                 0.89      0.73
+10 coorte2025-S2                                 0.95      0.3 </code></pre>
+</div>
+</div>
+<section id="a-discordância-é-informação" class="level3" data-number="19.4.1">
+<h3 data-number="19.4.1" class="anchored" data-anchor-id="a-discordância-é-informação"><span class="header-section-number">19.4.1</span> A discordância é informação</h3>
+<p>Para a Vara D, o Cox por desfecho dá 0,50, e o Fine-Gray, 0,81. Os dois estão corretos. A Vara D produz êxito em ritmo bem menor que a Vara A entre os processos pendentes, porque sentencia devagar. Mas também produz improcedências devagar e mantém mais processos pendentes por mais tempo, e esses processos ainda podem ter êxito. Por isso a incidência acumulada de êxito fica menos distante da Vara A do que a taxa sugere. Pelo mecanismo da simulação, quando todos os processos terminarem, a incidência de êxito será a mesma nas quatro varas.</p>
+<p>Quando os dois modelos concordam, a conclusão é robusta. Quando discordam, a discordância descreve o mecanismo. Por isso, recomenda-se relatar os dois, para todos os desfechos (Latouche et al., 2013).</p>
+<p>Quando as curvas de incidência de dois grupos se cruzam ou se aproximam com o tempo, uma razão única resume mal a diferença: é uma média, ponderada no tempo, de um efeito que muda. Para comunicar, a incidência acumulada em horizontes fixos é mais clara que um coeficiente.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>aj_vara <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, desfecho_3) <span class="sc">~</span> vara, <span class="at">data =</span> base)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">summary</span>(aj_vara, <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">12</span>, <span class="dv">15</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vara =</span> <span class="fu">str_remove</span>(s<span class="sc">$</span>strata, <span class="st">"vara="</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">meses =</span> s<span class="sc">$</span>time,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">exito =</span> <span class="fu">round</span>(s<span class="sc">$</span>pstate[, <span class="dv">2</span>], <span class="dv">3</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> meses, <span class="at">values_from =</span> exito, <span class="at">names_prefix =</span> <span class="st">"meses_"</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  vara   meses_6 meses_9 meses_12 meses_15
+  &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1 Vara A   0.102   0.352    0.477    0.511
+2 Vara B   0.106   0.352    0.499    0.553
+3 Vara C   0.092   0.318    0.454    0.504
+4 Vara D   0.079   0.265    0.388    0.468</code></pre>
+</div>
+</div>
+</section>
+<section id="o-artefato-da-coorte-recente" class="level3" data-number="19.4.2">
+<h3 data-number="19.4.2" class="anchored" data-anchor-id="o-artefato-da-coorte-recente"><span class="header-section-number">19.4.2</span> O artefato da coorte recente</h3>
+<p>A coorte distribuída no segundo semestre de 2025 tem razão de 0,30 no Fine-Gray, e de 0,95 no Cox por desfecho. Os processos dessa coorte não são diferentes; foram observados por pouco tempo. O Fine-Gray calcula os pesos dos processos que tiveram outro desfecho a partir de uma única distribuição de censura para toda a base. Quando a censura depende de uma covariável, como a coorte, os pesos ficam errados para os grupos com seguimento curto, e o modelo pune a coorte nova pela falta de tempo para acumular êxitos.</p>
+<p>A correção é estimar a distribuição de censura dentro de cada coorte, com <code>strata()</code> na fórmula do <code>finegray()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dados_fg_estratos <span class="ot">&lt;-</span> <span class="fu">finegray</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Surv</span>(meses, desfecho_3) <span class="sc">~</span> . <span class="sc">+</span> <span class="fu">strata</span>(coorte), <span class="at">data =</span> base, <span class="at">etype =</span> <span class="st">"exito"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>fine_gray_estratos <span class="ot">&lt;-</span> <span class="fu">coxph</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">update</span>(formula_exito, <span class="fu">Surv</span>(fgstart, fgstop, fgstatus) <span class="sc">~</span> .),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> fgwt, <span class="at">data =</span> dados_fg_estratos</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(fine_gray_estratos))[<span class="fu">c</span>(<span class="st">"varaVara D"</span>, <span class="st">"coorte2025-S2"</span>)] <span class="sc">|&gt;</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   varaVara D coorte2025-S2 
+         0.81          1.07 </code></pre>
+</div>
+</div>
+<p>Com a censura estimada por coorte, a razão da coorte recente vai para 1,07.</p>
+</section>
+</section>
+<section id="heterogeneidade-não-observada-o-perito" class="level2" data-number="19.5">
+<h2 data-number="19.5" class="anchored" data-anchor-id="heterogeneidade-não-observada-o-perito"><span class="header-section-number">19.5</span> Heterogeneidade não observada: o perito</h2>
+<p>Na base, o perito é a fonte de variação mais forte do desfecho. Entre os peritos com 25 ou mais processos decididos, a taxa de êxito varia bastante:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>por_perito <span class="ot">&lt;-</span> base <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(perito), desfecho_3 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"exito"</span>, <span class="st">"improcedente"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">decididos =</span> <span class="fu">n</span>(), <span class="at">exito =</span> <span class="fu">mean</span>(desfecho_3 <span class="sc">==</span> <span class="st">"exito"</span>), <span class="at">.by =</span> perito)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>por_perito <span class="sc">|&gt;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(decididos <span class="sc">&gt;=</span> <span class="dv">25</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">peritos =</span> <span class="fu">n</span>(), <span class="at">menor =</span> <span class="fu">min</span>(exito), <span class="at">maior =</span> <span class="fu">max</span>(exito))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  peritos menor maior
+    &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1      30 0.286  0.85</code></pre>
+</div>
+</div>
+<p>Uma forma de tratar essa variação seria incluir um coeficiente por perito. Muitos peritos têm poucos casos, e os coeficientes deles seriam instáveis. A alternativa é a fragilidade, o nome que a análise de duração dá a um efeito aleatório: supõe-se que cada perito multiplica a taxa por um fator sorteado de uma distribuição comum, e estima-se a variância dessa distribuição. As estimativas dos peritos com poucos casos são puxadas para a média na proporção da informação que eles têm, o que se chama encolhimento.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fragilidade <span class="ot">&lt;-</span> <span class="fu">coxph</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Surv</span>(meses, desfecho_3 <span class="sc">==</span> <span class="st">"exito"</span>) <span class="sc">~</span> vara <span class="sc">+</span> inicial_instruida <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">frailty</span>(<span class="fu">coalesce</span>(perito, <span class="st">"sem perito"</span>), <span class="at">distribution =</span> <span class="st">"gaussian"</span>),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> base</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>fragilidade</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(meses, desfecho_3 == "exito") ~ vara + inicial_instruida + 
+    frailty(coalesce(perito, "sem perito"), distribution = "gaussian"), 
+    data = base)
+
+                              coef se(coef)      se2    Chisq   DF       p
+varaVara B                 -0.0995   0.0751   0.0749   1.7566  1.0  0.1850
+varaVara C                 -0.3321   0.0768   0.0766  18.7129  1.0 1.5e-05
+varaVara D                 -0.6535   0.0797   0.0794  67.3100  1.0 2.3e-16
+inicial_instruidaTRUE       0.1768   0.0575   0.0574   9.4440  1.0  0.0021
+frailty(coalesce(perito,                             102.6710 26.2 5.3e-11
+
+Iterations: 6 outer, 18 Newton-Raphson
+     Variance of random effect= 0.0845 
+Degrees of freedom for terms=  3.0  1.0 26.2 
+Likelihood ratio test=236  on 30.2 df, p=&lt;2e-16
+n= 4000, number of events= 1393 </code></pre>
+</div>
+</div>
+<p>A variância estimada é 0,085 na escala do logaritmo da taxa, o que corresponde a um desvio-padrão de 0,29. Um perito um desvio-padrão acima da média tem taxa de êxito 1,34 vez a do perito médio. Na simulação, o perito altera a chance de o laudo ser favorável, e não diretamente a taxa de êxito; a fragilidade capta o efeito que chega à taxa.</p>
+<p>Três cuidados acompanham o modelo:</p>
+<ul>
+<li><strong>Convergência.</strong> O ajuste por verossimilhança penalizada pode não convergir. O pacote <code>coxme</code> estima o mesmo modelo por outro método e serve de conferência.</li>
+<li><strong>Erro de classificação.</strong> A fragilidade absorve toda variação não explicada, inclusive a que vem de erros na identificação dos desfechos. Se a regra de classificação piora, a variância do perito aumenta.</li>
+<li><strong>Perito ausente.</strong> Processos extintos antes da perícia ou recentes não têm perito, e entram aqui num nível único, “sem perito”. Ter perito depende do tempo transcorrido, e o tratamento adequado é o perito como covariável dependente do tempo, que entra a partir da nomeação.</li>
+</ul>
+</section>
+<section id="seleção-e-censura-informativa" class="level2" data-number="19.6">
+<h2 data-number="19.6" class="anchored" data-anchor-id="seleção-e-censura-informativa"><span class="header-section-number">19.6</span> Seleção e censura informativa</h2>
+<p>Os métodos dos dois capítulos supõem censura não informativa, condicional às covariáveis. Quando o motivo de um processo não ter desfecho observado está ligado ao desfecho que ele teria, a suposição falha. Diante dos processos pendentes, o impulso de quem vem da econometria é um modelo de seleção. Na maior parte dos casos, ele não é a ferramenta principal: o problema é de tempo, e não de seleção, porque o processo pendente ainda vai ter desfecho, e o que mais explica estar pendente é a idade do processo, informação que o modelo de duração já usa.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ferramenta</th>
+<th>Pressuposto</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Desfechos concorrentes com censura</td>
+<td>Censura independente, condicional às covariáveis</td>
+<td>Modelo principal</td>
+</tr>
+<tr class="even">
+<td>Ponderação pelo inverso da probabilidade de censura (IPCW)</td>
+<td>A censura depende só de variáveis observadas</td>
+<td>Classificadores de previsão, como regressão logística ou árvores, num horizonte fixo (Robins; Finkelstein, 2000)</td>
+</tr>
+<tr class="odd">
+<td>Modelo de seleção de Heckman</td>
+<td>Erros normais correlacionados e uma variável que afete a seleção, mas não o desfecho</td>
+<td>Teste de robustez (Heckman, 1979)</td>
+</tr>
+<tr class="even">
+<td>Fragilidade compartilhada entre tempo e desfecho</td>
+<td>Um mesmo efeito latente do caso afeta os dois</td>
+<td>Versão do modelo de seleção para dados de duração</td>
+</tr>
+</tbody>
+</table>
+<p>A seleção pesa de verdade em pontos específicos do processo. A taxa de êxito entre os processos julgados no mérito é condicional a terem chegado ao mérito, e a desistência e o abandono provavelmente se concentram nos casos fracos, por razões que os dados não registram.</p>
+<p>A definição da população também é uma seleção. Excluir da análise os processos que, depois da distribuição, foram remetidos a outro juízo é condicionar no futuro. A exclusão só se justifica se a causa da remessa já existia na distribuição, como o domicílio do autor fora da comarca; nesse caso, a população é definida por uma característica de base que só se revela depois.</p>
+<p>Há, por fim, uma seleção que nenhum modelo corrige. A base contém apenas quem foi ao Judiciário. Um modelo ajustado nesses processos e aplicado a quem ainda não ajuizou supõe que os dois grupos se parecem. Sem um denominador, como os pedidos negados na via administrativa, essa diferença fica fora do alcance dos dados (ver o capítulo “Seleção dos litígios e desigualdades no sistema de justiça”).</p>
+</section>
+<section id="censura-intervalar" class="level2" data-number="19.7">
+<h2 data-number="19.7" class="anchored" data-anchor-id="censura-intervalar"><span class="header-section-number">19.7</span> Censura intervalar</h2>
+<p>A perícia é, em muitos processos, a etapa mais longa, e nem sempre tem fim observado. A nomeação do perito aparece nos movimentos; a juntada do laudo, em muitos sistemas, aparece como “Documento juntado”, título usado para qualquer documento. A duração até o laudo só é conhecida dentro de um intervalo.</p>
+<p>Na base simulada, o laudo tem movimento próprio. Para treinar, vamos fingir que ele não tem. O limite esquerdo do intervalo é a nomeação do perito. O limite direito é o primeiro movimento que só acontece depois do laudo: a ordem para as partes se manifestarem sobre ele, a proposta de acordo, a homologação ou a conclusão para sentença. O tempo é medido em semanas.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>depois_do_laudo <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Determinada a manifestação sobre o laudo"</span>, <span class="st">"Proposta de acordo juntada"</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Homologado o acordo"</span>, <span class="st">"Conclusos para sentença"</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>intervalos <span class="ot">&lt;-</span> movimentos <span class="sc">|&gt;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(movimento <span class="sc">==</span> <span class="st">"Nomeado perito"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">nomeacao =</span> <span class="fu">min</span>(data), <span class="at">.by =</span> processo) <span class="sc">|&gt;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    movimentos <span class="sc">|&gt;</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(movimento <span class="sc">%in%</span> depois_do_laudo) <span class="sc">|&gt;</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="at">sinal =</span> <span class="fu">min</span>(data), <span class="at">.by =</span> processo),</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">"processo"</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(<span class="fu">select</span>(processos, processo, data_distribuicao, real_data_laudo), <span class="at">by =</span> <span class="st">"processo"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">esquerda =</span> <span class="fu">floor</span>(<span class="fu">as.numeric</span>(nomeacao <span class="sc">-</span> data_distribuicao) <span class="sc">/</span> <span class="dv">7</span>),</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">direita =</span> <span class="fu">ceiling</span>(<span class="fu">as.numeric</span>(sinal <span class="sc">-</span> data_distribuicao) <span class="sc">/</span> <span class="dv">7</span>),</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">real =</span> <span class="fu">as.numeric</span>(real_data_laudo <span class="sc">-</span> data_distribuicao) <span class="sc">/</span> <span class="dv">7</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O estimador de Turnbull (1976) generaliza o Kaplan-Meier para intervalos (Sun, 2006). No <code>survival</code>, basta informar os dois limites com <code>type = "interval2"</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>turnbull <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(esquerda, direita, <span class="at">type =</span> <span class="st">"interval2"</span>) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> intervalos)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O atalho é imputar o ponto médio do intervalo. A tabela compara as medianas com a verdade, que a simulação conhece.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>medianas <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">metodo =</span> <span class="fu">c</span>(<span class="st">"Verdade"</span>, <span class="st">"Turnbull"</span>, <span class="st">"Ponto médio"</span>, <span class="st">"Limite direito"</span>),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">semanas =</span> <span class="fu">c</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">median</span>(intervalos<span class="sc">$</span>real),</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unname</span>(<span class="fu">quantile</span>(turnbull, <span class="fl">0.5</span>)<span class="sc">$</span>quantile),</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">median</span>((intervalos<span class="sc">$</span>esquerda <span class="sc">+</span> intervalos<span class="sc">$</span>direita) <span class="sc">/</span> <span class="dv">2</span>),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">median</span>(intervalos<span class="sc">$</span>direita)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>medianas</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  metodo         semanas
+  &lt;chr&gt;            &lt;dbl&gt;
+1 Verdade           23.4
+2 Turnbull          14.5
+3 Ponto médio       17.5
+4 Limite direito    26  </code></pre>
+</div>
+</div>
+<p>O Turnbull erra muito para menos (14,5 semanas, contra 23,4). O ponto médio também erra (17,5). A causa está num pressuposto do estimador: a inspeção não informativa. O Turnbull supõe que as datas que formam o intervalo não dependem de onde o evento está dentro dele. Aqui, o limite direito é provocado pelo próprio laudo: o juiz manda as partes se manifestarem porque o laudo chegou. O limite direito é, na verdade, a data do laudo mais um atraso de reação do cartório. Em símbolos, <span class="math inline">\(R = T + D\)</span>, e o problema é de medida com erro, e não de inspeção independente. O limite esquerdo, por sua vez, está longe do laudo, e o estimador espalha a probabilidade pelo intervalo inteiro.</p>
+<p>A saída é medir o atraso <span class="math inline">\(D\)</span> onde a data exata é conhecida. Basta uma subamostra em que a data do laudo seja lida na própria peça, por exemplo no carimbo de protocolo do PDF. Com o atraso típico, corrige-se o limite direito.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>validacao <span class="ot">&lt;-</span> intervalos <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">200</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>atraso <span class="ot">&lt;-</span> <span class="fu">median</span>(validacao<span class="sc">$</span>direita <span class="sc">-</span> validacao<span class="sc">$</span>real)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">atraso_semanas =</span> atraso,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">mediana_corrigida =</span> <span class="fu">median</span>(intervalos<span class="sc">$</span>direita <span class="sc">-</span> atraso),</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">verdade =</span> <span class="fu">median</span>(intervalos<span class="sc">$</span>real)</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   atraso_semanas mediana_corrigida           verdade 
+         2.285714         23.714286         23.428571 </code></pre>
+</div>
+</div>
+<p>A correção pela mediana do atraso é a forma mais simples de deconvolução. A subamostra também serve para medir quanto as regras que deduzem o intervalo acertam: se a data exata cai dentro do intervalo, qual a largura dos intervalos e qual dos movimentos genéricos era o laudo. Os pacotes <code>icenReg</code> e <code>interval</code> oferecem modelos de regressão e testes para censura intervalar, e o <code>msm</code> trata modelos de fases observados em datas de inspeção.</p>
+</section>
+<section id="amostragem-para-variáveis-caras" class="level2" data-number="19.8">
+<h2 data-number="19.8" class="anchored" data-anchor-id="amostragem-para-variáveis-caras"><span class="header-section-number">19.8</span> Amostragem para variáveis caras</h2>
+<p>As características mais informativas de um processo estão nas peças: o tipo de pedido, a prova que acompanha a inicial, a conclusão do laudo. Ler as peças tem custo, mesmo com modelos de linguagem, porque o acesso aos autos é limitado e a leitura precisa ser validada (capítulo “Análise de conteúdo de textos jurídicos”). O desenho da amostra decide que perguntas sobre o tempo podem ser respondidas.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Desenho</th>
+<th>Como se faz</th>
+<th>Responde</th>
+<th>Não responde</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Caso-controle pelo desfecho</td>
+<td>Sorteiam-se processos de cada desfecho</td>
+<td>Que fatores distinguem os desfechos, com reponderação</td>
+<td>Nada sobre tempo: só há processos com desfecho</td>
+</tr>
+<tr class="even">
+<td>Todos os decididos</td>
+<td>Lêem-se os processos com desfecho</td>
+<td>Taxas entre os decididos</td>
+<td>Incidência: a característica falta justamente nos pendentes</td>
+</tr>
+<tr class="odd">
+<td>Coorte com pendentes</td>
+<td>Sorteiam-se processos distribuídos, decididos ou não</td>
+<td>Incidência acumulada e modelos com a característica</td>
+<td>Nada falta, salvo a precisão de uma amostra</td>
+</tr>
+<tr class="even">
+<td>Caso-coorte</td>
+<td>Subcoorte sorteada mais todos os casos do desfecho de interesse, com pesos</td>
+<td>Modelos para um desfecho raro, com menos leituras</td>
+<td>Vários desfechos ao mesmo tempo</td>
+</tr>
+</tbody>
+</table>
+<p>O desenho de coorte é o que a análise de duração exige: a característica precisa existir para quem teve e para quem não teve desfecho, com o mesmo critério de seleção. O caso-coorte (Prentice, 1986) é uma alternativa mais econômica quando o interesse está num único desfecho raro.</p>
+<p>Na base, suponha que “inicial instruída com documentos” só pudesse ser obtida lendo a petição inicial, e que houvesse orçamento para 600 leituras. A amostra de coorte é sorteada pelo hash do número do processo: os 600 menores valores do hash. O sorteio é estável. Se o universo crescer, os sorteados continuam sorteados, e os novos entram ou não pela mesma regra.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>amostra <span class="ot">&lt;-</span> base <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hash =</span> cli<span class="sc">::</span><span class="fu">hash_md5</span>(processo)) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(hash, <span class="at">n =</span> <span class="dv">600</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>incidencia_12 <span class="ot">&lt;-</span> <span class="cf">function</span>(dados) {</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, desfecho_3) <span class="sc">~</span> inicial_instruida, <span class="at">data =</span> dados)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(fit, <span class="at">times =</span> <span class="dv">12</span>)<span class="sc">$</span>pstate[, <span class="dv">2</span>]</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">inicial_instruida =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">base_inteira =</span> <span class="fu">incidencia_12</span>(base),</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">amostra_de_coorte =</span> <span class="fu">incidencia_12</span>(amostra)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">round</span>(x, <span class="dv">3</span>)))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  inicial_instruida base_inteira amostra_de_coorte
+  &lt;lgl&gt;                    &lt;dbl&gt;             &lt;dbl&gt;
+1 FALSE                    0.372             0.379
+2 TRUE                     0.509             0.53 </code></pre>
+</div>
+</div>
+<p>Com 15% dos processos, a amostra de coorte reproduz a incidência de êxito aos 12 meses de cada grupo. Uma amostra de caso-controle de mesmo tamanho não permitiria calcular incidência alguma, e uma amostra só de decididos não teria a característica para os pendentes.</p>
+</section>
+<section id="fases-com-covariáveis" class="level2" data-number="19.9">
+<h2 data-number="19.9" class="anchored" data-anchor-id="fases-com-covariáveis"><span class="header-section-number">19.9</span> Fases com covariáveis</h2>
+<p>O modelo de Cox se estende ao modelo de fases do capítulo anterior: cada passagem entre fases ganha a sua própria taxa e os seus próprios coeficientes. No <code>survival</code>, basta ajustar o <code>coxph()</code> sobre os dados em trechos, com o identificador do processo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>trechos_fases <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  com_laudo <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transmute</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>      processo, vara, <span class="at">inicio =</span> <span class="dv">0</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">fim =</span> <span class="fu">coalesce</span>(t_laudo, meses),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">estado =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(t_laudo), desfecho, <span class="st">"laudo"</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  com_laudo <span class="sc">|&gt;</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(t_laudo)) <span class="sc">|&gt;</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transmute</span>(processo, vara, <span class="at">inicio =</span> t_laudo, <span class="at">fim =</span> meses, <span class="at">estado =</span> desfecho)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fim <span class="sc">&gt;</span> inicio) <span class="sc">|&gt;</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">estado =</span> <span class="fu">factor</span>(</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    estado,</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"pendente"</span>, <span class="st">"laudo"</span>, <span class="st">"acordo"</span>, <span class="st">"procedente"</span>, <span class="st">"improcedente"</span>, <span class="st">"extinto"</span>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>cox_fases <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(inicio, fim, estado) <span class="sc">~</span> vara, <span class="at">data =</span> trechos_fases, <span class="at">id =</span> processo)</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">passagem =</span> <span class="fu">names</span>(<span class="fu">coef</span>(cox_fases)),</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">razao =</span> <span class="fu">exp</span>(<span class="fu">coef</span>(cox_fases))</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(passagem, <span class="st">"Vara D"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">passagem =</span> <span class="fu">str_remove</span>(passagem, <span class="st">"varaVara D_"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_replace_all</span>(<span class="fu">c</span>(<span class="st">"1:2"</span> <span class="ot">=</span> <span class="st">"inicial → laudo"</span>, <span class="st">"1:6"</span> <span class="ot">=</span> <span class="st">"inicial → extinto"</span>,</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"2:3"</span> <span class="ot">=</span> <span class="st">"laudo → acordo"</span>, <span class="st">"2:4"</span> <span class="ot">=</span> <span class="st">"laudo → procedente"</span>,</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"2:5"</span> <span class="ot">=</span> <span class="st">"laudo → improcedente"</span>)),</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">razao =</span> <span class="fu">round</span>(razao, <span class="dv">2</span>)</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  passagem             razao
+  &lt;chr&gt;                &lt;dbl&gt;
+1 inicial → laudo       0.94
+2 laudo → acordo        0.81
+3 laudo → procedente    0.29
+4 laudo → improcedente  0.31
+5 inicial → extinto     0.78</code></pre>
+</div>
+</div>
+<p>O modelo localiza a diferença da Vara D. A chegada do laudo tem praticamente o mesmo ritmo que na Vara A; a sentença depois do laudo, procedente ou improcedente, sai a cerca de um terço do ritmo. O modelo de um só desfecho diz que a Vara D é mais lenta; o modelo de fases diz em que fase.</p>
+</section>
+<section id="atividade" class="level2" data-number="19.10">
+<h2 data-number="19.10" class="anchored" data-anchor-id="atividade"><span class="header-section-number">19.10</span> Atividade</h2>
+<p>A atividade usa a base simulada.</p>
+<ol type="1">
+<li><strong>Cox.</strong> Ajuste o modelo de Cox para qualquer desfecho com a faixa do valor da causa como única covariável. Verifique a proporcionalidade. A razão de taxas muda entre os períodos?</li>
+<li><strong>Tempo imortal.</strong> Repita a comparação da seção sobre covariáveis no tempo usando a nomeação do perito como variável. A variável fixa “teve perito” aumenta ou diminui a taxa de desfecho? Por quê?</li>
+<li><strong>Dois modelos.</strong> Ajuste o Cox por desfecho e o Fine-Gray para a extinção. A inicial instruída tem o mesmo efeito nos dois? Interprete.</li>
+<li><strong>Fragilidade.</strong> Ajuste o modelo com fragilidade do perito excluindo os processos sem perito. A variância muda? Que processos foram excluídos e o que isso implica?</li>
+<li><strong>Censura intervalar.</strong> Refaça a correção do atraso com subamostras de validação de 50, 100 e 400 processos. A partir de que tamanho a mediana corrigida se estabiliza?</li>
+<li><strong>Amostragem.</strong> Sorteie uma amostra de caso-controle com 300 processos com êxito e 300 com improcedência. Que pergunta sobre a inicial instruída ela responde, e qual não responde?</li>
+</ol>
+</section>
+<section id="síntese" class="level2" data-number="19.11">
+<h2 data-number="19.11" class="anchored" data-anchor-id="síntese"><span class="header-section-number">19.11</span> Síntese</h2>
+<p>O modelo de Cox estima razões de taxas: velocidades relativas entre processos pendentes, e não razões entre durações ou entre probabilidades de ganhar. A suposição de que a razão é constante deve ser verificada e, quando falha, a estratificação ou a divisão do seguimento em períodos mostram o efeito em cada fase. As covariáveis se distinguem pelo momento em que passam a ser conhecidas; uma característica que surge no meio do processo, como o laudo, entra como covariável dependente do tempo, sob pena de viés do tempo imortal.</p>
+<p>Com desfechos concorrentes, o Cox por desfecho mede velocidade, e o Fine-Gray, incidência acumulada; a discordância entre eles descreve o mecanismo, e o Fine-Gray exige cuidado quando a censura difere entre grupos. A fragilidade trata a heterogeneidade entre peritos ou juízos com encolhimento. A censura intervalar pede estimadores próprios, e o estimador usual falha quando o limite do intervalo é provocado pelo próprio evento; a validação com a data exata numa subamostra corrige o problema. Por fim, características extraídas das peças só servem à análise de duração se lidas numa amostra de coorte, que inclua os processos pendentes.</p>
+</section>
+<section id="referências" class="level2" data-number="19.12">
+<h2 data-number="19.12" class="anchored" data-anchor-id="referências"><span class="header-section-number">19.12</span> Referências</h2>
+<ul>
+<li>Austin, P. C.; Lee, D. S.; Fine, J. P. Introduction to the analysis of survival data in the presence of competing risks. <em>Circulation</em>, v. 133, n.&nbsp;6, p.&nbsp;601-609, 2016. <a href="https://doi.org/10.1161/CIRCULATIONAHA.115.017719" class="uri">https://doi.org/10.1161/CIRCULATIONAHA.115.017719</a></li>
+<li>Cox, D. R. Regression models and life-tables. <em>Journal of the Royal Statistical Society: Series B (Methodological)</em>, v. 34, n.&nbsp;2, p.&nbsp;187-202, 1972. <a href="https://doi.org/10.1111/j.2517-6161.1972.tb00899.x" class="uri">https://doi.org/10.1111/j.2517-6161.1972.tb00899.x</a></li>
+<li>Fine, J. P.; Gray, R. J. A proportional hazards model for the subdistribution of a competing risk. <em>Journal of the American Statistical Association</em>, v. 94, n.&nbsp;446, p.&nbsp;496-509, 1999. <a href="https://doi.org/10.1080/01621459.1999.10474144" class="uri">https://doi.org/10.1080/01621459.1999.10474144</a></li>
+<li>Heckman, J. J. Sample selection bias as a specification error. <em>Econometrica</em>, v. 47, n.&nbsp;1, p.&nbsp;153-161, 1979. <a href="https://doi.org/10.2307/1912352" class="uri">https://doi.org/10.2307/1912352</a></li>
+<li>Hernán, M. A. The hazards of hazard ratios. <em>Epidemiology</em>, v. 21, n.&nbsp;1, p.&nbsp;13-15, 2010. <a href="https://doi.org/10.1097/EDE.0b013e3181c1ea43" class="uri">https://doi.org/10.1097/EDE.0b013e3181c1ea43</a></li>
+<li>Latouche, A.; Allignol, A.; Beyersmann, J.; Labopin, M.; Fine, J. P. A competing risks analysis should report results on all cause-specific hazards and cumulative incidence functions. <em>Journal of Clinical Epidemiology</em>, v. 66, n.&nbsp;6, p.&nbsp;648-653, 2013. <a href="https://doi.org/10.1016/j.jclinepi.2012.09.017" class="uri">https://doi.org/10.1016/j.jclinepi.2012.09.017</a></li>
+<li>Lau, B.; Cole, S. R.; Gange, S. J. Competing risk regression models for epidemiologic data. <em>American Journal of Epidemiology</em>, v. 170, n.&nbsp;2, p.&nbsp;244-256, 2009. <a href="https://doi.org/10.1093/aje/kwp107" class="uri">https://doi.org/10.1093/aje/kwp107</a></li>
+<li>Prentice, R. L. A case-cohort design for epidemiologic cohort studies and disease prevention trials. <em>Biometrika</em>, v. 73, n.&nbsp;1, p.&nbsp;1-11, 1986. <a href="https://doi.org/10.1093/biomet/73.1.1" class="uri">https://doi.org/10.1093/biomet/73.1.1</a></li>
+<li>Robins, J. M.; Finkelstein, D. M. Correcting for noncompliance and dependent censoring in an AIDS clinical trial with inverse probability of censoring weighted (IPCW) log-rank tests. <em>Biometrics</em>, v. 56, n.&nbsp;3, p.&nbsp;779-788, 2000. <a href="https://doi.org/10.1111/j.0006-341X.2000.00779.x" class="uri">https://doi.org/10.1111/j.0006-341X.2000.00779.x</a></li>
+<li>Suissa, S. Immortal time bias in pharmacoepidemiology. <em>American Journal of Epidemiology</em>, v. 167, n.&nbsp;4, p.&nbsp;492-499, 2008. <a href="https://doi.org/10.1093/aje/kwm324" class="uri">https://doi.org/10.1093/aje/kwm324</a></li>
+<li>Sun, J. <em>The statistical analysis of interval-censored failure time data</em>. New York: Springer, 2006.</li>
+<li>Therneau, T. M.; Grambsch, P. M. <em>Modeling survival data: extending the Cox model</em>. New York: Springer, 2000. <a href="https://doi.org/10.1007/978-1-4757-3294-8" class="uri">https://doi.org/10.1007/978-1-4757-3294-8</a></li>
+<li>Turnbull, B. W. The empirical distribution function with arbitrarily grouped, censored and truncated data. <em>Journal of the Royal Statistical Society: Series B (Methodological)</em>, v. 38, n.&nbsp;3, p.&nbsp;290-295, 1976. <a href="https://doi.org/10.1111/j.2517-6161.1976.tb01597.x" class="uri">https://doi.org/10.1111/j.2517-6161.1976.tb01597.x</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/P5C02-modelos-avancados.html" class="pagination-link" aria-label="Modelos Avançados">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
