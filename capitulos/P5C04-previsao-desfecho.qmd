@@ -1,0 +1,524 @@
+---
+title: "Prever o desfecho do processo"
+subtitle: "Classificação dentro da análise de duração"
+format: html
+author:
+- José de Jesus Filho
+execute:
+  eval: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+knitr::opts_knit$set(root.dir = normalizePath(".."))
+```
+
+```{r}
+#| include: false
+library(tidyverse)
+library(survival)
+library(xgboost)
+
+num <- function(x, d = 0) {
+  format(round(x, d), nsmall = d, big.mark = ".", decimal.mark = ",")
+}
+pct <- function(x, d = 1) paste0(num(100 * x, d), "%")
+theme_set(theme_minimal(base_size = 12))
+```
+
+## Introdução
+
+Uma das perguntas mais frequentes sobre processos parece de classificação: este processo vai ter êxito? Bastaria um rótulo por processo (teve êxito ou não teve), um conjunto de características e um classificador, como a regressão logística do capítulo "Modelos avançados" ou um algoritmo de aprendizado de máquina.
+
+A dificuldade está no rótulo. Numa base de processos, uma parte grande ainda não terminou. Para esses processos não existe rótulo; existe só uma informação parcial: até a data da coleta, nada aconteceu. Isso não é defeito da base. Toda base de processos é uma fotografia tirada no meio do filme: processos entram o tempo todo, os mais novos estão sempre no começo, a duração varia muito, e cada processo termina de uma entre várias formas, cada uma com velocidade própria.
+
+Este capítulo parte de uma ideia: não se trata de escolher entre classificação e análise de duração. A pergunta continua sendo de classificação, mas formulada com um horizonte, como "qual a probabilidade de êxito em até 12 meses?", e respondida com as ferramentas da análise de duração, que sabem usar a informação parcial dos processos pendentes. O capítulo retoma os conceitos dos capítulos "O tempo do processo: análise de duração" e "Modelos para o tempo do processo".
+
+::: {.callout-note title="Objetivos do capítulo"}
+
+Ao final do capítulo, você deverá ser capaz de:
+
+- formular uma pergunta de classificação com horizonte;
+- explicar por que os atalhos usuais para lidar com processos pendentes erram e em que direção;
+- calcular os pesos pelo inverso da probabilidade de censura e relacioná-los à incidência acumulada;
+- escolher entre três caminhos para prever o desfecho com características dos processos;
+- avaliar modelos com AUC, Brier e calibração corrigidos para a censura;
+- reconhecer por que a calibração revela erros que a AUC esconde.
+
+:::
+
+```{mermaid}
+flowchart LR
+  A[Coorte por<br/>distribuição] --> B[Horizonte<br/>de previsão]
+  B --> C[Tempo e<br/>desfecho]
+  C --> D[Pesos pela<br/>censura]
+  D --> E[Modelo]
+  E --> F[Avaliação fora<br/>da amostra]
+  F --> G[Calibração]
+```
+
+## Um exemplo com dez processos
+
+Dez processos, inventados, e horizonte de 12 meses. O tempo é contado da distribuição até o desfecho ou, para os pendentes, até a data da coleta. O êxito inclui o acordo e a procedência.
+
+```{r}
+dez <- tribble(
+  ~processo, ~meses, ~desfecho,
+  "A",  3, "exito",
+  "B",  5, "exito",
+  "C",  2, "extinto",
+  "D",  8, "improcedente",
+  "E", 10, "exito",
+  "F", 11, "improcedente",
+  "G",  4, "pendente",
+  "H",  6, "pendente",
+  "I", 14, "pendente",
+  "J",  9, "pendente"
+) |>
+  mutate(desfecho_f = factor(
+    desfecho, levels = c("pendente", "exito", "improcedente", "extinto")
+  ))
+```
+
+O processo I está pendente, mas já passou dos 12 meses sem decisão: sabemos que não teve êxito no horizonte. G, H e J estão pendentes há menos de 12 meses: ainda podem ter.
+
+Qual é a probabilidade de êxito em até 12 meses? Há quatro atalhos comuns.
+
+```{r}
+H <- 12
+exito_12 <- dez$desfecho == "exito" & dez$meses <= H
+conhecido_12 <- dez$desfecho != "pendente" | dez$meses >= H
+
+km_exito <- survfit(Surv(meses, desfecho == "exito") ~ 1, data = dez)
+aj_dez <- survfit(Surv(meses, desfecho_f) ~ 1, data = dez)
+
+atalhos <- tibble(
+  conta = c(
+    "Pendente conta como derrota",
+    "Descartar quem não tem desfecho conhecido em 12 meses",
+    "Olhar só os decididos",
+    "1 - Kaplan-Meier do êxito, outros desfechos como censura",
+    "Incidência acumulada (Aalen-Johansen)"
+  ),
+  exito = c(
+    mean(exito_12),
+    mean(exito_12[conhecido_12]),
+    mean(dez$desfecho[dez$desfecho != "pendente"] == "exito"),
+    1 - summary(km_exito, times = H)$surv,
+    summary(aj_dez, times = H)$pstate[, 2]
+  )
+)
+
+atalhos
+```
+
+```{r}
+#| include: false
+aj10 <- atalhos$exito[5]
+stopifnot(abs(aj10 - 0.3971) < 0.001)
+```
+
+Os quatro atalhos dão 30%, 43%, 50% e 49%. A conta correta dá `r pct(aj10)`. Cada atalho erra numa direção.
+
+## Por que cada atalho erra
+
+**Pendente como derrota.** G, H e J ainda podem ter êxito. Tratá-los como derrota subestima o êxito, e o erro é maior entre os processos mais novos. Num modelo, o efeito é traiçoeiro: o classificador aprende que processo recente perde, e a data de distribuição vira um preditor espúrio. Qualquer característica associada à idade do processo herda o viés, como uma vara criada há pouco ou uma mudança de prática de uma das partes.
+
+**Descartar os pendentes ou olhar só os decididos.** Os processos que sobram são os que terminaram rápido, e os desfechos não têm a mesma velocidade. A extinção sai cedo; o acordo, logo depois do laudo; a improcedência, depois de alegações e sentença. Quem foi descartado tende a ser o processo que ainda seria julgado improcedente, e o êxito fica inflado. É a armadilha da taxa entre os decididos, discutida no capítulo "O tempo do processo: análise de duração".
+
+**O 1 − Kaplan-Meier com os outros desfechos como censura.** O estimador trata C (extinto) e D e F (improcedentes) como processos que ainda poderiam ter êxito mais tarde. Não podem. Com desfechos concorrentes, o 1 − Kaplan-Meier superestima a incidência, e em processo judicial eles sempre existem.
+
+Tudo isso supõe que a base foi montada pela distribuição: todos os processos distribuídos num período, acompanhados até a data da coleta. Uma base montada pelas sentenças ou pelo acervo numa data já está viesada antes de qualquer modelo, e nenhum dos métodos deste capítulo corrige esse viés (ver a seção sobre o desenho da coleta no capítulo "O tempo do processo: análise de duração").
+
+## A conta certa: pesos pela censura
+
+O estimador de Aalen-Johansen percorre o tempo em ordem e, a cada desfecho, divide pelo número de processos que ainda estavam em observação naquele momento. O pendente conta enquanto é observado e sai da conta quando a observação acaba, sem virar derrota e sem ser descartado.
+
+Uma forma equivalente, mais útil para o que vem depois, são os pesos pelo inverso da probabilidade de censura (em inglês, *inverse probability of censoring weighting*, IPCW).
+
+1. Estime, pelo Kaplan-Meier, a probabilidade de um processo continuar sendo observado até cada tempo. Aqui o "ato" é ser censurado, isto é, estar pendente na coleta. Chame essa probabilidade de $G(t)$.
+2. Cada processo com situação conhecida no horizonte recebe peso $1 / G(t)$, em que $t$ é o tempo do desfecho, ou 12 meses para quem passou do horizonte sem decisão. Os processos censurados antes do horizonte recebem peso zero.
+3. A probabilidade de êxito é a proporção ponderada de êxitos.
+
+```{r}
+censura <- survfit(Surv(meses, desfecho == "pendente") ~ 1, data = dez)
+G <- stepfun(censura$time, c(1, censura$surv), right = TRUE)
+
+pesos <- dez |>
+  mutate(
+    t = pmin(meses, H),
+    G_t = G(t),
+    peso = if_else(desfecho != "pendente" | meses >= H, 1 / G_t, 0)
+  ) |>
+  arrange(t)
+
+pesos |>
+  select(processo, t, desfecho, G_t, peso) |>
+  mutate(across(c(G_t, peso), \(x) round(x, 3)))
+```
+
+```{r}
+#| include: false
+ipcw10 <- with(pesos, sum(peso * (desfecho == "exito" & meses <= H)) / sum(peso))
+stopifnot(abs(ipcw10 - aj10) < 1e-6, abs(sum(pesos$peso) - 10) < 0.01)
+```
+
+O processo G sai da observação aos 4 meses, e $G(t)$ cai para 0,875; H sai aos 6 meses (0,729); J, aos 9 (0,547). A soma dos pesos volta a dar `r num(sum(pesos$peso), 1)`, o número de processos. A proporção ponderada de êxitos é `r pct(ipcw10)`, exatamente a incidência acumulada de Aalen-Johansen.
+
+A intuição: quem foi observado por muito tempo representa também os processos parecidos que saíram da observação antes. Os três pendentes sumiram, mas o peso deles foi redistribuído entre os que continuaram sendo acompanhados. Nenhum processo é tratado como derrota, e nenhum é descartado sem compensação.
+
+A hipótese por trás dos pesos é que sair da observação não tem relação com o desfecho. Ela vale quando a censura vem apenas da data da coleta: o processo está pendente porque é novo, e não porque vai perder. Se a pendência tiver a ver com o desfecho, como um processo parado por causa de um laudo desfavorável, a correção fica incompleta. Por isso convém deixar entrar no cálculo de $G$ as características que explicam a duração.
+
+## Os atalhos na base simulada
+
+A base simulada dos capítulos anteriores permite repetir as contas em 4.000 processos e compará-las com a verdade, que só a simulação conhece. A base é montada como antes.
+
+```{r}
+processos <- read_csv("dados/duracao_processos_simulados.csv")
+movimentos <- read_csv("dados/duracao_movimentos_simulados.csv")
+
+regras <- tribble(
+  ~movimento,                                   ~desfecho,
+  "Homologado o acordo",                        "acordo",
+  "Julgado procedente o pedido",                "procedente",
+  "Julgado procedente em parte o pedido",       "procedente",
+  "Julgado improcedente o pedido",              "improcedente",
+  "Extinto o processo sem resolução do mérito", "extinto",
+  "Indeferida a petição inicial",               "extinto"
+)
+
+base <- processos |>
+  left_join(
+    movimentos |>
+      inner_join(regras, by = "movimento") |>
+      slice_min(data, by = processo, with_ties = FALSE) |>
+      select(processo, data_desfecho = data, desfecho),
+    by = "processo"
+  ) |>
+  mutate(
+    desfecho = coalesce(desfecho, "pendente"),
+    meses = as.numeric(coalesce(data_desfecho, data_coleta) - data_distribuicao) / 30.4375,
+    status = as.integer(desfecho != "pendente"),
+    desfecho_3 = factor(
+      case_when(desfecho %in% c("acordo", "procedente") ~ "exito", .default = desfecho),
+      levels = c("pendente", "exito", "improcedente", "extinto")
+    ),
+    faixa_valor = factor(
+      faixa_valor,
+      levels = c("até R$ 30 mil", "R$ 30 mil a R$ 100 mil", "acima de R$ 100 mil")
+    ),
+    exito_12 = desfecho_3 == "exito" & meses <= H,
+    conhecido_12 = status == 1 | meses >= H,
+    real_meses = as.numeric(real_data_desfecho - data_distribuicao) / 30.4375,
+    real_exito_12 = real_meses <= H & real_desfecho %in% c("acordo", "procedente")
+  )
+
+aj_base <- survfit(Surv(meses, desfecho_3) ~ 1, data = base)
+km_base <- survfit(Surv(meses, desfecho_3 == "exito") ~ 1, data = base)
+
+atalhos_base <- tibble(
+  conta = c(
+    "Verdade (simulação)", "Pendente conta como derrota",
+    "Descartar quem não tem desfecho conhecido em 12 meses",
+    "Olhar só os decididos", "1 - Kaplan-Meier, outros desfechos como censura",
+    "Incidência acumulada (Aalen-Johansen)"
+  ),
+  exito = c(
+    mean(base$real_exito_12),
+    mean(base$exito_12),
+    mean(base$exito_12[base$conhecido_12]),
+    mean(base$desfecho_3[base$status == 1] == "exito"),
+    1 - summary(km_base, times = H)$surv,
+    summary(aj_base, times = H)$pstate[, 2]
+  )
+)
+
+atalhos_base
+```
+
+```{r}
+#| include: false
+ab <- set_names(atalhos_base$exito, c("real", "derrota", "descarta", "decididos", "km", "aj"))
+stopifnot(
+  abs(ab[["aj"]] - ab[["real"]]) < 0.02,
+  abs(ab[["descarta"]] - ab[["real"]]) < 0.02,
+  ab[["derrota"]] < ab[["real"]] - 0.08,
+  ab[["decididos"]] > ab[["real"]] + 0.03,
+  ab[["km"]] > ab[["real"]] + 0.1
+)
+```
+
+A verdade é `r pct(ab[["real"]])`, e o Aalen-Johansen chega a `r pct(ab[["aj"]])`. Contar os pendentes como derrota dá `r pct(ab[["derrota"]])`; olhar só os decididos, `r pct(ab[["decididos"]])`; o 1 − Kaplan-Meier, `r pct(ab[["km"]])`. Sobre os mesmos 4.000 processos, a diferença entre o pior e o melhor atalho é de `r num(100 * (ab[["km"]] - ab[["derrota"]]), 0)` pontos percentuais.
+
+Descartar os processos sem desfecho conhecido deu `r pct(ab[["descarta"]])`, perto da verdade. Na base simulada, as formas de término e as características dos processos não mudam entre as coortes de distribuição, e o descarte remove sobretudo processos novos, parecidos com os antigos. O resultado não deve tranquilizar: basta que as coortes difiram, ou que a censura dependa de outra coisa além da idade, para o viés aparecer. Os pesos dão a resposta correta nas duas situações.
+
+## Três caminhos para prever com características
+
+Com características de cada processo, a pergunta passa a ser: qual a probabilidade de êxito em até 12 meses para um processo com este perfil? Há três caminhos, e todos respondem à mesma pergunta.
+
+**Um modelo de desfechos concorrentes, lido no horizonte.** O modelo de Fine-Gray, do capítulo "Modelos para o tempo do processo", devolve para cada perfil a curva de incidência acumulada do êxito; lê-se o valor em 12 meses. Usa toda a informação, inclusive a ordem e a velocidade dos desfechos, e tem coeficientes interpretáveis. Uma versão flexível é a floresta aleatória de sobrevivência para desfechos concorrentes (Ishwaran et al., 2014).
+
+**Um classificador comum, com rótulo no horizonte e pesos.** O rótulo é "teve êxito até 12 meses". Os processos censurados antes do horizonte ficam fora, e os demais entram com peso $1/G(t)$. Daí em diante é classificação usual: regressão logística, XGBoost (Chen; Guestrin, 2016) ou qualquer algoritmo que aceite pesos (Vock et al., 2016). A vantagem é a liberdade de escolher o algoritmo; o custo é que a informação parcial dos pendentes só volta pela compensação dos pesos.
+
+**Pseudo-observações.** Cada processo recebe um rótulo contínuo, calculado pela variação da incidência acumulada quando ele é retirado da base (Andersen; Pohar Perme, 2010). Qualquer regressão pode usar esse rótulo. A função `pseudo()` do pacote `survival` faz o cálculo.
+
+```{r}
+pseudo_12 <- pseudo(survfit(Surv(meses, desfecho_3) ~ 1, data = base, id = processo), times = H)
+
+base_pseudo <- base |>
+  mutate(pseudo_exito = pseudo_12[, "exito"])
+
+lm(pseudo_exito ~ parecer_tecnico + meses_desde_fato + inicial_instruida + vara, data = base_pseudo) |>
+  coef() |>
+  round(3)
+```
+
+```{r}
+#| include: false
+coef_pseudo <- coef(lm(pseudo_exito ~ parecer_tecnico + meses_desde_fato + inicial_instruida + vara, data = base_pseudo))
+stopifnot(abs(mean(base_pseudo$pseudo_exito) - ab[["aj"]]) < 1e-6, coef_pseudo[["parecer_tecnicoTRUE"]] > 0.08)
+```
+
+A média das pseudo-observações é igual à incidência acumulada, e os coeficientes da regressão linear se leem em pontos percentuais: o parecer técnico juntado à inicial soma `r num(100 * coef_pseudo[["parecer_tecnicoTRUE"]], 0)` pontos à probabilidade de êxito em 12 meses, mantidas as demais características.
+
+O erro é o quarto caminho: um classificador treinado com um dos atalhos. Ele roda, produz números, e os números estão errados de um jeito que a avaliação usual não mostra.
+
+## Como medir o desempenho
+
+As medidas usuais de classificação também precisam da correção, porque os processos usados para avaliar o modelo têm os mesmos pendentes. A regra é a mesma: cada processo pesa $1/G(t)$, e os censurados antes do horizonte ficam fora.
+
+### AUC dependente do tempo
+
+A AUC responde a esta pergunta: sorteados um processo que teve êxito até 12 meses e um que não teve, qual a chance de o modelo dar ao primeiro um escore maior? Vai de 0,5 (acaso) a 1 (ordenação perfeita). Com censura (Heagerty; Lumley; Pepe, 2000; Blanche; Dartigues; Jacqmin-Gadda, 2013):
+
+- **Casos:** êxito até 12 meses.
+- **Controles:** improcedência ou extinção até 12 meses, ou 12 meses sem decisão.
+- **Fora:** pendentes com menos de 12 meses.
+
+Cada par de caso e controle vale o produto dos pesos dos dois. A AUC é a soma dos pesos dos pares em que o caso tem escore maior, dividida pela soma dos pesos de todos os pares; empates valem meio.
+
+```{r}
+auc_ipcw <- function(escore, exito, peso) {
+  manter <- peso > 0
+  escore <- escore[manter]; exito <- exito[manter]; peso <- peso[manter]
+  casos <- which(exito)
+  controles <- which(!exito)
+  acerto <- outer(escore[casos], escore[controles], ">") +
+    0.5 * outer(escore[casos], escore[controles], "==")
+  pesos_pares <- outer(peso[casos], peso[controles])
+  sum(acerto * pesos_pares) / sum(pesos_pares)
+}
+```
+
+No exemplo de dez processos, suponha que um modelo tenha dado os escores abaixo.
+
+```{r}
+escores <- c(A = 0.70, B = 0.50, C = 0.30, D = 0.60, E = 0.40, F = 0.20, I = 0.45)
+
+dez_avaliados <- pesos |>
+  filter(peso > 0) |>
+  mutate(escore = escores[processo], exito = desfecho == "exito" & meses <= H)
+
+c(
+  sem_peso = auc_ipcw(dez_avaliados$escore, dez_avaliados$exito, rep(1, nrow(dez_avaliados))),
+  com_peso = auc_ipcw(dez_avaliados$escore, dez_avaliados$exito, dez_avaliados$peso)
+)
+```
+
+Sem peso, 9 dos 12 pares estão na ordem certa, e a AUC seria 0,75. Com peso, é 0,69. O erro do modelo está em E, o êxito tardio, que vale mais porque representa também os pendentes.
+
+### Brier e calibração
+
+O escore de Brier com pesos é o erro quadrático médio da probabilidade prevista (Graf et al., 1999). Para quem teve êxito no horizonte, o erro é $(1 - p)^2$; para quem não teve, $p^2$; cada termo é multiplicado pelo peso. Sozinho, o Brier é difícil de ler. Compara-se ao de um modelo nulo, que dá a todos a taxa geral: o Brier escalonado é $1 - \text{Brier}_\text{modelo} / \text{Brier}_\text{nulo}$. Zero indica que o modelo não ajuda; valores positivos medem quanto ajuda.
+
+```{r}
+brier_ipcw <- function(prob, exito, peso) sum(peso * (exito - prob)^2) / sum(peso)
+```
+
+A calibração compara o previsto com o observado (Van Calster et al., 2019). Ordenam-se os processos pelo escore, dividem-se em cinco grupos, e em cada grupo compara-se a média prevista com a incidência observada, estimada pelo Aalen-Johansen dentro do grupo, e nunca pela proporção de êxitos entre os decididos. Um modelo calibrado diz 15% onde acontecem 15%, e 55% onde acontecem 55%.
+
+```{r}
+calibracao <- function(prob, dados, grupos = 5) {
+  dados |>
+    mutate(grupo = ntile(prob, grupos), previsto = prob) |>
+    group_by(grupo) |>
+    summarise(
+      previsto = mean(previsto),
+      observado = {
+        s <- summary(survfit(Surv(meses, desfecho_3) ~ 1, data = pick(everything())), times = H, extend = TRUE)
+        if (max(meses) < H) NA_real_ else s$pstate[, 2]
+      }
+    )
+}
+```
+
+### Sempre fora da amostra
+
+As medidas se calculam em validação cruzada: o modelo é ajustado em quatro quintos da base e avaliado no quinto restante, cinco vezes, com as mesmas partições para todos os modelos. Avaliar na própria base de ajuste premia quem decorou os dados. Os pesos de avaliação usam $G$ estimado na base inteira; os de ajuste, $G$ estimado apenas na parte usada para ajustar.
+
+## Comparação na base simulada
+
+A comparação usa apenas o que se sabe na distribuição: vara, faixa do valor da causa, pedido de tutela, inicial instruída com documentos, parecer técnico juntado à inicial e meses entre o fato e o ajuizamento. Cinco modelos são comparados: o Fine-Gray lido em 12 meses, a regressão logística com pesos, o XGBoost com pesos e duas logísticas que usam atalhos, uma que descarta os pendentes e outra que os conta como derrota.
+
+```{r}
+formula_base <- ~ vara + faixa_valor + tutela_pedida + inicial_instruida +
+  parecer_tecnico + meses_desde_fato
+
+pesos_ipcw <- function(dados) {
+  g <- survfit(Surv(meses, status == 0) ~ 1, data = dados)
+  G <- stepfun(g$time, c(1, g$surv), right = TRUE)
+  if_else(dados$conhecido_12, 1 / G(pmin(dados$meses, H)), 0)
+}
+
+base$peso <- pesos_ipcw(base)
+
+set.seed(2026)
+dobra <- sample(rep(1:5, length.out = nrow(base)))
+modelos <- c("Fine-Gray", "Logística com pesos", "XGBoost com pesos",
+             "Logística: descarta pendentes", "Logística: pendente é derrota")
+previsto <- matrix(NA_real_, nrow(base), length(modelos), dimnames = list(NULL, modelos))
+
+for (k in 1:5) {
+  ajuste <- base[dobra != k, ]
+  teste <- base[dobra == k, ]
+  ajuste$peso <- pesos_ipcw(ajuste)
+
+  dados_fg <- finegray(
+    Surv(meses, desfecho_3) ~ .,
+    data = select(ajuste, meses, desfecho_3, all_of(all.vars(formula_base))),
+    etype = "exito"
+  )
+  fg <- coxph(update(formula_base, Surv(fgstart, fgstop, fgstatus) ~ .), weights = fgwt, data = dados_fg)
+  previsto[dobra == k, 1] <- 1 - summary(survfit(fg, newdata = teste), times = H)$surv
+
+  logistica <- glm(update(formula_base, exito_12 ~ .), family = quasibinomial, weights = peso, data = ajuste)
+  previsto[dobra == k, 2] <- predict(logistica, teste, type = "response")
+
+  x_ajuste <- model.matrix(formula_base, ajuste)[ajuste$peso > 0, -1]
+  xgb <- xgb.train(
+    params = list(objective = "binary:logistic", max_depth = 3, learning_rate = 0.05, nthread = 2),
+    data = xgb.DMatrix(
+      x_ajuste,
+      label = as.numeric(ajuste$exito_12[ajuste$peso > 0]),
+      weight = ajuste$peso[ajuste$peso > 0]
+    ),
+    nrounds = 150
+  )
+  previsto[dobra == k, 3] <- predict(xgb, xgb.DMatrix(model.matrix(formula_base, teste)[, -1]))
+
+  descarta <- glm(update(formula_base, exito_12 ~ .), family = binomial, data = filter(ajuste, conhecido_12))
+  previsto[dobra == k, 4] <- predict(descarta, teste, type = "response")
+
+  derrota <- glm(update(formula_base, exito_12 ~ .), family = binomial, data = ajuste)
+  previsto[dobra == k, 5] <- predict(derrota, teste, type = "response")
+}
+```
+
+A taxa geral, usada pelo modelo nulo do Brier, é a incidência acumulada da base inteira.
+
+```{r}
+taxa_geral <- summary(aj_base, times = H)$pstate[, 2]
+brier_nulo <- brier_ipcw(rep(taxa_geral, nrow(base)), base$exito_12, base$peso)
+
+desempenho <- map_dfr(modelos, \(m) tibble(
+  modelo = m,
+  auc = auc_ipcw(previsto[, m], base$exito_12, base$peso),
+  brier_escalonado = 1 - brier_ipcw(previsto[, m], base$exito_12, base$peso) / brier_nulo,
+  auc_contra_verdade = auc_ipcw(previsto[, m], base$real_exito_12, rep(1, nrow(base)))
+))
+
+desempenho |>
+  mutate(across(where(is.numeric), \(x) round(x, 3)))
+```
+
+```{r}
+#| include: false
+d <- set_names(desempenho$auc, c("fg", "log", "xgb", "desc", "derr"))
+b <- set_names(desempenho$brier_escalonado, c("fg", "log", "xgb", "desc", "derr"))
+v <- set_names(desempenho$auc_contra_verdade, c("fg", "log", "xgb", "desc", "derr"))
+stopifnot(
+  abs(d[["derr"]] - d[["log"]]) < 0.02,
+  b[["derr"]] < b[["log"]] - 0.03,
+  abs(d[["log"]] - v[["log"]]) < 0.02
+)
+```
+
+A coluna `auc_contra_verdade` existe apenas porque a simulação conhece o desfecho de todos os processos em 12 meses, inclusive dos pendentes. Para os modelos corretos, a AUC com pesos fica muito perto dela: na logística com pesos, `r num(d[["log"]], 3)` contra `r num(v[["log"]], 3)`. Os pesos recuperam, a partir dos dados censurados, a medida que se obteria se todos os processos tivessem terminado.
+
+Os três modelos corretos têm desempenho parecido. O XGBoost não ganha: com seis características e poucas interações, sobra pouca não linearidade para ele encontrar. Em bases com mais características, ele pode ganhar na ordenação, mas não tem coeficientes legíveis; o Fine-Gray e as pseudo-observações continuam sendo as ferramentas para dizer quais fatores pesam e quanto.
+
+O ponto central está na logística que trata os pendentes como derrota. A AUC dela é praticamente igual à dos modelos corretos (`r num(d[["derr"]], 3)`), porque a AUC só olha a ordem dos escores, e a ordem sobrevive ao viés. O Brier escalonado, porém, é `r num(b[["derr"]], 3)`, pior que o do modelo nulo. A calibração mostra por quê.
+
+```{r}
+map_dfr(modelos[c(2, 5)], \(m) calibracao(previsto[, m], base) |> mutate(modelo = m)) |>
+  mutate(previsto_observado = paste0(round(100 * previsto), "% / ", round(100 * observado), "%")) |>
+  select(grupo, modelo, previsto_observado) |>
+  pivot_wider(names_from = modelo, values_from = previsto_observado)
+```
+
+```{r}
+#| include: false
+cal_derrota <- calibracao(previsto[, 5], base)
+cal_log <- calibracao(previsto[, 2], base)
+stopifnot(mean(cal_derrota$previsto - cal_derrota$observado, na.rm = TRUE) < -0.05)
+```
+
+Cada linha é um quinto dos processos, do menor para o maior escore, com a probabilidade prevista e a incidência observada. A logística com pesos prevê, em cada grupo, valores próximos aos observados. A que conta os pendentes como derrota prevê sistematicamente menos que o observado. Na prática, é a probabilidade que importa: quanto vale o caso, quanto provisionar, qual a chance de acordo. Um modelo com AUC aceitável e probabilidades deslocadas leva a decisões erradas.
+
+### Encolhimento
+
+Quando um modelo exagera os extremos, prevendo 70% onde acontecem 59%, a correção é encolher o preditor: multiplicar o preditor linear por um fator menor que 1, estimado também fora da amostra (Van Houwelingen; Le Cessie, 1990). O fator é a inclinação de uma regressão do desfecho sobre o preditor linear previsto. Uma inclinação próxima de 1 indica que o encolhimento é desnecessário.
+
+```{r}
+inclinacao <- glm(
+  exito_12 ~ qlogis(prev),
+  family = quasibinomial, weights = peso,
+  data = mutate(base, prev = previsto[, "Logística com pesos"])
+) |>
+  coef()
+
+inclinacao
+```
+
+Com seis características e 4.000 processos, a inclinação da logística com pesos é `r num(inclinacao[[2]], 2)`, e o encolhimento muda pouco as previsões. Modelos com muitas características e poucos processos tendem a ter inclinações bem menores que 1.
+
+## Receita
+
+1. Monte a base pela distribuição, e não pelas sentenças nem pelo acervo numa data. Todo processo distribuído no período entra, inclusive os que serão extintos.
+2. Defina o horizonte. A pergunta passa a ser a probabilidade de êxito até lá.
+3. Para cada processo, guarde o tempo, da distribuição ao desfecho ou à coleta, e o desfecho, ou a situação de pendente.
+4. Para a taxa geral ou por grupo, use o Aalen-Johansen, nunca a proporção entre os decididos.
+5. Para o modelo, use um dos três caminhos: modelo de desfechos concorrentes lido no horizonte, classificador com pesos ou pseudo-observações. Para explicar fatores, o Fine-Gray ou as pseudo-observações; para ordenar casos, um classificador flexível com pesos.
+6. Avalie fora da amostra, com AUC e Brier com pesos e calibração por grupos contra o Aalen-Johansen.
+7. Se o modelo exagera os extremos, encolha o preditor.
+8. Lembre a hipótese: a censura vem da data da coleta, e não do desfecho. Se houver motivo para duvidar, como processos suspensos ou arquivados provisoriamente, trate esses estados à parte.
+
+## Atividade
+
+A atividade usa a base simulada.
+
+1. **Atalhos.** Repita a comparação dos atalhos com horizonte de 6 e de 18 meses. Em qual horizonte os atalhos erram mais? Por quê?
+2. **Pesos.** Recalcule a probabilidade de êxito em 12 meses por vara com os pesos e com o Aalen-Johansen. Os dois coincidem?
+3. **Idade como preditor.** Inclua a coorte de distribuição na logística que trata os pendentes como derrota. O coeficiente da coorte mais recente é negativo? O que ele mede?
+4. **Pseudo-observações.** Ajuste a regressão linear sobre as pseudo-observações com horizonte de 6 meses. O efeito do parecer técnico muda? Interprete.
+5. **Avaliação.** Calcule a AUC com pesos e a calibração do Fine-Gray. Ele está tão bem calibrado quanto a logística com pesos?
+
+## Síntese
+
+Prever o desfecho de um processo é uma pergunta de classificação que só pode ser respondida com as ferramentas da análise de duração, porque parte dos processos ainda não terminou. Com um horizonte definido, a probabilidade de êxito é a incidência acumulada do Aalen-Johansen, e os pesos pelo inverso da probabilidade de censura chegam ao mesmo resultado. Contar os pendentes como derrota, descartá-los, olhar só os decididos ou usar o 1 − Kaplan-Meier erram, cada um numa direção.
+
+Com características dos processos, há três caminhos corretos: o modelo de desfechos concorrentes lido no horizonte, o classificador com pesos e as pseudo-observações. A avaliação precisa da mesma correção, e a calibração revela erros que a AUC esconde. A análise de duração corrige a censura, mas não corrige uma base montada pelo desfecho: o desenho da coleta vem antes do modelo.
+
+## Referências
+
+- Andersen, P. K.; Pohar Perme, M. Pseudo-observations in survival analysis. *Statistical Methods in Medical Research*, v. 19, n. 1, p. 71-99, 2010. <https://doi.org/10.1177/0962280209105020>
+- Blanche, P.; Dartigues, J.-F.; Jacqmin-Gadda, H. Estimating and comparing time-dependent areas under receiver operating characteristic curves for censored event times with competing risks. *Statistics in Medicine*, v. 32, n. 30, p. 5381-5397, 2013. <https://doi.org/10.1002/sim.5958>
+- Chen, T.; Guestrin, C. XGBoost: a scalable tree boosting system. In: *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining*, p. 785-794, 2016. <https://doi.org/10.1145/2939672.2939785>
+- Graf, E.; Schmoor, C.; Sauerbrei, W.; Schumacher, M. Assessment and comparison of prognostic classification schemes for survival data. *Statistics in Medicine*, v. 18, n. 17-18, p. 2529-2545, 1999.
+- Heagerty, P. J.; Lumley, T.; Pepe, M. S. Time-dependent ROC curves for censored survival data and a diagnostic marker. *Biometrics*, v. 56, n. 2, p. 337-344, 2000. <https://doi.org/10.1111/j.0006-341X.2000.00337.x>
+- Ishwaran, H.; Gerds, T. A.; Kogalur, U. B.; Moore, R. D.; Gange, S. J.; Lau, B. M. Random survival forests for competing risks. *Biostatistics*, v. 15, n. 4, p. 757-773, 2014. <https://doi.org/10.1093/biostatistics/kxu010>
+- Van Calster, B.; McLernon, D. J.; van Smeden, M.; Wynants, L.; Steyerberg, E. W. Calibration: the Achilles heel of predictive analytics. *BMC Medicine*, v. 17, 230, 2019. <https://doi.org/10.1186/s12916-019-1466-7>
+- Van Houwelingen, J. C.; Le Cessie, S. Predictive value of statistical models. *Statistics in Medicine*, v. 9, n. 11, p. 1303-1325, 1990. <https://doi.org/10.1002/sim.4780091109>
+- Vock, D. M. et al. Adapting machine learning techniques to censored time-to-event health record data: a general-purpose approach using inverse probability of censoring weighting. *Journal of Biomedical Informatics*, v. 61, p. 119-131, 2016. <https://doi.org/10.1016/j.jbi.2016.03.009>

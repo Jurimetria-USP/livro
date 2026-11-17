@@ -55,6 +55,7 @@ book:
         - capitulos/P5C01-modelos-lineares.qmd
         - capitulos/P5C02-modelos-avancados.qmd
         - capitulos/P5C03-modelos-duracao.qmd
+        - capitulos/P5C04-previsao-desfecho.qmd
 
 format:
   html:

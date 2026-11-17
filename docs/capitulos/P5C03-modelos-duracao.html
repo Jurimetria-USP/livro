@@ -72,6 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../capitulos/P5C04-previsao-desfecho.html" rel="next">
 <link href="../capitulos/P5C02-modelos-avancados.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -383,6 +384,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelos para o tempo do processo</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C04-previsao-desfecho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Prever o desfecho do processo</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -555,16 +562,16 @@ h(t \mid x) = h_0(t) \exp(\beta_1 x_1 + \dots + \beta_p x_p)
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                  exp(coef) lower .95 upper .95
-varaVara B                             0.82      0.74      0.91
-varaVara C                             0.72      0.64      0.80
-varaVara D                             0.48      0.43      0.54
-faixa_valorR$ 30 mil a R$ 100 mil      0.92      0.84      1.00
-faixa_valoracima de R$ 100 mil         0.84      0.76      0.93
-tutela_pedidaTRUE                      1.19      1.10      1.29
-inicial_instruidaTRUE                  0.84      0.78      0.91</code></pre>
+varaVara B                             0.83      0.74      0.92
+varaVara C                             0.74      0.66      0.82
+varaVara D                             0.49      0.44      0.55
+faixa_valorR$ 30 mil a R$ 100 mil      0.93      0.86      1.02
+faixa_valoracima de R$ 100 mil         0.84      0.76      0.94
+tutela_pedidaTRUE                      1.18      1.09      1.28
+inicial_instruidaTRUE                  0.82      0.76      0.89</code></pre>
 </div>
 </div>
-<p>A razão de taxas da Vara D em relação à Vara A é 0,48: entre os processos ainda pendentes, num mesmo momento, a taxa de desfecho na Vara D é cerca de metade da taxa na Vara A, mantidas as demais características. Processos com pedido de tutela têm taxa 19% maior.</p>
+<p>A razão de taxas da Vara D em relação à Vara A é 0,49: entre os processos ainda pendentes, num mesmo momento, a taxa de desfecho na Vara D é cerca de metade da taxa na Vara A, mantidas as demais características. Processos com pedido de tutela têm taxa 18% maior.</p>
 <p>Três leituras devem ser evitadas. A razão de taxas não é razão entre durações: uma razão de 0,5 não significa que o processo dure o dobro. Não é razão entre probabilidades de ganhar: o ato aqui é qualquer desfecho, inclusive a improcedência. E não é uma medida de quanto um processo individual seria mais rápido em outra vara, porque compara conjuntos de processos ainda pendentes, cuja composição muda com o tempo (Hernán, 2010).</p>
 <section id="proporcionalidade" class="level3" data-number="19.2.1">
 <h3 data-number="19.2.1" class="anchored" data-anchor-id="proporcionalidade"><span class="header-section-number">19.2.1</span> Proporcionalidade</h3>
@@ -573,11 +580,11 @@ inicial_instruidaTRUE                  0.84      0.78      0.91</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(cox)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  chisq df       p
-vara              35.37  3 1.0e-07
-faixa_valor        2.18  2    0.34
-tutela_pedida      1.56  1    0.21
-inicial_instruida 37.02  1 1.2e-09
-GLOBAL            78.97  7 2.2e-14</code></pre>
+vara              36.62  3 5.5e-08
+faixa_valor        2.05  2    0.36
+tutela_pedida      1.53  1    0.22
+inicial_instruida 34.66  1 3.9e-09
+GLOBAL            75.81  7 9.8e-14</code></pre>
 </div>
 </div>
 <p>A proporcionalidade é rejeitada para a vara. Não é surpresa: no capítulo anterior, a razão de taxas entre as Varas D e A era próxima de 0,8 nos primeiros quatro meses, quando quase todo desfecho é extinção, e caía para cerca de 0,6 depois. O gráfico dos resíduos mostra o coeficiente da Vara D mudando ao longo do tempo; a linha pontilhada é o coeficiente único estimado pelo modelo.</p>
@@ -616,16 +623,16 @@ GLOBAL            78.97  7 2.2e-14</code></pre>
 <pre><code># A tibble: 7 × 3
   termo                             `Até 4 meses` `Depois de 4 meses`
   &lt;chr&gt;                                     &lt;dbl&gt;               &lt;dbl&gt;
-1 varaVara B                                 0.82                0.82
-2 varaVara C                                 0.76                0.7 
-3 varaVara D                                 0.82                0.42
-4 faixa_valorR$ 30 mil a R$ 100 mil          0.9                 0.93
-5 faixa_valoracima de R$ 100 mil             0.93                0.82
-6 tutela_pedidaTRUE                          1.05                1.23
-7 inicial_instruidaTRUE                      0.36                1.04</code></pre>
+1 varaVara B                                 0.83                0.82
+2 varaVara C                                 0.76                0.72
+3 varaVara D                                 0.82                0.43
+4 faixa_valorR$ 30 mil a R$ 100 mil          0.9                 0.95
+5 faixa_valoracima de R$ 100 mil             0.91                0.83
+6 tutela_pedidaTRUE                          1.06                1.22
+7 inicial_instruidaTRUE                      0.36                1.01</code></pre>
 </div>
 </div>
-<p>A razão de taxas da Vara D é 0,82 até o quarto mês e 0,42 depois. O coeficiente único do primeiro modelo era uma média ponderada das duas fases. A inicial instruída, que o teste também apontou, mostra outro padrão: reduz a taxa de desfecho no início (0,36), porque evita a emenda e o indeferimento, e quase não a altera depois (1,04).</p>
+<p>A razão de taxas da Vara D é 0,82 até o quarto mês e 0,43 depois. O coeficiente único do primeiro modelo era uma média ponderada das duas fases. A inicial instruída, que o teste também apontou, mostra outro padrão: reduz a taxa de desfecho no início (0,36), porque evita a emenda e o indeferimento, e quase não a altera depois (1,01).</p>
 <p>A saída do <code>summary()</code> também traz a concordância, a proporção de pares de processos em que o modelo ordena corretamente quem termina primeiro. Ela é útil para comparar modelos ajustados na mesma base, mas não tem limiar universal de qualidade, e um modelo explicativo pode ser útil com concordância modesta.</p>
 </section>
 </section>
@@ -711,10 +718,10 @@ GLOBAL            78.97  7 2.2e-14</code></pre>
 <span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      fixo.laudo_favoravel_fixoTRUE dependente_do_tempo.laudo_favoravel 
-                               14.3                                38.9 </code></pre>
+                               14.2                                37.3 </code></pre>
 </div>
 </div>
-<p>As duas especificações dão razões muito diferentes: 14,3 com a variável fixa e 38,9 com a dependente do tempo. Só a segunda compara, em cada momento, processos que já têm laudo favorável com processos que não têm. A primeira dilui o efeito nos meses anteriores ao laudo e, além disso, condiciona no futuro, porque classifica cada processo pelo que aconteceu depois do termo inicial.</p>
+<p>As duas especificações dão razões muito diferentes: 14,2 com a variável fixa e 37,3 com a dependente do tempo. Só a segunda compara, em cada momento, processos que já têm laudo favorável com processos que não têm. A primeira dilui o efeito nos meses anteriores ao laudo e, além disso, condiciona no futuro, porque classifica cada processo pelo que aconteceu depois do termo inicial.</p>
 <p>O exemplo usa a coluna <code>real_laudo_favoravel</code>, que só a simulação tem. Em dados reais, a conclusão do laudo precisa ser extraída da peça, com o cuidado de análise de conteúdo discutido no capítulo “Análise de conteúdo de textos jurídicos”.</p>
 </section>
 </section>
@@ -753,21 +760,21 @@ GLOBAL            78.97  7 2.2e-14</code></pre>
 <pre><code># A tibble: 10 × 3
    termo                             cox_por_desfecho fine_gray
    &lt;chr&gt;                                        &lt;dbl&gt;     &lt;dbl&gt;
- 1 varaVara B                                    0.91      1.05
- 2 varaVara C                                    0.73      0.93
- 3 varaVara D                                    0.5       0.81
- 4 faixa_valorR$ 30 mil a R$ 100 mil             0.96      1   
- 5 faixa_valoracima de R$ 100 mil                0.89      1.01
- 6 tutela_pedidaTRUE                             1.2       1.08
- 7 inicial_instruidaTRUE                         1.2       1.48
- 8 coorte2024-S2                                 0.96      0.88
- 9 coorte2025-S1                                 0.89      0.73
-10 coorte2025-S2                                 0.95      0.3 </code></pre>
+ 1 varaVara B                                    0.93      1.07
+ 2 varaVara C                                    0.79      1   
+ 3 varaVara D                                    0.53      0.87
+ 4 faixa_valorR$ 30 mil a R$ 100 mil             0.96      0.99
+ 5 faixa_valoracima de R$ 100 mil                0.91      1.02
+ 6 tutela_pedidaTRUE                             1.17      1.06
+ 7 inicial_instruidaTRUE                         1.2       1.49
+ 8 coorte2024-S2                                 0.99      0.92
+ 9 coorte2025-S1                                 0.89      0.75
+10 coorte2025-S2                                 0.92      0.31</code></pre>
 </div>
 </div>
 <section id="a-discordância-é-informação" class="level3" data-number="19.4.1">
 <h3 data-number="19.4.1" class="anchored" data-anchor-id="a-discordância-é-informação"><span class="header-section-number">19.4.1</span> A discordância é informação</h3>
-<p>Para a Vara D, o Cox por desfecho dá 0,50, e o Fine-Gray, 0,81. Os dois estão corretos. A Vara D produz êxito em ritmo bem menor que a Vara A entre os processos pendentes, porque sentencia devagar. Mas também produz improcedências devagar e mantém mais processos pendentes por mais tempo, e esses processos ainda podem ter êxito. Por isso a incidência acumulada de êxito fica menos distante da Vara A do que a taxa sugere. Pelo mecanismo da simulação, quando todos os processos terminarem, a incidência de êxito será a mesma nas quatro varas.</p>
+<p>Para a Vara D, o Cox por desfecho dá 0,53, e o Fine-Gray, 0,87. Os dois estão corretos. A Vara D produz êxito em ritmo bem menor que a Vara A entre os processos pendentes, porque sentencia devagar. Mas também produz improcedências devagar e mantém mais processos pendentes por mais tempo, e esses processos ainda podem ter êxito. Por isso a incidência acumulada de êxito fica menos distante da Vara A do que a taxa sugere. Pelo mecanismo da simulação, quando todos os processos terminarem, a incidência de êxito será a mesma nas quatro varas.</p>
 <p>Quando os dois modelos concordam, a conclusão é robusta. Quando discordam, a discordância descreve o mecanismo. Por isso, recomenda-se relatar os dois, para todos os desfechos (Latouche et al., 2013).</p>
 <p>Quando as curvas de incidência de dois grupos se cruzam ou se aproximam com o tempo, uma razão única resume mal a diferença: é uma média, ponderada no tempo, de um efeito que muda. Para comunicar, a incidência acumulada em horizontes fixos é mais clara que um coeficiente.</p>
 <div class="cell">
@@ -784,16 +791,16 @@ GLOBAL            78.97  7 2.2e-14</code></pre>
 <pre><code># A tibble: 4 × 5
   vara   meses_6 meses_9 meses_12 meses_15
   &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 Vara A   0.102   0.352    0.477    0.511
-2 Vara B   0.106   0.352    0.499    0.553
-3 Vara C   0.092   0.318    0.454    0.504
-4 Vara D   0.079   0.265    0.388    0.468</code></pre>
+1 Vara A   0.107   0.34     0.451    0.479
+2 Vara B   0.102   0.329    0.48     0.533
+3 Vara C   0.094   0.321    0.451    0.502
+4 Vara D   0.087   0.264    0.378    0.455</code></pre>
 </div>
 </div>
 </section>
 <section id="o-artefato-da-coorte-recente" class="level3" data-number="19.4.2">
 <h3 data-number="19.4.2" class="anchored" data-anchor-id="o-artefato-da-coorte-recente"><span class="header-section-number">19.4.2</span> O artefato da coorte recente</h3>
-<p>A coorte distribuída no segundo semestre de 2025 tem razão de 0,30 no Fine-Gray, e de 0,95 no Cox por desfecho. Os processos dessa coorte não são diferentes; foram observados por pouco tempo. O Fine-Gray calcula os pesos dos processos que tiveram outro desfecho a partir de uma única distribuição de censura para toda a base. Quando a censura depende de uma covariável, como a coorte, os pesos ficam errados para os grupos com seguimento curto, e o modelo pune a coorte nova pela falta de tempo para acumular êxitos.</p>
+<p>A coorte distribuída no segundo semestre de 2025 tem razão de 0,31 no Fine-Gray, e de 0,92 no Cox por desfecho. Os processos dessa coorte não são diferentes; foram observados por pouco tempo. O Fine-Gray calcula os pesos dos processos que tiveram outro desfecho a partir de uma única distribuição de censura para toda a base. Quando a censura depende de uma covariável, como a coorte, os pesos ficam errados para os grupos com seguimento curto, e o modelo pune a coorte nova pela falta de tempo para acumular êxitos.</p>
 <p>A correção é estimar a distribuição de censura dentro de cada coorte, com <code>strata()</code> na fórmula do <code>finegray()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dados_fg_estratos <span class="ot">&lt;-</span> <span class="fu">finegray</span>(</span>
@@ -808,10 +815,10 @@ GLOBAL            78.97  7 2.2e-14</code></pre>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   varaVara D coorte2025-S2 
-         0.81          1.07 </code></pre>
+         0.87          1.06 </code></pre>
 </div>
 </div>
-<p>Com a censura estimada por coorte, a razão da coorte recente vai para 1,07.</p>
+<p>Com a censura estimada por coorte, a razão da coorte recente vai para 1,06.</p>
 </section>
 </section>
 <section id="heterogeneidade-não-observada-o-perito" class="level2" data-number="19.5">
@@ -829,7 +836,7 @@ GLOBAL            78.97  7 2.2e-14</code></pre>
 <pre><code># A tibble: 1 × 3
   peritos menor maior
     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
-1      30 0.286  0.85</code></pre>
+1      30 0.314  0.88</code></pre>
 </div>
 </div>
 <p>Uma forma de tratar essa variação seria incluir um coeficiente por perito. Muitos peritos têm poucos casos, e os coeficientes deles seriam instáveis. A alternativa é a fragilidade, o nome que a análise de duração dá a um efeito aleatório: supõe-se que cada perito multiplica a taxa por um fator sorteado de uma distribuição comum, e estima-se a variância dessa distribuição. As estimativas dos peritos com poucos casos são puxadas para a média na proporção da informação que eles têm, o que se chama encolhimento.</p>
@@ -847,21 +854,21 @@ coxph(formula = Surv(meses, desfecho_3 == "exito") ~ vara + inicial_instruida +
     frailty(coalesce(perito, "sem perito"), distribution = "gaussian"), 
     data = base)
 
-                              coef se(coef)      se2    Chisq   DF       p
-varaVara B                 -0.0995   0.0751   0.0749   1.7566  1.0  0.1850
-varaVara C                 -0.3321   0.0768   0.0766  18.7129  1.0 1.5e-05
-varaVara D                 -0.6535   0.0797   0.0794  67.3100  1.0 2.3e-16
-inicial_instruidaTRUE       0.1768   0.0575   0.0574   9.4440  1.0  0.0021
-frailty(coalesce(perito,                             102.6710 26.2 5.3e-11
+                             coef se(coef)     se2   Chisq   DF       p
+varaVara B                -0.0837   0.0770  0.0768  1.1808  1.0  0.2772
+varaVara C                -0.2510   0.0779  0.0776 10.3918  1.0  0.0013
+varaVara D                -0.5966   0.0810  0.0807 54.2736  1.0 1.7e-13
+inicial_instruidaTRUE      0.1716   0.0584  0.0583  8.6297  1.0  0.0033
+frailty(coalesce(perito,                           82.5451 24.2 2.8e-08
 
-Iterations: 6 outer, 18 Newton-Raphson
-     Variance of random effect= 0.0845 
-Degrees of freedom for terms=  3.0  1.0 26.2 
-Likelihood ratio test=236  on 30.2 df, p=&lt;2e-16
-n= 4000, number of events= 1393 </code></pre>
+Iterations: 8 outer, 25 Newton-Raphson
+     Variance of random effect= 0.0674 
+Degrees of freedom for terms=  3.0  1.0 24.3 
+Likelihood ratio test=193  on 28.2 df, p=&lt;2e-16
+n= 4000, number of events= 1351 </code></pre>
 </div>
 </div>
-<p>A variância estimada é 0,085 na escala do logaritmo da taxa, o que corresponde a um desvio-padrão de 0,29. Um perito um desvio-padrão acima da média tem taxa de êxito 1,34 vez a do perito médio. Na simulação, o perito altera a chance de o laudo ser favorável, e não diretamente a taxa de êxito; a fragilidade capta o efeito que chega à taxa.</p>
+<p>A variância estimada é 0,067 na escala do logaritmo da taxa, o que corresponde a um desvio-padrão de 0,26. Um perito um desvio-padrão acima da média tem taxa de êxito 1,30 vez a do perito médio. Na simulação, o perito altera a chance de o laudo ser favorável, e não diretamente a taxa de êxito; a fragilidade capta o efeito que chega à taxa.</p>
 <p>Três cuidados acompanham o modelo:</p>
 <ul>
 <li><strong>Convergência.</strong> O ajuste por verossimilhança penalizada pode não convergir. O pacote <code>coxme</code> estima o mesmo modelo por outro método e serve de conferência.</li>
@@ -1053,8 +1060,8 @@ n= 4000, number of events= 1393 </code></pre>
 <pre><code># A tibble: 2 × 3
   inicial_instruida base_inteira amostra_de_coorte
   &lt;lgl&gt;                    &lt;dbl&gt;             &lt;dbl&gt;
-1 FALSE                    0.372             0.379
-2 TRUE                     0.509             0.53 </code></pre>
+1 FALSE                    0.356             0.357
+2 TRUE                     0.495             0.522</code></pre>
 </div>
 </div>
 <p>Com 15% dos processos, a amostra de coorte reproduz a incidência de êxito aos 12 meses de cada grupo. Uma amostra de caso-controle de mesmo tamanho não permitiria calcular incidência alguma, e uma amostra só de decididos não teria a característica para os pendentes.</p>
@@ -1099,9 +1106,9 @@ n= 4000, number of events= 1393 </code></pre>
   passagem             razao
   &lt;chr&gt;                &lt;dbl&gt;
 1 inicial → laudo       0.94
-2 laudo → acordo        0.81
-3 laudo → procedente    0.29
-4 laudo → improcedente  0.31
+2 laudo → acordo        0.85
+3 laudo → procedente    0.31
+4 laudo → improcedente  0.3 
 5 inicial → extinto     0.78</code></pre>
 </div>
 </div>
@@ -1553,6 +1560,9 @@ n= 4000, number of events= 1393 </code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../capitulos/P5C04-previsao-desfecho.html" class="pagination-link" aria-label="Prever o desfecho do processo">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Prever o desfecho do processo</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

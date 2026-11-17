@@ -342,7 +342,13 @@ stopifnot(media_acervo > media_real + 1)
 
 Os `r num(nrow(acervo))` processos em tramitação em 30 de junho de 2025 duram, em média, `r num(media_acervo, 1)` meses, contra `r num(media_real, 1)` meses de todos os processos. Medidas como o tempo médio dos processos pendentes descrevem o acervo, e não o tempo que um processo novo deve esperar.
 
-O desenho dos decididos num período não tem viés de sentido fixo. Se a entrada de processos é estável há muito tempo, os decididos num ano podem representar bem as durações; se a entrada cresce ou diminui, ou se a janela começa pouco depois do início da série, as durações curtas ou as longas ficam sobrerrepresentadas. Em todos os casos, o desenho não observa os processos que ainda não terminaram.
+O desenho dos decididos num período, que parte do desfecho, tem três problemas próprios.
+
+1. **Some o denominador.** Quem parte das sentenças só vê os processos que chegaram a uma decisão. Os extintos sem mérito, por indeferimento da inicial, desistência ou remessa a outro juízo, ficam de fora, e com eles boa parte da informação sobre a qualidade da inicial. A pergunta "qual a chance de uma ação dar certo" vira "qual a chance de uma sentença ser favorável", que é outra pergunta.
+2. **O que conta como decisão muda o resultado.** Uma busca por sentenças de procedência e improcedência não encontra as homologações de acordo. Onde o acordo é um caminho frequente de êxito, a taxa de procedência entre as sentenças pode até se aproximar da chance real de êxito por processo distribuído, mas mede outra coisa, e quem a lê conclui que o acordo não existe.
+3. **Processos de épocas diferentes se misturam conforme a duração.** As sentenças publicadas num ano vêm de processos rápidos distribuídos naquele ano e de processos lentos distribuídos anos antes. Se algo mudou no intervalo, como a composição da vara ou a prática de uma das partes, a mudança se confunde com a duração, e a duração se confunde com o desfecho, porque acordos costumam sair cedo e improcedências, tarde.
+
+Além disso, o sentido do viés na duração não é fixo: depende de a entrada de processos crescer ou diminuir e de quando a janela começa. Um banco de sentenças, como o usado no capítulo "Análise de conteúdo de textos jurídicos", serve para estudar o que as decisões dizem, mas não para estimar o tempo do processo nem a chance de um desfecho. A análise de duração corrige a censura; não corrige uma base montada pelo desfecho. O desenho vem antes do modelo.
 
 ::: {.callout-tip title="Entrada tardia"}
 
@@ -819,12 +825,12 @@ p9 <- taxa_decididos |> filter(meses == 9)
 p9_A <- p9$taxa_entre_decididos[p9$vara == "Vara A"]
 p9_D <- p9$taxa_entre_decididos[p9$vara == "Vara D"]
 vf <- verdade_final$taxa_final_verdadeira
-stopifnot(p9_D > p9_A + 0.08, max(vf) - min(vf) < 0.03)
+stopifnot(p9_D > p9_A + 0.08, max(vf) - min(vf) < 0.05)
 ```
 
-Aos 9 meses, a Vara D parece a mais favorável ao autor: `r pct(p9_D, 0)` de êxito entre os decididos, contra `r pct(p9_A, 0)` na Vara A. A última coluna mostra a taxa que cada vara terá quando todos os processos terminarem: praticamente igual nas quatro, entre `r pct(min(vf), 0)` e `r pct(max(vf), 0)`. A Vara D não é mais favorável. É mais lenta para sentenciar. Os acordos, que vêm logo depois do laudo e não dependem da vara, chegam no mesmo ritmo em todas; as improcedências da Vara D, que dependem da sentença, ainda não chegaram.
+Aos 9 meses, a Vara D parece a mais favorável ao autor: `r pct(p9_D, 0)` de êxito entre os decididos, contra `r pct(p9_A, 0)` na Vara A. A última coluna mostra a taxa que cada vara terá quando todos os processos terminarem: entre `r pct(min(vf), 0)` e `r pct(max(vf), 0)`. Na simulação, as quatro varas têm a mesma chance de êxito, e a diferença restante é variação de amostragem. A Vara D não é mais favorável. É mais lenta para sentenciar. Os acordos, que vêm logo depois do laudo e não dependem da vara, chegam no mesmo ritmo em todas; as improcedências da Vara D, que dependem da sentença, ainda não chegaram.
 
-A taxa entre os decididos mede a velocidade dos desfechos tanto quanto o desfecho. No conjunto da base, o vício pode quase se cancelar. É nas comparações entre grupos com ritmos diferentes que ele inverte conclusões. A pergunta útil tem horizonte: qual a chance de êxito em até 12 meses, lida na incidência acumulada.
+A taxa entre os decididos mede a velocidade dos desfechos tanto quanto o desfecho. No conjunto da base, o vício pode quase se cancelar. É nas comparações entre grupos com ritmos diferentes que ele inverte conclusões. A pergunta útil tem horizonte: qual a chance de êxito em até 12 meses, lida na incidência acumulada. O capítulo "Prever o desfecho do processo", na Parte V, compara lado a lado os atalhos usados para responder a essa pergunta e mostra como fazer a previsão com características de cada processo.
 
 ### Condicionar no futuro
 

@@ -24,9 +24,16 @@ suppressPackageStartupMessages({
   library(readr)
 })
 
-set.seed(20261115)
-
 n <- 4000
+
+# Preditores acrescentados para o capítulo de previsão. São sorteados com
+# semente própria, antes da simulação principal, para não alterar a
+# sequência de números aleatórios usada no restante do script.
+set.seed(20261117)
+parecer_tecnico <- runif(n) < 0.35
+meses_desde_fato <- round(pmin(rlnorm(n, meanlog = log(12), sdlog = 0.8), 120), 1)
+
+set.seed(20261115)
 inicio <- as.Date("2024-01-01")
 fim <- as.Date("2025-12-31")
 lotes_coleta <- as.Date(c("2026-01-12", "2026-01-19", "2026-01-26"))
@@ -44,6 +51,8 @@ processos <- tibble(
   faixa_valor = sample(faixas, n, replace = TRUE, prob = c(0.45, 0.35, 0.20)),
   tutela_pedida = runif(n) < 0.35,
   inicial_instruida = runif(n) < 0.60,
+  parecer_tecnico = parecer_tecnico,
+  meses_desde_fato = meses_desde_fato,
   data_coleta = sample(lotes_coleta, n, replace = TRUE)
 )
 
@@ -75,8 +84,13 @@ t_contestacao <- t_citacao + sorteio_inteiro(15, 40)
 t_nomeacao <- t_contestacao + sorteio_inteiro(5, 40)
 indice_perito <- sample.int(40, n, replace = TRUE, prob = carga_perito)
 t_laudo <- t_nomeacao + round(rgamma(n, shape = 4, scale = 28))
-favoravel <- runif(n) <
-  plogis(0.1 + 0.6 * instruida + efeito_perito[indice_perito])
+# O parecer técnico juntado à inicial aumenta a chance de laudo favorável; a
+# demora entre o fato e o ajuizamento a reduz, sobretudo depois de dois anos.
+favoravel <- runif(n) < plogis(
+  0.1 + 0.6 * instruida + efeito_perito[indice_perito] +
+    1.4 * processos$parecer_tecnico -
+    2.0 * plogis((processos$meses_desde_fato - 24) / 4)
+)
 t_manifestacao <- t_laudo + sorteio_inteiro(2, 25)
 
 # Desistência ou abandono, possíveis apenas antes do laudo.

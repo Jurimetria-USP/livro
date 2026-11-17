@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="José de Jesus Filho">
+
+<title>20&nbsp; Prever o desfecho do processo – JURIMETRIA: Dados, Métodos e Evidência para o Direito</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../capitulos/P5C03-modelos-duracao.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-dd5fa769cd8cd11b6d61b3c64d2f60b9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../estilos.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo light-content">
+    <img src="../figuras/usp.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">JURIMETRIA: Dados, Métodos e Evidência para o Direito</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Procurar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Alternar de navegação" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/Jurimetria-USP/livro"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/05-explicacao-fenomeno.html">Parte V — Explicação do fenômeno</a></li><li class="breadcrumb-item"><a href="../capitulos/P5C04-previsao-desfecho.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Prever o desfecho do processo</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../autores.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sobre os autores</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/01-fundamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte I — Fundamentos</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C01-metodo-cientifico.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Método científico e desenho de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C02-pergunta-dados-evidencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Da pergunta à conclusão</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C03-jurimetria-instrumento-pesquisa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Jurimetria como instrumento de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P1C04-litigios-desigualdades.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Seleção dos litígios e desigualdades no sistema de justiça</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/02-ambiente-trabalho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte II — Ambiente de trabalho e ferramentas</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C01-ambiente-computacional.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Ambiente computacional para a pesquisa jurimétrica</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C02-r-python-linguagens.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R e Python: linguagens do ambiente de pesquisa</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C03-positron-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Positron e Quarto: ambiente de trabalho e documentos reproduzíveis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C04-git-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Git e GitHub: versões, colaboração e proteção do projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C05-agentes-projeto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Agentes de inteligência artificial no projeto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C06-exemplo-integrado-ecossistema.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Um exemplo integrado do ecossistema</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P2C07-introducao-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introdução ao R</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Parte III — Construção do banco de dados</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P3C02-analise-conteudo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de conteúdo de textos jurídicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P3C03-limpeza-estruturacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Limpeza e estruturação de dados jurídicos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/04-descricao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte IV — Descrição do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C01-introducao-estatistica.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Uma Introdução à Estatística</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C02-analise-descritiva.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Análise descritiva de dados jurídicos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P4C03-analise-sobrevivencia.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">O tempo do processo: análise de duração</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../partes/05-explicacao-fenomeno.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parte V — Explicação do fenômeno</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C01-modelos-lineares.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Modelos Lineares</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C02-modelos-avancados.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Modelos Avançados</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C03-modelos-duracao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelos para o tempo do processo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C04-previsao-desfecho.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Prever o desfecho do processo</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Nesta página</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução"><span class="header-section-number">20.1</span> Introdução</a></li>
+  <li><a href="#um-exemplo-com-dez-processos" id="toc-um-exemplo-com-dez-processos" class="nav-link" data-scroll-target="#um-exemplo-com-dez-processos"><span class="header-section-number">20.2</span> Um exemplo com dez processos</a></li>
+  <li><a href="#por-que-cada-atalho-erra" id="toc-por-que-cada-atalho-erra" class="nav-link" data-scroll-target="#por-que-cada-atalho-erra"><span class="header-section-number">20.3</span> Por que cada atalho erra</a></li>
+  <li><a href="#a-conta-certa-pesos-pela-censura" id="toc-a-conta-certa-pesos-pela-censura" class="nav-link" data-scroll-target="#a-conta-certa-pesos-pela-censura"><span class="header-section-number">20.4</span> A conta certa: pesos pela censura</a></li>
+  <li><a href="#os-atalhos-na-base-simulada" id="toc-os-atalhos-na-base-simulada" class="nav-link" data-scroll-target="#os-atalhos-na-base-simulada"><span class="header-section-number">20.5</span> Os atalhos na base simulada</a></li>
+  <li><a href="#três-caminhos-para-prever-com-características" id="toc-três-caminhos-para-prever-com-características" class="nav-link" data-scroll-target="#três-caminhos-para-prever-com-características"><span class="header-section-number">20.6</span> Três caminhos para prever com características</a></li>
+  <li><a href="#como-medir-o-desempenho" id="toc-como-medir-o-desempenho" class="nav-link" data-scroll-target="#como-medir-o-desempenho"><span class="header-section-number">20.7</span> Como medir o desempenho</a>
+  <ul class="collapse">
+  <li><a href="#auc-dependente-do-tempo" id="toc-auc-dependente-do-tempo" class="nav-link" data-scroll-target="#auc-dependente-do-tempo"><span class="header-section-number">20.7.1</span> AUC dependente do tempo</a></li>
+  <li><a href="#brier-e-calibração" id="toc-brier-e-calibração" class="nav-link" data-scroll-target="#brier-e-calibração"><span class="header-section-number">20.7.2</span> Brier e calibração</a></li>
+  <li><a href="#sempre-fora-da-amostra" id="toc-sempre-fora-da-amostra" class="nav-link" data-scroll-target="#sempre-fora-da-amostra"><span class="header-section-number">20.7.3</span> Sempre fora da amostra</a></li>
+  </ul></li>
+  <li><a href="#comparação-na-base-simulada" id="toc-comparação-na-base-simulada" class="nav-link" data-scroll-target="#comparação-na-base-simulada"><span class="header-section-number">20.8</span> Comparação na base simulada</a>
+  <ul class="collapse">
+  <li><a href="#encolhimento" id="toc-encolhimento" class="nav-link" data-scroll-target="#encolhimento"><span class="header-section-number">20.8.1</span> Encolhimento</a></li>
+  </ul></li>
+  <li><a href="#receita" id="toc-receita" class="nav-link" data-scroll-target="#receita"><span class="header-section-number">20.9</span> Receita</a></li>
+  <li><a href="#atividade" id="toc-atividade" class="nav-link" data-scroll-target="#atividade"><span class="header-section-number">20.10</span> Atividade</a></li>
+  <li><a href="#síntese" id="toc-síntese" class="nav-link" data-scroll-target="#síntese"><span class="header-section-number">20.11</span> Síntese</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências"><span class="header-section-number">20.12</span> Referências</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../partes/05-explicacao-fenomeno.html">Parte V — Explicação do fenômeno</a></li><li class="breadcrumb-item"><a href="../capitulos/P5C04-previsao-desfecho.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Prever o desfecho do processo</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Prever o desfecho do processo</span></h1>
+<p class="subtitle lead">Classificação dentro da análise de duração</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor</div>
+    <div class="quarto-title-meta-contents">
+             <p>José de Jesus Filho </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introdução" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">20.1</span> Introdução</h2>
+<p>Uma das perguntas mais frequentes sobre processos parece de classificação: este processo vai ter êxito? Bastaria um rótulo por processo (teve êxito ou não teve), um conjunto de características e um classificador, como a regressão logística do capítulo “Modelos avançados” ou um algoritmo de aprendizado de máquina.</p>
+<p>A dificuldade está no rótulo. Numa base de processos, uma parte grande ainda não terminou. Para esses processos não existe rótulo; existe só uma informação parcial: até a data da coleta, nada aconteceu. Isso não é defeito da base. Toda base de processos é uma fotografia tirada no meio do filme: processos entram o tempo todo, os mais novos estão sempre no começo, a duração varia muito, e cada processo termina de uma entre várias formas, cada uma com velocidade própria.</p>
+<p>Este capítulo parte de uma ideia: não se trata de escolher entre classificação e análise de duração. A pergunta continua sendo de classificação, mas formulada com um horizonte, como “qual a probabilidade de êxito em até 12 meses?”, e respondida com as ferramentas da análise de duração, que sabem usar a informação parcial dos processos pendentes. O capítulo retoma os conceitos dos capítulos “O tempo do processo: análise de duração” e “Modelos para o tempo do processo”.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Objetivos do capítulo">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Objetivos do capítulo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ao final do capítulo, você deverá ser capaz de:</p>
+<ul>
+<li>formular uma pergunta de classificação com horizonte;</li>
+<li>explicar por que os atalhos usuais para lidar com processos pendentes erram e em que direção;</li>
+<li>calcular os pesos pelo inverso da probabilidade de censura e relacioná-los à incidência acumulada;</li>
+<li>escolher entre três caminhos para prever o desfecho com características dos processos;</li>
+<li>avaliar modelos com AUC, Brier e calibração corrigidos para a censura;</li>
+<li>reconhecer por que a calibração revela erros que a AUC esconde.</li>
+</ul>
+</div>
+</div>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Coorte por&lt;br/&gt;distribuição] --&gt; B[Horizonte&lt;br/&gt;de previsão]
+  B --&gt; C[Tempo e&lt;br/&gt;desfecho]
+  C --&gt; D[Pesos pela&lt;br/&gt;censura]
+  D --&gt; E[Modelo]
+  E --&gt; F[Avaliação fora&lt;br/&gt;da amostra]
+  F --&gt; G[Calibração]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="um-exemplo-com-dez-processos" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="um-exemplo-com-dez-processos"><span class="header-section-number">20.2</span> Um exemplo com dez processos</h2>
+<p>Dez processos, inventados, e horizonte de 12 meses. O tempo é contado da distribuição até o desfecho ou, para os pendentes, até a data da coleta. O êxito inclui o acordo e a procedência.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dez <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>processo, <span class="sc">~</span>meses, <span class="sc">~</span>desfecho,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"A"</span>,  <span class="dv">3</span>, <span class="st">"exito"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"B"</span>,  <span class="dv">5</span>, <span class="st">"exito"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"C"</span>,  <span class="dv">2</span>, <span class="st">"extinto"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"D"</span>,  <span class="dv">8</span>, <span class="st">"improcedente"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"E"</span>, <span class="dv">10</span>, <span class="st">"exito"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"F"</span>, <span class="dv">11</span>, <span class="st">"improcedente"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"G"</span>,  <span class="dv">4</span>, <span class="st">"pendente"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"H"</span>,  <span class="dv">6</span>, <span class="st">"pendente"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"I"</span>, <span class="dv">14</span>, <span class="st">"pendente"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"J"</span>,  <span class="dv">9</span>, <span class="st">"pendente"</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">desfecho_f =</span> <span class="fu">factor</span>(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    desfecho, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"pendente"</span>, <span class="st">"exito"</span>, <span class="st">"improcedente"</span>, <span class="st">"extinto"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>O processo I está pendente, mas já passou dos 12 meses sem decisão: sabemos que não teve êxito no horizonte. G, H e J estão pendentes há menos de 12 meses: ainda podem ter.</p>
+<p>Qual é a probabilidade de êxito em até 12 meses? Há quatro atalhos comuns.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>H <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>exito_12 <span class="ot">&lt;-</span> dez<span class="sc">$</span>desfecho <span class="sc">==</span> <span class="st">"exito"</span> <span class="sc">&amp;</span> dez<span class="sc">$</span>meses <span class="sc">&lt;=</span> H</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>conhecido_12 <span class="ot">&lt;-</span> dez<span class="sc">$</span>desfecho <span class="sc">!=</span> <span class="st">"pendente"</span> <span class="sc">|</span> dez<span class="sc">$</span>meses <span class="sc">&gt;=</span> H</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>km_exito <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, desfecho <span class="sc">==</span> <span class="st">"exito"</span>) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> dez)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>aj_dez <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, desfecho_f) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> dez)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>atalhos <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">conta =</span> <span class="fu">c</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Pendente conta como derrota"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Descartar quem não tem desfecho conhecido em 12 meses"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Olhar só os decididos"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1 - Kaplan-Meier do êxito, outros desfechos como censura"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Incidência acumulada (Aalen-Johansen)"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">exito =</span> <span class="fu">c</span>(</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(exito_12),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(exito_12[conhecido_12]),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(dez<span class="sc">$</span>desfecho[dez<span class="sc">$</span>desfecho <span class="sc">!=</span> <span class="st">"pendente"</span>] <span class="sc">==</span> <span class="st">"exito"</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span> <span class="sc">-</span> <span class="fu">summary</span>(km_exito, <span class="at">times =</span> H)<span class="sc">$</span>surv,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>(aj_dez, <span class="at">times =</span> H)<span class="sc">$</span>pstate[, <span class="dv">2</span>]</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>atalhos</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  conta                                                    exito
+  &lt;chr&gt;                                                    &lt;dbl&gt;
+1 Pendente conta como derrota                              0.3  
+2 Descartar quem não tem desfecho conhecido em 12 meses    0.429
+3 Olhar só os decididos                                    0.5  
+4 1 - Kaplan-Meier do êxito, outros desfechos como censura 0.492
+5 Incidência acumulada (Aalen-Johansen)                    0.397</code></pre>
+</div>
+</div>
+<p>Os quatro atalhos dão 30%, 43%, 50% e 49%. A conta correta dá 39,7%. Cada atalho erra numa direção.</p>
+</section>
+<section id="por-que-cada-atalho-erra" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="por-que-cada-atalho-erra"><span class="header-section-number">20.3</span> Por que cada atalho erra</h2>
+<p><strong>Pendente como derrota.</strong> G, H e J ainda podem ter êxito. Tratá-los como derrota subestima o êxito, e o erro é maior entre os processos mais novos. Num modelo, o efeito é traiçoeiro: o classificador aprende que processo recente perde, e a data de distribuição vira um preditor espúrio. Qualquer característica associada à idade do processo herda o viés, como uma vara criada há pouco ou uma mudança de prática de uma das partes.</p>
+<p><strong>Descartar os pendentes ou olhar só os decididos.</strong> Os processos que sobram são os que terminaram rápido, e os desfechos não têm a mesma velocidade. A extinção sai cedo; o acordo, logo depois do laudo; a improcedência, depois de alegações e sentença. Quem foi descartado tende a ser o processo que ainda seria julgado improcedente, e o êxito fica inflado. É a armadilha da taxa entre os decididos, discutida no capítulo “O tempo do processo: análise de duração”.</p>
+<p><strong>O 1 − Kaplan-Meier com os outros desfechos como censura.</strong> O estimador trata C (extinto) e D e F (improcedentes) como processos que ainda poderiam ter êxito mais tarde. Não podem. Com desfechos concorrentes, o 1 − Kaplan-Meier superestima a incidência, e em processo judicial eles sempre existem.</p>
+<p>Tudo isso supõe que a base foi montada pela distribuição: todos os processos distribuídos num período, acompanhados até a data da coleta. Uma base montada pelas sentenças ou pelo acervo numa data já está viesada antes de qualquer modelo, e nenhum dos métodos deste capítulo corrige esse viés (ver a seção sobre o desenho da coleta no capítulo “O tempo do processo: análise de duração”).</p>
+</section>
+<section id="a-conta-certa-pesos-pela-censura" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="a-conta-certa-pesos-pela-censura"><span class="header-section-number">20.4</span> A conta certa: pesos pela censura</h2>
+<p>O estimador de Aalen-Johansen percorre o tempo em ordem e, a cada desfecho, divide pelo número de processos que ainda estavam em observação naquele momento. O pendente conta enquanto é observado e sai da conta quando a observação acaba, sem virar derrota e sem ser descartado.</p>
+<p>Uma forma equivalente, mais útil para o que vem depois, são os pesos pelo inverso da probabilidade de censura (em inglês, <em>inverse probability of censoring weighting</em>, IPCW).</p>
+<ol type="1">
+<li>Estime, pelo Kaplan-Meier, a probabilidade de um processo continuar sendo observado até cada tempo. Aqui o “ato” é ser censurado, isto é, estar pendente na coleta. Chame essa probabilidade de <span class="math inline">\(G(t)\)</span>.</li>
+<li>Cada processo com situação conhecida no horizonte recebe peso <span class="math inline">\(1 / G(t)\)</span>, em que <span class="math inline">\(t\)</span> é o tempo do desfecho, ou 12 meses para quem passou do horizonte sem decisão. Os processos censurados antes do horizonte recebem peso zero.</li>
+<li>A probabilidade de êxito é a proporção ponderada de êxitos.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>censura <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, desfecho <span class="sc">==</span> <span class="st">"pendente"</span>) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> dez)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> <span class="fu">stepfun</span>(censura<span class="sc">$</span>time, <span class="fu">c</span>(<span class="dv">1</span>, censura<span class="sc">$</span>surv), <span class="at">right =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>pesos <span class="ot">&lt;-</span> dez <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">t =</span> <span class="fu">pmin</span>(meses, H),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">G_t =</span> <span class="fu">G</span>(t),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">peso =</span> <span class="fu">if_else</span>(desfecho <span class="sc">!=</span> <span class="st">"pendente"</span> <span class="sc">|</span> meses <span class="sc">&gt;=</span> H, <span class="dv">1</span> <span class="sc">/</span> G_t, <span class="dv">0</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(t)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>pesos <span class="sc">|&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(processo, t, desfecho, G_t, peso) <span class="sc">|&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(G_t, peso), \(x) <span class="fu">round</span>(x, <span class="dv">3</span>)))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 5
+   processo     t desfecho       G_t  peso
+   &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;
+ 1 C            2 extinto      1      1   
+ 2 A            3 exito        1      1   
+ 3 G            4 pendente     1      0   
+ 4 B            5 exito        0.875  1.14
+ 5 H            6 pendente     0.875  0   
+ 6 D            8 improcedente 0.729  1.37
+ 7 J            9 pendente     0.729  0   
+ 8 E           10 exito        0.547  1.83
+ 9 F           11 improcedente 0.547  1.83
+10 I           12 pendente     0.547  1.83</code></pre>
+</div>
+</div>
+<p>O processo G sai da observação aos 4 meses, e <span class="math inline">\(G(t)\)</span> cai para 0,875; H sai aos 6 meses (0,729); J, aos 9 (0,547). A soma dos pesos volta a dar 10,0, o número de processos. A proporção ponderada de êxitos é 39,7%, exatamente a incidência acumulada de Aalen-Johansen.</p>
+<p>A intuição: quem foi observado por muito tempo representa também os processos parecidos que saíram da observação antes. Os três pendentes sumiram, mas o peso deles foi redistribuído entre os que continuaram sendo acompanhados. Nenhum processo é tratado como derrota, e nenhum é descartado sem compensação.</p>
+<p>A hipótese por trás dos pesos é que sair da observação não tem relação com o desfecho. Ela vale quando a censura vem apenas da data da coleta: o processo está pendente porque é novo, e não porque vai perder. Se a pendência tiver a ver com o desfecho, como um processo parado por causa de um laudo desfavorável, a correção fica incompleta. Por isso convém deixar entrar no cálculo de <span class="math inline">\(G\)</span> as características que explicam a duração.</p>
+</section>
+<section id="os-atalhos-na-base-simulada" class="level2" data-number="20.5">
+<h2 data-number="20.5" class="anchored" data-anchor-id="os-atalhos-na-base-simulada"><span class="header-section-number">20.5</span> Os atalhos na base simulada</h2>
+<p>A base simulada dos capítulos anteriores permite repetir as contas em 4.000 processos e compará-las com a verdade, que só a simulação conhece. A base é montada como antes.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>processos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dados/duracao_processos_simulados.csv"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>movimentos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dados/duracao_movimentos_simulados.csv"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>regras <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>movimento,                                   <span class="sc">~</span>desfecho,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Homologado o acordo"</span>,                        <span class="st">"acordo"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Julgado procedente o pedido"</span>,                <span class="st">"procedente"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Julgado procedente em parte o pedido"</span>,       <span class="st">"procedente"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Julgado improcedente o pedido"</span>,              <span class="st">"improcedente"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Extinto o processo sem resolução do mérito"</span>, <span class="st">"extinto"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Indeferida a petição inicial"</span>,               <span class="st">"extinto"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> processos <span class="sc">|&gt;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    movimentos <span class="sc">|&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">inner_join</span>(regras, <span class="at">by =</span> <span class="st">"movimento"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">slice_min</span>(data, <span class="at">by =</span> processo, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">select</span>(processo, <span class="at">data_desfecho =</span> data, desfecho),</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">"processo"</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">desfecho =</span> <span class="fu">coalesce</span>(desfecho, <span class="st">"pendente"</span>),</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">meses =</span> <span class="fu">as.numeric</span>(<span class="fu">coalesce</span>(data_desfecho, data_coleta) <span class="sc">-</span> data_distribuicao) <span class="sc">/</span> <span class="fl">30.4375</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">status =</span> <span class="fu">as.integer</span>(desfecho <span class="sc">!=</span> <span class="st">"pendente"</span>),</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">desfecho_3 =</span> <span class="fu">factor</span>(</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">case_when</span>(desfecho <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"acordo"</span>, <span class="st">"procedente"</span>) <span class="sc">~</span> <span class="st">"exito"</span>, <span class="at">.default =</span> desfecho),</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"pendente"</span>, <span class="st">"exito"</span>, <span class="st">"improcedente"</span>, <span class="st">"extinto"</span>)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">faixa_valor =</span> <span class="fu">factor</span>(</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>      faixa_valor,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"até R$ 30 mil"</span>, <span class="st">"R$ 30 mil a R$ 100 mil"</span>, <span class="st">"acima de R$ 100 mil"</span>)</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">exito_12 =</span> desfecho_3 <span class="sc">==</span> <span class="st">"exito"</span> <span class="sc">&amp;</span> meses <span class="sc">&lt;=</span> H,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">conhecido_12 =</span> status <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> meses <span class="sc">&gt;=</span> H,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">real_meses =</span> <span class="fu">as.numeric</span>(real_data_desfecho <span class="sc">-</span> data_distribuicao) <span class="sc">/</span> <span class="fl">30.4375</span>,</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">real_exito_12 =</span> real_meses <span class="sc">&lt;=</span> H <span class="sc">&amp;</span> real_desfecho <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"acordo"</span>, <span class="st">"procedente"</span>)</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>aj_base <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, desfecho_3) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> base)</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>km_base <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, desfecho_3 <span class="sc">==</span> <span class="st">"exito"</span>) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> base)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>atalhos_base <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">conta =</span> <span class="fu">c</span>(</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Verdade (simulação)"</span>, <span class="st">"Pendente conta como derrota"</span>,</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Descartar quem não tem desfecho conhecido em 12 meses"</span>,</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Olhar só os decididos"</span>, <span class="st">"1 - Kaplan-Meier, outros desfechos como censura"</span>,</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Incidência acumulada (Aalen-Johansen)"</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">exito =</span> <span class="fu">c</span>(</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(base<span class="sc">$</span>real_exito_12),</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(base<span class="sc">$</span>exito_12),</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(base<span class="sc">$</span>exito_12[base<span class="sc">$</span>conhecido_12]),</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mean</span>(base<span class="sc">$</span>desfecho_3[base<span class="sc">$</span>status <span class="sc">==</span> <span class="dv">1</span>] <span class="sc">==</span> <span class="st">"exito"</span>),</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span> <span class="sc">-</span> <span class="fu">summary</span>(km_base, <span class="at">times =</span> H)<span class="sc">$</span>surv,</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>(aj_base, <span class="at">times =</span> H)<span class="sc">$</span>pstate[, <span class="dv">2</span>]</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>atalhos_base</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  conta                                                 exito
+  &lt;chr&gt;                                                 &lt;dbl&gt;
+1 Verdade (simulação)                                   0.443
+2 Pendente conta como derrota                           0.306
+3 Descartar quem não tem desfecho conhecido em 12 meses 0.446
+4 Olhar só os decididos                                 0.506
+5 1 - Kaplan-Meier, outros desfechos como censura       0.624
+6 Incidência acumulada (Aalen-Johansen)                 0.439</code></pre>
+</div>
+</div>
+<p>A verdade é 44,3%, e o Aalen-Johansen chega a 43,9%. Contar os pendentes como derrota dá 30,6%; olhar só os decididos, 50,6%; o 1 − Kaplan-Meier, 62,4%. Sobre os mesmos 4.000 processos, a diferença entre o pior e o melhor atalho é de 32 pontos percentuais.</p>
+<p>Descartar os processos sem desfecho conhecido deu 44,6%, perto da verdade. Na base simulada, as formas de término e as características dos processos não mudam entre as coortes de distribuição, e o descarte remove sobretudo processos novos, parecidos com os antigos. O resultado não deve tranquilizar: basta que as coortes difiram, ou que a censura dependa de outra coisa além da idade, para o viés aparecer. Os pesos dão a resposta correta nas duas situações.</p>
+</section>
+<section id="três-caminhos-para-prever-com-características" class="level2" data-number="20.6">
+<h2 data-number="20.6" class="anchored" data-anchor-id="três-caminhos-para-prever-com-características"><span class="header-section-number">20.6</span> Três caminhos para prever com características</h2>
+<p>Com características de cada processo, a pergunta passa a ser: qual a probabilidade de êxito em até 12 meses para um processo com este perfil? Há três caminhos, e todos respondem à mesma pergunta.</p>
+<p><strong>Um modelo de desfechos concorrentes, lido no horizonte.</strong> O modelo de Fine-Gray, do capítulo “Modelos para o tempo do processo”, devolve para cada perfil a curva de incidência acumulada do êxito; lê-se o valor em 12 meses. Usa toda a informação, inclusive a ordem e a velocidade dos desfechos, e tem coeficientes interpretáveis. Uma versão flexível é a floresta aleatória de sobrevivência para desfechos concorrentes (Ishwaran et al., 2014).</p>
+<p><strong>Um classificador comum, com rótulo no horizonte e pesos.</strong> O rótulo é “teve êxito até 12 meses”. Os processos censurados antes do horizonte ficam fora, e os demais entram com peso <span class="math inline">\(1/G(t)\)</span>. Daí em diante é classificação usual: regressão logística, XGBoost (Chen; Guestrin, 2016) ou qualquer algoritmo que aceite pesos (Vock et al., 2016). A vantagem é a liberdade de escolher o algoritmo; o custo é que a informação parcial dos pendentes só volta pela compensação dos pesos.</p>
+<p><strong>Pseudo-observações.</strong> Cada processo recebe um rótulo contínuo, calculado pela variação da incidência acumulada quando ele é retirado da base (Andersen; Pohar Perme, 2010). Qualquer regressão pode usar esse rótulo. A função <code>pseudo()</code> do pacote <code>survival</code> faz o cálculo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pseudo_12 <span class="ot">&lt;-</span> <span class="fu">pseudo</span>(<span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, desfecho_3) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> base, <span class="at">id =</span> processo), <span class="at">times =</span> H)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>base_pseudo <span class="ot">&lt;-</span> base <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pseudo_exito =</span> pseudo_12[, <span class="st">"exito"</span>])</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(pseudo_exito <span class="sc">~</span> parecer_tecnico <span class="sc">+</span> meses_desde_fato <span class="sc">+</span> inicial_instruida <span class="sc">+</span> vara, <span class="at">data =</span> base_pseudo) <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>() <span class="sc">|&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          (Intercept)   parecer_tecnicoTRUE      meses_desde_fato 
+                0.401                 0.146                -0.005 
+inicial_instruidaTRUE            varaVara B            varaVara C 
+                0.137                 0.023                -0.012 
+           varaVara D 
+               -0.081 </code></pre>
+</div>
+</div>
+<p>A média das pseudo-observações é igual à incidência acumulada, e os coeficientes da regressão linear se leem em pontos percentuais: o parecer técnico juntado à inicial soma 15 pontos à probabilidade de êxito em 12 meses, mantidas as demais características.</p>
+<p>O erro é o quarto caminho: um classificador treinado com um dos atalhos. Ele roda, produz números, e os números estão errados de um jeito que a avaliação usual não mostra.</p>
+</section>
+<section id="como-medir-o-desempenho" class="level2" data-number="20.7">
+<h2 data-number="20.7" class="anchored" data-anchor-id="como-medir-o-desempenho"><span class="header-section-number">20.7</span> Como medir o desempenho</h2>
+<p>As medidas usuais de classificação também precisam da correção, porque os processos usados para avaliar o modelo têm os mesmos pendentes. A regra é a mesma: cada processo pesa <span class="math inline">\(1/G(t)\)</span>, e os censurados antes do horizonte ficam fora.</p>
+<section id="auc-dependente-do-tempo" class="level3" data-number="20.7.1">
+<h3 data-number="20.7.1" class="anchored" data-anchor-id="auc-dependente-do-tempo"><span class="header-section-number">20.7.1</span> AUC dependente do tempo</h3>
+<p>A AUC responde a esta pergunta: sorteados um processo que teve êxito até 12 meses e um que não teve, qual a chance de o modelo dar ao primeiro um escore maior? Vai de 0,5 (acaso) a 1 (ordenação perfeita). Com censura (Heagerty; Lumley; Pepe, 2000; Blanche; Dartigues; Jacqmin-Gadda, 2013):</p>
+<ul>
+<li><strong>Casos:</strong> êxito até 12 meses.</li>
+<li><strong>Controles:</strong> improcedência ou extinção até 12 meses, ou 12 meses sem decisão.</li>
+<li><strong>Fora:</strong> pendentes com menos de 12 meses.</li>
+</ul>
+<p>Cada par de caso e controle vale o produto dos pesos dos dois. A AUC é a soma dos pesos dos pares em que o caso tem escore maior, dividida pela soma dos pesos de todos os pares; empates valem meio.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>auc_ipcw <span class="ot">&lt;-</span> <span class="cf">function</span>(escore, exito, peso) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  manter <span class="ot">&lt;-</span> peso <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  escore <span class="ot">&lt;-</span> escore[manter]; exito <span class="ot">&lt;-</span> exito[manter]; peso <span class="ot">&lt;-</span> peso[manter]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  casos <span class="ot">&lt;-</span> <span class="fu">which</span>(exito)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  controles <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span>exito)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  acerto <span class="ot">&lt;-</span> <span class="fu">outer</span>(escore[casos], escore[controles], <span class="st">"&gt;"</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.5</span> <span class="sc">*</span> <span class="fu">outer</span>(escore[casos], escore[controles], <span class="st">"=="</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  pesos_pares <span class="ot">&lt;-</span> <span class="fu">outer</span>(peso[casos], peso[controles])</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(acerto <span class="sc">*</span> pesos_pares) <span class="sc">/</span> <span class="fu">sum</span>(pesos_pares)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>No exemplo de dez processos, suponha que um modelo tenha dado os escores abaixo.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>escores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A =</span> <span class="fl">0.70</span>, <span class="at">B =</span> <span class="fl">0.50</span>, <span class="at">C =</span> <span class="fl">0.30</span>, <span class="at">D =</span> <span class="fl">0.60</span>, <span class="at">E =</span> <span class="fl">0.40</span>, <span class="at">F =</span> <span class="fl">0.20</span>, <span class="at">I =</span> <span class="fl">0.45</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dez_avaliados <span class="ot">&lt;-</span> pesos <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(peso <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">escore =</span> escores[processo], <span class="at">exito =</span> desfecho <span class="sc">==</span> <span class="st">"exito"</span> <span class="sc">&amp;</span> meses <span class="sc">&lt;=</span> H)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sem_peso =</span> <span class="fu">auc_ipcw</span>(dez_avaliados<span class="sc">$</span>escore, dez_avaliados<span class="sc">$</span>exito, <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(dez_avaliados))),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">com_peso =</span> <span class="fu">auc_ipcw</span>(dez_avaliados<span class="sc">$</span>escore, dez_avaliados<span class="sc">$</span>exito, dez_avaliados<span class="sc">$</span>peso)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sem_peso com_peso 
+0.750000 0.690136 </code></pre>
+</div>
+</div>
+<p>Sem peso, 9 dos 12 pares estão na ordem certa, e a AUC seria 0,75. Com peso, é 0,69. O erro do modelo está em E, o êxito tardio, que vale mais porque representa também os pendentes.</p>
+</section>
+<section id="brier-e-calibração" class="level3" data-number="20.7.2">
+<h3 data-number="20.7.2" class="anchored" data-anchor-id="brier-e-calibração"><span class="header-section-number">20.7.2</span> Brier e calibração</h3>
+<p>O escore de Brier com pesos é o erro quadrático médio da probabilidade prevista (Graf et al., 1999). Para quem teve êxito no horizonte, o erro é <span class="math inline">\((1 - p)^2\)</span>; para quem não teve, <span class="math inline">\(p^2\)</span>; cada termo é multiplicado pelo peso. Sozinho, o Brier é difícil de ler. Compara-se ao de um modelo nulo, que dá a todos a taxa geral: o Brier escalonado é <span class="math inline">\(1 - \text{Brier}_\text{modelo} / \text{Brier}_\text{nulo}\)</span>. Zero indica que o modelo não ajuda; valores positivos medem quanto ajuda.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>brier_ipcw <span class="ot">&lt;-</span> <span class="cf">function</span>(prob, exito, peso) <span class="fu">sum</span>(peso <span class="sc">*</span> (exito <span class="sc">-</span> prob)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">sum</span>(peso)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A calibração compara o previsto com o observado (Van Calster et al., 2019). Ordenam-se os processos pelo escore, dividem-se em cinco grupos, e em cada grupo compara-se a média prevista com a incidência observada, estimada pelo Aalen-Johansen dentro do grupo, e nunca pela proporção de êxitos entre os decididos. Um modelo calibrado diz 15% onde acontecem 15%, e 55% onde acontecem 55%.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>calibracao <span class="ot">&lt;-</span> <span class="cf">function</span>(prob, dados, <span class="at">grupos =</span> <span class="dv">5</span>) {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  dados <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">grupo =</span> <span class="fu">ntile</span>(prob, grupos), <span class="at">previsto =</span> prob) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(grupo) <span class="sc">|&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">previsto =</span> <span class="fu">mean</span>(previsto),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">observado =</span> {</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        s <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, desfecho_3) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> <span class="fu">pick</span>(<span class="fu">everything</span>())), <span class="at">times =</span> H, <span class="at">extend =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">max</span>(meses) <span class="sc">&lt;</span> H) <span class="cn">NA_real_</span> <span class="cf">else</span> s<span class="sc">$</span>pstate[, <span class="dv">2</span>]</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="sempre-fora-da-amostra" class="level3" data-number="20.7.3">
+<h3 data-number="20.7.3" class="anchored" data-anchor-id="sempre-fora-da-amostra"><span class="header-section-number">20.7.3</span> Sempre fora da amostra</h3>
+<p>As medidas se calculam em validação cruzada: o modelo é ajustado em quatro quintos da base e avaliado no quinto restante, cinco vezes, com as mesmas partições para todos os modelos. Avaliar na própria base de ajuste premia quem decorou os dados. Os pesos de avaliação usam <span class="math inline">\(G\)</span> estimado na base inteira; os de ajuste, <span class="math inline">\(G\)</span> estimado apenas na parte usada para ajustar.</p>
+</section>
+</section>
+<section id="comparação-na-base-simulada" class="level2" data-number="20.8">
+<h2 data-number="20.8" class="anchored" data-anchor-id="comparação-na-base-simulada"><span class="header-section-number">20.8</span> Comparação na base simulada</h2>
+<p>A comparação usa apenas o que se sabe na distribuição: vara, faixa do valor da causa, pedido de tutela, inicial instruída com documentos, parecer técnico juntado à inicial e meses entre o fato e o ajuizamento. Cinco modelos são comparados: o Fine-Gray lido em 12 meses, a regressão logística com pesos, o XGBoost com pesos e duas logísticas que usam atalhos, uma que descarta os pendentes e outra que os conta como derrota.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>formula_base <span class="ot">&lt;-</span> <span class="er">~</span> vara <span class="sc">+</span> faixa_valor <span class="sc">+</span> tutela_pedida <span class="sc">+</span> inicial_instruida <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  parecer_tecnico <span class="sc">+</span> meses_desde_fato</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>pesos_ipcw <span class="ot">&lt;-</span> <span class="cf">function</span>(dados) {</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  g <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, status <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> dados)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  G <span class="ot">&lt;-</span> <span class="fu">stepfun</span>(g<span class="sc">$</span>time, <span class="fu">c</span>(<span class="dv">1</span>, g<span class="sc">$</span>surv), <span class="at">right =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">if_else</span>(dados<span class="sc">$</span>conhecido_12, <span class="dv">1</span> <span class="sc">/</span> <span class="fu">G</span>(<span class="fu">pmin</span>(dados<span class="sc">$</span>meses, H)), <span class="dv">0</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>base<span class="sc">$</span>peso <span class="ot">&lt;-</span> <span class="fu">pesos_ipcw</span>(base)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>dobra <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">length.out =</span> <span class="fu">nrow</span>(base)))</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>modelos <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Fine-Gray"</span>, <span class="st">"Logística com pesos"</span>, <span class="st">"XGBoost com pesos"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Logística: descarta pendentes"</span>, <span class="st">"Logística: pendente é derrota"</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>previsto <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA_real_</span>, <span class="fu">nrow</span>(base), <span class="fu">length</span>(modelos), <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="cn">NULL</span>, modelos))</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  ajuste <span class="ot">&lt;-</span> base[dobra <span class="sc">!=</span> k, ]</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  teste <span class="ot">&lt;-</span> base[dobra <span class="sc">==</span> k, ]</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  ajuste<span class="sc">$</span>peso <span class="ot">&lt;-</span> <span class="fu">pesos_ipcw</span>(ajuste)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  dados_fg <span class="ot">&lt;-</span> <span class="fu">finegray</span>(</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Surv</span>(meses, desfecho_3) <span class="sc">~</span> .,</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">select</span>(ajuste, meses, desfecho_3, <span class="fu">all_of</span>(<span class="fu">all.vars</span>(formula_base))),</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">etype =</span> <span class="st">"exito"</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  fg <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">update</span>(formula_base, <span class="fu">Surv</span>(fgstart, fgstop, fgstatus) <span class="sc">~</span> .), <span class="at">weights =</span> fgwt, <span class="at">data =</span> dados_fg)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  previsto[dobra <span class="sc">==</span> k, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">summary</span>(<span class="fu">survfit</span>(fg, <span class="at">newdata =</span> teste), <span class="at">times =</span> H)<span class="sc">$</span>surv</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  logistica <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">update</span>(formula_base, exito_12 <span class="sc">~</span> .), <span class="at">family =</span> quasibinomial, <span class="at">weights =</span> peso, <span class="at">data =</span> ajuste)</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  previsto[dobra <span class="sc">==</span> k, <span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">predict</span>(logistica, teste, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  x_ajuste <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(formula_base, ajuste)[ajuste<span class="sc">$</span>peso <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>  xgb <span class="ot">&lt;-</span> <span class="fu">xgb.train</span>(</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">params =</span> <span class="fu">list</span>(<span class="at">objective =</span> <span class="st">"binary:logistic"</span>, <span class="at">max_depth =</span> <span class="dv">3</span>, <span class="at">learning_rate =</span> <span class="fl">0.05</span>, <span class="at">nthread =</span> <span class="dv">2</span>),</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">xgb.DMatrix</span>(</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>      x_ajuste,</span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">as.numeric</span>(ajuste<span class="sc">$</span>exito_12[ajuste<span class="sc">$</span>peso <span class="sc">&gt;</span> <span class="dv">0</span>]),</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">weight =</span> ajuste<span class="sc">$</span>peso[ajuste<span class="sc">$</span>peso <span class="sc">&gt;</span> <span class="dv">0</span>]</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrounds =</span> <span class="dv">150</span></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>  previsto[dobra <span class="sc">==</span> k, <span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">predict</span>(xgb, <span class="fu">xgb.DMatrix</span>(<span class="fu">model.matrix</span>(formula_base, teste)[, <span class="sc">-</span><span class="dv">1</span>]))</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>  descarta <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">update</span>(formula_base, exito_12 <span class="sc">~</span> .), <span class="at">family =</span> binomial, <span class="at">data =</span> <span class="fu">filter</span>(ajuste, conhecido_12))</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>  previsto[dobra <span class="sc">==</span> k, <span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">predict</span>(descarta, teste, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a>  derrota <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">update</span>(formula_base, exito_12 <span class="sc">~</span> .), <span class="at">family =</span> binomial, <span class="at">data =</span> ajuste)</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>  previsto[dobra <span class="sc">==</span> k, <span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">predict</span>(derrota, teste, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>A taxa geral, usada pelo modelo nulo do Brier, é a incidência acumulada da base inteira.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>taxa_geral <span class="ot">&lt;-</span> <span class="fu">summary</span>(aj_base, <span class="at">times =</span> H)<span class="sc">$</span>pstate[, <span class="dv">2</span>]</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>brier_nulo <span class="ot">&lt;-</span> <span class="fu">brier_ipcw</span>(<span class="fu">rep</span>(taxa_geral, <span class="fu">nrow</span>(base)), base<span class="sc">$</span>exito_12, base<span class="sc">$</span>peso)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>desempenho <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(modelos, \(m) <span class="fu">tibble</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">modelo =</span> m,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">auc =</span> <span class="fu">auc_ipcw</span>(previsto[, m], base<span class="sc">$</span>exito_12, base<span class="sc">$</span>peso),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">brier_escalonado =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">brier_ipcw</span>(previsto[, m], base<span class="sc">$</span>exito_12, base<span class="sc">$</span>peso) <span class="sc">/</span> brier_nulo,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">auc_contra_verdade =</span> <span class="fu">auc_ipcw</span>(previsto[, m], base<span class="sc">$</span>real_exito_12, <span class="fu">rep</span>(<span class="dv">1</span>, <span class="fu">nrow</span>(base)))</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>desempenho <span class="sc">|&gt;</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), \(x) <span class="fu">round</span>(x, <span class="dv">3</span>)))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  modelo                          auc brier_escalonado auc_contra_verdade
+  &lt;chr&gt;                         &lt;dbl&gt;            &lt;dbl&gt;              &lt;dbl&gt;
+1 Fine-Gray                     0.645            0.062              0.646
+2 Logística com pesos           0.645            0.062              0.644
+3 XGBoost com pesos             0.643            0.06               0.641
+4 Logística: descarta pendentes 0.644            0.061              0.643
+5 Logística: pendente é derrota 0.643           -0.017              0.644</code></pre>
+</div>
+</div>
+<p>A coluna <code>auc_contra_verdade</code> existe apenas porque a simulação conhece o desfecho de todos os processos em 12 meses, inclusive dos pendentes. Para os modelos corretos, a AUC com pesos fica muito perto dela: na logística com pesos, 0,645 contra 0,644. Os pesos recuperam, a partir dos dados censurados, a medida que se obteria se todos os processos tivessem terminado.</p>
+<p>Os três modelos corretos têm desempenho parecido. O XGBoost não ganha: com seis características e poucas interações, sobra pouca não linearidade para ele encontrar. Em bases com mais características, ele pode ganhar na ordenação, mas não tem coeficientes legíveis; o Fine-Gray e as pseudo-observações continuam sendo as ferramentas para dizer quais fatores pesam e quanto.</p>
+<p>O ponto central está na logística que trata os pendentes como derrota. A AUC dela é praticamente igual à dos modelos corretos (0,643), porque a AUC só olha a ordem dos escores, e a ordem sobrevive ao viés. O Brier escalonado, porém, é -0,017, pior que o do modelo nulo. A calibração mostra por quê.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dfr</span>(modelos[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>)], \(m) <span class="fu">calibracao</span>(previsto[, m], base) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">modelo =</span> m)) <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">previsto_observado =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> previsto), <span class="st">"% / "</span>, <span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> observado), <span class="st">"%"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(grupo, modelo, previsto_observado) <span class="sc">|&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> modelo, <span class="at">values_from =</span> previsto_observado)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  grupo `Logística com pesos` `Logística: pendente é derrota`
+  &lt;int&gt; &lt;chr&gt;                 &lt;chr&gt;                          
+1     1 25% / 25%             18% / 26%                      
+2     2 37% / 38%             26% / 38%                      
+3     3 44% / 47%             31% / 46%                      
+4     4 51% / 52%             35% / 52%                      
+5     5 62% / 59%             44% / 58%                      </code></pre>
+</div>
+</div>
+<p>Cada linha é um quinto dos processos, do menor para o maior escore, com a probabilidade prevista e a incidência observada. A logística com pesos prevê, em cada grupo, valores próximos aos observados. A que conta os pendentes como derrota prevê sistematicamente menos que o observado. Na prática, é a probabilidade que importa: quanto vale o caso, quanto provisionar, qual a chance de acordo. Um modelo com AUC aceitável e probabilidades deslocadas leva a decisões erradas.</p>
+<section id="encolhimento" class="level3" data-number="20.8.1">
+<h3 data-number="20.8.1" class="anchored" data-anchor-id="encolhimento"><span class="header-section-number">20.8.1</span> Encolhimento</h3>
+<p>Quando um modelo exagera os extremos, prevendo 70% onde acontecem 59%, a correção é encolher o preditor: multiplicar o preditor linear por um fator menor que 1, estimado também fora da amostra (Van Houwelingen; Le Cessie, 1990). O fator é a inclinação de uma regressão do desfecho sobre o preditor linear previsto. Uma inclinação próxima de 1 indica que o encolhimento é desnecessário.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>inclinacao <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  exito_12 <span class="sc">~</span> <span class="fu">qlogis</span>(prev),</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> quasibinomial, <span class="at">weights =</span> peso,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">mutate</span>(base, <span class="at">prev =</span> previsto[, <span class="st">"Logística com pesos"</span>])</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coef</span>()</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>inclinacao</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> (Intercept) qlogis(prev) 
+ -0.01747376   0.91656078 </code></pre>
+</div>
+</div>
+<p>Com seis características e 4.000 processos, a inclinação da logística com pesos é 0,92, e o encolhimento muda pouco as previsões. Modelos com muitas características e poucos processos tendem a ter inclinações bem menores que 1.</p>
+</section>
+</section>
+<section id="receita" class="level2" data-number="20.9">
+<h2 data-number="20.9" class="anchored" data-anchor-id="receita"><span class="header-section-number">20.9</span> Receita</h2>
+<ol type="1">
+<li>Monte a base pela distribuição, e não pelas sentenças nem pelo acervo numa data. Todo processo distribuído no período entra, inclusive os que serão extintos.</li>
+<li>Defina o horizonte. A pergunta passa a ser a probabilidade de êxito até lá.</li>
+<li>Para cada processo, guarde o tempo, da distribuição ao desfecho ou à coleta, e o desfecho, ou a situação de pendente.</li>
+<li>Para a taxa geral ou por grupo, use o Aalen-Johansen, nunca a proporção entre os decididos.</li>
+<li>Para o modelo, use um dos três caminhos: modelo de desfechos concorrentes lido no horizonte, classificador com pesos ou pseudo-observações. Para explicar fatores, o Fine-Gray ou as pseudo-observações; para ordenar casos, um classificador flexível com pesos.</li>
+<li>Avalie fora da amostra, com AUC e Brier com pesos e calibração por grupos contra o Aalen-Johansen.</li>
+<li>Se o modelo exagera os extremos, encolha o preditor.</li>
+<li>Lembre a hipótese: a censura vem da data da coleta, e não do desfecho. Se houver motivo para duvidar, como processos suspensos ou arquivados provisoriamente, trate esses estados à parte.</li>
+</ol>
+</section>
+<section id="atividade" class="level2" data-number="20.10">
+<h2 data-number="20.10" class="anchored" data-anchor-id="atividade"><span class="header-section-number">20.10</span> Atividade</h2>
+<p>A atividade usa a base simulada.</p>
+<ol type="1">
+<li><strong>Atalhos.</strong> Repita a comparação dos atalhos com horizonte de 6 e de 18 meses. Em qual horizonte os atalhos erram mais? Por quê?</li>
+<li><strong>Pesos.</strong> Recalcule a probabilidade de êxito em 12 meses por vara com os pesos e com o Aalen-Johansen. Os dois coincidem?</li>
+<li><strong>Idade como preditor.</strong> Inclua a coorte de distribuição na logística que trata os pendentes como derrota. O coeficiente da coorte mais recente é negativo? O que ele mede?</li>
+<li><strong>Pseudo-observações.</strong> Ajuste a regressão linear sobre as pseudo-observações com horizonte de 6 meses. O efeito do parecer técnico muda? Interprete.</li>
+<li><strong>Avaliação.</strong> Calcule a AUC com pesos e a calibração do Fine-Gray. Ele está tão bem calibrado quanto a logística com pesos?</li>
+</ol>
+</section>
+<section id="síntese" class="level2" data-number="20.11">
+<h2 data-number="20.11" class="anchored" data-anchor-id="síntese"><span class="header-section-number">20.11</span> Síntese</h2>
+<p>Prever o desfecho de um processo é uma pergunta de classificação que só pode ser respondida com as ferramentas da análise de duração, porque parte dos processos ainda não terminou. Com um horizonte definido, a probabilidade de êxito é a incidência acumulada do Aalen-Johansen, e os pesos pelo inverso da probabilidade de censura chegam ao mesmo resultado. Contar os pendentes como derrota, descartá-los, olhar só os decididos ou usar o 1 − Kaplan-Meier erram, cada um numa direção.</p>
+<p>Com características dos processos, há três caminhos corretos: o modelo de desfechos concorrentes lido no horizonte, o classificador com pesos e as pseudo-observações. A avaliação precisa da mesma correção, e a calibração revela erros que a AUC esconde. A análise de duração corrige a censura, mas não corrige uma base montada pelo desfecho: o desenho da coleta vem antes do modelo.</p>
+</section>
+<section id="referências" class="level2" data-number="20.12">
+<h2 data-number="20.12" class="anchored" data-anchor-id="referências"><span class="header-section-number">20.12</span> Referências</h2>
+<ul>
+<li>Andersen, P. K.; Pohar Perme, M. Pseudo-observations in survival analysis. <em>Statistical Methods in Medical Research</em>, v. 19, n.&nbsp;1, p.&nbsp;71-99, 2010. <a href="https://doi.org/10.1177/0962280209105020" class="uri">https://doi.org/10.1177/0962280209105020</a></li>
+<li>Blanche, P.; Dartigues, J.-F.; Jacqmin-Gadda, H. Estimating and comparing time-dependent areas under receiver operating characteristic curves for censored event times with competing risks. <em>Statistics in Medicine</em>, v. 32, n.&nbsp;30, p.&nbsp;5381-5397, 2013. <a href="https://doi.org/10.1002/sim.5958" class="uri">https://doi.org/10.1002/sim.5958</a></li>
+<li>Chen, T.; Guestrin, C. XGBoost: a scalable tree boosting system. In: <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, p.&nbsp;785-794, 2016. <a href="https://doi.org/10.1145/2939672.2939785" class="uri">https://doi.org/10.1145/2939672.2939785</a></li>
+<li>Graf, E.; Schmoor, C.; Sauerbrei, W.; Schumacher, M. Assessment and comparison of prognostic classification schemes for survival data. <em>Statistics in Medicine</em>, v. 18, n.&nbsp;17-18, p.&nbsp;2529-2545, 1999.</li>
+<li>Heagerty, P. J.; Lumley, T.; Pepe, M. S. Time-dependent ROC curves for censored survival data and a diagnostic marker. <em>Biometrics</em>, v. 56, n.&nbsp;2, p.&nbsp;337-344, 2000. <a href="https://doi.org/10.1111/j.0006-341X.2000.00337.x" class="uri">https://doi.org/10.1111/j.0006-341X.2000.00337.x</a></li>
+<li>Ishwaran, H.; Gerds, T. A.; Kogalur, U. B.; Moore, R. D.; Gange, S. J.; Lau, B. M. Random survival forests for competing risks. <em>Biostatistics</em>, v. 15, n.&nbsp;4, p.&nbsp;757-773, 2014. <a href="https://doi.org/10.1093/biostatistics/kxu010" class="uri">https://doi.org/10.1093/biostatistics/kxu010</a></li>
+<li>Van Calster, B.; McLernon, D. J.; van Smeden, M.; Wynants, L.; Steyerberg, E. W. Calibration: the Achilles heel of predictive analytics. <em>BMC Medicine</em>, v. 17, 230, 2019. <a href="https://doi.org/10.1186/s12916-019-1466-7" class="uri">https://doi.org/10.1186/s12916-019-1466-7</a></li>
+<li>Van Houwelingen, J. C.; Le Cessie, S. Predictive value of statistical models. <em>Statistics in Medicine</em>, v. 9, n.&nbsp;11, p.&nbsp;1303-1325, 1990. <a href="https://doi.org/10.1002/sim.4780091109" class="uri">https://doi.org/10.1002/sim.4780091109</a></li>
+<li>Vock, D. M. et al.&nbsp;Adapting machine learning techniques to censored time-to-event health record data: a general-purpose approach using inverse probability of censoring weighting. <em>Journal of Biomedical Informatics</em>, v. 61, p.&nbsp;119-131, 2016. <a href="https://doi.org/10.1016/j.jbi.2016.03.009" class="uri">https://doi.org/10.1016/j.jbi.2016.03.009</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../capitulos/P5C03-modelos-duracao.html" class="pagination-link" aria-label="Modelos para o tempo do processo">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelos para o tempo do processo</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

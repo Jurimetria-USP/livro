@@ -141,3 +141,11 @@ A nomenclatura põe o termo jurídico à frente, com o termo estatístico entre 
 Trabalhos ainda não publicados e projetos aplicados dos autores entram apenas pelas contribuições de método, sem resultados, números ou trechos literais.
 
 **Justificativa:** a descrição e a explicação do tempo do processo correspondem às Partes IV e V; a base simulada permite mostrar o tamanho de cada viés; a nomenclatura aproxima os conceitos do vocabulário processual.
+
+## 17 de novembro de 2026
+
+### Capítulo de previsão do desfecho
+
+**Decisão:** a Parte V recebe `P5C04-previsao-desfecho.qmd`, "Prever o desfecho do processo", sobre classificação com horizonte em bases com processos pendentes: atalhos e seus erros, pesos pelo inverso da probabilidade de censura, três caminhos de modelagem e avaliação com AUC, Brier e calibração corrigidos. O capítulo parte de um exemplo inventado de dez processos e usa a base simulada, que ganhou dois preditores conhecidos na distribuição. O capítulo de análise de duração passa a tratar os problemas de amostrar pelo desfecho.
+
+**Justificativa:** a pergunta sobre a chance de êxito é de classificação, mas só pode ser respondida com as ferramentas da análise de duração; o tema é previsão e avaliação de modelos, distinto do capítulo de modelos para o tempo do processo.

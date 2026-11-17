@@ -384,6 +384,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Modelos para o tempo do processo</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../capitulos/P5C04-previsao-desfecho.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Prever o desfecho do processo</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -733,15 +739,15 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 2
   desfecho         n
   &lt;chr&gt;        &lt;int&gt;
-1 acordo         684
+1 acordo         666
 2 extinto        545
-3 improcedente   745
-4 pendente      1317
-5 procedente     709</code></pre>
+3 improcedente   774
+4 pendente      1330
+5 procedente     685</code></pre>
 </div>
 </div>
 <p>A variável <code>status</code> vale 1 quando o desfecho foi observado e 0 quando o processo estava pendente na data da coleta. O par (<code>meses</code>, <code>status</code>) é a matéria-prima de tudo o que segue.</p>
-<p>Na coleta, 1.317 processos (32,9%) estavam pendentes. O que fazer com eles é o primeiro problema da análise de duração.</p>
+<p>Na coleta, 1.330 processos (33,2%) estavam pendentes. O que fazer com eles é o primeiro problema da análise de duração.</p>
 </section>
 </section>
 <section id="censura" class="level2" data-number="16.3">
@@ -772,7 +778,7 @@ window.Quarto = {
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>pend_coleta <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, status) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> base), <span class="at">times =</span> <span class="dv">12</span>)<span class="sc">$</span>surv</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>pend_hoje <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, status) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> base_hoje), <span class="at">times =</span> <span class="dv">12</span>)<span class="sc">$</span>surv</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Com a censura na data da coleta, a probabilidade de um processo seguir pendente após 12 meses é estimada em 15,8%, próxima da verdadeira (15,3%). Com a censura na data da análise, sobe para 18,9%. O erro faz os processos parecerem mais lentos do que são.</p>
+<p>Com a censura na data da coleta, a probabilidade de um processo seguir pendente após 12 meses é estimada em 16,0%, próxima da verdadeira (15,3%). Com a censura na data da análise, sobe para 19,3%. O erro faz os processos parecerem mais lentos do que são.</p>
 </section>
 <section id="evento-não-detectado-vira-censura" class="level3" data-number="16.3.3">
 <h3 data-number="16.3.3" class="anchored" data-anchor-id="evento-não-detectado-vira-censura"><span class="header-section-number">16.3.3</span> Evento não detectado vira censura</h3>
@@ -794,11 +800,11 @@ window.Quarto = {
 <pre><code># A tibble: 5 × 3
   desfecho     completa incompleta
   &lt;chr&gt;           &lt;int&gt;      &lt;int&gt;
-1 acordo            684        684
+1 acordo            666        666
 2 extinto           545        185
-3 improcedente      745        745
-4 pendente         1317       1677
-5 procedente        709        709</code></pre>
+3 improcedente      774        774
+4 pendente         1330       1690
+5 procedente        685        685</code></pre>
 </div>
 </div>
 <p>Com as regras incompletas, 360 processos extintos passam por pendentes. A prevenção é simples, porque a lista de títulos de movimento é finita e cabe numa revisão manual. Antes de estimar qualquer coisa, liste todos os títulos e confira cada um contra a definição do ato de interesse.</p>
@@ -811,13 +817,13 @@ window.Quarto = {
    &lt;chr&gt;                     &lt;int&gt;
  1 Distribuído por sorteio    4000
  2 Expedida a citação         3580
- 3 Documento juntado          3467
- 4 Certidão expedida          3451
+ 3 Documento juntado          3469
+ 4 Certidão expedida          3448
  5 Contestação juntada        3445
- 6 Ato ordinatório praticado  3434
- 7 Petição juntada            3368
+ 6 Ato ordinatório praticado  3431
+ 7 Petição juntada            3361
  8 Nomeado perito             3310
- 9 Suspensão do prazo         2685
+ 9 Suspensão do prazo         2700
 10 Laudo pericial juntado     2635
 # ℹ 15 more rows</code></pre>
 </div>
@@ -867,12 +873,12 @@ window.Quarto = {
 <pre><code># A tibble: 3 × 2
   medida                                   meses
   &lt;chr&gt;                                    &lt;dbl&gt;
-1 Média real (todos, sem censura)           8.34
+1 Média real (todos, sem censura)           8.35
 2 Média só dos decididos                    7.33
-3 Média com pendentes encerrados na coleta  6.73</code></pre>
+3 Média com pendentes encerrados na coleta  6.74</code></pre>
 </div>
 </div>
-<p>Os dois atalhos subestimam o tempo: 7,3 e 6,7 meses, contra 8,3 meses verdadeiros. O viés seria maior com seguimento mais curto.</p>
+<p>Os dois atalhos subestimam o tempo: 7,3 e 6,7 meses, contra 8,4 meses verdadeiros. O viés seria maior com seguimento mais curto.</p>
 <p>O acervo erra no sentido oposto. Um processo longo fica mais tempo em tramitação e, por isso, tem mais chance de estar no acervo em qualquer data. Os processos de um acervo são, em média, mais longos que os processos de uma coorte.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data_acervo <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">"2025-06-30"</span>)</span>
@@ -884,11 +890,17 @@ window.Quarto = {
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(acervo<span class="sc">$</span>real_meses)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10.19846</code></pre>
+<pre><code>[1] 10.22735</code></pre>
 </div>
 </div>
-<p>Os 1.395 processos em tramitação em 30 de junho de 2025 duram, em média, 10,2 meses, contra 8,3 meses de todos os processos. Medidas como o tempo médio dos processos pendentes descrevem o acervo, e não o tempo que um processo novo deve esperar.</p>
-<p>O desenho dos decididos num período não tem viés de sentido fixo. Se a entrada de processos é estável há muito tempo, os decididos num ano podem representar bem as durações; se a entrada cresce ou diminui, ou se a janela começa pouco depois do início da série, as durações curtas ou as longas ficam sobrerrepresentadas. Em todos os casos, o desenho não observa os processos que ainda não terminaram.</p>
+<p>Os 1.393 processos em tramitação em 30 de junho de 2025 duram, em média, 10,2 meses, contra 8,4 meses de todos os processos. Medidas como o tempo médio dos processos pendentes descrevem o acervo, e não o tempo que um processo novo deve esperar.</p>
+<p>O desenho dos decididos num período, que parte do desfecho, tem três problemas próprios.</p>
+<ol type="1">
+<li><strong>Some o denominador.</strong> Quem parte das sentenças só vê os processos que chegaram a uma decisão. Os extintos sem mérito, por indeferimento da inicial, desistência ou remessa a outro juízo, ficam de fora, e com eles boa parte da informação sobre a qualidade da inicial. A pergunta “qual a chance de uma ação dar certo” vira “qual a chance de uma sentença ser favorável”, que é outra pergunta.</li>
+<li><strong>O que conta como decisão muda o resultado.</strong> Uma busca por sentenças de procedência e improcedência não encontra as homologações de acordo. Onde o acordo é um caminho frequente de êxito, a taxa de procedência entre as sentenças pode até se aproximar da chance real de êxito por processo distribuído, mas mede outra coisa, e quem a lê conclui que o acordo não existe.</li>
+<li><strong>Processos de épocas diferentes se misturam conforme a duração.</strong> As sentenças publicadas num ano vêm de processos rápidos distribuídos naquele ano e de processos lentos distribuídos anos antes. Se algo mudou no intervalo, como a composição da vara ou a prática de uma das partes, a mudança se confunde com a duração, e a duração se confunde com o desfecho, porque acordos costumam sair cedo e improcedências, tarde.</li>
+</ol>
+<p>Além disso, o sentido do viés na duração não é fixo: depende de a entrada de processos crescer ou diminuir e de quando a janela começa. Um banco de sentenças, como o usado no capítulo “Análise de conteúdo de textos jurídicos”, serve para estudar o que as decisões dizem, mas não para estimar o tempo do processo nem a chance de um desfecho. A análise de duração corrige a censura; não corrige uma base montada pelo desfecho. O desenho vem antes do modelo.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Entrada tardia">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -911,7 +923,7 @@ window.Quarto = {
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       ingenuo entrada_tardia           real 
-      9.757700       8.312115       8.147844 </code></pre>
+      9.790554       8.410678       8.164271 </code></pre>
 </div>
 </div>
 <p>O processo distribuído há dez meses na data do acervo só conta a partir do décimo mês: antes disso, ele não estava sob observação, e quem terminou antes dele nunca entrou na base.</p>
@@ -1016,10 +1028,10 @@ S(t) = P(T &gt; t)
 <pre><code>Call: survfit(formula = Surv(meses, status) ~ 1, data = base)
 
         n events median 0.95LCL 0.95UCL
-[1,] 4000   2683   8.18    8.02    8.31</code></pre>
+[1,] 4000   2670   8.21    8.05    8.34</code></pre>
 </div>
 </div>
-<p>A mediana estimada é de 8,2 meses, e a verdadeira, de 8,1 meses. Aos 6 e aos 12 meses, a probabilidade de pendência estimada é de 74,5% e 15,8%; as verdadeiras são 74,4% e 15,3%. O estimador recupera a verdade a partir de dados em que um terço dos processos estava pendente.</p>
+<p>A mediana estimada é de 8,2 meses, e a verdadeira, de 8,2 meses. Aos 6 e aos 12 meses, a probabilidade de pendência estimada é de 74,4% e 16,0%; as verdadeiras são 74,2% e 15,3%. O estimador recupera a verdade a partir de dados em que um terço dos processos estava pendente.</p>
 <p>A curva se lê pela vertical e pela horizontal. Pela vertical: aos 12 meses, cerca de 16% dos processos ainda não tiveram desfecho. Pela horizontal: metade dos processos tem desfecho até 8,2 meses. A curva informa quando os processos terminam, e não como terminam. Ela não diz nada sobre a chance de vitória.</p>
 </section>
 </section>
@@ -1052,12 +1064,12 @@ S(t) = P(T &gt; t)
 survdiff(formula = Surv(meses, status) ~ vara, data = base)
 
                N Observed Expected (O-E)^2/E (O-E)^2/V
-vara=Vara A 1001      723      530   70.6484    90.488
-vara=Vara B 1012      685      600   12.0722    15.795
-vara=Vara C  998      665      673    0.0979     0.132
-vara=Vara D  989      610      880   83.0532   131.289
+vara=Vara A 1001      719      531  66.16300  8.48e+01
+vara=Vara B 1012      677      597  10.75820  1.41e+01
+vara=Vara C  998      665      664   0.00126  1.69e-03
+vara=Vara D  989      609      878  82.19128  1.30e+02
 
- Chisq= 177  on 3 degrees of freedom, p= &lt;2e-16 </code></pre>
+ Chisq= 170  on 3 degrees of freedom, p= &lt;2e-16 </code></pre>
 </div>
 </div>
 <p>A coluna <code>Observed</code> mostra os desfechos observados em cada vara, e <code>Expected</code>, os esperados se as quatro varas tivessem o mesmo ritmo. A Vara D teve muito menos desfechos que o esperado, e a Vara A, mais. O valor-p muito pequeno indica que diferenças desse tamanho dificilmente surgiriam por acaso.</p>
@@ -1087,14 +1099,14 @@ vara=Vara D  989      610      880   83.0532   131.289
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km_coorte, <span class="at">times =</span> <span class="dv">12</span>, <span class="at">extend =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>surv</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1506024 0.1536082 0.1900561 0.6857068</code></pre>
+<pre><code>[1] 0.1526104 0.1515464 0.2017177 0.6891353</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km_coorte, <span class="at">times =</span> <span class="dv">12</span>, <span class="at">extend =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>n.risk</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 150 149  18   0</code></pre>
+<pre><code>[1] 152 147  18   0</code></pre>
 </div>
 </div>
-<p>Com <code>extend = TRUE</code>, a função devolve uma probabilidade de pendência aos 12 meses para a coorte de 2025-S2 (68,6%), embora nenhum processo dessa coorte tenha sido observado por 12 meses (a coluna <code>n.risk</code> vale zero). O valor é apenas o último ponto da curva repetido. Uma regra prática é anular as estimativas quando restam poucos processos pendentes sob observação, por exemplo menos de 30.</p>
+<p>Com <code>extend = TRUE</code>, a função devolve uma probabilidade de pendência aos 12 meses para a coorte de 2025-S2 (68,9%), embora nenhum processo dessa coorte tenha sido observado por 12 meses (a coluna <code>n.risk</code> vale zero). O valor é apenas o último ponto da curva repetido. Uma regra prática é anular as estimativas quando restam poucos processos pendentes sob observação, por exemplo menos de 30.</p>
 </section>
 <section id="taxa-de-resolutividade" class="level2" data-number="16.8">
 <h2 data-number="16.8" class="anchored" data-anchor-id="taxa-de-resolutividade"><span class="header-section-number">16.8</span> Taxa de resolutividade</h2>
@@ -1147,9 +1159,9 @@ h(t) = \lim_{\Delta t \to 0} \frac{P(t \le T &lt; t + \Delta t \mid T \ge t)}{\D
   meses taxa_acumulada pendencia
   &lt;dbl&gt;          &lt;dbl&gt;     &lt;dbl&gt;
 1     3          0.121     0.886
-2     6          0.294     0.745
-3     9          0.913     0.400
-4    12          1.84      0.158</code></pre>
+2     6          0.295     0.744
+3     9          0.897     0.407
+4    12          1.83      0.160</code></pre>
 </div>
 </div>
 </section>
@@ -1174,10 +1186,10 @@ h(t) = \lim_{\Delta t \to 0} \frac{P(t \le T &lt; t + \Delta t \mid T \ge t)}{\D
   periodo           `Vara A` `Vara D` razao_D_A
   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
 1 Até 4 meses         0.0433   0.0354     0.817
-2 Depois de 4 meses   0.213    0.124      0.581</code></pre>
+2 Depois de 4 meses   0.209    0.123      0.587</code></pre>
 </div>
 </div>
-<p>Até o quarto mês, quando quase todo desfecho é extinção, a taxa da Vara D é 82% da taxa da Vara A. Depois, com as sentenças, cai para 58%. A razão de taxas mede velocidade entre os processos pendentes. Não é uma razão entre durações nem entre probabilidades de ganhar. O exemplo também mostra que a razão pode mudar ao longo do processo, o que importa para o modelo de Cox, apresentado no capítulo de modelos.</p>
+<p>Até o quarto mês, quando quase todo desfecho é extinção, a taxa da Vara D é 82% da taxa da Vara A. Depois, com as sentenças, cai para 59%. A razão de taxas mede velocidade entre os processos pendentes. Não é uma razão entre durações nem entre probabilidades de ganhar. O exemplo também mostra que a razão pode mudar ao longo do processo, o que importa para o modelo de Cox, apresentado no capítulo de modelos.</p>
 </section>
 </section>
 <section id="o-processo-como-sucessão-de-fases" class="level2" data-number="16.9">
@@ -1243,9 +1255,9 @@ h(t) = \lim_{\Delta t \to 0} \frac{P(t \le T &lt; t + \Delta t \mid T \ge t)}{\D
 <span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      (s0) acordo procedente improcedente extinto
-[1,] 0.745  0.078      0.016        0.020   0.141
-[2,] 0.158  0.228      0.226        0.239   0.149
-[3,] 0.020  0.235      0.290        0.305   0.149</code></pre>
+[1,] 0.744  0.080      0.018        0.018   0.141
+[2,] 0.160  0.222      0.217        0.252   0.149
+[3,] 0.023  0.229      0.281        0.319   0.149</code></pre>
 </div>
 </div>
 <p>A primeira coluna é a probabilidade de seguir pendente, e as demais, a incidência acumulada de cada desfecho. O gráfico de áreas empilhadas mostra a composição ao longo do tempo.</p>
@@ -1293,12 +1305,12 @@ h(t) = \lim_{\Delta t \to 0} \frac{P(t \le T &lt; t + \Delta t \mid T \ge t)}{\D
 <pre><code># A tibble: 3 × 4
   meses verdade aalen_johansen um_menos_km
   &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;
-1     6  0.0198         0.0196      0.0243
-2    12  0.246          0.239       0.475 
-3    18  0.311          0.305       0.812 </code></pre>
+1     6   0.018         0.0175      0.0219
+2    12   0.256         0.252       0.495 
+3    18   0.321         0.319       0.808 </code></pre>
 </div>
 </div>
-<p>Aos 12 meses, a incidência verdadeira de improcedência é de 24,6%, e o estimador de Aalen-Johansen chega a 23,9%. O atalho do Kaplan-Meier estima 47,5%. O erro cresce com o tempo, porque cada acordo e cada extinção, tratados como censura, transferem probabilidade para a improcedência.</p>
+<p>Aos 12 meses, a incidência verdadeira de improcedência é de 25,6%, e o estimador de Aalen-Johansen chega a 25,2%. O atalho do Kaplan-Meier estima 49,5%. O erro cresce com o tempo, porque cada acordo e cada extinção, tratados como censura, transferem probabilidade para a improcedência.</p>
 <p>O Kaplan-Meier continua correto para o desfecho composto. Quando a pergunta é quanto tempo leva até qualquer desfecho, todos os desfechos são o ato de interesse, e não há concorrência. O erro está apenas em estimar um desfecho específico tratando os outros como censura. Por isso, uma estratégia comum é usar o desfecho composto na análise principal e decompô-lo por tipo com o Aalen-Johansen.</p>
 </section>
 <section id="a-sentença-também-concorre" class="level3" data-number="16.10.2">
@@ -1342,12 +1354,12 @@ h(t) = \lim_{\Delta t \to 0} \frac{P(t \le T &lt; t + \Delta t \mid T \ge t)}{\D
 <div class="cell-output cell-output-stdout">
 <pre><code>      (s0) laudo acordo procedente improcedente extinto
 [1,] 0.850 0.036  0.001      0.000        0.000   0.113
-[2,] 0.358 0.388  0.078      0.016        0.019   0.141
-[3,] 0.064 0.337  0.196      0.124        0.130   0.148
-[4,] 0.005 0.153  0.227      0.226        0.239   0.150</code></pre>
+[2,] 0.358 0.387  0.080      0.018        0.017   0.141
+[3,] 0.064 0.344  0.190      0.123        0.132   0.148
+[4,] 0.005 0.155  0.221      0.217        0.252   0.150</code></pre>
 </div>
 </div>
-<p>A primeira coluna é a probabilidade de o processo seguir sem laudo e sem desfecho; a segunda, de estar com o laudo juntado à espera do desfecho. Aos seis meses, 38,8% dos processos estão com o laudo juntado, mais do que os que ainda aguardam o laudo (35,8%). Aos doze meses, 15,3% continuam nessa fase. A leitura por fases mostra onde os processos estão parados, e não apenas quando terminam.</p>
+<p>A primeira coluna é a probabilidade de o processo seguir sem laudo e sem desfecho; a segunda, de estar com o laudo juntado à espera do desfecho. Aos seis meses, 38,7% dos processos estão com o laudo juntado, mais do que os que ainda aguardam o laudo (35,8%). Aos doze meses, 15,5% continuam nessa fase. A leitura por fases mostra onde os processos estão parados, e não apenas quando terminam.</p>
 </section>
 </section>
 <section id="a-armadilha-da-taxa-entre-os-decididos" class="level2" data-number="16.11">
@@ -1392,14 +1404,14 @@ p(t) = \frac{F_{\text{êxito}}(t)}{F_{\text{êxito}}(t) + F_{\text{improcedênci
 <pre><code># A tibble: 4 × 5
   vara   meses_6 meses_9 meses_12 taxa_final_verdadeira
   &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;                 &lt;dbl&gt;
-1 Vara A   0.733   0.666    0.621                 0.617
-2 Vara B   0.825   0.704    0.675                 0.632
-3 Vara C   0.901   0.708    0.632                 0.629
-4 Vara D   0.901   0.799    0.709                 0.624</code></pre>
+1 Vara A   0.781   0.651    0.593                 0.587
+2 Vara B   0.820   0.677    0.649                 0.626
+3 Vara C   0.903   0.718    0.627                 0.622
+4 Vara D   0.921   0.809    0.690                 0.609</code></pre>
 </div>
 </div>
-<p>Aos 9 meses, a Vara D parece a mais favorável ao autor: 80% de êxito entre os decididos, contra 67% na Vara A. A última coluna mostra a taxa que cada vara terá quando todos os processos terminarem: praticamente igual nas quatro, entre 62% e 63%. A Vara D não é mais favorável. É mais lenta para sentenciar. Os acordos, que vêm logo depois do laudo e não dependem da vara, chegam no mesmo ritmo em todas; as improcedências da Vara D, que dependem da sentença, ainda não chegaram.</p>
-<p>A taxa entre os decididos mede a velocidade dos desfechos tanto quanto o desfecho. No conjunto da base, o vício pode quase se cancelar. É nas comparações entre grupos com ritmos diferentes que ele inverte conclusões. A pergunta útil tem horizonte: qual a chance de êxito em até 12 meses, lida na incidência acumulada.</p>
+<p>Aos 9 meses, a Vara D parece a mais favorável ao autor: 81% de êxito entre os decididos, contra 65% na Vara A. A última coluna mostra a taxa que cada vara terá quando todos os processos terminarem: entre 59% e 63%. Na simulação, as quatro varas têm a mesma chance de êxito, e a diferença restante é variação de amostragem. A Vara D não é mais favorável. É mais lenta para sentenciar. Os acordos, que vêm logo depois do laudo e não dependem da vara, chegam no mesmo ritmo em todas; as improcedências da Vara D, que dependem da sentença, ainda não chegaram.</p>
+<p>A taxa entre os decididos mede a velocidade dos desfechos tanto quanto o desfecho. No conjunto da base, o vício pode quase se cancelar. É nas comparações entre grupos com ritmos diferentes que ele inverte conclusões. A pergunta útil tem horizonte: qual a chance de êxito em até 12 meses, lida na incidência acumulada. O capítulo “Prever o desfecho do processo”, na Parte V, compara lado a lado os atalhos usados para responder a essa pergunta e mostra como fazer a previsão com características de cada processo.</p>
 <section id="condicionar-no-futuro" class="level3" data-number="16.11.1">
 <h3 data-number="16.11.1" class="anchored" data-anchor-id="condicionar-no-futuro"><span class="header-section-number">16.11.1</span> Condicionar no futuro</h3>
 <p>Um erro aparentado é comparar o tempo dos processos conforme o desfecho que tiveram: os processos com acordo terminam mais rápido que os julgados improcedentes? A comparação condiciona no futuro, porque o grupo de cada processo só é conhecido no fim. Ela descreve os dados, mas não serve para prever o tempo de um processo novo nem para explicar por que ele demora (Andersen; Keiding, 2012).</p>
@@ -1419,10 +1431,10 @@ p(t) = \frac{F_{\text{êxito}}(t)}{F_{\text{êxito}}(t) + F_{\text{improcedênci
   periodo acordo extinto improcedente procedente
   &lt;fct&gt;    &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
 1 0-3       0       1            0          0   
-2 3-6       0.55    0.2          0.14       0.11
-3 6-9       0.35    0.02         0.32       0.31
-4 9-12      0.13    0.01         0.45       0.42
-5 12+       0.06    0            0.48       0.47</code></pre>
+2 3-6       0.56    0.2          0.12       0.12
+3 6-9       0.33    0.02         0.34       0.31
+4 9-12      0.13    0.01         0.48       0.38
+5 12+       0.05    0            0.48       0.46</code></pre>
 </div>
 </div>
 <p>Até o terceiro mês, praticamente todo desfecho é extinção. A fração de acordos atinge o máximo logo depois da chegada dos laudos e cai em seguida, quando as sentenças passam a predominar.</p>
@@ -1597,8 +1609,8 @@ P(T = 0) \le P(T \le 24\,\text{h}) \le P(T \le 1)
 <pre><code># A tibble: 2 × 2
   data           n
   &lt;date&gt;     &lt;int&gt;
-1 2024-12-20  1267
-2 2025-12-20  1418</code></pre>
+1 2024-12-20  1276
+2 2025-12-20  1424</code></pre>
 </div>
 </div>
 <p>Uma regra que tratasse esse movimento como suspensão do processo pararia o relógio de milhares de processos ao mesmo tempo.</p>
