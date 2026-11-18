@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-dd5fa769cd8cd11b6d61b3c64d2f60b9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-af376c0a327698bc4256a7316fbe19a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -111,7 +111,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+
 <link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
@@ -489,8 +491,8 @@ window.Quarto = {
 <section id="introdução" class="level2" data-number="15.1">
 <h2 data-number="15.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">15.1</span> Introdução</h2>
 <p>A análise descritiva organiza as informações contidas em um banco de dados. Ela apresenta a composição da amostra, resume a posição e a dispersão das variáveis numéricas e identifica padrões de distribuição e associação. Essas operações constituem uma etapa necessária entre a construção do banco e a elaboração de modelos estatísticos.</p>
-<p>Neste capítulo, utilizaremos o banco produzido no capítulo de limpeza e estruturação. Ele reúne 642 acórdãos sobre violência de gênero digital e contém informações sobre tribunal, ano, perfil das partes, participação de plataformas, tipos de prova, suficiência probatória, resultado em primeira instância e indenização.</p>
-<p>O banco primário é de propriedade do InternetLab e deriva de pesquisa desenvolvida pela instituição. A base utilizada no livro corresponde a um recorte didático, sem identificadores processuais e campos textuais, posteriormente estruturado e tratado conforme as decisões documentadas no capítulo anterior.</p>
+<p>Neste capítulo, utilizaremos o banco produzido no capítulo de limpeza e estruturação. Ele reúne 700 casos inteiramente sintéticos sobre violência de gênero digital e contém informações sobre tribunal, ano, perfil das partes, participação de plataformas, tipos de prova, suficiência probatória, resultado em primeira instância e indenização.</p>
+<p>A base foi gerada exclusivamente para fins didáticos. Ela não contém decisões, pessoas, processos ou valores copiados de casos reais. As relações estatísticas e os problemas de qualidade foram planejados para permitir a aplicação das decisões de limpeza e das técnicas apresentadas no livro.</p>
 <p>O percurso está organizado em seis blocos:</p>
 <ol type="1">
 <li>medidas de posição;</li>
@@ -568,7 +570,7 @@ window.Quarto = {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggcorrplot)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dados/violencia_digital_didatica_tratada.csv"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dados/violencia_digital_sintetica_tratada.csv"</span>,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>),</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
@@ -577,37 +579,37 @@ window.Quarto = {
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(base)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 642  23</code></pre>
+<pre><code>[1] 700  23</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(base)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 642
+<pre><code>Rows: 700
 Columns: 23
-$ id_caso                      &lt;chr&gt; "caso_001", "caso_002", "caso_003", "caso…
-$ tribunal                     &lt;chr&gt; "TJSP", "TJSP", "TJSP", "TJSP", "TJPR", "…
-$ ano_decisao                  &lt;dbl&gt; 2019, 2020, 2020, 2024, 2023, 2017, 2024,…
+$ id_caso                      &lt;chr&gt; "CASO_S0001", "CASO_S0002", "CASO_S0003",…
+$ tribunal                     &lt;chr&gt; "Tribunal A", "Tribunal A", "Tribunal A",…
+$ ano_decisao                  &lt;dbl&gt; 2023, 2020, 2021, 2021, 2016, 2019, 2022,…
 $ perfil_vitima                &lt;chr&gt; "Mulher", "Mulher", "Mulher", "Mulher", "…
-$ perfil_agressor              &lt;chr&gt; "Mulher", "Mulher", "Mulher", "Mulher", "…
-$ plataforma_parte             &lt;chr&gt; "Não", "Não", "Não", "Não", "Não", "Não",…
-$ prova_documental             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1,…
-$ prova_print                  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0,…
-$ prova_depoimento_testemunhal &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,…
-$ prova_audio_video            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ prova_imei_ip_url            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,…
-$ prova_boletim_ocorrencia     &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ prova_imagem                 &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+$ perfil_agressor              &lt;chr&gt; "Organização", "Homem", "Mulher", "Mulher…
+$ plataforma_parte             &lt;chr&gt; "Não", "Não", "Não", "Não", "Sim", "Não",…
+$ prova_documental             &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0,…
+$ prova_print                  &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,…
+$ prova_depoimento_testemunhal &lt;dbl&gt; 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,…
+$ prova_audio_video            &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,…
+$ prova_imei_ip_url            &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0,…
+$ prova_boletim_ocorrencia     &lt;dbl&gt; 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0,…
+$ prova_imagem                 &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,…
 $ prova_ata_notarial           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-$ prova_outros                 &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,…
-$ prova_nao_cita               &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0,…
-$ suficiencia_probatoria       &lt;chr&gt; "Sim", "Sim", "Sim", "Sim", "Sim", "Sim",…
+$ prova_outros                 &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,…
+$ prova_nao_cita               &lt;dbl&gt; 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1,…
+$ suficiencia_probatoria       &lt;chr&gt; "Sim", "Sim", "Sim", "Não", "Sim", "Não",…
 $ contestacao_prova            &lt;chr&gt; "Não", "Não", "Não", "Não", "Não", "Não",…
-$ resultado_primeira_instancia &lt;chr&gt; "Parcialmente procedente", "Procedente", …
-$ procedente_bin               &lt;dbl&gt; 0, 1, 1, 0, 0, NA, 1, 0, 0, 0, 1, 1, 1, 1…
+$ resultado_primeira_instancia &lt;chr&gt; "Procedente", "Procedente", "Improcedente…
+$ procedente_bin               &lt;dbl&gt; 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0,…
 $ forma_registro_valor         &lt;chr&gt; "Valor informado em reais", "Valor inform…
-$ valor_indenizacao_nominal    &lt;dbl&gt; 3000, 10000, 20000, 0, 10000, 500, 5000, …
-$ valor_indenizacao_jul2026    &lt;dbl&gt; 4397.47, 14327.90, 28655.79, 0.00, 11484.…</code></pre>
+$ valor_indenizacao_nominal    &lt;dbl&gt; 1564.24, 0.00, 5674.76, 0.00, 0.00, 17782…
+$ valor_indenizacao_jul2026    &lt;dbl&gt; 1796.44, 0.00, 7459.75, 0.00, 0.00, 26066…</code></pre>
 </div>
 </div>
 <p>Criamos funções auxiliares para calcular percentuais e identificar a moda de uma variável numérica.</p>
@@ -700,7 +702,7 @@ $ valor_indenizacao_jul2026    &lt;dbl&gt; 4397.47, 14327.90, 28655.79, 0.00, 11
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>media_com_zero</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11403.43</code></pre>
+<pre><code>[1] 15912.77</code></pre>
 </div>
 </div>
 <p>O argumento <code>na.rm = TRUE</code> retira apenas os valores ausentes do cálculo. Os valores iguais a zero permanecem na média.</p>
@@ -716,7 +718,7 @@ $ valor_indenizacao_jul2026    &lt;dbl&gt; 4397.47, 14327.90, 28655.79, 0.00, 11
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>mediana_com_zero</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5258.19</code></pre>
+<pre><code>[1] 5735.45</code></pre>
 </div>
 </div>
 </section>
@@ -795,12 +797,12 @@ $ valor_indenizacao_jul2026    &lt;dbl&gt; 4397.47, 14327.90, 28655.79, 0.00, 11
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">608</td>
-<td style="text-align: center;">R$ 11.403,43</td>
-<td style="text-align: center;">R$ 5.258,19</td>
+<td style="text-align: center;">656</td>
+<td style="text-align: center;">R$ 15.912,77</td>
+<td style="text-align: center;">R$ 5.735,45</td>
 <td style="text-align: center;">0</td>
 <td style="text-align: center;">R$ 0,00</td>
-<td style="text-align: center;">R$ 11.983,28</td>
+<td style="text-align: center;">R$ 19.739,70</td>
 </tr>
 </tbody>
 </table>
@@ -849,19 +851,19 @@ $ valor_indenizacao_jul2026    &lt;dbl&gt; 4397.47, 14327.90, 28655.79, 0.00, 11
 </tr>
 <tr class="even">
 <td style="text-align: center;">50%</td>
-<td style="text-align: center;">R$ 5.258,19</td>
+<td style="text-align: center;">R$ 5.735,45</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">75%</td>
-<td style="text-align: center;">R$ 11.983,28</td>
+<td style="text-align: center;">R$ 19.739,70</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">95%</td>
-<td style="text-align: center;">R$ 39.667,78</td>
+<td style="text-align: center;">R$ 61.326,63</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">99%</td>
-<td style="text-align: center;">R$ 73.208,26</td>
+<td style="text-align: center;">R$ 148.642,98</td>
 </tr>
 </tbody>
 </table>
@@ -889,7 +891,7 @@ A=x_{\max}-x_{\min}
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>amplitude_com_zero</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 618052.3</code></pre>
+<pre><code>[1] 429836.9</code></pre>
 </div>
 </div>
 <p>Esse resultado considera todos os valores monetários informados, inclusive os iguais a zero.</p>
@@ -908,7 +910,7 @@ AIQ=Q_3-Q_1
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>aiq_com_zero</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 11983.28</code></pre>
+<pre><code>[1] 19739.69</code></pre>
 </div>
 </div>
 <p>Como utiliza os quartis, a amplitude interquartil é menos influenciada pelos extremos do que a amplitude total.</p>
@@ -931,7 +933,7 @@ s=\sqrt{s^2}
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>variancia_com_zero</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 927652590</code></pre>
+<pre><code>[1] 1081127908</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -942,7 +944,7 @@ s=\sqrt{s^2}
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>desvio_padrao_com_zero</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 30457.39</code></pre>
+<pre><code>[1] 32880.51</code></pre>
 </div>
 </div>
 <p>A variância está expressa em unidades monetárias ao quadrado. O desvio-padrão retorna à unidade dos valores de indenização e, por isso, possui interpretação mais direta.</p>
@@ -960,7 +962,7 @@ CV=\frac{s}{\bar{x}}\times 100
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>cv_com_zero</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 267.0898</code></pre>
+<pre><code>[1] 206.6296</code></pre>
 </div>
 </div>
 <p>O coeficiente de variação expressa o desvio-padrão como percentual da média. Ele deve ser interpretado com cautela quando a média se aproxima de zero ou quando a distribuição contém muitos zeros.</p>
@@ -1047,7 +1049,7 @@ CV=\frac{s}{\bar{x}}\times 100
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>amplitude_positivos</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 617395</code></pre>
+<pre><code>[1] 428668.9</code></pre>
 </div>
 </div>
 </section>
@@ -1063,7 +1065,7 @@ CV=\frac{s}{\bar{x}}\times 100
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>aiq_positivos</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12058.23</code></pre>
+<pre><code>[1] 24346.42</code></pre>
 </div>
 </div>
 </section>
@@ -1079,7 +1081,7 @@ CV=\frac{s}{\bar{x}}\times 100
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>variancia_positivos</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1254720578</code></pre>
+<pre><code>[1] 1579511222</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1092,7 +1094,7 @@ CV=\frac{s}{\bar{x}}\times 100
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>desvio_padrao_positivos</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 35422.04</code></pre>
+<pre><code>[1] 39743.07</code></pre>
 </div>
 </div>
 </section>
@@ -1112,7 +1114,7 @@ CV=\frac{s}{\bar{x}}\times 100
 <span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>cv_positivos</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 215.5991</code></pre>
+<pre><code>[1] 139.3454</code></pre>
 </div>
 </div>
 </section>
@@ -1141,7 +1143,7 @@ CV=\frac{s}{\bar{x}}\times 100
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Percentil 97,5</td>
-<td style="text-align: center;">R$ 69.448,94</td>
+<td style="text-align: center;">R$ 112.328,10</td>
 </tr>
 </tbody>
 </table>
@@ -1259,63 +1261,63 @@ CV=\frac{s}{\bar{x}}\times 100
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Observações</td>
-<td style="text-align: center;">608</td>
-<td style="text-align: center;">422</td>
-<td style="text-align: center;">411</td>
+<td style="text-align: center;">656</td>
+<td style="text-align: center;">366</td>
+<td style="text-align: center;">356</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Média</td>
-<td style="text-align: center;">R$ 11.403,43</td>
-<td style="text-align: center;">R$ 16.429,58</td>
-<td style="text-align: center;">R$ 12.818,58</td>
+<td style="text-align: center;">R$ 15.912,77</td>
+<td style="text-align: center;">R$ 28.521,26</td>
+<td style="text-align: center;">R$ 23.417,20</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Mediana</td>
-<td style="text-align: center;">R$ 5.258,19</td>
-<td style="text-align: center;">R$ 9.132,92</td>
-<td style="text-align: center;">R$ 8.792,02</td>
+<td style="text-align: center;">R$ 5.735,45</td>
+<td style="text-align: center;">R$ 17.647,46</td>
+<td style="text-align: center;">R$ 17.402,77</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Primeiro quartil</td>
 <td style="text-align: center;">R$ 0,00</td>
-<td style="text-align: center;">R$ 5.168,36</td>
-<td style="text-align: center;">R$ 4.943,05</td>
+<td style="text-align: center;">R$ 9.148,41</td>
+<td style="text-align: center;">R$ 8.907,44</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Terceiro quartil</td>
-<td style="text-align: center;">R$ 11.983,28</td>
-<td style="text-align: center;">R$ 17.226,60</td>
-<td style="text-align: center;">R$ 15.767,46</td>
+<td style="text-align: center;">R$ 19.739,70</td>
+<td style="text-align: center;">R$ 33.494,82</td>
+<td style="text-align: center;">R$ 31.578,36</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Amplitude</td>
-<td style="text-align: center;">R$ 618.052,32</td>
-<td style="text-align: center;">R$ 617.395,05</td>
-<td style="text-align: center;">R$ 68.437,94</td>
+<td style="text-align: center;">R$ 429.836,86</td>
+<td style="text-align: center;">R$ 428.668,90</td>
+<td style="text-align: center;">R$ 107.116,78</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Amplitude interquartil</td>
-<td style="text-align: center;">R$ 11.983,28</td>
-<td style="text-align: center;">R$ 12.058,23</td>
-<td style="text-align: center;">R$ 10.824,40</td>
+<td style="text-align: center;">R$ 19.739,70</td>
+<td style="text-align: center;">R$ 24.346,42</td>
+<td style="text-align: center;">R$ 22.670,92</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Variância</td>
-<td style="text-align: center;">R$ 927.652.590,20</td>
-<td style="text-align: center;">R$ 1.254.720.578,38</td>
-<td style="text-align: center;">R$ 152.888.957,29</td>
+<td style="text-align: center;">R$ 1.081.127.907,63</td>
+<td style="text-align: center;">R$ 1.579.511.222,16</td>
+<td style="text-align: center;">R$ 400.084.089,15</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Desvio-padrão</td>
-<td style="text-align: center;">R$ 30.457,39</td>
-<td style="text-align: center;">R$ 35.422,04</td>
-<td style="text-align: center;">R$ 12.364,83</td>
+<td style="text-align: center;">R$ 32.880,51</td>
+<td style="text-align: center;">R$ 39.743,07</td>
+<td style="text-align: center;">R$ 20.002,10</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Coeficiente de variação</td>
-<td style="text-align: center;">267.1%</td>
-<td style="text-align: center;">215.6%</td>
-<td style="text-align: center;">96.5%</td>
+<td style="text-align: center;">206.6%</td>
+<td style="text-align: center;">139.3%</td>
+<td style="text-align: center;">85.4%</td>
 </tr>
 </tbody>
 </table>
@@ -1376,22 +1378,22 @@ CV=\frac{s}{\bar{x}}\times 100
    ano_decisao numero_acordaos
          &lt;dbl&gt;           &lt;int&gt;
  1        2010               4
- 2        2011               6
- 3        2012               4
- 4        2013              19
+ 2        2011               2
+ 3        2012               3
+ 4        2013              17
  5        2014              22
- 6        2015              22
- 7        2016              19
- 8        2017              20
- 9        2018              45
-10        2019              47
-11        2020              48
-12        2021              63
-13        2022              67
-14        2023              90
-15        2024              87
-16        2025              71
-17          NA               8</code></pre>
+ 6        2015              24
+ 7        2016              20
+ 8        2017              25
+ 9        2018              53
+10        2019              54
+11        2020              47
+12        2021              76
+13        2022              66
+14        2023              87
+15        2024             103
+16        2025              86
+17          NA              11</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1605,7 +1607,7 @@ CV=\frac{s}{\bar{x}}\times 100
 <pre><code># A tibble: 1 × 3
   limite_inferior limite_superior numero_valores_extremos
             &lt;dbl&gt;           &lt;dbl&gt;                   &lt;int&gt;
-1            657.          31627.                      34</code></pre>
+1           1168.          65537.                      17</code></pre>
 </div>
 </div>
 <p>Uma observação identificada como extrema pelo boxplot não deve ser excluída automaticamente. Ela pode representar um caso juridicamente relevante, uma característica incomum ou um erro. A decisão exige retorno ao contexto e à fonte.</p>
@@ -1756,7 +1758,7 @@ p_j=\frac{n_j}{n}
 \]</span></p>
 <section id="tribunais" class="level3" data-number="15.8.1">
 <h3 data-number="15.8.1" class="anchored" data-anchor-id="tribunais"><span class="header-section-number">15.8.1</span> Tribunais</h3>
-<p>Vamos analisar como os 642 acórdãos se distribuem entre os tribunais. A frequência revela a composição do banco e ajuda a identificar quais tribunais exercem maior influência sobre os resultados agregados.</p>
+<p>Vamos analisar como os 700 casos se distribuem entre os tribunais sintéticos. A frequência revela a composição do banco e ajuda a identificar quais tribunais exercem maior influência sobre os resultados agregados.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>distribuicao_tribunais <span class="ot">&lt;-</span> base <span class="sc">|&gt;</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(</span>
@@ -1787,34 +1789,34 @@ p_j=\frac{n_j}{n}
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">TJSP</td>
-<td style="text-align: center;">403</td>
-<td style="text-align: center;">62.8</td>
+<td style="text-align: center;">Tribunal A</td>
+<td style="text-align: center;">443</td>
+<td style="text-align: center;">63.3</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">TJPR</td>
-<td style="text-align: center;">139</td>
-<td style="text-align: center;">21.7</td>
+<td style="text-align: center;">Tribunal B</td>
+<td style="text-align: center;">147</td>
+<td style="text-align: center;">21.0</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">TJDF</td>
-<td style="text-align: center;">65</td>
-<td style="text-align: center;">10.1</td>
+<td style="text-align: center;">Tribunal C</td>
+<td style="text-align: center;">54</td>
+<td style="text-align: center;">7.7</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">TJCE</td>
-<td style="text-align: center;">16</td>
-<td style="text-align: center;">2.5</td>
+<td style="text-align: center;">Tribunal E</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">3.6</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">TJGO</td>
-<td style="text-align: center;">14</td>
-<td style="text-align: center;">2.2</td>
+<td style="text-align: center;">Tribunal D</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">3.1</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">TJAM</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;">0.8</td>
+<td style="text-align: center;">Tribunal F</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">1.3</td>
 </tr>
 </tbody>
 </table>
@@ -1881,7 +1883,7 @@ p_j=\frac{n_j}{n}
 </div>
 </div>
 </div>
-<p>A concentração no TJSP e no TJPR deve ser considerada em qualquer comparação agregada. As frequências totais refletem a composição do banco e não pesos equivalentes entre tribunais.</p>
+<p>A concentração nos tribunais A e B deve ser considerada em qualquer comparação agregada. As frequências totais refletem a composição do banco e não pesos equivalentes entre tribunais.</p>
 </section>
 <section id="perfis-e-participação-das-plataformas" class="level3" data-number="15.8.2">
 <h3 data-number="15.8.2" class="anchored" data-anchor-id="perfis-e-participação-das-plataformas"><span class="header-section-number">15.8.2</span> Perfis e participação das plataformas</h3>
@@ -1929,68 +1931,68 @@ p_j=\frac{n_j}{n}
 <tr class="odd">
 <td style="text-align: center;">Perfil da vítima</td>
 <td style="text-align: center;">Homem</td>
-<td style="text-align: center;">42</td>
-<td style="text-align: center;">6.5</td>
+<td style="text-align: center;">58</td>
+<td style="text-align: center;">8.3</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Perfil da vítima</td>
 <td style="text-align: center;">Homem e mulher</td>
-<td style="text-align: center;">30</td>
-<td style="text-align: center;">4.7</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">4.4</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Perfil da vítima</td>
 <td style="text-align: center;">Mulher</td>
-<td style="text-align: center;">567</td>
-<td style="text-align: center;">88.3</td>
+<td style="text-align: center;">603</td>
+<td style="text-align: center;">86.1</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Perfil da vítima</td>
 <td style="text-align: center;">Não informado</td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">1.1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Perfil do agressor</td>
 <td style="text-align: center;">Homem</td>
-<td style="text-align: center;">224</td>
-<td style="text-align: center;">34.9</td>
+<td style="text-align: center;">248</td>
+<td style="text-align: center;">35.4</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Perfil do agressor</td>
 <td style="text-align: center;">Homem e mulher</td>
-<td style="text-align: center;">36</td>
-<td style="text-align: center;">5.6</td>
+<td style="text-align: center;">35</td>
+<td style="text-align: center;">5.0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Perfil do agressor</td>
 <td style="text-align: center;">Mulher</td>
-<td style="text-align: center;">314</td>
-<td style="text-align: center;">48.9</td>
+<td style="text-align: center;">324</td>
+<td style="text-align: center;">46.3</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Perfil do agressor</td>
 <td style="text-align: center;">Não informado</td>
-<td style="text-align: center;">62</td>
-<td style="text-align: center;">9.7</td>
+<td style="text-align: center;">77</td>
+<td style="text-align: center;">11.0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Perfil do agressor</td>
 <td style="text-align: center;">Organização</td>
-<td style="text-align: center;">6</td>
-<td style="text-align: center;">0.9</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">2.3</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Plataforma integra a ação</td>
 <td style="text-align: center;">Não</td>
-<td style="text-align: center;">555</td>
-<td style="text-align: center;">86.4</td>
+<td style="text-align: center;">591</td>
+<td style="text-align: center;">84.4</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Plataforma integra a ação</td>
 <td style="text-align: center;">Sim</td>
-<td style="text-align: center;">87</td>
-<td style="text-align: center;">13.6</td>
+<td style="text-align: center;">109</td>
+<td style="text-align: center;">15.6</td>
 </tr>
 </tbody>
 </table>
@@ -2102,7 +2104,7 @@ p_j=\frac{n_j}{n}
 <span id="cb56-68"><a href="#cb56-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(</span>
 <span id="cb56-69"><a href="#cb56-69" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Tipo de prova"</span>,</span>
 <span id="cb56-70"><a href="#cb56-70" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Número de registros"</span>,</span>
-<span id="cb56-71"><a href="#cb56-71" aria-hidden="true" tabindex="-1"></a>      <span class="st">"% dos 642 acórdãos"</span></span>
+<span id="cb56-71"><a href="#cb56-71" aria-hidden="true" tabindex="-1"></a>      <span class="st">"% dos 700 casos"</span></span>
 <span id="cb56-72"><a href="#cb56-72" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb56-73"><a href="#cb56-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">"c"</span>,</span>
 <span id="cb56-74"><a href="#cb56-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Tipos de prova registrados nos acórdãos"</span></span>
@@ -2116,70 +2118,70 @@ p_j=\frac{n_j}{n}
 <tr class="header">
 <th style="text-align: center;" data-quarto-table-cell-role="th">Tipo de prova</th>
 <th style="text-align: center;" data-quarto-table-cell-role="th">Número de registros</th>
-<th style="text-align: center;" data-quarto-table-cell-role="th">% dos 642 acórdãos</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">% dos 700 casos</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Prova documental</td>
-<td style="text-align: center;">187</td>
-<td style="text-align: center;">29.1</td>
+<td style="text-align: center;">213</td>
+<td style="text-align: center;">30.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Não cita</td>
+<td style="text-align: center;">161</td>
+<td style="text-align: center;">23.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Depoimento e prova testemunhal</td>
+<td style="text-align: center;">129</td>
+<td style="text-align: center;">18.4</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Print</td>
-<td style="text-align: center;">168</td>
-<td style="text-align: center;">26.2</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Não cita</td>
-<td style="text-align: center;">130</td>
-<td style="text-align: center;">20.2</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Depoimento e prova testemunhal</td>
-<td style="text-align: center;">109</td>
+<td style="text-align: center;">119</td>
 <td style="text-align: center;">17.0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Áudio e vídeo</td>
-<td style="text-align: center;">93</td>
-<td style="text-align: center;">14.5</td>
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">15.7</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">IMEI, IP ou URL</td>
-<td style="text-align: center;">59</td>
-<td style="text-align: center;">9.2</td>
+<td style="text-align: center;">91</td>
+<td style="text-align: center;">13.0</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Boletim de ocorrência</td>
-<td style="text-align: center;">58</td>
-<td style="text-align: center;">9.0</td>
+<td style="text-align: center;">59</td>
+<td style="text-align: center;">8.4</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Imagem</td>
-<td style="text-align: center;">51</td>
-<td style="text-align: center;">7.9</td>
+<td style="text-align: center;">48</td>
+<td style="text-align: center;">6.9</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;">Outros</td>
-<td style="text-align: center;">44</td>
-<td style="text-align: center;">6.9</td>
+<td style="text-align: center;">45</td>
+<td style="text-align: center;">6.4</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Ata notarial</td>
-<td style="text-align: center;">23</td>
-<td style="text-align: center;">3.6</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">4.4</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center; font-weight: bold;">Total de registros probatórios</td>
-<td style="text-align: center; font-weight: bold;">922</td>
-<td style="text-align: center; font-weight: bold;">143.6</td>
+<td style="text-align: center; font-weight: bold;">1006</td>
+<td style="text-align: center; font-weight: bold;">143.7</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<p>Os percentuais usam os 642 acórdãos como denominador. Como um acórdão pode apresentar várias provas, a soma pode superar 100%. Cada percentual responde à pergunta: em que proporção dos acórdãos essa categoria aparece?</p>
+<p>Os percentuais usam os 700 casos como denominador. Como um caso pode apresentar várias provas, a soma pode superar 100%. Cada percentual responde à pergunta: em que proporção dos casos essa categoria aparece?</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  frequencia_provas,</span>
@@ -2289,51 +2291,51 @@ p_j=\frac{n_j}{n}
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Homem</td>
-<td style="text-align: center;">64</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">55</td>
-<td style="text-align: center;">103</td>
-<td style="text-align: center;">224</td>
+<td style="text-align: center;">69</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">69</td>
+<td style="text-align: center;">109</td>
+<td style="text-align: center;">248</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Homem e mulher</td>
-<td style="text-align: center;">15</td>
+<td style="text-align: center;">9</td>
 <td style="text-align: center;">0</td>
-<td style="text-align: center;">13</td>
-<td style="text-align: center;">8</td>
-<td style="text-align: center;">36</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">35</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Mulher</td>
-<td style="text-align: center;">86</td>
-<td style="text-align: center;">0</td>
-<td style="text-align: center;">78</td>
-<td style="text-align: center;">150</td>
-<td style="text-align: center;">314</td>
+<td style="text-align: center;">104</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">76</td>
+<td style="text-align: center;">143</td>
+<td style="text-align: center;">324</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Não informado</td>
-<td style="text-align: center;">14</td>
+<td style="text-align: center;">18</td>
 <td style="text-align: center;">0</td>
-<td style="text-align: center;">21</td>
-<td style="text-align: center;">27</td>
-<td style="text-align: center;">62</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">39</td>
+<td style="text-align: center;">77</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Organização</td>
-<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
 <td style="text-align: center;">0</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">2</td>
-<td style="text-align: center;">6</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">16</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sum</td>
-<td style="text-align: center;">181</td>
+<td style="text-align: center;">203</td>
 <td style="text-align: center;">2</td>
-<td style="text-align: center;">169</td>
-<td style="text-align: center;">290</td>
-<td style="text-align: center;">642</td>
+<td style="text-align: center;">178</td>
+<td style="text-align: center;">317</td>
+<td style="text-align: center;">700</td>
 </tr>
 </tbody>
 </table>
@@ -2369,38 +2371,38 @@ p_j=\frac{n_j}{n}
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Homem</td>
-<td style="text-align: center;">28.6</td>
-<td style="text-align: center;">0.9</td>
-<td style="text-align: center;">24.6</td>
-<td style="text-align: center;">46.0</td>
+<td style="text-align: center;">27.8</td>
+<td style="text-align: center;">0.4</td>
+<td style="text-align: center;">27.8</td>
+<td style="text-align: center;">44.0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Homem e mulher</td>
-<td style="text-align: center;">41.7</td>
+<td style="text-align: center;">25.7</td>
 <td style="text-align: center;">0.0</td>
-<td style="text-align: center;">36.1</td>
-<td style="text-align: center;">22.2</td>
+<td style="text-align: center;">25.7</td>
+<td style="text-align: center;">48.6</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Mulher</td>
-<td style="text-align: center;">27.4</td>
-<td style="text-align: center;">0.0</td>
-<td style="text-align: center;">24.8</td>
-<td style="text-align: center;">47.8</td>
+<td style="text-align: center;">32.1</td>
+<td style="text-align: center;">0.3</td>
+<td style="text-align: center;">23.5</td>
+<td style="text-align: center;">44.1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Não informado</td>
-<td style="text-align: center;">22.6</td>
+<td style="text-align: center;">23.4</td>
 <td style="text-align: center;">0.0</td>
-<td style="text-align: center;">33.9</td>
-<td style="text-align: center;">43.5</td>
+<td style="text-align: center;">26.0</td>
+<td style="text-align: center;">50.6</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Organização</td>
-<td style="text-align: center;">33.3</td>
+<td style="text-align: center;">18.8</td>
 <td style="text-align: center;">0.0</td>
-<td style="text-align: center;">33.3</td>
-<td style="text-align: center;">33.3</td>
+<td style="text-align: center;">25.0</td>
+<td style="text-align: center;">56.2</td>
 </tr>
 </tbody>
 </table>
@@ -2501,9 +2503,9 @@ p_j=\frac{n_j}{n}
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">15.0971</td>
+<td style="text-align: center;">5.4875</td>
 <td style="text-align: center;">12</td>
-<td style="text-align: center;">0.2362</td>
+<td style="text-align: center;">0.9397</td>
 </tr>
 </tbody>
 </table>
@@ -2561,7 +2563,7 @@ V=\sqrt{\frac{\chi^2}{n\min(r-1,c-1)}}
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">V de Cramér</td>
-<td style="text-align: center;">0.0885</td>
+<td style="text-align: center;">0.0511</td>
 </tr>
 </tbody>
 </table>
@@ -2617,7 +2619,7 @@ r=\frac{\operatorname{cov}(X,Y)}{s_Xs_Y}
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Covariância</td>
-<td style="text-align: center;">-12150.32</td>
+<td style="text-align: center;">-5124.24</td>
 </tr>
 </tbody>
 </table>
@@ -2652,7 +2654,7 @@ r=\frac{\operatorname{cov}(X,Y)}{s_Xs_Y}
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Correlação de Pearson</td>
-<td style="text-align: center;">-0.2754</td>
+<td style="text-align: center;">-0.0731</td>
 </tr>
 </tbody>
 </table>
@@ -2777,7 +2779,7 @@ r=\frac{\operatorname{cov}(X,Y)}{s_Xs_Y}
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> pd.read_csv(</span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dados/violencia_digital_didatica_tratada.csv"</span></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dados/violencia_digital_sintetica_tratada.csv"</span></span>
 <span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>tabela <span class="op">=</span> pd.crosstab(</span>
@@ -2867,19 +2869,19 @@ r=\frac{\operatorname{cov}(X,Y)}{s_Xs_Y}
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">Homem</td>
-<td style="text-align: center;">151</td>
-<td style="text-align: center;">R$ 16.585,07</td>
-<td style="text-align: center;">R$ 14.972,55</td>
-<td style="text-align: center;">R$ 1.218,45</td>
-<td style="text-align: center;">R$ 11.484,40</td>
+<td style="text-align: center;">121</td>
+<td style="text-align: center;">R$ 26.829,91</td>
+<td style="text-align: center;">R$ 19.398,37</td>
+<td style="text-align: center;">R$ 1.763,49</td>
+<td style="text-align: center;">R$ 20.728,83</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">Mulher</td>
-<td style="text-align: center;">213</td>
-<td style="text-align: center;">R$ 9.870,29</td>
-<td style="text-align: center;">R$ 9.628,96</td>
-<td style="text-align: center;">R$ 659,77</td>
-<td style="text-align: center;">R$ 5.971,45</td>
+<td style="text-align: center;">165</td>
+<td style="text-align: center;">R$ 21.233,22</td>
+<td style="text-align: center;">R$ 20.959,76</td>
+<td style="text-align: center;">R$ 1.631,71</td>
+<td style="text-align: center;">R$ 13.739,46</td>
 </tr>
 </tbody>
 </table>
@@ -3019,29 +3021,29 @@ t=
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">t de Student — variâncias iguais</td>
-<td style="text-align: center;">R$ 6.714,78</td>
-<td style="text-align: center;">5.203</td>
-<td style="text-align: center;">362.00</td>
-<td style="text-align: center;">3.297e-07</td>
-<td style="text-align: center;">R$ 4.176,66</td>
-<td style="text-align: center;">R$ 9.252,91</td>
+<td style="text-align: center;">R$ 5.596,69</td>
+<td style="text-align: center;">2.302</td>
+<td style="text-align: center;">284.0</td>
+<td style="text-align: center;">2.207e-02</td>
+<td style="text-align: center;">R$ 810,82</td>
+<td style="text-align: center;">R$ 10.382,56</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">t de Welch — variâncias distintas</td>
-<td style="text-align: center;">R$ 6.714,78</td>
-<td style="text-align: center;">4.846</td>
-<td style="text-align: center;">236.47</td>
-<td style="text-align: center;">2.280e-06</td>
-<td style="text-align: center;">R$ 3.985,07</td>
-<td style="text-align: center;">R$ 9.444,49</td>
+<td style="text-align: center;">R$ 5.596,69</td>
+<td style="text-align: center;">2.329</td>
+<td style="text-align: center;">269.1</td>
+<td style="text-align: center;">2.058e-02</td>
+<td style="text-align: center;">R$ 866,45</td>
+<td style="text-align: center;">R$ 10.326,93</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<p>Na base analisada, a indenização média foi de R$ 16.585,07 quando o agressor foi classificado como homem e de R$ 9.870,29 quando foi classificado como mulher. A diferença estimada, calculada como média do primeiro grupo menos a média do segundo, foi de R$ 6.714,78.</p>
-<p>Os dois testes produzem valores-p inferiores a 0,05 e intervalos de confiança que não incluem zero. Portanto, rejeitamos a hipótese de igualdade das médias no recorte analisado. Como os desvios-padrão e os tamanhos dos grupos são diferentes, adotamos o resultado de Welch como referência principal. A estatística t foi 4.846, com 236.47 graus de liberdade e valor-p igual a 2.280e-06.</p>
+<p>Na base analisada, a indenização média foi de R$ 26.829,91 quando o agressor foi classificado como homem e de R$ 21.233,22 quando foi classificado como mulher. A diferença estimada, calculada como média do primeiro grupo menos a média do segundo, foi de R$ 5.596,69.</p>
+<p>Os dois testes produzem valores-p inferiores a 0,05 e intervalos de confiança que não incluem zero. Portanto, rejeitamos a hipótese de igualdade das médias no recorte analisado. Como os desvios-padrão e os tamanhos dos grupos são diferentes, adotamos o resultado de Welch como referência principal. A estatística t foi 2.329, com 269.1 graus de liberdade e valor-p igual a 2.058e-02.</p>
 <div class="callout callout-style-default callout-warning callout-titled" title="Como interpretar o resultado">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

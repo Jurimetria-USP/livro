@@ -16,6 +16,7 @@ execute:
 #| eval: true
 knitr::opts_knit$set(root.dir = normalizePath(".."))
 knitr::opts_chunk$set(
+  python.reticulate = FALSE,
   out.width = "78%",
   fig.align = "center"
 )
@@ -36,7 +37,7 @@ Neste capítulo, estudaremos os modelos lineares a partir de dados de corte tran
 
 A exposição se baseia na quarta edição de *Introdução à Econometria: uma abordagem moderna*, de Jeffrey Wooldridge, publicada em 2013. Embora o livro esteja situado no campo da econometria, os modelos apresentados são utilizados em diferentes áreas das Ciências Sociais, entre elas o Direito, a Ciência Política, a Sociologia e a Psicologia.
 
-A aplicação acompanhará o banco de violência de gênero digital construído e tratado nos capítulos anteriores. A pergunta que orienta o percurso será: **como o valor atualizado da indenização se associa às características observadas dos processos?** A partir dessa pergunta, mostraremos como especificar, estimar, interpretar e avaliar modelos lineares, começando por uma relação entre duas variáveis e avançando até modelos com diferentes variáveis explicativas.
+A aplicação acompanhará o banco sintético de violência de gênero digital construído e tratado nos capítulos anteriores. Os casos são inteiramente simulados e não reproduzem decisões ou valores de processos reais. A pergunta que orienta o percurso será: **como o valor atualizado da indenização se associa às características observadas dos casos?** A partir dessa pergunta, mostraremos como especificar, estimar, interpretar e avaliar modelos lineares, começando por uma relação entre duas variáveis e avançando até modelos com diferentes variáveis explicativas.
 
 ::: callout-important
 ## Associação não é causalidade
@@ -46,18 +47,21 @@ Os modelos deste capítulo descrevem associações condicionais no banco analisa
 
 ## Preparando o banco da aplicação
 
-Para manter a mesma amostra ao longo do capítulo, todas as aplicações utilizarão os 349 casos que possuem valor atualizado de indenização maior que zero e nos quais vítima e agressor foram classificados como homem ou mulher. O valor zero não será incluído porque, como discutido anteriormente, ele pode representar tanto ausência de indenização quanto ausência de informação identificada. Os modelos, portanto, descrevem o valor da indenização **condicionalmente à existência de um valor positivo registrado e aos perfis selecionados**.
+Para manter a mesma amostra ao longo do capítulo, todas as aplicações utilizarão os 223 casos que possuem valor atualizado de indenização maior que zero, perfis de vítima e agressor classificados como homem ou mulher e informação sobre os tipos de prova. O valor zero não será incluído porque, como discutido anteriormente, ele pode representar tanto ausência de indenização quanto ausência de informação identificada. Quando o caso não cita o tipo de prova, `numero_provas` recebe `NA`, pois não sabemos quantos meios probatórios existiam. Os modelos, portanto, descrevem o valor da indenização **condicionalmente à existência de um valor positivo registrado, aos perfis selecionados e à disponibilidade da informação probatória**.
 
 ```{r}
 #| label: preparar-bancos-modelos
 
 base_tratada <- read.csv(
-  "dados/violencia_digital_didatica_tratada.csv",
+  "dados/violencia_digital_sintetica_tratada.csv",
   check.names = FALSE,
   encoding = "UTF-8"
 )
 
-colunas_prova <- grep("^prova_", names(base_tratada), value = TRUE)
+colunas_prova <- setdiff(
+  grep("^prova_", names(base_tratada), value = TRUE),
+  "prova_nao_cita"
+)
 
 dados_modelos <- base_tratada |>
   filter(
@@ -68,18 +72,22 @@ dados_modelos <- base_tratada |>
     perfil_vitima %in% c("Homem", "Mulher")
   ) |>
   mutate(
-    numero_provas = rowSums(across(all_of(colunas_prova)), na.rm = TRUE),
+    numero_provas = if_else(
+      prova_nao_cita == 1,
+      NA_real_,
+      rowSums(across(all_of(colunas_prova)), na.rm = TRUE)
+    ),
     agressor_homem = if_else(perfil_agressor == "Homem", 1, 0),
     vitima_homem = if_else(perfil_vitima == "Homem", 1, 0),
     plataforma_sim = if_else(plataforma_parte == "Sim", 1, 0),
     tribunal_grupo = case_when(
-      tribunal == "TJPR" ~ "TJPR",
-      tribunal == "TJSP" ~ "TJSP",
-      TRUE ~ "Outros_TJs"
+      tribunal == "Tribunal A" ~ "Tribunal A",
+      tribunal == "Tribunal B" ~ "Tribunal B",
+      TRUE ~ "Outros_Tribunais"
     ),
     tribunal_grupo = factor(
       tribunal_grupo,
-      levels = c("TJPR", "TJSP", "Outros_TJs")
+      levels = c("Outros_Tribunais", "Tribunal A", "Tribunal B")
     ),
     combinacao_genero = factor(
       paste(perfil_vitima, perfil_agressor, sep = " / "),
@@ -92,7 +100,8 @@ dados_modelos <- base_tratada |>
     ),
     perfil_agressor = factor(perfil_agressor, levels = c("Mulher", "Homem")),
     perfil_vitima = factor(perfil_vitima, levels = c("Mulher", "Homem"))
-  )
+  ) |>
+  filter(!is.na(numero_provas))
 
 nrow(dados_modelos)
 ```
@@ -427,7 +436,7 @@ variacao_percentual_agressor <-
 variacao_percentual_agressor
 ```
 
-O resultado de aproximadamente 64,93% indica que o valor ajustado para os casos com agressor homem é cerca de 64,93% superior ao valor ajustado para os casos com agressora mulher. Para compreender essa comparação, podemos reconstruir os valores dos dois grupos.
+O resultado de aproximadamente `r formatC(100 * (exp(coef(modelo_log)[["agressor_homem"]]) - 1), format = "f", digits = 2, decimal.mark = ",")`% indica quanto o valor ajustado para os casos com agressor homem difere do valor ajustado para os casos com agressora mulher. Para compreender essa comparação, podemos reconstruir os valores dos dois grupos.
 
 Para a agressora mulher, `agressor_homem = 0`. O valor ajustado no logaritmo é, portanto, apenas o intercepto:
 
@@ -437,7 +446,7 @@ Para o agressor homem, `agressor_homem = 1`. O valor ajustado é a soma do inter
 
 $$\widehat{\log(Indenização)}_{Homem}=\widehat\beta_0+\widehat\beta_1.$$
 
-Aplicando a função exponencial e dividindo o resultado por mil, retornamos à escala monetária:
+Aplicando a função exponencial, retornamos à escala monetária em reais:
 
 ```{r}
 beta_0_log <- coef(modelo_log)["(Intercept)"]
@@ -459,12 +468,12 @@ valor_homem_reais - valor_mulher_reais
 valor_homem_reais / valor_mulher_reais
 ```
 
-O modelo estima um valor retrans­formado de aproximadamente R$ 6.989,71 para os casos com agressora mulher e R$ 11.528,16 para os casos com agressor homem. A diferença é de aproximadamente R$ 4.538,45, e o segundo valor corresponde a cerca de 1,65 vez o primeiro. Essa razão é a mesma representada pelo aumento de 64,93%.
+O modelo estima um valor retrans­formado de aproximadamente R$ `r formatC(exp(coef(modelo_log)[["(Intercept)"]]), format = "f", digits = 2, big.mark = ".", decimal.mark = ",")` para os casos com agressora mulher e R$ `r formatC(exp(sum(coef(modelo_log))), format = "f", digits = 2, big.mark = ".", decimal.mark = ",")` para os casos com agressor homem. A diferença é de aproximadamente R$ `r formatC(exp(sum(coef(modelo_log))) - exp(coef(modelo_log)[["(Intercept)"]]), format = "f", digits = 2, big.mark = ".", decimal.mark = ",")`, e o segundo valor corresponde a cerca de `r formatC(exp(coef(modelo_log)[["agressor_homem"]]), format = "f", digits = 2, decimal.mark = ",")` vez o primeiro.
 
 ::: callout-note
 ## Retransformação e interpretação
 
-Os valores de R$ 6.989,71 e R$ 11.528,16 resultam da exponencial dos valores ajustados no logaritmo. Eles representam valores típicos ajustados — equivalentes à média geométrica de cada grupo — e não as médias aritméticas das indenizações. A obtenção da média aritmética prevista na escala original exige uma correção adicional para a retrans­formação. Para a interpretação do coeficiente entre os grupos, contudo, a razão de aproximadamente 1,65 e a diferença percentual de 64,93% permanecem válidas.
+Esses valores resultam da exponencial dos valores ajustados no logaritmo. Eles representam valores típicos ajustados — equivalentes à média geométrica de cada grupo — e não as médias aritméticas das indenizações. A obtenção da média aritmética prevista na escala original exige uma correção adicional para a retrans­formação. Para a interpretação do coeficiente entre os grupos, contudo, a razão e a diferença percentual permanecem válidas.
 :::
 
 O coeficiente descreve uma associação no banco analisado, e não um efeito causal.
@@ -954,9 +963,9 @@ Esse vetor de estimativas irá nos fornecer os valores para os $\beta_j$, com $j
 
 ### Estimativas de MQO
 
-Vamos ampliar o modelo da indenização. Além do perfil do agressor, incluiremos o número de tipos de prova, o grupo do tribunal e a indicação de que a plataforma integra a ação. O TJPR e os processos nos quais a plataforma não faz parte serão as categorias de referência:
+Vamos ampliar o modelo da indenização. Além do perfil do agressor, incluiremos o número de tipos de prova, o grupo do tribunal e a indicação de que a plataforma integra a ação. `Outros_Tribunais` e os processos nos quais a plataforma não faz parte serão as categorias de referência:
 
-$$\log(Indenização_i) = \beta_0 + \beta_1 AgressorHomem_i + \beta_2 NúmeroProvas_i + \delta_1 TJSP_i + \delta_2 OutrosTJs_i + \gamma PlataformaParte_i + u_i$$
+$$\log(Indenização_i) = \beta_0 + \beta_1 AgressorHomem_i + \beta_2 NúmeroProvas_i + \delta_1 TribunalA_i + \delta_2 TribunalB_i + \gamma PlataformaParte_i + u_i$$
 
 ```{r}
 #| label: regressao-linear-multipla
@@ -987,8 +996,8 @@ tabela_interpretacao_rlm <- data.frame(
     "Intercepto",
     "Agressor homem",
     "Número de provas",
-    "TJSP",
-    "Outros tribunais",
+    "Tribunal A",
+    "Tribunal B",
     "Plataforma faz parte"
   ),
   Coeficiente = unname(coeficientes_rlm),
@@ -1010,11 +1019,11 @@ tabela_interpretacao_rlm <- data.frame(
   ),
   Unidade = c("R$", "%", "%", "%", "%", "%"),
   Referência = c(
-    "Mulher, zero provas e TJPR",
+    "Mulher, zero provas e Outros Tribunais",
     "Agressora mulher",
     "Valor anterior do número de provas",
-    "TJPR",
-    "TJPR",
+    "Outros Tribunais",
+    "Outros Tribunais",
     "Plataforma não faz parte"
   ),
   check.names = FALSE
@@ -1029,56 +1038,40 @@ kable(
 
 #### Intercepto
 
-O intercepto estimado é 8,3007. Ele representa o valor ajustado do logaritmo da indenização para a categoria de referência: agressora mulher, nenhuma prova contabilizada, processo do TJPR e plataforma fora da ação. Aplicando a exponencial, obtemos aproximadamente R$ 4.026,78.
+O intercepto estimado é `r formatC(coef(rlm)[["(Intercept)"]], format = "f", digits = 4, decimal.mark = ",")`. Ele representa o valor ajustado do logaritmo da indenização para a categoria de referência: agressora mulher, nenhuma prova contabilizada, processo do grupo `Outros_Tribunais` e plataforma fora da ação. Aplicando a exponencial, obtemos aproximadamente R$ `r formatC(exp(coef(rlm)[["(Intercept)"]]), format = "f", digits = 2, big.mark = ".", decimal.mark = ",")`.
 
 Entretanto, o banco utilizado neste capítulo possui entre um e quatro tipos de prova por processo. Como não há observações com `numero_provas = 0`, o intercepto é necessário para definir a equação, mas não corresponde diretamente a um grupo observado. Sua interpretação substantiva deve, portanto, ser feita com cautela.
 
 #### Perfil do agressor
 
-O coeficiente de `agressor_homem` é 0,4887. Ele compara casos com agressor homem aos casos com agressora mulher, mantendo constantes o número de provas, o grupo do tribunal e a participação da plataforma. Pela transformação exata,
+O coeficiente de `agressor_homem` é `r formatC(coef(rlm)[["agressor_homem"]], format = "f", digits = 4, decimal.mark = ",")`. Ele compara casos com agressor homem aos casos com agressora mulher, mantendo constantes o número de provas, o grupo do tribunal e a participação da plataforma. Pela transformação exata, obtemos uma diferença de `r formatC(100 * (exp(coef(rlm)[["agressor_homem"]]) - 1), format = "f", digits = 2, decimal.mark = ",")`%.
 
-$$100(e^{0{,}4887}-1)=63{,}02\%.$$
-
-Portanto, para processos equivalentes nas demais variáveis do modelo, o valor ajustado da indenização é aproximadamente 63,02% maior quando o agressor é homem do que quando a agressora é mulher. Trata-se de uma diferença condicional às variáveis incluídas no modelo, e não da simples diferença bruta entre os dois grupos.
+Portanto, para processos equivalentes nas demais variáveis do modelo, o valor ajustado da indenização é maior quando o agressor é homem do que quando a agressora é mulher. Trata-se de uma diferença condicional às variáveis incluídas no modelo, e não da simples diferença bruta entre os dois grupos.
 
 #### Número de provas
 
-`numero_provas` é uma variável numérica discreta e assume, neste banco, valores de 1 a 4. Seu coeficiente estimado é 0,0628. Pela transformação exata,
+`numero_provas` é uma variável numérica discreta e assume, na amostra dos modelos, valores de 1 a 4. Seu coeficiente estimado é `r formatC(coef(rlm)[["numero_provas"]], format = "f", digits = 4, decimal.mark = ",")`. Pela transformação exata, um tipo adicional de prova corresponde a uma diferença estimada de `r formatC(100 * (exp(coef(rlm)[["numero_provas"]]) - 1), format = "f", digits = 2, decimal.mark = ",")`%.
 
-$$100(e^{0{,}0628}-1)=6{,}48\%.$$
-
-Assim, um tipo adicional de prova está associado a uma indenização aproximadamente 6,48% maior, mantendo constantes as demais variáveis. Por exemplo, o coeficiente compara dois processos equivalentes nas demais características, mas com dois e três tipos de prova. A estimativa não indica, isoladamente, que acrescentar uma prova cause o aumento da indenização.
+O valor-p desse coeficiente é `r formatC(coef(summary(rlm))["numero_provas", "Pr(>|t|)"], format = "f", digits = 3, decimal.mark = ",")`. Portanto, nesta base sintética, não encontramos evidência estatística de associação entre o número de tipos de prova e o valor da indenização, mantidas constantes as demais variáveis. A ausência de significância não demonstra que a associação seja exatamente zero; indica que a estimativa não é suficientemente precisa para rejeitar essa hipótese no nível adotado.
 
 #### Tribunal
 
-`tribunal_grupo` é uma variável qualitativa nominal, e o TJPR foi definido como referência.
+`tribunal_grupo` é uma variável qualitativa nominal, e `Outros_Tribunais` foi definido como referência.
 
-O coeficiente do TJSP é 0,5422. Pela transformação exata,
+O coeficiente do Tribunal A é `r formatC(coef(rlm)[["tribunal_grupoTribunal A"]], format = "f", digits = 4, decimal.mark = ",")`. Pela transformação exata, sua indenização ajustada é aproximadamente `r formatC(100 * (exp(coef(rlm)[["tribunal_grupoTribunal A"]]) - 1), format = "f", digits = 2, decimal.mark = ",")`% maior que a do grupo de referência, mantidas constantes as demais variáveis.
 
-$$100(e^{0{,}5422}-1)=71{,}98\%.$$
+O coeficiente do Tribunal B é `r formatC(coef(rlm)[["tribunal_grupoTribunal B"]], format = "f", digits = 4, decimal.mark = ",")`. Nas mesmas condições, sua indenização ajustada é aproximadamente `r formatC(100 * (exp(coef(rlm)[["tribunal_grupoTribunal B"]]) - 1), format = "f", digits = 2, decimal.mark = ",")`% maior que a de `Outros_Tribunais`.
 
-Isso significa que, mantidas constantes as demais variáveis, o valor ajustado da indenização no TJSP é aproximadamente 71,98% maior do que no TJPR.
-
-O coeficiente de `Outros_TJs` é 0,7680. Sua transformação resulta em:
-
-$$100(e^{0{,}7680}-1)=115{,}55\%.$$
-
-Portanto, nas mesmas condições, o valor ajustado da indenização no grupo dos outros tribunais é aproximadamente 115,55% maior do que no TJPR.
-
-Esses dois coeficientes não comparam diretamente TJSP e `Outros_TJs`, pois ambos utilizam o TJPR como referência. Para realizar essa comparação, calculamos a diferença entre os coeficientes: $0{,}7680-0{,}5422=0{,}2258$. A transformação exata indica que a indenização ajustada em `Outros_TJs` é aproximadamente 25,33% maior do que no TJSP, mantendo constantes as demais variáveis.
+Os dois coeficientes são comparações com a mesma referência. Uma comparação direta entre os tribunais A e B exigiria calcular a diferença entre seus coeficientes ou alterar a categoria de referência.
 
 #### Participação da plataforma
 
-O coeficiente de `plataforma_sim` é 0,6284. Ele compara processos nos quais a plataforma integra a ação com aqueles nos quais ela não faz parte, mantendo constantes o perfil do agressor, o número de provas e o grupo do tribunal. Pela transformação exata,
-
-$$100(e^{0{,}6284}-1)=87{,}46\%.$$
-
-Assim, no banco analisado, o valor ajustado da indenização é aproximadamente 87,46% maior quando a plataforma faz parte da ação. O intervalo de confiança dessa diferença é amplo, e somente 13 dos 349 casos pertencem a essa categoria. O resultado deve ser lido como uma associação condicional observada nessa amostra, e não como evidência de que a presença da plataforma cause o aumento da indenização.
+O coeficiente de `plataforma_sim` é `r formatC(coef(rlm)[["plataforma_sim"]], format = "f", digits = 4, decimal.mark = ",")`. Ele compara casos nos quais a plataforma integra a ação com aqueles nos quais ela não faz parte, mantendo constantes o perfil do agressor, o número de provas e o grupo do tribunal. Pela transformação exata, o valor ajustado é aproximadamente `r formatC(100 * (exp(coef(rlm)[["plataforma_sim"]]) - 1), format = "f", digits = 2, decimal.mark = ",")`% maior quando a plataforma faz parte da ação. O resultado deve ser lido como uma associação condicional observada nessa base sintética, e não como evidência causal.
 
 ::: callout-note
 ## Categoria de referência
 
-Com três categorias de tribunal e um intercepto, o modelo inclui apenas duas variáveis indicadoras. O TJPR não desaparece: ele é a categoria de referência, representada quando `tribunal_grupoTJSP = 0` e `tribunal_grupoOutros_TJs = 0`.
+Com três categorias de tribunal e um intercepto, o modelo inclui apenas duas variáveis indicadoras. `Outros_Tribunais` não desaparece: ele é a categoria de referência, representada quando as indicadoras do Tribunal A e do Tribunal B são iguais a zero.
 :::
 
 
@@ -1168,18 +1161,18 @@ O fator de retrans­formação corrige a passagem da escala logarítmica para re
 ::: callout-note
 ## Como foi calculada a média prevista ajustada?
 
-Para obter o valor referente à agressora mulher, definimos `agressor_homem = 0` nos 349 processos. Em cada observação, mantivemos o número de provas, o tribunal e a participação da plataforma originalmente registrados. O modelo produziu, assim, um valor predito para cada processo como se a agressora fosse mulher. A média desses 349 valores preditos, após a correção de retrans­formação, foi R$ 11.495,63.
+Para obter o valor referente à agressora mulher, definimos `agressor_homem = 0` nos `r nrow(dados_modelos)` casos. Em cada observação, mantivemos o número de provas, o tribunal e a participação da plataforma originalmente registrados. O modelo produziu, assim, um valor predito para cada caso como se a agressora fosse mulher. A média dessas previsões, após a correção de retrans­formação, foi R$ `r formatC(media_ajustada_mulher, format = "f", digits = 2, big.mark = ".", decimal.mark = ",")`.
 
-O coeficiente estimado para agressor homem foi 0,4887. No modelo log–nível, esse coeficiente corresponde à razão $e^{0{,}4887}=1{,}6302$, isto é, a uma diferença de 63,02%. Como o modelo não contém interação com o perfil do agressor, essa razão é constante para todas as combinações das demais variáveis. Aplicando-a à média prevista para agressora mulher, obtemos:
+O coeficiente estimado para agressor homem foi `r formatC(coef(rlm)[["agressor_homem"]], format = "f", digits = 4, decimal.mark = ",")`. No modelo log–nível, esse coeficiente corresponde à razão `r formatC(exp(coef(rlm)[["agressor_homem"]]), format = "f", digits = 4, decimal.mark = ",")`, isto é, a uma diferença de `r formatC(100 * (exp(coef(rlm)[["agressor_homem"]]) - 1), format = "f", digits = 2, decimal.mark = ",")`%. Como o modelo não contém interação com o perfil do agressor, essa razão é constante para todas as combinações das demais variáveis.
 
-$$R\$\,11.495{,}63 \times 1{,}6302 = R\$\,18.740{,}42.$$
+O valor médio previsto ajustado para agressor homem é R$ `r formatC(media_ajustada_homem, format = "f", digits = 2, big.mark = ".", decimal.mark = ",")`.
 
 Portanto, apenas o perfil do agressor foi alterado. As demais características permaneceram com a distribuição observada no banco. O valor apresentado para cada grupo é uma média de previsões ajustadas, e não o intercepto $\widehat\beta_0$ isoladamente.
 :::
 
 ### Categorias múltiplas: os tribunais
 
-Tribunal é uma variável categórica nominal, e não uma variável ordinal. As categorias foram agrupadas em TJPR, TJSP e `Outros_TJs`, reunindo TJDF, TJAM, TJCE e TJGO. O TJPR é a referência no mesmo modelo multivariado utilizado desde o início desta seção.
+Tribunal é uma variável categórica nominal, e não uma variável ordinal. As categorias foram agrupadas em Tribunal A, Tribunal B e `Outros_Tribunais`, que reúne os tribunais C, D, E e F. `Outros_Tribunais` é a referência no mesmo modelo multivariado utilizado desde o início desta seção.
 
 ```{r}
 #| label: tabela-tribunais-modelos
@@ -1198,9 +1191,9 @@ kable(
 
 Embora existam três categorias, o modelo multivariado com intercepto inclui somente duas variáveis indicadoras para os tribunais:
 
-$$\log(Indenização_i)=\beta_0+\beta_1 AgressorHomem_i+\beta_2 NúmeroProvas_i+\delta_1 TJSP_i+\delta_2 OutrosTJs_i+\gamma PlataformaParte_i+u_i.$$
+$$\log(Indenização_i)=\beta_0+\beta_1 AgressorHomem_i+\beta_2 NúmeroProvas_i+\delta_1 TribunalA_i+\delta_2 TribunalB_i+\gamma PlataformaParte_i+u_i.$$
 
-Quando `TJSP = 0` e `OutrosTJs = 0`, a observação pertence ao TJPR. Incluir simultaneamente as três indicadoras e o intercepto produziria colinearidade perfeita. Os coeficientes dos tribunais são, portanto, interpretados mantendo constantes o perfil do agressor, o número de provas e a participação da plataforma.
+Quando `TribunalA = 0` e `TribunalB = 0`, a observação pertence a `Outros_Tribunais`. Incluir simultaneamente as três indicadoras e o intercepto produziria colinearidade perfeita. Os coeficientes dos tribunais são, portanto, interpretados mantendo constantes o perfil do agressor, o número de provas e a participação da plataforma.
 
 ### Qualidade do ajuste do primeiro modelo
 
@@ -1240,7 +1233,7 @@ Uma interação permite que a associação de uma variável com o resultado depe
 
 O modelo será:
 
-$$\log(Indenização_i) = \beta_0 + \beta_1 AgressorHomem_i + \beta_2 VitimaHomem_i + \beta_3(AgressorHomem_i \times VitimaHomem_i) + \beta_4 NúmeroProvas_i + \delta_1 TJSP_i + \delta_2 OutrosTJs_i + \gamma PlataformaParte_i + u_i.$$
+$$\log(Indenização_i) = \beta_0 + \beta_1 AgressorHomem_i + \beta_2 VitimaHomem_i + \beta_3(AgressorHomem_i \times VitimaHomem_i) + \beta_4 NúmeroProvas_i + \delta_1 TribunalA_i + \delta_2 TribunalB_i + \gamma PlataformaParte_i + u_i.$$
 
 ```{r}
 #| label: modelo-interacao-genero
@@ -1263,7 +1256,7 @@ A interpretação exige somar os coeficientes correspondentes a cada combinaçã
 | Homem | Mulher | $\beta_0 + \beta_2$ |
 | Homem | Homem | $\beta_0 + \beta_1 + \beta_2 + \beta_3$ |
 
-Os coeficientes do número de provas, dos tribunais e da plataforma continuam fazendo parte do modelo, mas não alteram a composição algébrica da interação. Para calcular médias monetárias ajustadas, aplicaremos a mesma padronização utilizada anteriormente: em cada combinação, conservamos para os 349 processos os valores observados dos controles, alteramos apenas os perfis da vítima e do agressor e calculamos a média das previsões. Desse modo, não precisamos escolher arbitrariamente um número de provas ou uma categoria de tribunal.
+Os coeficientes do número de provas, dos tribunais e da plataforma continuam fazendo parte do modelo, mas não alteram a composição algébrica da interação. Para calcular médias monetárias ajustadas, aplicaremos a mesma padronização utilizada anteriormente: em cada combinação, conservamos para os `r nrow(dados_modelos)` casos os valores observados dos controles, alteramos apenas os perfis da vítima e do agressor e calculamos a média das previsões. Desse modo, não precisamos escolher arbitrariamente um número de provas ou uma categoria de tribunal.
 
 ```{r}
 #| label: tabela-combinacoes-interacao
@@ -1444,8 +1437,8 @@ stargazer::stargazer(
     "agressor_homem",
     "numero_provas",
     "vitima_homem",
-    "tribunal_grupoTJSP",
-    "tribunal_grupoOutros_TJs",
+    "tribunal_grupoTribunal A",
+    "tribunal_grupoTribunal B",
     "plataforma_sim",
     "agressor_homem:vitima_homem"
   ),
@@ -1453,8 +1446,8 @@ stargazer::stargazer(
     "Agressor homem",
     "Número de provas",
     "Vítima homem",
-    "TJSP",
-    "Outros tribunais",
+    "Tribunal A",
+    "Tribunal B",
     "Plataforma faz parte",
     "Agressor homem × vítima homem"
   ),
@@ -1472,4 +1465,4 @@ Essa tabela é uma forma de comunicação dos resultados. Ela não substitui a l
 
 O capítulo partiu da regressão linear simples e mostrou como os mínimos quadrados relacionam valores observados, valores ajustados e resíduos. A aplicação evidenciou que mudanças de unidade alteram a escala dos coeficientes, mas não a evidência estatística; que as formas nível–nível, nível–log, log–nível e log–log exigem interpretações distintas; e que a regressão múltipla permite incluir variáveis categóricas e interações.
 
-Todas as aplicações utilizaram os mesmos 349 casos com indenização positiva e perfis de vítima e agressor classificados como homem ou mulher. Apenas a comparação das formas funcionais restringiu temporariamente a amostra às observações com pelo menos um tipo de prova, pois o logaritmo de zero não é definido. Em todos os casos, as estimativas representam associações no banco analisado, e não efeitos causais.
+Todas as aplicações utilizaram os mesmos `r nrow(dados_modelos)` casos com indenização positiva, perfis de vítima e agressor classificados como homem ou mulher e informação sobre os tipos de prova. Em todos os casos, as estimativas representam associações na base sintética analisada, e não efeitos causais.

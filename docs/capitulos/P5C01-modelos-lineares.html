@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-dd5fa769cd8cd11b6d61b3c64d2f60b9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-af376c0a327698bc4256a7316fbe19a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -489,7 +489,7 @@ window.Quarto = {
 <p>A análise de regressão permite investigar como um fenômeno varia em função de características observadas. Em dados jurídicos, esse tipo de modelo pode ser utilizado, por exemplo, para examinar por que o valor de uma indenização é mais elevado em alguns processos do que em outros. O objetivo é representar estatisticamente essas variações e avaliar como elas se associam às informações disponíveis no banco de dados.</p>
 <p>Neste capítulo, estudaremos os modelos lineares a partir de dados de corte transversal, nos quais diferentes processos são observados em determinado período. O percurso começa com a regressão linear simples (RLS), que relaciona uma variável dependente a uma única variável explicativa. Em seguida, apresentamos a estimação pelo método dos mínimos quadrados ordinários, a interpretação dos coeficientes, as formas funcionais e a regressão linear múltipla, que permite considerar simultaneamente diferentes características dos processos.</p>
 <p>A exposição se baseia na quarta edição de <em>Introdução à Econometria: uma abordagem moderna</em>, de Jeffrey Wooldridge, publicada em 2013. Embora o livro esteja situado no campo da econometria, os modelos apresentados são utilizados em diferentes áreas das Ciências Sociais, entre elas o Direito, a Ciência Política, a Sociologia e a Psicologia.</p>
-<p>A aplicação acompanhará o banco de violência de gênero digital construído e tratado nos capítulos anteriores. A pergunta que orienta o percurso será: <strong>como o valor atualizado da indenização se associa às características observadas dos processos?</strong> A partir dessa pergunta, mostraremos como especificar, estimar, interpretar e avaliar modelos lineares, começando por uma relação entre duas variáveis e avançando até modelos com diferentes variáveis explicativas.</p>
+<p>A aplicação acompanhará o banco sintético de violência de gênero digital construído e tratado nos capítulos anteriores. Os casos são inteiramente simulados e não reproduzem decisões ou valores de processos reais. A pergunta que orienta o percurso será: <strong>como o valor atualizado da indenização se associa às características observadas dos casos?</strong> A partir dessa pergunta, mostraremos como especificar, estimar, interpretar e avaliar modelos lineares, começando por uma relação entre duas variáveis e avançando até modelos com diferentes variáveis explicativas.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -505,54 +505,62 @@ window.Quarto = {
 </div>
 <section id="preparando-o-banco-da-aplicação" class="level2" data-number="17.1">
 <h2 data-number="17.1" class="anchored" data-anchor-id="preparando-o-banco-da-aplicação"><span class="header-section-number">17.1</span> Preparando o banco da aplicação</h2>
-<p>Para manter a mesma amostra ao longo do capítulo, todas as aplicações utilizarão os 349 casos que possuem valor atualizado de indenização maior que zero e nos quais vítima e agressor foram classificados como homem ou mulher. O valor zero não será incluído porque, como discutido anteriormente, ele pode representar tanto ausência de indenização quanto ausência de informação identificada. Os modelos, portanto, descrevem o valor da indenização <strong>condicionalmente à existência de um valor positivo registrado e aos perfis selecionados</strong>.</p>
+<p>Para manter a mesma amostra ao longo do capítulo, todas as aplicações utilizarão os 223 casos que possuem valor atualizado de indenização maior que zero, perfis de vítima e agressor classificados como homem ou mulher e informação sobre os tipos de prova. O valor zero não será incluído porque, como discutido anteriormente, ele pode representar tanto ausência de indenização quanto ausência de informação identificada. Quando o caso não cita o tipo de prova, <code>numero_provas</code> recebe <code>NA</code>, pois não sabemos quantos meios probatórios existiam. Os modelos, portanto, descrevem o valor da indenização <strong>condicionalmente à existência de um valor positivo registrado, aos perfis selecionados e à disponibilidade da informação probatória</strong>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>base_tratada <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dados/violencia_digital_didatica_tratada.csv"</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dados/violencia_digital_sintetica_tratada.csv"</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">encoding =</span> <span class="st">"UTF-8"</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>colunas_prova <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">"^prova_"</span>, <span class="fu">names</span>(base_tratada), <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>dados_modelos <span class="ot">&lt;-</span> base_tratada <span class="sc">|&gt;</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(valor_indenizacao_jul2026),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    valor_indenizacao_jul2026 <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(plataforma_parte),</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    perfil_agressor <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Homem"</span>, <span class="st">"Mulher"</span>),</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    perfil_vitima <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Homem"</span>, <span class="st">"Mulher"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">numero_provas =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(colunas_prova)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">agressor_homem =</span> <span class="fu">if_else</span>(perfil_agressor <span class="sc">==</span> <span class="st">"Homem"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">vitima_homem =</span> <span class="fu">if_else</span>(perfil_vitima <span class="sc">==</span> <span class="st">"Homem"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">plataforma_sim =</span> <span class="fu">if_else</span>(plataforma_parte <span class="sc">==</span> <span class="st">"Sim"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">tribunal_grupo =</span> <span class="fu">case_when</span>(</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>      tribunal <span class="sc">==</span> <span class="st">"TJPR"</span> <span class="sc">~</span> <span class="st">"TJPR"</span>,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      tribunal <span class="sc">==</span> <span class="st">"TJSP"</span> <span class="sc">~</span> <span class="st">"TJSP"</span>,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Outros_TJs"</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">tribunal_grupo =</span> <span class="fu">factor</span>(</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>      tribunal_grupo,</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"TJPR"</span>, <span class="st">"TJSP"</span>, <span class="st">"Outros_TJs"</span>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">combinacao_genero =</span> <span class="fu">factor</span>(</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(perfil_vitima, perfil_agressor, <span class="at">sep =</span> <span class="st">" / "</span>),</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mulher / Mulher"</span>,</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mulher / Homem"</span>,</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Homem / Mulher"</span>,</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Homem / Homem"</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">perfil_agressor =</span> <span class="fu">factor</span>(perfil_agressor, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Mulher"</span>, <span class="st">"Homem"</span>)),</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">perfil_vitima =</span> <span class="fu">factor</span>(perfil_vitima, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Mulher"</span>, <span class="st">"Homem"</span>))</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(dados_modelos)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>colunas_prova <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grep</span>(<span class="st">"^prova_"</span>, <span class="fu">names</span>(base_tratada), <span class="at">value =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"prova_nao_cita"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>dados_modelos <span class="ot">&lt;-</span> base_tratada <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(valor_indenizacao_jul2026),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    valor_indenizacao_jul2026 <span class="sc">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(plataforma_parte),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    perfil_agressor <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Homem"</span>, <span class="st">"Mulher"</span>),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    perfil_vitima <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Homem"</span>, <span class="st">"Mulher"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">numero_provas =</span> <span class="fu">if_else</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>      prova_nao_cita <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>      <span class="cn">NA_real_</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(colunas_prova)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">agressor_homem =</span> <span class="fu">if_else</span>(perfil_agressor <span class="sc">==</span> <span class="st">"Homem"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">vitima_homem =</span> <span class="fu">if_else</span>(perfil_vitima <span class="sc">==</span> <span class="st">"Homem"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">plataforma_sim =</span> <span class="fu">if_else</span>(plataforma_parte <span class="sc">==</span> <span class="st">"Sim"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">tribunal_grupo =</span> <span class="fu">case_when</span>(</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>      tribunal <span class="sc">==</span> <span class="st">"Tribunal A"</span> <span class="sc">~</span> <span class="st">"Tribunal A"</span>,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>      tribunal <span class="sc">==</span> <span class="st">"Tribunal B"</span> <span class="sc">~</span> <span class="st">"Tribunal B"</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Outros_Tribunais"</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">tribunal_grupo =</span> <span class="fu">factor</span>(</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>      tribunal_grupo,</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Outros_Tribunais"</span>, <span class="st">"Tribunal A"</span>, <span class="st">"Tribunal B"</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">combinacao_genero =</span> <span class="fu">factor</span>(</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(perfil_vitima, perfil_agressor, <span class="at">sep =</span> <span class="st">" / "</span>),</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mulher / Mulher"</span>,</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Mulher / Homem"</span>,</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Homem / Mulher"</span>,</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Homem / Homem"</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">perfil_agressor =</span> <span class="fu">factor</span>(perfil_agressor, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Mulher"</span>, <span class="st">"Homem"</span>)),</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">perfil_vitima =</span> <span class="fu">factor</span>(perfil_vitima, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Mulher"</span>, <span class="st">"Homem"</span>))</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(numero_provas))</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(dados_modelos)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 349</code></pre>
+<pre><code>[1] 223</code></pre>
 </div>
 </div>
 <p>O objeto <code>dados_modelos</code> será utilizado em todas as regressões. Essa decisão evita que diferenças entre resultados decorram apenas de mudanças na composição da amostra.</p>
@@ -698,18 +706,18 @@ lm(formula = valor_indenizacao_jul2026 ~ agressor_homem, data = dados_modelos)
 
 Residuals:
    Min     1Q Median     3Q    Max 
--17799  -8322  -5713   1690 198620 
+-33672 -19107 -12714   5585 404767 
 
 Coefficients:
                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)       11456       1393   8.221 4.07e-15 ***
-agressor_homem     7001       2140   3.272  0.00118 ** 
+(Intercept)       25070       3938   6.366 1.11e-09 ***
+agressor_homem    11426       6002   1.904   0.0583 .  
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 19750 on 347 degrees of freedom
-Multiple R-squared:  0.02993,   Adjusted R-squared:  0.02713 
-F-statistic: 10.71 on 1 and 347 DF,  p-value: 0.001175</code></pre>
+Residual standard error: 44380 on 221 degrees of freedom
+Multiple R-squared:  0.01613,   Adjusted R-squared:  0.01168 
+F-statistic: 3.624 on 1 and 221 DF,  p-value: 0.05825</code></pre>
 </div>
 </div>
 <section id="entendendo-os-resultados" class="level4" data-number="17.4.2.1">
@@ -825,18 +833,18 @@ lm(formula = log(valor_indenizacao_jul2026) ~ agressor_homem,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.8645 -0.6578 -0.0615  0.5806  3.4030 
+-2.1127 -0.6437 -0.0538  0.6229  3.3465 
 
 Coefficients:
                Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)     8.85219    0.06717 131.779  &lt; 2e-16 ***
-agressor_homem  0.50035    0.10315   4.851 1.86e-06 ***
+(Intercept)     9.62466    0.08188 117.550  &lt; 2e-16 ***
+agressor_homem  0.43360    0.12479   3.475 0.000616 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.9524 on 347 degrees of freedom
-Multiple R-squared:  0.0635,    Adjusted R-squared:  0.0608 
-F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
+Residual standard error: 0.9227 on 221 degrees of freedom
+Multiple R-squared:  0.0518,    Adjusted R-squared:  0.04751 
+F-statistic: 12.07 on 1 and 221 DF,  p-value: 0.0006155</code></pre>
 </div>
 </div>
 <p>Como <code>agressor_homem</code> é binária, a variação percentual exata associada ao grupo dos agressores homens, em comparação com o grupo das agressoras mulheres, é calculada por <span class="math inline">\(100(e^{\widehat\beta_1}-1)\)</span>:</p>
@@ -847,15 +855,15 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>variacao_percentual_agressor</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>agressor_homem 
-      64.93046 </code></pre>
+       54.2804 </code></pre>
 </div>
 </div>
-<p>O resultado de aproximadamente 64,93% indica que o valor ajustado para os casos com agressor homem é cerca de 64,93% superior ao valor ajustado para os casos com agressora mulher. Para compreender essa comparação, podemos reconstruir os valores dos dois grupos.</p>
+<p>O resultado de aproximadamente 54,28% indica quanto o valor ajustado para os casos com agressor homem difere do valor ajustado para os casos com agressora mulher. Para compreender essa comparação, podemos reconstruir os valores dos dois grupos.</p>
 <p>Para a agressora mulher, <code>agressor_homem = 0</code>. O valor ajustado no logaritmo é, portanto, apenas o intercepto:</p>
 <p><span class="math display">\[\widehat{\log(Indenização)}_{Mulher}=\widehat\beta_0.\]</span></p>
 <p>Para o agressor homem, <code>agressor_homem = 1</code>. O valor ajustado é a soma do intercepto com o coeficiente da variável binária:</p>
 <p><span class="math display">\[\widehat{\log(Indenização)}_{Homem}=\widehat\beta_0+\widehat\beta_1.\]</span></p>
-<p>Aplicando a função exponencial e dividindo o resultado por mil, retornamos à escala monetária:</p>
+<p>Aplicando a função exponencial, retornamos à escala monetária em reais:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>beta_0_log <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo_log)[<span class="st">"(Intercept)"</span>]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>beta_1_log <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo_log)[<span class="st">"agressor_homem"</span>]</span>
@@ -873,21 +881,21 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>estimativas_grupos</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Grupo Cálculo no log Valor retrans­formado (R$)
-1 Agressora mulher             β₀                   6989.708
-2   Agressor homem        β₀ + β₁                  11528.157</code></pre>
+1 Agressora mulher             β₀                   15133.48
+2   Agressor homem        β₀ + β₁                   23348.00</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>valor_homem_reais <span class="sc">-</span> valor_mulher_reais</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) 
-   4538.449 </code></pre>
+   8214.516 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>valor_homem_reais <span class="sc">/</span> valor_mulher_reais</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept) 
-   1.649305 </code></pre>
+   1.542804 </code></pre>
 </div>
 </div>
-<p>O modelo estima um valor retrans­formado de aproximadamente R$ 6.989,71 para os casos com agressora mulher e R$ 11.528,16 para os casos com agressor homem. A diferença é de aproximadamente R$ 4.538,45, e o segundo valor corresponde a cerca de 1,65 vez o primeiro. Essa razão é a mesma representada pelo aumento de 64,93%.</p>
+<p>O modelo estima um valor retrans­formado de aproximadamente R$ 15.133,48 para os casos com agressora mulher e R$ 23.348,00 para os casos com agressor homem. A diferença é de aproximadamente R$ 8.214,52, e o segundo valor corresponde a cerca de 1,54 vez o primeiro.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -898,7 +906,7 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Os valores de R$ 6.989,71 e R$ 11.528,16 resultam da exponencial dos valores ajustados no logaritmo. Eles representam valores típicos ajustados — equivalentes à média geométrica de cada grupo — e não as médias aritméticas das indenizações. A obtenção da média aritmética prevista na escala original exige uma correção adicional para a retrans­formação. Para a interpretação do coeficiente entre os grupos, contudo, a razão de aproximadamente 1,65 e a diferença percentual de 64,93% permanecem válidas.</p>
+<p>Esses valores resultam da exponencial dos valores ajustados no logaritmo. Eles representam valores típicos ajustados — equivalentes à média geométrica de cada grupo — e não as médias aritméticas das indenizações. A obtenção da média aritmética prevista na escala original exige uma correção adicional para a retrans­formação. Para a interpretação do coeficiente entre os grupos, contudo, a razão e a diferença percentual permanecem válidas.</p>
 </div>
 </div>
 <p>O coeficiente descreve uma associação no banco analisado, e não um efeito causal.</p>
@@ -946,7 +954,7 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(resid_nivel)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.3506e-10</code></pre>
+<pre><code>[1] -4.060894e-10</code></pre>
 </div>
 </div>
 <ol start="2" type="1">
@@ -960,7 +968,7 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#somando com os residuos</span></span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x <span class="sc">*</span> resid_nivel)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.476099e-10</code></pre>
+<pre><code>[1] 5.320544e-11</code></pre>
 </div>
 </div>
 <ol start="3" type="1">
@@ -972,17 +980,17 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> dados_modelos<span class="sc">$</span>valor_indenizacao_jul2026</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 14424.38</code></pre>
+<pre><code>[1] 29988.52</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#y estimado</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>y_hat <span class="ot">&lt;-</span> <span class="fu">fitted.values</span>(modelo_nivel)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y_hat)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 14424.38</code></pre>
+<pre><code>[1] 29988.52</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y) <span class="sc">-</span> <span class="fu">mean</span>(y_hat)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
+<pre><code>[1] -3.637979e-12</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">isTRUE</span>(<span class="fu">all.equal</span>(<span class="fu">mean</span>(y), <span class="fu">mean</span>(y_hat)))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1017,7 +1025,7 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>sqt_log <span class="ot">&lt;-</span> <span class="fu">sum</span>((y_log <span class="sc">-</span> media_y_log)<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>sqt_log</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 336.0688</code></pre>
+<pre><code>[1] 198.4375</code></pre>
 </div>
 </div>
 <p>Soma dos Quadrados Explicados (SQE):</p>
@@ -1027,7 +1035,7 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>sqe_log <span class="ot">&lt;-</span> <span class="fu">sum</span>((y_hat_log <span class="sc">-</span> media_y_log)<span class="sc">^</span><span class="dv">2</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>sqe_log</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 21.33962</code></pre>
+<pre><code>[1] 10.27902</code></pre>
 </div>
 </div>
 <p>Soma dos Quadrados dos Resíduos (SQR):</p>
@@ -1037,7 +1045,7 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>sqr_log <span class="ot">&lt;-</span> <span class="fu">sum</span>(residuos_quadrados_log)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>sqr_log</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 314.7292</code></pre>
+<pre><code>[1] 188.1584</code></pre>
 </div>
 </div>
 <p>O resultado mais importante é o seguinte:</p>
@@ -1052,12 +1060,12 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>r_quadrado_log <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (sqr_log <span class="sc">/</span> sqt_log)</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>r_quadrado_log</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.06349776</code></pre>
+<pre><code>[1] 0.05179981</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conferindo o valor informado por summary()</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_log)<span class="sc">$</span>r.squared</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.06349776</code></pre>
+<pre><code>[1] 0.05179981</code></pre>
 </div>
 </div>
 <p>Nesse modelo, o <span class="math inline">\(R^2\)</span> é a proporção da variação amostral do <strong>logaritmo da indenização</strong> representada pela variável <code>agressor_homem</code>. Ele não mede a proporção da variação da indenização em reais e tampouco demonstra uma relação causal. Na regressão linear simples com intercepto, seu valor estará entre 0 e 1.</p>
@@ -1124,19 +1132,19 @@ F-statistic: 23.53 on 1 and 347 DF,  p-value: 1.863e-06</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Reais</td>
-<td style="text-align: right;">11455.5078</td>
-<td style="text-align: right;">7000.9219</td>
-<td style="text-align: right;">3.2719</td>
-<td style="text-align: right;">0.0012</td>
-<td style="text-align: right;">0.0299</td>
+<td style="text-align: right;">25069.8912</td>
+<td style="text-align: right;">11425.5578</td>
+<td style="text-align: right;">1.9037</td>
+<td style="text-align: right;">0.0583</td>
+<td style="text-align: right;">0.0161</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Milhares de reais</td>
-<td style="text-align: right;">11.4555</td>
-<td style="text-align: right;">7.0009</td>
-<td style="text-align: right;">3.2719</td>
-<td style="text-align: right;">0.0012</td>
-<td style="text-align: right;">0.0299</td>
+<td style="text-align: right;">25.0699</td>
+<td style="text-align: right;">11.4256</td>
+<td style="text-align: right;">1.9037</td>
+<td style="text-align: right;">0.0583</td>
+<td style="text-align: right;">0.0161</td>
 </tr>
 </tbody>
 </table>
@@ -1263,24 +1271,24 @@ lm(formula = valor_indenizacao_jul2026 ~ numero_provas, data = subset(dados_mode
 
 Residuals:
    Min     1Q Median     3Q    Max 
--16221  -9904  -5863   1782 190769 
+-33673 -19943 -11910   5693 397243 
 
 Coefficients:
-              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)      11363       2352   4.832 2.04e-06 ***
-numero_provas     1986       1358   1.462    0.145    
+              Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)      22746       7286   3.122  0.00204 **
+numero_provas     4924       4518   1.090  0.27693   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 20000 on 347 degrees of freedom
-Multiple R-squared:  0.00612,   Adjusted R-squared:  0.003255 
-F-statistic: 2.137 on 1 and 347 DF,  p-value: 0.1447</code></pre>
+Residual standard error: 44620 on 221 degrees of freedom
+Multiple R-squared:  0.005347,  Adjusted R-squared:  0.000846 
+F-statistic: 1.188 on 1 and 221 DF,  p-value: 0.2769</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>beta_nn <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo_nn)[<span class="st">"numero_provas"</span>]</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>beta_nn</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>numero_provas 
-     1985.725 </code></pre>
+     4923.808 </code></pre>
 </div>
 </div>
 <p>O coeficiente estimado é aproximadamente R$ 1.985,73. Portanto, cada tipo adicional de prova está associado, em média, a um acréscimo de R$ 1.985,73 no valor da indenização. Essa é uma interpretação absoluta: uma unidade adicional em <span class="math inline">\(X\)</span> corresponde a uma variação monetária em <span class="math inline">\(Y\)</span>.</p>
@@ -1303,18 +1311,18 @@ lm(formula = valor_indenizacao_jul2026 ~ log(numero_provas),
 
 Residuals:
    Min     1Q Median     3Q    Max 
--15756  -9946  -5865   1739 192314 
+-31557 -20221 -11967   6100 397186 
 
 Coefficients:
                    Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)           13392       1340   9.992   &lt;2e-16 ***
-log(numero_provas)     3152       2458   1.282    0.201    
+(Intercept)           27948       3756   7.440 2.21e-12 ***
+log(numero_provas)     6785       7557   0.898     0.37    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 20010 on 347 degrees of freedom
-Multiple R-squared:  0.004716,  Adjusted R-squared:  0.001848 
-F-statistic: 1.644 on 1 and 347 DF,  p-value: 0.2006</code></pre>
+Residual standard error: 44660 on 221 degrees of freedom
+Multiple R-squared:  0.003634,  Adjusted R-squared:  -0.0008744 
+F-statistic: 0.8061 on 1 and 221 DF,  p-value: 0.3703</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>beta_nl <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo_nl)[<span class="st">"log(numero_provas)"</span>]</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1322,12 +1330,12 @@ F-statistic: 1.644 on 1 and 347 DF,  p-value: 0.2006</code></pre>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>beta_nl <span class="sc">/</span> <span class="dv">100</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>log(numero_provas) 
-           31.5249 </code></pre>
+          67.84934 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>beta_nl <span class="sc">/</span> <span class="dv">10</span></span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>log(numero_provas) 
-           315.249 </code></pre>
+          678.4934 </code></pre>
 </div>
 </div>
 <p>O coeficiente estimado é aproximadamente 3.152,49. Como <span class="math inline">\(X\)</span> está em log e <span class="math inline">\(Y\)</span> permanece em reais, um aumento de 1% no número de provas está associado a aproximadamente <span class="math inline">\(\beta_1/100\)</span>, ou R$ 31,52, no valor da indenização. Um aumento de 10% está associado a aproximadamente R$ 315,25.</p>
@@ -1350,19 +1358,19 @@ lm(formula = log(valor_indenizacao_jul2026) ~ numero_provas,
     data = subset(dados_modelos, numero_provas &gt; 0))
 
 Residuals:
-    Min      1Q  Median      3Q     Max 
--2.5631 -0.6624 -0.0973  0.6150  3.1307 
+     Min       1Q   Median       3Q      Max 
+-2.08749 -0.69439 -0.00559  0.67403  3.09747 
 
 Coefficients:
               Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)    9.02669    0.11573  77.999   &lt;2e-16 ***
-numero_provas  0.02445    0.06685   0.366    0.715    
+(Intercept)    9.63798    0.15419  62.508   &lt;2e-16 ***
+numero_provas  0.11785    0.09561   1.233    0.219    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.9839 on 347 degrees of freedom
-Multiple R-squared:  0.0003852, Adjusted R-squared:  -0.002496 
-F-statistic: 0.1337 on 1 and 347 DF,  p-value: 0.7148</code></pre>
+Residual standard error: 0.9443 on 221 degrees of freedom
+Multiple R-squared:  0.006829,  Adjusted R-squared:  0.002335 
+F-statistic:  1.52 on 1 and 221 DF,  p-value: 0.219</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>beta_ln <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo_ln)[<span class="st">"numero_provas"</span>]</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1370,12 +1378,12 @@ F-statistic: 0.1337 on 1 and 347 DF,  p-value: 0.7148</code></pre>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">*</span> beta_ln</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>numero_provas 
-     2.444547 </code></pre>
+     11.78545 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="dv">100</span> <span class="sc">*</span> (<span class="fu">exp</span>(beta_ln) <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>numero_provas 
-     2.474671 </code></pre>
+     12.50804 </code></pre>
 </div>
 </div>
 <p>O coeficiente estimado é aproximadamente 0,0244. Para cada tipo adicional de prova, a indenização varia aproximadamente <span class="math inline">\(100\beta_1=2,44\)</span>%. Pela transformação exata, <span class="math inline">\(100(e^{\beta_1}-1)\)</span>, o aumento estimado é de aproximadamente 2,47%.</p>
@@ -1399,18 +1407,18 @@ lm(formula = log(valor_indenizacao_jul2026) ~ log(numero_provas),
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--2.56464 -0.65933 -0.09889  0.61342  3.15321 
+-2.09184 -0.69874 -0.00994  0.67532  3.09313 
 
 Coefficients:
                    Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)         9.05273    0.06590 137.362   &lt;2e-16 ***
-log(numero_provas)  0.03555    0.12090   0.294    0.769    
+(Intercept)          9.7602     0.0795 122.766   &lt;2e-16 ***
+log(numero_provas)   0.1700     0.1599   1.063    0.289    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.984 on 347 degrees of freedom
-Multiple R-squared:  0.0002491, Adjusted R-squared:  -0.002632 
-F-statistic: 0.08646 on 1 and 347 DF,  p-value: 0.7689</code></pre>
+Residual standard error: 0.9452 on 221 degrees of freedom
+Multiple R-squared:  0.005086,  Adjusted R-squared:  0.0005842 
+F-statistic:  1.13 on 1 and 221 DF,  p-value: 0.289</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>beta_ll <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo_ll)[<span class="st">"log(numero_provas)"</span>]</span>
 <span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1418,12 +1426,12 @@ F-statistic: 0.08646 on 1 and 347 DF,  p-value: 0.7689</code></pre>
 <span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>beta_ll</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>log(numero_provas) 
-        0.03554881 </code></pre>
+         0.1700022 </code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">*</span> beta_ll</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>log(numero_provas) 
-         0.3554881 </code></pre>
+          1.700022 </code></pre>
 </div>
 </div>
 <p>O coeficiente estimado é aproximadamente 0,0355. Ele é uma elasticidade: um aumento de 1% no número de provas está associado a um aumento aproximado de 0,0355% na indenização. Um aumento de 10% está associado, aproximadamente, a um aumento de 0,355% na indenização.</p>
@@ -1471,31 +1479,31 @@ F-statistic: 0.08646 on 1 and 347 DF,  p-value: 0.7689</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Nível–nível</td>
-<td style="text-align: right;">1985.7247</td>
-<td style="text-align: right;">1358.4921</td>
-<td style="text-align: right;">0.1447</td>
-<td style="text-align: right;">0.0061</td>
+<td style="text-align: right;">4923.8082</td>
+<td style="text-align: right;">4517.5124</td>
+<td style="text-align: right;">0.2769</td>
+<td style="text-align: right;">0.0053</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Nível–log</td>
-<td style="text-align: right;">3152.4901</td>
-<td style="text-align: right;">2458.4972</td>
-<td style="text-align: right;">0.2006</td>
-<td style="text-align: right;">0.0047</td>
+<td style="text-align: right;">6784.9343</td>
+<td style="text-align: right;">7557.2336</td>
+<td style="text-align: right;">0.3703</td>
+<td style="text-align: right;">0.0036</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Log–nível</td>
-<td style="text-align: right;">0.0244</td>
-<td style="text-align: right;">0.0668</td>
-<td style="text-align: right;">0.7148</td>
-<td style="text-align: right;">0.0004</td>
+<td style="text-align: right;">0.1179</td>
+<td style="text-align: right;">0.0956</td>
+<td style="text-align: right;">0.2190</td>
+<td style="text-align: right;">0.0068</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Log–log</td>
-<td style="text-align: right;">0.0355</td>
-<td style="text-align: right;">0.1209</td>
-<td style="text-align: right;">0.7689</td>
-<td style="text-align: right;">0.0002</td>
+<td style="text-align: right;">0.1700</td>
+<td style="text-align: right;">0.1599</td>
+<td style="text-align: right;">0.2890</td>
+<td style="text-align: right;">0.0051</td>
 </tr>
 </tbody>
 </table>
@@ -1586,8 +1594,8 @@ F-statistic: 0.08646 on 1 and 347 DF,  p-value: 0.7689</code></pre>
 </div>
 <section id="estimativas-de-mqo" class="level3" data-number="17.9.1">
 <h3 data-number="17.9.1" class="anchored" data-anchor-id="estimativas-de-mqo"><span class="header-section-number">17.9.1</span> Estimativas de MQO</h3>
-<p>Vamos ampliar o modelo da indenização. Além do perfil do agressor, incluiremos o número de tipos de prova, o grupo do tribunal e a indicação de que a plataforma integra a ação. O TJPR e os processos nos quais a plataforma não faz parte serão as categorias de referência:</p>
-<p><span class="math display">\[\log(Indenização_i) = \beta_0 + \beta_1 AgressorHomem_i + \beta_2 NúmeroProvas_i + \delta_1 TJSP_i + \delta_2 OutrosTJs_i + \gamma PlataformaParte_i + u_i\]</span></p>
+<p>Vamos ampliar o modelo da indenização. Além do perfil do agressor, incluiremos o número de tipos de prova, o grupo do tribunal e a indicação de que a plataforma integra a ação. <code>Outros_Tribunais</code> e os processos nos quais a plataforma não faz parte serão as categorias de referência:</p>
+<p><span class="math display">\[\log(Indenização_i) = \beta_0 + \beta_1 AgressorHomem_i + \beta_2 NúmeroProvas_i + \delta_1 TribunalA_i + \delta_2 TribunalB_i + \gamma PlataformaParte_i + u_i\]</span></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>modelo_log_agressor <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>(valor_indenizacao_jul2026) <span class="sc">~</span> agressor_homem,</span>
@@ -1608,23 +1616,23 @@ lm(formula = log(valor_indenizacao_jul2026) ~ agressor_homem +
     numero_provas + tribunal_grupo + plataforma_sim, data = dados_modelos)
 
 Residuals:
-     Min       1Q   Median       3Q      Max 
--2.88113 -0.59451 -0.02893  0.54042  3.16099 
+    Min      1Q  Median      3Q     Max 
+-1.9989 -0.6173 -0.0219  0.5191  3.1784 
 
 Coefficients:
                          Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)               8.30072    0.15242  54.461  &lt; 2e-16 ***
-agressor_homem            0.48872    0.09872   4.951 1.16e-06 ***
-numero_provas             0.06283    0.06352   0.989   0.3233    
-tribunal_grupoTJSP        0.54220    0.11736   4.620 5.44e-06 ***
-tribunal_grupoOutros_TJs  0.76800    0.15345   5.005 8.95e-07 ***
-plataforma_sim            0.62839    0.25916   2.425   0.0158 *  
+(Intercept)               8.84069    0.20762  42.581  &lt; 2e-16 ***
+agressor_homem            0.45591    0.11760   3.877  0.00014 ***
+numero_provas             0.09516    0.08942   1.064  0.28842    
+tribunal_grupoTribunal A  0.76172    0.16179   4.708 4.46e-06 ***
+tribunal_grupoTribunal B  0.41624    0.19583   2.125  0.03468 *  
+plataforma_sim            0.45223    0.16421   2.754  0.00639 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.9096 on 343 degrees of freedom
-Multiple R-squared:  0.1556,    Adjusted R-squared:  0.1433 
-F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
+Residual standard error: 0.8631 on 217 degrees of freedom
+Multiple R-squared:  0.1853,    Adjusted R-squared:  0.1665 
+F-statistic: 9.871 on 5 and 217 DF,  p-value: 1.616e-08</code></pre>
 </div>
 </div>
 </section>
@@ -1639,8 +1647,8 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 <span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Intercepto"</span>,</span>
 <span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Agressor homem"</span>,</span>
 <span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Número de provas"</span>,</span>
-<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TJSP"</span>,</span>
-<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Outros tribunais"</span>,</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tribunal A"</span>,</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tribunal B"</span>,</span>
 <span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Plataforma faz parte"</span></span>
 <span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Coeficiente =</span> <span class="fu">unname</span>(coeficientes_rlm),</span>
@@ -1662,11 +1670,11 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 <span id="cb68-28"><a href="#cb68-28" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb68-29"><a href="#cb68-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">Unidade =</span> <span class="fu">c</span>(<span class="st">"R$"</span>, <span class="st">"%"</span>, <span class="st">"%"</span>, <span class="st">"%"</span>, <span class="st">"%"</span>, <span class="st">"%"</span>),</span>
 <span id="cb68-30"><a href="#cb68-30" aria-hidden="true" tabindex="-1"></a>  Referência <span class="ot">=</span> <span class="fu">c</span>(</span>
-<span id="cb68-31"><a href="#cb68-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mulher, zero provas e TJPR"</span>,</span>
+<span id="cb68-31"><a href="#cb68-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mulher, zero provas e Outros Tribunais"</span>,</span>
 <span id="cb68-32"><a href="#cb68-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Agressora mulher"</span>,</span>
 <span id="cb68-33"><a href="#cb68-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Valor anterior do número de provas"</span>,</span>
-<span id="cb68-34"><a href="#cb68-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TJPR"</span>,</span>
-<span id="cb68-35"><a href="#cb68-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TJPR"</span>,</span>
+<span id="cb68-34"><a href="#cb68-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Outros Tribunais"</span>,</span>
+<span id="cb68-35"><a href="#cb68-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Outros Tribunais"</span>,</span>
 <span id="cb68-36"><a href="#cb68-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Plataforma não faz parte"</span></span>
 <span id="cb68-37"><a href="#cb68-37" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb68-38"><a href="#cb68-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
@@ -1681,13 +1689,13 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 <table class="caption-top table table-sm table-striped small">
 <caption>Transformação dos coeficientes do modelo log–nível</caption>
 <colgroup>
-<col style="width: 18%">
+<col style="width: 17%">
 <col style="width: 15%">
 <col style="width: 8%">
 <col style="width: 17%">
 <col style="width: 7%">
 <col style="width: 5%">
-<col style="width: 25%">
+<col style="width: 28%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1704,54 +1712,54 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
 <td style="text-align: left;">Intercepto</td>
-<td style="text-align: right;">8.3007</td>
-<td style="text-align: left;">exp(8.3007)</td>
-<td style="text-align: right;">4026.78</td>
+<td style="text-align: right;">8.8407</td>
+<td style="text-align: left;">exp(8.8407)</td>
+<td style="text-align: right;">6909.79</td>
 <td style="text-align: left;">R$</td>
-<td style="text-align: left;">Mulher, zero provas e TJPR</td>
+<td style="text-align: left;">Mulher, zero provas e Outros Tribunais</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">agressor_homem</td>
 <td style="text-align: left;">Agressor homem</td>
-<td style="text-align: right;">0.4887</td>
-<td style="text-align: left;">100 × [exp(0.4887) − 1]</td>
-<td style="text-align: right;">63.02</td>
+<td style="text-align: right;">0.4559</td>
+<td style="text-align: left;">100 × [exp(0.4559) − 1]</td>
+<td style="text-align: right;">57.76</td>
 <td style="text-align: left;">%</td>
 <td style="text-align: left;">Agressora mulher</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">numero_provas</td>
 <td style="text-align: left;">Número de provas</td>
-<td style="text-align: right;">0.0628</td>
-<td style="text-align: left;">100 × [exp(0.0628) − 1]</td>
-<td style="text-align: right;">6.48</td>
+<td style="text-align: right;">0.0952</td>
+<td style="text-align: left;">100 × [exp(0.0952) − 1]</td>
+<td style="text-align: right;">9.98</td>
 <td style="text-align: left;">%</td>
 <td style="text-align: left;">Valor anterior do número de provas</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">tribunal_grupoTJSP</td>
-<td style="text-align: left;">TJSP</td>
-<td style="text-align: right;">0.5422</td>
-<td style="text-align: left;">100 × [exp(0.5422) − 1]</td>
-<td style="text-align: right;">71.98</td>
+<td style="text-align: left;">tribunal_grupoTribunal A</td>
+<td style="text-align: left;">Tribunal A</td>
+<td style="text-align: right;">0.7617</td>
+<td style="text-align: left;">100 × [exp(0.7617) − 1]</td>
+<td style="text-align: right;">114.20</td>
 <td style="text-align: left;">%</td>
-<td style="text-align: left;">TJPR</td>
+<td style="text-align: left;">Outros Tribunais</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">tribunal_grupoOutros_TJs</td>
-<td style="text-align: left;">Outros tribunais</td>
-<td style="text-align: right;">0.7680</td>
-<td style="text-align: left;">100 × [exp(0.7680) − 1]</td>
-<td style="text-align: right;">115.55</td>
+<td style="text-align: left;">tribunal_grupoTribunal B</td>
+<td style="text-align: left;">Tribunal B</td>
+<td style="text-align: right;">0.4162</td>
+<td style="text-align: left;">100 × [exp(0.4162) − 1]</td>
+<td style="text-align: right;">51.62</td>
 <td style="text-align: left;">%</td>
-<td style="text-align: left;">TJPR</td>
+<td style="text-align: left;">Outros Tribunais</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">plataforma_sim</td>
 <td style="text-align: left;">Plataforma faz parte</td>
-<td style="text-align: right;">0.6284</td>
-<td style="text-align: left;">100 × [exp(0.6284) − 1]</td>
-<td style="text-align: right;">87.46</td>
+<td style="text-align: right;">0.4522</td>
+<td style="text-align: left;">100 × [exp(0.4522) − 1]</td>
+<td style="text-align: right;">57.18</td>
 <td style="text-align: left;">%</td>
 <td style="text-align: left;">Plataforma não faz parte</td>
 </tr>
@@ -1761,37 +1769,29 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 </div>
 <section id="intercepto" class="level4" data-number="17.9.2.1">
 <h4 data-number="17.9.2.1" class="anchored" data-anchor-id="intercepto"><span class="header-section-number">17.9.2.1</span> Intercepto</h4>
-<p>O intercepto estimado é 8,3007. Ele representa o valor ajustado do logaritmo da indenização para a categoria de referência: agressora mulher, nenhuma prova contabilizada, processo do TJPR e plataforma fora da ação. Aplicando a exponencial, obtemos aproximadamente R$ 4.026,78.</p>
+<p>O intercepto estimado é 8,8407. Ele representa o valor ajustado do logaritmo da indenização para a categoria de referência: agressora mulher, nenhuma prova contabilizada, processo do grupo <code>Outros_Tribunais</code> e plataforma fora da ação. Aplicando a exponencial, obtemos aproximadamente R$ 6.909,79.</p>
 <p>Entretanto, o banco utilizado neste capítulo possui entre um e quatro tipos de prova por processo. Como não há observações com <code>numero_provas = 0</code>, o intercepto é necessário para definir a equação, mas não corresponde diretamente a um grupo observado. Sua interpretação substantiva deve, portanto, ser feita com cautela.</p>
 </section>
 <section id="perfil-do-agressor" class="level4" data-number="17.9.2.2">
 <h4 data-number="17.9.2.2" class="anchored" data-anchor-id="perfil-do-agressor"><span class="header-section-number">17.9.2.2</span> Perfil do agressor</h4>
-<p>O coeficiente de <code>agressor_homem</code> é 0,4887. Ele compara casos com agressor homem aos casos com agressora mulher, mantendo constantes o número de provas, o grupo do tribunal e a participação da plataforma. Pela transformação exata,</p>
-<p><span class="math display">\[100(e^{0{,}4887}-1)=63{,}02\%.\]</span></p>
-<p>Portanto, para processos equivalentes nas demais variáveis do modelo, o valor ajustado da indenização é aproximadamente 63,02% maior quando o agressor é homem do que quando a agressora é mulher. Trata-se de uma diferença condicional às variáveis incluídas no modelo, e não da simples diferença bruta entre os dois grupos.</p>
+<p>O coeficiente de <code>agressor_homem</code> é 0,4559. Ele compara casos com agressor homem aos casos com agressora mulher, mantendo constantes o número de provas, o grupo do tribunal e a participação da plataforma. Pela transformação exata, obtemos uma diferença de 57,76%.</p>
+<p>Portanto, para processos equivalentes nas demais variáveis do modelo, o valor ajustado da indenização é maior quando o agressor é homem do que quando a agressora é mulher. Trata-se de uma diferença condicional às variáveis incluídas no modelo, e não da simples diferença bruta entre os dois grupos.</p>
 </section>
 <section id="número-de-provas" class="level4" data-number="17.9.2.3">
 <h4 data-number="17.9.2.3" class="anchored" data-anchor-id="número-de-provas"><span class="header-section-number">17.9.2.3</span> Número de provas</h4>
-<p><code>numero_provas</code> é uma variável numérica discreta e assume, neste banco, valores de 1 a 4. Seu coeficiente estimado é 0,0628. Pela transformação exata,</p>
-<p><span class="math display">\[100(e^{0{,}0628}-1)=6{,}48\%.\]</span></p>
-<p>Assim, um tipo adicional de prova está associado a uma indenização aproximadamente 6,48% maior, mantendo constantes as demais variáveis. Por exemplo, o coeficiente compara dois processos equivalentes nas demais características, mas com dois e três tipos de prova. A estimativa não indica, isoladamente, que acrescentar uma prova cause o aumento da indenização.</p>
+<p><code>numero_provas</code> é uma variável numérica discreta e assume, na amostra dos modelos, valores de 1 a 4. Seu coeficiente estimado é 0,0952. Pela transformação exata, um tipo adicional de prova corresponde a uma diferença estimada de 9,98%.</p>
+<p>O valor-p desse coeficiente é 0,288. Portanto, nesta base sintética, não encontramos evidência estatística de associação entre o número de tipos de prova e o valor da indenização, mantidas constantes as demais variáveis. A ausência de significância não demonstra que a associação seja exatamente zero; indica que a estimativa não é suficientemente precisa para rejeitar essa hipótese no nível adotado.</p>
 </section>
 <section id="tribunal" class="level4" data-number="17.9.2.4">
 <h4 data-number="17.9.2.4" class="anchored" data-anchor-id="tribunal"><span class="header-section-number">17.9.2.4</span> Tribunal</h4>
-<p><code>tribunal_grupo</code> é uma variável qualitativa nominal, e o TJPR foi definido como referência.</p>
-<p>O coeficiente do TJSP é 0,5422. Pela transformação exata,</p>
-<p><span class="math display">\[100(e^{0{,}5422}-1)=71{,}98\%.\]</span></p>
-<p>Isso significa que, mantidas constantes as demais variáveis, o valor ajustado da indenização no TJSP é aproximadamente 71,98% maior do que no TJPR.</p>
-<p>O coeficiente de <code>Outros_TJs</code> é 0,7680. Sua transformação resulta em:</p>
-<p><span class="math display">\[100(e^{0{,}7680}-1)=115{,}55\%.\]</span></p>
-<p>Portanto, nas mesmas condições, o valor ajustado da indenização no grupo dos outros tribunais é aproximadamente 115,55% maior do que no TJPR.</p>
-<p>Esses dois coeficientes não comparam diretamente TJSP e <code>Outros_TJs</code>, pois ambos utilizam o TJPR como referência. Para realizar essa comparação, calculamos a diferença entre os coeficientes: <span class="math inline">\(0{,}7680-0{,}5422=0{,}2258\)</span>. A transformação exata indica que a indenização ajustada em <code>Outros_TJs</code> é aproximadamente 25,33% maior do que no TJSP, mantendo constantes as demais variáveis.</p>
+<p><code>tribunal_grupo</code> é uma variável qualitativa nominal, e <code>Outros_Tribunais</code> foi definido como referência.</p>
+<p>O coeficiente do Tribunal A é 0,7617. Pela transformação exata, sua indenização ajustada é aproximadamente 114,20% maior que a do grupo de referência, mantidas constantes as demais variáveis.</p>
+<p>O coeficiente do Tribunal B é 0,4162. Nas mesmas condições, sua indenização ajustada é aproximadamente 51,62% maior que a de <code>Outros_Tribunais</code>.</p>
+<p>Os dois coeficientes são comparações com a mesma referência. Uma comparação direta entre os tribunais A e B exigiria calcular a diferença entre seus coeficientes ou alterar a categoria de referência.</p>
 </section>
 <section id="participação-da-plataforma" class="level4" data-number="17.9.2.5">
 <h4 data-number="17.9.2.5" class="anchored" data-anchor-id="participação-da-plataforma"><span class="header-section-number">17.9.2.5</span> Participação da plataforma</h4>
-<p>O coeficiente de <code>plataforma_sim</code> é 0,6284. Ele compara processos nos quais a plataforma integra a ação com aqueles nos quais ela não faz parte, mantendo constantes o perfil do agressor, o número de provas e o grupo do tribunal. Pela transformação exata,</p>
-<p><span class="math display">\[100(e^{0{,}6284}-1)=87{,}46\%.\]</span></p>
-<p>Assim, no banco analisado, o valor ajustado da indenização é aproximadamente 87,46% maior quando a plataforma faz parte da ação. O intervalo de confiança dessa diferença é amplo, e somente 13 dos 349 casos pertencem a essa categoria. O resultado deve ser lido como uma associação condicional observada nessa amostra, e não como evidência de que a presença da plataforma cause o aumento da indenização.</p>
+<p>O coeficiente de <code>plataforma_sim</code> é 0,4522. Ele compara casos nos quais a plataforma integra a ação com aqueles nos quais ela não faz parte, mantendo constantes o perfil do agressor, o número de provas e o grupo do tribunal. Pela transformação exata, o valor ajustado é aproximadamente 57,18% maior quando a plataforma faz parte da ação. O resultado deve ser lido como uma associação condicional observada nessa base sintética, e não como evidência causal.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1802,7 +1802,7 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Com três categorias de tribunal e um intercepto, o modelo inclui apenas duas variáveis indicadoras. O TJPR não desaparece: ele é a categoria de referência, representada quando <code>tribunal_grupoTJSP = 0</code> e <code>tribunal_grupoOutros_TJs = 0</code>.</p>
+<p>Com três categorias de tribunal e um intercepto, o modelo inclui apenas duas variáveis indicadoras. <code>Outros_Tribunais</code> não desaparece: ele é a categoria de referência, representada quando as indicadoras do Tribunal A e do Tribunal B são iguais a zero.</p>
 </div>
 </div>
 </section>
@@ -1885,13 +1885,13 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Agressora mulher</td>
-<td style="text-align: right;">11455.51</td>
-<td style="text-align: right;">11495.63</td>
+<td style="text-align: right;">25069.89</td>
+<td style="text-align: right;">23991.16</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Agressor homem</td>
-<td style="text-align: right;">18456.43</td>
-<td style="text-align: right;">18740.42</td>
+<td style="text-align: right;">36495.45</td>
+<td style="text-align: right;">37848.50</td>
 </tr>
 </tbody>
 </table>
@@ -1932,9 +1932,9 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Para obter o valor referente à agressora mulher, definimos <code>agressor_homem = 0</code> nos 349 processos. Em cada observação, mantivemos o número de provas, o tribunal e a participação da plataforma originalmente registrados. O modelo produziu, assim, um valor predito para cada processo como se a agressora fosse mulher. A média desses 349 valores preditos, após a correção de retrans­formação, foi R$ 11.495,63.</p>
-<p>O coeficiente estimado para agressor homem foi 0,4887. No modelo log–nível, esse coeficiente corresponde à razão <span class="math inline">\(e^{0{,}4887}=1{,}6302\)</span>, isto é, a uma diferença de 63,02%. Como o modelo não contém interação com o perfil do agressor, essa razão é constante para todas as combinações das demais variáveis. Aplicando-a à média prevista para agressora mulher, obtemos:</p>
-<p><span class="math display">\[R\$\,11.495{,}63 \times 1{,}6302 = R\$\,18.740{,}42.\]</span></p>
+<p>Para obter o valor referente à agressora mulher, definimos <code>agressor_homem = 0</code> nos 223 casos. Em cada observação, mantivemos o número de provas, o tribunal e a participação da plataforma originalmente registrados. O modelo produziu, assim, um valor predito para cada caso como se a agressora fosse mulher. A média dessas previsões, após a correção de retrans­formação, foi R$ 23.991,16.</p>
+<p>O coeficiente estimado para agressor homem foi 0,4559. No modelo log–nível, esse coeficiente corresponde à razão 1,5776, isto é, a uma diferença de 57,76%. Como o modelo não contém interação com o perfil do agressor, essa razão é constante para todas as combinações das demais variáveis.</p>
+<p>O valor médio previsto ajustado para agressor homem é R$ 37.848,50.</p>
 <p>Portanto, apenas o perfil do agressor foi alterado. As demais características permaneceram com a distribuição observada no banco. O valor apresentado para cada grupo é uma média de previsões ajustadas, e não o intercepto <span class="math inline">\(\widehat\beta_0\)</span> isoladamente.</p>
 </div>
 </div>
@@ -1942,7 +1942,7 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 </section>
 <section id="categorias-múltiplas-os-tribunais" class="level3" data-number="17.9.4">
 <h3 data-number="17.9.4" class="anchored" data-anchor-id="categorias-múltiplas-os-tribunais"><span class="header-section-number">17.9.4</span> Categorias múltiplas: os tribunais</h3>
-<p>Tribunal é uma variável categórica nominal, e não uma variável ordinal. As categorias foram agrupadas em TJPR, TJSP e <code>Outros_TJs</code>, reunindo TJDF, TJAM, TJCE e TJGO. O TJPR é a referência no mesmo modelo multivariado utilizado desde o início desta seção.</p>
+<p>Tribunal é uma variável categórica nominal, e não uma variável ordinal. As categorias foram agrupadas em Tribunal A, Tribunal B e <code>Outros_Tribunais</code>, que reúne os tribunais C, D, E e F. <code>Outros_Tribunais</code> é a referência no mesmo modelo multivariado utilizado desde o início desta seção.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>tabela_tribunais <span class="ot">&lt;-</span> dados_modelos <span class="sc">|&gt;</span></span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(tribunal_grupo, <span class="at">name =</span> <span class="st">"Casos"</span>) <span class="sc">|&gt;</span></span>
@@ -1966,27 +1966,27 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">TJPR</td>
-<td style="text-align: right;">92</td>
-<td style="text-align: right;">26.4</td>
+<td style="text-align: left;">Outros_Tribunais</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">16.1</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">TJSP</td>
-<td style="text-align: right;">200</td>
-<td style="text-align: right;">57.3</td>
+<td style="text-align: left;">Tribunal A</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">63.2</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Outros_TJs</td>
-<td style="text-align: right;">57</td>
-<td style="text-align: right;">16.3</td>
+<td style="text-align: left;">Tribunal B</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">20.6</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <p>Embora existam três categorias, o modelo multivariado com intercepto inclui somente duas variáveis indicadoras para os tribunais:</p>
-<p><span class="math display">\[\log(Indenização_i)=\beta_0+\beta_1 AgressorHomem_i+\beta_2 NúmeroProvas_i+\delta_1 TJSP_i+\delta_2 OutrosTJs_i+\gamma PlataformaParte_i+u_i.\]</span></p>
-<p>Quando <code>TJSP = 0</code> e <code>OutrosTJs = 0</code>, a observação pertence ao TJPR. Incluir simultaneamente as três indicadoras e o intercepto produziria colinearidade perfeita. Os coeficientes dos tribunais são, portanto, interpretados mantendo constantes o perfil do agressor, o número de provas e a participação da plataforma.</p>
+<p><span class="math display">\[\log(Indenização_i)=\beta_0+\beta_1 AgressorHomem_i+\beta_2 NúmeroProvas_i+\delta_1 TribunalA_i+\delta_2 TribunalB_i+\gamma PlataformaParte_i+u_i.\]</span></p>
+<p>Quando <code>TribunalA = 0</code> e <code>TribunalB = 0</code>, a observação pertence a <code>Outros_Tribunais</code>. Incluir simultaneamente as três indicadoras e o intercepto produziria colinearidade perfeita. Os coeficientes dos tribunais são, portanto, interpretados mantendo constantes o perfil do agressor, o número de provas e a participação da plataforma.</p>
 </section>
 <section id="qualidade-do-ajuste-do-primeiro-modelo" class="level3" data-number="17.9.5">
 <h3 data-number="17.9.5" class="anchored" data-anchor-id="qualidade-do-ajuste-do-primeiro-modelo"><span class="header-section-number">17.9.5</span> Qualidade do ajuste do primeiro modelo</h3>
@@ -2025,9 +2025,9 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Agressor, provas, tribunais e plataforma</td>
-<td style="text-align: right;">0.1556</td>
-<td style="text-align: right;">0.1433</td>
-<td style="text-align: right;">349</td>
+<td style="text-align: right;">0.1853</td>
+<td style="text-align: right;">0.1665</td>
+<td style="text-align: right;">223</td>
 </tr>
 </tbody>
 </table>
@@ -2045,7 +2045,7 @@ F-statistic: 12.64 on 5 and 343 DF,  p-value: 2.762e-11</code></pre>
 <h3 data-number="17.10.1" class="anchored" data-anchor-id="interação-entre-variáveis-binárias"><span class="header-section-number">17.10.1</span> Interação entre variáveis binárias</h3>
 <p>Uma interação permite que a associação de uma variável com o resultado dependa do valor de outra variável. Como <code>dados_modelos</code> já contém somente os casos nos quais vítima e agressor foram classificados como homem ou mulher, podemos representar as quatro combinações usando duas variáveis binárias.</p>
 <p>O modelo será:</p>
-<p><span class="math display">\[\log(Indenização_i) = \beta_0 + \beta_1 AgressorHomem_i + \beta_2 VitimaHomem_i + \beta_3(AgressorHomem_i \times VitimaHomem_i) + \beta_4 NúmeroProvas_i + \delta_1 TJSP_i + \delta_2 OutrosTJs_i + \gamma PlataformaParte_i + u_i.\]</span></p>
+<p><span class="math display">\[\log(Indenização_i) = \beta_0 + \beta_1 AgressorHomem_i + \beta_2 VitimaHomem_i + \beta_3(AgressorHomem_i \times VitimaHomem_i) + \beta_4 NúmeroProvas_i + \delta_1 TribunalA_i + \delta_2 TribunalB_i + \gamma PlataformaParte_i + u_i.\]</span></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>modelo_interacao_genero <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>(valor_indenizacao_jul2026) <span class="sc">~</span></span>
@@ -2063,24 +2063,24 @@ lm(formula = log(valor_indenizacao_jul2026) ~ agressor_homem *
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.8784 -0.5916 -0.0247  0.5411  3.1691 
+-1.9888 -0.6168 -0.0126  0.5383  3.1899 
 
 Coefficients:
                             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)                  8.29908    0.15435  53.767  &lt; 2e-16 ***
-agressor_homem               0.48763    0.10220   4.772 2.72e-06 ***
-vitima_homem                 0.06460    0.23887   0.270   0.7870    
-numero_provas                0.06155    0.06379   0.965   0.3353    
-tribunal_grupoTJSP           0.54086    0.11781   4.591 6.21e-06 ***
-tribunal_grupoOutros_TJs     0.76204    0.15445   4.934 1.26e-06 ***
-plataforma_sim               0.63352    0.26008   2.436   0.0154 *  
-agressor_homem:vitima_homem  0.06782    0.42662   0.159   0.8738    
+(Intercept)                  8.83053    0.20935  42.180  &lt; 2e-16 ***
+agressor_homem               0.45286    0.12299   3.682 0.000293 ***
+vitima_homem                 0.12931    0.27363   0.473 0.637008    
+numero_provas                0.09386    0.08976   1.046 0.296921    
+tribunal_grupoTribunal A     0.76301    0.16234   4.700 4.64e-06 ***
+tribunal_grupoTribunal B     0.40684    0.19708   2.064 0.040188 *  
+plataforma_sim               0.46230    0.16532   2.796 0.005637 ** 
+agressor_homem:vitima_homem  0.05606    0.42235   0.133 0.894527    
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.9119 on 341 degrees of freedom
-Multiple R-squared:  0.1562,    Adjusted R-squared:  0.1388 
-F-statistic: 9.015 on 7 and 341 DF,  p-value: 3.273e-10</code></pre>
+Residual standard error: 0.866 on 215 degrees of freedom
+Multiple R-squared:  0.1874,    Adjusted R-squared:  0.1609 
+F-statistic: 7.082 on 7 and 215 DF,  p-value: 1.298e-07</code></pre>
 </div>
 </div>
 <p>A interpretação exige somar os coeficientes correspondentes a cada combinação. A tabela apresenta a parcela formada exclusivamente pelos perfis da vítima e do agressor:</p>
@@ -2115,7 +2115,7 @@ F-statistic: 9.015 on 7 and 341 DF,  p-value: 3.273e-10</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Os coeficientes do número de provas, dos tribunais e da plataforma continuam fazendo parte do modelo, mas não alteram a composição algébrica da interação. Para calcular médias monetárias ajustadas, aplicaremos a mesma padronização utilizada anteriormente: em cada combinação, conservamos para os 349 processos os valores observados dos controles, alteramos apenas os perfis da vítima e do agressor e calculamos a média das previsões. Desse modo, não precisamos escolher arbitrariamente um número de provas ou uma categoria de tribunal.</p>
+<p>Os coeficientes do número de provas, dos tribunais e da plataforma continuam fazendo parte do modelo, mas não alteram a composição algébrica da interação. Para calcular médias monetárias ajustadas, aplicaremos a mesma padronização utilizada anteriormente: em cada combinação, conservamos para os 223 casos os valores observados dos controles, alteramos apenas os perfis da vítima e do agressor e calculamos a média das previsões. Desse modo, não precisamos escolher arbitrariamente um número de provas ou uma categoria de tribunal.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>fator_retransformacao_interacao <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">exp</span>(<span class="fu">residuals</span>(modelo_interacao_genero)))</span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -2192,30 +2192,30 @@ F-statistic: 9.015 on 7 and 341 DF,  p-value: 3.273e-10</code></pre>
 <tr class="odd">
 <td style="text-align: left;">Mulher</td>
 <td style="text-align: left;">Mulher</td>
-<td style="text-align: right;">185</td>
+<td style="text-align: right;">116</td>
 <td style="text-align: left;">β₀</td>
-<td style="text-align: right;">11447.81</td>
+<td style="text-align: right;">23737.73</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Mulher</td>
 <td style="text-align: left;">Homem</td>
-<td style="text-align: right;">141</td>
+<td style="text-align: right;">88</td>
 <td style="text-align: left;">β₀ + β₁</td>
-<td style="text-align: right;">18642.25</td>
+<td style="text-align: right;">37334.66</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Homem</td>
 <td style="text-align: left;">Mulher</td>
-<td style="text-align: right;">16</td>
+<td style="text-align: right;">11</td>
 <td style="text-align: left;">β₀ + β₂</td>
-<td style="text-align: right;">12211.73</td>
+<td style="text-align: right;">27014.50</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Homem</td>
 <td style="text-align: left;">Homem</td>
-<td style="text-align: right;">7</td>
+<td style="text-align: right;">8</td>
 <td style="text-align: left;">β₀ + β₁ + β₂ + β₃</td>
-<td style="text-align: right;">21281.65</td>
+<td style="text-align: right;">44938.28</td>
 </tr>
 </tbody>
 </table>
@@ -2302,15 +2302,15 @@ F-statistic: 9.015 on 7 and 341 DF,  p-value: 3.273e-10</code></pre>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Múltiplo sem interação</td>
-<td style="text-align: right;">0.1556</td>
-<td style="text-align: right;">0.1433</td>
-<td style="text-align: right;">349</td>
+<td style="text-align: right;">0.1853</td>
+<td style="text-align: right;">0.1665</td>
+<td style="text-align: right;">223</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Com interação vítima × agressor</td>
-<td style="text-align: right;">0.1562</td>
-<td style="text-align: right;">0.1388</td>
-<td style="text-align: right;">349</td>
+<td style="text-align: right;">0.1874</td>
+<td style="text-align: right;">0.1609</td>
+<td style="text-align: right;">223</td>
 </tr>
 </tbody>
 </table>
@@ -2379,8 +2379,8 @@ F-statistic: 9.015 on 7 and 341 DF,  p-value: 3.273e-10</code></pre>
 <span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"agressor_homem"</span>,</span>
 <span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"numero_provas"</span>,</span>
 <span id="cb80-14"><a href="#cb80-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"vitima_homem"</span>,</span>
-<span id="cb80-15"><a href="#cb80-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tribunal_grupoTJSP"</span>,</span>
-<span id="cb80-16"><a href="#cb80-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tribunal_grupoOutros_TJs"</span>,</span>
+<span id="cb80-15"><a href="#cb80-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tribunal_grupoTribunal A"</span>,</span>
+<span id="cb80-16"><a href="#cb80-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tribunal_grupoTribunal B"</span>,</span>
 <span id="cb80-17"><a href="#cb80-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"plataforma_sim"</span>,</span>
 <span id="cb80-18"><a href="#cb80-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"agressor_homem:vitima_homem"</span></span>
 <span id="cb80-19"><a href="#cb80-19" aria-hidden="true" tabindex="-1"></a>  ),</span>
@@ -2388,8 +2388,8 @@ F-statistic: 9.015 on 7 and 341 DF,  p-value: 3.273e-10</code></pre>
 <span id="cb80-21"><a href="#cb80-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Agressor homem"</span>,</span>
 <span id="cb80-22"><a href="#cb80-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Número de provas"</span>,</span>
 <span id="cb80-23"><a href="#cb80-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Vítima homem"</span>,</span>
-<span id="cb80-24"><a href="#cb80-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"TJSP"</span>,</span>
-<span id="cb80-25"><a href="#cb80-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Outros tribunais"</span>,</span>
+<span id="cb80-24"><a href="#cb80-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tribunal A"</span>,</span>
+<span id="cb80-25"><a href="#cb80-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Tribunal B"</span>,</span>
 <span id="cb80-26"><a href="#cb80-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Plataforma faz parte"</span>,</span>
 <span id="cb80-27"><a href="#cb80-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Agressor homem × vítima homem"</span></span>
 <span id="cb80-28"><a href="#cb80-28" aria-hidden="true" tabindex="-1"></a>  ),</span>
@@ -2448,32 +2448,32 @@ Interação
 Agressor homem
 </td>
 <td>
-7,000.922<sup>***</sup>
+11,425.560<sup>*</sup>
 </td>
 <td>
-0.500<sup>***</sup>
+0.434<sup>***</sup>
 </td>
 <td>
-0.489<sup>***</sup>
+0.456<sup>***</sup>
 </td>
 <td>
-0.488<sup>***</sup>
+0.453<sup>***</sup>
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
 </td>
 <td>
-(2,139.699)
+(6,001.829)
 </td>
 <td>
-(0.103)
+(0.125)
 </td>
 <td>
-(0.099)
+(0.118)
 </td>
 <td>
-(0.102)
+(0.123)
 </td>
 </tr>
 <tr>
@@ -2499,7 +2499,7 @@ Número de provas
 <td>
 </td>
 <td>
-0.068
+0.056
 </td>
 </tr>
 <tr>
@@ -2512,7 +2512,7 @@ Número de provas
 <td>
 </td>
 <td>
-(0.427)
+(0.422)
 </td>
 </tr>
 <tr>
@@ -2536,10 +2536,10 @@ Vítima homem
 <td>
 </td>
 <td>
-0.063
+0.095
 </td>
 <td>
-0.062
+0.094
 </td>
 </tr>
 <tr>
@@ -2550,49 +2550,10 @@ Vítima homem
 <td>
 </td>
 <td>
-(0.064)
+(0.089)
 </td>
 <td>
-(0.064)
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-TJSP
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-0.065
-</td>
-</tr>
-<tr>
-<td style="text-align:left">
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td>
-(0.239)
+(0.090)
 </td>
 </tr>
 <tr>
@@ -2609,17 +2570,16 @@ TJSP
 </tr>
 <tr>
 <td style="text-align:left">
-Outros tribunais
+Tribunal A
 </td>
 <td>
 </td>
 <td>
 </td>
 <td>
-0.542<sup>***</sup>
 </td>
 <td>
-0.541<sup>***</sup>
+0.129
 </td>
 </tr>
 <tr>
@@ -2630,10 +2590,50 @@ Outros tribunais
 <td>
 </td>
 <td>
-(0.117)
 </td>
 <td>
-(0.118)
+(0.274)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Tribunal B
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+0.762<sup>***</sup>
+</td>
+<td>
+0.763<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(0.162)
+</td>
+<td>
+(0.162)
 </td>
 </tr>
 <tr>
@@ -2657,10 +2657,10 @@ Plataforma faz parte
 <td>
 </td>
 <td>
-0.768<sup>***</sup>
+0.416<sup>**</sup>
 </td>
 <td>
-0.762<sup>***</sup>
+0.407<sup>**</sup>
 </td>
 </tr>
 <tr>
@@ -2671,10 +2671,10 @@ Plataforma faz parte
 <td>
 </td>
 <td>
-(0.153)
+(0.196)
 </td>
 <td>
-(0.154)
+(0.197)
 </td>
 </tr>
 <tr>
@@ -2698,10 +2698,10 @@ Agressor homem × vítima homem
 <td>
 </td>
 <td>
-0.628<sup>**</sup>
+0.452<sup>***</sup>
 </td>
 <td>
-0.634<sup>**</sup>
+0.462<sup>***</sup>
 </td>
 </tr>
 <tr>
@@ -2712,10 +2712,10 @@ Agressor homem × vítima homem
 <td>
 </td>
 <td>
-(0.259)
+(0.164)
 </td>
 <td>
-(0.260)
+(0.165)
 </td>
 </tr>
 <tr>
@@ -2735,32 +2735,32 @@ Agressor homem × vítima homem
 Constant
 </td>
 <td>
-11,455.510<sup>***</sup>
+25,069.890<sup>***</sup>
 </td>
 <td>
-8.852<sup>***</sup>
+9.625<sup>***</sup>
 </td>
 <td>
-8.301<sup>***</sup>
+8.841<sup>***</sup>
 </td>
 <td>
-8.299<sup>***</sup>
+8.831<sup>***</sup>
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
 </td>
 <td>
-(1,393.384)
+(3,937.919)
 </td>
 <td>
-(0.067)
+(0.082)
 </td>
 <td>
-(0.152)
+(0.208)
 </td>
 <td>
-(0.154)
+(0.209)
 </td>
 </tr>
 <tr>
@@ -2784,16 +2784,16 @@ Constant
 Observations
 </td>
 <td>
-349
+223
 </td>
 <td>
-349
+223
 </td>
 <td>
-349
+223
 </td>
 <td>
-349
+223
 </td>
 </tr>
 <tr>
@@ -2801,16 +2801,16 @@ Observations
 R<sup>2</sup>
 </td>
 <td>
-0.030
+0.016
 </td>
 <td>
-0.063
+0.052
 </td>
 <td>
-0.156
+0.185
 </td>
 <td>
-0.156
+0.187
 </td>
 </tr>
 <tr>
@@ -2818,16 +2818,16 @@ R<sup>2</sup>
 Adjusted R<sup>2</sup>
 </td>
 <td>
-0.027
+0.012
 </td>
 <td>
-0.061
+0.048
 </td>
 <td>
-0.143
+0.167
 </td>
 <td>
-0.139
+0.161
 </td>
 </tr>
 <tr>
@@ -2835,16 +2835,16 @@ Adjusted R<sup>2</sup>
 Residual Std. Error
 </td>
 <td>
-19,754.630 (df = 347)
+44,378.090 (df = 221)
 </td>
 <td>
-0.952 (df = 347)
+0.923 (df = 221)
 </td>
 <td>
-0.910 (df = 343)
+0.863 (df = 217)
 </td>
 <td>
-0.912 (df = 341)
+0.866 (df = 215)
 </td>
 </tr>
 <tr>
@@ -2852,16 +2852,16 @@ Residual Std. Error
 F Statistic
 </td>
 <td>
-10.705<sup>***</sup> (df = 1; 347)
+3.624<sup>*</sup> (df = 1; 221)
 </td>
 <td>
-23.528<sup>***</sup> (df = 1; 347)
+12.073<sup>***</sup> (df = 1; 221)
 </td>
 <td>
-12.644<sup>***</sup> (df = 5; 343)
+9.871<sup>***</sup> (df = 5; 217)
 </td>
 <td>
-9.015<sup>***</sup> (df = 7; 341)
+7.082<sup>***</sup> (df = 7; 215)
 </td>
 </tr>
 <tr>
@@ -2883,7 +2883,7 @@ Erros-padrão entre parênteses.
 <section id="síntese" class="level2" data-number="17.13">
 <h2 data-number="17.13" class="anchored" data-anchor-id="síntese"><span class="header-section-number">17.13</span> Síntese</h2>
 <p>O capítulo partiu da regressão linear simples e mostrou como os mínimos quadrados relacionam valores observados, valores ajustados e resíduos. A aplicação evidenciou que mudanças de unidade alteram a escala dos coeficientes, mas não a evidência estatística; que as formas nível–nível, nível–log, log–nível e log–log exigem interpretações distintas; e que a regressão múltipla permite incluir variáveis categóricas e interações.</p>
-<p>Todas as aplicações utilizaram os mesmos 349 casos com indenização positiva e perfis de vítima e agressor classificados como homem ou mulher. Apenas a comparação das formas funcionais restringiu temporariamente a amostra às observações com pelo menos um tipo de prova, pois o logaritmo de zero não é definido. Em todos os casos, as estimativas representam associações no banco analisado, e não efeitos causais.</p>
+<p>Todas as aplicações utilizaram os mesmos 223 casos com indenização positiva, perfis de vítima e agressor classificados como homem ou mulher e informação sobre os tipos de prova. Em todos os casos, as estimativas representam associações na base sintética analisada, e não efeitos causais.</p>
 
 
 </section>

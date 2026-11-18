@@ -12,13 +12,14 @@ execute:
 #| include: false
 #| eval: true
 knitr::opts_knit$set(root.dir = normalizePath(".."))
+knitr::opts_chunk$set(python.reticulate = FALSE)
 ```
 
 ## Introdução
 
 Uma base de dados não está pronta para análise apenas porque pode ser aberta no R. Categorias equivalentes podem estar registradas com grafias diferentes, respostas múltiplas podem ocupar várias colunas e valores monetários podem combinar números, textos e ausências. Antes de calcular frequências ou medidas estatísticas, precisamos conhecer a estrutura dos registros e documentar as decisões necessárias para torná-los comparáveis.
 
-Neste capítulo, trabalharemos com uma base didática composta por 642 acórdãos sobre violência de gênero digital. O banco pertence ao InternetLab e resulta de uma parceria de pesquisa entre essa instituição e a Universidade de São Paulo (USP). Para uso didático, foram retirados identificadores processuais, campos textuais e outras informações que poderiam permitir a identificação dos casos. Cada linha da versão anonimizada representa um acórdão e cada coluna registra uma característica do caso, das provas ou da decisão judicial.
+Neste capítulo, trabalharemos com uma base composta por 700 casos inteiramente sintéticos sobre violência de gênero digital. Nenhuma linha corresponde a um processo, uma pessoa ou uma decisão real. Cada linha representa um caso simulado e cada coluna registra uma característica do caso, das provas ou da decisão judicial.
 
 ::: {.callout-note title="Objetivos do capítulo"}
 
@@ -36,31 +37,28 @@ Ao final do capítulo, você deverá ser capaz de:
 
 ## Como a base foi construída
 
-A base utilizada neste capítulo deriva de uma pesquisa sobre a relação entre os elementos probatórios registrados nos acórdãos, o reconhecimento de sua suficiência e os resultados de demandas cíveis de violência de gênero digital. A base primária foi estruturada no âmbito da parceria entre o InternetLab e a USP e pertence ao InternetLab. O livro utiliza somente um recorte didático anonimizado desse material.
+A base foi gerada especificamente para o percurso didático deste livro. O processo de simulação começou pela criação de 700 identificadores fictícios e pela atribuição probabilística de tribunal, ano, perfil da vítima, perfil do agressor, participação da plataforma, provas, suficiência probatória, contestação, resultado e valor da indenização.
 
-O corpo empírico inicial foi constituído pela coleta automatizada de acórdãos cíveis em grau de apelação, julgados entre 2010 e 2025 e disponibilizados nos portais dos Tribunais de Justiça do Amazonas, Ceará, Distrito Federal e Territórios, Goiás, Paraná e São Paulo. A seleção considerou a diversidade regional e a viabilidade da coleta automatizada, com preferência por tribunais que utilizavam o sistema ESAJ.
+As relações entre as variáveis também foram planejadas. Por exemplo, a suficiência probatória depende parcialmente da quantidade de provas e da existência de contestação. O resultado da primeira instância se relaciona à suficiência, enquanto o valor positivo da indenização varia conforme características simuladas do caso. Essas relações permitem que as análises posteriores encontrem padrões interpretáveis, sem reproduzir observações ou resultados individuais de uma pesquisa real.
 
-A rotina de coleta foi desenvolvida em Python, com Selenium e requisições via API, para automatizar a navegação e a recuperação dos documentos. A busca combinou três léxicos: termos relacionados à internet; palavras de cunho misógino, racista ou homofóbico; e expressões relacionadas à disseminação não consentida de imagens íntimas. Para reduzir falsos positivos, foram estabelecidas regras de combinação entre os termos desses léxicos.
+Depois de criar uma estrutura coerente, foram introduzidos deliberadamente problemas comuns em bases jurídicas: grafias diferentes para a mesma categoria, anos registrados como texto, respostas múltiplas distribuídas em várias colunas, repetição de uma prova no mesmo caso, ocorrência simultânea de `Não cita` e uma prova identificada, valores monetários em formatos diferentes e indenizações expressas em salários mínimos.
 
-Após a busca automatizada, foi produzido um resumo de cada caso com a ferramenta Mistral. Esses resumos apoiaram a triagem, mas não substituíram a análise documental. Os acórdãos foram lidos integralmente para confirmar a pertinência temática e extrair as informações mediante um formulário eletrônico padronizado.
-
-A codificação inicial reuniu 673 decisões e mais de 130 variáveis, organizadas em cinco eixos: identificação processual, características do caso, dinâmica probatória, fundamentação e decisão. Antes da análise, foram excluídos oito acórdãos duplicados, oito processos julgados pelo Superior Tribunal de Justiça e quinze casos em que havia incerteza sobre a caracterização da violência de gênero. O corpus final passou, assim, a conter 642 acórdãos.
+O arquivo inicial contém apenas as 14 variáveis necessárias ao exercício. O objetivo não é reconstruir uma pesquisa empírica específica, mas oferecer um banco seguro e reproduzível no qual cada decisão de limpeza possa ser inspecionada e justificada.
 
 ```{mermaid}
 flowchart LR
-  A[Coleta automatizada<br/>nos tribunais] -->
-  B[Busca por<br/>léxicos]
-  B --> C[Resumos para<br/>apoio à triagem]
-  C --> D[Leitura integral<br/>dos acórdãos]
-  D --> E[Codificação de<br/>673 decisões]
-  E --> F[Exclusão de duplicados,<br/>casos do STJ e casos incertos]
-  F --> G[Base final:<br/>642 acórdãos]
-  G --> H[Recorte didático:<br/>14 variáveis]
+  A[Definição das<br/>14 variáveis] -->
+  B[Simulação de<br/>700 casos]
+  B --> C[Relações estatísticas<br/>planejadas]
+  C --> D[Inserção de problemas<br/>de qualidade]
+  D --> E[Base sintética<br/>inicial]
+  E --> F[Limpeza e<br/>estruturação]
+  F --> G[Base sintética<br/>tratada]
 ```
 
 ::: {.callout-note title="O banco didático"}
 
-O arquivo utilizado no livro não reproduz as mais de 130 variáveis da pesquisa. Ele contém somente as 14 variáveis necessárias ao percurso didático deste capítulo. Identificadores processuais, campos textuais e outras informações potencialmente identificadoras foram retirados, e os casos receberam códigos sequenciais. Essa anonimização antecede os tratamentos ensinados nas próximas seções, protege os registros e permite concentrar a aula nas decisões de limpeza e estruturação. As variáveis selecionadas, contudo, preservam os valores que precisam ser examinados e tratados.
+O arquivo utilizado no livro contém somente as 14 variáveis necessárias ao percurso didático deste capítulo. Os casos receberam códigos sequenciais inteiramente fictícios. Como não existem registros processuais subjacentes, o banco não deve ser interpretado como fonte de resultados substantivos sobre violência de gênero digital. Sua finalidade é ensinar decisões de limpeza, estruturação e análise.
 
 :::
 
@@ -76,7 +74,7 @@ library(tibble)
 library(kableExtra)
 
 base_inicial <- read_csv(
-  "dados/violencia_digital_didatica_inicial.csv",
+  "dados/violencia_digital_sintetica_inicial.csv",
   na = c("", "NA"),
   show_col_types = FALSE
 )
@@ -148,7 +146,7 @@ O código principal deste capítulo será desenvolvido e executado em R. O trech
 import pandas as pd
 
 base_inicial = pd.read_csv(
-    "dados/violencia_digital_didatica_inicial.csv",
+    "dados/violencia_digital_sintetica_inicial.csv",
     na_values=["", "NA"]
 )
 
@@ -208,9 +206,9 @@ frequencia_tribunal <- base_limpa |>
 frequencia_tribunal
 ```
 
-Não há valores ausentes ou siglas inconsistentes para a finalidade deste capítulo. Manteremos os registros como recebidos, inclusive `TJDF`. O nome curto `tribunal` será atribuído somente na construção do banco final, sem alterar as categorias observadas.
+Não há valores ausentes nem grafias inconsistentes nessa variável. Manteremos as categorias sintéticas `Tribunal A` a `Tribunal F` como recebidas. O nome curto `tribunal` será atribuído somente na construção do banco final.
 
-A distribuição entre os tribunais é desigual: o TJSP reúne 403 acórdãos e o TJPR, 139, enquanto os outros quatro tribunais somam 100 casos. Essa característica não exige ponderação automática na limpeza, mas deverá ser considerada nas comparações posteriores.
+A distribuição entre os tribunais é desigual: o Tribunal A reúne 443 casos e o Tribunal B, 147, enquanto os outros quatro tribunais somam 110 casos. Essa característica foi planejada para permitir a discussão sobre grupos com tamanhos diferentes. Ela não exige ponderação automática na limpeza, mas deverá ser considerada nas comparações posteriores.
 
 ## Ano da decisão
 
@@ -326,23 +324,23 @@ Preservamos `Vítima:` e criamos `perfil_vitima`. Essa prática mantém o regist
 base_limpa <- base_limpa |>
   mutate(
     perfil_vitima = case_when(
-      `Vítima:` %in% c(
-        "Mulher",
-        "Mulheres"
+      tolower(trimws(`Vítima:`)) %in% c(
+        "mulher",
+        "mulheres"
       ) ~ "Mulher",
 
-      `Vítima:` %in% c(
-        "Homem",
-        "Homens",
-        "Homem (backlash)"
+      tolower(trimws(`Vítima:`)) %in% c(
+        "homem",
+        "homens",
+        "homem (backlash)"
       ) ~ "Homem",
 
-      `Vítima:` %in% c(
-        "Homem e mulher",
-        "Homens e mulheres"
+      tolower(trimws(`Vítima:`)) %in% c(
+        "homem e mulher",
+        "homens e mulheres"
       ) ~ "Homem e mulher",
 
-      `Vítima:` == "Não cita" ~ "Não informado",
+      tolower(trimws(`Vítima:`)) == "não cita" ~ "Não informado",
       is.na(`Vítima:`) ~ "Não informado",
       TRUE ~ "Revisar"
     )
@@ -460,7 +458,7 @@ Além das formas no singular e no plural, encontramos uma vírgula em `Mulher,` 
 
 | Registro original | Perfil tratado |
 |---|---|
-| Mulher,; Mulheres | Mulher |
+| Mulher; Mulher,; Mulheres | Mulher |
 | Homem; Homens; Homem (backlash) | Homem |
 | Homem e mulher | Homem e mulher |
 | Empresa; Empresa de transporte; Grupo Cidade de Comunicação; Hotel; Igreja; Partido Político | Organização |
@@ -474,30 +472,31 @@ Preservamos `Agressor/a:` e acrescentamos `perfil_agressor` ao objeto que já co
 base_limpa <- base_limpa |>
   mutate(
     perfil_agressor = case_when(
-      `Agressor/a:` %in% c(
-        "Mulher,",
-        "Mulheres"
+      tolower(trimws(`Agressor/a:`)) %in% c(
+        "mulher",
+        "mulher,",
+        "mulheres"
       ) ~ "Mulher",
 
-      `Agressor/a:` %in% c(
-        "Homem",
-        "Homens",
-        "Homem (backlash)"
+      tolower(trimws(`Agressor/a:`)) %in% c(
+        "homem",
+        "homens",
+        "homem (backlash)"
       ) ~ "Homem",
 
-      `Agressor/a:` == "Homem e mulher" ~
+      tolower(trimws(`Agressor/a:`)) == "homem e mulher" ~
         "Homem e mulher",
 
-      `Agressor/a:` %in% c(
-        "Empresa",
-        "Empresa de transporte",
-        "Grupo Cidade de Comunicação",
-        "Hotel",
-        "Igreja",
-        "Partido Político"
+      tolower(trimws(`Agressor/a:`)) %in% c(
+        "empresa",
+        "empresa de transporte",
+        "grupo cidade de comunicação",
+        "hotel",
+        "igreja",
+        "partido político"
       ) ~ "Organização",
 
-      `Agressor/a:` == "Não cita" ~
+      tolower(trimws(`Agressor/a:`)) == "não cita" ~
         "Não informado",
 
       is.na(`Agressor/a:`) ~
@@ -558,6 +557,7 @@ import numpy as np
 base_limpa["perfil_agressor"] = np.select(
     [
         base_limpa["Agressor/a:"].isin([
+            "Mulher",
             "Mulher,",
             "Mulheres"
         ]),
@@ -656,7 +656,7 @@ provas_longas |>
   )
 ```
 
-A inspeção revela 52 denominações. Parte dessa variedade decorre de diferenças de grafia, como `Prova documental` e `Prova Documental`. Outra parte é substantiva: `Print`, `Testemunha`, `Áudio` e `Ata notarial`, por exemplo, representam meios de prova distintos. Para tornar os registros comparáveis, adotamos as categorias empregadas no artigo que analisou essa base:
+A inspeção revela 26 denominações. Parte dessa variedade decorre de diferenças de grafia, como `Prova documental` e `Prova Documental`. Outra parte é substantiva: `Print`, `Testemunha`, `Áudio` e `Ata notarial`, por exemplo, representam meios de prova distintos. Para tornar os registros comparáveis, adotamos categorias didáticas comuns na descrição de meios de prova:
 
 - prova documental;
 - print;
@@ -680,6 +680,7 @@ provas_classificadas <- provas_longas |>
       prova_original %in% c(
         "Prova documental",
         "Prova Documental",
+        "Contrato",
         "E-mail",
         "Transcrição do storie",
         "Transcrição de e-mail",
@@ -694,7 +695,9 @@ provas_classificadas <- provas_longas |>
       prova_original %in% c(
         "Testemunha",
         "Depoimento",
-        "Relato de informante"
+        "Relato de informante",
+        "Prova oral",
+        "Prova Oral"
       ) ~ "Depoimento e prova testemunhal",
 
       prova_original %in% c(
@@ -762,9 +765,9 @@ provas_repetidas <- provas_classificadas |>
 provas_repetidas
 ```
 
-Foram encontrados 11 acórdãos com repetição exata de uma denominação. Como o objetivo é identificar se cada processo registra determinado tipo de prova, e não quantas vezes a mesma resposta ocupou as quatro colunas, essas repetições serão contabilizadas apenas uma vez.
+Foram encontrados sete casos com repetição exata de uma denominação. Como o objetivo é identificar se cada caso registra determinado tipo de prova, e não quantas vezes a mesma resposta ocupou as quatro colunas, essas repetições serão contabilizadas apenas uma vez.
 
-O caso dos prints ilustra o efeito da decisão. O banco contém 169 registros preenchidos como `Print`, mas eles correspondem a 168 acórdãos distintos.
+O caso dos prints ilustra o efeito da decisão. O banco contém 120 registros preenchidos como `Print`, mas eles correspondem a 119 casos distintos.
 
 ```{r}
 provas_classificadas |>
@@ -777,7 +780,7 @@ provas_classificadas |>
 
 ### O significado de “Não cita”
 
-`Não cita` indica que o acórdão não especifica o tipo de prova. A expressão não permite concluir que nenhuma prova foi produzida nos autos. Além disso, três acórdãos registram simultaneamente `Não cita` e alguma prova identificada.
+`Não cita` indica que o caso simulado não especifica o tipo de prova. A expressão não permite concluir que nenhuma prova existia. Além disso, 20 casos registram simultaneamente `Não cita` e alguma prova identificada.
 
 ```{r}
 classificacao_nao_cita <- provas_classificadas |>
@@ -884,7 +887,7 @@ frequencia_suficiencia <- base_limpa |>
 frequencia_suficiencia
 ```
 
-A variável contém apenas as respostas `Sim` e `Não`, sem valores ausentes ou grafias divergentes. Portanto, não precisamos reagrupar nem recodificar suas categorias. O resultado indica 548 acórdãos nos quais as provas foram consideradas suficientes e 94 nos quais foram consideradas insuficientes. O nome curto `suficiencia_probatoria` será atribuído somente na construção do banco final.
+A variável contém apenas as respostas `Sim` e `Não`, sem valores ausentes ou grafias divergentes. Portanto, não precisamos reagrupar nem recodificar suas categorias. O resultado indica 596 casos nos quais as provas foram consideradas suficientes e 104 nos quais foram consideradas insuficientes. O nome curto `suficiencia_probatoria` será atribuído somente na construção do banco final.
 
 ## Contestação da prova
 
@@ -912,7 +915,7 @@ frequencia_contestacao <- base_limpa |>
 frequencia_contestacao
 ```
 
-O campo contém apenas as respostas `Sim` e `Não`, sem valores ausentes ou grafias divergentes. Não há necessidade de reagrupar nem recodificar suas categorias. O resultado indica 61 acórdãos com contestação sobre a forma de apresentação ou obtenção da prova e 581 sem contestação registrada. O nome curto `contestacao_prova` será atribuído somente na construção do banco final.
+O campo contém apenas as respostas `Sim` e `Não`, sem valores ausentes ou grafias divergentes. Não há necessidade de reagrupar nem recodificar suas categorias. O resultado indica 63 casos com contestação sobre a forma de apresentação ou obtenção da prova e 637 sem contestação registrada. O nome curto `contestacao_prova` será atribuído somente na construção do banco final.
 
 ## Decisão de primeira instância
 
@@ -984,7 +987,7 @@ base_limpa |>
   )
 ```
 
-Após a padronização, temos 290 decisões procedentes, 169 parcialmente procedentes, 181 improcedentes e duas em que o resultado não consta.
+Após a padronização, temos 317 decisões procedentes, 178 parcialmente procedentes, 203 improcedentes e duas em que o resultado não consta.
 
 ### Criando um indicador de procedência
 
@@ -1119,6 +1122,33 @@ Criamos `forma_registro_valor` para documentar como o valor numérico foi obtido
 - `Não informado`: o campo está vazio ou contém `Não consta`.
 
 ```{r}
+converter_numero_br <- function(x) {
+  vapply(
+    x,
+    function(valor) {
+      if (is.na(valor)) {
+        return(NA_real_)
+      }
+
+      texto <- gsub("R$", "", valor, fixed = TRUE)
+      texto <- gsub(" ", "", texto, fixed = TRUE)
+
+      if (grepl(",", texto, fixed = TRUE)) {
+        texto <- gsub(".", "", texto, fixed = TRUE)
+        texto <- sub(",", ".", texto, fixed = TRUE)
+      } else if (grepl(
+        "^[0-9]{1,3}(\\.[0-9]{3})+$",
+        texto
+      )) {
+        texto <- gsub(".", "", texto, fixed = TRUE)
+      }
+
+      suppressWarnings(as.numeric(texto))
+    },
+    numeric(1)
+  )
+}
+
 base_limpa <- base_limpa |>
   mutate(
     valor_indenizacao_original =
@@ -1137,9 +1167,10 @@ base_limpa <- base_limpa |>
         fixed = TRUE
       ) ~ "Convertido de salários mínimos",
 
-      grepl(
-        "^[0-9]+([.][0-9]+)?$",
-        valor_indenizacao_original
+      !is.na(
+        converter_numero_br(
+          valor_indenizacao_original
+        )
       ) ~ "Valor informado em reais",
 
       TRUE ~ "Revisar"
@@ -1160,15 +1191,27 @@ base_limpa |>
 
 ### Convertendo os valores em salários mínimos
 
-Há seis registros expressos em salários mínimos. Para convertê-los, utilizamos o valor vigente no ano do acórdão:
+Há nove registros expressos em salários mínimos. Para convertê-los, utilizamos o valor vigente no ano do caso simulado:
 
 ```{r}
 tabela_salario_minimo <- tribble(
   ~ano_referencia, ~salario_minimo,
+  2010L, 510,
+  2011L, 545,
+  2012L, 622,
   2013L, 678,
   2014L, 724,
   2015L, 788,
-  2022L, 1212
+  2016L, 880,
+  2017L, 937,
+  2018L, 954,
+  2019L, 998,
+  2020L, 1045,
+  2021L, 1100,
+  2022L, 1212,
+  2023L, 1320,
+  2024L, 1412,
+  2025L, 1518
 )
 
 tabela_salario_minimo |>
@@ -1184,11 +1227,11 @@ tabela_salario_minimo |>
   kable_styling(full_width = FALSE)
 ```
 
-Os valores foram estabelecidos pelo [Decreto nº 7.872/2012](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/decreto/d7872.htm), pelo [Decreto nº 8.166/2013](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/decreto/d8166.htm), pelo [Decreto nº 8.381/2014](https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/decreto/d8381.htm) e pela [Lei nº 14.358/2022](https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/l14358.htm).
+Os valores correspondem ao salário mínimo nacional adotado como referência anual. Nos anos em que houve mais de um valor, utilizamos o valor vigente em julho, mantendo o mesmo critério temporal adotado posteriormente para o IPCA.
 
 ::: {.callout-warning title="Uma aproximação necessária"}
 
-O banco informa o ano do acórdão, mas não contém uma data estruturada para a sentença de primeira instância. Por isso, utilizamos o salário mínimo vigente no ano do acórdão como aproximação. A variável `forma_registro_valor` permite identificar os valores afetados por essa decisão. Se a data da sentença for recuperada posteriormente, a conversão poderá ser refeita.
+A base informa apenas o ano simulado do caso. Por isso, utilizamos o salário mínimo de referência daquele ano como aproximação. A variável `forma_registro_valor` permite identificar os valores afetados por essa decisão.
 
 :::
 
@@ -1197,14 +1240,16 @@ Extraímos a quantidade de salários mínimos e incorporamos a tabela de referê
 ```{r}
 base_limpa <- base_limpa |>
   mutate(
-    valor_extraido = suppressWarnings(
-      parse_number(valor_indenizacao_original)
+    valor_extraido = converter_numero_br(
+      valor_indenizacao_original
     ),
 
     quantidade_salarios_minimos = if_else(
       forma_registro_valor ==
         "Convertido de salários mínimos",
-      valor_extraido,
+      suppressWarnings(
+        parse_number(valor_indenizacao_original)
+      ),
       NA_real_
     )
   ) |>
@@ -1235,7 +1280,7 @@ base_limpa <- base_limpa |>
   )
 ```
 
-Conferimos os seis registros convertidos:
+Conferimos os nove registros convertidos:
 
 ```{r}
 base_limpa |>
@@ -1520,6 +1565,23 @@ base_limpa["valor_indenizacao_original"] = (
 
 texto_valor = base_limpa["valor_indenizacao_original"]
 
+def converter_numero_br(valor):
+    if pd.isna(valor):
+        return np.nan
+
+    texto = str(valor).replace("R$", "").replace(" ", "")
+
+    if "," in texto:
+        texto = texto.replace(".", "").replace(",", ".")
+    elif pd.Series([texto]).str.match(
+        r"^[0-9]{1,3}(\.[0-9]{3})+$"
+    ).iloc[0]:
+        texto = texto.replace(".", "")
+
+    return pd.to_numeric(texto, errors="coerce")
+
+valor_extraido = texto_valor.apply(converter_numero_br)
+
 base_limpa["forma_registro_valor"] = np.select(
     [
         texto_valor.isna() | texto_valor.eq("Não consta"),
@@ -1528,10 +1590,7 @@ base_limpa["forma_registro_valor"] = np.select(
             na=False,
             regex=False
         ),
-        texto_valor.str.match(
-            r"^[0-9]+([.][0-9]+)?$",
-            na=False
-        )
+        valor_extraido.notna()
     ],
     [
         "Não informado",
@@ -1542,12 +1601,17 @@ base_limpa["forma_registro_valor"] = np.select(
 )
 
 salario_minimo = pd.DataFrame({
-    "ano_decisao": [2013, 2014, 2015, 2022],
-    "salario_minimo": [678, 724, 788, 1212]
+    "ano_decisao": list(range(2010, 2026)),
+    "salario_minimo": [
+        510, 545, 622, 678, 724, 788, 880, 937,
+        954, 998, 1045, 1100, 1212, 1320, 1412, 1518
+    ]
 })
 
-base_limpa["valor_extraido"] = pd.to_numeric(
-    texto_valor.str.extract(r"([0-9]+(?:[.][0-9]+)?)")[0],
+base_limpa["valor_extraido"] = valor_extraido
+base_limpa["quantidade_salarios_minimos"] = pd.to_numeric(
+    texto_valor.str.extract(r"^([0-9]+(?:[.,][0-9]+)?)")[0]
+    .str.replace(",", ".", regex=False),
     errors="coerce"
 )
 
@@ -1568,7 +1632,7 @@ base_limpa["valor_indenizacao_nominal"] = np.select(
     ],
     [
         base_limpa["valor_extraido"],
-        base_limpa["valor_extraido"] *
+        base_limpa["quantidade_salarios_minimos"] *
         base_limpa["salario_minimo"]
     ],
     default=np.nan
@@ -1745,8 +1809,8 @@ Os testes abaixo interrompem a execução se alguma condição indispensável de
 
 ```{r}
 stopifnot(
-  nrow(base_final) == 642,
-  n_distinct(base_final$id_caso) == 642,
+  nrow(base_final) == 700,
+  n_distinct(base_final$id_caso) == 700,
   ncol(base_final) == 23,
   anyDuplicated(base_final$id_caso) == 0,
   categorias_pendentes == 0,
@@ -1768,7 +1832,7 @@ Somente depois das verificações gravamos o banco que será utilizado no capít
 ```{r}
 write_csv(
   base_final,
-  "dados/violencia_digital_didatica_tratada.csv",
+  "dados/violencia_digital_sintetica_tratada.csv",
   na = ""
 )
 ```
@@ -1809,13 +1873,13 @@ colunas_finais = [
 
 base_final = base_limpa[colunas_finais].copy()
 
-assert len(base_final) == 642
-assert base_final["id_caso"].nunique() == 642
+assert len(base_final) == 700
+assert base_final["id_caso"].nunique() == 700
 assert len(base_final.columns) == 23
 assert not base_final["id_caso"].duplicated().any()
 
 base_final.to_csv(
-    "dados/violencia_digital_didatica_tratada.csv",
+    "dados/violencia_digital_sintetica_tratada.csv",
     index=False,
     encoding="utf-8"
 )

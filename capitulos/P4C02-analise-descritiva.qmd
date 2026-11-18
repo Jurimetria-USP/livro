@@ -12,6 +12,7 @@ execute:
 #| include: false
 #| eval: true
 knitr::opts_knit$set(root.dir = normalizePath(".."))
+knitr::opts_chunk$set(python.reticulate = FALSE)
 options(scipen = 999)
 ```
 
@@ -19,9 +20,9 @@ options(scipen = 999)
 
 A análise descritiva organiza as informações contidas em um banco de dados. Ela apresenta a composição da amostra, resume a posição e a dispersão das variáveis numéricas e identifica padrões de distribuição e associação. Essas operações constituem uma etapa necessária entre a construção do banco e a elaboração de modelos estatísticos.
 
-Neste capítulo, utilizaremos o banco produzido no capítulo de limpeza e estruturação. Ele reúne 642 acórdãos sobre violência de gênero digital e contém informações sobre tribunal, ano, perfil das partes, participação de plataformas, tipos de prova, suficiência probatória, resultado em primeira instância e indenização.
+Neste capítulo, utilizaremos o banco produzido no capítulo de limpeza e estruturação. Ele reúne 700 casos inteiramente sintéticos sobre violência de gênero digital e contém informações sobre tribunal, ano, perfil das partes, participação de plataformas, tipos de prova, suficiência probatória, resultado em primeira instância e indenização.
 
-O banco primário é de propriedade do InternetLab e deriva de pesquisa desenvolvida pela instituição. A base utilizada no livro corresponde a um recorte didático, sem identificadores processuais e campos textuais, posteriormente estruturado e tratado conforme as decisões documentadas no capítulo anterior.
+A base foi gerada exclusivamente para fins didáticos. Ela não contém decisões, pessoas, processos ou valores copiados de casos reais. As relações estatísticas e os problemas de qualidade foram planejados para permitir a aplicação das decisões de limpeza e das técnicas apresentadas no livro.
 
 O percurso está organizado em seis blocos:
 
@@ -80,7 +81,7 @@ library(kableExtra)
 library(ggcorrplot)
 
 base <- read_csv(
-  "dados/violencia_digital_didatica_tratada.csv",
+  "dados/violencia_digital_sintetica_tratada.csv",
   na = c("", "NA"),
   show_col_types = FALSE
 )
@@ -996,7 +997,7 @@ $$
 
 ### Tribunais
 
-Vamos analisar como os 642 acórdãos se distribuem entre os tribunais. A frequência revela a composição do banco e ajuda a identificar quais tribunais exercem maior influência sobre os resultados agregados.
+Vamos analisar como os 700 casos se distribuem entre os tribunais sintéticos. A frequência revela a composição do banco e ajuda a identificar quais tribunais exercem maior influência sobre os resultados agregados.
 
 ```{r}
 distribuicao_tribunais <- base |>
@@ -1068,7 +1069,7 @@ ggplot(
   theme_minimal(base_size = 12)
 ```
 
-A concentração no TJSP e no TJPR deve ser considerada em qualquer comparação agregada. As frequências totais refletem a composição do banco e não pesos equivalentes entre tribunais.
+A concentração nos tribunais A e B deve ser considerada em qualquer comparação agregada. As frequências totais refletem a composição do banco e não pesos equivalentes entre tribunais.
 
 ### Perfis e participação das plataformas
 
@@ -1204,7 +1205,7 @@ tabela_provas |>
     col.names = c(
       "Tipo de prova",
       "Número de registros",
-      "% dos 642 acórdãos"
+      "% dos 700 casos"
     ),
     align = "c",
     caption = "Tipos de prova registrados nos acórdãos"
@@ -1213,7 +1214,7 @@ tabela_provas |>
   row_spec(nrow(tabela_provas), bold = TRUE)
 ```
 
-Os percentuais usam os 642 acórdãos como denominador. Como um acórdão pode apresentar várias provas, a soma pode superar 100%. Cada percentual responde à pergunta: em que proporção dos acórdãos essa categoria aparece?
+Os percentuais usam os 700 casos como denominador. Como um caso pode apresentar várias provas, a soma pode superar 100%. Cada percentual responde à pergunta: em que proporção dos casos essa categoria aparece?
 
 ```{r}
 ggplot(
@@ -1597,7 +1598,7 @@ Os comandos abaixo apresentam operações equivalentes em Python. Eles não são
 import pandas as pd
 
 base = pd.read_csv(
-    "dados/violencia_digital_didatica_tratada.csv"
+    "dados/violencia_digital_sintetica_tratada.csv"
 )
 
 tabela = pd.crosstab(

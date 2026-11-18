@@ -1,0 +1,701 @@
+id_caso,tribunal,ano_decisao,perfil_vitima,perfil_agressor,plataforma_parte,prova_documental,prova_print,prova_depoimento_testemunhal,prova_audio_video,prova_imei_ip_url,prova_boletim_ocorrencia,prova_imagem,prova_ata_notarial,prova_outros,prova_nao_cita,suficiencia_probatoria,contestacao_prova,resultado_primeira_instancia,procedente_bin,forma_registro_valor,valor_indenizacao_nominal,valor_indenizacao_jul2026
+CASO_S0001,Tribunal A,2023,Mulher,Organização,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,1564.24,1796.44
+CASO_S0002,Tribunal A,2020,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0003,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,5674.76,7459.75
+CASO_S0004,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,1,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0005,Tribunal A,2016,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0006,Tribunal A,2019,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,17782.62,26066.2
+CASO_S0007,Tribunal A,2022,Mulher,Homem,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0008,Tribunal A,2024,Mulher,Homem,Não,0,0,0,0,0,1,1,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,49924,54866.61
+CASO_S0009,Tribunal A,2023,Mulher,Homem,Sim,0,0,0,0,1,1,0,0,0,0,Não,Não,Improcedente,0,Convertido de salários mínimos,13200,15159.41
+CASO_S0010,Tribunal C,2025,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,41553.2,43399.35
+CASO_S0011,Tribunal D,2025,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0012,Tribunal A,2016,Mulher,Homem,Não,1,1,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0013,Tribunal D,2021,Mulher,Não informado,Não,0,0,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4618,6070.58
+CASO_S0014,Tribunal B,2021,Homem,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,175018.64,230070.45
+CASO_S0015,Tribunal A,2024,Mulher,Organização,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0016,Tribunal B,2018,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,22734,34397.76
+CASO_S0017,Tribunal A,2020,Mulher,Mulher,Não,1,1,0,0,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,51481.68,73762.41
+CASO_S0018,Tribunal A,2022,Mulher,Homem,Não,1,1,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
+CASO_S0019,Tribunal B,2023,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,1863,2139.54
+CASO_S0020,Tribunal A,2024,Mulher,Homem,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,28556,31383.12
+CASO_S0021,Tribunal A,2015,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,43143.93,76176.2
+CASO_S0022,Tribunal A,2023,Mulher,Homem,Sim,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,41136,47242.23
+CASO_S0023,Tribunal A,2022,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,21798.25,26033.44
+CASO_S0024,Tribunal A,2019,Mulher,Mulher,Não,1,0,1,0,0,0,0,1,0,0,Não,Não,Improcedente,0,Valor informado em reais,39856.53,58422.67
+CASO_S0025,Tribunal A,2013,Mulher,Não informado,Não,1,1,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,19535.07,40245.65
+CASO_S0026,Tribunal A,2017,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0027,Tribunal A,2021,Mulher,Homem,Não,0,0,0,1,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0028,Tribunal B,2022,Mulher,Mulher,Não,1,1,0,0,0,0,1,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0029,Tribunal C,2013,Mulher,Mulher,Não,0,0,0,0,1,1,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,3618.53,7454.8
+CASO_S0030,Tribunal A,2018,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0031,Tribunal B,2019,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,7960.22,11668.28
+CASO_S0032,Tribunal A,2018,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,140216,212154.3
+CASO_S0033,Tribunal A,2023,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,0,0
+CASO_S0034,Tribunal B,2024,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,4701.01,5166.42
+CASO_S0035,Tribunal A,,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,5265,
+CASO_S0036,Tribunal A,2020,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,10697,15326.55
+CASO_S0037,Tribunal A,2019,Mulher,Não informado,Sim,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,31567,46271.68
+CASO_S0038,Tribunal B,2013,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,3804,7836.9
+CASO_S0039,Tribunal A,2020,Mulher,Homem,Não,1,0,0,1,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0040,Tribunal A,2024,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0041,Tribunal A,2014,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0042,Tribunal A,2025,Mulher,Mulher,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0043,Tribunal A,2023,Mulher,Homem e mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0044,Tribunal A,2022,Mulher,Homem,Sim,1,1,1,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
+CASO_S0045,Tribunal B,2023,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5704,6550.7
+CASO_S0046,Tribunal A,2023,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6632.44,7616.96
+CASO_S0047,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
+CASO_S0048,Tribunal A,2023,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0049,Tribunal A,2016,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,10748.52,17453.23
+CASO_S0050,Tribunal A,2024,Mulher,Não informado,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,11707.95,12867.07
+CASO_S0051,Tribunal C,2018,Mulher,Mulher,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2944.9,4455.79
+CASO_S0052,Tribunal C,2025,Mulher,Não informado,Não,0,0,1,0,0,0,0,0,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6808.16,7110.64
+CASO_S0053,Tribunal A,2025,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,49720.08,51929.08
+CASO_S0054,Tribunal A,2024,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,40400.1,44399.82
+CASO_S0055,Tribunal A,2019,Homem,Homem,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0056,Tribunal B,2022,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0057,Tribunal B,2021,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,26000.83,34179.35
+CASO_S0058,Tribunal A,2019,Mulher,Homem,Não,0,0,0,0,1,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,19898.59,29167.84
+CASO_S0059,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0060,Tribunal A,2025,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,13419,14015.19
+CASO_S0061,Tribunal A,2014,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0062,Tribunal A,2023,Mulher,Mulher,Não,0,0,0,0,0,0,1,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,3913.02,4493.87
+CASO_S0063,Tribunal B,2023,Mulher,Não informado,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0064,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,23328.13,30665.95
+CASO_S0065,Tribunal A,2025,Mulher,Mulher,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,18478.58,19299.56
+CASO_S0066,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0067,Tribunal E,2017,Mulher,Homem,Não,1,0,0,0,1,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,4531,7163.11
+CASO_S0068,Tribunal C,2018,Homem e mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6921.82,10473.08
+CASO_S0069,Tribunal B,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,54484.47,71622.47
+CASO_S0070,Tribunal B,2023,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0071,Tribunal A,2025,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,12767.93,13335.19
+CASO_S0072,Tribunal A,2019,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0073,Tribunal D,2021,Mulher,Mulher,Não,0,0,0,1,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6970.57,9163.15
+CASO_S0074,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0075,Tribunal A,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,26886,29547.79
+CASO_S0076,Tribunal A,2018,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,28580,43243.07
+CASO_S0077,Tribunal B,2021,Mulher,Homem,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
+CASO_S0078,Tribunal B,2021,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,13407.45,17624.74
+CASO_S0079,Tribunal C,2023,Mulher,Não informado,Não,0,1,1,1,1,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0080,Tribunal B,2014,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0081,Tribunal A,2020,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,137250.74,196651.43
+CASO_S0082,Tribunal A,2025,Mulher,Homem,Não,0,0,0,0,0,0,0,0,1,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,59542.37,62187.76
+CASO_S0083,Tribunal F,2023,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,18219.12,20923.57
+CASO_S0084,Tribunal B,2024,Mulher,Mulher,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0085,Tribunal A,2023,Homem e mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0086,Tribunal B,2023,Mulher,Homem,Sim,1,1,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0087,Tribunal B,2024,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0088,Tribunal C,2021,Mulher,Mulher,Não,0,1,0,1,0,0,0,1,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0089,Tribunal A,2021,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0090,Tribunal A,2018,Mulher,Mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Não consta,,Valor informado em reais,0,0
+CASO_S0091,Tribunal A,2017,Mulher,Mulher,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0092,Tribunal A,2016,Homem e mulher,Homem,Não,0,0,1,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0093,Tribunal C,2025,Mulher,Mulher,Não,1,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4181,4366.76
+CASO_S0094,Tribunal F,2025,Mulher,Mulher,Não,0,0,1,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,9033,9434.32
+CASO_S0095,Tribunal B,2023,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,14370,16503.08
+CASO_S0096,Tribunal A,,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,38091.28,
+CASO_S0097,Tribunal E,2020,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,2054,2942.95
+CASO_S0098,Tribunal A,2022,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3369,4023.56
+CASO_S0099,Tribunal E,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,31286.09,41127.08
+CASO_S0100,Tribunal B,2022,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Não,Não,Improcedente,0,Não informado,,
+CASO_S0101,Tribunal A,2024,Mulher,Mulher,Sim,0,0,0,1,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0102,Tribunal C,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0103,Tribunal A,2013,Homem e mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0104,Tribunal A,2025,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0105,Tribunal B,2023,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0106,Tribunal B,2020,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,32685.51,46831.46
+CASO_S0107,Tribunal B,2024,Homem e mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Procedente,1,Valor informado em reais,0,0
+CASO_S0108,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,1,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,31134,37183.04
+CASO_S0109,Tribunal D,2024,Mulher,Não informado,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0110,Tribunal B,2025,Mulher,Homem,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,22367.28,23361.03
+CASO_S0111,Tribunal A,2015,Mulher,Homem,Não,0,0,1,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0112,Tribunal A,2019,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0113,Tribunal A,2020,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,15529.92,22251.11
+CASO_S0114,Tribunal B,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,5429.72,7137.63
+CASO_S0115,Tribunal A,2020,Mulher,Mulher,Não,0,0,0,1,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,300000,429836.86
+CASO_S0116,Tribunal A,2021,Mulher,Mulher,Sim,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,13770.52,18102.01
+CASO_S0117,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
+CASO_S0118,Tribunal C,2019,Mulher,Homem,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,6179.6,9058.21
+CASO_S0119,Tribunal A,2015,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,36838.62,65043.36
+CASO_S0120,Tribunal A,2024,Mulher,Não informado,Sim,0,0,1,1,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,21586.97,23724.14
+CASO_S0121,Tribunal E,2014,Mulher,Não informado,Não,0,0,1,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,12192,23584.15
+CASO_S0122,Tribunal B,2016,Mulher,Homem,Não,0,0,0,0,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,10832,17588.78
+CASO_S0123,Tribunal B,2018,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5786.98,8756.01
+CASO_S0124,Tribunal B,2020,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0125,Tribunal A,2021,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0126,Tribunal B,2018,Mulher,Homem,Não,0,1,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,13700,20728.83
+CASO_S0127,Tribunal A,2016,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0128,Tribunal A,2016,Mulher,Mulher,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0129,Tribunal E,2024,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0130,Tribunal A,2024,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,18104,19896.35
+CASO_S0131,Tribunal E,2013,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0132,Tribunal C,2022,Homem,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,6306.17,7531.4
+CASO_S0133,Tribunal E,2023,Mulher,Mulher,Não,1,0,0,0,1,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,8233.52,9455.7
+CASO_S0134,Tribunal A,2017,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0135,Tribunal A,2019,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0136,Tribunal A,2019,Mulher,Mulher,Não,0,0,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0137,Tribunal A,2022,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0138,Tribunal A,2021,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0139,Tribunal B,2025,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0140,Tribunal D,2019,Mulher,Homem e mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0141,Tribunal A,2024,Mulher,Homem e mulher,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0142,Tribunal B,2023,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,19468.9,22358.87
+CASO_S0143,Tribunal B,2025,Homem,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Convertido de salários mínimos,22770,23781.64
+CASO_S0144,Tribunal A,2023,Mulher,Mulher,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,9652.74,11085.59
+CASO_S0145,Tribunal A,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0146,Tribunal A,2024,Mulher,Homem e mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
+CASO_S0147,Tribunal B,2023,Mulher,Mulher,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,17739.76,20373.05
+CASO_S0148,Tribunal A,2014,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Não,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0149,Tribunal A,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0150,Tribunal A,2024,Mulher,Homem e mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0151,Tribunal A,2023,Mulher,Homem,Não,0,0,0,1,0,0,0,0,1,0,Sim,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0152,Tribunal A,2024,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,31111.5,34191.62
+CASO_S0153,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,0,0,1,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0154,Tribunal A,,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Não informado,,
+CASO_S0155,Tribunal A,2022,Mulher,Não informado,Não,1,0,0,0,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0156,Tribunal B,2021,Mulher,Mulher,Sim,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,40424.29,53139.68
+CASO_S0157,Tribunal A,2019,Mulher,Não informado,Não,0,0,0,1,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0158,Tribunal A,2022,Mulher,Mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0159,Tribunal B,2016,Homem e mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,41707.61,67723.98
+CASO_S0160,Tribunal A,2016,Mulher,Homem,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Não consta,,Valor informado em reais,0,0
+CASO_S0161,Tribunal B,2025,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6231.2,6508.04
+CASO_S0162,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,0,0,0,1,0,0,0,Sim,Sim,Procedente,1,Convertido de salários mínimos,11296,12414.33
+CASO_S0163,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Sim,Procedente,1,Convertido de salários mínimos,28240,31035.84
+CASO_S0164,Tribunal A,2016,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0165,Tribunal E,2023,Mulher,Homem,Sim,0,0,1,0,0,0,1,0,1,0,Sim,Não,Procedente,1,Convertido de salários mínimos,6600,7579.7
+CASO_S0166,Tribunal B,2015,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,13312.03,23504.11
+CASO_S0167,Tribunal B,2025,Mulher,Homem,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,16656.35,17396.37
+CASO_S0168,Tribunal A,2020,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0169,Tribunal A,2025,Mulher,Homem,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0170,Tribunal A,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,14669.24,19283.42
+CASO_S0171,Tribunal A,2019,Mulher,Não informado,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,23050.56,33788.07
+CASO_S0172,Tribunal A,2016,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0173,Tribunal A,2014,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,11289.94,21839.21
+CASO_S0174,Tribunal E,2025,Homem,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,8071.55,8430.16
+CASO_S0175,Tribunal F,2021,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0176,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0177,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,3874.18,4626.9
+CASO_S0178,Tribunal B,2023,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,8934.94,10261.24
+CASO_S0179,Tribunal B,2024,Mulher,Homem e mulher,Não,1,0,0,1,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10556.01,11601.08
+CASO_S0180,Tribunal A,2025,Mulher,Homem e mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,18055.66,18857.85
+CASO_S0181,Tribunal A,2018,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0182,Tribunal E,2025,Homem e mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0183,Tribunal B,2015,Homem,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0184,Tribunal A,2024,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2541.87,2793.52
+CASO_S0185,Tribunal B,2021,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,9767.37,12839.68
+CASO_S0186,Tribunal B,2017,Homem,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,3767,5955.29
+CASO_S0187,Tribunal A,2023,Homem,Mulher,Sim,0,1,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0188,Tribunal B,2022,Mulher,Homem e mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,47213.7,56386.87
+CASO_S0189,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0190,Tribunal A,2021,Mulher,Não informado,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0191,Tribunal B,2022,Mulher,Homem,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0192,Tribunal A,2023,Mulher,Mulher,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,79484.72,91283.44
+CASO_S0193,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0194,Tribunal A,2025,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,11737,12258.46
+CASO_S0195,Tribunal B,2020,Homem,Mulher,Sim,0,0,1,1,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0196,Tribunal A,2023,Homem,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,21049.62,24174.23
+CASO_S0197,Tribunal B,2014,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0198,Tribunal A,2024,Mulher,Homem,Sim,1,0,0,0,1,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0199,Tribunal A,2025,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2111.53,2205.34
+CASO_S0200,Tribunal A,2019,Mulher,Não informado,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,25599,37523.64
+CASO_S0201,Tribunal B,2019,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Não informado,,
+CASO_S0202,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0203,Tribunal A,2025,Mulher,Homem e mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4427.61,4624.32
+CASO_S0204,Tribunal A,2023,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,50343.73,57816.76
+CASO_S0205,Tribunal B,2018,Mulher,Não informado,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,2944.17,4454.69
+CASO_S0206,Tribunal B,2021,Mulher,Mulher,Não,0,1,1,0,0,0,0,1,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5586.71,7344
+CASO_S0207,Tribunal A,2020,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0208,Tribunal A,2018,Mulher,Mulher,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0209,Tribunal A,2024,Homem e mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4289.59,4714.27
+CASO_S0210,Tribunal A,2022,Mulher,Homem,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,13493.83,16115.55
+CASO_S0211,Tribunal A,2019,Homem,Homem,Não,0,1,0,0,1,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0212,Tribunal B,2022,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Não informado,,
+CASO_S0213,Tribunal B,2017,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,11535.6,18236.76
+CASO_S0214,Tribunal A,2016,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5788.1,9398.6
+CASO_S0215,Tribunal A,2025,Não informado,Organização,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,14026.4,14649.57
+CASO_S0216,Tribunal A,2021,Mulher,Homem,Não,1,1,1,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,122628.94,161201.66
+CASO_S0217,Tribunal A,,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,13737.95,
+CASO_S0218,Tribunal B,2023,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,28244.19,32436.76
+CASO_S0219,Tribunal A,2023,Mulher,Homem e mulher,Não,1,0,0,1,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,17161,19708.38
+CASO_S0220,Tribunal B,2016,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0221,Tribunal D,2016,Mulher,Homem,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0222,Tribunal B,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10962,12047.27
+CASO_S0223,Tribunal B,2014,Mulher,Mulher,Não,0,0,1,0,1,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,10370,20059.68
+CASO_S0224,Tribunal B,2025,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,14524,15169.28
+CASO_S0225,Tribunal A,2023,Mulher,Não informado,Sim,0,0,0,0,0,0,0,0,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0226,Tribunal A,2020,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0227,Tribunal A,2021,Mulher,Homem,Sim,0,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Não informado,,
+CASO_S0228,Tribunal B,2022,Mulher,Não informado,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,22587.8,26976.39
+CASO_S0229,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,1,0,0,Sim,Não,Improcedente,0,Valor informado em reais,14367.09,17158.48
+CASO_S0230,Tribunal A,2018,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Parcialmente procedente,0,Não informado,,
+CASO_S0231,Tribunal A,2019,Mulher,Homem,Sim,1,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0232,Tribunal A,2022,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0233,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0234,Tribunal A,2017,Mulher,Homem,Sim,0,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0235,Tribunal E,2018,Mulher,Mulher,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0236,Tribunal E,2024,Mulher,Mulher,Não,0,0,0,1,1,0,0,0,0,0,Não,Não,Improcedente,0,Não informado,,
+CASO_S0237,Tribunal B,2022,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,7743.8,9248.35
+CASO_S0238,Tribunal D,2020,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,8880.82,12724.35
+CASO_S0239,Tribunal A,2025,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0240,Tribunal C,2024,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,5915.08,6500.69
+CASO_S0241,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0242,Tribunal A,2025,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4936,5155.3
+CASO_S0243,Tribunal A,2018,Homem,Organização,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,16069.91,24314.63
+CASO_S0244,Tribunal C,2024,Mulher,Mulher,Não,1,0,0,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0245,Tribunal A,2017,Homem e mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,8045.15,12718.67
+CASO_S0246,Tribunal A,2025,Homem,Não informado,Sim,1,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,21855.29,22826.29
+CASO_S0247,Tribunal A,2014,Mulher,Mulher,Sim,1,1,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0248,Tribunal A,2020,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0249,Tribunal B,2019,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,28895,42354.99
+CASO_S0250,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,0,0,1,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0251,Tribunal A,2020,Mulher,Homem,Não,0,0,0,0,0,0,0,1,1,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0252,Tribunal A,2022,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3697,4415.29
+CASO_S0253,Tribunal A,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,29945.99,32910.72
+CASO_S0254,Tribunal A,2020,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,24514,35123.4
+CASO_S0255,Tribunal A,2015,Mulher,Mulher,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Não informado,,
+CASO_S0256,Tribunal A,2021,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,9299,12223.98
+CASO_S0257,Tribunal A,2022,Homem,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,5598.24,6685.92
+CASO_S0258,Tribunal B,2019,Homem e mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0259,Tribunal A,2018,Mulher,Não informado,Não,0,1,1,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4748.55,7184.81
+CASO_S0260,Tribunal A,2020,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Parcialmente procedente,0,Valor informado em reais,7041,10088.27
+CASO_S0261,Tribunal B,2013,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0262,Tribunal A,2023,Mulher,Mulher,Não,1,1,0,1,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Não informado,,
+CASO_S0263,Tribunal A,2024,Não informado,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,6473.65,7114.56
+CASO_S0264,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0265,Tribunal A,2024,Homem e mulher,Mulher,Não,1,0,0,1,0,0,0,1,0,0,Sim,Não,Improcedente,0,Valor informado em reais,27972.69,30742.06
+CASO_S0266,Tribunal A,2021,Homem,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,4606,6054.81
+CASO_S0267,Tribunal A,2020,Mulher,Homem e mulher,Não,0,0,0,0,0,1,0,0,1,0,Sim,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0268,Tribunal A,2010,Mulher,Mulher,Não,0,0,0,1,1,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0269,Tribunal F,2025,Mulher,Homem,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,2702.99,2823.08
+CASO_S0270,Tribunal B,2023,Mulher,Homem,Sim,0,0,1,1,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0271,Tribunal A,2022,Homem,Homem,Sim,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0272,Tribunal B,2023,Mulher,Mulher,Não,0,0,0,0,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,5010,5753.69
+CASO_S0273,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0274,Tribunal A,2015,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0275,Tribunal A,2022,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0276,Tribunal A,2019,Mulher,Homem,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0277,Tribunal A,2019,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Parcialmente procedente,0,Valor informado em reais,10114.08,14825.46
+CASO_S0278,Tribunal A,2022,Mulher,Homem,Sim,1,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,17900,21377.8
+CASO_S0279,Tribunal F,2025,Mulher,Homem,Sim,0,0,0,0,1,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,5474.01,5717.21
+CASO_S0280,Tribunal A,2018,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,13680.46,20699.27
+CASO_S0281,Tribunal A,2022,Mulher,Mulher,Não,1,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0282,Tribunal A,2025,Mulher,Homem e mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,7403.22,7732.14
+CASO_S0283,Tribunal A,2024,Mulher,Homem,Não,0,0,1,1,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0284,Tribunal A,2020,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,8111,11621.36
+CASO_S0285,Tribunal B,2019,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,0,0
+CASO_S0286,Tribunal A,2025,Mulher,Homem e mulher,Sim,1,1,0,1,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0287,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0288,Tribunal A,2025,Mulher,Não informado,Não,0,1,1,0,0,1,0,1,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6030.76,6298.7
+CASO_S0289,Tribunal A,2022,Homem e mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,21409.86,25569.59
+CASO_S0290,Tribunal C,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,19920.2,22877.16
+CASO_S0291,Tribunal C,2018,Homem,Homem e mulher,Sim,1,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0292,Tribunal A,2016,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,31424,51025.66
+CASO_S0293,Tribunal A,2024,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,13004.78,14292.29
+CASO_S0294,Tribunal F,2025,Mulher,Não informado,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,33399,34882.87
+CASO_S0295,Tribunal A,2023,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,98312.24,112905.72
+CASO_S0296,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,3935.47,4700.09
+CASO_S0297,Tribunal A,2020,Homem,Não informado,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,31596.15,45270.63
+CASO_S0298,Tribunal A,2013,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,7415.31,15276.83
+CASO_S0299,Tribunal A,2014,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4608.06,8913.81
+CASO_S0300,Tribunal A,2020,Mulher,Homem,Não,1,0,0,0,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0301,Tribunal A,2025,Mulher,Homem,Sim,1,0,0,0,1,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0302,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,16710.36,21966.57
+CASO_S0303,Tribunal A,2019,Mulher,Homem,Sim,0,0,1,1,0,0,0,0,0,0,Sim,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0304,Tribunal E,2020,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0305,Tribunal A,2025,Mulher,Homem,Sim,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0306,Tribunal B,2018,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0307,Tribunal A,2019,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0308,Tribunal A,2024,Mulher,Mulher,Não,1,0,0,1,0,0,1,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0309,Tribunal A,2018,Mulher,Homem,Sim,1,0,1,1,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,15612.48,23622.52
+CASO_S0310,Tribunal A,2019,Mulher,Não informado,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0311,Tribunal A,2014,Mulher,Não informado,Não,0,1,1,0,0,0,0,0,0,0,Sim,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0312,Tribunal A,2022,Não informado,Não informado,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Não informado,,
+CASO_S0313,Tribunal B,2023,Mulher,Não informado,Não,0,1,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0314,Tribunal B,2013,Mulher,Organização,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,8025.43,16533.79
+CASO_S0315,Tribunal C,2019,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Não informado,,
+CASO_S0316,Tribunal F,2017,Homem e mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3796.06,6001.24
+CASO_S0317,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0318,Tribunal A,2014,Mulher,Mulher,Não,0,0,0,0,0,0,1,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,5172.19,10005.06
+CASO_S0319,Tribunal A,2025,Mulher,Não informado,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,40124.49,41907.17
+CASO_S0320,Tribunal A,2025,Mulher,Homem e mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Procedente,1,Valor informado em reais,22303.64,23294.56
+CASO_S0321,Tribunal B,2021,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,7071.86,9296.3
+CASO_S0322,Tribunal A,2022,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0323,Tribunal B,2013,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Não,Não,Procedente,1,Não informado,,
+CASO_S0324,Tribunal A,2020,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,7424.27,10637.42
+CASO_S0325,Tribunal A,2017,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,18777.97,29686.31
+CASO_S0326,Tribunal A,2021,Homem,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,15998.95,21031.39
+CASO_S0327,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Parcialmente procedente,0,Valor informado em reais,10788.53,12884.64
+CASO_S0328,Tribunal A,2020,Mulher,Mulher,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,6105.68,8748.15
+CASO_S0329,Tribunal B,2013,Homem,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,7623.63,15706.01
+CASO_S0330,Tribunal A,2019,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Não informado,,
+CASO_S0331,Tribunal E,2018,Mulher,Homem,Não,0,0,0,1,0,0,0,1,0,0,Não,Não,Procedente,1,Valor informado em reais,3616,5471.2
+CASO_S0332,Tribunal A,2017,Mulher,Homem e mulher,Não,0,0,0,1,1,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,10772,17029.58
+CASO_S0333,Tribunal A,2025,Mulher,Mulher,Não,0,1,1,0,0,0,0,0,0,0,Sim,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0334,Tribunal B,2022,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,13326.24,15915.4
+CASO_S0335,Tribunal A,2025,Mulher,Mulher,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,18462.68,19282.95
+CASO_S0336,Tribunal A,2024,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0337,Tribunal A,2024,Mulher,Homem,Sim,0,1,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0338,Tribunal E,2022,Mulher,Homem,Não,0,0,0,0,0,1,0,0,0,0,Não,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0339,Tribunal A,2024,Mulher,Homem e mulher,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,28384,31194.09
+CASO_S0340,Tribunal A,2012,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0341,Tribunal A,2020,Mulher,Homem,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,45741,65537.23
+CASO_S0342,Tribunal A,2019,Não informado,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,13988.36,20504.48
+CASO_S0343,Tribunal B,,Mulher,Não informado,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,20420.84,
+CASO_S0344,Tribunal A,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,27266.33,35842.91
+CASO_S0345,Tribunal B,2024,Mulher,Homem,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,30512,33532.77
+CASO_S0346,Tribunal A,2017,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,7569.89,11967.33
+CASO_S0347,Tribunal D,2023,Mulher,Mulher,Sim,1,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,13285.41,15257.5
+CASO_S0348,Tribunal A,2023,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0349,Tribunal A,2016,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,52515.47,85273.57
+CASO_S0350,Tribunal B,2021,Homem,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,118522,155802.89
+CASO_S0351,Tribunal A,2018,Homem e mulher,Homem,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,9505.34,14382.09
+CASO_S0352,Tribunal B,2025,Mulher,Organização,Não,0,0,1,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Convertido de salários mínimos,4554,4756.33
+CASO_S0353,Tribunal A,2025,Homem e mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
+CASO_S0354,Tribunal C,2022,Mulher,Não informado,Não,0,0,1,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0355,Tribunal A,2019,Homem,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,42168.77,61812.01
+CASO_S0356,Tribunal A,2024,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0357,Tribunal C,2014,Homem e mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,9496.8,18370.57
+CASO_S0358,Tribunal C,2020,Mulher,Organização,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0359,Tribunal A,2024,Mulher,Mulher,Não,0,1,1,0,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,27882.42,30642.86
+CASO_S0360,Tribunal B,2022,Mulher,Não informado,Não,0,0,1,0,0,0,0,0,0,0,Sim,Sim,Improcedente,0,Valor informado em reais,6003.42,7169.83
+CASO_S0361,Tribunal B,2023,Homem,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0362,Tribunal C,2019,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5072,7434.66
+CASO_S0363,Tribunal A,2019,Mulher,Mulher,Não,1,0,0,0,0,0,1,0,0,0,Não,Não,Procedente,1,Valor informado em reais,12453.02,18253.94
+CASO_S0364,Tribunal A,2017,Mulher,Não informado,Não,0,0,0,0,1,1,0,1,0,0,Sim,Sim,Procedente,1,Valor informado em reais,0,0
+CASO_S0365,Tribunal A,2025,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0366,Tribunal A,2018,Mulher,Mulher,Sim,0,0,1,0,0,0,0,1,0,0,Não,Não,Improcedente,0,Valor informado em reais,26584.46,40223.71
+CASO_S0367,Tribunal A,2024,Mulher,Homem,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,58998,64838.96
+CASO_S0368,Tribunal A,,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,7593.37,
+CASO_S0369,Tribunal A,2024,Mulher,Homem,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,19642.43,21587.08
+CASO_S0370,Tribunal A,2021,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,24541.8,32261.38
+CASO_S0371,Tribunal C,2025,Mulher,Homem,Sim,0,0,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0372,Tribunal A,2023,Mulher,Mulher,Sim,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,21354.73,24524.63
+CASO_S0373,Tribunal A,2025,Mulher,Não informado,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0374,Tribunal B,2022,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,12627.35,15080.72
+CASO_S0375,Tribunal A,,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10144.11,
+CASO_S0376,Tribunal B,2025,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0377,Tribunal A,2018,Mulher,Mulher,Não,0,0,0,0,0,1,0,1,0,0,Não,Não,Procedente,1,Valor informado em reais,26568,40198.8
+CASO_S0378,Tribunal C,2015,Mulher,Mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0379,Tribunal B,2025,Mulher,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0380,Tribunal A,2024,Mulher,Não informado,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4333,4761.98
+CASO_S0381,Tribunal C,2024,Mulher,Mulher,Não,0,0,0,0,1,1,0,0,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,39561.3,43477.98
+CASO_S0382,Tribunal A,2018,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0383,Tribunal C,2024,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,7238.92,7955.59
+CASO_S0384,Tribunal B,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0385,Tribunal A,2024,Homem,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0386,Tribunal A,2022,Mulher,Mulher,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,8977,10721.14
+CASO_S0387,Tribunal C,2024,Mulher,Mulher,Não,1,0,0,0,1,0,0,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0388,Tribunal B,2020,Homem,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0389,Tribunal B,2020,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Sim,Improcedente,0,Valor informado em reais,14905.71,21356.75
+CASO_S0390,Tribunal B,2018,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0391,Tribunal A,2016,Mulher,Homem,Não,1,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0392,Tribunal A,2021,Homem,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,6221.63,8178.63
+CASO_S0393,Tribunal C,2019,Homem,Mulher,Não,0,0,0,0,0,0,1,0,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0394,Tribunal A,2023,Mulher,Mulher,Sim,0,1,0,1,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,24730.29,28401.26
+CASO_S0395,Tribunal D,2014,Mulher,Organização,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,12106.02,23417.83
+CASO_S0396,Tribunal C,2022,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0397,Tribunal C,2015,Homem e mulher,Organização,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,3409.16,6019.31
+CASO_S0398,Tribunal A,2024,Mulher,Homem,Não,1,0,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,8912.91,9795.31
+CASO_S0399,Tribunal A,2020,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0400,Tribunal A,2019,Mulher,Homem,Não,1,0,0,1,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0401,Tribunal D,2013,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0402,Tribunal C,2022,Homem,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,12354.04,14754.31
+CASO_S0403,Tribunal D,2025,Mulher,Homem e mulher,Sim,1,0,1,0,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Não informado,,
+CASO_S0404,Tribunal B,2023,Mulher,Homem,Sim,1,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,12296.2,14121.45
+CASO_S0405,Tribunal C,2018,Mulher,Homem,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,21873.83,33096.27
+CASO_S0406,Tribunal A,2025,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10804,11284.01
+CASO_S0407,Tribunal A,2021,Mulher,Homem e mulher,Não,0,0,1,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,64308,84535.97
+CASO_S0408,Tribunal A,2014,Mulher,Não informado,Não,1,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0409,Tribunal A,2021,Homem,Mulher,Não,1,1,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0410,Tribunal A,2017,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,28018,44293.98
+CASO_S0411,Tribunal B,2021,Mulher,Não informado,Não,1,1,0,0,0,0,0,0,0,0,Sim,Sim,Improcedente,0,Valor informado em reais,8908.71,11710.93
+CASO_S0412,Tribunal A,2025,Mulher,Mulher,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0413,Tribunal C,2023,Mulher,Homem e mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0414,Tribunal C,2021,Mulher,Homem,Sim,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0415,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,11807.37,15521.36
+CASO_S0416,Tribunal B,2022,Homem e mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,17235.27,20583.92
+CASO_S0417,Tribunal A,2021,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0418,Tribunal B,2025,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0419,Tribunal A,2022,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,9280.7,11083.85
+CASO_S0420,Tribunal C,2013,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,3938,8112.97
+CASO_S0421,Tribunal A,2024,Mulher,Homem,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0422,Tribunal B,2024,Mulher,Homem e mulher,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,51055.96,56110.64
+CASO_S0423,Tribunal A,2018,Mulher,Mulher,Sim,0,0,0,0,0,0,0,1,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,4332.75,6555.68
+CASO_S0424,Tribunal C,2024,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15840.88,17409.17
+CASO_S0425,Tribunal A,2021,Mulher,Homem,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0426,Tribunal E,2018,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,15909,24071.17
+CASO_S0427,Tribunal A,2023,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0428,Tribunal B,2014,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0429,Tribunal D,2024,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,0,0
+CASO_S0430,Tribunal A,2010,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,23991.1,59053.17
+CASO_S0431,Tribunal B,,Mulher,Homem e mulher,Sim,0,0,1,0,0,0,0,0,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,24609,
+CASO_S0432,Tribunal A,2024,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0433,Tribunal A,2018,Mulher,Homem,Não,1,0,1,0,0,0,0,1,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0434,Tribunal A,2024,Mulher,Homem,Sim,0,0,1,0,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,41724.19,45855
+CASO_S0435,Tribunal B,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0436,Tribunal B,2019,Mulher,Mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0437,Tribunal B,2021,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0438,Tribunal A,2022,Mulher,Homem,Sim,0,0,0,1,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,43801,52311.11
+CASO_S0439,Tribunal A,2021,Homem e mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Convertido de salários mínimos,5500,7230.02
+CASO_S0440,Tribunal A,2016,Mulher,Mulher,Não,0,0,1,0,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,9928,16120.89
+CASO_S0441,Tribunal A,2025,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0442,Tribunal A,2023,Mulher,Homem,Não,0,0,1,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0443,Tribunal B,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,19266,22125.85
+CASO_S0444,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0445,Tribunal A,2019,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
+CASO_S0446,Tribunal C,2024,Mulher,Homem,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10784.02,11851.67
+CASO_S0447,Tribunal A,2025,Mulher,Homem,Não,0,0,0,1,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0448,Tribunal A,2019,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0449,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,1,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4549.48,4999.89
+CASO_S0450,Tribunal A,2025,Mulher,Mulher,Não,1,0,1,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Convertido de salários mínimos,7590,7927.21
+CASO_S0451,Tribunal B,2024,Mulher,Mulher,Não,0,1,0,0,0,0,0,1,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0452,Tribunal A,2018,Mulher,Organização,Sim,0,0,0,0,1,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0453,Tribunal A,2024,Mulher,Homem e mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,67081.19,73722.41
+CASO_S0454,Tribunal D,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Procedente,1,Valor informado em reais,0,0
+CASO_S0455,Tribunal A,2023,Homem,Mulher,Não,0,0,0,0,0,0,0,1,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,34250.49,39334.64
+CASO_S0456,Tribunal B,2025,Homem,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0457,Tribunal C,2024,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4597,5052.12
+CASO_S0458,Tribunal A,2013,Mulher,Homem,Sim,0,0,1,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0459,Tribunal A,2025,Homem e mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0460,Tribunal A,2025,Mulher,Homem,Não,1,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0461,Tribunal A,2022,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0462,Tribunal B,2025,Mulher,Homem,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0463,Tribunal A,2015,Homem,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0464,Tribunal A,2023,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0465,Tribunal A,2019,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,8317.13,12191.45
+CASO_S0466,Tribunal A,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0467,Tribunal C,2023,Mulher,Não informado,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0468,Tribunal C,2025,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,10575,11044.83
+CASO_S0469,Tribunal A,2021,Mulher,Homem e mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0470,Tribunal A,2020,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,99655.16,142784.87
+CASO_S0471,Tribunal B,2025,Homem,Não informado,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,46850,48931.48
+CASO_S0472,Tribunal A,2021,Mulher,Homem,Sim,0,1,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,35727.03,46964.91
+CASO_S0473,Tribunal F,2023,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,8755,10054.59
+CASO_S0474,Tribunal B,2024,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0475,Tribunal D,2025,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,4121.11,4304.21
+CASO_S0476,Tribunal B,2023,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0477,Tribunal D,2024,Homem e mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Não,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0478,Tribunal C,2014,Homem,Mulher,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
+CASO_S0479,Tribunal A,2018,Mulher,Homem,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,7986.72,12084.33
+CASO_S0480,Tribunal A,2023,Homem,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,17015.89,19541.73
+CASO_S0481,Tribunal A,2022,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0482,Tribunal A,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0483,Tribunal A,2022,Mulher,Não informado,Não,0,0,1,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,21540.63,25725.77
+CASO_S0484,Tribunal A,2015,Mulher,Homem e mulher,Não,0,0,1,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0485,Tribunal A,2019,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,56375.23,82636.18
+CASO_S0486,Tribunal B,2015,Mulher,Mulher,Não,0,1,1,0,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,3547.11,6262.88
+CASO_S0487,Tribunal A,2017,Mulher,Homem,Não,1,0,1,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Não informado,,
+CASO_S0488,Tribunal A,2010,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,3517,8656.96
+CASO_S0489,Tribunal C,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
+CASO_S0490,Tribunal B,2025,Homem e mulher,Mulher,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0491,Tribunal C,2024,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5264.58,5785.79
+CASO_S0492,Tribunal A,2021,Mulher,Não informado,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0493,Tribunal F,2023,Homem e mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,7736.47,8884.87
+CASO_S0494,Tribunal A,2024,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0495,Tribunal A,2019,Homem,Homem,Não,1,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0496,Tribunal A,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0497,Tribunal A,2022,Homem,Mulher,Não,0,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15277.6,18245.89
+CASO_S0498,Tribunal A,2018,Mulher,Mulher,Sim,1,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,39285,59440.31
+CASO_S0499,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,1,0,1,0,0,0,0,Não,Sim,Procedente,1,Valor informado em reais,4639.53,5098.86
+CASO_S0500,Tribunal A,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0501,Tribunal A,2019,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,0,0
+CASO_S0502,Tribunal A,2019,Homem,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0503,Tribunal C,2023,Mulher,Organização,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,1017,1167.96
+CASO_S0504,Tribunal B,2018,Mulher,Homem e mulher,Sim,1,0,0,0,0,1,1,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0505,Tribunal A,2017,Mulher,Homem,Sim,0,0,0,1,0,0,0,0,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,33254.97,52573.17
+CASO_S0506,Tribunal A,2022,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,11462,13688.96
+CASO_S0507,Tribunal E,2024,Homem,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,4315,4742.2
+CASO_S0508,Tribunal A,2025,Homem,Não informado,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,11312.08,11814.66
+CASO_S0509,Tribunal A,2023,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Não,Não,Parcialmente procedente,0,Valor informado em reais,74472.94,85527.71
+CASO_S0510,Tribunal A,2015,Mulher,Homem,Não,0,0,1,0,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,18906,33380.99
+CASO_S0511,Tribunal A,2018,Mulher,Mulher,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,8430.59,12755.93
+CASO_S0512,Tribunal A,2021,Mulher,Homem,Sim,0,0,0,0,0,0,0,0,0,1,Não,Sim,Improcedente,0,Valor informado em reais,46529.17,61164.84
+CASO_S0513,Tribunal A,2021,Mulher,Organização,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,15087.8,19833.64
+CASO_S0514,Tribunal C,,Mulher,Homem e mulher,Não,0,0,0,0,0,0,0,1,1,0,Sim,Não,Improcedente,0,Valor informado em reais,10910,
+CASO_S0515,Tribunal A,2021,Mulher,Mulher,Não,0,0,1,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0516,Tribunal B,2023,Mulher,Mulher,Não,0,1,0,0,1,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0517,Tribunal A,2024,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4196.08,4611.5
+CASO_S0518,Tribunal A,2024,Mulher,Homem e mulher,Sim,1,0,0,0,1,1,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,29765.22,32712.06
+CASO_S0519,Tribunal A,2018,Mulher,Homem,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0520,Tribunal B,2023,Homem,Homem,Não,0,1,0,0,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,16055,18438.21
+CASO_S0521,Tribunal A,2022,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,22885.57,27332.02
+CASO_S0522,Tribunal A,2025,Mulher,Homem,Não,1,0,1,1,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,33188,34662.5
+CASO_S0523,Tribunal C,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,1,0,Não,Não,Procedente,1,Valor informado em reais,29278,34966.43
+CASO_S0524,Tribunal A,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Sim,Improcedente,0,Valor informado em reais,65189,74865.66
+CASO_S0525,Tribunal A,2021,Mulher,Mulher,Sim,1,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,21109.64,27749.64
+CASO_S0526,Tribunal A,2018,Mulher,Homem,Não,0,0,0,0,0,0,0,0,1,0,Sim,Sim,Procedente,1,Valor informado em reais,4372.76,6616.22
+CASO_S0527,Tribunal A,2023,Não informado,Mulher,Não,0,0,1,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,17129.88,19672.64
+CASO_S0528,Tribunal A,2025,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,5348.5,5586.13
+CASO_S0529,Tribunal A,2012,Mulher,Não informado,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0530,Tribunal A,2019,Mulher,Mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,18887.13,27685.21
+CASO_S0531,Tribunal A,2025,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,7828.36,8176.16
+CASO_S0532,Tribunal A,2024,Mulher,Homem,Não,0,1,0,1,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,38924.58,42778.22
+CASO_S0533,Tribunal A,2020,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,7405.38,10610.35
+CASO_S0534,Tribunal A,2025,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,16918.52,17670.19
+CASO_S0535,Tribunal A,2021,Homem,Mulher,Não,0,0,1,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,15331.5,20154
+CASO_S0536,Tribunal A,2015,Homem,Homem,Não,0,0,0,0,0,0,1,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,9585.79,16924.96
+CASO_S0537,Tribunal A,2024,Mulher,Mulher,Sim,1,0,0,0,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0538,Tribunal A,2018,Mulher,Homem,Não,0,0,1,0,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,27328.2,41349.03
+CASO_S0539,Tribunal A,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0540,Tribunal A,2017,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,25275.77,39958.76
+CASO_S0541,Tribunal A,2014,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0542,Tribunal A,2018,Não informado,Mulher,Sim,1,0,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,17086.63,25852.98
+CASO_S0543,Tribunal A,2020,Mulher,Mulher,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0544,Tribunal B,2024,Mulher,Não informado,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0545,Tribunal A,2023,Mulher,Homem e mulher,Não,0,1,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0546,Tribunal A,2024,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
+CASO_S0547,Tribunal C,2011,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Não informado,,
+CASO_S0548,Tribunal B,2021,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0549,Tribunal C,2025,Mulher,Não informado,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0550,Tribunal A,2018,Homem,Mulher,Sim,0,1,0,0,0,0,0,0,1,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0551,Tribunal A,2019,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,13197.84,19345.71
+CASO_S0552,Tribunal D,2021,Mulher,Mulher,Não,1,1,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0553,Tribunal A,2015,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,12816.87,22629.85
+CASO_S0554,Tribunal B,2017,Mulher,Homem,Sim,1,0,1,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0555,Tribunal A,2025,Homem e mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Procedente,1,Valor informado em reais,9321.84,9736
+CASO_S0556,Tribunal A,2013,Homem,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,6324.54,13029.66
+CASO_S0557,Tribunal A,2014,Mulher,Não informado,Não,0,0,1,0,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,18687.13,36148.3
+CASO_S0558,Tribunal A,2023,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Não,Sim,Improcedente,0,Valor informado em reais,101281.59,116315.84
+CASO_S0559,Tribunal B,2021,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0560,Tribunal C,2023,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0561,Tribunal A,2025,Mulher,Mulher,Não,0,0,0,1,1,0,0,1,0,0,Não,Não,Procedente,1,Valor informado em reais,3681.2,3844.75
+CASO_S0562,Tribunal A,2019,Mulher,Mulher,Não,0,1,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0563,Tribunal A,2022,Mulher,Não informado,Não,1,0,0,0,1,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,7656,9143.49
+CASO_S0564,Tribunal A,2025,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Não,Sim,Parcialmente procedente,0,Valor informado em reais,7627.32,7966.19
+CASO_S0565,Tribunal B,2020,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,8327.32,11931.3
+CASO_S0566,Tribunal B,2023,Mulher,Homem,Sim,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,300000,344532.04
+CASO_S0567,Tribunal A,2022,Mulher,Mulher,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,18717.89,22354.6
+CASO_S0568,Tribunal E,2024,Mulher,Mulher,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,11440,12572.59
+CASO_S0569,Tribunal A,2021,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0570,Tribunal C,2018,Homem,Mulher,Não,0,1,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,6363.62,9628.5
+CASO_S0571,Tribunal A,2011,Mulher,Não informado,Não,0,0,0,0,0,0,0,1,0,0,Sim,Não,Procedente,1,Valor informado em reais,11802.14,27182.38
+CASO_S0572,Tribunal B,2022,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,11973.84,14300.24
+CASO_S0573,Tribunal B,2021,Homem,Homem,Não,0,1,0,0,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0574,Tribunal A,2023,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
+CASO_S0575,Tribunal D,2015,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,6581.42,11620.35
+CASO_S0576,Tribunal A,2023,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Convertido de salários mínimos,26400,30318.82
+CASO_S0577,Tribunal A,2018,Mulher,Homem e mulher,Sim,1,0,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0578,Tribunal A,2024,Mulher,Homem,Não,0,1,1,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,10422.6,11454.47
+CASO_S0579,Tribunal A,2024,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Não informado,,
+CASO_S0580,Tribunal A,2024,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,3957.04,4348.8
+CASO_S0581,Tribunal B,2024,Mulher,Homem,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0582,Tribunal B,2020,Mulher,Homem,Sim,1,1,0,0,1,0,0,0,0,0,Sim,Sim,Improcedente,0,Valor informado em reais,0,0
+CASO_S0583,Tribunal B,2021,Mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,22949.42,30168.12
+CASO_S0584,Tribunal A,2016,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0585,Tribunal C,2020,Mulher,Organização,Sim,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0586,Tribunal A,2020,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0587,Tribunal B,2021,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0588,Tribunal A,2017,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,4415.9,6981.15
+CASO_S0589,Tribunal C,2015,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0590,Tribunal A,2025,Mulher,Homem,Não,1,0,1,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,17760.44,18549.51
+CASO_S0591,Tribunal A,2015,Homem e mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,5787.91,10219.31
+CASO_S0592,Tribunal A,2025,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0593,Tribunal A,2020,Mulher,Não informado,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0594,Tribunal B,2017,Mulher,Homem,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0595,Tribunal A,2018,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0596,Tribunal A,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Não informado,,
+CASO_S0597,Tribunal B,2022,Mulher,Homem,Sim,0,1,0,0,0,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,66862.58,79853.33
+CASO_S0598,Tribunal A,2015,Mulher,Homem,Não,0,0,0,0,0,1,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,44264.59,78154.87
+CASO_S0599,Tribunal A,2022,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,18198,21733.7
+CASO_S0600,Tribunal B,2025,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0601,Tribunal A,2025,Homem,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0602,Tribunal E,2023,Mulher,Homem,Não,1,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0603,Tribunal E,2018,Mulher,Mulher,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0604,Tribunal C,2020,Mulher,Homem,Não,0,0,0,0,0,0,0,1,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,7900.76,11320.13
+CASO_S0605,Tribunal D,2021,Mulher,Não informado,Não,0,0,0,0,1,1,1,1,0,0,Sim,Sim,Procedente,1,Valor informado em reais,6618.58,8700.44
+CASO_S0606,Tribunal B,2014,Mulher,Homem,Não,0,0,1,0,0,0,1,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0607,Tribunal B,2023,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,5327.25,6118.03
+CASO_S0608,Tribunal A,2021,Mulher,Organização,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,6078,7989.82
+CASO_S0609,Tribunal A,2017,Homem,Homem e mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0610,Tribunal A,2025,Mulher,Mulher,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,100856.15,105337.05
+CASO_S0611,Tribunal A,2019,Mulher,Não informado,Não,1,1,1,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0612,Tribunal A,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,80574.71,92535.23
+CASO_S0613,Tribunal A,2024,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Sim,Improcedente,0,Valor informado em reais,32948.92,36210.95
+CASO_S0614,Tribunal A,2023,Mulher,Mulher,Não,0,0,0,0,0,1,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,18010.07,20683.49
+CASO_S0615,Tribunal A,2019,Mulher,Homem,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0616,Tribunal A,2018,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,22415.72,33916.18
+CASO_S0617,Tribunal A,2018,Mulher,Homem,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,27662.29,41854.52
+CASO_S0618,Tribunal B,2021,Mulher,Organização,Não,1,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0619,Tribunal A,2024,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,20678,22725.18
+CASO_S0620,Tribunal B,2018,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0621,Tribunal D,2023,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Sim,Parcialmente procedente,0,Valor informado em reais,4800.9,5513.55
+CASO_S0622,Tribunal A,2017,Mulher,Mulher,Não,1,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10693.09,16904.83
+CASO_S0623,Tribunal A,2023,Mulher,Mulher,Sim,1,0,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0624,Tribunal A,2024,Homem,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,15993.96,17577.41
+CASO_S0625,Tribunal A,2019,Mulher,Homem,Não,1,0,0,0,0,0,0,0,0,0,Não,Não,Parcialmente procedente,0,Valor informado em reais,41245,60457.92
+CASO_S0626,Tribunal B,2020,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,6203.51,8888.32
+CASO_S0627,Tribunal B,2019,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Procedente,1,Valor informado em reais,9479,13894.55
+CASO_S0628,Tribunal A,2025,Mulher,Homem,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0629,Tribunal B,2015,Homem,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,3702.11,6536.56
+CASO_S0630,Tribunal A,2020,Mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0631,Tribunal A,2024,Mulher,Mulher,Sim,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,13749.41,15110.64
+CASO_S0632,Tribunal A,2021,Homem e mulher,Mulher,Sim,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0633,Tribunal A,2024,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0634,Tribunal A,2024,Mulher,Não informado,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,11643.57,12796.31
+CASO_S0635,Tribunal B,2023,Homem,Não informado,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0636,Tribunal A,2015,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0637,Tribunal C,2018,Mulher,Homem,Não,0,1,0,1,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,21257.73,32164.08
+CASO_S0638,Tribunal A,2024,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,14959.64,16440.68
+CASO_S0639,Tribunal A,2021,Mulher,Não informado,Não,0,0,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0640,Tribunal A,2025,Homem,Mulher,Sim,1,1,1,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,74547.61,77859.66
+CASO_S0641,Tribunal A,2025,Homem,Não informado,Não,1,0,0,0,1,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,60377.47,63059.96
+CASO_S0642,Tribunal A,2021,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,4026.18,5292.61
+CASO_S0643,Tribunal A,2022,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0644,Tribunal A,2025,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,18482.26,19303.4
+CASO_S0645,Tribunal A,2017,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0646,Tribunal A,2013,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0647,Tribunal A,2018,Mulher,Homem,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,31463.75,47606.34
+CASO_S0648,Tribunal B,2024,Mulher,Mulher,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,11036.67,12129.33
+CASO_S0649,Tribunal A,2023,Homem,Mulher,Não,0,0,0,0,0,0,1,0,1,0,Sim,Não,Procedente,1,Não informado,,
+CASO_S0650,Tribunal A,2025,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,19157,20008.12
+CASO_S0651,Tribunal D,2017,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0652,Tribunal A,2024,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,98530,108284.74
+CASO_S0653,Tribunal B,2015,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0654,Tribunal B,2018,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,1537,2325.56
+CASO_S0655,Tribunal B,2023,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0656,Tribunal B,2023,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0657,Tribunal B,2019,Mulher,Não informado,Sim,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,33535.6,49157.3
+CASO_S0658,Tribunal A,,Mulher,Homem e mulher,Não,0,0,0,1,1,0,0,0,0,0,Não,Não,Procedente,1,Valor informado em reais,19395.01,
+CASO_S0659,Tribunal C,2021,Mulher,Homem e mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,25596,33647.18
+CASO_S0660,Tribunal B,2019,Homem e mulher,Homem,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,9264.09,13579.53
+CASO_S0661,Tribunal B,2014,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,4195.99,8116.7
+CASO_S0662,Tribunal A,2024,Homem e mulher,Homem,Não,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,25683.66,28226.41
+CASO_S0663,Tribunal B,2014,Homem,Mulher,Não,1,1,0,0,0,0,1,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0664,Tribunal A,2021,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,1,0,Sim,Sim,Procedente,1,Valor informado em reais,0,0
+CASO_S0665,Tribunal A,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Parcialmente procedente,0,Valor informado em reais,15812.37,18159.56
+CASO_S0666,Tribunal A,2020,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0667,Tribunal A,2019,Mulher,Homem,Sim,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0668,Tribunal A,2013,Não informado,Mulher,Não,0,0,0,1,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0669,Tribunal E,2019,Mulher,Mulher,Não,0,0,1,0,0,0,0,0,0,0,Não,Não,Procedente,1,Valor informado em reais,2070.46,3034.93
+CASO_S0670,Tribunal B,2016,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Procedente,1,Valor informado em reais,11229,18233.43
+CASO_S0671,Tribunal E,2023,Mulher,Mulher,Sim,0,0,0,0,0,0,1,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,10476.97,12032.17
+CASO_S0672,Tribunal A,2013,Mulher,Mulher,Sim,0,1,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,28402,58513.07
+CASO_S0673,Tribunal A,2023,Mulher,Homem e mulher,Não,1,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,5615,6448.49
+CASO_S0674,Tribunal D,2018,Mulher,Mulher,Não,0,0,1,0,1,0,0,0,0,0,Não,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0675,Tribunal A,2023,Mulher,Homem,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,29468.85,33843.21
+CASO_S0676,Tribunal A,2025,Mulher,Mulher,Sim,0,1,0,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,3826,3995.98
+CASO_S0677,Tribunal C,2018,Mulher,Não informado,Não,0,0,1,0,0,0,0,0,0,0,Sim,Não,Procedente,1,Não informado,,
+CASO_S0678,Tribunal A,2020,Homem e mulher,Não informado,Sim,1,0,1,1,1,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,27336.64,39167.65
+CASO_S0679,Tribunal A,2021,Mulher,Mulher,Sim,0,0,0,1,1,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,20224.86,26586.55
+CASO_S0680,Tribunal B,2012,Mulher,Homem e mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,5626.69,12318.86
+CASO_S0681,Tribunal A,2018,Mulher,Mulher,Não,1,0,1,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,9080.62,13739.46
+CASO_S0682,Tribunal E,2025,Não informado,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0683,Tribunal B,2023,Mulher,Homem,Não,0,0,1,1,0,0,0,0,0,0,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0684,Tribunal A,2025,Homem e mulher,Mulher,Não,0,1,1,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,10042,10488.15
+CASO_S0685,Tribunal A,2024,Mulher,Organização,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,22540,24771.52
+CASO_S0686,Tribunal E,2023,Mulher,Não informado,Não,1,0,0,0,0,0,0,0,0,0,Sim,Sim,Procedente,1,Valor informado em reais,0,0
+CASO_S0687,Tribunal B,,Mulher,Mulher,Não,0,0,1,1,0,0,1,0,0,0,Sim,Sim,Improcedente,0,Valor informado em reais,12465,
+CASO_S0688,Tribunal A,2024,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0689,Tribunal A,2020,Homem e mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Não,Não,Improcedente,0,Não informado,,
+CASO_S0690,Tribunal B,2019,Mulher,Mulher,Não,0,0,0,1,0,0,0,0,0,0,Não,Não,Procedente,1,Não informado,,
+CASO_S0691,Tribunal B,2020,Homem,Mulher,Não,0,1,0,1,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0692,Tribunal D,2024,Mulher,Não informado,Não,1,0,1,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,2015,2214.49
+CASO_S0693,Tribunal A,2021,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Parcialmente procedente,0,Valor informado em reais,0,0
+CASO_S0694,Tribunal A,2025,Mulher,Mulher,Não,0,0,0,0,1,0,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,8211.61,8576.44
+CASO_S0695,Tribunal A,2022,Mulher,Mulher,Não,1,0,0,0,0,0,0,0,0,0,Sim,Não,Parcialmente procedente,0,Valor informado em reais,12658.26,15117.64
+CASO_S0696,Tribunal B,2010,Mulher,Não informado,Não,0,0,0,0,0,0,0,0,0,1,Sim,Sim,Parcialmente procedente,0,Valor informado em reais,18708,46049.02
+CASO_S0697,Tribunal A,2015,Mulher,Mulher,Sim,0,0,0,0,1,0,0,0,0,0,Sim,Não,Improcedente,0,Valor informado em reais,0,0
+CASO_S0698,Tribunal E,2017,Mulher,Mulher,Não,0,0,0,0,0,0,0,0,0,1,Sim,Não,Procedente,1,Valor informado em reais,0,0
+CASO_S0699,Tribunal A,2020,Homem,Homem,Não,0,0,0,0,0,0,0,0,1,0,Sim,Não,Procedente,1,Valor informado em reais,16514.09,23661.22
+CASO_S0700,Tribunal A,2015,Mulher,Mulher,Não,0,0,0,0,0,1,0,0,0,0,Sim,Não,Procedente,1,Valor informado em reais,0,0
