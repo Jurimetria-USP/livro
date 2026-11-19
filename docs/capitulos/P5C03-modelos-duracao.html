@@ -458,7 +458,9 @@ window.Quarto = {
 
 <section id="introdução" class="level2" data-number="19.1">
 <h2 data-number="19.1" class="anchored" data-anchor-id="introdução"><span class="header-section-number">19.1</span> Introdução</h2>
-<p>O capítulo “O tempo do processo: análise de duração”, na Parte IV, descreveu o tempo do processo com curvas de pendência, incidências acumuladas e tempos médios dentro de prazos. As curvas comparam grupos, mas não separam o efeito de uma característica do efeito de outras, nem acomodam características contínuas ou que mudam ao longo do processo. Este capítulo trata dos modelos de regressão para o tempo, na mesma lógica dos modelos para variáveis qualitativas do capítulo “Modelos avançados”: lá, o exponencial de um coeficiente do logit é uma razão de chances; aqui, o exponencial de um coeficiente do modelo de Cox é uma razão de taxas.</p>
+<p>O capítulo “O tempo do processo: análise de duração”, na Parte IV, descreveu o tempo do processo com curvas de pendência, incidências acumuladas e tempos médios dentro de prazos. Este capítulo passa da descrição para perguntas como esta: mantidas constantes as demais características observadas, processos distribuídos em varas diferentes terminam em ritmos diferentes? E essa diferença é a mesma no começo e no fim do processo?</p>
+<p>As curvas por grupo não bastam para responder. Com uma característica, basta desenhar uma curva por vara. Com quatro varas, três faixas de valor, pedido de tutela e documentos da inicial, já são 48 combinações, muitas com poucos processos; com uma característica contínua, ou com uma que muda ao longo do processo, como a juntada do laudo, não há grupos fixos para comparar. Os modelos de regressão para o tempo resolvem isso, na mesma lógica dos modelos para variáveis qualitativas do capítulo “Modelos avançados”: lá, o exponencial de um coeficiente do logit é uma razão de chances; aqui, o exponencial de um coeficiente do modelo de Cox é uma razão de taxas.</p>
+<p>“Mantidas constantes” tem um sentido preciso. Os modelos estimam associações condicionais: como o ritmo dos desfechos difere entre processos que têm as mesmas características incluídas no modelo. Isso não é, por si só, um efeito causal. Dizer que a vara torna o processo mais lento exige que os processos das varas sejam comparáveis também nas características que ficaram de fora, o que depende do desenho (como o sorteio na distribuição), e não do modelo. Ao longo do capítulo, a linguagem distingue associação, previsão e efeito.</p>
 <p>O capítulo usa a mesma base simulada, com a mesma vantagem: conhecemos o mecanismo que gerou os dados. Na simulação, as varas diferem apenas na velocidade com que sentenciam; a chance final de cada desfecho é a mesma nas quatro. O laudo pericial decide boa parte dos casos, e os peritos diferem entre si. Cada modelo será lido contra esse mecanismo.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Objetivos do capítulo">
 <div class="callout-header d-flex align-content-center">
@@ -478,7 +480,8 @@ window.Quarto = {
 <li>usar a fragilidade para tratar a heterogeneidade entre peritos ou juízos;</li>
 <li>reconhecer problemas de seleção e de censura informativa;</li>
 <li>tratar a censura intervalar e reconhecer quando o estimador usual falha;</li>
-<li>escolher o desenho amostral para variáveis extraídas das peças processuais.</li>
+<li>escolher o desenho amostral para variáveis extraídas das peças processuais;</li>
+<li>localizar, com o modelo de fases, a etapa em que dois grupos se diferenciam.</li>
 </ul>
 </div>
 </div>
@@ -495,13 +498,14 @@ window.Quarto = {
   E --&gt; F[Seleção e censura&lt;br/&gt;informativa]
   F --&gt; G[Censura&lt;br/&gt;intervalar]
   G --&gt; H[Desenho&lt;br/&gt;amostral]
+  H --&gt; I[Fases com&lt;br/&gt;covariáveis]
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
-<p>A base é montada como no capítulo anterior: a tabela de regras transforma os movimentos no par (tempo, desfecho).</p>
+<p>A base é montada como no capítulo anterior: a tabela de regras transforma os movimentos no tempo e no desfecho de cada processo.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>processos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dados/duracao_processos_simulados.csv"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>movimentos <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dados/duracao_movimentos_simulados.csv"</span>)</span>
@@ -546,11 +550,18 @@ window.Quarto = {
 </section>
 <section id="razão-de-taxas-e-o-modelo-de-cox" class="level2" data-number="19.2">
 <h2 data-number="19.2" class="anchored" data-anchor-id="razão-de-taxas-e-o-modelo-de-cox"><span class="header-section-number">19.2</span> Razão de taxas e o modelo de Cox</h2>
-<p>O modelo de Cox (Cox, 1972) descreve a taxa de resolutividade de um processo com características <span class="math inline">\(x\)</span> como uma taxa básica, comum a todos, multiplicada por um fator que depende das características:</p>
+<p>O ponto de partida é a taxa de resolutividade do capítulo anterior, o <em>hazard</em>: a intensidade com que o desfecho ocorre, por unidade de tempo, entre os processos que ainda não o tiveram. Não é uma probabilidade. Em cada momento <span class="math inline">\(t\)</span>, os processos que ainda estão pendentes e sob observação logo antes de <span class="math inline">\(t\)</span> formam o conjunto em risco; é sempre a eles que a taxa se refere. O conjunto em risco muda com o tempo: perde os processos que terminam e os que são censurados.</p>
+<p>O modelo de Cox (Cox, 1972) descreve a taxa de um processo com características <span class="math inline">\(x\)</span> como uma taxa básica, comum a todos, multiplicada por um fator que depende das características:</p>
 <p><span class="math display">\[
 h(t \mid x) = h_0(t) \exp(\beta_1 x_1 + \dots + \beta_p x_p)
 \]</span></p>
-<p>A taxa básica <span class="math inline">\(h_0(t)\)</span> pode ter qualquer forma e não é estimada diretamente; por isso o modelo é chamado de semiparamétrico. O que se estima são os coeficientes, e o exponencial de cada um é uma razão de taxas: quantas vezes a taxa de um processo com a característica é maior que a de um processo sem ela, mantidas as demais. A suposição central é que essa razão seja constante ao longo do tempo, a proporcionalidade das taxas.</p>
+<p>Cada parte tem um papel:</p>
+<ul>
+<li><strong><span class="math inline">\(h_0(t)\)</span>, a taxa básica:</strong> a taxa de um processo com todas as covariáveis na categoria de referência (Vara A, menor faixa de valor, sem tutela, sem documentos). Pode subir e descer ao longo do tempo, com qualquer forma, e não precisa ser estimada para obter os coeficientes; por isso o modelo é chamado de semiparamétrico.</li>
+<li><strong><span class="math inline">\(\beta_1 x_1 + \dots + \beta_p x_p\)</span>, o preditor linear:</strong> a soma das características ponderadas pelos coeficientes. Não depende de <span class="math inline">\(t\)</span>.</li>
+<li><strong><span class="math inline">\(\exp(\beta_j)\)</span>, a razão de taxas (<em>hazard ratio</em>):</strong> quantas vezes a taxa de um processo com a característica <span class="math inline">\(j\)</span> é maior ou menor que a de um processo sem ela, com as demais características iguais, entre os processos que estão no conjunto em risco no mesmo momento.</li>
+</ul>
+<p>Como o preditor linear não depende do tempo, a razão entre as taxas de dois processos é a mesma em todo <span class="math inline">\(t\)</span>, ainda que a taxa básica mude. Essa é a suposição central do modelo, a proporcionalidade das taxas, examinada adiante.</p>
 <p>O modelo abaixo tem como ato qualquer desfecho e, como covariáveis, a vara, a faixa do valor da causa, o pedido de tutela de urgência e a inicial instruída com documentos.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(</span>
@@ -572,10 +583,12 @@ inicial_instruidaTRUE                  0.82      0.76      0.89</code></pre>
 </div>
 </div>
 <p>A razão de taxas da Vara D em relação à Vara A é 0,49: entre os processos ainda pendentes, num mesmo momento, a taxa de desfecho na Vara D é cerca de metade da taxa na Vara A, mantidas as demais características. Processos com pedido de tutela têm taxa 18% maior.</p>
-<p>Três leituras devem ser evitadas. A razão de taxas não é razão entre durações: uma razão de 0,5 não significa que o processo dure o dobro. Não é razão entre probabilidades de ganhar: o ato aqui é qualquer desfecho, inclusive a improcedência. E não é uma medida de quanto um processo individual seria mais rápido em outra vara, porque compara conjuntos de processos ainda pendentes, cuja composição muda com o tempo (Hernán, 2010).</p>
+<p>Um exemplo numérico ajuda a ler o número. Suponha que, no sexto mês, a taxa de desfecho na Vara A seja de 0,20 por processo-mês, e que a razão da Vara D seja 0,5. Então, entre os processos da Vara D ainda pendentes no sexto mês e com as mesmas características, a taxa é de 0,10 por processo-mês: em um mês curto, cerca de 10% deles terminam, contra cerca de 18% na Vara A. É uma comparação de ritmo, naquele momento, entre os que ainda esperam.</p>
+<p>Três leituras devem ser evitadas. A razão de taxas não é razão entre durações: uma razão de 0,5 não significa que o processo dure o dobro; quanto a duração aumenta depende da forma da taxa básica ao longo do tempo. Não é razão entre probabilidades de ganhar: o ato aqui é qualquer desfecho, inclusive a improcedência e a extinção, e a razão diz quão depressa os processos terminam, não como. E não é uma medida de quanto um processo individual seria mais rápido em outra vara. A razão compara os conjuntos de processos ainda pendentes em cada vara, e esses conjuntos se tornam diferentes com o tempo: na vara mais rápida, os processos simples já saíram, e os que restam tendem a ser os mais difíceis. Mesmo com varas sorteadas na distribuição, a comparação no décimo mês é entre grupos que já não são comparáveis (Hernán, 2010).</p>
 <section id="proporcionalidade" class="level3" data-number="19.2.1">
 <h3 data-number="19.2.1" class="anchored" data-anchor-id="proporcionalidade"><span class="header-section-number">19.2.1</span> Proporcionalidade</h3>
-<p>A função <code>cox.zph()</code> testa se cada razão de taxas é constante no tempo, com base nos resíduos de Schoenfeld (Therneau; Grambsch, 2000).</p>
+<p>Supor proporcionalidade é supor que a diferença relativa entre os grupos não muda ao longo do processo. Se a razão da Vara D fosse 0,8 em todos os meses, a taxa da Vara D seria sempre 80% da taxa da Vara A: no segundo mês, quando as duas são baixas, e no oitavo, quando as duas são altas. A taxa básica pode subir e descer à vontade; a razão fica fixa. Agora suponha que a razão seja 0,8 nos primeiros meses e 0,4 depois. Um único coeficiente resume as duas fases num número intermediário, que não descreve nenhuma delas.</p>
+<p>A função <code>cox.zph()</code> examina essa suposição com os resíduos de Schoenfeld (Therneau; Grambsch, 2000). Em cada desfecho, o resíduo compara a característica do processo que terminou com a média das características do conjunto em risco naquele momento, ponderada pelas taxas que o modelo prevê para cada processo. Se a razão é constante, os resíduos não têm tendência no tempo; se a razão muda, eles sobem ou descem. O teste mede a associação entre os resíduos e o tempo.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(cox)</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -587,6 +600,7 @@ inicial_instruida 34.66  1 3.9e-09
 GLOBAL            75.81  7 9.8e-14</code></pre>
 </div>
 </div>
+<p>A saída tem uma linha por covariável, que testa a proporcionalidade daquela razão, e uma linha <code>GLOBAL</code>, que testa todas ao mesmo tempo. Três cuidados orientam a leitura. Um valor-p pequeno é evidência contra a proporcionalidade, mas não mede o tamanho da violação: com 4.000 processos, desvios pequenos e sem importância prática também são detectados. Um valor-p grande não prova a proporcionalidade, sobretudo em amostras pequenas, em que o teste tem pouco poder. Por isso, o teste deve ser lido junto com o gráfico dos resíduos, que mostra como e quanto a razão muda.</p>
 <p>A proporcionalidade é rejeitada para a vara. Não é surpresa: no capítulo anterior, a razão de taxas entre as Varas D e A era próxima de 0,8 nos primeiros quatro meses, quando quase todo desfecho é extinção, e caía para cerca de 0,6 depois. O gráfico dos resíduos mostra o coeficiente da Vara D mudando ao longo do tempo; a linha pontilhada é o coeficiente único estimado pelo modelo.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>zph_coeficientes <span class="ot">&lt;-</span> <span class="fu">cox.zph</span>(cox, <span class="at">terms =</span> <span class="cn">FALSE</span>)</span>
@@ -601,7 +615,44 @@ GLOBAL            75.81  7 9.8e-14</code></pre>
 </div>
 </div>
 </div>
-<p>Há três saídas usuais. A primeira é estratificar o modelo pela variável que viola a suposição, deixando cada estrato com a sua taxa básica; o efeito dela deixa de ser estimado, mas o das demais fica ajustado. A segunda é dividir o seguimento em períodos e estimar um coeficiente por período. A terceira é modelar o efeito como função do tempo. A segunda é a mais fácil de comunicar:</p>
+<p>Há três saídas usuais.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Saída</th>
+<th>Como funciona</th>
+<th>O que resolve</th>
+<th>O que se perde ou se exige</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estratificação</td>
+<td>Cada categoria da variável tem a sua própria taxa básica, com <code>strata()</code></td>
+<td>As demais razões ficam ajustadas sem supor nada sobre a forma do efeito da variável estratificada</td>
+<td>O efeito da variável estratificada deixa de ser estimado como um coeficiente; só serve para variáveis categóricas com poucos níveis</td>
+</tr>
+<tr class="even">
+<td>Divisão do seguimento em períodos</td>
+<td>Um coeficiente por período, com <code>survSplit()</code></td>
+<td>Mostra o efeito em cada fase, de forma fácil de comunicar</td>
+<td>Os pontos de corte precisam de justificativa substantiva (a chegada dos laudos) ou do gráfico dos resíduos; cortes escolhidos depois de olhar os dados exageram as diferenças</td>
+</tr>
+<tr class="odd">
+<td>Coeficiente dependente do tempo</td>
+<td>O coeficiente vira função do tempo, como <span class="math inline">\(\beta + \gamma \log t\)</span>, com <code>tt()</code></td>
+<td>Descreve uma mudança contínua com poucos parâmetros</td>
+<td>A forma da função precisa ser escolhida; uma forma errada descreve mal o efeito</td>
+</tr>
+</tbody>
+</table>
+<p>A segunda é a mais fácil de comunicar. Aqui, o corte no quarto mês tem uma razão substantiva: é quando os laudos começam a chegar, e a natureza dos desfechos muda.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>periodos <span class="ot">&lt;-</span> <span class="fu">survSplit</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Surv</span>(meses, status) <span class="sc">~</span> ., <span class="at">data =</span> base, <span class="at">cut =</span> <span class="dv">4</span>, <span class="at">episode =</span> <span class="st">"periodo"</span></span>
@@ -632,59 +683,84 @@ GLOBAL            75.81  7 9.8e-14</code></pre>
 7 inicial_instruidaTRUE                      0.36                1.01</code></pre>
 </div>
 </div>
-<p>A razão de taxas da Vara D é 0,82 até o quarto mês e 0,43 depois. O coeficiente único do primeiro modelo era uma média ponderada das duas fases. A inicial instruída, que o teste também apontou, mostra outro padrão: reduz a taxa de desfecho no início (0,36), porque evita a emenda e o indeferimento, e quase não a altera depois (1,01).</p>
-<p>A saída do <code>summary()</code> também traz a concordância, a proporção de pares de processos em que o modelo ordena corretamente quem termina primeiro. Ela é útil para comparar modelos ajustados na mesma base, mas não tem limiar universal de qualidade, e um modelo explicativo pode ser útil com concordância modesta.</p>
+<p>O <code>survSplit()</code> corta o seguimento de cada processo que passou do quarto mês em dois trechos, de 0 a 4 e de 4 até o fim, e o processo que terminou antes do quarto mês fica com um trecho só. O modelo do segundo período usa, portanto, apenas os processos que chegaram pendentes ao quarto mês, e a razão desse período é condicional a ter chegado lá. A razão de taxas da Vara D é 0,82 até o quarto mês e 0,43 depois. O coeficiente único do primeiro modelo era uma média ponderada das duas fases. A inicial instruída, que o teste também apontou, mostra outro padrão: reduz a taxa de desfecho no início (0,36), porque evita a emenda e o indeferimento, e quase não a altera depois (1,01).</p>
+<p>A saída do <code>summary()</code> também traz a concordância (o índice C). A ideia é ordenar: entre dois processos, o modelo atribui taxa maior a quem de fato termina primeiro? Com censura, nem todo par pode ser julgado. Se um processo foi censurado aos cinco meses e o outro terminou aos oito, não se sabe quem terminou primeiro. A concordância é calculada só sobre os pares comparáveis, aqueles em que o processo de menor tempo teve o desfecho observado, e é a proporção desses pares em que o modelo acerta a ordem. Vale 0,5 para um modelo que ordena ao acaso e 1 para um que ordena perfeitamente.</p>
+<p>A concordância mede discriminação, e não calibração. Um modelo pode ordenar bem os processos e errar o nível das probabilidades, prevendo 30% de desfecho em 12 meses para um grupo em que o verdadeiro é 50%. Ela também não diz nada sobre causalidade. Serve para comparar modelos ajustados na mesma base e com o mesmo padrão de censura; quando o objetivo é prever, deve ser calculada fora da amostra em que o modelo foi ajustado. Não há limiar universal de qualidade, e um modelo explicativo pode ser útil com concordância modesta, como a deste modelo, que tem só quatro características de base.</p>
 </section>
 </section>
 <section id="covariáveis-no-tempo" class="level2" data-number="19.3">
 <h2 data-number="19.3" class="anchored" data-anchor-id="covariáveis-no-tempo"><span class="header-section-number">19.3</span> Covariáveis no tempo</h2>
-<p>No processo judicial, cada característica passa a ser conhecida numa data, e essa data decide o papel dela no modelo. A pergunta é: o que se sabe no termo inicial?</p>
+<p>No processo judicial, cada característica passa a ser conhecida numa data, e essa data decide o papel dela no modelo. Duas perguntas orientam a classificação: quando a característica passa a ser conhecida e o que determina o seu valor?</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Tipo</th>
 <th>Exemplos</th>
 <th>Conhecida em</th>
-<th>Papel</th>
+<th>O que determina o valor</th>
+<th>Papel no modelo</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Ex ante</td>
+<td>Medida no termo inicial</td>
 <td>Valor da causa, pedido de tutela, documentos da inicial</td>
 <td>Distribuição</td>
-<td>Previsão: é o que se sabe quando a ação é proposta</td>
+<td>As partes, antes do processo</td>
+<td>Covariável fixa; é o que se sabe quando a ação é proposta e serve à previsão</td>
 </tr>
 <tr class="even">
-<td>Designada depois, ao acaso</td>
+<td>Determinada depois, por mecanismo aleatório ou administrativo</td>
 <td>Vara (sorteio na distribuição)</td>
 <td>Logo após a distribuição</td>
-<td>Controle: o sorteio a torna independente das características ex ante</td>
+<td>O sorteio, independente do caso</td>
+<td>Covariável fixa; o sorteio a torna independente das características do caso, e a comparação entre varas se aproxima de um efeito</td>
 </tr>
 <tr class="odd">
-<td>Designada depois, por escolha</td>
-<td>Perito nomeado pelo juiz</td>
+<td>Determinada depois, por escolha</td>
+<td>Perito nomeado pelo juiz; designação de audiência de conciliação</td>
 <td>Semanas ou meses depois</td>
-<td>Controle, com cautela: a escolha pode depender do caso</td>
+<td>Uma decisão que pode levar em conta o caso</td>
+<td>Covariável dependente do tempo, a partir da data da escolha; a escolha pode refletir características do caso, e a razão não é efeito da escolha</td>
 </tr>
 <tr class="even">
 <td>Mediadora</td>
 <td>Conclusão do laudo</td>
 <td>No meio do processo</td>
-<td>Explicação do caminho; nunca como covariável fixa no termo inicial</td>
+<td>Etapas anteriores do próprio processo</td>
+<td>Covariável dependente do tempo, para descrever o caminho; nunca fixa no termo inicial e nunca um simples “controle”</td>
 </tr>
 </tbody>
 </table>
+<p>O ponto da tabela é que nem toda variável conhecida depois da distribuição é um controle. Incluir no modelo uma variável mediadora, como a conclusão do laudo, muda a pergunta: o coeficiente da vara passa a medir a diferença entre varas entre processos com o mesmo laudo, e não a diferença total. Pode ser a pergunta desejada, mas deve ser escolhida, e não herdada da lista de variáveis disponíveis.</p>
 <section id="o-viés-do-tempo-imortal" class="level3" data-number="19.3.1">
 <h3 data-number="19.3.1" class="anchored" data-anchor-id="o-viés-do-tempo-imortal"><span class="header-section-number">19.3.1</span> O viés do tempo imortal</h3>
-<p>Suponha que se queira medir o efeito de um laudo favorável sobre a taxa de êxito. O atalho é criar uma variável fixa, “teve laudo favorável”, e incluí-la no modelo como se fosse conhecida na distribuição. O atalho credita ao grupo do laudo favorável todo o tempo anterior ao laudo, durante o qual nenhum êxito podia ocorrer. Esse tempo é chamado de imortal, porque é garantido pela própria definição do grupo (Suissa, 2008).</p>
-<p>A forma correta é tratar o laudo como covariável dependente do tempo: o processo conta no grupo sem laudo favorável até a data do laudo e no grupo com laudo favorável depois dela. A função <code>tmerge()</code> divide o seguimento de cada processo nesses trechos.</p>
+<p>Suponha que se queira saber como a taxa de êxito se associa a um laudo favorável. O atalho é criar uma variável fixa, “teve laudo favorável”, e incluí-la no modelo como se fosse conhecida na distribuição. A linha do tempo de um processo mostra o problema.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A["Distribuição&lt;br/&gt;(termo inicial)"] --&gt; B["Sem laudo&lt;br/&gt;(êxito raro ou impossível)"]
+    B --&gt; C["Juntada do laudo&lt;br/&gt;favorável"]
+    C --&gt; D["Com laudo favorável&lt;br/&gt;(acordo e procedência)"]
+    D --&gt; E((Desfecho))
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>O processo só entra no grupo “teve laudo favorável” se sobreviver sem desfecho até a juntada do laudo. Um processo extinto no segundo mês nunca terá laudo e fica no outro grupo. Classificado desde a distribuição, o grupo do laudo favorável recebe todo o tempo anterior ao laudo, um período em que, por definição, nenhum dos seus processos terminou. Esse tempo é chamado de imortal, porque é garantido pela própria definição do grupo (Suissa, 2008). No atalho, ele entra no denominador da taxa do grupo como tempo de exposição sem desfecho, e a taxa do grupo parece menor do que é.</p>
+<p>A forma correta é tratar o laudo como covariável dependente do tempo, cujo valor é atualizado ao longo do seguimento: o processo conta no grupo sem laudo favorável da distribuição até a data da juntada e no grupo com laudo favorável depois dela. O tempo anterior ao laudo vai para o grupo a que de fato pertencia. A função <code>tmerge()</code> divide o seguimento de cada processo nesses trechos: o primeiro <code>tmerge()</code> cria um trecho de 0 até o fim do seguimento, com o êxito marcado no fim; o segundo corta esse trecho na data do laudo dos processos com laudo favorável. Processos com laudo desfavorável e processos sem laudo ficam no grupo não exposto em todo o seguimento.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>laudos <span class="ot">&lt;-</span> movimentos <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(movimento <span class="sc">==</span> <span class="st">"Laudo pericial juntado"</span>) <span class="sc">|&gt;</span></span>
@@ -721,18 +797,20 @@ GLOBAL            75.81  7 9.8e-14</code></pre>
                                14.2                                37.3 </code></pre>
 </div>
 </div>
-<p>As duas especificações dão razões muito diferentes: 14,2 com a variável fixa e 37,3 com a dependente do tempo. Só a segunda compara, em cada momento, processos que já têm laudo favorável com processos que não têm. A primeira dilui o efeito nos meses anteriores ao laudo e, além disso, condiciona no futuro, porque classifica cada processo pelo que aconteceu depois do termo inicial.</p>
+<p>As duas especificações dão razões muito diferentes: 14,2 com a variável fixa e 37,3 com a dependente do tempo. Só a segunda compara, em cada momento, processos que já têm laudo favorável com processos que não têm. A primeira dilui a associação nos meses anteriores ao laudo e, além disso, condiciona no futuro, porque classifica cada processo pelo que aconteceu depois do termo inicial. Num modelo com o tempo imortal maior ou com uma associação mais fraca, o atalho pode até inverter o sinal.</p>
+<p>A diferença entre os dois números demonstra o efeito de uma classificação temporal errada; não mostra que o segundo seja o efeito causal do laudo. A covariável dependente do tempo corrige o momento da exposição, mas não resolve outros problemas. A perícia não é feita em todos os processos, e quem chega a ela é selecionado: não foi extinto, não fez acordo antes. A conclusão do laudo depende do caso, e as características do caso que levam a um laudo favorável também podem levar ao êxito por outros caminhos. Atribuir a razão ao laudo exigiria tratar essa confusão, que muda ao longo do processo, com desenho e pressupostos próprios. Aqui, a leitura correta é descritiva: depois de um laudo favorável, o êxito chega num ritmo muito maior.</p>
 <p>O exemplo usa a coluna <code>real_laudo_favoravel</code>, que só a simulação tem. Em dados reais, a conclusão do laudo precisa ser extraída da peça, com o cuidado de análise de conteúdo discutido no capítulo “Análise de conteúdo de textos jurídicos”.</p>
 </section>
 </section>
 <section id="desfechos-concorrentes-com-covariáveis" class="level2" data-number="19.4">
 <h2 data-number="19.4" class="anchored" data-anchor-id="desfechos-concorrentes-com-covariáveis"><span class="header-section-number">19.4</span> Desfechos concorrentes com covariáveis</h2>
-<p>Com desfechos concorrentes, há dois modelos de regressão, e eles respondem a perguntas diferentes (Lau; Cole; Gange, 2009; Austin; Lee; Fine, 2016).</p>
+<p>Com desfechos concorrentes, há dois modelos de regressão. Eles modelam taxas diferentes, definidas sobre conjuntos em risco diferentes, e respondem a perguntas diferentes (Lau; Cole; Gange, 2009; Austin; Lee; Fine, 2016).</p>
 <ul>
-<li><strong>Modelo de Cox por desfecho.</strong> Modela a taxa de resolutividade de um desfecho entre os processos ainda pendentes, tratando os outros desfechos como censura. Responde: entre os processos pendentes, com que velocidade o êxito acontece?</li>
-<li><strong>Modelo de Fine-Gray.</strong> Modela a incidência acumulada do desfecho (Fine; Gray, 1999). Responde: qual a probabilidade de o processo terminar em êxito até o tempo <span class="math inline">\(t\)</span>? O processo que teve outro desfecho permanece no conjunto de referência, com peso decrescente, porque também ele faz parte de quem não teve êxito.</li>
+<li><strong>Modelo de Cox por desfecho (de causa específica).</strong> Modela a taxa do êxito entre os processos que ainda não tiveram desfecho algum. O processo que fez acordo, foi julgado improcedente ou foi extinto deixa o conjunto em risco na data desse desfecho. Pergunta: entre os processos ainda pendentes, com que velocidade o êxito acontece?</li>
+<li><strong>Modelo de Fine-Gray (de subdistribuição).</strong> Modela uma taxa construída para corresponder à incidência acumulada do êxito (Fine; Gray, 1999). O conjunto em risco é modificado: o processo que teve outro desfecho permanece nele depois desse desfecho, com peso que diminui com o tempo, porque também ele faz parte de quem não teve êxito. Pergunta: que características se associam a uma incidência acumulada de êxito maior ou menor?</li>
 </ul>
-<p>No Cox por desfecho, tratar os outros desfechos como censura não é erro, porque o modelo estima uma taxa, e não uma probabilidade acumulada. O erro, visto no capítulo anterior, é transformar essa taxa em probabilidade com <span class="math inline">\(1 - \hat S(t)\)</span>.</p>
+<p>O coeficiente exponenciado do Fine-Gray é uma razão de taxas de subdistribuição, e não uma razão de probabilidades. Se o modelo estiver correto, uma razão maior que 1 indica incidência acumulada maior em todos os horizontes, mas o tamanho da diferença em probabilidade depende do horizonte e precisa ser calculado à parte. Por isso, os coeficientes dos dois modelos não são duas estimativas do mesmo parâmetro: não faz sentido perguntar qual dos dois está “mais certo” sobre a Vara D.</p>
+<p>No Cox por desfecho, tratar os outros desfechos como censura é a construção usual, porque o que se quer é a taxa entre os que ainda não tiveram desfecho algum, e é exatamente quem sai do conjunto em risco quando outro desfecho ocorre. A interpretação deve ficar nessa taxa. O erro, visto no capítulo anterior, é transformar essa taxa em probabilidade com <span class="math inline">\(1 - \hat S(t)\)</span>, como se os processos que tiveram outro desfecho ainda pudessem ter êxito.</p>
 <p>Em R, o Cox por desfecho é um <code>coxph()</code> com o êxito como ato. O Fine-Gray é obtido com a função <code>finegray()</code>, que monta os pesos, seguida de um <code>coxph()</code> ponderado.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>formula_exito <span class="ot">&lt;-</span> <span class="er">~</span> vara <span class="sc">+</span> faixa_valor <span class="sc">+</span> tutela_pedida <span class="sc">+</span> inicial_instruida <span class="sc">+</span> coorte</span>
@@ -774,8 +852,15 @@ GLOBAL            75.81  7 9.8e-14</code></pre>
 </div>
 <section id="a-discordância-é-informação" class="level3" data-number="19.4.1">
 <h3 data-number="19.4.1" class="anchored" data-anchor-id="a-discordância-é-informação"><span class="header-section-number">19.4.1</span> A discordância é informação</h3>
-<p>Para a Vara D, o Cox por desfecho dá 0,53, e o Fine-Gray, 0,87. Os dois estão corretos. A Vara D produz êxito em ritmo bem menor que a Vara A entre os processos pendentes, porque sentencia devagar. Mas também produz improcedências devagar e mantém mais processos pendentes por mais tempo, e esses processos ainda podem ter êxito. Por isso a incidência acumulada de êxito fica menos distante da Vara A do que a taxa sugere. Pelo mecanismo da simulação, quando todos os processos terminarem, a incidência de êxito será a mesma nas quatro varas.</p>
-<p>Quando os dois modelos concordam, a conclusão é robusta. Quando discordam, a discordância descreve o mecanismo. Por isso, recomenda-se relatar os dois, para todos os desfechos (Latouche et al., 2013).</p>
+<p>Para a Vara D, o Cox por desfecho dá 0,53, e o Fine-Gray, 0,87. Não há contradição, porque os números medem coisas diferentes. O raciocínio, passo a passo:</p>
+<ol type="1">
+<li>Entre os processos ainda pendentes, a Vara D produz êxito num ritmo bem menor que a Vara A, porque sentencia devagar. É o que mede o Cox por desfecho.</li>
+<li>A Vara D também produz improcedências devagar. Os seus processos ficam pendentes por mais tempo, sem sair por outro desfecho.</li>
+<li>Um processo pendente ainda pode ter êxito. Na Vara A, parte dos processos já saiu por improcedência e não terá êxito nunca; na Vara D, esses processos ainda estão na fila.</li>
+<li>Por isso, a probabilidade acumulada de êxito da Vara D fica menos distante da Vara A do que a diferença de ritmo sugere. É o que mede o Fine-Gray, cujo coeficiente se refere à incidência acumulada.</li>
+</ol>
+<p>Pelo mecanismo da simulação, quando todos os processos terminarem, a incidência de êxito será a mesma nas quatro varas: a Vara D é mais lenta, e não menos favorável.</p>
+<p>Os dois números podem estar certos ao mesmo tempo, como estimativas de parâmetros diferentes, desde que cada modelo esteja bem especificado: a proporcionalidade, que a seção anterior mostrou falhar para a vara, vale para os dois, e o Fine-Gray depende ainda do modelo para a censura, como se vê a seguir. A discordância não é prova de que ambos estejam corretos; é uma pista sobre o mecanismo, que precisa ser conferida nas curvas. Quando as duas perguntas interessam (a velocidade e a probabilidade acumulada), vale relatar os dois modelos, para todos os desfechos, porque o efeito de uma característica sobre a incidência de um desfecho depende do que ela faz com os outros (Latouche et al., 2013). Quando só uma interessa, a pergunta escolhe o modelo.</p>
 <p>Quando as curvas de incidência de dois grupos se cruzam ou se aproximam com o tempo, uma razão única resume mal a diferença: é uma média, ponderada no tempo, de um efeito que muda. Para comunicar, a incidência acumulada em horizontes fixos é mais clara que um coeficiente.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>aj_vara <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(meses, desfecho_3) <span class="sc">~</span> vara, <span class="at">data =</span> base)</span>
@@ -800,8 +885,10 @@ GLOBAL            75.81  7 9.8e-14</code></pre>
 </section>
 <section id="o-artefato-da-coorte-recente" class="level3" data-number="19.4.2">
 <h3 data-number="19.4.2" class="anchored" data-anchor-id="o-artefato-da-coorte-recente"><span class="header-section-number">19.4.2</span> O artefato da coorte recente</h3>
-<p>A coorte distribuída no segundo semestre de 2025 tem razão de 0,31 no Fine-Gray, e de 0,92 no Cox por desfecho. Os processos dessa coorte não são diferentes; foram observados por pouco tempo. O Fine-Gray calcula os pesos dos processos que tiveram outro desfecho a partir de uma única distribuição de censura para toda a base. Quando a censura depende de uma covariável, como a coorte, os pesos ficam errados para os grupos com seguimento curto, e o modelo pune a coorte nova pela falta de tempo para acumular êxitos.</p>
-<p>A correção é estimar a distribuição de censura dentro de cada coorte, com <code>strata()</code> na fórmula do <code>finegray()</code>:</p>
+<p>A coorte distribuída no segundo semestre de 2025 tem razão de 0,31 no Fine-Gray, e de 0,92 no Cox por desfecho. Os processos dessa coorte não são diferentes; foram observados por pouco tempo.</p>
+<p>Para entender o artefato, é preciso ver como o Fine-Gray monta o conjunto em risco. O processo que teve outro desfecho, digamos uma improcedência no sexto mês, fica no conjunto em risco depois disso. Mas não por inteiro: se ele não tivesse terminado, poderia ter sido censurado pela coleta em algum momento posterior. O peso dele em cada momento <span class="math inline">\(t\)</span> é a probabilidade estimada de que um processo ainda estivesse sob observação em <span class="math inline">\(t\)</span>, dado que estava no sexto mês. Essa probabilidade vem da distribuição da censura, estimada por um Kaplan-Meier em que o “evento” é ser censurado.</p>
+<p>O <code>finegray()</code> estima, por padrão, uma única distribuição de censura para toda a base. Na base, a censura depende da coorte: os processos de 2025-S2 foram coletados com no máximo sete meses de seguimento, e os de 2024-S1 com um ano e meio a dois anos. Com uma distribuição única, um processo da coorte recente que teve outro desfecho recebe o peso de quem seria observado por muito tempo, mais do que deveria. Ele continua “em risco”, com peso alto, em meses que a sua coorte jamais alcançou, e nesses meses nenhum processo da coorte pode ter êxito observado. O modelo lê a ausência de êxitos como incidência baixa e pune a coorte nova pela falta de tempo para acumulá-los.</p>
+<p>A correção é estimar a distribuição de censura dentro de cada coorte, com <code>strata()</code> na fórmula do <code>finegray()</code>. A variável de estrato serve só para os pesos; o modelo ponderado continua a usar a mesma fórmula, <code>formula_exito</code>, que inclui a coorte como covariável:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dados_fg_estratos <span class="ot">&lt;-</span> <span class="fu">finegray</span>(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Surv</span>(meses, desfecho_3) <span class="sc">~</span> . <span class="sc">+</span> <span class="fu">strata</span>(coorte), <span class="at">data =</span> base, <span class="at">etype =</span> <span class="st">"exito"</span></span>
@@ -819,6 +906,7 @@ GLOBAL            75.81  7 9.8e-14</code></pre>
 </div>
 </div>
 <p>Com a censura estimada por coorte, a razão da coorte recente vai para 1,06.</p>
+<p>A mudança mostra quanto o Fine-Gray é sensível ao modelo da censura, e não que estratificar pela coorte seja sempre a correção certa. Aqui funciona porque, na simulação, a censura é administrativa: depende da data de distribuição e da data da coleta, e não do desfecho que o processo teria. A estratificação acomoda diferenças de censura entre estratos observados; não corrige censura que dependa de outras variáveis, observadas ou não. A escolha do estrato deve vir do mecanismo que gera a censura no desenho da coleta. Numa coorte por distribuição com uma única data de coleta, a censura é determinada pela data de distribuição, e estratificar por ela é natural; com perdas de seguimento ligadas ao tipo de processo, por exemplo, o estrato teria de ser outro.</p>
 </section>
 </section>
 <section id="heterogeneidade-não-observada-o-perito" class="level2" data-number="19.5">
@@ -839,7 +927,12 @@ GLOBAL            75.81  7 9.8e-14</code></pre>
 1      30 0.314  0.88</code></pre>
 </div>
 </div>
-<p>Uma forma de tratar essa variação seria incluir um coeficiente por perito. Muitos peritos têm poucos casos, e os coeficientes deles seriam instáveis. A alternativa é a fragilidade, o nome que a análise de duração dá a um efeito aleatório: supõe-se que cada perito multiplica a taxa por um fator sorteado de uma distribuição comum, e estima-se a variância dessa distribuição. As estimativas dos peritos com poucos casos são puxadas para a média na proporção da informação que eles têm, o que se chama encolhimento.</p>
+<p>Uma forma de tratar essa variação seria incluir um coeficiente por perito. Muitos peritos têm poucos casos, e os coeficientes deles seriam instáveis: um perito com três processos e três êxitos pareceria excepcional por acaso. A alternativa é a fragilidade, o nome que a análise de duração dá a um efeito aleatório.</p>
+<p>O modelo supõe que cada perito <span class="math inline">\(j\)</span> multiplica a taxa dos seus processos por um fator <span class="math inline">\(e^{b_j}\)</span>, em que <span class="math inline">\(b_j\)</span> é sorteado de uma distribuição comum, aqui normal com média zero e variância <span class="math inline">\(\theta\)</span>:</p>
+<p><span class="math display">\[
+h(t \mid x, j) = h_0(t) \exp(\beta x + b_j), \qquad b_j \sim N(0, \theta)
+\]</span></p>
+<p>Em vez de estimar um coeficiente livre por perito, estima-se a variância <span class="math inline">\(\theta\)</span>. Ela mede a heterogeneidade entre peritos que as covariáveis do modelo não explicam: com <span class="math inline">\(\theta = 0\)</span>, todos os peritos são iguais depois de considerar a vara e a inicial; quanto maior <span class="math inline">\(\theta\)</span>, mais os peritos diferem. As previsões de <span class="math inline">\(b_j\)</span> para cada perito combinam os dados do próprio perito com a distribuição comum. Para quem tem muitos casos, prevalecem os seus dados; para quem tem poucos, a previsão é puxada para zero, a média. Esse puxão se chama encolhimento, e é ele que evita que o perito de três processos pareça excepcional.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fragilidade <span class="ot">&lt;-</span> <span class="fu">coxph</span>(</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Surv</span>(meses, desfecho_3 <span class="sc">==</span> <span class="st">"exito"</span>) <span class="sc">~</span> vara <span class="sc">+</span> inicial_instruida <span class="sc">+</span></span>
@@ -868,17 +961,65 @@ Likelihood ratio test=193  on 28.2 df, p=&lt;2e-16
 n= 4000, number of events= 1351 </code></pre>
 </div>
 </div>
-<p>A variância estimada é 0,067 na escala do logaritmo da taxa, o que corresponde a um desvio-padrão de 0,26. Um perito um desvio-padrão acima da média tem taxa de êxito 1,30 vez a do perito médio. Na simulação, o perito altera a chance de o laudo ser favorável, e não diretamente a taxa de êxito; a fragilidade capta o efeito que chega à taxa.</p>
+<p>A variância estimada é 0,067 na escala do logaritmo da taxa, o que corresponde a um desvio-padrão de 0,26. A leitura é condicional: comparados dois processos com as mesmas covariáveis, um com um perito no centro da distribuição (<span class="math inline">\(b_j = 0\)</span>) e outro com um perito um desvio-padrão acima (<span class="math inline">\(b_j\)</span> igual a 0,26), a taxa de êxito do segundo é 1,30 vez a do primeiro. Não é a razão entre as taxas médias de grupos de peritos, nem uma afirmação sobre a média de todos os processos. Na simulação, o perito altera a chance de o laudo ser favorável, e não diretamente a taxa de êxito; a fragilidade capta o que chega à taxa.</p>
+<p>A fragilidade mede heterogeneidade associada ao agrupamento por perito, condicional às covariáveis do modelo. Ela não identifica de onde vem essa heterogeneidade e não é uma medida da qualidade de cada perito. Peritos diferentes podem receber casos diferentes: um perito especializado em casos complexos terá menos êxitos sem que isso diga algo sobre o seu trabalho. Se a nomeação depende do tipo de caso, e o tipo de caso não está no modelo, a fragilidade absorve essa diferença de composição. O mesmo vale para varas e juízos.</p>
 <p>Três cuidados acompanham o modelo:</p>
 <ul>
 <li><strong>Convergência.</strong> O ajuste por verossimilhança penalizada pode não convergir. O pacote <code>coxme</code> estima o mesmo modelo por outro método e serve de conferência.</li>
-<li><strong>Erro de classificação.</strong> A fragilidade absorve toda variação não explicada, inclusive a que vem de erros na identificação dos desfechos. Se a regra de classificação piora, a variância do perito aumenta.</li>
-<li><strong>Perito ausente.</strong> Processos extintos antes da perícia ou recentes não têm perito, e entram aqui num nível único, “sem perito”. Ter perito depende do tempo transcorrido, e o tratamento adequado é o perito como covariável dependente do tempo, que entra a partir da nomeação.</li>
+<li><strong>Erro de classificação.</strong> A fragilidade absorve toda variação não explicada, inclusive a que vem de erros na identificação dos desfechos. Se a regra de classificação piora e os erros se concentram nos processos de alguns peritos, a variância aumenta. Uma variância alta, portanto, não prova que o perito seja a causa da heterogeneidade.</li>
+<li><strong>Perito ausente.</strong> No modelo acima, os processos sem perito entram num nível único, “sem perito”. Esse nível junta situações distintas: processos extintos antes da perícia, que nunca terão perito, e processos recentes, que ainda não chegaram à fase pericial. Na base simulada, não há processo com perícia feita e perito não registrado, mas em dados reais haveria um terceiro grupo, o da informação ausente. Tratá-los como um “perito” é uma simplificação, que a atividade pede para examinar. O tratamento mais fiel é o perito como covariável dependente do tempo, que entra a partir da nomeação. Mesmo assim, a nomeação é seletiva, porque só chega à perícia quem não foi extinto antes, e a comparação entre processos com e sem perito continua sujeita a essa seleção.</li>
 </ul>
 </section>
 <section id="seleção-e-censura-informativa" class="level2" data-number="19.6">
 <h2 data-number="19.6" class="anchored" data-anchor-id="seleção-e-censura-informativa"><span class="header-section-number">19.6</span> Seleção e censura informativa</h2>
-<p>Os métodos dos dois capítulos supõem censura não informativa, condicional às covariáveis. Quando o motivo de um processo não ter desfecho observado está ligado ao desfecho que ele teria, a suposição falha. Diante dos processos pendentes, o impulso de quem vem da econometria é um modelo de seleção. Na maior parte dos casos, ele não é a ferramenta principal: o problema é de tempo, e não de seleção, porque o processo pendente ainda vai ter desfecho, e o que mais explica estar pendente é a idade do processo, informação que o modelo de duração já usa.</p>
+<p>Os métodos dos dois capítulos supõem censura não informativa, condicional às covariáveis. Quando o motivo de um processo não ter desfecho observado está ligado ao desfecho que ele teria, a suposição falha. Sob o nome de “seleção” ou de “censura informativa”, porém, misturam-se fenômenos diferentes, que pedem ferramentas diferentes:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fenômeno</th>
+<th>Exemplo</th>
+<th>O que acontece</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Censura administrativa</td>
+<td>O processo estava pendente na data da coleta</td>
+<td>O desfecho ainda virá; o tempo é maior que o observado</td>
+</tr>
+<tr class="even">
+<td>Perda de seguimento</td>
+<td>O processo foi redistribuído a outro tribunal ou passou a tramitar em segredo</td>
+<td>O processo some da fonte antes da coleta</td>
+</tr>
+<tr class="odd">
+<td>Censura dependente de covariáveis observadas</td>
+<td>Uma vara atualiza o sistema com atraso, e a vara está na base</td>
+<td>A censura é informativa sem a covariável, e não informativa com ela</td>
+</tr>
+<tr class="even">
+<td>Censura dependente de fatores não observados</td>
+<td>Os casos que vão para segredo de justiça são os mais conflituosos, e a base não registra o conflito</td>
+<td>Nenhum ajuste pelas variáveis disponíveis resolve</td>
+</tr>
+<tr class="odd">
+<td>Seleção para a população analisada</td>
+<td>A base só tem processos de quem ajuizou a ação</td>
+<td>A conclusão vale para os litigantes, e não para quem tinha o mesmo direito</td>
+</tr>
+<tr class="even">
+<td>Seleção para uma etapa</td>
+<td>Só se lê a sentença de mérito de quem chegou ao mérito</td>
+<td>A taxa de êxito é condicional a ter chegado à etapa</td>
+</tr>
+</tbody>
+</table>
+<p>Diante dos processos pendentes, o impulso de quem vem da econometria é um modelo de seleção. Para o processo pendente ao fim do estudo, a primeira ferramenta é outra: ele é uma observação censurada à direita, que ainda vai ter desfecho, e o que mais explica estar pendente é a idade do processo, informação que o modelo de duração já usa. Isso não torna a censura automaticamente não informativa. Se a coleta foi feita de uma vez, para todos os processos, numa data fixada pelo pesquisador, a censura administrativa é defensável. Se há perdas de seguimento ou atrasos de atualização ligados ao processo, a validade depende de saber o que gera a censura e de ter as variáveis que a explicam.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -889,40 +1030,47 @@ n= 4000, number of events= 1351 </code></pre>
 <tr class="header">
 <th>Ferramenta</th>
 <th>Pressuposto</th>
-<th>Uso</th>
+<th>Para quê</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Desfechos concorrentes com censura</td>
-<td>Censura independente, condicional às covariáveis</td>
-<td>Modelo principal</td>
+<td>Modelos de duração com desfechos concorrentes</td>
+<td>Censura independente, condicional às covariáveis do modelo</td>
+<td>Modelo principal, quando a censura é administrativa ou explicada pelas covariáveis</td>
 </tr>
 <tr class="even">
 <td>Ponderação pelo inverso da probabilidade de censura (IPCW)</td>
-<td>A censura depende só de variáveis observadas</td>
-<td>Classificadores de previsão, como regressão logística ou árvores, num horizonte fixo (Robins; Finkelstein, 2000)</td>
+<td>A censura depende só de variáveis observadas, incluídas num modelo bem especificado para a probabilidade de seguir observado; todo tipo de processo tem chance positiva de seguir observado (positividade)</td>
+<td>Corrigir censura explicada por variáveis que não entram no modelo do desfecho; viabilizar classificadores de previsão, como regressão logística ou árvores, num horizonte fixo (Robins; Finkelstein, 2000)</td>
 </tr>
 <tr class="odd">
-<td>Modelo de seleção de Heckman</td>
-<td>Erros normais correlacionados e uma variável que afete a seleção, mas não o desfecho</td>
-<td>Teste de robustez (Heckman, 1979)</td>
+<td>Modelos de seleção</td>
+<td>Uma equação para a seleção e outra para o desfecho, com erros correlacionados, e uma variável que afete a seleção, mas não o desfecho</td>
+<td>Análise de sensibilidade para seleção por fatores não observados. O modelo clássico de Heckman (1979) foi feito para um desfecho observado só nos selecionados; levá-lo a dados de duração exige uma formulação própria e pressupostos adicionais</td>
 </tr>
 <tr class="even">
-<td>Fragilidade compartilhada entre tempo e desfecho</td>
-<td>Um mesmo efeito latente do caso afeta os dois</td>
-<td>Versão do modelo de seleção para dados de duração</td>
+<td>Fragilidade compartilhada ou modelos conjuntos</td>
+<td>Um mesmo efeito latente do caso afeta o tempo até o desfecho e o tempo até a censura (ou a seleção)</td>
+<td>Modelar diretamente a dependência entre censura e desfecho, com pressupostos fortes sobre a forma do efeito latente</td>
 </tr>
 </tbody>
 </table>
+<p>A ponderação não corrige, por si só, o que não foi observado: ela redistribui o peso dos censurados para processos parecidos que seguiram sob observação, e “parecidos” só pode ser definido com as variáveis disponíveis.</p>
 <p>A seleção pesa de verdade em pontos específicos do processo. A taxa de êxito entre os processos julgados no mérito é condicional a terem chegado ao mérito, e a desistência e o abandono provavelmente se concentram nos casos fracos, por razões que os dados não registram.</p>
-<p>A definição da população também é uma seleção. Excluir da análise os processos que, depois da distribuição, foram remetidos a outro juízo é condicionar no futuro. A exclusão só se justifica se a causa da remessa já existia na distribuição, como o domicílio do autor fora da comarca; nesse caso, a população é definida por uma característica de base que só se revela depois.</p>
-<p>Há, por fim, uma seleção que nenhum modelo corrige. A base contém apenas quem foi ao Judiciário. Um modelo ajustado nesses processos e aplicado a quem ainda não ajuizou supõe que os dois grupos se parecem. Sem um denominador, como os pedidos negados na via administrativa, essa diferença fica fora do alcance dos dados (ver o capítulo “Seleção dos litígios e desigualdades no sistema de justiça”).</p>
+<p>A definição da população também é uma seleção. Os critérios de elegibilidade devem usar características existentes no termo inicial. Excluir da análise os processos que, depois da distribuição, foram remetidos a outro juízo é condicionar no futuro: a remessa é um acontecimento posterior, e quem foi remetido pode ser diferente de quem ficou. A exclusão só se justifica se a causa da remessa já existia na distribuição, como o domicílio do autor fora da comarca; nesse caso, a população é definida por uma característica de base que só se revela depois. Fora disso, a restrição precisa decorrer explicitamente da pergunta, e a conclusão vale só para a população restrita.</p>
+<p>Há, por fim, uma seleção que nenhum modelo corrige. A base contém apenas quem foi ao Judiciário. A decisão de litigar depende de características do caso, da pessoa e do acesso a advogado, e quem ajuizou pode ser diferente de quem não ajuizou mesmo com as mesmas características observadas. Um modelo ajustado nesses processos e aplicado a quem ainda não ajuizou supõe que os dois grupos se parecem. Sem dados sobre quem não litigou, como os pedidos negados na via administrativa, e sem hipóteses fortes sobre a decisão de litigar, essa diferença fica fora do alcance dos dados (ver o capítulo “Seleção dos litígios e desigualdades no sistema de justiça”).</p>
 </section>
 <section id="censura-intervalar" class="level2" data-number="19.7">
 <h2 data-number="19.7" class="anchored" data-anchor-id="censura-intervalar"><span class="header-section-number">19.7</span> Censura intervalar</h2>
 <p>A perícia é, em muitos processos, a etapa mais longa, e nem sempre tem fim observado. A nomeação do perito aparece nos movimentos; a juntada do laudo, em muitos sistemas, aparece como “Documento juntado”, título usado para qualquer documento. A duração até o laudo só é conhecida dentro de um intervalo.</p>
-<p>Na base simulada, o laudo tem movimento próprio. Para treinar, vamos fingir que ele não tem. O limite esquerdo do intervalo é a nomeação do perito. O limite direito é o primeiro movimento que só acontece depois do laudo: a ordem para as partes se manifestarem sobre ele, a proposta de acordo, a homologação ou a conclusão para sentença. O tempo é medido em semanas.</p>
+<p>Três situações parecidas precisam ser separadas:</p>
+<ul>
+<li><strong>Censura à direita:</strong> sabe-se que o evento não ocorreu até uma data. O laudo ainda não tinha chegado na coleta.</li>
+<li><strong>Censura intervalar:</strong> sabe-se que o evento ocorreu entre duas datas, mas não quando. O laudo chegou depois da nomeação do perito e antes da ordem para as partes se manifestarem.</li>
+<li><strong>Erro de medida ou atraso de registro:</strong> há uma data, mas ela não é a do evento. O movimento foi lançado dias depois da juntada, ou a data registrada é a da publicação.</li>
+</ul>
+<p>Na base simulada, o laudo tem movimento próprio. Para treinar, vamos fingir que ele não tem. O limite esquerdo do intervalo é a nomeação do perito. O limite direito é o primeiro movimento que só acontece depois do laudo: a ordem para as partes se manifestarem sobre ele, a proposta de acordo, a homologação ou a conclusão para sentença. O tempo é medido em semanas. Para simplificar, o exemplo usa só os processos que já tinham esse movimento na coleta; os demais, com perito nomeado e sem sinal do laudo, seriam censurados à direita e deveriam entrar com o limite direito em aberto (<code>NA</code>). Incluí-los muda pouco os números deste exemplo, mas, numa pesquisa real, excluí-los selecionaria as perícias mais curtas.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>depois_do_laudo <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Determinada a manifestação sobre o laudo"</span>, <span class="st">"Proposta de acordo juntada"</span>,</span>
@@ -972,8 +1120,9 @@ n= 4000, number of events= 1351 </code></pre>
 4 Limite direito    26  </code></pre>
 </div>
 </div>
-<p>O Turnbull erra muito para menos (14,5 semanas, contra 23,4). O ponto médio também erra (17,5). A causa está num pressuposto do estimador: a inspeção não informativa. O Turnbull supõe que as datas que formam o intervalo não dependem de onde o evento está dentro dele. Aqui, o limite direito é provocado pelo próprio laudo: o juiz manda as partes se manifestarem porque o laudo chegou. O limite direito é, na verdade, a data do laudo mais um atraso de reação do cartório. Em símbolos, <span class="math inline">\(R = T + D\)</span>, e o problema é de medida com erro, e não de inspeção independente. O limite esquerdo, por sua vez, está longe do laudo, e o estimador espalha a probabilidade pelo intervalo inteiro.</p>
-<p>A saída é medir o atraso <span class="math inline">\(D\)</span> onde a data exata é conhecida. Basta uma subamostra em que a data do laudo seja lida na própria peça, por exemplo no carimbo de protocolo do PDF. Com o atraso típico, corrige-se o limite direito.</p>
+<p>O Turnbull erra muito para menos (14,5 semanas, contra 23,4). O ponto médio também erra (17,5). A causa está num pressuposto do estimador: a inspeção não informativa. Pense em alguém que consulta o processo em datas marcadas na agenda, sem saber nada do laudo, e anota se ele já chegou. As datas das consultas são escolhidas independentemente de quando o laudo chega; o intervalo entre a última consulta sem laudo e a primeira com laudo é só um retrato tirado em datas que nada têm a ver com o evento. É esse o mundo que o Turnbull supõe: as datas que formam o intervalo não carregam informação sobre onde o evento está dentro dele.</p>
+<p>Aqui, o limite direito não é uma consulta de agenda. Ele é provocado pelo próprio laudo: o juiz manda as partes se manifestarem porque o laudo chegou. O limite direito é a data do laudo mais um atraso de reação do cartório. Em símbolos, <span class="math inline">\(R = T + D\)</span>, em que <span class="math inline">\(T\)</span> é a data real do laudo, <span class="math inline">\(D\)</span> o atraso entre o laudo e o movimento seguinte e <span class="math inline">\(R\)</span> a data observada usada como limite. O problema é de medida com erro, e não de inspeção independente: o evento está sempre perto do fim do intervalo, a <span class="math inline">\(D\)</span> semanas dele. O limite esquerdo, por sua vez, está longe do laudo, e o estimador, que não sabe disso, espalha a probabilidade pelo intervalo inteiro e puxa a estimativa para trás.</p>
+<p>Uma saída aproximada é medir o atraso <span class="math inline">\(D\)</span> onde a data exata é conhecida. Basta uma subamostra em que a data do laudo seja lida na própria peça, por exemplo no carimbo de protocolo do PDF. No código abaixo, a data verdadeira vem da coluna <code>real_data_laudo</code>, que só a simulação tem; numa pesquisa real, ela teria de ser extraída manualmente ou por um procedimento validado. Com o atraso típico, corrige-se o limite direito.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>validacao <span class="ot">&lt;-</span> intervalos <span class="sc">|&gt;</span></span>
@@ -991,11 +1140,13 @@ n= 4000, number of events= 1351 </code></pre>
          2.285714         23.714286         23.428571 </code></pre>
 </div>
 </div>
-<p>A correção pela mediana do atraso é a forma mais simples de deconvolução. A subamostra também serve para medir quanto as regras que deduzem o intervalo acertam: se a data exata cai dentro do intervalo, qual a largura dos intervalos e qual dos movimentos genéricos era o laudo. Os pacotes <code>icenReg</code> e <code>interval</code> oferecem modelos de regressão e testes para censura intervalar, e o <code>msm</code> trata modelos de fases observados em datas de inspeção.</p>
+<p>A mediana corrigida fica próxima da verdade. A correção, porém, é uma aproximação, e não uma solução geral. Ela subtrai de todos os processos o mesmo atraso, a mediana da subamostra, e só funciona bem se o atraso for parecido entre os processos e se a subamostra representar o mecanismo de atraso da base inteira. Na simulação, o atraso é sorteado da mesma forma para todos; em dados reais, ele pode variar por vara, por período, por tipo de processo ou pelo sistema processual, e a subamostra deveria ser estratificada por essas variáveis, ou o atraso estimado dentro de cada grupo. A mediana do atraso também é uma estimativa, com incerteza que se propaga para a mediana corrigida e que o número único acima não mostra; repetir o sorteio da subamostra, como pede a atividade, dá uma ideia dessa variação. Por fim, corrigir um limite observado é diferente de ajustar um modelo formal para o processo de observação, que trataria <span class="math inline">\(T\)</span> e <span class="math inline">\(D\)</span> conjuntamente e daria a incerteza da estimativa de forma coerente.</p>
+<p>A subamostra também serve para medir quanto as regras que deduzem o intervalo acertam: se a data exata cai dentro do intervalo, qual a largura dos intervalos e qual dos movimentos genéricos era o laudo. Os pacotes <code>icenReg</code> e <code>interval</code> oferecem modelos de regressão e testes para censura intervalar, e o <code>msm</code> trata modelos de fases observados em datas de inspeção.</p>
 </section>
 <section id="amostragem-para-variáveis-caras" class="level2" data-number="19.8">
 <h2 data-number="19.8" class="anchored" data-anchor-id="amostragem-para-variáveis-caras"><span class="header-section-number">19.8</span> Amostragem para variáveis caras</h2>
 <p>As características mais informativas de um processo estão nas peças: o tipo de pedido, a prova que acompanha a inicial, a conclusão do laudo. Ler as peças tem custo, mesmo com modelos de linguagem, porque o acesso aos autos é limitado e a leitura precisa ser validada (capítulo “Análise de conteúdo de textos jurídicos”). O desenho da amostra decide que perguntas sobre o tempo podem ser respondidas.</p>
+<p>O que cada desenho permite estimar depende de três coisas: a quantidade de interesse, a forma como os processos são sorteados e os pesos usados na análise. O quadro resume os desenhos mais comuns, supondo que a base de movimentos (com tempo e desfecho) existe para todos os processos e que só a característica lida nas peças é cara.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -1007,39 +1158,45 @@ n= 4000, number of events= 1351 </code></pre>
 <tr class="header">
 <th>Desenho</th>
 <th>Como se faz</th>
-<th>Responde</th>
-<th>Não responde</th>
+<th>Com a análise adequada, permite</th>
+<th>Limite</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Caso-controle pelo desfecho</td>
-<td>Sorteiam-se processos de cada desfecho</td>
-<td>Que fatores distinguem os desfechos, com reponderação</td>
-<td>Nada sobre tempo: só há processos com desfecho</td>
+<td>Coorte com pendentes</td>
+<td>Sorteiam-se processos distribuídos, decididos ou não</td>
+<td>Incidência acumulada e modelos de duração com a característica, ponderando pelo inverso da probabilidade de sorteio se ela variar</td>
+<td>Só a precisão, que depende do tamanho da amostra</td>
 </tr>
 <tr class="even">
 <td>Todos os decididos</td>
-<td>Lêem-se os processos com desfecho</td>
-<td>Taxas entre os decididos</td>
-<td>Incidência: a característica falta justamente nos pendentes</td>
+<td>Lêem-se os processos com desfecho até a coleta</td>
+<td>Descrever os decididos</td>
+<td>Em geral, não permite estimar a incidência na população de distribuídos: a característica falta justamente nos pendentes, que não são uma amostra aleatória dos processos</td>
 </tr>
 <tr class="odd">
-<td>Coorte com pendentes</td>
-<td>Sorteiam-se processos distribuídos, decididos ou não</td>
-<td>Incidência acumulada e modelos com a característica</td>
-<td>Nada falta, salvo a precisão de uma amostra</td>
+<td>Caso-controle pelo desfecho</td>
+<td>Sorteiam-se processos de cada desfecho, sem atenção ao tempo</td>
+<td>Associações entre a característica e o tipo de desfecho, com reponderação</td>
+<td>Sem informação sobre o tempo, não estima taxas nem incidências acumuladas</td>
 </tr>
 <tr class="even">
+<td>Caso-controle aninhado</td>
+<td>Para cada processo com o desfecho, sorteiam-se controles entre os pendentes naquele momento (amostragem pelo conjunto em risco)</td>
+<td>Razões de taxas do modelo de Cox para o desfecho, com menos leituras</td>
+<td>Os controles são sorteados para um desfecho específico; reutilizá-los para outro desfecho exige análise ponderada própria</td>
+</tr>
+<tr class="odd">
 <td>Caso-coorte</td>
-<td>Subcoorte sorteada mais todos os casos do desfecho de interesse, com pesos</td>
-<td>Modelos para um desfecho raro, com menos leituras</td>
-<td>Vários desfechos ao mesmo tempo</td>
+<td>Subcoorte sorteada da coorte inteira, mais todos os casos do desfecho de interesse, com pesos</td>
+<td>Modelos de duração para o desfecho, com menos leituras; a mesma subcoorte pode servir de referência para vários desfechos, acrescentando os casos de cada um</td>
+<td>Exige pesos e variância apropriados; a economia é grande quando o desfecho é raro e pequena quando é comum</td>
 </tr>
 </tbody>
 </table>
-<p>O desenho de coorte é o que a análise de duração exige: a característica precisa existir para quem teve e para quem não teve desfecho, com o mesmo critério de seleção. O caso-coorte (Prentice, 1986) é uma alternativa mais econômica quando o interesse está num único desfecho raro.</p>
-<p>Na base, suponha que “inicial instruída com documentos” só pudesse ser obtida lendo a petição inicial, e que houvesse orçamento para 600 leituras. A amostra de coorte é sorteada pelo hash do número do processo: os 600 menores valores do hash. O sorteio é estável. Se o universo crescer, os sorteados continuam sorteados, e os novos entram ou não pela mesma regra.</p>
+<p>O desenho de coorte é o mais simples para a análise de duração: a característica existe para quem teve e para quem não teve desfecho, com o mesmo critério de seleção. Os desenhos de caso-controle aninhado e de caso-coorte (Prentice, 1986) economizam leituras sem abrir mão do tempo, ao custo de uma análise mais trabalhosa. Nos dois, a economia depende de o desfecho de interesse ser relativamente raro; na base, em que êxito, improcedência e extinção são todos frequentes, a coorte simples é a escolha natural.</p>
+<p>Na base, suponha que “inicial instruída com documentos” só pudesse ser obtida lendo a petição inicial, e que houvesse orçamento para 600 leituras. A amostra de coorte é sorteada pelo hash do número do processo: os 600 menores valores do hash. O hash é uma função que transforma o número do processo numa sequência de aparência aleatória, sempre a mesma para o mesmo número. A vantagem é a reprodutibilidade: qualquer pessoa, com a mesma lista e a mesma regra, chega à mesma amostra, sem depender de uma semente guardada. Selecionar os menores valores equivale a uma amostra aleatória simples desde que o hash funcione como uma ordenação aleatória dos números, o que vale para funções como o MD5 usado aqui, e desde que o universo e a regra sejam definidos antes de olhar os dados. Numa pesquisa real, documentam-se o algoritmo, o universo elegível, a data da extração e o tamanho da amostra. Há um cuidado com universos que crescem: um processo novo entra na amostra se o seu hash ficar entre os menores, e pode empurrar para fora o último sorteado; a regra estável é fixar um limiar do hash, e não o número de processos.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>amostra <span class="ot">&lt;-</span> base <span class="sc">|&gt;</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hash =</span> cli<span class="sc">::</span><span class="fu">hash_md5</span>(processo)) <span class="sc">|&gt;</span></span>
@@ -1064,11 +1221,30 @@ n= 4000, number of events= 1351 </code></pre>
 2 TRUE                     0.495             0.522</code></pre>
 </div>
 </div>
-<p>Com 15% dos processos, a amostra de coorte reproduz a incidência de êxito aos 12 meses de cada grupo. Uma amostra de caso-controle de mesmo tamanho não permitiria calcular incidência alguma, e uma amostra só de decididos não teria a característica para os pendentes.</p>
+<p>Com 15% dos processos, a amostra de coorte fica próxima da incidência de êxito aos 12 meses de cada grupo. A proximidade nesta amostra não garante a mesma precisão em outra: com 600 processos, divididos em dois grupos, o erro-padrão de cada incidência é de alguns pontos percentuais, e uma pesquisa real deve relatar intervalos de confiança, que o <code>summary()</code> do <code>survfit()</code> fornece. Uma amostra de caso-controle pelo desfecho, de mesmo tamanho, não permitiria calcular incidência alguma, e uma amostra só de decididos não teria a característica para os pendentes.</p>
 </section>
 <section id="fases-com-covariáveis" class="level2" data-number="19.9">
 <h2 data-number="19.9" class="anchored" data-anchor-id="fases-com-covariáveis"><span class="header-section-number">19.9</span> Fases com covariáveis</h2>
-<p>O modelo de Cox se estende ao modelo de fases do capítulo anterior: cada passagem entre fases ganha a sua própria taxa e os seus próprios coeficientes. No <code>survival</code>, basta ajustar o <code>coxph()</code> sobre os dados em trechos, com o identificador do processo.</p>
+<p>A Vara D é mais lenta. Mas em que etapa? Na chegada à perícia, no encerramento sem mérito ou na sentença depois do laudo? O modelo de Cox se estende ao modelo de fases do capítulo anterior para responder: cada passagem entre fases ganha a sua própria taxa básica e os seus próprios coeficientes.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    I[Fase inicial] --&gt;|1:2| L[Laudo juntado]
+    I --&gt;|1:6| X((Extinto))
+    L --&gt;|2:3| A((Acordo))
+    L --&gt;|2:4| PR((Procedente))
+    L --&gt;|2:5| IM((Improcedente))
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Os números nas setas são os códigos das passagens que o <code>coxph()</code> atribui, pela ordem dos estados no fator: 1 é a fase inicial, 2 o laudo, 3 a 6 os desfechos. Na base, essas são as únicas passagens observadas; não há acordo nem sentença sem laudo, nem extinção depois dele.</p>
+<p>A codificação dos dados merece atenção, porque o <code>coxph()</code> não verifica o sentido substantivo dos trechos. Cada processo tem até dois trechos contíguos: de 0 até o laudo (ou até o fim, se não houve laudo) e do laudo até o fim. A variável <code>estado</code> registra o estado ao final de cada trecho; o primeiro nível do fator, <code>pendente</code>, indica que o trecho terminou sem passagem, isto é, censura. O estado de origem de cada trecho é deduzido pelo <code>coxph()</code> a partir do trecho anterior do mesmo <code>id</code>, e o primeiro trecho parte da fase inicial. Por isso, os trechos de cada processo precisam estar em ordem, sem sobreposição nem lacuna, e o <code>id</code> é indispensável. Antes de interpretar os coeficientes, convém conferir a tabela de passagens que o modelo guarda em <code>cox_fases$transitions</code>. Os cinco processos em que o laudo e o desfecho caíram na mesma data perdem o segundo trecho, de duração zero; em dados reais, empates assim pedem uma regra explícita.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>trechos_fases <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  com_laudo <span class="sc">|&gt;</span></span>
@@ -1113,23 +1289,34 @@ n= 4000, number of events= 1351 </code></pre>
 </div>
 </div>
 <p>O modelo localiza a diferença da Vara D. A chegada do laudo tem praticamente o mesmo ritmo que na Vara A; a sentença depois do laudo, procedente ou improcedente, sai a cerca de um terço do ritmo. O modelo de um só desfecho diz que a Vara D é mais lenta; o modelo de fases diz em que fase.</p>
+<p>Cada razão é específica de uma passagem e se refere aos processos que estão na fase de origem. A razão de 0,3 para “laudo → procedente” compara, entre processos com laudo juntado e ainda sem desfecho, o ritmo da sentença de procedência na Vara D e na Vara A. Não é o efeito da vara sobre a duração total do processo, que resulta da combinação de todas as passagens, e não é uma razão de probabilidades de procedência. Para traduzir o modelo em durações ou probabilidades de estar em cada fase, é preciso combinar as taxas de todas as passagens, o que o <code>survfit()</code> faz a partir de um <code>coxph()</code> multiestado para um perfil de covariáveis escolhido.</p>
 </section>
 <section id="atividade" class="level2" data-number="19.10">
 <h2 data-number="19.10" class="anchored" data-anchor-id="atividade"><span class="header-section-number">19.10</span> Atividade</h2>
 <p>A atividade usa a base simulada.</p>
+<p>Cada item indica a pergunta, o modelo, o que verificar, o que interpretar e uma limitação a reconhecer.</p>
 <ol type="1">
-<li><strong>Cox.</strong> Ajuste o modelo de Cox para qualquer desfecho com a faixa do valor da causa como única covariável. Verifique a proporcionalidade. A razão de taxas muda entre os períodos?</li>
-<li><strong>Tempo imortal.</strong> Repita a comparação da seção sobre covariáveis no tempo usando a nomeação do perito como variável. A variável fixa “teve perito” aumenta ou diminui a taxa de desfecho? Por quê?</li>
-<li><strong>Dois modelos.</strong> Ajuste o Cox por desfecho e o Fine-Gray para a extinção. A inicial instruída tem o mesmo efeito nos dois? Interprete.</li>
-<li><strong>Fragilidade.</strong> Ajuste o modelo com fragilidade do perito excluindo os processos sem perito. A variância muda? Que processos foram excluídos e o que isso implica?</li>
-<li><strong>Censura intervalar.</strong> Refaça a correção do atraso com subamostras de validação de 50, 100 e 400 processos. A partir de que tamanho a mediana corrigida se estabiliza?</li>
-<li><strong>Amostragem.</strong> Sorteie uma amostra de caso-controle com 300 processos com êxito e 300 com improcedência. Que pergunta sobre a inicial instruída ela responde, e qual não responde?</li>
+<li><strong>Cox.</strong> Pergunta: processos de maior valor terminam em outro ritmo? Ajuste o modelo de Cox para qualquer desfecho com a faixa do valor da causa como única covariável. Verifique a proporcionalidade com <code>cox.zph()</code> e o gráfico dos resíduos. Interprete a razão de taxas em termos de ritmo entre pendentes. A razão muda antes e depois do quarto mês? Que comparação ela não autoriza?</li>
+<li><strong>Tempo imortal.</strong> Pergunta: processos com perito terminam mais depressa? Repita a comparação da seção sobre covariáveis no tempo usando a nomeação do perito, primeiro como variável fixa (“teve perito”) e depois como dependente do tempo. A variável fixa aumenta ou diminui a taxa de desfecho? Explique pela linha do tempo. Mesmo na versão correta, por que a razão não é o efeito da perícia?</li>
+<li><strong>Dois modelos.</strong> Pergunta: a inicial instruída se associa à extinção? Ajuste o Cox por desfecho e o Fine-Gray para a extinção. Interprete cada coeficiente com o seu conjunto em risco. Os dois apontam na mesma direção? Se não, explique o mecanismo, conferindo nas curvas de incidência acumulada.</li>
+<li><strong>Fragilidade.</strong> Pergunta: quanto os peritos diferem entre si? Ajuste o modelo com fragilidade do perito excluindo os processos sem perito e compare a variância com a do texto. Que processos foram excluídos? A população do modelo mudou? Por que a variância não mede a qualidade dos peritos?</li>
+<li><strong>Censura intervalar.</strong> Pergunta: quanto a correção do atraso depende do tamanho da subamostra de validação? Refaça a correção com subamostras de 50, 100 e 400 processos, repetindo cada sorteio 100 vezes. A partir de que tamanho a mediana corrigida se estabiliza? Que suposição sobre o atraso continua necessária, qualquer que seja o tamanho?</li>
+<li><strong>Amostragem.</strong> Pergunta: o que uma amostra pelo desfecho permite saber sobre a inicial instruída? Sorteie uma amostra de caso-controle com 300 processos com êxito e 300 com improcedência. Que pergunta ela responde, e qual não responde? Compare com a amostra de coorte do texto.</li>
 </ol>
 </section>
 <section id="síntese" class="level2" data-number="19.11">
 <h2 data-number="19.11" class="anchored" data-anchor-id="síntese"><span class="header-section-number">19.11</span> Síntese</h2>
-<p>O modelo de Cox estima razões de taxas: velocidades relativas entre processos pendentes, e não razões entre durações ou entre probabilidades de ganhar. A suposição de que a razão é constante deve ser verificada e, quando falha, a estratificação ou a divisão do seguimento em períodos mostram o efeito em cada fase. As covariáveis se distinguem pelo momento em que passam a ser conhecidas; uma característica que surge no meio do processo, como o laudo, entra como covariável dependente do tempo, sob pena de viés do tempo imortal.</p>
-<p>Com desfechos concorrentes, o Cox por desfecho mede velocidade, e o Fine-Gray, incidência acumulada; a discordância entre eles descreve o mecanismo, e o Fine-Gray exige cuidado quando a censura difere entre grupos. A fragilidade trata a heterogeneidade entre peritos ou juízos com encolhimento. A censura intervalar pede estimadores próprios, e o estimador usual falha quando o limite do intervalo é provocado pelo próprio evento; a validação com a data exata numa subamostra corrige o problema. Por fim, características extraídas das peças só servem à análise de duração se lidas numa amostra de coorte, que inclua os processos pendentes.</p>
+<p>Cada família de modelos responde a uma pergunta.</p>
+<ul>
+<li><strong>Em que ritmo os processos terminam, conforme as suas características?</strong> O modelo de Cox, que estima razões de taxas: velocidades relativas entre processos pendentes, com as demais características iguais, e não razões entre durações ou entre probabilidades de ganhar. A suposição de que a razão é constante deve ser verificada, com o teste e o gráfico; quando falha, a estratificação, a divisão do seguimento em períodos ou um coeficiente dependente do tempo mostram como o efeito muda.</li>
+<li><strong>Como tratar o que se sabe no meio do processo?</strong> Pelo momento em que a característica passa a ser conhecida e pelo mecanismo que a determina. Uma característica que surge no meio do processo, como o laudo, entra como covariável dependente do tempo, sob pena de viés do tempo imortal; a correção do tempo não resolve, porém, a seleção e a confusão que acompanham essa característica.</li>
+<li><strong>Com que velocidade e com que probabilidade acontece cada desfecho?</strong> O Cox por desfecho modela a taxa de um desfecho entre os que ainda não tiveram nenhum; o Fine-Gray, a taxa de subdistribuição ligada à incidência acumulada. Os coeficientes não são comparáveis entre si; a discordância é uma pista sobre o mecanismo, e o Fine-Gray depende do modelo para a censura.</li>
+<li><strong>Quanto os peritos ou juízos diferem, além do que as covariáveis explicam?</strong> A fragilidade, que estima essa heterogeneidade com encolhimento, sem identificar a sua origem nem medir a qualidade de ninguém.</li>
+<li><strong>E quando a observação falha?</strong> Censura informativa, perda de seguimento e seleção são problemas distintos, com ferramentas distintas e pressupostos que os dados nem sempre permitem verificar. A censura intervalar pede estimadores próprios, e o estimador usual falha quando o limite do intervalo é provocado pelo próprio evento; uma subamostra com a data exata permite medir o atraso e corrigir, de forma aproximada, o limite.</li>
+<li><strong>Que processos ler?</strong> Características extraídas das peças só servem à análise de duração se lidas numa amostra que preserve o tempo: a coorte com pendentes ou, com análise ponderada, o caso-coorte e o caso-controle aninhado.</li>
+<li><strong>Em que etapa está a diferença?</strong> O modelo de fases com covariáveis, com coeficientes próprios de cada passagem.</li>
+</ul>
+<p>Em todos os casos, o modelo estima associações condicionais. Atribuir uma diferença à vara, ao perito ou ao laudo depende do desenho que gerou os dados, e não do modelo escolhido.</p>
 </section>
 <section id="referências" class="level2" data-number="19.12">
 <h2 data-number="19.12" class="anchored" data-anchor-id="referências"><span class="header-section-number">19.12</span> Referências</h2>
